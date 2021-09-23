@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="不少朋友被我安利到长毛象(mastodon)玩耍，本着对他们负责的态度，写下这篇长毛象使用指南。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="长毛象使用指南">
+<meta property="og:url" content="http://example.com/2021/09/21/mstdn/index.html">
+<meta property="og:site_name" content="Bugrocery">
+<meta property="og:description" content="不少朋友被我安利到长毛象(mastodon)玩耍，本着对他们负责的态度，写下这篇长毛象使用指南。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-09-21T07:24:14.000Z">
+<meta property="article:modified_time" content="2021-09-23T10:41:02.539Z">
+<meta property="article:author" content="R">
+<meta property="article:tag" content="Mastodon">
+<meta property="article:tag" content="UserGuide">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2021/09/21/mstdn/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2021/09/21/mstdn/","path":"2021/09/21/mstdn/","title":"长毛象使用指南"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>长毛象使用指南 | Bugrocery</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Bugrocery</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFmastodon"><span class="nav-number">1.</span> <span class="nav-text">什么是mastodon</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%9C%A8mastodon%E6%8B%A5%E6%9C%89%E4%B8%80%E4%B8%AA%E8%B4%A6%E5%8F%B7"><span class="nav-number">2.</span> <span class="nav-text">如何在mastodon拥有一个账号</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E7%AB%99%E7%82%B9"><span class="nav-number">2.1.</span> <span class="nav-text">选择站点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E5%86%8C"><span class="nav-number">2.2.</span> <span class="nav-text">注册</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8mastodon"><span class="nav-number">3.</span> <span class="nav-text">如何使用mastodon</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Timeline"><span class="nav-number">3.1.</span> <span class="nav-text">Timeline</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%8A%9F%E8%83%BD"><span class="nav-number">3.2.</span> <span class="nav-text">基本功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%B4%E5%83%8F%E3%80%81%E6%98%B5%E7%A7%B0%E3%80%81profile%E3%80%81%E6%A0%87%E7%AD%BE"><span class="nav-number">3.3.</span> <span class="nav-text">头像、昵称、profile、标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE"><span class="nav-number">3.4.</span> <span class="nav-text">设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2"><span class="nav-number">3.5.</span> <span class="nav-text">搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#block-mute"><span class="nav-number">3.6.</span> <span class="nav-text">block &#x2F; mute</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%81%E7%A7%BB%E8%B4%A6%E5%8F%B7"><span class="nav-number">3.7.</span> <span class="nav-text">迁移账号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%A6%E5%8F%B7%E5%A4%87%E4%BB%BD"><span class="nav-number">3.8.</span> <span class="nav-text">账号备份</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#app"><span class="nav-number">3.9.</span> <span class="nav-text">app</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tag"><span class="nav-number">3.10.</span> <span class="nav-text">tag</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E5%A5%BD%E7%8E%A9%E7%9A%84%E8%B4%A6%E5%8F%B7"><span class="nav-number">3.11.</span> <span class="nav-text">一些好玩的账号</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#More-than-Mastodon"><span class="nav-number">4.</span> <span class="nav-text">More than Mastodon</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">R</p>
+  <div class="site-description" itemprop="description">It's no use to be hardworking.</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/21/mstdn/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="R">
+      <meta itemprop="description" content="It's no use to be hardworking.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bugrocery">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          长毛象使用指南
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-09-21 15:24:14" itemprop="dateCreated datePublished" datetime="2021-09-21T15:24:14+08:00">2021-09-21</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-09-23 18:41:02" itemprop="dateModified" datetime="2021-09-23T18:41:02+08:00">2021-09-23</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Mastodon/" itemprop="url" rel="index"><span itemprop="name">Mastodon</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>不少朋友被我安利到长毛象(mastodon)玩耍，本着对他们负责的态度，写下这篇长毛象使用指南。</p>
+<span id="more"></span>
+
+<h2 id="什么是mastodon"><a href="#什么是mastodon" class="headerlink" title="什么是mastodon"></a>什么是mastodon</h2><p>Mastodon(长毛象)是一个开源、去中心化的社交平台。简单来说，这里没有屏蔽词，没有限流，没有铺天盖地的营销号，没有Doctor看了都想重启宇宙的混乱时间线，只是一个纯粹的社交平台。长毛象将内容、社交网络交还给用户，更加尊重用户而不是平台“霸权”。<br><strong>如果将联邦宇宙(Fediverse)看做一个宇宙，那么每一个长毛象站点(Mastodon Society)就像一颗颗星球。</strong> 也就是说，你可以选择任何一颗星球定居，哪怕只是居住着一个人，只要它与宇宙相通，那么你就可以联系到宇宙中任何一个人而不会孤单。(摘自pullopen对长毛象的介绍：<a target="_blank" rel="noopener" href="https://pullopenbluebox.wordpress.com/2020/06/30/mastodon-introduction/">长毛象（Mastodon）：更尊重用户的社交平台</a> )</p>
+<h2 id="如何在mastodon拥有一个账号"><a href="#如何在mastodon拥有一个账号" class="headerlink" title="如何在mastodon拥有一个账号"></a>如何在mastodon拥有一个账号</h2><h3 id="选择站点"><a href="#选择站点" class="headerlink" title="选择站点"></a>选择站点</h3><p>长毛象有各种各样的站点(或称实例)，如二次元相关站、LGBTQ站、艺术类站，或者按照语言划分的小语种站点等等。可以在官网列出的站点列表(<a target="_blank" rel="noopener" href="https://joinmastodon.org/communities">https://joinmastodon.org/communities</a>)里找到一个喜欢又适合的站点。<br>一开始使用建议在一些大型的国际站点注册，限制较少，每天都有很多世界各地的人在时间线上灌水，如</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://mastodon.social/">https://mastodon.social</a></li>
+<li><a target="_blank" rel="noopener" href="https://mastodon.online/">https://mastodon.online</a></li>
+<li><a target="_blank" rel="noopener" href="https://mstdn.social/">https://mstdn.social</a>  </li>
+</ul>
+<p>使用一段时间，对各项操作都熟悉之后，可进一步选择更适合自己的小站点注册并迁移账号，或者继续呆在国际站点也无妨。<br>也可以在中文站点，或者中文用户较多的站点注册。这样在查看local timeline(本地轴)时都是中文，方便遇到志同道合的朋友。但无论在哪个站点注册，都建议阅读过<strong>服务器规则</strong>和<strong>服务条款</strong>后再进行，这两项通常都放在注册页面。<br>熟悉长毛象后，发现没有一个站点完全符合自己的想法，也可以自建站加入长毛象宇宙。搭建长毛象站点有很多简单易上手的教程可供参考，即使是计算机小白也能拥有属于自己的站点。可参考的教程：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://docs.joinmastodon.org/zh-cn/admin/prerequisites/">官方建站文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.notion.so/Mastodon-042a05ee29a048df8b2c1afd49e4c49b">长毛象（Mastodon）社区搭建详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/07/19/How-to-build-a-mastodon-instance.html">技术小白如何搭建Mastodon实例</a></li>
+<li><a target="_blank" rel="noopener" href="https://morikka.me/blog/mastodon-personal-instance/">长毛象个人向建站</a>)</li>
+</ul>
+<h3 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h3><p>只要在一个站点注册，就可以连上整个长毛象宇宙，看到所有在用户和他们公开可见的嘟文，所以只需选择一个合适的站点注册账号即可。但由于站点服务器大多在中国境外，有被墙掉的风险，很多人会选择在多个站点注册账号，避免一个站点被GFW盯上ban掉就难以连上长毛象宇宙。<br>邮箱是各站点注册的必须品，注册成功后也可以更改。建议使用gmail、protonmail等邮箱服务，避免使用qq邮箱一类能直接指向使用者的邮箱。一些站点还需要填写入站申请或入站理由等以便站长和管理员审核注册人，通过审核之后便可成功注册，在长毛象宇宙自由玩耍。</p>
+<h2 id="如何使用mastodon"><a href="#如何使用mastodon" class="headerlink" title="如何使用mastodon"></a>如何使用mastodon</h2><h3 id="Timeline"><a href="#Timeline" class="headerlink" title="Timeline"></a>Timeline</h3><p>Timeline简称为TL，完全按照时间来排列嘟文，不必担心出现时间线混乱、指给你看热度高的嘟文或塞给你不想看的广告、推广。<br>一般情况下，时间线有三种：</p>
+<ul>
+<li><strong>Home</strong> timeline，简称HTL，即首页。这是账号持有人自行关注而产生的时间线，能看到public、unlist、followers-only的嘟文以及提到你的direct message。</li>
+<li><strong>Local</strong> timeline，简称LTL，即本站(地)轴。这是账号所在站点的时间线，只有该站点的公开嘟文会出现在这里。</li>
+<li><strong>Federate</strong> timeline，简称FTL，即跨站轴。这是无论站点、所有账号嘟出的public内容共同组成的时间轴，能够看到世界各地的人都在这里发出自己的嘟嘟。</li>
+</ul>
+<p>通过设置<code>preferences(首选项)-&gt;other(其它)-&gt;PUBLIC TIMELINES-Filter languages(公共时间轴-语言过滤)</code>，可过滤时间线上的语言，只留下自己想看的语言。但这个过滤并不完全，公共轴或本站轴仍会出现一些应该被过滤掉的语言。 </p>
+<h3 id="基本功能"><a href="#基本功能" class="headerlink" title="基本功能"></a>基本功能</h3><ul>
+<li><p>发嘟  </p>
+<ul>
+<li>可见范围<br>发嘟可选择四种可见范围：public(公开)，unlist(公开，但不出现在公共时间轴)，followers-only(仅关注者可见)，direct message(私信，也可用作发仅自己可见的嘟文)。在设置中可以选择默认发嘟可见范围。</li>
+<li>cw折叠功能<br>一些不想被直接看到或者含有可能令人不适内容的嘟文推荐使用cw。点击发嘟窗口下方的cw就会出现一个新的小窗口，在这个新的小窗口填上内容提示信息，在发嘟主要窗口填写主要内容。<del>这个功能也很好地被用来讲冷笑话</del>  </li>
+</ul>
+</li>
+<li><p>回复<br>左下角箭头是回复功能，回复也可以设置不同的可见范围。在此处如果设置followers-only，被回复者即使没有关注你，也可以看到。回复的嘟嘟仅会出现在同时关注对话双方的账号首页时间线(Home Timeline)。这样尽最大可能避免参与对话者以外的人的打扰，使对话双方处于平等地位，不会出现因一方粉丝过多看到回复一拥而上的现象。</p>
+</li>
+<li><p>转发<br>长毛象的转发是仅转发，不能带文字。这样很好的避免了类似微博上转发挂人形成骂战的现象。在设置中选择<code>在时间轴中合并转嘟</code>，以避免一篇嘟文被太多人转发刷屏时间轴的情况。</p>
+</li>
+<li><p>喜欢<br>这里的⭐是favourite的意思，类似点赞功能。点赞代表赞同、安慰还是这里有个言论我mark一下就看使用者自己的想法，但通常来说都是<strong>赞</strong>！  </p>
+</li>
+<li><p>书签<br>bookmark是书签，或者称为收藏功能，这个功能与大多数平台相似，不再赘述。</p>
+</li>
+</ul>
+<h3 id="头像、昵称、profile、标签"><a href="#头像、昵称、profile、标签" class="headerlink" title="头像、昵称、profile、标签"></a>头像、昵称、profile、标签</h3><p>一些站点固定期限内没有头像、昵称和嘟文的“三无账号”会被清除收回，注意阅读站点规则避免注册之后账号被回收。既然已经决定抛弃微博等在用户时间线上搞动作的平台，就不要只是注册个账号放着，用起来！</p>
+<h3 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h3><ul>
+<li><p>锁嘟<br>锁定账号(选项在个人资料页面)，需要手动审核所有关注请求。即每个想要关注你账号的人需要先发送关注请求，你通过之后方可关注你的账号以及看到你的followers-only的嘟文。与instgram的锁账号不同，即使挂上小锁其他人仍能看到公开可见的嘟文。如果有较多敏感嘟文不想随意被人看到，可定期删除或选择followers-only、direct message这两种可见范围。</p>
+</li>
+<li><p>语言<br>通过<code>Preferences(首选项)-&gt;Appearance(外观)-&gt;Interface language(界面语言)</code>设置平台语言。由于各语种都是志愿者翻译，可能会出现错误或词不达意，但基本不影响使用。</p>
+</li>
+<li><p>过滤器<br>这里的过滤器是真的过滤掉包含关键字的嘟文，但可能会在原本应该是一条嘟文的地方出现<code>filtered</code>的提醒。过滤器可以设置失效时间、作用场景等。</p>
+</li>
+<li><p>其它<br>界面语言设置为惯用语言后，其它设置可自行探索。</p>
+</li>
+</ul>
+<h3 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h3><p>Mastodon故意弱化了搜索功能，避免形成“广场”，从而导致有人随便搜索一个关键词便前来抬杠或骂人的行为。但这也在一定程度上造成使用者的不便，比如明明有印象一条嘟嘟，但根本找不到，所以需要使用者自己多注意收藏有用的信息。有些站点开了全文搜索，会让搜索结果好一些，如自己的嘟文或转发、点赞过的嘟文能够搜索，但无法实现真正的“搜索”。 </p>
+<h3 id="block-mute"><a href="#block-mute" class="headerlink" title="block / mute"></a>block / mute</h3><p>block即拉黑。拉黑后，该账号无法与你互动、关注，嘟文不会出现在你的时间线。<br>mute即屏蔽。屏蔽后，该账号的嘟文不会出现在你的时间线，但仍可与你互动、关注，而你不会收到任何提醒。</p>
+<h3 id="迁移账号"><a href="#迁移账号" class="headerlink" title="迁移账号"></a>迁移账号</h3><p>长毛象的一大优点就是站点多，且类型丰富。如果看上了别的站点，可以在新站点注册账号后将账号迁移过去。迁移账号可以自动将followers/following转移到新账号，但无法迁移旧帐号的嘟文。</p>
+<h3 id="账号备份"><a href="#账号备份" class="headerlink" title="账号备份"></a>账号备份</h3><p>长毛象自带的备份功能可以备份follower列表、following列表、mute列表、block列表等。如果想要备份嘟文，可以使用象友提供的<a target="_blank" rel="noopener" href="https://github.com/slashyn/mastodon-archive-viewer-modified">备份插件</a>。<br>由于各个站点的维护仅依赖站长和可能有的站点管理员，所以可能会有不稳定、服务器出问题等状况出现，有时整个站点也会关闭不再运行，及时备份账号内容是个好习惯。</p>
+<h3 id="app"><a href="#app" class="headerlink" title="app"></a>app</h3><p>长毛象作为一个去中心化的平台，最佳访问方式是直接浏览器访问，如Chrome、Firefox、safari等。这些浏览器可以在手机主屏幕创建快捷方式，在手机桌面单独形成一个图标和有一个app没有太大差别。<br>如果仍需要一个app，可选择的有：</p>
+<ul>
+<li><p><strong>Android</strong>: Tusky, Subway Tooter, Fedilab(付费)</p>
+</li>
+<li><p><strong>iOS</strong>: Metatext, Mercury, iMast, Amaroq, Mast(付费), Toot!(付费)  </p>
+</li>
+</ul>
+<p>对于中文用户，推荐使用tooot。这是一个专注于中文社区的简洁、开源长毛象手机客户端，跨平台支持iOS和Android。<br>其它平台应用推荐可查看<a target="_blank" rel="noopener" href="https://joinmastodon.org/apps">官网应用推荐</a>。  </p>
+<h3 id="tag"><a href="#tag" class="headerlink" title="tag"></a>tag</h3><p>作为一个公共社交网络，这里也可以带话题(tag)发嘟。格式和Instagram一样，只需要一个<code>#</code>，如<code>#tag</code>。<br>长毛象已经有很多有趣或有用的tag，如<code>#长毛象安利交换大会</code>、<code>#资源分享</code>、<code>#菜谱</code>，还有季节性的赏花、赏月tag。也可以创建自己的专属tag，把某类嘟文存在这个tag下，方便自己查看。</p>
+<h3 id="一些好玩的账号"><a href="#一些好玩的账号" class="headerlink" title="一些好玩的账号"></a>一些好玩的账号</h3><ul>
+<li><p>骰寶機<br>吃喝玩乐都可以找它！想不到晚饭吃什么，发嘟@骰宝问吃什么，不出一分钟就会回复一种食物。问它喝什么同理。还有好玩又有趣的答案之书和对不对判断。具体玩法可查看骰宝主页了解。</p>
+</li>
+<li><p>妙仙包<br>想知道心中之事的结果？找大师求签、塔罗牌都能给你一个奇妙的答案。选择困难症？找包包真普选，轻松治愈选择困难。心中有愿还可对着大师许愿，有机会被大师选中实现。具体玩法查看妙仙包主页了解。</p>
+</li>
+<li><p>sci咖啡屋<br>这里可以点单饮品、套餐，但一定要吃完不可浪费。累了还可以在这里撸猫，猫猫送上缓解疲惫。具体玩法查看sci咖啡屋主页了解。</p>
+</li>
+</ul>
+<p>以上有趣账号可通过搜索名称获得，在此不提供具体以免给站点造成麻烦。</p>
+<h2 id="More-than-Mastodon"><a href="#More-than-Mastodon" class="headerlink" title="More than Mastodon"></a>More than Mastodon</h2><p>其实mastodon只是这个宇宙中的一部分，还有Misskey、pleroma、funkwhale、peertube等和mastodon类似的社交平台共同组成整个联邦宇宙。<br>何必拘泥于处处受限的一隅，这里有更广阔的宇宙等你。<br>Enjoy yourself！</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Mastodon/" rel="tag"># Mastodon</a>
+              <a href="/tags/UserGuide/" rel="tag"># UserGuide</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/09/16/blastp/" rel="prev" title="blastp的本地化使用">
+                  <i class="fa fa-chevron-left"></i> blastp的本地化使用
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">R</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
