@@ -3,15 +3,19 @@
   <entry>
     <title>Hexo + GitHub Pages搭建个人博客</title>
     <url>/2021/09/16/Hexo-GitHubPages/</url>
-    <content><![CDATA[<p>本博客搭建过程参考了许多教程，本文记录搭建过程及出现的一些小问题</p>
+    <content><![CDATA[<center>本博客搭建过程参考了许多教程，本文记录搭建过程及出现的一些小问题</center>
 <span id="more"></span>
-<p>有需要学习搭建博客的朋友可直接参考他人成熟的教程。本文参考教程：</p>
-<ol>
-<li><a href="https://zhuanlan.zhihu.com/p/70240127">https://zhuanlan.zhihu.com/p/70240127</a><br> 搭建流程较为清晰，整体框架都有，不想详细了解每一个步骤只是想成功搭建一个博客参考这个教程就够</li>
-<li><a href="https://juejin.cn/post/6844904131266609165">https://juejin.cn/post/6844904131266609165</a><br> 对于各种概念的解释都很详细，能够学习到很多知识，有助于未来对博客进行魔改升级等高级操作</li>
-<li><a href="https://hexo.io/zh-cn/docs/">https://hexo.io/zh-cn/docs/</a><br> Hexo官方说明文档，目前更新版本为1/9/2021。内容步骤简洁明了，跟着一步步做不会出大的差错，如有问题也可以直接提交</li>
-<li><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site">https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site</a><br> GitHub Pages官方说明文档</li>
-</ol>
+有需要学习搭建博客的朋友可直接参考他人成熟的教程。本文参考教程：
+1. <https://zhuanlan.zhihu.com/p/70240127>  
+    搭建流程较为清晰，整体框架都有，不想详细了解每一个步骤只是想成功搭建一个博客参考这个教程就够
+2. <https://juejin.cn/post/6844904131266609165>  
+    对于各种概念的解释都很详细，能够学习到很多知识，有助于未来对博客进行魔改升级等高级操作
+3. <https://hexo.io/zh-cn/docs/>  
+    Hexo官方说明文档，目前更新版本为1/9/2021。内容步骤简洁明了，跟着一步步做不会出大的差错，如有问题也可以直接提交
+4. <https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site>  
+    GitHub Pages官方说明文档
+
+
 <h2 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h2><h3 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h3><p>Mac和Linux系统的电脑已经预装了git.<br>Windows系统的电脑可以从官网(<a href="https://git-scm.com/downloads">https://git-scm.com/downloads</a> )下载相应的版本，安装过程中选择默认选项即可。<br>由于之前简单使用过gitee加git存代码，git的配置在当初已经完成。搜索“git使用”能够找到很多有用的教程。</p>
 <h3 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h3><p>可从官网 (<a href="https://nodejs.org/en/">https://nodejs.org/en/</a>)直接下载安装，可根据需求下载最新版本或推荐版本。需要注意的是，目前Hexo官网给出的建议是Node.js版本需不低于10.13，建议使用Node.js 12.0及以上版本。此处下载了Nodejs官网的推荐版本(recommended for most users)，14.17.6 LTS.<br>由于对Node.js并不了解，安装过程中直接选择了Automatically install the necessary tools.如果想更深入了解安装过程及自定义安装，可参考官方给出的详细安装教程(<a href="https://github.com/nodejs/node-gyp#on-windows">https://github.com/nodejs/node-gyp#on-windows</a>)</p>
 <h3 id="Hexo-1"><a href="#Hexo-1" class="headerlink" title="Hexo"></a>Hexo</h3><h4 id="检查Git和node-js安装情况"><a href="#检查Git和node-js安装情况" class="headerlink" title="检查Git和node.js安装情况"></a>检查Git和node.js安装情况</h4><p>安装Hexo需要git和node.js安装完成。检查电脑中这两项安装完成后，即可安装Hexo。可使用查看版本来检查是否安装成功。  </p>
@@ -102,7 +106,7 @@ $ git clone https://github.com/next-theme/hexo-theme-next themes/next
   <entry>
     <title>blastp的本地化使用</title>
     <url>/2021/09/16/blastp/</url>
-    <content><![CDATA[<p>blastp在Windows系统电脑上的本地使用</p>
+    <content><![CDATA[<center>blastp在Windows系统电脑上的本地使用</center>
 <span id="more"></span>
 
 <h2 id="下载blast到本地"><a href="#下载blast到本地" class="headerlink" title="下载blast到本地"></a>下载blast到本地</h2><p>在NCBI官网找到blast工具即可找到下载链接，根据提示一步步完成下载即可。<br>官网下载链接：<a href="https://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&PAGE_TYPE=BlastDocs&DOC_TYPE=Download">blast tools</a><br>网站打开速度较慢，挂梯可能会好一点。</p>
@@ -334,7 +338,7 @@ main() # 运行上述函数
   <entry>
     <title>长毛象使用指南</title>
     <url>/2021/09/21/mstdn/</url>
-    <content><![CDATA[<p>不少朋友被我安利到长毛象(mastodon)玩耍，本着对他们负责的态度，写下这篇长毛象使用指南。</p>
+    <content><![CDATA[<center>不少朋友被我安利到长毛象(mastodon)玩耍，本着对他们负责的态度，写下这篇长毛象使用指南。</center>
 <span id="more"></span>
 
 <h2 id="什么是mastodon"><a href="#什么是mastodon" class="headerlink" title="什么是mastodon"></a>什么是mastodon</h2><p>Mastodon(长毛象)是一个开源、去中心化的社交平台。简单来说，这里没有屏蔽词，没有限流，没有铺天盖地的营销号，没有Doctor看了都想重启宇宙的混乱时间线，只是一个纯粹的社交平台。长毛象将内容、社交网络交还给用户，更加尊重用户而不是平台“霸权”。<br><strong>如果将联邦宇宙(Fediverse)看做一个宇宙，那么每一个长毛象站点(Mastodon Society)就像一颗颗星球。</strong> 也就是说，你可以选择任何一颗星球定居，哪怕只是居住着一个人，只要它与宇宙相通，那么你就可以联系到宇宙中任何一个人而不会孤单。(摘自pullopen对长毛象的介绍：<a href="https://pullopenbluebox.wordpress.com/2020/06/30/mastodon-introduction/">长毛象（Mastodon）：更尊重用户的社交平台</a> )</p>
@@ -421,7 +425,7 @@ main() # 运行上述函数
   <entry>
     <title>Hexo + Markdown写博客</title>
     <url>/2021/09/16/writenewblog/</url>
-    <content><![CDATA[<p>创建、发布新文章；用vscode + markdown编辑文章；给文章添加分类和标签。</p>
+    <content><![CDATA[<center>创建、发布新文章；用vscode + markdown编辑文章；给文章添加分类和标签。</center>
 <span id="more"></span>
 
 <h2 id="新建文章-create-a-post"><a href="#新建文章-create-a-post" class="headerlink" title="新建文章 create a post"></a>新建文章 create a post</h2><p>在博客目录运行命令：</p>
