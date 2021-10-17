@@ -1,6 +1,204 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>长毛象使用指南</title>
+    <url>/2021/09/21/mstdn/</url>
+    <content><![CDATA[<center>不少朋友被我安利到长毛象(mastodon)玩耍，本着对他们负责的态度，写下这篇长毛象使用指南。</center>
+<span id="more"></span>
+
+<h2 id="什么是mastodon"><a href="#什么是mastodon" class="headerlink" title="什么是mastodon"></a>什么是mastodon</h2><p>Mastodon(长毛象)是一个开源、去中心化的社交平台。简单来说，这里没有屏蔽词，没有限流，没有铺天盖地的营销号，没有Doctor看了都想重启宇宙的混乱时间线，只是一个纯粹的社交平台。长毛象将内容、社交网络交还给用户，更加尊重用户而不是平台“霸权”。<br><strong>如果将联邦宇宙(Fediverse)看做一个宇宙，那么每一个长毛象站点(Mastodon Society)就像一颗颗星球。</strong> 也就是说，你可以选择任何一颗星球定居，哪怕只是居住着一个人，只要它与宇宙相通，那么你就可以联系到宇宙中任何一个人而不会孤单。(摘自pullopen对长毛象的介绍：<a href="https://pullopenbluebox.wordpress.com/2020/06/30/mastodon-introduction/">长毛象（Mastodon）：更尊重用户的社交平台</a> )</p>
+<h2 id="如何在mastodon拥有一个账号"><a href="#如何在mastodon拥有一个账号" class="headerlink" title="如何在mastodon拥有一个账号"></a>如何在mastodon拥有一个账号</h2><h3 id="选择站点"><a href="#选择站点" class="headerlink" title="选择站点"></a>选择站点</h3><p>长毛象有各种各样的站点(或称实例)，如二次元相关站、LGBTQ站、艺术类站，或者按照语言划分的小语种站点等等。可以在官网列出的站点列表(<a href="https://joinmastodon.org/communities">https://joinmastodon.org/communities</a>)里找到一个喜欢又适合的站点。<br>一开始使用建议在一些大型的国际站点注册，限制较少，每天都有很多世界各地的人在时间线上灌水，如</p>
+<ul>
+<li><a href="https://mastodon.social/">https://mastodon.social</a></li>
+<li><a href="https://mastodon.online/">https://mastodon.online</a></li>
+<li><a href="https://mstdn.social/">https://mstdn.social</a>  </li>
+</ul>
+<p>使用一段时间，对各项操作都熟悉之后，可进一步选择更适合自己的小站点注册并迁移账号，或者继续呆在国际站点也无妨。<br>也可以在中文站点，或者中文用户较多的站点注册。这样在查看local timeline(本地轴)时都是中文，方便遇到志同道合的朋友。但无论在哪个站点注册，都建议阅读过<strong>服务器规则</strong>和<strong>服务条款</strong>后再进行，这两项通常都放在注册页面。<br>熟悉长毛象后，发现没有一个站点完全符合自己的想法，也可以自建站加入长毛象宇宙。搭建长毛象站点有很多简单易上手的教程可供参考，即使是计算机小白也能拥有属于自己的站点。可参考的教程：</p>
+<ul>
+<li><a href="https://docs.joinmastodon.org/zh-cn/admin/prerequisites/">官方建站文档</a></li>
+<li><a href="https://www.notion.so/Mastodon-042a05ee29a048df8b2c1afd49e4c49b">长毛象（Mastodon）社区搭建详解</a></li>
+<li><a href="https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/07/19/How-to-build-a-mastodon-instance.html">技术小白如何搭建Mastodon实例</a></li>
+<li><a href="https://morikka.me/blog/mastodon-personal-instance/">长毛象个人向建站</a>)</li>
+</ul>
+<h3 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h3><p>只要在一个站点注册，就可以连上整个长毛象宇宙，看到所有在用户和他们公开可见的嘟文，所以只需选择一个合适的站点注册账号即可。但由于站点服务器大多在中国境外，有被墙掉的风险，很多人会选择在多个站点注册账号，避免一个站点被GFW盯上ban掉就难以连上长毛象宇宙。<br>邮箱是各站点注册的必须品，注册成功后也可以更改。建议使用gmail、protonmail等邮箱服务，避免使用qq邮箱一类能直接指向使用者的邮箱。一些站点还需要填写入站申请或入站理由等以便站长和管理员审核注册人，通过审核之后便可成功注册，在长毛象宇宙自由玩耍。</p>
+<h2 id="如何使用mastodon"><a href="#如何使用mastodon" class="headerlink" title="如何使用mastodon"></a>如何使用mastodon</h2><h3 id="Timeline"><a href="#Timeline" class="headerlink" title="Timeline"></a>Timeline</h3><p>Timeline简称为TL，完全按照时间来排列嘟文，不必担心出现时间线混乱、指给你看热度高的嘟文或塞给你不想看的广告、推广。<br>一般情况下，时间线有三种：</p>
+<ul>
+<li><strong>Home</strong> timeline，简称HTL，即首页。这是账号持有人自行关注而产生的时间线，能看到public、unlist、followers-only的嘟文以及提到你的direct message。</li>
+<li><strong>Local</strong> timeline，简称LTL，即本站(地)轴。这是账号所在站点的时间线，只有该站点的公开嘟文会出现在这里。</li>
+<li><strong>Federate</strong> timeline，简称FTL，即跨站轴。这是无论站点、所有账号嘟出的public内容共同组成的时间轴，能够看到世界各地的人都在这里发出自己的嘟嘟。</li>
+</ul>
+<p>通过设置<code>preferences(首选项)-&gt;other(其它)-&gt;PUBLIC TIMELINES-Filter languages(公共时间轴-语言过滤)</code>，可过滤时间线上的语言，只留下自己想看的语言。但这个过滤并不完全，公共轴或本站轴仍会出现一些应该被过滤掉的语言。 </p>
+<h3 id="基本功能"><a href="#基本功能" class="headerlink" title="基本功能"></a>基本功能</h3><ul>
+<li><p>发嘟  </p>
+<ul>
+<li>可见范围<br>发嘟可选择四种可见范围：public(公开)，unlist(公开，但不出现在公共时间轴)，followers-only(仅关注者可见)，direct message(私信，也可用作发仅自己可见的嘟文)。在设置中可以选择默认发嘟可见范围。</li>
+<li>cw折叠功能<br>一些不想被直接看到或者含有可能令人不适内容的嘟文推荐使用cw。点击发嘟窗口下方的cw就会出现一个新的小窗口，在这个新的小窗口填上内容提示信息，在发嘟主要窗口填写主要内容。<del>这个功能也很好地被用来讲冷笑话</del>  </li>
+<li>标记敏感内容<br>如果发的嘟文/图片含有not safe for work(NSFW，包括色情、暴力、血腥等)的内容，需要在发嘟时将图片标记为敏感信息，且善用cw折叠功能。</li>
+</ul>
+</li>
+<li><p>回复<br>左下角箭头是回复功能，回复也可以设置不同的可见范围。在此处如果设置followers-only，被回复者即使没有关注你，也可以看到。回复的嘟嘟仅会出现在同时关注对话双方的账号首页时间线(Home Timeline)。这样尽最大可能避免参与对话者以外的人的打扰，使对话双方处于平等地位，不会出现因一方粉丝过多看到回复一拥而上的现象。</p>
+</li>
+<li><p>转发<br>长毛象的转发是仅转发，不能带文字。这样很好的避免了类似微博上转发挂人形成骂战的现象。在设置中选择<code>在时间轴中合并转嘟</code>，以避免一篇嘟文被太多人转发刷屏时间轴的情况。</p>
+</li>
+<li><p>喜欢<br>这里的⭐是favourite的意思，类似点赞功能。点赞代表赞同、安慰还是这里有个言论我mark一下就看使用者自己的想法，但通常来说都是<strong>赞</strong>！  </p>
+</li>
+<li><p>书签<br>bookmark是书签，或者称为收藏功能，这个功能与大多数平台相似，不再赘述。</p>
+</li>
+</ul>
+<h3 id="头像、昵称、profile、标签"><a href="#头像、昵称、profile、标签" class="headerlink" title="头像、昵称、profile、标签"></a>头像、昵称、profile、标签</h3><p>一些站点固定期限内没有头像、昵称和嘟文的“三无账号”会被清除收回，注意阅读站点规则避免注册之后账号被回收。既然已经决定抛弃微博等在用户时间线上搞动作的平台，就不要只是注册个账号放着，用起来！</p>
+<h3 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h3><ul>
+<li><p>锁嘟<br>锁定账号(选项在个人资料页面)，需要手动审核所有关注请求。即每个想要关注你账号的人需要先发送关注请求，你通过之后方可关注你的账号以及看到你的followers-only的嘟文。与instgram的锁账号不同，即使挂上小锁其他人仍能看到公开可见的嘟文。如果有较多敏感嘟文不想随意被人看到，可定期删除或选择followers-only、direct message这两种可见范围。</p>
+</li>
+<li><p>语言<br>通过<code>Preferences(首选项)-&gt;Appearance(外观)-&gt;Interface language(界面语言)</code>设置平台语言。由于各语种都是志愿者翻译，可能会出现错误或词不达意，但基本不影响使用。</p>
+</li>
+<li><p>过滤器<br>这里的过滤器是真的过滤掉包含关键字的嘟文，但可能会在原本应该是一条嘟文的地方出现<code>filtered</code>的提醒。过滤器可以设置失效时间、作用场景等。</p>
+</li>
+<li><p>邮件通知<br>Preferences(首选项) -&gt; Notifications(通知)里的邮件提醒建议关掉，避免发送过多邮件给站长的邮件服务造成不必要的负担。</p>
+</li>
+<li><p>其它<br>界面语言设置为惯用语言后，其它设置可自行探索。</p>
+</li>
+</ul>
+<h3 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h3><p>Mastodon故意弱化了搜索功能，避免形成“广场”，从而导致有人随便搜索一个关键词便前来抬杠或骂人的行为。但这也在一定程度上造成使用者的不便，比如明明有印象一条嘟嘟，但根本找不到，所以需要使用者自己多注意收藏有用的信息。有些站点开了全文搜索，会让搜索结果好一些，如自己的嘟文或转发、点赞过的嘟文能够搜索，但无法实现真正的“搜索”。 </p>
+<h3 id="block-mute"><a href="#block-mute" class="headerlink" title="block / mute"></a>block / mute</h3><p>block即拉黑/屏蔽。拉黑后，该账号无法与你互动、关注，嘟文不会出现在你的时间线。<br>mute即隐藏。隐藏后，该账号的嘟文不会出现在你的时间线，但仍可与你互动、关注，而你不会收到任何提醒。</p>
+<h3 id="迁移账号"><a href="#迁移账号" class="headerlink" title="迁移账号"></a>迁移账号</h3><p>长毛象的一大优点就是站点多，且类型丰富。如果看上了别的站点，可以在新站点注册账号后将账号迁移过去。迁移账号可以自动将followers/following转移到新账号，但无法迁移旧帐号的嘟文。</p>
+<h3 id="账号备份"><a href="#账号备份" class="headerlink" title="账号备份"></a>账号备份</h3><p>长毛象自带的备份功能可以备份follower列表、following列表、mute列表、block列表等。如果想要备份嘟文，可以使用象友提供的<a href="https://github.com/slashyn/mastodon-archive-viewer-modified">备份插件</a>。<br>由于各个站点的维护仅依赖站长和可能有的站点管理员，所以可能会有不稳定、服务器出问题等状况出现，有时整个站点也会关闭不再运行，及时备份账号内容是个好习惯。</p>
+<h3 id="app"><a href="#app" class="headerlink" title="app"></a>app</h3><p>长毛象作为一个去中心化的平台，最佳访问方式是直接浏览器访问，如Chrome、Firefox、safari等。这些浏览器可以在手机主屏幕创建快捷方式，在手机桌面单独形成一个图标和有一个app没有太大差别。<br>如果仍需要一个app，可选择的有：</p>
+<ul>
+<li><p><strong>Android</strong>: Tusky, Subway Tooter, Fedilab(付费)</p>
+</li>
+<li><p><strong>iOS</strong>: Metatext, Mercury, iMast, Amaroq, Mast(付费), Toot!(付费)  </p>
+</li>
+<li><p><strong>tooot</strong>：对于中文用户，推荐使用tooot。这是一个专注于中文社区的简洁、开源长毛象手机客户端，跨平台支持iOS和Android。 </p>
+</li>
+<li><p><strong>其它</strong>：其它平台应用推荐可查看<a href="https://joinmastodon.org/apps">官网应用推荐</a>。  </p>
+</li>
+</ul>
+<h3 id="tag"><a href="#tag" class="headerlink" title="tag"></a>tag</h3><p>作为一个公共社交网络，这里也可以带话题(tag)发嘟。格式和Instagram一样，只需要一个<code>#</code>，如<code>#tag</code>。<br>长毛象已经有很多有趣或有用的tag，如<code>#长毛象中文使用指南</code>、<code>#长毛象安利交换大会</code>、<code>#资源分享</code>、<code>#菜谱</code>，还有季节性的赏花、赏月tag。也可以创建自己的专属tag，把某类嘟文存在这个tag下，方便自己查看。</p>
+<h3 id="一些好玩的账号"><a href="#一些好玩的账号" class="headerlink" title="一些好玩的账号"></a>一些好玩的账号</h3><ul>
+<li><p>骰寶機<br>吃喝玩乐都可以找它！想不到晚饭吃什么，发嘟@骰宝问吃什么，不出一分钟就会回复一种食物。问它喝什么同理。还有好玩又有趣的答案之书和对不对判断。具体玩法可查看骰宝账号主页了解。</p>
+</li>
+<li><p>妙仙包<br>想知道心中之事的结果？找大师求签、塔罗牌都能给你一个奇妙的答案。选择困难症？找包包真普选，轻松治愈选择困难。心中有愿还可对着大师许愿，有机会被大师选中实现。具体玩法查看妙仙包账号主页了解。</p>
+</li>
+<li><p>sci咖啡屋<br>这里可以点单饮品、套餐，但一定要吃完不可浪费。累了还可以在这里撸猫，猫猫送上缓解疲惫。具体玩法查看sci咖啡屋账号主页了解。</p>
+</li>
+<li><p>Mature[マツレ]<br>Mature是长毛象上最早的科学期刊之一，也是长毛象最权威及最有名望的学术期刊之一。每周最重要、最前沿的研究结果是在「Mature」中以论文导读的形式发表的。欢迎订阅，支持投稿。投稿方法详见Mature账号主页。</p>
+</li>
+</ul>
+<p>以上有趣账号可通过搜索名称获得，在此不提供具体账号以免给站点造成麻烦。</p>
+<h2 id="More-than-Mastodon"><a href="#More-than-Mastodon" class="headerlink" title="More than Mastodon"></a>More than Mastodon</h2><p>其实mastodon只是这个宇宙中的一部分，还有Misskey、pleroma、funkwhale、peertube等和mastodon类似的社交平台共同组成整个联邦宇宙。<br>何必拘泥于处处受限的一隅，这里有更广阔的宇宙等你。<br>Enjoy yourself！</p>
+]]></content>
+      <categories>
+        <category>Mastodon</category>
+      </categories>
+      <tags>
+        <tag>Mastodon</tag>
+        <tag>UserGuide</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo + GitHub Pages搭建个人博客</title>
+    <url>/2021/09/16/Hexo-GitHubPages/</url>
+    <content><![CDATA[<center>本博客搭建过程中参考了许多教程。本文用于记录搭建过程，以及出现的一些小问题</center>  
+<span id="more"></span>  
+
+<br/>  
+<br/>  
+
+<p>有需要学习搭建博客的朋友可直接参考他人成熟的教程。本文参考教程：</p>
+<ol>
+<li><a href="https://zhuanlan.zhihu.com/p/70240127">Hexo+Github Pages快速实现个人网站</a><br> 搭建流程较为清晰，整体框架都有，不想详细了解每一个步骤只是想成功搭建一个博客参考这个教程就够</li>
+<li><a href="https://juejin.cn/post/6844904131266609165">彻底搞懂如何使用Hexo+GitHubPages搭建个人博客</a><br> 对于各种概念的解释都很详细，能够学习到很多知识，有助于未来对博客进行魔改升级等高级操作</li>
+<li><a href="https://hexo.io/zh-cn/docs/">Hexo官方说明文档</a><br> Hexo官方说明文档，目前更新版本为1/9/2021。内容步骤简洁明了，跟着一步步做不会出大的差错，如有问题也可以直接提交</li>
+<li><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site">GitHub Pages官方说明文档</a><br> GitHub Pages官方说明文档，参考性不如前面三个链接，但也能提供一部分支持。</li>
+</ol>
+<h2 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h2><h3 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h3><p>Mac和Linux系统的电脑已经预装了git.<br>Windows系统的电脑可以从官网(<a href="https://git-scm.com/downloads">https://git-scm.com/downloads</a> )下载相应的版本，安装过程中选择默认选项即可。<br>由于之前简单使用过gitee加git存代码，git的配置在当初已经完成。搜索“git使用”能够找到很多有用的教程。</p>
+<h3 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h3><p>可从官网 (<a href="https://nodejs.org/en/">https://nodejs.org/en/</a>)直接下载安装，可根据需求下载最新版本或推荐版本。需要注意的是，目前Hexo官网给出的建议是Node.js版本需不低于10.13，建议使用Node.js 12.0及以上版本。此处下载了Nodejs官网的推荐版本(recommended for most users)，14.17.6 LTS.<br>由于对Node.js并不了解，安装过程中直接选择了Automatically install the necessary tools.如果想更深入了解安装过程及自定义安装，可参考官方给出的详细安装教程(<a href="https://github.com/nodejs/node-gyp#on-windows">https://github.com/nodejs/node-gyp#on-windows</a>)</p>
+<h3 id="Hexo-1"><a href="#Hexo-1" class="headerlink" title="Hexo"></a>Hexo</h3><h4 id="检查Git和node-js安装情况"><a href="#检查Git和node-js安装情况" class="headerlink" title="检查Git和node.js安装情况"></a>检查Git和node.js安装情况</h4><p>安装Hexo需要git和node.js安装完成。检查电脑中这两项安装完成后，即可安装Hexo。可使用查看版本来检查是否安装成功。  </p>
+<pre><code>$ npm -v  
+$ node -v  
+$ git --version  
+</code></pre>
+<h4 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h4><p>上述安装成功后，只需要使用npm即可完成Hexo的安装  </p>
+<pre><code>$ npm install -g hexo-cli  
+</code></pre>
+<p>对于熟悉 npm 的进阶用户，可以仅局部安装 hexo 包  </p>
+<pre><code>$ npm install hexo
+</code></pre>
+<h4 id="检查安装是否成功"><a href="#检查安装是否成功" class="headerlink" title="检查安装是否成功"></a>检查安装是否成功</h4><p>依然使用查看版本号的方式检查安装是否成功，运行命令：  </p>
+<pre><code>$ hexo - v
+</code></pre>
+<h4 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h4><pre><code>$ hexo init &lt;blogname&gt; #此处blogname可以自己起名字，此步要在空目录下进行
+$ cd blog  #进入blog目录
+$ npm install  #它会根据package.json依赖配置文件自动下载安装所需要的依赖模块node_modules
+$ hexo generate  #生成静态文件, 缩写 $ hexo g
+$ hexo server  #开启本地服务, 此时通过 http://localhost:4000 就可以访问默认样式的博客, 缩写$ hexo s
+</code></pre>
+<h4 id="小小的Debug"><a href="#小小的Debug" class="headerlink" title="小小的Debug"></a>小小的Debug</h4><p>安装时，显示在resolveNewModule步骤耗时很久，不知道是卡住还是这个步骤本就耗费时间。<br>Google找到Hexo的官方说明文档(<a href="https://hexo.io/zh-cn/docs/">https://hexo.io/zh-cn/docs/</a>)，其中提到安装只需要几分钟，并且这个几分钟可能包含前述的Git和Node.js的准备。因此意识到安装出现问题，直接停下此次安装并重新运行命令。<br>出现问题的原因可能是安装的同时在下载一个较大的文件，无论是内存占用还是网络占用都达到一定程度，使得Hexo的安装受到影响。二次运行命令行时，下载已经结束，只用时51s就完成安装。<br>多翻了几个教程，很多教程都有提到新建文件夹Hexo，在这个目录下安装Hexo。因此卸载Hexo，在目标位置建立文件夹重装。卸载命令：  </p>
+<pre><code>$ npm uninstall hexo-cli -g
+</code></pre>
+<p>这次安装同样比较顺利，很快就完成。<br>实际上，如果在安装前没有建立文件夹，只需在安装成功后建立一个新目录，后续步骤在这个空目录下进行即可。上述uninstall步骤是因为比较心急，直接推翻重来，但没有必要。</p>
+<h2 id="GitHub-Pages"><a href="#GitHub-Pages" class="headerlink" title="GitHub Pages"></a>GitHub Pages</h2><h3 id="git初始配置"><a href="#git初始配置" class="headerlink" title="git初始配置"></a>git初始配置</h3><p>Git安装完成后确认是否完成基本部署，用户名和邮箱设置是否完成。  </p>
+<pre><code>$ git config --global user.name &quot;YOUR NAME&quot;  #设置用户名称
+$ git config --global user.email &quot;YOUR EMAIL&quot;  #设置邮箱地址
+</code></pre>
+<h3 id="生成SSH-key公钥"><a href="#生成SSH-key公钥" class="headerlink" title="生成SSH key公钥"></a>生成SSH key公钥</h3><p>查看当前用户的目录下是否存在.ssh目录，如果存在进入到此目录下检查是否存在id_rsa和id_rsa.pub两个文件，这两个文件分别对应的是公钥和私钥，如果存在直接跳过此步，否则输入下面的命令：  </p>
+<pre><code>$ ssh-keygen -t rsa -C “your_github_email”
+# -t type:指定你要生成的密钥类型
+# -C commit:提供一个新的注释  
+</code></pre>
+<p>然后一路回车，直到生成一个矩形的图案为止。记下生成的这串字符，这就是后面需要给GitHub配置的公钥。</p>
+<h3 id="创建GitHub账号"><a href="#创建GitHub账号" class="headerlink" title="创建GitHub账号"></a>创建GitHub账号</h3><p>打开官网用邮箱一步步注册即可，仅有的两个可能遇到的问题:</p>
+<ul>
+<li>没想好用户名</li>
+<li>确认注册的邮件因为有链接可能会被当作垃圾邮件。</li>
+</ul>
+<h3 id="配置GitHub中的公钥"><a href="#配置GitHub中的公钥" class="headerlink" title="配置GitHub中的公钥"></a>配置GitHub中的公钥</h3><p>在GitHub账号设置中找到添加SSH key的地方，即<br>Settings -&gt; SSH and GPG keys -&gt; New SSH key<br>将前述步骤中生成的公钥贴在此处  </p>
+<h3 id="创建仓库-repository"><a href="#创建仓库-repository" class="headerlink" title="创建仓库(repository)"></a>创建仓库(repository)</h3><p>单机右上角(用户头像旁边)的“+”号即可创建New repository，会出现如图所示界面。<br>Owner处为用户名，后面的Repository name需要严格按照username.github.io填写。这样才能保证生成的是GitHub Pages页面，而不是其它代码库。  </p>
+<h3 id="GitHub-Pages-1"><a href="#GitHub-Pages-1" class="headerlink" title="GitHub Pages"></a>GitHub Pages</h3><p>创建成功后会自动进入该repository，进入setting找到Pages，进入后即可看到GitHub Pages界面。<br>这一步骤可能需要一些时间，耐心等待，一般几分钟就会显示站点发布成功。</p>
+<h4 id="小小的debug"><a href="#小小的debug" class="headerlink" title="小小的debug"></a>小小的debug</h4><p>第一次走到这一步时，此处有一句提醒，由于该GitHub仓库是空的，所以无法创建GitHub Pages站点。解决方式： </p>
+<ul>
+<li>可自己创建一个README文件</li>
+<li>粗暴删库重来，建库时选择生成默认README文件  </li>
+</ul>
+<h2 id="将Hexo部署到GitHub"><a href="#将Hexo部署到GitHub" class="headerlink" title="将Hexo部署到GitHub"></a>将Hexo部署到GitHub</h2><h3 id="安装hexo-deployer-git"><a href="#安装hexo-deployer-git" class="headerlink" title="安装hexo-deployer-git"></a>安装hexo-deployer-git</h3><p>在博客根目录下运行命令  </p>
+<pre><code>$ npm install hexo-deployer-git –save
+</code></pre>
+<h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><p>_config.yml是整个博客的配置文件，每项配置参数在Hexo官方文档可找到详细介绍。<br>使用git能将本地博客文件夹关联到GitHub的远程仓库，并把本地文件push到对应的仓库中。Hexo提供了一种更简便地方式，只需要在_config.yml中作相应的配置，通过命令行命令就可以很方便地把静态文件部署到对应的仓库中。<br>找到根目录中的_config.yml博客配置文件，在deployment配置项下设置如下参数：  </p>
+<pre><code>deploy:  
+    type: git  
+    repo: git@github.com:yourname/yourname.github.io.git  
+    branch: master  
+</code></pre>
+<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><pre><code>$ hexo generate #生成本地静态文件，可缩写为hexo g
+$ hexo deploy   #部署，可缩写为hexo d
+</code></pre>
+<p>这时回到GitHub仓库, 可以看到网站的静态文件已经上传。</p>
+<h4 id="小小的Debug-1"><a href="#小小的Debug-1" class="headerlink" title="小小的Debug"></a>小小的Debug</h4><p>部署没有报错，但网站没有更新<br>原因：GitHub Pages默认是从main生成页面，但本地设置部署参数是branch一项中填写的是master<br>Debug：修改该repository设置中pages的source一项或将前面提到的修改博客配置文件的branch参数为main</p>
+<h3 id="一些有用的命令"><a href="#一些有用的命令" class="headerlink" title="一些有用的命令"></a>一些有用的命令</h3><pre><code>hexo clean = hexo c #清除本地缓存，也就是清除public/文件夹和db.json文件
+hexo generate = hexo g #将souce文件夹下的Markdown和HTML文件解析到了public文件夹下，并生成了db.json文件
+hexo server = hexo s #开启本地调试模式
+hexo deploy = hexo d #将本地资源部署到GithubPages
+</code></pre>
+<h2 id="修改主题"><a href="#修改主题" class="headerlink" title="修改主题"></a>修改主题</h2><h3 id="选择主题"><a href="#选择主题" class="headerlink" title="选择主题"></a>选择主题</h3><p>Hexo的官网上即可找到许多可用主题，或搜索Hexo theme也可以找到。官网中列出的主题直达：<a href="https://hexo.io/themes/">https://hexo.io/themes/</a><br>找主题除了符合自己的审美之外，也要注意该主题是否一直有人维护。较长时间无人维护的主题可能由于版本问题无法顺利安装使用。</p>
+<h3 id="安装主题"><a href="#安装主题" class="headerlink" title="安装主题"></a>安装主题</h3><p>本博客选择的主题是Next，安装步骤如下：<br>将主题clone到theme文件夹下</p>
+<pre><code>$ cd blog
+$ git clone https://github.com/next-theme/hexo-theme-next themes/next
+</code></pre>
+<p>然后在hexo配置文件中修改themes为next</p>
+<pre><code>themes: next
+</code></pre>
+<h3 id="一些小改动"><a href="#一些小改动" class="headerlink" title="一些小改动"></a>一些小改动</h3><p>根据next的说明文件，可以在该主题的配置文件中对细节进行修改。<br>对博客名、描述以及作者等的修改在根目录的配置文件中进行。</p>
+]]></content>
+      <categories>
+        <category>Blog</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>Github</tag>
+        <tag>Blog</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>blastp的本地化使用</title>
     <url>/2021/09/16/blastp/</url>
     <content><![CDATA[<center>blastp在Windows系统电脑上的本地使用</center>
@@ -226,110 +424,11 @@ main() # 运行上述函数
 ]]></content>
       <categories>
         <category>Bioinfomatics</category>
+        <category>BLAST</category>
       </categories>
       <tags>
         <tag>BLAST</tag>
         <tag>Bioinfomatics</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo + GitHub Pages搭建个人博客</title>
-    <url>/2021/09/16/Hexo-GitHubPages/</url>
-    <content><![CDATA[<center>本博客搭建过程中参考了许多教程。本文用于记录搭建过程，以及出现的一些小问题</center>  
-<span id="more"></span>  
- 
-<p>有需要学习搭建博客的朋友可直接参考他人成熟的教程。本文参考教程：</p>
-<ol>
-<li><a href="https://zhuanlan.zhihu.com/p/70240127">Hexo+Github Pages快速实现个人网站</a><br> 搭建流程较为清晰，整体框架都有，不想详细了解每一个步骤只是想成功搭建一个博客参考这个教程就够</li>
-<li><a href="https://juejin.cn/post/6844904131266609165">彻底搞懂如何使用Hexo+GitHubPages搭建个人博客</a><br> 对于各种概念的解释都很详细，能够学习到很多知识，有助于未来对博客进行魔改升级等高级操作</li>
-<li><a href="https://hexo.io/zh-cn/docs/">Hexo官方说明文档</a><br> Hexo官方说明文档，目前更新版本为1/9/2021。内容步骤简洁明了，跟着一步步做不会出大的差错，如有问题也可以直接提交</li>
-<li><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site">GitHub Pages官方说明文档</a><br> GitHub Pages官方说明文档，参考性不如前面三个链接，但也能提供一部分支持。</li>
-</ol>
-<h2 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h2><h3 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h3><p>Mac和Linux系统的电脑已经预装了git.<br>Windows系统的电脑可以从官网(<a href="https://git-scm.com/downloads">https://git-scm.com/downloads</a> )下载相应的版本，安装过程中选择默认选项即可。<br>由于之前简单使用过gitee加git存代码，git的配置在当初已经完成。搜索“git使用”能够找到很多有用的教程。</p>
-<h3 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h3><p>可从官网 (<a href="https://nodejs.org/en/">https://nodejs.org/en/</a>)直接下载安装，可根据需求下载最新版本或推荐版本。需要注意的是，目前Hexo官网给出的建议是Node.js版本需不低于10.13，建议使用Node.js 12.0及以上版本。此处下载了Nodejs官网的推荐版本(recommended for most users)，14.17.6 LTS.<br>由于对Node.js并不了解，安装过程中直接选择了Automatically install the necessary tools.如果想更深入了解安装过程及自定义安装，可参考官方给出的详细安装教程(<a href="https://github.com/nodejs/node-gyp#on-windows">https://github.com/nodejs/node-gyp#on-windows</a>)</p>
-<h3 id="Hexo-1"><a href="#Hexo-1" class="headerlink" title="Hexo"></a>Hexo</h3><h4 id="检查Git和node-js安装情况"><a href="#检查Git和node-js安装情况" class="headerlink" title="检查Git和node.js安装情况"></a>检查Git和node.js安装情况</h4><p>安装Hexo需要git和node.js安装完成。检查电脑中这两项安装完成后，即可安装Hexo。可使用查看版本来检查是否安装成功。  </p>
-<pre><code>$ npm -v  
-$ node -v  
-$ git --version  
-</code></pre>
-<h4 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h4><p>上述安装成功后，只需要使用npm即可完成Hexo的安装  </p>
-<pre><code>$ npm install -g hexo-cli  
-</code></pre>
-<p>对于熟悉 npm 的进阶用户，可以仅局部安装 hexo 包  </p>
-<pre><code>$ npm install hexo
-</code></pre>
-<h4 id="检查安装是否成功"><a href="#检查安装是否成功" class="headerlink" title="检查安装是否成功"></a>检查安装是否成功</h4><p>依然使用查看版本号的方式检查安装是否成功，运行命令：  </p>
-<pre><code>$ hexo - v
-</code></pre>
-<h4 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h4><pre><code>$ hexo init &lt;blogname&gt; #此处blogname可以自己起名字，此步要在空目录下进行
-$ cd blog  #进入blog目录
-$ npm install  #它会根据package.json依赖配置文件自动下载安装所需要的依赖模块node_modules
-$ hexo generate  #生成静态文件, 缩写 $ hexo g
-$ hexo server  #开启本地服务, 此时通过 http://localhost:4000 就可以访问默认样式的博客, 缩写$ hexo s
-</code></pre>
-<h4 id="小小的Debug"><a href="#小小的Debug" class="headerlink" title="小小的Debug"></a>小小的Debug</h4><p>安装时，显示在resolveNewModule步骤耗时很久，不知道是卡住还是这个步骤本就耗费时间。<br>Google找到Hexo的官方说明文档(<a href="https://hexo.io/zh-cn/docs/">https://hexo.io/zh-cn/docs/</a>)，其中提到安装只需要几分钟，并且这个几分钟可能包含前述的Git和Node.js的准备。因此意识到安装出现问题，直接停下此次安装并重新运行命令。<br>出现问题的原因可能是安装的同时在下载一个较大的文件，无论是内存占用还是网络占用都达到一定程度，使得Hexo的安装受到影响。二次运行命令行时，下载已经结束，只用时51s就完成安装。<br>多翻了几个教程，很多教程都有提到新建文件夹Hexo，在这个目录下安装Hexo。因此卸载Hexo，在目标位置建立文件夹重装。卸载命令：  </p>
-<pre><code>$ npm uninstall hexo-cli -g
-</code></pre>
-<p>这次安装同样比较顺利，很快就完成。<br>实际上，如果在安装前没有建立文件夹，只需在安装成功后建立一个新目录，后续步骤在这个空目录下进行即可。上述uninstall步骤是因为比较心急，直接推翻重来，但没有必要。</p>
-<h2 id="GitHub-Pages"><a href="#GitHub-Pages" class="headerlink" title="GitHub Pages"></a>GitHub Pages</h2><h3 id="git初始配置"><a href="#git初始配置" class="headerlink" title="git初始配置"></a>git初始配置</h3><p>Git安装完成后确认是否完成基本部署，用户名和邮箱设置是否完成。  </p>
-<pre><code>$ git config --global user.name &quot;YOUR NAME&quot;  #设置用户名称
-$ git config --global user.email &quot;YOUR EMAIL&quot;  #设置邮箱地址
-</code></pre>
-<h3 id="生成SSH-key公钥"><a href="#生成SSH-key公钥" class="headerlink" title="生成SSH key公钥"></a>生成SSH key公钥</h3><p>查看当前用户的目录下是否存在.ssh目录，如果存在进入到此目录下检查是否存在id_rsa和id_rsa.pub两个文件，这两个文件分别对应的是公钥和私钥，如果存在直接跳过此步，否则输入下面的命令：  </p>
-<pre><code>$ ssh-keygen -t rsa -C “your_github_email”
-# -t type:指定你要生成的密钥类型
-# -C commit:提供一个新的注释  
-</code></pre>
-<p>然后一路回车，直到生成一个矩形的图案为止。记下生成的这串字符，这就是后面需要给GitHub配置的公钥。</p>
-<h3 id="创建GitHub账号"><a href="#创建GitHub账号" class="headerlink" title="创建GitHub账号"></a>创建GitHub账号</h3><p>打开官网用邮箱一步步注册即可，仅有的两个可能遇到的问题:</p>
-<ul>
-<li>没想好用户名</li>
-<li>确认注册的邮件因为有链接可能会被当作垃圾邮件。</li>
-</ul>
-<h3 id="配置GitHub中的公钥"><a href="#配置GitHub中的公钥" class="headerlink" title="配置GitHub中的公钥"></a>配置GitHub中的公钥</h3><p>在GitHub账号设置中找到添加SSH key的地方，即<br>Settings -&gt; SSH and GPG keys -&gt; New SSH key<br>将前述步骤中生成的公钥贴在此处  </p>
-<h3 id="创建仓库-repository"><a href="#创建仓库-repository" class="headerlink" title="创建仓库(repository)"></a>创建仓库(repository)</h3><p>单机右上角(用户头像旁边)的“+”号即可创建New repository，会出现如图所示界面。<br>Owner处为用户名，后面的Repository name需要严格按照username.github.io填写。这样才能保证生成的是GitHub Pages页面，而不是其它代码库。  </p>
-<h3 id="GitHub-Pages-1"><a href="#GitHub-Pages-1" class="headerlink" title="GitHub Pages"></a>GitHub Pages</h3><p>创建成功后会自动进入该repository，进入setting找到Pages，进入后即可看到GitHub Pages界面。<br>这一步骤可能需要一些时间，耐心等待，一般几分钟就会显示站点发布成功。</p>
-<h4 id="小小的debug"><a href="#小小的debug" class="headerlink" title="小小的debug"></a>小小的debug</h4><p>第一次走到这一步时，此处有一句提醒，由于该GitHub仓库是空的，所以无法创建GitHub Pages站点。解决方式： </p>
-<ul>
-<li>可自己创建一个README文件</li>
-<li>粗暴删库重来，建库时选择生成默认README文件  </li>
-</ul>
-<h2 id="将Hexo部署到GitHub"><a href="#将Hexo部署到GitHub" class="headerlink" title="将Hexo部署到GitHub"></a>将Hexo部署到GitHub</h2><h3 id="安装hexo-deployer-git"><a href="#安装hexo-deployer-git" class="headerlink" title="安装hexo-deployer-git"></a>安装hexo-deployer-git</h3><p>在博客根目录下运行命令  </p>
-<pre><code>$ npm install hexo-deployer-git –save
-</code></pre>
-<h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><p>_config.yml是整个博客的配置文件，每项配置参数在Hexo官方文档可找到详细介绍。<br>使用git能将本地博客文件夹关联到GitHub的远程仓库，并把本地文件push到对应的仓库中。Hexo提供了一种更简便地方式，只需要在_config.yml中作相应的配置，通过命令行命令就可以很方便地把静态文件部署到对应的仓库中。<br>找到根目录中的_config.yml博客配置文件，在deployment配置项下设置如下参数：  </p>
-<pre><code>deploy:  
-    type: git  
-    repo: git@github.com:yourname/yourname.github.io.git  
-    branch: master  
-</code></pre>
-<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><pre><code>$ hexo generate #生成本地静态文件，可缩写为hexo g
-$ hexo deploy   #部署，可缩写为hexo d
-</code></pre>
-<p>这时回到GitHub仓库, 可以看到网站的静态文件已经上传。</p>
-<h4 id="小小的Debug-1"><a href="#小小的Debug-1" class="headerlink" title="小小的Debug"></a>小小的Debug</h4><p>部署没有报错，但网站没有更新<br>原因：GitHub Pages默认是从main生成页面，但本地设置部署参数是branch一项中填写的是master<br>Debug：修改该repository设置中pages的source一项或将前面提到的修改博客配置文件的branch参数为main</p>
-<h3 id="一些有用的命令"><a href="#一些有用的命令" class="headerlink" title="一些有用的命令"></a>一些有用的命令</h3><pre><code>hexo clean = hexo c #清除本地缓存，也就是清除public/文件夹和db.json文件
-hexo generate = hexo g #将souce文件夹下的Markdown和HTML文件解析到了public文件夹下，并生成了db.json文件
-hexo server = hexo s #开启本地调试模式
-hexo deploy = hexo d #将本地资源部署到GithubPages
-</code></pre>
-<h2 id="修改主题"><a href="#修改主题" class="headerlink" title="修改主题"></a>修改主题</h2><h3 id="选择主题"><a href="#选择主题" class="headerlink" title="选择主题"></a>选择主题</h3><p>Hexo的官网上即可找到许多可用主题，或搜索Hexo theme也可以找到。官网中列出的主题直达：<a href="https://hexo.io/themes/">https://hexo.io/themes/</a><br>找主题除了符合自己的审美之外，也要注意该主题是否一直有人维护。较长时间无人维护的主题可能由于版本问题无法顺利安装使用。</p>
-<h3 id="安装主题"><a href="#安装主题" class="headerlink" title="安装主题"></a>安装主题</h3><p>本博客选择的主题是Next，安装步骤如下：<br>将主题clone到theme文件夹下</p>
-<pre><code>$ cd blog
-$ git clone https://github.com/next-theme/hexo-theme-next themes/next
-</code></pre>
-<p>然后在hexo配置文件中修改themes为next</p>
-<pre><code>themes: next
-</code></pre>
-<h3 id="一些小改动"><a href="#一些小改动" class="headerlink" title="一些小改动"></a>一些小改动</h3><p>根据next的说明文件，可以在该主题的配置文件中对细节进行修改。<br>对博客名、描述以及作者等的修改在根目录的配置文件中进行。</p>
-]]></content>
-      <categories>
-        <category>Blog</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>Github</tag>
-        <tag>Blog</tag>
       </tags>
   </entry>
   <entry>
@@ -407,101 +506,6 @@ $ hexo deploy  # 部署到GitHub Pages
         <tag>Blog</tag>
         <tag>Markdown</tag>
         <tag>vscode</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>长毛象使用指南</title>
-    <url>/2021/09/21/mstdn/</url>
-    <content><![CDATA[<center>不少朋友被我安利到长毛象(mastodon)玩耍，本着对他们负责的态度，写下这篇长毛象使用指南。</center>
-<span id="more"></span>
-
-<h2 id="什么是mastodon"><a href="#什么是mastodon" class="headerlink" title="什么是mastodon"></a>什么是mastodon</h2><p>Mastodon(长毛象)是一个开源、去中心化的社交平台。简单来说，这里没有屏蔽词，没有限流，没有铺天盖地的营销号，没有Doctor看了都想重启宇宙的混乱时间线，只是一个纯粹的社交平台。长毛象将内容、社交网络交还给用户，更加尊重用户而不是平台“霸权”。<br><strong>如果将联邦宇宙(Fediverse)看做一个宇宙，那么每一个长毛象站点(Mastodon Society)就像一颗颗星球。</strong> 也就是说，你可以选择任何一颗星球定居，哪怕只是居住着一个人，只要它与宇宙相通，那么你就可以联系到宇宙中任何一个人而不会孤单。(摘自pullopen对长毛象的介绍：<a href="https://pullopenbluebox.wordpress.com/2020/06/30/mastodon-introduction/">长毛象（Mastodon）：更尊重用户的社交平台</a> )</p>
-<h2 id="如何在mastodon拥有一个账号"><a href="#如何在mastodon拥有一个账号" class="headerlink" title="如何在mastodon拥有一个账号"></a>如何在mastodon拥有一个账号</h2><h3 id="选择站点"><a href="#选择站点" class="headerlink" title="选择站点"></a>选择站点</h3><p>长毛象有各种各样的站点(或称实例)，如二次元相关站、LGBTQ站、艺术类站，或者按照语言划分的小语种站点等等。可以在官网列出的站点列表(<a href="https://joinmastodon.org/communities">https://joinmastodon.org/communities</a>)里找到一个喜欢又适合的站点。<br>一开始使用建议在一些大型的国际站点注册，限制较少，每天都有很多世界各地的人在时间线上灌水，如</p>
-<ul>
-<li><a href="https://mastodon.social/">https://mastodon.social</a></li>
-<li><a href="https://mastodon.online/">https://mastodon.online</a></li>
-<li><a href="https://mstdn.social/">https://mstdn.social</a>  </li>
-</ul>
-<p>使用一段时间，对各项操作都熟悉之后，可进一步选择更适合自己的小站点注册并迁移账号，或者继续呆在国际站点也无妨。<br>也可以在中文站点，或者中文用户较多的站点注册。这样在查看local timeline(本地轴)时都是中文，方便遇到志同道合的朋友。但无论在哪个站点注册，都建议阅读过<strong>服务器规则</strong>和<strong>服务条款</strong>后再进行，这两项通常都放在注册页面。<br>熟悉长毛象后，发现没有一个站点完全符合自己的想法，也可以自建站加入长毛象宇宙。搭建长毛象站点有很多简单易上手的教程可供参考，即使是计算机小白也能拥有属于自己的站点。可参考的教程：</p>
-<ul>
-<li><a href="https://docs.joinmastodon.org/zh-cn/admin/prerequisites/">官方建站文档</a></li>
-<li><a href="https://www.notion.so/Mastodon-042a05ee29a048df8b2c1afd49e4c49b">长毛象（Mastodon）社区搭建详解</a></li>
-<li><a href="https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/07/19/How-to-build-a-mastodon-instance.html">技术小白如何搭建Mastodon实例</a></li>
-<li><a href="https://morikka.me/blog/mastodon-personal-instance/">长毛象个人向建站</a>)</li>
-</ul>
-<h3 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h3><p>只要在一个站点注册，就可以连上整个长毛象宇宙，看到所有在用户和他们公开可见的嘟文，所以只需选择一个合适的站点注册账号即可。但由于站点服务器大多在中国境外，有被墙掉的风险，很多人会选择在多个站点注册账号，避免一个站点被GFW盯上ban掉就难以连上长毛象宇宙。<br>邮箱是各站点注册的必须品，注册成功后也可以更改。建议使用gmail、protonmail等邮箱服务，避免使用qq邮箱一类能直接指向使用者的邮箱。一些站点还需要填写入站申请或入站理由等以便站长和管理员审核注册人，通过审核之后便可成功注册，在长毛象宇宙自由玩耍。</p>
-<h2 id="如何使用mastodon"><a href="#如何使用mastodon" class="headerlink" title="如何使用mastodon"></a>如何使用mastodon</h2><h3 id="Timeline"><a href="#Timeline" class="headerlink" title="Timeline"></a>Timeline</h3><p>Timeline简称为TL，完全按照时间来排列嘟文，不必担心出现时间线混乱、指给你看热度高的嘟文或塞给你不想看的广告、推广。<br>一般情况下，时间线有三种：</p>
-<ul>
-<li><strong>Home</strong> timeline，简称HTL，即首页。这是账号持有人自行关注而产生的时间线，能看到public、unlist、followers-only的嘟文以及提到你的direct message。</li>
-<li><strong>Local</strong> timeline，简称LTL，即本站(地)轴。这是账号所在站点的时间线，只有该站点的公开嘟文会出现在这里。</li>
-<li><strong>Federate</strong> timeline，简称FTL，即跨站轴。这是无论站点、所有账号嘟出的public内容共同组成的时间轴，能够看到世界各地的人都在这里发出自己的嘟嘟。</li>
-</ul>
-<p>通过设置<code>preferences(首选项)-&gt;other(其它)-&gt;PUBLIC TIMELINES-Filter languages(公共时间轴-语言过滤)</code>，可过滤时间线上的语言，只留下自己想看的语言。但这个过滤并不完全，公共轴或本站轴仍会出现一些应该被过滤掉的语言。 </p>
-<h3 id="基本功能"><a href="#基本功能" class="headerlink" title="基本功能"></a>基本功能</h3><ul>
-<li><p>发嘟  </p>
-<ul>
-<li>可见范围<br>发嘟可选择四种可见范围：public(公开)，unlist(公开，但不出现在公共时间轴)，followers-only(仅关注者可见)，direct message(私信，也可用作发仅自己可见的嘟文)。在设置中可以选择默认发嘟可见范围。</li>
-<li>cw折叠功能<br>一些不想被直接看到或者含有可能令人不适内容的嘟文推荐使用cw。点击发嘟窗口下方的cw就会出现一个新的小窗口，在这个新的小窗口填上内容提示信息，在发嘟主要窗口填写主要内容。<del>这个功能也很好地被用来讲冷笑话</del>  </li>
-<li>标记敏感内容<br>如果发的嘟文/图片含有not safe for work(NSFW，包括色情、暴力、血腥等)的内容，需要在发嘟时将图片标记为敏感信息，且善用cw折叠功能。</li>
-</ul>
-</li>
-<li><p>回复<br>左下角箭头是回复功能，回复也可以设置不同的可见范围。在此处如果设置followers-only，被回复者即使没有关注你，也可以看到。回复的嘟嘟仅会出现在同时关注对话双方的账号首页时间线(Home Timeline)。这样尽最大可能避免参与对话者以外的人的打扰，使对话双方处于平等地位，不会出现因一方粉丝过多看到回复一拥而上的现象。</p>
-</li>
-<li><p>转发<br>长毛象的转发是仅转发，不能带文字。这样很好的避免了类似微博上转发挂人形成骂战的现象。在设置中选择<code>在时间轴中合并转嘟</code>，以避免一篇嘟文被太多人转发刷屏时间轴的情况。</p>
-</li>
-<li><p>喜欢<br>这里的⭐是favourite的意思，类似点赞功能。点赞代表赞同、安慰还是这里有个言论我mark一下就看使用者自己的想法，但通常来说都是<strong>赞</strong>！  </p>
-</li>
-<li><p>书签<br>bookmark是书签，或者称为收藏功能，这个功能与大多数平台相似，不再赘述。</p>
-</li>
-</ul>
-<h3 id="头像、昵称、profile、标签"><a href="#头像、昵称、profile、标签" class="headerlink" title="头像、昵称、profile、标签"></a>头像、昵称、profile、标签</h3><p>一些站点固定期限内没有头像、昵称和嘟文的“三无账号”会被清除收回，注意阅读站点规则避免注册之后账号被回收。既然已经决定抛弃微博等在用户时间线上搞动作的平台，就不要只是注册个账号放着，用起来！</p>
-<h3 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h3><ul>
-<li><p>锁嘟<br>锁定账号(选项在个人资料页面)，需要手动审核所有关注请求。即每个想要关注你账号的人需要先发送关注请求，你通过之后方可关注你的账号以及看到你的followers-only的嘟文。与instgram的锁账号不同，即使挂上小锁其他人仍能看到公开可见的嘟文。如果有较多敏感嘟文不想随意被人看到，可定期删除或选择followers-only、direct message这两种可见范围。</p>
-</li>
-<li><p>语言<br>通过<code>Preferences(首选项)-&gt;Appearance(外观)-&gt;Interface language(界面语言)</code>设置平台语言。由于各语种都是志愿者翻译，可能会出现错误或词不达意，但基本不影响使用。</p>
-</li>
-<li><p>过滤器<br>这里的过滤器是真的过滤掉包含关键字的嘟文，但可能会在原本应该是一条嘟文的地方出现<code>filtered</code>的提醒。过滤器可以设置失效时间、作用场景等。</p>
-</li>
-<li><p>邮件通知<br>Preferences(首选项) -&gt; Notifications(通知)里的邮件提醒建议关掉，避免发送过多邮件给站长的邮件服务造成不必要的负担。</p>
-</li>
-<li><p>其它<br>界面语言设置为惯用语言后，其它设置可自行探索。</p>
-</li>
-</ul>
-<h3 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h3><p>Mastodon故意弱化了搜索功能，避免形成“广场”，从而导致有人随便搜索一个关键词便前来抬杠或骂人的行为。但这也在一定程度上造成使用者的不便，比如明明有印象一条嘟嘟，但根本找不到，所以需要使用者自己多注意收藏有用的信息。有些站点开了全文搜索，会让搜索结果好一些，如自己的嘟文或转发、点赞过的嘟文能够搜索，但无法实现真正的“搜索”。 </p>
-<h3 id="block-mute"><a href="#block-mute" class="headerlink" title="block / mute"></a>block / mute</h3><p>block即拉黑/屏蔽。拉黑后，该账号无法与你互动、关注，嘟文不会出现在你的时间线。<br>mute即隐藏。隐藏后，该账号的嘟文不会出现在你的时间线，但仍可与你互动、关注，而你不会收到任何提醒。</p>
-<h3 id="迁移账号"><a href="#迁移账号" class="headerlink" title="迁移账号"></a>迁移账号</h3><p>长毛象的一大优点就是站点多，且类型丰富。如果看上了别的站点，可以在新站点注册账号后将账号迁移过去。迁移账号可以自动将followers/following转移到新账号，但无法迁移旧帐号的嘟文。</p>
-<h3 id="账号备份"><a href="#账号备份" class="headerlink" title="账号备份"></a>账号备份</h3><p>长毛象自带的备份功能可以备份follower列表、following列表、mute列表、block列表等。如果想要备份嘟文，可以使用象友提供的<a href="https://github.com/slashyn/mastodon-archive-viewer-modified">备份插件</a>。<br>由于各个站点的维护仅依赖站长和可能有的站点管理员，所以可能会有不稳定、服务器出问题等状况出现，有时整个站点也会关闭不再运行，及时备份账号内容是个好习惯。</p>
-<h3 id="app"><a href="#app" class="headerlink" title="app"></a>app</h3><p>长毛象作为一个去中心化的平台，最佳访问方式是直接浏览器访问，如Chrome、Firefox、safari等。这些浏览器可以在手机主屏幕创建快捷方式，在手机桌面单独形成一个图标和有一个app没有太大差别。<br>如果仍需要一个app，可选择的有：</p>
-<ul>
-<li><p><strong>Android</strong>: Tusky, Subway Tooter, Fedilab(付费)</p>
-</li>
-<li><p><strong>iOS</strong>: Metatext, Mercury, iMast, Amaroq, Mast(付费), Toot!(付费)  </p>
-</li>
-<li><p><strong>tooot</strong>：对于中文用户，推荐使用tooot。这是一个专注于中文社区的简洁、开源长毛象手机客户端，跨平台支持iOS和Android。 </p>
-</li>
-<li><p><strong>其它</strong>：其它平台应用推荐可查看<a href="https://joinmastodon.org/apps">官网应用推荐</a>。  </p>
-</li>
-</ul>
-<h3 id="tag"><a href="#tag" class="headerlink" title="tag"></a>tag</h3><p>作为一个公共社交网络，这里也可以带话题(tag)发嘟。格式和Instagram一样，只需要一个<code>#</code>，如<code>#tag</code>。<br>长毛象已经有很多有趣或有用的tag，如<code>#长毛象中文使用指南</code>、<code>#长毛象安利交换大会</code>、<code>#资源分享</code>、<code>#菜谱</code>，还有季节性的赏花、赏月tag。也可以创建自己的专属tag，把某类嘟文存在这个tag下，方便自己查看。</p>
-<h3 id="一些好玩的账号"><a href="#一些好玩的账号" class="headerlink" title="一些好玩的账号"></a>一些好玩的账号</h3><ul>
-<li><p>骰寶機<br>吃喝玩乐都可以找它！想不到晚饭吃什么，发嘟@骰宝问吃什么，不出一分钟就会回复一种食物。问它喝什么同理。还有好玩又有趣的答案之书和对不对判断。具体玩法可查看骰宝账号主页了解。</p>
-</li>
-<li><p>妙仙包<br>想知道心中之事的结果？找大师求签、塔罗牌都能给你一个奇妙的答案。选择困难症？找包包真普选，轻松治愈选择困难。心中有愿还可对着大师许愿，有机会被大师选中实现。具体玩法查看妙仙包账号主页了解。</p>
-</li>
-<li><p>sci咖啡屋<br>这里可以点单饮品、套餐，但一定要吃完不可浪费。累了还可以在这里撸猫，猫猫送上缓解疲惫。具体玩法查看sci咖啡屋账号主页了解。</p>
-</li>
-<li><p>Mature[マツレ]<br>Mature是长毛象上最早的科学期刊之一，也是长毛象最权威及最有名望的学术期刊之一。每周最重要、最前沿的研究结果是在「Mature」中以论文导读的形式发表的。欢迎订阅，支持投稿。投稿方法详见Mature账号主页。</p>
-</li>
-</ul>
-<p>以上有趣账号可通过搜索名称获得，在此不提供具体账号以免给站点造成麻烦。</p>
-<h2 id="More-than-Mastodon"><a href="#More-than-Mastodon" class="headerlink" title="More than Mastodon"></a>More than Mastodon</h2><p>其实mastodon只是这个宇宙中的一部分，还有Misskey、pleroma、funkwhale、peertube等和mastodon类似的社交平台共同组成整个联邦宇宙。<br>何必拘泥于处处受限的一隅，这里有更广阔的宇宙等你。<br>Enjoy yourself！</p>
-]]></content>
-      <categories>
-        <category>Mastodon</category>
-      </categories>
-      <tags>
-        <tag>Mastodon</tag>
-        <tag>UserGuide</tag>
       </tags>
   </entry>
 </search>
