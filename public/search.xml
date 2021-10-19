@@ -1,101 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>长毛象使用指南</title>
-    <url>/2021/09/21/mstdn/</url>
-    <content><![CDATA[<center>不少朋友被我安利到长毛象(mastodon)玩耍，本着对他们负责的态度，写下这篇长毛象使用指南。</center>
-<span id="more"></span>
-
-<h2 id="什么是mastodon"><a href="#什么是mastodon" class="headerlink" title="什么是mastodon"></a>什么是mastodon</h2><p>Mastodon(长毛象)是一个开源、去中心化的社交平台。简单来说，这里没有屏蔽词，没有限流，没有铺天盖地的营销号，没有Doctor看了都想重启宇宙的混乱时间线，只是一个纯粹的社交平台。长毛象将内容、社交网络交还给用户，更加尊重用户而不是平台“霸权”。<br><strong>如果将联邦宇宙(Fediverse)看做一个宇宙，那么每一个长毛象站点(Mastodon Society)就像一颗颗星球。</strong> 也就是说，你可以选择任何一颗星球定居，哪怕只是居住着一个人，只要它与宇宙相通，那么你就可以联系到宇宙中任何一个人而不会孤单。(摘自pullopen对长毛象的介绍：<a href="https://pullopenbluebox.wordpress.com/2020/06/30/mastodon-introduction/">长毛象（Mastodon）：更尊重用户的社交平台</a> )</p>
-<h2 id="如何在mastodon拥有一个账号"><a href="#如何在mastodon拥有一个账号" class="headerlink" title="如何在mastodon拥有一个账号"></a>如何在mastodon拥有一个账号</h2><h3 id="选择站点"><a href="#选择站点" class="headerlink" title="选择站点"></a>选择站点</h3><p>长毛象有各种各样的站点(或称实例)，如二次元相关站、LGBTQ站、艺术类站，或者按照语言划分的小语种站点等等。可以在官网列出的站点列表(<a href="https://joinmastodon.org/communities">https://joinmastodon.org/communities</a>)里找到一个喜欢又适合的站点。<br>一开始使用建议在一些大型的国际站点注册，限制较少，每天都有很多世界各地的人在时间线上灌水，如</p>
-<ul>
-<li><a href="https://mastodon.social/">https://mastodon.social</a></li>
-<li><a href="https://mastodon.online/">https://mastodon.online</a></li>
-<li><a href="https://mstdn.social/">https://mstdn.social</a>  </li>
-</ul>
-<p>使用一段时间，对各项操作都熟悉之后，可进一步选择更适合自己的小站点注册并迁移账号，或者继续呆在国际站点也无妨。<br>也可以在中文站点，或者中文用户较多的站点注册。这样在查看local timeline(本地轴)时都是中文，方便遇到志同道合的朋友。但无论在哪个站点注册，都建议阅读过<strong>服务器规则</strong>和<strong>服务条款</strong>后再进行，这两项通常都放在注册页面。<br>熟悉长毛象后，发现没有一个站点完全符合自己的想法，也可以自建站加入长毛象宇宙。搭建长毛象站点有很多简单易上手的教程可供参考，即使是计算机小白也能拥有属于自己的站点。可参考的教程：</p>
-<ul>
-<li><a href="https://docs.joinmastodon.org/zh-cn/admin/prerequisites/">官方建站文档</a></li>
-<li><a href="https://www.notion.so/Mastodon-042a05ee29a048df8b2c1afd49e4c49b">长毛象（Mastodon）社区搭建详解</a></li>
-<li><a href="https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/07/19/How-to-build-a-mastodon-instance.html">技术小白如何搭建Mastodon实例</a></li>
-<li><a href="https://morikka.me/blog/mastodon-personal-instance/">长毛象个人向建站</a>)</li>
-</ul>
-<h3 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h3><p>只要在一个站点注册，就可以连上整个长毛象宇宙，看到所有在用户和他们公开可见的嘟文，所以只需选择一个合适的站点注册账号即可。但由于站点服务器大多在中国境外，有被墙掉的风险，很多人会选择在多个站点注册账号，避免一个站点被GFW盯上ban掉就难以连上长毛象宇宙。<br>邮箱是各站点注册的必须品，注册成功后也可以更改。建议使用gmail、protonmail等邮箱服务，避免使用qq邮箱一类能直接指向使用者的邮箱。一些站点还需要填写入站申请或入站理由等以便站长和管理员审核注册人，通过审核之后便可成功注册，在长毛象宇宙自由玩耍。</p>
-<h2 id="如何使用mastodon"><a href="#如何使用mastodon" class="headerlink" title="如何使用mastodon"></a>如何使用mastodon</h2><h3 id="Timeline"><a href="#Timeline" class="headerlink" title="Timeline"></a>Timeline</h3><p>Timeline简称为TL，完全按照时间来排列嘟文，不必担心出现时间线混乱、指给你看热度高的嘟文或塞给你不想看的广告、推广。<br>一般情况下，时间线有三种：</p>
-<ul>
-<li><strong>Home</strong> timeline，简称HTL，即首页。这是账号持有人自行关注而产生的时间线，能看到public、unlist、followers-only的嘟文以及提到你的direct message。</li>
-<li><strong>Local</strong> timeline，简称LTL，即本站(地)轴。这是账号所在站点的时间线，只有该站点的公开嘟文会出现在这里。</li>
-<li><strong>Federate</strong> timeline，简称FTL，即跨站轴。这是无论站点、所有账号嘟出的public内容共同组成的时间轴，能够看到世界各地的人都在这里发出自己的嘟嘟。</li>
-</ul>
-<p>通过设置<code>preferences(首选项)-&gt;other(其它)-&gt;PUBLIC TIMELINES-Filter languages(公共时间轴-语言过滤)</code>，可过滤时间线上的语言，只留下自己想看的语言。但这个过滤并不完全，公共轴或本站轴仍会出现一些应该被过滤掉的语言。 </p>
-<h3 id="基本功能"><a href="#基本功能" class="headerlink" title="基本功能"></a>基本功能</h3><ul>
-<li><p>发嘟  </p>
-<ul>
-<li>可见范围<br>发嘟可选择四种可见范围：public(公开)，unlist(公开，但不出现在公共时间轴)，followers-only(仅关注者可见)，direct message(私信，也可用作发仅自己可见的嘟文)。在设置中可以选择默认发嘟可见范围。</li>
-<li>cw折叠功能<br>一些不想被直接看到或者含有可能令人不适内容的嘟文推荐使用cw。点击发嘟窗口下方的cw就会出现一个新的小窗口，在这个新的小窗口填上内容提示信息，在发嘟主要窗口填写主要内容。<del>这个功能也很好地被用来讲冷笑话</del>  </li>
-<li>标记敏感内容<br>如果发的嘟文/图片含有not safe for work(NSFW，包括色情、暴力、血腥等)的内容，需要在发嘟时将图片标记为敏感信息，且善用cw折叠功能。</li>
-</ul>
-</li>
-<li><p>回复<br>左下角箭头是回复功能，回复也可以设置不同的可见范围。在此处如果设置followers-only，被回复者即使没有关注你，也可以看到。回复的嘟嘟仅会出现在同时关注对话双方的账号首页时间线(Home Timeline)。这样尽最大可能避免参与对话者以外的人的打扰，使对话双方处于平等地位，不会出现因一方粉丝过多看到回复一拥而上的现象。</p>
-</li>
-<li><p>转发<br>长毛象的转发是仅转发，不能带文字。这样很好的避免了类似微博上转发挂人形成骂战的现象。在设置中选择<code>在时间轴中合并转嘟</code>，以避免一篇嘟文被太多人转发刷屏时间轴的情况。</p>
-</li>
-<li><p>喜欢<br>这里的⭐是favourite的意思，类似点赞功能。点赞代表赞同、安慰还是这里有个言论我mark一下就看使用者自己的想法，但通常来说都是<strong>赞</strong>！  </p>
-</li>
-<li><p>书签<br>bookmark是书签，或者称为收藏功能，这个功能与大多数平台相似，不再赘述。</p>
-</li>
-</ul>
-<h3 id="头像、昵称、profile、标签"><a href="#头像、昵称、profile、标签" class="headerlink" title="头像、昵称、profile、标签"></a>头像、昵称、profile、标签</h3><p>一些站点固定期限内没有头像、昵称和嘟文的“三无账号”会被清除收回，注意阅读站点规则避免注册之后账号被回收。既然已经决定抛弃微博等在用户时间线上搞动作的平台，就不要只是注册个账号放着，用起来！</p>
-<h3 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h3><ul>
-<li><p>锁嘟<br>锁定账号(选项在个人资料页面)，需要手动审核所有关注请求。即每个想要关注你账号的人需要先发送关注请求，你通过之后方可关注你的账号以及看到你的followers-only的嘟文。与instgram的锁账号不同，即使挂上小锁其他人仍能看到公开可见的嘟文。如果有较多敏感嘟文不想随意被人看到，可定期删除或选择followers-only、direct message这两种可见范围。</p>
-</li>
-<li><p>语言<br>通过<code>Preferences(首选项)-&gt;Appearance(外观)-&gt;Interface language(界面语言)</code>设置平台语言。由于各语种都是志愿者翻译，可能会出现错误或词不达意，但基本不影响使用。</p>
-</li>
-<li><p>过滤器<br>这里的过滤器是真的过滤掉包含关键字的嘟文，但可能会在原本应该是一条嘟文的地方出现<code>filtered</code>的提醒。过滤器可以设置失效时间、作用场景等。</p>
-</li>
-<li><p>邮件通知<br>Preferences(首选项) -&gt; Notifications(通知)里的邮件提醒建议关掉，避免发送过多邮件给站长的邮件服务造成不必要的负担。</p>
-</li>
-<li><p>其它<br>界面语言设置为惯用语言后，其它设置可自行探索。</p>
-</li>
-</ul>
-<h3 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h3><p>Mastodon故意弱化了搜索功能，避免形成“广场”，从而导致有人随便搜索一个关键词便前来抬杠或骂人的行为。但这也在一定程度上造成使用者的不便，比如明明有印象一条嘟嘟，但根本找不到，所以需要使用者自己多注意收藏有用的信息。有些站点开了全文搜索，会让搜索结果好一些，如自己的嘟文或转发、点赞过的嘟文能够搜索，但无法实现真正的“搜索”。 </p>
-<h3 id="block-mute"><a href="#block-mute" class="headerlink" title="block / mute"></a>block / mute</h3><p>block即拉黑/屏蔽。拉黑后，该账号无法与你互动、关注，嘟文不会出现在你的时间线。<br>mute即隐藏。隐藏后，该账号的嘟文不会出现在你的时间线，但仍可与你互动、关注，而你不会收到任何提醒。</p>
-<h3 id="迁移账号"><a href="#迁移账号" class="headerlink" title="迁移账号"></a>迁移账号</h3><p>长毛象的一大优点就是站点多，且类型丰富。如果看上了别的站点，可以在新站点注册账号后将账号迁移过去。迁移账号可以自动将followers/following转移到新账号，但无法迁移旧帐号的嘟文。</p>
-<h3 id="账号备份"><a href="#账号备份" class="headerlink" title="账号备份"></a>账号备份</h3><p>长毛象自带的备份功能可以备份follower列表、following列表、mute列表、block列表等。如果想要备份嘟文，可以使用象友提供的<a href="https://github.com/slashyn/mastodon-archive-viewer-modified">备份插件</a>。<br>由于各个站点的维护仅依赖站长和可能有的站点管理员，所以可能会有不稳定、服务器出问题等状况出现，有时整个站点也会关闭不再运行，及时备份账号内容是个好习惯。</p>
-<h3 id="app"><a href="#app" class="headerlink" title="app"></a>app</h3><p>长毛象作为一个去中心化的平台，最佳访问方式是直接浏览器访问，如Chrome、Firefox、safari等。这些浏览器可以在手机主屏幕创建快捷方式，在手机桌面单独形成一个图标和有一个app没有太大差别。<br>如果仍需要一个app，可选择的有：</p>
-<ul>
-<li><p><strong>Android</strong>: Tusky, Subway Tooter, Fedilab(付费)</p>
-</li>
-<li><p><strong>iOS</strong>: Metatext, Mercury, iMast, Amaroq, Mast(付费), Toot!(付费)  </p>
-</li>
-<li><p><strong>tooot</strong>：对于中文用户，推荐使用tooot。这是一个专注于中文社区的简洁、开源长毛象手机客户端，跨平台支持iOS和Android。 </p>
-</li>
-<li><p><strong>其它</strong>：其它平台应用推荐可查看<a href="https://joinmastodon.org/apps">官网应用推荐</a>。  </p>
-</li>
-</ul>
-<h3 id="tag"><a href="#tag" class="headerlink" title="tag"></a>tag</h3><p>作为一个公共社交网络，这里也可以带话题(tag)发嘟。格式和Instagram一样，只需要一个<code>#</code>，如<code>#tag</code>。<br>长毛象已经有很多有趣或有用的tag，如<code>#长毛象中文使用指南</code>、<code>#长毛象安利交换大会</code>、<code>#资源分享</code>、<code>#菜谱</code>，还有季节性的赏花、赏月tag。也可以创建自己的专属tag，把某类嘟文存在这个tag下，方便自己查看。</p>
-<h3 id="一些好玩的账号"><a href="#一些好玩的账号" class="headerlink" title="一些好玩的账号"></a>一些好玩的账号</h3><ul>
-<li><p>骰寶機<br>吃喝玩乐都可以找它！想不到晚饭吃什么，发嘟@骰宝问吃什么，不出一分钟就会回复一种食物。问它喝什么同理。还有好玩又有趣的答案之书和对不对判断。具体玩法可查看骰宝账号主页了解。</p>
-</li>
-<li><p>妙仙包<br>想知道心中之事的结果？找大师求签、塔罗牌都能给你一个奇妙的答案。选择困难症？找包包真普选，轻松治愈选择困难。心中有愿还可对着大师许愿，有机会被大师选中实现。具体玩法查看妙仙包账号主页了解。</p>
-</li>
-<li><p>sci咖啡屋<br>这里可以点单饮品、套餐，但一定要吃完不可浪费。累了还可以在这里撸猫，猫猫送上缓解疲惫。具体玩法查看sci咖啡屋账号主页了解。</p>
-</li>
-<li><p>Mature[マツレ]<br>Mature是长毛象上最早的科学期刊之一，也是长毛象最权威及最有名望的学术期刊之一。每周最重要、最前沿的研究结果是在「Mature」中以论文导读的形式发表的。欢迎订阅，支持投稿。投稿方法详见Mature账号主页。</p>
-</li>
-</ul>
-<p>以上有趣账号可通过搜索名称获得，在此不提供具体账号以免给站点造成麻烦。</p>
-<h2 id="More-than-Mastodon"><a href="#More-than-Mastodon" class="headerlink" title="More than Mastodon"></a>More than Mastodon</h2><p>其实mastodon只是这个宇宙中的一部分，还有Misskey、pleroma、funkwhale、peertube等和mastodon类似的社交平台共同组成整个联邦宇宙。<br>何必拘泥于处处受限的一隅，这里有更广阔的宇宙等你。<br>Enjoy yourself！</p>
-]]></content>
-      <categories>
-        <category>Mastodon</category>
-      </categories>
-      <tags>
-        <tag>Mastodon</tag>
-        <tag>UserGuide</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hexo + GitHub Pages搭建个人博客</title>
     <url>/2021/09/16/Hexo-GitHubPages/</url>
     <content><![CDATA[<center>本博客搭建过程中参考了许多教程。本文用于记录搭建过程，以及出现的一些小问题</center>  
@@ -191,10 +96,47 @@ $ git clone https://github.com/next-theme/hexo-theme-next themes/next
 ]]></content>
       <categories>
         <category>Blog</category>
+        <category>Building</category>
       </categories>
       <tags>
         <tag>Hexo</tag>
         <tag>Github</tag>
+        <tag>Blog</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在文章中插入图片的各种方式</title>
+    <url>/2021/10/19/imginblog/</url>
+    <content><![CDATA[<center>终于还是没能避免想要在文章中用到图片，所以有了本文记录在Hexo博客中插入图片的各种方式</center>  
+<span id="more"></span>  
+
+<h2 id="本地引用"><a href="#本地引用" class="headerlink" title="本地引用"></a>本地引用</h2><h3 id="绝对路径"><a href="#绝对路径" class="headerlink" title="绝对路径"></a>绝对路径</h3><p>当整个博客图片内容较少时，可将所有的图片都放在<code>source/images</code>文件夹下，通过<code>markdown</code>语法访问。  </p>
+<pre><code>![](/images/img1.png)
+</code></pre>
+<p>对于图片较少切命名清晰的情况，这种方式存放图片足够。</p>
+<h3 id="相对路径"><a href="#相对路径" class="headerlink" title="相对路径"></a>相对路径</h3><h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><p>除了将图片存放在<code>source/images</code>文件夹下，还可以将图片存放在文章自己的目录中。文章目录可通过修改配置文件生成：  </p>
+<pre><code>post_asset_folder: true  
+</code></pre>
+<p>将配置文件中<code>post_asset_folder</code>修改为<code>true</code>后，执行命令</p>
+<pre><code>hexo new post newblog
+</code></pre>
+<p>会在<code>source/_posts</code>生成<code>newblog.md</code>和同名文件夹<code>newblog</code>。将图片存在该同名文件夹中，即可通过相对路径的方式在文章中添加图片。</p>
+<pre><code>![](img.png)
+</code></pre>
+<p>这一方法能够在文章中显示图片，但无法在首页正常显示图片，如需在首页显示图片可使用如下方式：</p>
+<pre><code>&#123;% asset_img img.png This is an image %&#125;
+</code></pre>
+<p>当图片内容较多，使用相对路径存放图片的方式更易于整理。</p>
+<h4 id="小提示"><a href="#小提示" class="headerlink" title="小提示"></a>小提示</h4><p>如遇到修改配置文件后运行<code>hexo new newblog</code>命令无法正常建立一个同名文件夹，可以手动在<code>_POST</code>目录下建立一个同名文件夹，仍能够达到同样的效果。<br>实际上，md文件也可以手动新建。根据使用者的习惯，怎么新建md文件和同名文件夹都是可以的。<br>平时写文章不常用到图片，也可以使用手动建立同名文件夹的方式。  </p>
+<h2 id="CDN引用"><a href="#CDN引用" class="headerlink" title="CDN引用"></a>CDN引用</h2><p>将图片上传到一些CDN服务中并使用对应的url地址引用图片也是一个很好的方式。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>[1] <a href="https://yanyinhong.github.io/2017/05/02/How-to-insert-image-in-hexo-post/">Hexo博客搭建之在文章中插入图片</a><br>[2] <a href="https://fuhailin.github.io/Hexo-images/">在Hexo博客中插入图片的各种方式</a><br>[3] <a href="https://www.cxyzjd.com/article/m0_43401436/107191688">hexo博客中插入图片失败——解决思路及个人最终解决办法</a></p>
+]]></content>
+      <categories>
+        <category>Blog</category>
+        <category>Writing</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
         <tag>Blog</tag>
       </tags>
   </entry>
@@ -500,12 +442,108 @@ $ hexo deploy  # 部署到GitHub Pages
 ]]></content>
       <categories>
         <category>Blog</category>
+        <category>Writing</category>
       </categories>
       <tags>
         <tag>Hexo</tag>
         <tag>Blog</tag>
         <tag>Markdown</tag>
         <tag>vscode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>长毛象使用指南</title>
+    <url>/2021/09/21/mstdn/</url>
+    <content><![CDATA[<center>不少朋友被我安利到长毛象(mastodon)玩耍，本着对他们负责的态度，写下这篇长毛象使用指南。</center>
+<span id="more"></span>
+
+<h2 id="什么是mastodon"><a href="#什么是mastodon" class="headerlink" title="什么是mastodon"></a>什么是mastodon</h2><p>Mastodon(长毛象)是一个开源、去中心化的社交平台。简单来说，这里没有屏蔽词，没有限流，没有铺天盖地的营销号，没有Doctor看了都想重启宇宙的混乱时间线，只是一个纯粹的社交平台。长毛象将内容、社交网络交还给用户，更加尊重用户而不是平台“霸权”。<br><strong>如果将联邦宇宙(Fediverse)看做一个宇宙，那么每一个长毛象站点(Mastodon Society)就像一颗颗星球。</strong> 也就是说，你可以选择任何一颗星球定居，哪怕只是居住着一个人，只要它与宇宙相通，那么你就可以联系到宇宙中任何一个人而不会孤单。(摘自pullopen对长毛象的介绍：<a href="https://pullopenbluebox.wordpress.com/2020/06/30/mastodon-introduction/">长毛象（Mastodon）：更尊重用户的社交平台</a> )</p>
+<h2 id="如何在mastodon拥有一个账号"><a href="#如何在mastodon拥有一个账号" class="headerlink" title="如何在mastodon拥有一个账号"></a>如何在mastodon拥有一个账号</h2><h3 id="选择站点"><a href="#选择站点" class="headerlink" title="选择站点"></a>选择站点</h3><p>长毛象有各种各样的站点(或称实例)，如二次元相关站、LGBTQ站、艺术类站，或者按照语言划分的小语种站点等等。可以在官网列出的站点列表(<a href="https://joinmastodon.org/communities">https://joinmastodon.org/communities</a>)里找到一个喜欢又适合的站点。<br>一开始使用建议在一些大型的国际站点注册，限制较少，每天都有很多世界各地的人在时间线上灌水，如</p>
+<ul>
+<li><a href="https://mastodon.social/">https://mastodon.social</a></li>
+<li><a href="https://mastodon.online/">https://mastodon.online</a></li>
+<li><a href="https://mstdn.social/">https://mstdn.social</a>  </li>
+</ul>
+<p>使用一段时间，对各项操作都熟悉之后，可进一步选择更适合自己的小站点注册并迁移账号，或者继续呆在国际站点也无妨。<br>也可以在中文站点，或者中文用户较多的站点注册。这样在查看local timeline(本地轴)时都是中文，方便遇到志同道合的朋友。但无论在哪个站点注册，都建议阅读过<strong>服务器规则</strong>和<strong>服务条款</strong>后再进行，这两项通常都放在注册页面。<br>熟悉长毛象后，发现没有一个站点完全符合自己的想法，也可以自建站加入长毛象宇宙。搭建长毛象站点有很多简单易上手的教程可供参考，即使是计算机小白也能拥有属于自己的站点。可参考的教程：</p>
+<ul>
+<li><a href="https://docs.joinmastodon.org/zh-cn/admin/prerequisites/">官方建站文档</a></li>
+<li><a href="https://www.notion.so/Mastodon-042a05ee29a048df8b2c1afd49e4c49b">长毛象（Mastodon）社区搭建详解</a></li>
+<li><a href="https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/07/19/How-to-build-a-mastodon-instance.html">技术小白如何搭建Mastodon实例</a></li>
+<li><a href="https://morikka.me/blog/mastodon-personal-instance/">长毛象个人向建站</a></li>
+</ul>
+<h3 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h3><p>只要在一个站点注册，就可以连上整个长毛象宇宙，看到所有在用户和他们公开可见的嘟文，所以只需选择一个合适的站点注册账号即可。但由于站点服务器大多在中国境外，有被墙掉的风险，很多人会选择在多个站点注册账号，避免一个站点被GFW盯上ban掉就难以连上长毛象宇宙。<br>邮箱是各站点注册的必须品，注册成功后也可以更改。建议使用gmail、protonmail等邮箱服务，避免使用qq邮箱一类能直接指向使用者的邮箱。一些站点还需要填写入站申请或入站理由等以便站长和管理员审核注册人，通过审核之后便可成功注册，在长毛象宇宙自由玩耍。</p>
+<h2 id="如何使用mastodon"><a href="#如何使用mastodon" class="headerlink" title="如何使用mastodon"></a>如何使用mastodon</h2><h3 id="Timeline-时间轴"><a href="#Timeline-时间轴" class="headerlink" title="Timeline(时间轴)"></a>Timeline(时间轴)</h3><p>Timeline简称为TL，完全按照时间来排列嘟文，不必担心出现时间线混乱、只给你看热度高的嘟文或塞给你不想看的广告、推广。<br>一般情况下，时间线有三种：</p>
+<ul>
+<li><strong>Home</strong> timeline，简称HTL，即首页。这是账号持有人自行关注而产生的时间线，能看到public、unlist、followers-only的嘟文(包括回复)以及提到你的direct message。</li>
+<li><strong>Local</strong> timeline，简称LTL，即本站(地)轴。这是账号所在站点的时间线，只有该站点的公开嘟文会出现在这里。</li>
+<li><strong>Federate</strong> timeline，简称FTL，即跨站轴。这是无论站点、所有账号嘟出的public内容共同组成的时间轴，能够看到世界各地的人都在这里发出自己的嘟嘟。</li>
+</ul>
+<p>通过设置<code>preferences(首选项)-&gt;other(其它)-&gt;PUBLIC TIMELINES-Filter languages(公共时间轴-语言过滤)</code>，可过滤时间线上的语言，只留下自己想看的语言。但这个过滤并不完全，公共轴或本站轴仍会出现一些应该被过滤掉的语言。 </p>
+<h3 id="基本功能"><a href="#基本功能" class="headerlink" title="基本功能"></a>基本功能</h3><ul>
+<li><p>发嘟  </p>
+<ul>
+<li>可见范围<br>发嘟可选择四种可见范围：public(公开)，unlist(公开，但不出现在公共时间轴)，followers-only(仅关注者可见)，direct message(私信，也可用作发仅自己可见的嘟文)。在设置中可以选择默认发嘟可见范围。</li>
+<li>cw折叠功能<br>一些不想被直接看到或者含有可能令人不适内容的嘟文推荐使用cw。点击发嘟窗口下方的cw就会出现一个新的小窗口，在这个新的小窗口填上内容提示信息，在发嘟主要窗口填写主要内容。<del>这个功能也很好地被用来讲冷笑话</del>  </li>
+<li>标记敏感内容<br>如果发的嘟文/图片含有not safe for work(NSFW，包括色情、暴力、血腥等)的内容，需要在发嘟时将图片标记为敏感信息，且善用cw折叠功能。</li>
+</ul>
+</li>
+<li><p>回复<br>左下角箭头是回复功能，回复也可以设置不同的可见范围。在此处如果设置followers-only，被回复者即使没有关注你，也可以看到。回复的嘟嘟仅会出现在同时关注对话双方的账号首页时间线(Home Timeline)。这样尽最大可能避免参与对话者以外的人的打扰，使对话双方处于平等地位，不会出现因一方粉丝过多看到回复一拥而上的现象。各个时间轴设置(一般在主区域右上角)中可设置该时间轴不显示回复类嘟文。</p>
+</li>
+<li><p>转发<br>长毛象的转发是仅转发，不能带文字。这样很好的避免了类似微博上转发挂人形成骂战的现象。在账号设置中选择<code>在时间轴中合并转嘟</code>，以避免一篇嘟文被太多人转发刷屏时间轴的情况。各个时间轴设置(一般在主区域右上角)中可设置该时间轴不显示转发类嘟文，公共轴一般默认不显示转发。</p>
+</li>
+<li><p>喜欢<br>这里的⭐是favourite的意思，类似点赞功能。点赞代表赞同、安慰还是这里有个言论我mark一下就看使用者自己的想法，但通常来说都是<strong>赞</strong>！  </p>
+</li>
+<li><p>书签<br>bookmark是书签，或者称为收藏功能，这个功能与大多数平台相似，不再赘述。</p>
+</li>
+</ul>
+<h3 id="头像、昵称、profile、标签"><a href="#头像、昵称、profile、标签" class="headerlink" title="头像、昵称、profile、标签"></a>头像、昵称、profile、标签</h3><p>一些站点固定期限内没有头像、昵称和嘟文的“三无账号”会被清除收回，注意阅读站点规则避免注册之后账号被回收。既然已经决定抛弃微博等在用户时间线上搞动作的平台，就不要只是注册个账号放着，用起来！</p>
+<h3 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h3><ul>
+<li><p>锁嘟<br>锁定账号(选项在个人资料页面)，需要手动审核所有关注请求。即每个想要关注你账号的人需要先发送关注请求，你通过之后方可关注你的账号以及看到你的followers-only的嘟文。与instgram的锁账号不同，即使挂上小锁其他人仍能看到公开可见的嘟文。如果有较多敏感嘟文不想随意被人看到，可定期删除或选择followers-only、direct message这两种可见范围。</p>
+</li>
+<li><p>语言<br>通过<code>Preferences(首选项)-&gt;Appearance(外观)-&gt;Interface language(界面语言)</code>设置平台语言。由于各语种都是志愿者翻译，可能会出现错误或词不达意，但基本不影响使用。</p>
+</li>
+<li><p>过滤器<br>这里的过滤器是真的过滤掉包含关键字的嘟文，但可能会在原本应该是一条嘟文的地方出现<code>filtered</code>的提醒。过滤器可以设置失效时间、作用场景等。</p>
+</li>
+<li><p>邮件通知<br>Preferences(首选项) -&gt; Notifications(通知)里的邮件提醒建议关掉，避免发送过多邮件给站长的邮件服务造成不必要的负担。</p>
+</li>
+<li><p>其它<br>界面语言设置为惯用语言后，其它设置可自行探索。</p>
+</li>
+</ul>
+<h3 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h3><p>Mastodon故意弱化了搜索功能，避免形成“广场”，从而导致有人随便搜索一个关键词便前来抬杠或骂人的行为。但这也在一定程度上造成使用者的不便，比如明明有印象一条嘟嘟，但根本找不到，所以需要使用者自己多注意收藏有用的信息。有些站点开了全文搜索，会让搜索结果好一些，如自己的嘟文或转发、点赞过的嘟文能够搜索，但无法实现真正的“搜索”。 </p>
+<h3 id="block-mute"><a href="#block-mute" class="headerlink" title="block / mute"></a>block / mute</h3><p>block即拉黑/屏蔽。拉黑后，该账号无法与你互动、关注，嘟文不会出现在你的时间线。<br>mute即隐藏。隐藏后，该账号的嘟文不会出现在你的时间线，但仍可与你互动、关注，而你不会收到任何提醒。</p>
+<h3 id="迁移账号"><a href="#迁移账号" class="headerlink" title="迁移账号"></a>迁移账号</h3><p>长毛象的一大优点就是站点多，且类型丰富。如果看上了别的站点，可以在新站点注册账号后将账号迁移过去。迁移账号可以自动将followers/following转移到新账号，但无法迁移旧帐号的嘟文。</p>
+<h3 id="账号备份"><a href="#账号备份" class="headerlink" title="账号备份"></a>账号备份</h3><p>长毛象自带的备份功能可以备份follower列表、following列表、mute列表、block列表等。如果想要备份嘟文，可以使用象友提供的<a href="https://github.com/slashyn/mastodon-archive-viewer-modified">备份插件</a>。<br>由于各个站点的维护仅依赖站长和可能有的站点管理员，所以可能会有不稳定、服务器出问题等状况出现，有时整个站点也会关闭不再运行，及时备份账号内容是个好习惯。</p>
+<h3 id="app"><a href="#app" class="headerlink" title="app"></a>app</h3><p>长毛象作为一个去中心化的平台，最佳访问方式是直接浏览器访问，如Chrome、Firefox、safari等。这些浏览器可以在手机主屏幕创建快捷方式，在手机桌面单独形成一个图标和有一个app没有太大差别。<br>如果仍需要一个app，可选择的有：</p>
+<ul>
+<li><p><strong>Android</strong>: Tusky, Subway Tooter, Fedilab(付费)</p>
+</li>
+<li><p><strong>iOS</strong>: Metatext, Mercury, iMast, Amaroq, Mast(付费), Toot!(付费)  </p>
+</li>
+<li><p><strong>tooot</strong>：对于中文用户，推荐使用tooot。这是一个专注于中文社区的简洁、开源长毛象手机客户端，跨平台支持iOS和Android。 </p>
+</li>
+<li><p><strong>其它</strong>：其它平台应用推荐可查看<a href="https://joinmastodon.org/apps">官网应用推荐</a>。  </p>
+</li>
+</ul>
+<h3 id="tag"><a href="#tag" class="headerlink" title="tag"></a>tag</h3><p>作为一个公共社交网络，这里也可以带话题(tag)发嘟。格式和Instagram一样，只需要一个<code>#</code>，如<code>#tag</code>。<br>长毛象已经有很多有趣或有用的tag，如<code>#长毛象中文使用指南</code>、<code>#长毛象安利交换大会</code>、<code>#资源分享</code>、<code>#菜谱</code>，还有季节性的赏花、赏月tag。也可以创建自己的专属tag，把某类嘟文存在这个tag下，方便自己查看。</p>
+<h3 id="一些好玩的账号"><a href="#一些好玩的账号" class="headerlink" title="一些好玩的账号"></a>一些好玩的账号</h3><ul>
+<li><p>骰寶機<br>吃喝玩乐都可以找它！想不到晚饭吃什么，发嘟@骰宝问吃什么，不出一分钟就会回复一种食物。问它喝什么同理。还有好玩又有趣的答案之书和对不对判断。具体玩法可查看骰宝账号主页了解。</p>
+</li>
+<li><p>妙仙包<br>想知道心中之事的结果？找大师求签、塔罗牌都能给你一个奇妙的答案。选择困难症？找包包真普选，轻松治愈选择困难。心中有愿还可对着大师许愿，有机会被大师选中实现。具体玩法查看妙仙包账号主页了解。</p>
+</li>
+<li><p>sci咖啡屋<br>这里可以点单饮品、套餐，但一定要吃完不可浪费。累了还可以在这里撸猫，猫猫送上缓解疲惫。具体玩法查看sci咖啡屋账号主页了解。</p>
+</li>
+<li><p>Mature[マツレ]<br>Mature是长毛象上最早的科学期刊之一，也是长毛象最权威及最有名望的学术期刊之一。每周最重要、最前沿的研究结果是在「Mature」中以论文导读的形式发表的。欢迎订阅，支持投稿。投稿方法详见Mature账号主页。</p>
+</li>
+</ul>
+<p>以上有趣账号可通过搜索名称获得，在此不提供具体账号以免给站点造成麻烦。</p>
+<h2 id="More-than-Mastodon"><a href="#More-than-Mastodon" class="headerlink" title="More than Mastodon"></a>More than Mastodon</h2><p>其实mastodon只是这个宇宙中的一部分，还有Misskey、pleroma、funkwhale、peertube等和mastodon类似的社交平台共同组成整个联邦宇宙。<br>何必拘泥于处处受限的一隅，这里有更广阔的宇宙等你。<br>Enjoy yourself！</p>
+]]></content>
+      <categories>
+        <category>Mastodon</category>
+      </categories>
+      <tags>
+        <tag>Mastodon</tag>
+        <tag>UserGuide</tag>
       </tags>
   </entry>
 </search>

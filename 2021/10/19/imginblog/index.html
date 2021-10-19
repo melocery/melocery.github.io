@@ -20,31 +20,29 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="创建、发布新文章；用vscode + markdown编辑文章；给文章添加分类和标签。">
+<meta name="description" content="终于还是没能避免想要在文章中用到图片，所以有了本文记录在Hexo博客中插入图片的各种方式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo + Markdown写博客">
-<meta property="og:url" content="http://example.com/2021/09/16/writenewblog/index.html">
+<meta property="og:title" content="在文章中插入图片的各种方式">
+<meta property="og:url" content="http://example.com/2021/10/19/imginblog/index.html">
 <meta property="og:site_name" content="Bugrocery">
-<meta property="og:description" content="创建、发布新文章；用vscode + markdown编辑文章；给文章添加分类和标签。">
+<meta property="og:description" content="终于还是没能避免想要在文章中用到图片，所以有了本文记录在Hexo博客中插入图片的各种方式">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-09-16T09:35:43.000Z">
-<meta property="article:modified_time" content="2021-10-18T08:06:51.618Z">
+<meta property="article:published_time" content="2021-10-19T03:39:39.000Z">
+<meta property="article:modified_time" content="2021-10-19T04:30:40.211Z">
 <meta property="article:author" content="R">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="Blog">
-<meta property="article:tag" content="Markdown">
-<meta property="article:tag" content="vscode">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/2021/09/16/writenewblog/">
+<link rel="canonical" href="http://example.com/2021/10/19/imginblog/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2021/09/16/writenewblog/","path":"2021/09/16/writenewblog/","title":"Hexo + Markdown写博客"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2021/10/19/imginblog/","path":"2021/10/19/imginblog/","title":"在文章中插入图片的各种方式"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Hexo + Markdown写博客 | Bugrocery</title>
+<title>在文章中插入图片的各种方式 | Bugrocery</title>
   
 
 
@@ -149,7 +147,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E6%96%87%E7%AB%A0-create-a-post"><span class="nav-number">1.</span> <span class="nav-text">新建文章 create a post</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vscode-markdown%E5%86%99%E6%96%87%E7%AB%A0"><span class="nav-number">2.</span> <span class="nav-text">vscode + markdown写文章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#categories"><span class="nav-number">3.</span> <span class="nav-text">categories</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90categories%E9%A1%B5%E5%B9%B6%E4%BF%AE%E6%94%B9type%E5%B1%9E%E6%80%A7"><span class="nav-number">3.1.</span> <span class="nav-text">生成categories页并修改type属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%99%E6%96%87%E7%AB%A0%E6%B7%BB%E5%8A%A0categories"><span class="nav-number">3.2.</span> <span class="nav-text">给文章添加categories</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tag"><span class="nav-number">4.</span> <span class="nav-text">tag</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90tag%E9%A1%B5%E5%B9%B6%E4%BF%AE%E6%94%B9type%E5%B1%9E%E6%80%A7"><span class="nav-number">4.1.</span> <span class="nav-text">生成tag页并修改type属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%99%E6%96%87%E7%AB%A0%E6%B7%BB%E5%8A%A0tag"><span class="nav-number">4.2.</span> <span class="nav-text">给文章添加tag</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E7%AB%A0%E7%9A%84%E5%8F%91%E5%B8%83"><span class="nav-number">5.</span> <span class="nav-text">文章的发布</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E5%BC%95%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">本地引用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84"><span class="nav-number">1.1.</span> <span class="nav-text">绝对路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84"><span class="nav-number">1.2.</span> <span class="nav-text">相对路径</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.1.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%8F%E6%8F%90%E7%A4%BA"><span class="nav-number">1.2.2.</span> <span class="nav-text">小提示</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CDN%E5%BC%95%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">CDN引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -214,7 +212,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/16/writenewblog/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/19/imginblog/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/Head.jpg">
@@ -227,7 +225,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hexo + Markdown写博客
+          在文章中插入图片的各种方式
         </h1>
 
         <div class="post-meta-container">
@@ -237,16 +235,10 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
+      
 
-      <time title="Created: 2021-09-16 17:35:43" itemprop="dateCreated datePublished" datetime="2021-09-16T17:35:43+08:00">2021-09-16</time>
+      <time title="Created: 2021-10-19 11:39:39 / Modified: 12:30:40" itemprop="dateCreated datePublished" datetime="2021-10-19T11:39:39+08:00">2021-10-19</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-10-18 16:06:51" itemprop="dateModified" datetime="2021-10-18T16:06:51+08:00">2021-10-18</time>
-      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -268,7 +260,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>1.2k</span>
+      <span>769</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
@@ -286,69 +278,29 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <center>创建、发布新文章；用vscode + markdown编辑文章；给文章添加分类和标签。</center>
-<span id="more"></span>
+        <center>终于还是没能避免想要在文章中用到图片，所以有了本文记录在Hexo博客中插入图片的各种方式</center>  
+<span id="more"></span>  
 
-<h2 id="新建文章-create-a-post"><a href="#新建文章-create-a-post" class="headerlink" title="新建文章 create a post"></a>新建文章 create a post</h2><p>在博客目录运行命令：</p>
-<pre><code>$ hexo new [layout] title
-# layout有三种:post, draft, page, 默认是post，可以在博客配置文件中更改default_layout来更改默认设置
-# Hexo会根据scaffolds文件夹内相对应的文件来建立md文件
-# 当创建不同布局的md文件时，它们会存储在不同路径
-
-$ hexo new &quot;My New Post&quot;
-#新建一个名为&quot;My New Post&quot;的md文件
+<h2 id="本地引用"><a href="#本地引用" class="headerlink" title="本地引用"></a>本地引用</h2><h3 id="绝对路径"><a href="#绝对路径" class="headerlink" title="绝对路径"></a>绝对路径</h3><p>当整个博客图片内容较少时，可将所有的图片都放在<code>source/images</code>文件夹下，通过<code>markdown</code>语法访问。  </p>
+<pre><code>![](/images/img1.png)
 </code></pre>
-<p>后续编辑这个文件即可。</p>
-<h2 id="vscode-markdown写文章"><a href="#vscode-markdown写文章" class="headerlink" title="vscode + markdown写文章"></a>vscode + markdown写文章</h2><p>可按照以下步骤编辑一遍博客文章：</p>
-<ol>
-<li>从<a target="_blank" rel="noopener" href="https://code.visualstudio.com/">官网</a>下载vscode，并安装。  </li>
-<li>安装markdown插件：<ul>
-<li>Markdown All in One: 组合包，把最常用的Markdown优化全部装好</li>
-<li>Markdown Preview Github Styling: 在本地就能预览Markdown文件最终在Github Pages中显示的效果</li>
-</ul>
-</li>
-<li>学习基本的markdown语法，利用vscode编辑文章。同时，利用”Open Preview to the Side”按键或快捷键可同时预览文章</li>
-<li>写完这篇文章</li>
-</ol>
-<h2 id="categories"><a href="#categories" class="headerlink" title="categories"></a>categories</h2><h3 id="生成categories页并修改type属性"><a href="#生成categories页并修改type属性" class="headerlink" title="生成categories页并修改type属性"></a>生成categories页并修改type属性</h3><p>在博客目录运行命令行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new page categories</span><br></pre></td></tr></table></figure>
-<p>运行成功后会提示：</p>
-<pre><code>INFO  Created: ~/Documents/blog/source/categories/index.md
+<p>对于图片较少切命名清晰的情况，这种方式存放图片足够。</p>
+<h3 id="相对路径"><a href="#相对路径" class="headerlink" title="相对路径"></a>相对路径</h3><h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><p>除了将图片存放在<code>source/images</code>文件夹下，还可以将图片存放在文章自己的目录中。文章目录可通过修改配置文件生成：  </p>
+<pre><code>post_asset_folder: true  
 </code></pre>
-<p>根据所给路径找到index.md文件，在文件的框架内添加一行：</p>
-<pre><code>type: &quot;categories&quot;
+<p>将配置文件中<code>post_asset_folder</code>修改为<code>true</code>后，执行命令</p>
+<pre><code>hexo new post newblog
 </code></pre>
-<h3 id="给文章添加categories"><a href="#给文章添加categories" class="headerlink" title="给文章添加categories"></a>给文章添加categories</h3><p>在文章头的<code>categories:</code>后以<code>-</code>为标志添加标签，如本文的标签：</p>
-<pre><code>categories:
-- Blog #注意“-”后一定要加空格
+<p>会在<code>source/_posts</code>生成<code>newblog.md</code>和同名文件夹<code>newblog</code>。将图片存在该同名文件夹中，即可通过相对路径的方式在文章中添加图片。</p>
+<pre><code>![](img.png)
 </code></pre>
-<h2 id="tag"><a href="#tag" class="headerlink" title="tag"></a>tag</h2><h3 id="生成tag页并修改type属性"><a href="#生成tag页并修改type属性" class="headerlink" title="生成tag页并修改type属性"></a>生成tag页并修改type属性</h3><p>在博客目录运行命令行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new page tags</span><br></pre></td></tr></table></figure>
-<p>运行成功后会提示：</p>
-<pre><code>INFO  Created: ~/Documents/blog/source/tags/index.md
+<p>这一方法能够在文章中显示图片，但无法在首页正常显示图片，如需在首页显示图片可使用如下方式：</p>
+<pre><code>&#123;% asset_img img.png This is an image %&#125;
 </code></pre>
-<p>根据所给路径找到index.md文件，在文件的框架内添加一行：</p>
-<pre><code>type: &quot;tags&quot;
-</code></pre>
-<h3 id="给文章添加tag"><a href="#给文章添加tag" class="headerlink" title="给文章添加tag"></a>给文章添加tag</h3><p>在文章头的<code>tags:</code>后以<code>-</code>为标志添加标签，如本文的标签：</p>
-<pre><code>tags: 
-- Blog #注意“-”后一定要加空格
-- Hexo
-- Markdown
-- vscode
-</code></pre>
-<h2 id="文章的发布"><a href="#文章的发布" class="headerlink" title="文章的发布"></a>文章的发布</h2><p>在博客目录运行命令：</p>
-<pre><code>$ hexo generate
-$ hexo server  # 本地预查看
-$ hexo deploy  # 部署到GitHub Pages
-
-# 此步骤报错可先检查文件头等文章各部分是否缺少空格
-</code></pre>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/156915260">Hexo博客写文章及基本操作</a></li>
-<li><a target="_blank" rel="noopener" href="https://linlif.github.io/2017/05/27/Hexo%E4%BD%BF%E7%94%A8%E6%94%BB%E7%95%A5-%E6%B7%BB%E5%8A%A0%E5%88%86%E7%B1%BB%E5%8F%8A%E6%A0%87%E7%AD%BE/">Hexo使用攻略-添加分类及标签</a></li>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/56943330">[Markdown] 使用vscode开始Markdown写作之旅</a></li>
-</ol>
+<p>当图片内容较多，使用相对路径存放图片的方式更易于整理。</p>
+<h4 id="小提示"><a href="#小提示" class="headerlink" title="小提示"></a>小提示</h4><p>如遇到修改配置文件后运行<code>hexo new newblog</code>命令无法正常建立一个同名文件夹，可以手动在<code>_POST</code>目录下建立一个同名文件夹，仍能够达到同样的效果。<br>实际上，md文件也可以手动新建。根据使用者的习惯，怎么新建md文件和同名文件夹都是可以的。<br>平时写文章不常用到图片，也可以使用手动建立同名文件夹的方式。  </p>
+<h2 id="CDN引用"><a href="#CDN引用" class="headerlink" title="CDN引用"></a>CDN引用</h2><p>将图片上传到一些CDN服务中并使用对应的url地址引用图片也是一个很好的方式。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>[1] <a target="_blank" rel="noopener" href="https://yanyinhong.github.io/2017/05/02/How-to-insert-image-in-hexo-post/">Hexo博客搭建之在文章中插入图片</a><br>[2] <a target="_blank" rel="noopener" href="https://fuhailin.github.io/Hexo-images/">在Hexo博客中插入图片的各种方式</a><br>[3] <a target="_blank" rel="noopener" href="https://www.cxyzjd.com/article/m0_43401436/107191688">hexo博客中插入图片失败——解决思路及个人最终解决办法</a></p>
 
     </div>
 
@@ -360,22 +312,17 @@ $ hexo deploy  # 部署到GitHub Pages
           <div class="post-tags">
               <a href="/tags/Hexo/" rel="tag"># Hexo</a>
               <a href="/tags/Blog/" rel="tag"># Blog</a>
-              <a href="/tags/Markdown/" rel="tag"># Markdown</a>
-              <a href="/tags/vscode/" rel="tag"># vscode</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2021/09/16/Hexo-GitHubPages/" rel="prev" title="Hexo + GitHub Pages搭建个人博客">
-                  <i class="fa fa-chevron-left"></i> Hexo + GitHub Pages搭建个人博客
+                <a href="/2021/09/21/mstdn/" rel="prev" title="长毛象使用指南">
+                  <i class="fa fa-chevron-left"></i> 长毛象使用指南
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2021/09/16/blastp/" rel="next" title="blastp的本地化使用">
-                  blastp的本地化使用 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
