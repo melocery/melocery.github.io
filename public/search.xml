@@ -105,43 +105,6 @@ $ git clone https://github.com/next-theme/hexo-theme-next themes/next
       </tags>
   </entry>
   <entry>
-    <title>在文章中插入图片的各种方式</title>
-    <url>/2021/10/19/imginblog/</url>
-    <content><![CDATA[<center>终于还是没能避免想要在文章中用到图片，所以有了本文记录在Hexo博客中插入图片的各种方式</center>  
-<span id="more"></span>  
-
-<h2 id="本地引用"><a href="#本地引用" class="headerlink" title="本地引用"></a>本地引用</h2><h3 id="绝对路径"><a href="#绝对路径" class="headerlink" title="绝对路径"></a>绝对路径</h3><p>当整个博客图片内容较少时，可将所有的图片都放在<code>source/images</code>文件夹下，通过<code>markdown</code>语法访问。  </p>
-<pre><code>![](/images/img1.png)
-</code></pre>
-<p>对于图片较少切命名清晰的情况，这种方式存放图片足够。</p>
-<h3 id="相对路径"><a href="#相对路径" class="headerlink" title="相对路径"></a>相对路径</h3><h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><p>除了将图片存放在<code>source/images</code>文件夹下，还可以将图片存放在文章自己的目录中。文章目录可通过修改配置文件生成：  </p>
-<pre><code>post_asset_folder: true  
-</code></pre>
-<p>将配置文件中<code>post_asset_folder</code>修改为<code>true</code>后，执行命令</p>
-<pre><code>hexo new post newblog
-</code></pre>
-<p>会在<code>source/_posts</code>生成<code>newblog.md</code>和同名文件夹<code>newblog</code>。将图片存在该同名文件夹中，即可通过相对路径的方式在文章中添加图片。</p>
-<pre><code>![](img.png)
-</code></pre>
-<p>这一方法能够在文章中显示图片，但无法在首页正常显示图片，如需在首页显示图片可使用如下方式：</p>
-<pre><code>&#123;% asset_img img.png This is an image %&#125;
-</code></pre>
-<p>当图片内容较多，使用相对路径存放图片的方式更易于整理。</p>
-<h4 id="小提示"><a href="#小提示" class="headerlink" title="小提示"></a>小提示</h4><p>如遇到修改配置文件后运行<code>hexo new newblog</code>命令无法正常建立一个同名文件夹，可以手动在<code>_POST</code>目录下建立一个同名文件夹，仍能够达到同样的效果。<br>实际上，md文件也可以手动新建。根据使用者的习惯，怎么新建md文件和同名文件夹都是可以的。<br>平时写文章不常用到图片，也可以使用手动建立同名文件夹的方式。  </p>
-<h2 id="CDN引用"><a href="#CDN引用" class="headerlink" title="CDN引用"></a>CDN引用</h2><p>将图片上传到一些CDN服务中并使用对应的url地址引用图片也是一个很好的方式。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>[1] <a href="https://yanyinhong.github.io/2017/05/02/How-to-insert-image-in-hexo-post/">Hexo博客搭建之在文章中插入图片</a><br>[2] <a href="https://fuhailin.github.io/Hexo-images/">在Hexo博客中插入图片的各种方式</a><br>[3] <a href="https://www.cxyzjd.com/article/m0_43401436/107191688">hexo博客中插入图片失败——解决思路及个人最终解决办法</a></p>
-]]></content>
-      <categories>
-        <category>Blog</category>
-        <category>Writing</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>Blog</tag>
-        <tag>Markdown</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>blastp的本地化使用</title>
     <url>/2021/09/16/blastp/</url>
     <content><![CDATA[<center>blastp在Windows系统电脑上的本地使用</center>
@@ -375,71 +338,31 @@ main() # 运行上述函数
       </tags>
   </entry>
   <entry>
-    <title>Hexo + Markdown写博客</title>
-    <url>/2021/09/16/writenewblog/</url>
-    <content><![CDATA[<center>创建、发布新文章；用vscode + markdown编辑文章；给文章添加分类和标签。</center>
-<span id="more"></span>
+    <title>在文章中插入图片的各种方式</title>
+    <url>/2021/10/19/imginblog/</url>
+    <content><![CDATA[<center>终于还是没能避免想要在文章中用到图片，所以有了本文记录在Hexo博客中插入图片的各种方式</center>  
+<span id="more"></span>  
 
-<h2 id="新建文章-create-a-post"><a href="#新建文章-create-a-post" class="headerlink" title="新建文章 create a post"></a>新建文章 create a post</h2><p>在博客目录运行命令：</p>
-<pre><code>$ hexo new [layout] title
-# layout有三种:post, draft, page, 默认是post，可以在博客配置文件中更改default_layout来更改默认设置
-# Hexo会根据scaffolds文件夹内相对应的文件来建立md文件
-# 当创建不同布局的md文件时，它们会存储在不同路径
-
-$ hexo new &quot;My New Post&quot;
-#新建一个名为&quot;My New Post&quot;的md文件
+<h2 id="本地引用"><a href="#本地引用" class="headerlink" title="本地引用"></a>本地引用</h2><h3 id="绝对路径"><a href="#绝对路径" class="headerlink" title="绝对路径"></a>绝对路径</h3><p>当整个博客图片内容较少时，可将所有的图片都放在<code>source/images</code>文件夹下，通过<code>markdown</code>语法访问。  </p>
+<pre><code>![](/images/img1.png)
 </code></pre>
-<p>后续编辑这个文件即可。</p>
-<h2 id="vscode-markdown写文章"><a href="#vscode-markdown写文章" class="headerlink" title="vscode + markdown写文章"></a>vscode + markdown写文章</h2><p>可按照以下步骤编辑一遍博客文章：</p>
-<ol>
-<li>从<a href="https://code.visualstudio.com/">官网</a>下载vscode，并安装。  </li>
-<li>安装markdown插件：<ul>
-<li>Markdown All in One: 组合包，把最常用的Markdown优化全部装好</li>
-<li>Markdown Preview Github Styling: 在本地就能预览Markdown文件最终在Github Pages中显示的效果</li>
-</ul>
-</li>
-<li>学习基本的markdown语法，利用vscode编辑文章。同时，利用”Open Preview to the Side”按键或快捷键可同时预览文章</li>
-<li>写完这篇文章</li>
-</ol>
-<h2 id="categories"><a href="#categories" class="headerlink" title="categories"></a>categories</h2><h3 id="生成categories页并修改type属性"><a href="#生成categories页并修改type属性" class="headerlink" title="生成categories页并修改type属性"></a>生成categories页并修改type属性</h3><p>在博客目录运行命令行：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new page categories</span><br></pre></td></tr></table></figure>
-<p>运行成功后会提示：</p>
-<pre><code>INFO  Created: ~/Documents/blog/source/categories/index.md
+<p>对于图片较少切命名清晰的情况，这种方式存放图片足够。</p>
+<h3 id="相对路径"><a href="#相对路径" class="headerlink" title="相对路径"></a>相对路径</h3><h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><p>除了将图片存放在<code>source/images</code>文件夹下，还可以将图片存放在文章自己的目录中。文章目录可通过修改配置文件生成：  </p>
+<pre><code>post_asset_folder: true  
 </code></pre>
-<p>根据所给路径找到index.md文件，在文件的框架内添加一行：</p>
-<pre><code>type: &quot;categories&quot;
+<p>将配置文件中<code>post_asset_folder</code>修改为<code>true</code>后，执行命令</p>
+<pre><code>hexo new post newblog
 </code></pre>
-<h3 id="给文章添加categories"><a href="#给文章添加categories" class="headerlink" title="给文章添加categories"></a>给文章添加categories</h3><p>在文章头的<code>categories:</code>后以<code>-</code>为标志添加标签，如本文的标签：</p>
-<pre><code>categories:
-- Blog #注意“-”后一定要加空格
+<p>会在<code>source/_posts</code>生成<code>newblog.md</code>和同名文件夹<code>newblog</code>。将图片存在该同名文件夹中，即可通过相对路径的方式在文章中添加图片。</p>
+<pre><code>![](img.png)
 </code></pre>
-<h2 id="tag"><a href="#tag" class="headerlink" title="tag"></a>tag</h2><h3 id="生成tag页并修改type属性"><a href="#生成tag页并修改type属性" class="headerlink" title="生成tag页并修改type属性"></a>生成tag页并修改type属性</h3><p>在博客目录运行命令行：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new page tags</span><br></pre></td></tr></table></figure>
-<p>运行成功后会提示：</p>
-<pre><code>INFO  Created: ~/Documents/blog/source/tags/index.md
+<p>这一方法能够在文章中显示图片，但无法在首页正常显示图片，如需在首页显示图片可使用如下方式：</p>
+<pre><code>&#123;% asset_img img.png This is an image %&#125;
 </code></pre>
-<p>根据所给路径找到index.md文件，在文件的框架内添加一行：</p>
-<pre><code>type: &quot;tags&quot;
-</code></pre>
-<h3 id="给文章添加tag"><a href="#给文章添加tag" class="headerlink" title="给文章添加tag"></a>给文章添加tag</h3><p>在文章头的<code>tags:</code>后以<code>-</code>为标志添加标签，如本文的标签：</p>
-<pre><code>tags: 
-- Blog #注意“-”后一定要加空格
-- Hexo
-- Markdown
-- vscode
-</code></pre>
-<h2 id="文章的发布"><a href="#文章的发布" class="headerlink" title="文章的发布"></a>文章的发布</h2><p>在博客目录运行命令：</p>
-<pre><code>$ hexo generate
-$ hexo server  # 本地预查看
-$ hexo deploy  # 部署到GitHub Pages
-
-# 此步骤报错可先检查文件头等文章各部分是否缺少空格
-</code></pre>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
-<li><a href="https://zhuanlan.zhihu.com/p/156915260">Hexo博客写文章及基本操作</a></li>
-<li><a href="https://linlif.github.io/2017/05/27/Hexo%E4%BD%BF%E7%94%A8%E6%94%BB%E7%95%A5-%E6%B7%BB%E5%8A%A0%E5%88%86%E7%B1%BB%E5%8F%8A%E6%A0%87%E7%AD%BE/">Hexo使用攻略-添加分类及标签</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/56943330">[Markdown] 使用vscode开始Markdown写作之旅</a></li>
-</ol>
+<p>当图片内容较多，使用相对路径存放图片的方式更易于整理。</p>
+<h4 id="小提示"><a href="#小提示" class="headerlink" title="小提示"></a>小提示</h4><p>如遇到修改配置文件后运行<code>hexo new newblog</code>命令无法正常建立一个同名文件夹，可以手动在<code>_POST</code>目录下建立一个同名文件夹，仍能够达到同样的效果。<br>实际上，md文件也可以手动新建。根据使用者的习惯，怎么新建md文件和同名文件夹都是可以的。<br>平时写文章不常用到图片，也可以使用手动建立同名文件夹的方式。  </p>
+<h2 id="CDN引用"><a href="#CDN引用" class="headerlink" title="CDN引用"></a>CDN引用</h2><p>将图片上传到一些CDN服务中并使用对应的url地址引用图片也是一个很好的方式。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>[1] <a href="https://yanyinhong.github.io/2017/05/02/How-to-insert-image-in-hexo-post/">Hexo博客搭建之在文章中插入图片</a><br>[2] <a href="https://fuhailin.github.io/Hexo-images/">在Hexo博客中插入图片的各种方式</a><br>[3] <a href="https://www.cxyzjd.com/article/m0_43401436/107191688">hexo博客中插入图片失败——解决思路及个人最终解决办法</a></p>
 ]]></content>
       <categories>
         <category>Blog</category>
@@ -449,7 +372,168 @@ $ hexo deploy  # 部署到GitHub Pages
         <tag>Hexo</tag>
         <tag>Blog</tag>
         <tag>Markdown</tag>
-        <tag>vscode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Batch Effects Matter and Avoid Them in Omics Data</title>
+    <url>/2021/10/29/BatchEffect/</url>
+    <content><![CDATA[<center>文献阅读：关于批次效应的3W1H——什么是批次效应、什么情况下会出现批次效应、为什么要关注批次效应与如何处理批次效应</center>
+<span id="more"></span>
+
+<h2 id="什么是批次效应"><a href="#什么是批次效应" class="headerlink" title="什么是批次效应"></a>什么是批次效应</h2><p><strong>批次效应</strong>是指实验子组在不同的实验条件之下具有与研究中的生物学或其它科学变量无关的性质不同的行为，即实验中测量值之间由于技术因素造成的系统性差异。</p>
+<br>
+
+<h2 id="什么情况下会有批次效应"><a href="#什么情况下会有批次效应" class="headerlink" title="什么情况下会有批次效应"></a>什么情况下会有批次效应</h2><p>批次效应在生物学实验中广泛存在，无论是microarray expression profiling还是mass spectrometry产生的数据，都观察到明显的批次效应。具体到研究疾病的差异基因/蛋白或变异数据(如拷贝数变异)的研究中同样观察到明显批次效应。<br>造成批次效应的因素有很多，试剂批次不同、实验时间不同、仪器状态变化、实验员不同都可能造成批次效应。其中一些批次效应能够通过规范化实验操作、更好的实验设计避免；另一些则需要通过对所得数据进行处理才能够消除。<br>在Leek等人对已公开数据批次效应的研究发现，已公开的数据中存在明显批次效应。且在许多实验条件和技术中，技术性因素比生物性因素对实验结果更具影响力。当批次效应发生时，常常与生物性因素混淆，导致下游研究结果不准确。  </p>
+<br>
+
+<h2 id="为什么要关注批次效应"><a href="#为什么要关注批次效应" class="headerlink" title="为什么要关注批次效应"></a>为什么要关注批次效应</h2><p>当批次效应发生时，可能会</p>
+<ul>
+<li>增加变化(variability)而掩盖真正生物学信号，导致得到错误的生物学或临床结论  </li>
+<li>与特征信号混在一起，导致下游分类器构建困难  </li>
+<li>阻碍生物学上重要亚型的发现或与亚型混淆难以区分  </li>
+<li>导致实验资源分配不当，结果缺乏可重复性  </li>
+</ul>
+<p>因此，消除批次效应对得到准确、可重复性高的结论非常重要。</p>
+<br>
+
+<h2 id="如何避免或处理批次效应"><a href="#如何避免或处理批次效应" class="headerlink" title="如何避免或处理批次效应"></a>如何避免或处理批次效应</h2><h3 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h3><p>避免出现批次效应的首要步骤是合理的实验设计。高通量的实验应在实验设计时考虑到批次效应，在实验过程中尽可能避免批次效应的出现。实验分组时也需保证平衡性(balance)，避免非研究目标的生物学因素对实验结果造成影响，进而和批次效应混杂，导致数据难以处理。  </p>
+<h3 id="数据处理"><a href="#数据处理" class="headerlink" title="数据处理"></a>数据处理</h3><p>优秀的实验设计是降低批次效应的基础，在此基础之上处理批次效应主要有以下两个步骤：</p>
+<ol>
+<li>识别并量化数据中潜在的批次效应，包括人为因素  </li>
+<li>使用已知或找到的人为因素调整数据以适应下游分析</li>
+</ol>
+<h4 id="识别并量化批次效应"><a href="#识别并量化批次效应" class="headerlink" title="识别并量化批次效应"></a>识别并量化批次效应</h4><p>识别和量化批次效应主要通过主成分分析(Principal Component Analysis, PCA)或其它数据可视化工具如聚类、多维数据标化等。<br>如果数据处理结果中出现：  </p>
+<ul>
+<li>样本按处理组或时间聚类</li>
+<li>大量特征与处理组或时间高度相关</li>
+<li>主成分与批次处理组或时间相关联  </li>
+</ul>
+<p>则表明数据中极大可能存在批次效应，必须在下游数据处理前考虑到批次效应的影响。</p>
+<h4 id="处理批次效应"><a href="#处理批次效应" class="headerlink" title="处理批次效应"></a>处理批次效应</h4><p>根据其算法思想可将消除批次效应的方法分为如下几个大类：  </p>
+<ul>
+<li><strong>简单线性模型(Simple Linear Models)</strong>: Mean-scaling, zero-centering  </li>
+<li><strong>经验贝叶斯方法(Empirical Bayes)</strong>: ComBat  </li>
+<li><strong>因子分析(Factor-based analysis)</strong>: Surrogate Variable Analysis (SVA), Removed unwanted variation (RUV)  </li>
+<li><strong>深度学习(Deep Learning)</strong>: NormAE</li>
+</ul>
+<p>其中，前两种消除批次效应的方法需要已知造成批次效应的因素，如实验时间等。  </p>
+<p>根据先验知识、实验数据规模、特征空间大小、研究目的等因素，可挑选不同的处理批次效应的方法：</p>
+<ul>
+<li>大数据；特征空间有限；有限的生物异质性；批次效应或分类影响因子已知；目标是简单分析：<strong>Two-way ANOVA</strong>  </li>
+<li>小数据；特征空间有限；有限的生物异质性；批次效应或类影响因子已知；目标是去除批次效应：<strong>ComBat</strong>  </li>
+<li>中/大型数据集；大特征空间；存在生物异质性；类因子已知，批次效应影响因素不必已知；目标是移除批次效应且确定批次效应影响因素：<strong>SVA</strong>, <strong>RUV</strong>  </li>
+<li>中/大型数据集；大特征空间；存在生物异质性；批次效应或分类影响因子都不必已知；目标是移除批次效应且确定批次效应影响因素但不需直到类因子：<strong>unsupervised methods (PCA)</strong>, <strong>RUV</strong></li>
+</ul>
+<p>算法补充：<br><img src="/.com//Methods.png" alt="算法补充1"><br><img src="/.com//Methods2.png" alt="算法补充2">  </p>
+<h4 id="批次效应处理评估"><a href="#批次效应处理评估" class="headerlink" title="批次效应处理评估"></a>批次效应处理评估</h4><p>消除批次效应之后，通常会检查处理的效果。常用的方法有PCA、层次聚类等，检查数据是否有与批次相关联的偏移、聚类结果是否更符合生物学先验知识等。<br>评估方法小结：<br><img src="/.com//Validation.png" alt="批次效应评估方法">  </p>
+<br>
+
+<h2 id="批次效应处理流程"><a href="#批次效应处理流程" class="headerlink" title="批次效应处理流程"></a>批次效应处理流程</h2><p>Jelena Čuklina等人针对批次效应的研究中提供了一个消除蛋白质数据批次效应的处理流程和一个包含所有处理步骤的R包——proBatch (<a href="https://www.bioconductor.org/packages/release/bioc/html/proBatch.html">Bioconductor</a>, <a href="https://hub.docker.com/r/digitalproteomes/probatch">Docker container</a>, <a href="https://github.com/symbioticMe/batch_effects_workflow_code">GitHub repository</a>都可获取该R包)  </p>
+<h3 id="流程图总览"><a href="#流程图总览" class="headerlink" title="流程图总览"></a>流程图总览</h3><p><img src="/.com//workflow.png" alt="批次效应处理流程图">  </p>
+<ol>
+<li>初步评估原始数据中是否存在批次效应  </li>
+<li>归一化使数据集中所有数据在同一尺度  </li>
+<li>归一化后数据评估，以确定数据是否需要进一步处理  </li>
+<li>批次效应校正以纠正特征偏移  </li>
+<li>质量控制测试：是否在保留有意义信号的同时减少了数据偏差  </li>
+</ol>
+<h3 id="Raw-Data-Matrix"><a href="#Raw-Data-Matrix" class="headerlink" title="Raw Data Matrix"></a>Raw Data Matrix</h3><p>在进行这一流程之前，应当先对数据进行预处理，如肽段识别、肽段定量、FDR筛选、log-transformed或variance stabilizing transformation。<br>虽然在ion fragment、peptides、protein层面都可以识别并处理批次效应，但因为这个过程改变了对蛋白质推断至关重要的特征丰度，最好针对ion fragment或peptides数据处理批次效应。且在处理过程中应包含尽可能多的数据以保证数据分布最接近真实情况。  </p>
+<h3 id="Initial-Assessment"><a href="#Initial-Assessment" class="headerlink" title="Initial Assessment"></a>Initial Assessment</h3><p>这一步骤主要目的是确定数据的偏移程度并确定一个归一化方法。通常情况下，样本间intensity会有一定差异，调整这种差异有助于数据的比较，能够更好地识别出需要进一步处理的因素。主要方法有三种：</p>
+<ol>
+<li>按照质谱测量或技术批次的顺序绘制样品强度平均值或中值，评估每个批次中的质谱漂移或离散偏差  </li>
+<li>箱线图，评估样本方差和异常值  </li>
+<li>批次间与批次内样本相关性  </li>
+</ol>
+<p>通过上述步骤来检验</p>
+<ul>
+<li>数据分布是否具有一致性  </li>
+<li>样本间的相关性  </li>
+<li>如果有差异，这种差异是否与批次相关联  </li>
+</ul>
+<h3 id="Normalization"><a href="#Normalization" class="headerlink" title="Normalization"></a>Normalization</h3><p>归一化的目的就是将所有样本的数据处于同一尺度，使得跨样本数据能够互相比较。常用的归一化方法有quantile normalization、median normalization和z-transformation，应根据数据的异质性和数据分布情况选择合适的归一化方法。  </p>
+<h4 id="数据的异质性"><a href="#数据的异质性" class="headerlink" title="数据的异质性"></a>数据的异质性</h4><ul>
+<li><strong>数据相似程度高：</strong> quantile normalization  </li>
+<li><strong>数据具有本质差异：</strong> HMM-assisted normalization  </li>
+<li><strong>数据会有包含信息的异常值(outliers)：</strong> 选择能够保留异常值与总体数据关系的归一化方法  </li>
+</ul>
+<h4 id="样本丰度分布"><a href="#样本丰度分布" class="headerlink" title="样本丰度分布"></a>样本丰度分布</h4><ul>
+<li>通常情况下，只需调整数据中位数或平均值  </li>
+<li>如果出现方差差异较大，也需要将它们调整到同一尺度</li>
+</ul>
+<p>归一化步骤应尽可能简单直接，对数据的操作越少，越能够保留数据的真实情况。归一化后可通过diagnostic plots和quality control方法对数据进行评估。</p>
+<h3 id="Diagnostics-of-normalized-data"><a href="#Diagnostics-of-normalized-data" class="headerlink" title="Diagnostics of normalized data"></a>Diagnostics of normalized data</h3><p>评估归一化后的数据以确定是否需要进一步的处理，主要方法为：</p>
+<ul>
+<li><strong>Hierarchical clustering：</strong>  将相似的样本分组为树状结构，观察聚类结果是否和批次相关  </li>
+<li><strong>Principal Component Analysis(PCA):</strong> 观察主成分是否与批次相关联，对评估聚类依据是生物还是技术因素及检查重复组相似性十分有效  </li>
+</ul>
+<p>上述方法要求数据中没有缺失值，而蛋白质组数据通常含有缺失值。填补缺失值时应特别注意尽可能保留数据原有的分布，不能盲目填0或一个较小的随机数。<br>蛋白质组通常使用肽段数据检查是否存在与批次相关的偏移。如在DIA数据中加入iRT肽段用于数据特征校正。由于不同肽段对不同批次效应的response不同，有必要检查大量肽段以确定是否存在批次效应。通过检查肽段数据还能够确认跑样顺序是否对数据造成影响，是否有与顺序相关的变化趋势(trends)。<br>还可以用ion fragments的数据校正蛋白数据，但目前针对肽段的方法更加广泛。  </p>
+<h3 id="Batch-effect-correction"><a href="#Batch-effect-correction" class="headerlink" title="Batch effect correction"></a>Batch effect correction</h3><p>归一化能够校准数据的全局，而批次效应校正主要针对特征峰和特征组。根据批次效应的形式，可将消除批次效应的方法分为两大类：</p>
+<ul>
+<li><strong>Continuous</strong><br>消除连续的批次效应主要通过拟合的方式，如LOESS fit，或使用其它连续算法。<br>在质谱大数据(hundreds of samples)中会出现信号漂移现象，这仍是一个亟待解决的问题。  </li>
+<li><strong>Discrete</strong><br>消除离散的批次效应时常用mean and median centering。<br>基于贝叶斯模型的ComBat算法也能够用于处理蛋白质数据，但需要已知所有的批次效应影响因素。</li>
+</ul>
+<h3 id="Quality-control"><a href="#Quality-control" class="headerlink" title="Quality control"></a>Quality control</h3><p>质控步骤主要用于评估归一化和批次效应校正之后的数据质量，好的数据校正应做到消除偏移(negative control)和提升数据(positive control)两方面。  </p>
+<ul>
+<li><strong>消除偏移的标准</strong>  <ul>
+<li>聚类或PCA后，同组数据聚集依据与批次无关，更多地受生物学因素影响  </li>
+<li>肽段(或其他特征，如ion fragments)没有与批次相关的偏移  </li>
+</ul>
+</li>
+<li><strong>提升数据</strong><ul>
+<li>通常情况下，数据提升的标准为聚类结果更符合生物学先验知识，后续差异检验步骤能够识别出更多差异。但这种标准并不具有足够的客观性，尤其是后一个标准并不一定表明数据提升，还有可能是false positive  </li>
+<li>交叉验证：差异表达蛋白或最佳分类特征蛋白列表高度重合。但这种方法依赖于数据集和特征空间的大小，当数据集较小，后一个蛋白列表本身不稳定，会对评估造成影响。在另一篇综述中强调应避免交叉验证来评估数据质量  </li>
+<li>检查重复组间的方差：如果数据的归一化和消除批次效应步骤合理，重复组间的方差应降低  </li>
+<li>样本间相关性：技术或生物学重复样本间的相关性应明显高于与其它样本的相关性  </li>
+<li>距离矩阵：与上一方法的逻辑相似，但通过计算样本间距离来评估数据  </li>
+<li>肽段间的相关性：来自同一蛋白的肽段具有正相关或高相关性，而来自不同蛋白或不相关的肽段间的相关性应接近于0  </li>
+</ul>
+</li>
+</ul>
+<br>
+
+<h2 id="消除批次效应的方法-工具"><a href="#消除批次效应的方法-工具" class="headerlink" title="消除批次效应的方法/工具"></a>消除批次效应的方法/工具</h2><h3 id="ComBat"><a href="#ComBat" class="headerlink" title="ComBat"></a>ComBat</h3><h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>ComBat基于参数和非参数经验贝叶斯框架，用于调整具有批次效应的数据。该方法对小样本中的异常值具有健壮性，并且与大样本的现有方法相当。<br>以Microarray为研究对象。  </p>
+<h4 id="经验贝叶斯框架使用基础"><a href="#经验贝叶斯框架使用基础" class="headerlink" title="经验贝叶斯框架使用基础"></a>经验贝叶斯框架使用基础</h4><ul>
+<li>已经广泛用于大规模microarray数据：稳定具有极高或极低比率的基因的表达比，缩小所有其他基因的方差来稳定基因方差避免伪影的影响等  </li>
+<li>已有批次效应处理方法(如SVD、DWD和L/S method)需要大批量数据，且不能兼容小批次数据的离群值  </li>
+<li>对高位效数据组有较强的健壮性  </li>
+<li>利用跨基因和跨样本的“借用信息”，以得到更好的估计或更稳定的结果  </li>
+</ul>
+<h4 id="基本假设"><a href="#基本假设" class="headerlink" title="基本假设"></a>基本假设</h4><ul>
+<li>结合基因间常见的系统批次效应，假设导致批次效应的现象通常以相似的方式影响许多基因  </li>
+<li>通过汇集信息(pooling information)来估计代表批次效应的L/S模型参数，在每个批次的基因中缩减(shrink)批次效应参数估计值，使之朝着批次效应估计值的总体平均值(跨基因)发展  </li>
+<li>数据已被归一化，所有样本的基因表达值已被估计  </li>
+</ul>
+<h4 id="关键步骤"><a href="#关键步骤" class="headerlink" title="关键步骤"></a>关键步骤</h4><ol>
+<li>Standardize the data  </li>
+<li>EB batch effect parameter estimates using parametric empircal priors  </li>
+<li>Adjust the data for batch effects  </li>
+</ol>
+<h3 id="QC-RLSC"><a href="#QC-RLSC" class="headerlink" title="QC-RLSC"></a>QC-RLSC</h3><h4 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h4><p>QC-RLSC(quality control-based robust LOESS signal correction)可用于信号校正和整合来自不同实验批次的数据。<br>以Metabolics数据为研究对象。  </p>
+<h4 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h4><p>LOESS曲线拟合结合了经典的线性最小二乘法回归的简单性和非线性回归的灵活性。它通过对数据的局部子集进行简单的模型拟合来建立一个函数，逐点地描述数据中的确定性变化部分。不需要指定任何形式的全局函数来拟合数据的模型，而只需要拟合数据的片段。<br>对数据的每个子集进行拟合的局部多项式被限制为一阶或二阶(即局部线性或局部二阶)，并使用加权最小二乘法拟合(标准三立方权重函数)。<br>优化平滑参数(或称跨度)以获得更好的回归曲线。不使用过小的平滑参数以避免曲线受到随机误差的影响。<br>留一法交叉验证(leave-one-out cross validation)以避免过拟合。  </p>
+<h4 id="关键步骤-1"><a href="#关键步骤-1" class="headerlink" title="关键步骤"></a>关键步骤</h4><ol>
+<li>在实验结束、色谱解卷积后，使用QC-RLSC对数据进行标准化(normalize)</li>
+<li>依据注入顺序，对质控数据进行LOESS拟合</li>
+<li>对整个分析运行的校正曲线进行内插，并对该特征的总数据集进行标准化</li>
+</ol>
+<p>通过这些步骤，在一次分析中，峰响应的任何衰减都被最小化。</p>
+<h3 id="ICA"><a href="#ICA" class="headerlink" title="ICA"></a>ICA</h3><h4 id="简介-2"><a href="#简介-2" class="headerlink" title="简介"></a>简介</h4><p>使用时空独立成分分析(spatio-temporal independent component analysis)对批次效应建模，并移除这些影响。<br>以microarray datasets为研究对象。  </p>
+<h4 id="基本原理-1"><a href="#基本原理-1" class="headerlink" title="基本原理"></a>基本原理</h4><p>对整合的数据集进行因子分解(factorization)，移除与子数据集具有某种相关性的组件，以获得最终数据集。这一过程能够从数据中移除批次效应。<br>去除的成分是可以解释的，很容易检查它们是否与某些感兴趣的生物信息相关。<br>ICA被证明能更好地模拟不同的变异(variables)来源。  </p>
+<h4 id="关键步骤-2"><a href="#关键步骤-2" class="headerlink" title="关键步骤"></a>关键步骤</h4><p>假设汇总的数据集是一个按样本划分的基因矩阵<em>X</em>，<em>X</em><sub>i,j</sub> 表明gene <em>i</em> 在样本 <em>j</em> 中的表达量。<br><img src="/.com//ICAsteps.png" alt="ICA流程">  </p>
+<h3 id="WaveICA"><a href="#WaveICA" class="headerlink" title="WaveICA"></a>WaveICA</h3><h4 id="简介-3"><a href="#简介-3" class="headerlink" title="简介"></a>简介</h4><p>WaveICA基于带有小波变换的独立成分分析，作为大规模代谢组学数据的阈值处理方法捕获并去除批次效应。<br>研究对象为Metabolics数据。  </p>
+<h4 id="基本原理-2"><a href="#基本原理-2" class="headerlink" title="基本原理"></a>基本原理</h4><p>利用样品在注射顺序中的时间趋势，将原始数据分解为具有不同特征的多尺度数据，提取并去除多尺度数据中的批次效应信息，获得干净的数据。<br>在实际问题中DWT有局限性，WaveICA中使用的小波变换为Maximal overlap discrete wavelet transform (MODWT)。  </p>
+<h4 id="关键步骤-3"><a href="#关键步骤-3" class="headerlink" title="关键步骤"></a>关键步骤</h4><p><img src="/.com//WaveICA.png" alt="WaveICA流程">  </p>
+<h3 id="NormAE"><a href="#NormAE" class="headerlink" title="NormAE"></a>NormAE</h3><h4 id="简介-4"><a href="#简介-4" class="headerlink" title="简介"></a>简介</h4><p>Normlization Autoencoder(NormAE)基于非线性自编码器和对抗性学习的新型深度学习模型。<br>研究对象为Metabolics数据。  </p>
+<h4 id="基本原理-3"><a href="#基本原理-3" class="headerlink" title="基本原理"></a>基本原理</h4><p>将非线性自编码器和DNN结合，提高模型的非线性拟合能力，使得批次效应结果和其它因素影响结果分开，以在去除批次效应的同时保留更多生物学特征。<br>在AE模型的训练过程中，训练一个额外的分类器和排序器来对抗性正则化，潜在的特征被编码器提取出来，然后解码器在没有批次效应的情况下重建数据。  </p>
+<h4 id="关键步骤-4"><a href="#关键步骤-4" class="headerlink" title="关键步骤"></a>关键步骤</h4><p>黑色实线和红色虚线分别表示反向传播算法的前向和后向计算步骤。蓝色虚线路径表示训练后的批量效应去除步骤。<br><img src="/.com//NormAE.png" alt="NormAE原理图">  </p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1] Leek, Jeffrey T et al. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3880143/"><strong>Tackling the widespread and critical impact of batch effects in high-throughput data.</strong></a> Nature reviews. Genetics, vol. 11,10 (2010): 733-9.<br>[2] Čuklina, Jelena et al. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8447595/"><strong>Diagnostics and correction of batch effects in large-scale proteomic studies: a tutorial.</strong></a> Molecular systems biology, vol. 17,8 (2021): e10240.<br>[3] Zhou, Longjian et al. <a href="https://pubmed.ncbi.nlm.nih.gov/31611172/"><strong>Examining the practical limits of batch effect-correction algorithms: When should you care about batch effects?</strong></a>, Journal of Genetics and Genomics, Vol. 46, 9(2019): 433-443.<br>[4] Goh, Wilson Wen Bin et al. <a href="https://pubmed.ncbi.nlm.nih.gov/28351613/"><strong>Why Batch Effects Matter in Omics Data, and How to Avoid Them.</strong></a> Trends Biotechnol, Vol. 35, 6 (2017):498-507.<br>[5] Johnson, WE et al. <a href="https://academic.oup.com/biostatistics/article/8/1/118/252073/"><strong>Adjusting batch effects in microarray expression data using empirical Bayes methods.</strong></a> Biostatistics, Vol. 8, 1 (2007): 118–127.<br>[6] Dunn, W et al. <a href="https://www.nature.com/articles/nprot.2011.335/"><strong>Procedures for large-scale metabolic profiling of serum and plasma using gas chromatography and liquid chromatography coupled to mass spectrometry.</strong></a> Nature Protocol, 6 (2011): 1060–1083.<br>[7] Sompairac, Nicolas et al. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6771121/"><strong>Independent Component Analysis for Unraveling the Complexity of Cancer Omics Datasets.</strong></a> International journal of molecular sciences. vol. 20, 18 (2019): 4414.<br>[8] Deng, Kui et al. <a href="https://www.sciencedirect.com/science/article/abs/pii/S0003267019301849/"><strong>WaveICA: A novel algorithm to remove batch effects for large-scale untargeted metabolomics data based on wavelet analysis.</strong></a> Analytica Chimica Acta, Vol. 1061, (2019): 60-69.<br>[9] Rong, Zhiwei et al. <a href="https://pubs.acs.org/doi/10.1021/acs.analchem.9b05460/"><strong>NormAE: Deep Adversarial Learning Model to Remove Batch Effects in Liquid Chromatography Mass Spectrometry-Based Metabolomics Data.</strong></a> Analytical Chemistry, Vol. 92, 7 (2020): 5082–5090.  </p>
+]]></content>
+      <categories>
+        <category>Paper</category>
+        <category>BatchEffects</category>
+      </categories>
+      <tags>
+        <tag>BatchEffects</tag>
+        <tag>Bioinformatics</tag>
       </tags>
   </entry>
   <entry>
@@ -548,165 +632,81 @@ $ hexo deploy  # 部署到GitHub Pages
       </tags>
   </entry>
   <entry>
-    <title>Batch Effects Matter and Avoid Them in Omics Data</title>
-    <url>/2021/10/29/BatchEffect/</url>
-    <content><![CDATA[<center>文献阅读：关于批次效应的3W1H——什么是批次效应、什么情况下会出现批次效应、为什么要关注批次效应与如何处理批次效应</center>
+    <title>Hexo + Markdown写博客</title>
+    <url>/2021/09/16/writenewblog/</url>
+    <content><![CDATA[<center>创建、发布新文章；用vscode + markdown编辑文章；给文章添加分类和标签。</center>
 <span id="more"></span>
 
-<h2 id="什么是批次效应"><a href="#什么是批次效应" class="headerlink" title="什么是批次效应"></a>什么是批次效应</h2><p><strong>批次效应</strong>是指实验子组在不同的实验条件之下具有与研究中的生物学或其它科学变量无关的性质不同的行为，即实验中测量值之间由于技术因素造成的系统性差异。</p>
-<br>
+<h2 id="新建文章-create-a-post"><a href="#新建文章-create-a-post" class="headerlink" title="新建文章 create a post"></a>新建文章 create a post</h2><p>在博客目录运行命令：</p>
+<pre><code>$ hexo new [layout] title
+# layout有三种:post, draft, page, 默认是post，可以在博客配置文件中更改default_layout来更改默认设置
+# Hexo会根据scaffolds文件夹内相对应的文件来建立md文件
+# 当创建不同布局的md文件时，它们会存储在不同路径
 
-<h2 id="什么情况下会有批次效应"><a href="#什么情况下会有批次效应" class="headerlink" title="什么情况下会有批次效应"></a>什么情况下会有批次效应</h2><p>批次效应在生物学实验中广泛存在，无论是microarray expression profiling还是mass spectrometry产生的数据，都观察到明显的批次效应。具体到研究疾病的差异基因/蛋白或变异数据(如拷贝数变异)的研究中同样观察到明显批次效应。<br>造成批次效应的因素有很多，试剂批次不同、实验时间不同、仪器状态变化、实验员不同都可能造成批次效应。其中一些批次效应能够通过规范化实验操作、更好的实验设计避免；另一些则需要通过对所得数据进行处理才能够消除。<br>在Leek等人对已公开数据批次效应的研究发现，已公开的数据中存在明显批次效应。且在许多实验条件和技术中，技术性因素比生物性因素对实验结果更具影响力。当批次效应发生时，常常与生物性因素混淆，导致下游研究结果不准确。  </p>
-<br>
-
-<h2 id="为什么要关注批次效应"><a href="#为什么要关注批次效应" class="headerlink" title="为什么要关注批次效应"></a>为什么要关注批次效应</h2><p>当批次效应发生时，可能会</p>
-<ul>
-<li>增加变化(variability)而掩盖真正生物学信号，导致得到错误的生物学或临床结论  </li>
-<li>与特征信号混在一起，导致下游分类器构建困难  </li>
-<li>阻碍生物学上重要亚型的发现或与亚型混淆难以区分  </li>
-<li>导致实验资源分配不当，结果缺乏可重复性  </li>
-</ul>
-<p>因此，消除批次效应对得到准确、可重复性高的结论非常重要。</p>
-<br>
-
-<h2 id="如何避免或处理批次效应"><a href="#如何避免或处理批次效应" class="headerlink" title="如何避免或处理批次效应"></a>如何避免或处理批次效应</h2><h3 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h3><p>避免出现批次效应的首要步骤是合理的实验设计。高通量的实验应在实验设计时考虑到批次效应，在实验过程中尽可能避免批次效应的出现。实验分组时也需保证平衡性(balance)，避免非研究目标的生物学因素对实验结果造成影响，进而和批次效应混杂，导致数据难以处理。  </p>
-<h3 id="数据处理"><a href="#数据处理" class="headerlink" title="数据处理"></a>数据处理</h3><p>优秀的实验设计是降低批次效应的基础，在此基础之上处理批次效应主要有以下两个步骤：</p>
+$ hexo new &quot;My New Post&quot;
+#新建一个名为&quot;My New Post&quot;的md文件
+</code></pre>
+<p>后续编辑这个文件即可。</p>
+<h2 id="vscode-markdown写文章"><a href="#vscode-markdown写文章" class="headerlink" title="vscode + markdown写文章"></a>vscode + markdown写文章</h2><p>可按照以下步骤编辑一遍博客文章：</p>
 <ol>
-<li>识别并量化数据中潜在的批次效应，包括人为因素  </li>
-<li>使用已知或找到的人为因素调整数据以适应下游分析</li>
-</ol>
-<h4 id="识别并量化批次效应"><a href="#识别并量化批次效应" class="headerlink" title="识别并量化批次效应"></a>识别并量化批次效应</h4><p>识别和量化批次效应主要通过主成分分析(Principal Component Analysis, PCA)或其它数据可视化工具如聚类、多维数据标化等。<br>如果数据处理结果中出现：  </p>
-<ul>
-<li>样本按处理组或时间聚类</li>
-<li>大量特征与处理组或时间高度相关</li>
-<li>主成分与批次处理组或时间相关联  </li>
-</ul>
-<p>则表明数据中极大可能存在批次效应，必须在下游数据处理前考虑到批次效应的影响。</p>
-<h4 id="处理批次效应"><a href="#处理批次效应" class="headerlink" title="处理批次效应"></a>处理批次效应</h4><p>根据其算法思想可将消除批次效应的方法分为如下几个大类：  </p>
-<ul>
-<li><strong>简单线性模型(Simple Linear Models)</strong>: Mean-scaling, zero-centering  </li>
-<li><strong>经验贝叶斯方法(Empirical Bayes)</strong>: ComBat  </li>
-<li><strong>因子分析(Factor-based analysis)</strong>: Surrogate Variable Analysis (SVA), Removed unwanted variation (RUV)  </li>
-<li><strong>深度学习(Deep Learning)</strong>: NormAE</li>
-</ul>
-<p>其中，前两种消除批次效应的方法需要已知造成批次效应的因素，如实验时间等。  </p>
-<p>根据先验知识、实验数据规模、特征空间大小、研究目的等因素，可挑选不同的处理批次效应的方法：</p>
-<ul>
-<li>大数据；特征空间有限；有限的生物异质性；批次效应或分类影响因子已知；目标是简单分析：<strong>Two-way ANOVA</strong>  </li>
-<li>小数据；特征空间有限；有限的生物异质性；批次效应或类影响因子已知；目标是去除批次效应：<strong>ComBat</strong>  </li>
-<li>中/大型数据集；大特征空间；存在生物异质性；类因子已知，批次效应影响因素不必已知；目标是移除批次效应且确定批次效应影响因素：<strong>SVA</strong>, <strong>RUV</strong>  </li>
-<li>中/大型数据集；大特征空间；存在生物异质性；批次效应或分类影响因子都不必已知；目标是移除批次效应且确定批次效应影响因素但不需直到类因子：<strong>unsupervised methods (PCA)</strong>, <strong>RUV</strong></li>
-</ul>
-<p>算法补充：<br><img src="/.com//Methods.png"><br><img src="/.com//Methods2.png">  </p>
-<h4 id="批次效应处理评估"><a href="#批次效应处理评估" class="headerlink" title="批次效应处理评估"></a>批次效应处理评估</h4><p>消除批次效应之后，通常会检查处理的效果。常用的方法有PCA、层次聚类等，检查数据是否有与批次相关联的偏移、聚类结果是否更符合生物学先验知识等。<br>评估方法小结：<br><img src="/.com//Validation.png">  </p>
-<br>
-
-<h2 id="批次效应处理流程"><a href="#批次效应处理流程" class="headerlink" title="批次效应处理流程"></a>批次效应处理流程</h2><p>Jelena Čuklina等人针对批次效应的研究中提供了一个消除蛋白质数据批次效应的处理流程和一个包含所有处理步骤的R包——proBatch (<a href="https://www.bioconductor.org/packages/release/bioc/html/proBatch.html">Bioconductor</a>, <a href="https://hub.docker.com/r/digitalproteomes/probatch">Docker container</a>, <a href="https://github.com/symbioticMe/batch_effects_workflow_code">GitHub repository</a>都可获取该R包)  </p>
-<h3 id="流程图总览"><a href="#流程图总览" class="headerlink" title="流程图总览"></a>流程图总览</h3><p><img src="/.com//workflow.png">  </p>
-<ol>
-<li>初步评估原始数据中是否存在批次效应  </li>
-<li>归一化使数据集中所有数据在同一尺度  </li>
-<li>归一化后数据评估，以确定数据是否需要进一步处理  </li>
-<li>批次效应校正以纠正特征偏移  </li>
-<li>质量控制测试：是否在保留有意义信号的同时减少了数据偏差  </li>
-</ol>
-<h3 id="Raw-Data-Matrix"><a href="#Raw-Data-Matrix" class="headerlink" title="Raw Data Matrix"></a>Raw Data Matrix</h3><p>在进行这一流程之前，应当先对数据进行预处理，如肽段识别、肽段定量、FDR筛选、log-transformed或variance stabilizing transformation。<br>虽然在ion fragment、peptides、protein层面都可以识别并处理批次效应，但因为这个过程改变了对蛋白质推断至关重要的特征丰度，最好针对ion fragment或peptides数据处理批次效应。且在处理过程中应包含尽可能多的数据以保证数据分布最接近真实情况。  </p>
-<h3 id="Initial-Assessment"><a href="#Initial-Assessment" class="headerlink" title="Initial Assessment"></a>Initial Assessment</h3><p>这一步骤主要目的是确定数据的偏移程度并确定一个归一化方法。通常情况下，样本间intensity会有一定差异，调整这种差异有助于数据的比较，能够更好地识别出需要进一步处理的因素。主要方法有三种：</p>
-<ol>
-<li>按照质谱测量或技术批次的顺序绘制样品强度平均值或中值，评估每个批次中的质谱漂移或离散偏差  </li>
-<li>箱线图，评估样本方差和异常值  </li>
-<li>批次间与批次内样本相关性  </li>
-</ol>
-<p>通过上述步骤来检验</p>
-<ul>
-<li>数据分布是否具有一致性  </li>
-<li>样本间的相关性  </li>
-<li>如果有差异，这种差异是否与批次相关联  </li>
-</ul>
-<h3 id="Normalization"><a href="#Normalization" class="headerlink" title="Normalization"></a>Normalization</h3><p>归一化的目的就是将所有样本的数据处于同一尺度，使得跨样本数据能够互相比较。常用的归一化方法有quantile normalization、median normalization和z-transformation，应根据数据的异质性和数据分布情况选择合适的归一化方法。  </p>
-<h4 id="数据的异质性"><a href="#数据的异质性" class="headerlink" title="数据的异质性"></a>数据的异质性</h4><ul>
-<li><strong>数据相似程度高：</strong> quantile normalization  </li>
-<li><strong>数据具有本质差异：</strong> HMM-assisted normalization  </li>
-<li><strong>数据会有包含信息的异常值(outliers)：</strong> 选择能够保留异常值与总体数据关系的归一化方法  </li>
-</ul>
-<h4 id="样本丰度分布"><a href="#样本丰度分布" class="headerlink" title="样本丰度分布"></a>样本丰度分布</h4><ul>
-<li>通常情况下，只需调整数据中位数或平均值  </li>
-<li>如果出现方差差异较大，也需要将它们调整到同一尺度</li>
-</ul>
-<p>归一化步骤应尽可能简单直接，对数据的操作越少，越能够保留数据的真实情况。归一化后可通过diagnostic plots和quality control方法对数据进行评估。</p>
-<h3 id="Diagnostics-of-normalized-data"><a href="#Diagnostics-of-normalized-data" class="headerlink" title="Diagnostics of normalized data"></a>Diagnostics of normalized data</h3><p>评估归一化后的数据以确定是否需要进一步的处理，主要方法为：</p>
-<ul>
-<li><strong>Hierarchical clustering：</strong>  将相似的样本分组为树状结构，观察聚类结果是否和批次相关  </li>
-<li><strong>Principal Component Analysis(PCA):</strong> 观察主成分是否与批次相关联，对评估聚类依据是生物还是技术因素及检查重复组相似性十分有效  </li>
-</ul>
-<p>上述方法要求数据中没有缺失值，而蛋白质组数据通常含有缺失值。填补缺失值时应特别注意尽可能保留数据原有的分布，不能盲目填0或一个较小的随机数。<br>蛋白质组通常使用肽段数据检查是否存在与批次相关的偏移。如在DIA数据中加入iRT肽段用于数据特征校正。由于不同肽段对不同批次效应的response不同，有必要检查大量肽段以确定是否存在批次效应。通过检查肽段数据还能够确认跑样顺序是否对数据造成影响，是否有与顺序相关的变化趋势(trends)。<br>还可以用ion fragments的数据校正蛋白数据，但目前针对肽段的方法更加广泛。  </p>
-<h3 id="Batch-effect-correction"><a href="#Batch-effect-correction" class="headerlink" title="Batch effect correction"></a>Batch effect correction</h3><p>归一化能够校准数据的全局，而批次效应校正主要针对特征峰和特征组。根据批次效应的形式，可将消除批次效应的方法分为两大类：</p>
-<ul>
-<li><strong>Continuous</strong><br>消除连续的批次效应主要通过拟合的方式，如LOESS fit，或使用其它连续算法。<br>在质谱大数据(hundreds of samples)中会出现信号漂移现象，这仍是一个亟待解决的问题。  </li>
-<li><strong>Discrete</strong><br>消除离散的批次效应时常用mean and median centering。<br>基于贝叶斯模型的ComBat算法也能够用于处理蛋白质数据，但需要已知所有的批次效应影响因素。</li>
-</ul>
-<h3 id="Quality-control"><a href="#Quality-control" class="headerlink" title="Quality control"></a>Quality control</h3><p>质控步骤主要用于评估归一化和批次效应校正之后的数据质量，好的数据校正应做到消除偏移(negative control)和提升数据(positive control)两方面。  </p>
-<ul>
-<li><strong>消除偏移的标准</strong>  <ul>
-<li>聚类或PCA后，同组数据聚集依据与批次无关，更多地受生物学因素影响  </li>
-<li>肽段(或其他特征，如ion fragments)没有与批次相关的偏移  </li>
+<li>从<a href="https://code.visualstudio.com/">官网</a>下载vscode，并安装。  </li>
+<li>安装markdown插件：<ul>
+<li>Markdown All in One: 组合包，把最常用的Markdown优化全部装好</li>
+<li>Markdown Preview Github Styling: 在本地就能预览Markdown文件最终在Github Pages中显示的效果</li>
 </ul>
 </li>
-<li><strong>提升数据</strong><ul>
-<li>通常情况下，数据提升的标准为聚类结果更符合生物学先验知识，后续差异检验步骤能够识别出更多差异。但这种标准并不具有足够的客观性，尤其是后一个标准并不一定表明数据提升，还有可能是false positive  </li>
-<li>交叉验证：差异表达蛋白或最佳分类特征蛋白列表高度重合。但这种方法依赖于数据集和特征空间的大小，当数据集较小，后一个蛋白列表本身不稳定，会对评估造成影响。在另一篇综述中强调应避免交叉验证来评估数据质量  </li>
-<li>检查重复组间的方差：如果数据的归一化和消除批次效应步骤合理，重复组间的方差应降低  </li>
-<li>样本间相关性：技术或生物学重复样本间的相关性应明显高于与其它样本的相关性  </li>
-<li>距离矩阵：与上一方法的逻辑相似，但通过计算样本间距离来评估数据  </li>
-<li>肽段间的相关性：来自同一蛋白的肽段具有正相关或高相关性，而来自不同蛋白或不相关的肽段间的相关性应接近于0  </li>
-</ul>
-</li>
-</ul>
-<br>
+<li>学习基本的markdown语法，利用vscode编辑文章。同时，利用”Open Preview to the Side”按键或快捷键可同时预览文章</li>
+<li>写完这篇文章</li>
+</ol>
+<h2 id="categories"><a href="#categories" class="headerlink" title="categories"></a>categories</h2><h3 id="生成categories页并修改type属性"><a href="#生成categories页并修改type属性" class="headerlink" title="生成categories页并修改type属性"></a>生成categories页并修改type属性</h3><p>在博客目录运行命令行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new page categories</span><br></pre></td></tr></table></figure>
+<p>运行成功后会提示：</p>
+<pre><code>INFO  Created: ~/Documents/blog/source/categories/index.md
+</code></pre>
+<p>根据所给路径找到index.md文件，在文件的框架内添加一行：</p>
+<pre><code>type: &quot;categories&quot;
+</code></pre>
+<h3 id="给文章添加categories"><a href="#给文章添加categories" class="headerlink" title="给文章添加categories"></a>给文章添加categories</h3><p>在文章头的<code>categories:</code>后以<code>-</code>为标志添加标签，如本文的标签：</p>
+<pre><code>categories:
+- Blog #注意“-”后一定要加空格
+</code></pre>
+<h2 id="tag"><a href="#tag" class="headerlink" title="tag"></a>tag</h2><h3 id="生成tag页并修改type属性"><a href="#生成tag页并修改type属性" class="headerlink" title="生成tag页并修改type属性"></a>生成tag页并修改type属性</h3><p>在博客目录运行命令行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new page tags</span><br></pre></td></tr></table></figure>
+<p>运行成功后会提示：</p>
+<pre><code>INFO  Created: ~/Documents/blog/source/tags/index.md
+</code></pre>
+<p>根据所给路径找到index.md文件，在文件的框架内添加一行：</p>
+<pre><code>type: &quot;tags&quot;
+</code></pre>
+<h3 id="给文章添加tag"><a href="#给文章添加tag" class="headerlink" title="给文章添加tag"></a>给文章添加tag</h3><p>在文章头的<code>tags:</code>后以<code>-</code>为标志添加标签，如本文的标签：</p>
+<pre><code>tags: 
+- Blog #注意“-”后一定要加空格
+- Hexo
+- Markdown
+- vscode
+</code></pre>
+<h2 id="文章的发布"><a href="#文章的发布" class="headerlink" title="文章的发布"></a>文章的发布</h2><p>在博客目录运行命令：</p>
+<pre><code>$ hexo generate
+$ hexo server  # 本地预查看
+$ hexo deploy  # 部署到GitHub Pages
 
-<h2 id="消除批次效应的方法-工具"><a href="#消除批次效应的方法-工具" class="headerlink" title="消除批次效应的方法/工具"></a>消除批次效应的方法/工具</h2><h3 id="ComBat"><a href="#ComBat" class="headerlink" title="ComBat"></a>ComBat</h3><h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>ComBat基于参数和非参数经验贝叶斯框架，用于调整具有批次效应的数据。该方法对小样本中的异常值具有健壮性，并且与大样本的现有方法相当。<br>以Microarray为研究对象。  </p>
-<h4 id="经验贝叶斯框架使用基础"><a href="#经验贝叶斯框架使用基础" class="headerlink" title="经验贝叶斯框架使用基础"></a>经验贝叶斯框架使用基础</h4><ul>
-<li>已经广泛用于大规模microarray数据：稳定具有极高或极低比率的基因的表达比，缩小所有其他基因的方差来稳定基因方差避免伪影的影响等  </li>
-<li>已有批次效应处理方法(如SVD、DWD和L/S method)需要大批量数据，且不能兼容小批次数据的离群值  </li>
-<li>对高位效数据组有较强的健壮性  </li>
-<li>利用跨基因和跨样本的“借用信息”，以得到更好的估计或更稳定的结果  </li>
-</ul>
-<h4 id="基本假设"><a href="#基本假设" class="headerlink" title="基本假设"></a>基本假设</h4><ul>
-<li>结合基因间常见的系统批次效应，假设导致批次效应的现象通常以相似的方式影响许多基因  </li>
-<li>通过汇集信息(pooling information)来估计代表批次效应的L/S模型参数，在每个批次的基因中缩减(shrink)批次效应参数估计值，使之朝着批次效应估计值的总体平均值(跨基因)发展  </li>
-<li>数据已被归一化，所有样本的基因表达值已被估计  </li>
-</ul>
-<h4 id="关键步骤"><a href="#关键步骤" class="headerlink" title="关键步骤"></a>关键步骤</h4><ol>
-<li>Standardize the data  </li>
-<li>EB batch effect parameter estimates using parametric empircal priors  </li>
-<li>Adjust the data for batch effects  </li>
+# 此步骤报错可先检查文件头等文章各部分是否缺少空格
+</code></pre>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a href="https://zhuanlan.zhihu.com/p/156915260">Hexo博客写文章及基本操作</a></li>
+<li><a href="https://linlif.github.io/2017/05/27/Hexo%E4%BD%BF%E7%94%A8%E6%94%BB%E7%95%A5-%E6%B7%BB%E5%8A%A0%E5%88%86%E7%B1%BB%E5%8F%8A%E6%A0%87%E7%AD%BE/">Hexo使用攻略-添加分类及标签</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/56943330">[Markdown] 使用vscode开始Markdown写作之旅</a></li>
 </ol>
-<h3 id="QC-RLSC"><a href="#QC-RLSC" class="headerlink" title="QC-RLSC"></a>QC-RLSC</h3><h4 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h4><p>QC-RLSC(quality control-based robust LOESS signal correction)可用于信号校正和整合来自不同实验批次的数据。<br>以Metabolics数据为研究对象。  </p>
-<h4 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h4><p>LOESS曲线拟合结合了经典的线性最小二乘法回归的简单性和非线性回归的灵活性。它通过对数据的局部子集进行简单的模型拟合来建立一个函数，逐点地描述数据中的确定性变化部分。不需要指定任何形式的全局函数来拟合数据的模型，而只需要拟合数据的片段。<br>对数据的每个子集进行拟合的局部多项式被限制为一阶或二阶(即局部线性或局部二阶)，并使用加权最小二乘法拟合(标准三立方权重函数)。<br>优化平滑参数(或称跨度)以获得更好的回归曲线。不使用过小的平滑参数以避免曲线受到随机误差的影响。<br>留一法交叉验证(leave-one-out cross validation)以避免过拟合。  </p>
-<h4 id="关键步骤-1"><a href="#关键步骤-1" class="headerlink" title="关键步骤"></a>关键步骤</h4><ol>
-<li>在实验结束、色谱解卷积后，使用QC-RLSC对数据进行标准化(normalize)</li>
-<li>依据注入顺序，对质控数据进行LOESS拟合</li>
-<li>对整个分析运行的校正曲线进行内插，并对该特征的总数据集进行标准化</li>
-</ol>
-<p>通过这些步骤，在一次分析中，峰响应的任何衰减都被最小化。</p>
-<h3 id="ICA"><a href="#ICA" class="headerlink" title="ICA"></a>ICA</h3><h4 id="简介-2"><a href="#简介-2" class="headerlink" title="简介"></a>简介</h4><p>使用时空独立成分分析(spatio-temporal independent component analysis)对批次效应建模，并移除这些影响。<br>以microarray datasets为研究对象。  </p>
-<h4 id="基本原理-1"><a href="#基本原理-1" class="headerlink" title="基本原理"></a>基本原理</h4><p>对整合的数据集进行因子分解(factorization)，移除与子数据集具有某种相关性的组件，以获得最终数据集。这一过程能够从数据中移除批次效应。<br>去除的成分是可以解释的，很容易检查它们是否与某些感兴趣的生物信息相关。<br>ICA被证明能更好地模拟不同的变异(variables)来源。  </p>
-<h4 id="关键步骤-2"><a href="#关键步骤-2" class="headerlink" title="关键步骤"></a>关键步骤</h4><p>假设汇总的数据集是一个按样本划分的基因矩阵<em>X</em>，<em>X</em><sub>i,j</sub> 表明gene <em>i</em> 在样本 <em>j</em> 中的表达量。<br><img src="/.com//ICAsteps.png">  </p>
-<h3 id="WaveICA"><a href="#WaveICA" class="headerlink" title="WaveICA"></a>WaveICA</h3><h4 id="简介-3"><a href="#简介-3" class="headerlink" title="简介"></a>简介</h4><p>WaveICA基于带有小波变换的独立成分分析，作为大规模代谢组学数据的阈值处理方法捕获并去除批次效应。<br>研究对象为Metabolics数据。  </p>
-<h4 id="基本原理-2"><a href="#基本原理-2" class="headerlink" title="基本原理"></a>基本原理</h4><p>利用样品在注射顺序中的时间趋势，将原始数据分解为具有不同特征的多尺度数据，提取并去除多尺度数据中的批次效应信息，获得干净的数据。<br>在实际问题中DWT有局限性，WaveICA中使用的小波变换为Maximal overlap discrete wavelet transform (MODWT)。  </p>
-<h4 id="关键步骤-3"><a href="#关键步骤-3" class="headerlink" title="关键步骤"></a>关键步骤</h4><p><img src="/.com//WaveICA.png">  </p>
-<h3 id="NormAE"><a href="#NormAE" class="headerlink" title="NormAE"></a>NormAE</h3><h4 id="简介-4"><a href="#简介-4" class="headerlink" title="简介"></a>简介</h4><p>Normlization Autoencoder(NormAE)基于非线性自编码器和对抗性学习的新型深度学习模型。<br>研究对象为Metabolics数据。  </p>
-<h4 id="基本原理-3"><a href="#基本原理-3" class="headerlink" title="基本原理"></a>基本原理</h4><p>将非线性自编码器和DNN结合，提高模型的非线性拟合能力，使得批次效应结果和其它因素影响结果分开，以在去除批次效应的同时保留更多生物学特征。<br>在AE模型的训练过程中，训练一个额外的分类器和排序器来对抗性正则化，潜在的特征被编码器提取出来，然后解码器在没有批次效应的情况下重建数据。  </p>
-<h4 id="关键步骤-4"><a href="#关键步骤-4" class="headerlink" title="关键步骤"></a>关键步骤</h4><p>黑色实线和红色虚线分别表示反向传播算法的前向和后向计算步骤。蓝色虚线路径表示训练后的批量效应去除步骤。<br><img src="/.com//NormAE.png">  </p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1] Leek, Jeffrey T et al. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3880143/"><strong>Tackling the widespread and critical impact of batch effects in high-throughput data.</strong></a> Nature reviews. Genetics, vol. 11,10 (2010): 733-9.<br>[2] Čuklina, Jelena et al. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8447595/"><strong>Diagnostics and correction of batch effects in large-scale proteomic studies: a tutorial.</strong></a> Molecular systems biology, vol. 17,8 (2021): e10240.<br>[3] Zhou, Longjian et al. <a href="https://pubmed.ncbi.nlm.nih.gov/31611172/"><strong>Examining the practical limits of batch effect-correction algorithms: When should you care about batch effects?</strong></a>, Journal of Genetics and Genomics, Vol. 46, 9(2019): 433-443.<br>[4] Goh, Wilson Wen Bin et al. <a href="https://pubmed.ncbi.nlm.nih.gov/28351613/"><strong>Why Batch Effects Matter in Omics Data, and How to Avoid Them.</strong></a> Trends Biotechnol, Vol. 35, 6 (2017):498-507.<br>[5] Johnson, WE et al. <a href="https://academic.oup.com/biostatistics/article/8/1/118/252073/"><strong>Adjusting batch effects in microarray expression data using empirical Bayes methods.</strong></a> Biostatistics, Vol. 8, 1 (2007): 118–127.<br>[6] Dunn, W et al. <a href="https://www.nature.com/articles/nprot.2011.335/"><strong>Procedures for large-scale metabolic profiling of serum and plasma using gas chromatography and liquid chromatography coupled to mass spectrometry.</strong></a> Nature Protocol, 6 (2011): 1060–1083.<br>[7] Sompairac, Nicolas et al. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6771121/"><strong>Independent Component Analysis for Unraveling the Complexity of Cancer Omics Datasets.</strong></a> International journal of molecular sciences. vol. 20, 18 (2019): 4414.<br>[8] Deng, Kui et al. <a href="https://www.sciencedirect.com/science/article/abs/pii/S0003267019301849/"><strong>WaveICA: A novel algorithm to remove batch effects for large-scale untargeted metabolomics data based on wavelet analysis.</strong></a> Analytica Chimica Acta, Vol. 1061, (2019): 60-69.<br>[9] Rong, Zhiwei et al. <a href="https://pubs.acs.org/doi/10.1021/acs.analchem.9b05460/"><strong>NormAE: Deep Adversarial Learning Model to Remove Batch Effects in Liquid Chromatography Mass Spectrometry-Based Metabolomics Data.</strong></a> Analytical Chemistry, Vol. 92, 7 (2020): 5082–5090.  </p>
 ]]></content>
       <categories>
-        <category>Paper</category>
-        <category>BatchEffects</category>
+        <category>Blog</category>
+        <category>Writing</category>
       </categories>
       <tags>
-        <tag>BatchEffects</tag>
-        <tag>Bioinformatics</tag>
+        <tag>Hexo</tag>
+        <tag>Blog</tag>
+        <tag>Markdown</tag>
+        <tag>vscode</tag>
       </tags>
   </entry>
 </search>

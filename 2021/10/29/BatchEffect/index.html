@@ -35,7 +35,7 @@
 <meta property="og:image" content="http://example.com/.com//WaveICA.png">
 <meta property="og:image" content="http://example.com/.com//NormAE.png">
 <meta property="article:published_time" content="2021-10-29T02:44:02.000Z">
-<meta property="article:modified_time" content="2021-10-29T03:02:21.521Z">
+<meta property="article:modified_time" content="2021-10-29T03:33:21.787Z">
 <meta property="article:author" content="R">
 <meta property="article:tag" content="BatchEffects">
 <meta property="article:tag" content="Bioinformatics">
@@ -245,7 +245,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2021-10-29 10:44:02 / Modified: 11:02:21" itemprop="dateCreated datePublished" datetime="2021-10-29T10:44:02+08:00">2021-10-29</time>
+      <time title="Created: 2021-10-29 10:44:02 / Modified: 11:33:21" itemprop="dateCreated datePublished" datetime="2021-10-29T10:44:02+08:00">2021-10-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -333,12 +333,12 @@
 <li>中/大型数据集；大特征空间；存在生物异质性；类因子已知，批次效应影响因素不必已知；目标是移除批次效应且确定批次效应影响因素：<strong>SVA</strong>, <strong>RUV</strong>  </li>
 <li>中/大型数据集；大特征空间；存在生物异质性；批次效应或分类影响因子都不必已知；目标是移除批次效应且确定批次效应影响因素但不需直到类因子：<strong>unsupervised methods (PCA)</strong>, <strong>RUV</strong></li>
 </ul>
-<p>算法补充：<br><img src="/.com//Methods.png"><br><img src="/.com//Methods2.png">  </p>
-<h4 id="批次效应处理评估"><a href="#批次效应处理评估" class="headerlink" title="批次效应处理评估"></a>批次效应处理评估</h4><p>消除批次效应之后，通常会检查处理的效果。常用的方法有PCA、层次聚类等，检查数据是否有与批次相关联的偏移、聚类结果是否更符合生物学先验知识等。<br>评估方法小结：<br><img src="/.com//Validation.png">  </p>
+<p>算法补充：<br><img src="/.com//Methods.png" alt="算法补充1"><br><img src="/.com//Methods2.png" alt="算法补充2">  </p>
+<h4 id="批次效应处理评估"><a href="#批次效应处理评估" class="headerlink" title="批次效应处理评估"></a>批次效应处理评估</h4><p>消除批次效应之后，通常会检查处理的效果。常用的方法有PCA、层次聚类等，检查数据是否有与批次相关联的偏移、聚类结果是否更符合生物学先验知识等。<br>评估方法小结：<br><img src="/.com//Validation.png" alt="批次效应评估方法">  </p>
 <br>
 
 <h2 id="批次效应处理流程"><a href="#批次效应处理流程" class="headerlink" title="批次效应处理流程"></a>批次效应处理流程</h2><p>Jelena Čuklina等人针对批次效应的研究中提供了一个消除蛋白质数据批次效应的处理流程和一个包含所有处理步骤的R包——proBatch (<a target="_blank" rel="noopener" href="https://www.bioconductor.org/packages/release/bioc/html/proBatch.html">Bioconductor</a>, <a target="_blank" rel="noopener" href="https://hub.docker.com/r/digitalproteomes/probatch">Docker container</a>, <a target="_blank" rel="noopener" href="https://github.com/symbioticMe/batch_effects_workflow_code">GitHub repository</a>都可获取该R包)  </p>
-<h3 id="流程图总览"><a href="#流程图总览" class="headerlink" title="流程图总览"></a>流程图总览</h3><p><img src="/.com//workflow.png">  </p>
+<h3 id="流程图总览"><a href="#流程图总览" class="headerlink" title="流程图总览"></a>流程图总览</h3><p><img src="/.com//workflow.png" alt="批次效应处理流程图">  </p>
 <ol>
 <li>初步评估原始数据中是否存在批次效应  </li>
 <li>归一化使数据集中所有数据在同一尺度  </li>
@@ -427,13 +427,13 @@
 <p>通过这些步骤，在一次分析中，峰响应的任何衰减都被最小化。</p>
 <h3 id="ICA"><a href="#ICA" class="headerlink" title="ICA"></a>ICA</h3><h4 id="简介-2"><a href="#简介-2" class="headerlink" title="简介"></a>简介</h4><p>使用时空独立成分分析(spatio-temporal independent component analysis)对批次效应建模，并移除这些影响。<br>以microarray datasets为研究对象。  </p>
 <h4 id="基本原理-1"><a href="#基本原理-1" class="headerlink" title="基本原理"></a>基本原理</h4><p>对整合的数据集进行因子分解(factorization)，移除与子数据集具有某种相关性的组件，以获得最终数据集。这一过程能够从数据中移除批次效应。<br>去除的成分是可以解释的，很容易检查它们是否与某些感兴趣的生物信息相关。<br>ICA被证明能更好地模拟不同的变异(variables)来源。  </p>
-<h4 id="关键步骤-2"><a href="#关键步骤-2" class="headerlink" title="关键步骤"></a>关键步骤</h4><p>假设汇总的数据集是一个按样本划分的基因矩阵<em>X</em>，<em>X</em><sub>i,j</sub> 表明gene <em>i</em> 在样本 <em>j</em> 中的表达量。<br><img src="/.com//ICAsteps.png">  </p>
+<h4 id="关键步骤-2"><a href="#关键步骤-2" class="headerlink" title="关键步骤"></a>关键步骤</h4><p>假设汇总的数据集是一个按样本划分的基因矩阵<em>X</em>，<em>X</em><sub>i,j</sub> 表明gene <em>i</em> 在样本 <em>j</em> 中的表达量。<br><img src="/.com//ICAsteps.png" alt="ICA流程">  </p>
 <h3 id="WaveICA"><a href="#WaveICA" class="headerlink" title="WaveICA"></a>WaveICA</h3><h4 id="简介-3"><a href="#简介-3" class="headerlink" title="简介"></a>简介</h4><p>WaveICA基于带有小波变换的独立成分分析，作为大规模代谢组学数据的阈值处理方法捕获并去除批次效应。<br>研究对象为Metabolics数据。  </p>
 <h4 id="基本原理-2"><a href="#基本原理-2" class="headerlink" title="基本原理"></a>基本原理</h4><p>利用样品在注射顺序中的时间趋势，将原始数据分解为具有不同特征的多尺度数据，提取并去除多尺度数据中的批次效应信息，获得干净的数据。<br>在实际问题中DWT有局限性，WaveICA中使用的小波变换为Maximal overlap discrete wavelet transform (MODWT)。  </p>
-<h4 id="关键步骤-3"><a href="#关键步骤-3" class="headerlink" title="关键步骤"></a>关键步骤</h4><p><img src="/.com//WaveICA.png">  </p>
+<h4 id="关键步骤-3"><a href="#关键步骤-3" class="headerlink" title="关键步骤"></a>关键步骤</h4><p><img src="/.com//WaveICA.png" alt="WaveICA流程">  </p>
 <h3 id="NormAE"><a href="#NormAE" class="headerlink" title="NormAE"></a>NormAE</h3><h4 id="简介-4"><a href="#简介-4" class="headerlink" title="简介"></a>简介</h4><p>Normlization Autoencoder(NormAE)基于非线性自编码器和对抗性学习的新型深度学习模型。<br>研究对象为Metabolics数据。  </p>
 <h4 id="基本原理-3"><a href="#基本原理-3" class="headerlink" title="基本原理"></a>基本原理</h4><p>将非线性自编码器和DNN结合，提高模型的非线性拟合能力，使得批次效应结果和其它因素影响结果分开，以在去除批次效应的同时保留更多生物学特征。<br>在AE模型的训练过程中，训练一个额外的分类器和排序器来对抗性正则化，潜在的特征被编码器提取出来，然后解码器在没有批次效应的情况下重建数据。  </p>
-<h4 id="关键步骤-4"><a href="#关键步骤-4" class="headerlink" title="关键步骤"></a>关键步骤</h4><p>黑色实线和红色虚线分别表示反向传播算法的前向和后向计算步骤。蓝色虚线路径表示训练后的批量效应去除步骤。<br><img src="/.com//NormAE.png">  </p>
+<h4 id="关键步骤-4"><a href="#关键步骤-4" class="headerlink" title="关键步骤"></a>关键步骤</h4><p>黑色实线和红色虚线分别表示反向传播算法的前向和后向计算步骤。蓝色虚线路径表示训练后的批量效应去除步骤。<br><img src="/.com//NormAE.png" alt="NormAE原理图">  </p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1] Leek, Jeffrey T et al. <a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3880143/"><strong>Tackling the widespread and critical impact of batch effects in high-throughput data.</strong></a> Nature reviews. Genetics, vol. 11,10 (2010): 733-9.<br>[2] Čuklina, Jelena et al. <a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8447595/"><strong>Diagnostics and correction of batch effects in large-scale proteomic studies: a tutorial.</strong></a> Molecular systems biology, vol. 17,8 (2021): e10240.<br>[3] Zhou, Longjian et al. <a target="_blank" rel="noopener" href="https://pubmed.ncbi.nlm.nih.gov/31611172/"><strong>Examining the practical limits of batch effect-correction algorithms: When should you care about batch effects?</strong></a>, Journal of Genetics and Genomics, Vol. 46, 9(2019): 433-443.<br>[4] Goh, Wilson Wen Bin et al. <a target="_blank" rel="noopener" href="https://pubmed.ncbi.nlm.nih.gov/28351613/"><strong>Why Batch Effects Matter in Omics Data, and How to Avoid Them.</strong></a> Trends Biotechnol, Vol. 35, 6 (2017):498-507.<br>[5] Johnson, WE et al. <a target="_blank" rel="noopener" href="https://academic.oup.com/biostatistics/article/8/1/118/252073/"><strong>Adjusting batch effects in microarray expression data using empirical Bayes methods.</strong></a> Biostatistics, Vol. 8, 1 (2007): 118–127.<br>[6] Dunn, W et al. <a target="_blank" rel="noopener" href="https://www.nature.com/articles/nprot.2011.335/"><strong>Procedures for large-scale metabolic profiling of serum and plasma using gas chromatography and liquid chromatography coupled to mass spectrometry.</strong></a> Nature Protocol, 6 (2011): 1060–1083.<br>[7] Sompairac, Nicolas et al. <a target="_blank" rel="noopener" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6771121/"><strong>Independent Component Analysis for Unraveling the Complexity of Cancer Omics Datasets.</strong></a> International journal of molecular sciences. vol. 20, 18 (2019): 4414.<br>[8] Deng, Kui et al. <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/abs/pii/S0003267019301849/"><strong>WaveICA: A novel algorithm to remove batch effects for large-scale untargeted metabolomics data based on wavelet analysis.</strong></a> Analytica Chimica Acta, Vol. 1061, (2019): 60-69.<br>[9] Rong, Zhiwei et al. <a target="_blank" rel="noopener" href="https://pubs.acs.org/doi/10.1021/acs.analchem.9b05460/"><strong>NormAE: Deep Adversarial Learning Model to Remove Batch Effects in Liquid Chromatography Mass Spectrometry-Based Metabolomics Data.</strong></a> Analytical Chemistry, Vol. 92, 7 (2020): 5082–5090.  </p>
 
     </div>
