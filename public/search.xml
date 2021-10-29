@@ -1,110 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hexo + GitHub Pages搭建个人博客</title>
-    <url>/2021/09/16/Hexo-GitHubPages/</url>
-    <content><![CDATA[<center>本博客搭建过程中参考了许多教程。本文用于记录搭建过程，以及出现的一些小问题</center>  
-<span id="more"></span>  
-
-<br>  
-<br>  
-
-<p>有需要学习搭建博客的朋友可直接参考他人成熟的教程。本文参考教程：</p>
-<ol>
-<li><a href="https://zhuanlan.zhihu.com/p/70240127">Hexo+Github Pages快速实现个人网站</a><br> 搭建流程较为清晰，整体框架都有，不想详细了解每一个步骤只是想成功搭建一个博客参考这个教程就够</li>
-<li><a href="https://juejin.cn/post/6844904131266609165">彻底搞懂如何使用Hexo+GitHubPages搭建个人博客</a><br> 对于各种概念的解释都很详细，能够学习到很多知识，有助于未来对博客进行魔改升级等高级操作</li>
-<li><a href="https://hexo.io/zh-cn/docs/">Hexo官方说明文档</a><br> Hexo官方说明文档，目前更新版本为1/9/2021。内容步骤简洁明了，跟着一步步做不会出大的差错，如有问题也可以直接提交</li>
-<li><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site">GitHub Pages官方说明文档</a><br> GitHub Pages官方说明文档，参考性不如前面三个链接，但也能提供一部分支持。</li>
-</ol>
-<h2 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h2><h3 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h3><p>Mac和Linux系统的电脑已经预装了git.<br>Windows系统的电脑可以从官网(<a href="https://git-scm.com/downloads">https://git-scm.com/downloads</a> )下载相应的版本，安装过程中选择默认选项即可。<br>由于之前简单使用过gitee加git存代码，git的配置在当初已经完成。搜索“git使用”能够找到很多有用的教程。</p>
-<h3 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h3><p>可从官网 (<a href="https://nodejs.org/en/">https://nodejs.org/en/</a>)直接下载安装，可根据需求下载最新版本或推荐版本。需要注意的是，目前Hexo官网给出的建议是Node.js版本需不低于10.13，建议使用Node.js 12.0及以上版本。此处下载了Nodejs官网的推荐版本(recommended for most users)，14.17.6 LTS.<br>由于对Node.js并不了解，安装过程中直接选择了Automatically install the necessary tools.如果想更深入了解安装过程及自定义安装，可参考官方给出的详细安装教程(<a href="https://github.com/nodejs/node-gyp#on-windows">https://github.com/nodejs/node-gyp#on-windows</a>)</p>
-<h3 id="Hexo-1"><a href="#Hexo-1" class="headerlink" title="Hexo"></a>Hexo</h3><h4 id="检查Git和node-js安装情况"><a href="#检查Git和node-js安装情况" class="headerlink" title="检查Git和node.js安装情况"></a>检查Git和node.js安装情况</h4><p>安装Hexo需要git和node.js安装完成。检查电脑中这两项安装完成后，即可安装Hexo。可使用查看版本来检查是否安装成功。  </p>
-<pre><code>$ npm -v  
-$ node -v  
-$ git --version  
-</code></pre>
-<h4 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h4><p>上述安装成功后，只需要使用npm即可完成Hexo的安装  </p>
-<pre><code>$ npm install -g hexo-cli  
-</code></pre>
-<p>对于熟悉 npm 的进阶用户，可以仅局部安装 hexo 包  </p>
-<pre><code>$ npm install hexo
-</code></pre>
-<h4 id="检查安装是否成功"><a href="#检查安装是否成功" class="headerlink" title="检查安装是否成功"></a>检查安装是否成功</h4><p>依然使用查看版本号的方式检查安装是否成功，运行命令：  </p>
-<pre><code>$ hexo - v
-</code></pre>
-<h4 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h4><pre><code>$ hexo init &lt;blogname&gt; #此处blogname可以自己起名字，此步要在空目录下进行
-$ cd blog  #进入blog目录
-$ npm install  #它会根据package.json依赖配置文件自动下载安装所需要的依赖模块node_modules
-$ hexo generate  #生成静态文件, 缩写 $ hexo g
-$ hexo server  #开启本地服务, 此时通过 http://localhost:4000 就可以访问默认样式的博客, 缩写$ hexo s
-</code></pre>
-<h4 id="小小的Debug"><a href="#小小的Debug" class="headerlink" title="小小的Debug"></a>小小的Debug</h4><p>安装时，显示在resolveNewModule步骤耗时很久，不知道是卡住还是这个步骤本就耗费时间。<br>Google找到Hexo的官方说明文档(<a href="https://hexo.io/zh-cn/docs/">https://hexo.io/zh-cn/docs/</a>)，其中提到安装只需要几分钟，并且这个几分钟可能包含前述的Git和Node.js的准备。因此意识到安装出现问题，直接停下此次安装并重新运行命令。<br>出现问题的原因可能是安装的同时在下载一个较大的文件，无论是内存占用还是网络占用都达到一定程度，使得Hexo的安装受到影响。二次运行命令行时，下载已经结束，只用时51s就完成安装。<br>多翻了几个教程，很多教程都有提到新建文件夹Hexo，在这个目录下安装Hexo。因此卸载Hexo，在目标位置建立文件夹重装。卸载命令：  </p>
-<pre><code>$ npm uninstall hexo-cli -g
-</code></pre>
-<p>这次安装同样比较顺利，很快就完成。<br>实际上，如果在安装前没有建立文件夹，只需在安装成功后建立一个新目录，后续步骤在这个空目录下进行即可。上述uninstall步骤是因为比较心急，直接推翻重来，但没有必要。</p>
-<h2 id="GitHub-Pages"><a href="#GitHub-Pages" class="headerlink" title="GitHub Pages"></a>GitHub Pages</h2><h3 id="git初始配置"><a href="#git初始配置" class="headerlink" title="git初始配置"></a>git初始配置</h3><p>Git安装完成后确认是否完成基本部署，用户名和邮箱设置是否完成。  </p>
-<pre><code>$ git config --global user.name &quot;YOUR NAME&quot;  #设置用户名称
-$ git config --global user.email &quot;YOUR EMAIL&quot;  #设置邮箱地址
-</code></pre>
-<h3 id="生成SSH-key公钥"><a href="#生成SSH-key公钥" class="headerlink" title="生成SSH key公钥"></a>生成SSH key公钥</h3><p>查看当前用户的目录下是否存在.ssh目录，如果存在进入到此目录下检查是否存在id_rsa和id_rsa.pub两个文件，这两个文件分别对应的是公钥和私钥，如果存在直接跳过此步，否则输入下面的命令：  </p>
-<pre><code>$ ssh-keygen -t rsa -C “your_github_email”
-# -t type:指定你要生成的密钥类型
-# -C commit:提供一个新的注释  
-</code></pre>
-<p>然后一路回车，直到生成一个矩形的图案为止。记下生成的这串字符，这就是后面需要给GitHub配置的公钥。</p>
-<h3 id="创建GitHub账号"><a href="#创建GitHub账号" class="headerlink" title="创建GitHub账号"></a>创建GitHub账号</h3><p>打开官网用邮箱一步步注册即可，仅有的两个可能遇到的问题:</p>
-<ul>
-<li>没想好用户名</li>
-<li>确认注册的邮件因为有链接可能会被当作垃圾邮件。</li>
-</ul>
-<h3 id="配置GitHub中的公钥"><a href="#配置GitHub中的公钥" class="headerlink" title="配置GitHub中的公钥"></a>配置GitHub中的公钥</h3><p>在GitHub账号设置中找到添加SSH key的地方，即<br>Settings -&gt; SSH and GPG keys -&gt; New SSH key<br>将前述步骤中生成的公钥贴在此处  </p>
-<h3 id="创建仓库-repository"><a href="#创建仓库-repository" class="headerlink" title="创建仓库(repository)"></a>创建仓库(repository)</h3><p>单机右上角(用户头像旁边)的“+”号即可创建New repository，会出现如图所示界面。<br>Owner处为用户名，后面的Repository name需要严格按照username.github.io填写。这样才能保证生成的是GitHub Pages页面，而不是其它代码库。  </p>
-<h3 id="GitHub-Pages-1"><a href="#GitHub-Pages-1" class="headerlink" title="GitHub Pages"></a>GitHub Pages</h3><p>创建成功后会自动进入该repository，进入setting找到Pages，进入后即可看到GitHub Pages界面。<br>这一步骤可能需要一些时间，耐心等待，一般几分钟就会显示站点发布成功。</p>
-<h4 id="小小的debug"><a href="#小小的debug" class="headerlink" title="小小的debug"></a>小小的debug</h4><p>第一次走到这一步时，此处有一句提醒，由于该GitHub仓库是空的，所以无法创建GitHub Pages站点。解决方式： </p>
-<ul>
-<li>可自己创建一个README文件</li>
-<li>粗暴删库重来，建库时选择生成默认README文件  </li>
-</ul>
-<h2 id="将Hexo部署到GitHub"><a href="#将Hexo部署到GitHub" class="headerlink" title="将Hexo部署到GitHub"></a>将Hexo部署到GitHub</h2><h3 id="安装hexo-deployer-git"><a href="#安装hexo-deployer-git" class="headerlink" title="安装hexo-deployer-git"></a>安装hexo-deployer-git</h3><p>在博客根目录下运行命令  </p>
-<pre><code>$ npm install hexo-deployer-git –save
-</code></pre>
-<h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><p>_config.yml是整个博客的配置文件，每项配置参数在Hexo官方文档可找到详细介绍。<br>使用git能将本地博客文件夹关联到GitHub的远程仓库，并把本地文件push到对应的仓库中。Hexo提供了一种更简便地方式，只需要在_config.yml中作相应的配置，通过命令行命令就可以很方便地把静态文件部署到对应的仓库中。<br>找到根目录中的_config.yml博客配置文件，在deployment配置项下设置如下参数：  </p>
-<pre><code>deploy:  
-    type: git  
-    repo: git@github.com:yourname/yourname.github.io.git  
-    branch: master  
-</code></pre>
-<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><pre><code>$ hexo generate #生成本地静态文件，可缩写为hexo g
-$ hexo deploy   #部署，可缩写为hexo d
-</code></pre>
-<p>这时回到GitHub仓库, 可以看到网站的静态文件已经上传。</p>
-<h4 id="小小的Debug-1"><a href="#小小的Debug-1" class="headerlink" title="小小的Debug"></a>小小的Debug</h4><p>部署没有报错，但网站没有更新<br>原因：GitHub Pages默认是从main生成页面，但本地设置部署参数是branch一项中填写的是master<br>Debug：修改该repository设置中pages的source一项或将前面提到的修改博客配置文件的branch参数为main</p>
-<h3 id="一些有用的命令"><a href="#一些有用的命令" class="headerlink" title="一些有用的命令"></a>一些有用的命令</h3><pre><code>hexo clean = hexo c #清除本地缓存，也就是清除public/文件夹和db.json文件
-hexo generate = hexo g #将souce文件夹下的Markdown和HTML文件解析到了public文件夹下，并生成了db.json文件
-hexo server = hexo s #开启本地调试模式
-hexo deploy = hexo d #将本地资源部署到GithubPages
-</code></pre>
-<h2 id="修改主题"><a href="#修改主题" class="headerlink" title="修改主题"></a>修改主题</h2><h3 id="选择主题"><a href="#选择主题" class="headerlink" title="选择主题"></a>选择主题</h3><p>Hexo的官网上即可找到许多可用主题，或搜索Hexo theme也可以找到。官网中列出的主题直达：<a href="https://hexo.io/themes/">https://hexo.io/themes/</a><br>找主题除了符合自己的审美之外，也要注意该主题是否一直有人维护。较长时间无人维护的主题可能由于版本问题无法顺利安装使用。</p>
-<h3 id="安装主题"><a href="#安装主题" class="headerlink" title="安装主题"></a>安装主题</h3><p>本博客选择的主题是Next，安装步骤如下：<br>将主题clone到theme文件夹下</p>
-<pre><code>$ cd blog
-$ git clone https://github.com/next-theme/hexo-theme-next themes/next
-</code></pre>
-<p>然后在hexo配置文件中修改themes为next</p>
-<pre><code>themes: next
-</code></pre>
-<h3 id="一些小改动"><a href="#一些小改动" class="headerlink" title="一些小改动"></a>一些小改动</h3><p>根据next的说明文件，可以在该主题的配置文件中对细节进行修改。<br>对博客名、描述以及作者等的修改在根目录的配置文件中进行。</p>
-]]></content>
-      <categories>
-        <category>Blog</category>
-        <category>Building</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>Github</tag>
-        <tag>Blog</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>blastp的本地化使用</title>
     <url>/2021/09/16/blastp/</url>
     <content><![CDATA[<center>blastp在Windows系统电脑上的本地使用</center>
@@ -338,12 +234,181 @@ main() # 运行上述函数
       </tags>
   </entry>
   <entry>
+    <title>Hexo + GitHub Pages搭建个人博客</title>
+    <url>/2021/09/16/Hexo-GitHubPages/</url>
+    <content><![CDATA[<center>本博客搭建过程中参考了许多教程。本文用于记录搭建过程，以及出现的一些小问题</center>  
+<span id="more"></span>  
+
+<br>  
+<br>  
+
+<p>有需要学习搭建博客的朋友可直接参考他人成熟的教程。本文参考教程：</p>
+<ol>
+<li><a href="https://zhuanlan.zhihu.com/p/70240127">Hexo+Github Pages快速实现个人网站</a><br> 搭建流程较为清晰，整体框架都有，不想详细了解每一个步骤只是想成功搭建一个博客参考这个教程就够</li>
+<li><a href="https://juejin.cn/post/6844904131266609165">彻底搞懂如何使用Hexo+GitHubPages搭建个人博客</a><br> 对于各种概念的解释都很详细，能够学习到很多知识，有助于未来对博客进行魔改升级等高级操作</li>
+<li><a href="https://hexo.io/zh-cn/docs/">Hexo官方说明文档</a><br> Hexo官方说明文档，目前更新版本为1/9/2021。内容步骤简洁明了，跟着一步步做不会出大的差错，如有问题也可以直接提交</li>
+<li><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site">GitHub Pages官方说明文档</a><br> GitHub Pages官方说明文档，参考性不如前面三个链接，但也能提供一部分支持。</li>
+</ol>
+<h2 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h2><h3 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h3><p>Mac和Linux系统的电脑已经预装了git.<br>Windows系统的电脑可以从官网(<a href="https://git-scm.com/downloads">https://git-scm.com/downloads</a> )下载相应的版本，安装过程中选择默认选项即可。<br>由于之前简单使用过gitee加git存代码，git的配置在当初已经完成。搜索“git使用”能够找到很多有用的教程。</p>
+<h3 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h3><p>可从官网 (<a href="https://nodejs.org/en/">https://nodejs.org/en/</a>)直接下载安装，可根据需求下载最新版本或推荐版本。需要注意的是，目前Hexo官网给出的建议是Node.js版本需不低于10.13，建议使用Node.js 12.0及以上版本。此处下载了Nodejs官网的推荐版本(recommended for most users)，14.17.6 LTS.<br>由于对Node.js并不了解，安装过程中直接选择了Automatically install the necessary tools.如果想更深入了解安装过程及自定义安装，可参考官方给出的详细安装教程(<a href="https://github.com/nodejs/node-gyp#on-windows">https://github.com/nodejs/node-gyp#on-windows</a>)</p>
+<h3 id="Hexo-1"><a href="#Hexo-1" class="headerlink" title="Hexo"></a>Hexo</h3><h4 id="检查Git和node-js安装情况"><a href="#检查Git和node-js安装情况" class="headerlink" title="检查Git和node.js安装情况"></a>检查Git和node.js安装情况</h4><p>安装Hexo需要git和node.js安装完成。检查电脑中这两项安装完成后，即可安装Hexo。可使用查看版本来检查是否安装成功。  </p>
+<pre><code>$ npm -v  
+$ node -v  
+$ git --version  
+</code></pre>
+<h4 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h4><p>上述安装成功后，只需要使用npm即可完成Hexo的安装  </p>
+<pre><code>$ npm install -g hexo-cli  
+</code></pre>
+<p>对于熟悉 npm 的进阶用户，可以仅局部安装 hexo 包  </p>
+<pre><code>$ npm install hexo
+</code></pre>
+<h4 id="检查安装是否成功"><a href="#检查安装是否成功" class="headerlink" title="检查安装是否成功"></a>检查安装是否成功</h4><p>依然使用查看版本号的方式检查安装是否成功，运行命令：  </p>
+<pre><code>$ hexo - v
+</code></pre>
+<h4 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h4><pre><code>$ hexo init &lt;blogname&gt; #此处blogname可以自己起名字，此步要在空目录下进行
+$ cd blog  #进入blog目录
+$ npm install  #它会根据package.json依赖配置文件自动下载安装所需要的依赖模块node_modules
+$ hexo generate  #生成静态文件, 缩写 $ hexo g
+$ hexo server  #开启本地服务, 此时通过 http://localhost:4000 就可以访问默认样式的博客, 缩写$ hexo s
+</code></pre>
+<h4 id="小小的Debug"><a href="#小小的Debug" class="headerlink" title="小小的Debug"></a>小小的Debug</h4><p>安装时，显示在resolveNewModule步骤耗时很久，不知道是卡住还是这个步骤本就耗费时间。<br>Google找到Hexo的官方说明文档(<a href="https://hexo.io/zh-cn/docs/">https://hexo.io/zh-cn/docs/</a>)，其中提到安装只需要几分钟，并且这个几分钟可能包含前述的Git和Node.js的准备。因此意识到安装出现问题，直接停下此次安装并重新运行命令。<br>出现问题的原因可能是安装的同时在下载一个较大的文件，无论是内存占用还是网络占用都达到一定程度，使得Hexo的安装受到影响。二次运行命令行时，下载已经结束，只用时51s就完成安装。<br>多翻了几个教程，很多教程都有提到新建文件夹Hexo，在这个目录下安装Hexo。因此卸载Hexo，在目标位置建立文件夹重装。卸载命令：  </p>
+<pre><code>$ npm uninstall hexo-cli -g
+</code></pre>
+<p>这次安装同样比较顺利，很快就完成。<br>实际上，如果在安装前没有建立文件夹，只需在安装成功后建立一个新目录，后续步骤在这个空目录下进行即可。上述uninstall步骤是因为比较心急，直接推翻重来，但没有必要。</p>
+<h2 id="GitHub-Pages"><a href="#GitHub-Pages" class="headerlink" title="GitHub Pages"></a>GitHub Pages</h2><h3 id="git初始配置"><a href="#git初始配置" class="headerlink" title="git初始配置"></a>git初始配置</h3><p>Git安装完成后确认是否完成基本部署，用户名和邮箱设置是否完成。  </p>
+<pre><code>$ git config --global user.name &quot;YOUR NAME&quot;  #设置用户名称
+$ git config --global user.email &quot;YOUR EMAIL&quot;  #设置邮箱地址
+</code></pre>
+<h3 id="生成SSH-key公钥"><a href="#生成SSH-key公钥" class="headerlink" title="生成SSH key公钥"></a>生成SSH key公钥</h3><p>查看当前用户的目录下是否存在.ssh目录，如果存在进入到此目录下检查是否存在id_rsa和id_rsa.pub两个文件，这两个文件分别对应的是公钥和私钥，如果存在直接跳过此步，否则输入下面的命令：  </p>
+<pre><code>$ ssh-keygen -t rsa -C “your_github_email”
+# -t type:指定你要生成的密钥类型
+# -C commit:提供一个新的注释  
+</code></pre>
+<p>然后一路回车，直到生成一个矩形的图案为止。记下生成的这串字符，这就是后面需要给GitHub配置的公钥。</p>
+<h3 id="创建GitHub账号"><a href="#创建GitHub账号" class="headerlink" title="创建GitHub账号"></a>创建GitHub账号</h3><p>打开官网用邮箱一步步注册即可，仅有的两个可能遇到的问题:</p>
+<ul>
+<li>没想好用户名</li>
+<li>确认注册的邮件因为有链接可能会被当作垃圾邮件。</li>
+</ul>
+<h3 id="配置GitHub中的公钥"><a href="#配置GitHub中的公钥" class="headerlink" title="配置GitHub中的公钥"></a>配置GitHub中的公钥</h3><p>在GitHub账号设置中找到添加SSH key的地方，即<br>Settings -&gt; SSH and GPG keys -&gt; New SSH key<br>将前述步骤中生成的公钥贴在此处  </p>
+<h3 id="创建仓库-repository"><a href="#创建仓库-repository" class="headerlink" title="创建仓库(repository)"></a>创建仓库(repository)</h3><p>单机右上角(用户头像旁边)的“+”号即可创建New repository，会出现如图所示界面。<br>Owner处为用户名，后面的Repository name需要严格按照username.github.io填写。这样才能保证生成的是GitHub Pages页面，而不是其它代码库。  </p>
+<h3 id="GitHub-Pages-1"><a href="#GitHub-Pages-1" class="headerlink" title="GitHub Pages"></a>GitHub Pages</h3><p>创建成功后会自动进入该repository，进入setting找到Pages，进入后即可看到GitHub Pages界面。<br>这一步骤可能需要一些时间，耐心等待，一般几分钟就会显示站点发布成功。</p>
+<h4 id="小小的debug"><a href="#小小的debug" class="headerlink" title="小小的debug"></a>小小的debug</h4><p>第一次走到这一步时，此处有一句提醒，由于该GitHub仓库是空的，所以无法创建GitHub Pages站点。解决方式： </p>
+<ul>
+<li>可自己创建一个README文件</li>
+<li>粗暴删库重来，建库时选择生成默认README文件  </li>
+</ul>
+<h2 id="将Hexo部署到GitHub"><a href="#将Hexo部署到GitHub" class="headerlink" title="将Hexo部署到GitHub"></a>将Hexo部署到GitHub</h2><h3 id="安装hexo-deployer-git"><a href="#安装hexo-deployer-git" class="headerlink" title="安装hexo-deployer-git"></a>安装hexo-deployer-git</h3><p>在博客根目录下运行命令  </p>
+<pre><code>$ npm install hexo-deployer-git –save
+</code></pre>
+<h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><p>_config.yml是整个博客的配置文件，每项配置参数在Hexo官方文档可找到详细介绍。<br>使用git能将本地博客文件夹关联到GitHub的远程仓库，并把本地文件push到对应的仓库中。Hexo提供了一种更简便地方式，只需要在_config.yml中作相应的配置，通过命令行命令就可以很方便地把静态文件部署到对应的仓库中。<br>找到根目录中的_config.yml博客配置文件，在deployment配置项下设置如下参数：  </p>
+<pre><code>deploy:  
+    type: git  
+    repo: git@github.com:yourname/yourname.github.io.git  
+    branch: master  
+</code></pre>
+<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><pre><code>$ hexo generate #生成本地静态文件，可缩写为hexo g
+$ hexo deploy   #部署，可缩写为hexo d
+</code></pre>
+<p>这时回到GitHub仓库, 可以看到网站的静态文件已经上传。</p>
+<h4 id="小小的Debug-1"><a href="#小小的Debug-1" class="headerlink" title="小小的Debug"></a>小小的Debug</h4><p>部署没有报错，但网站没有更新<br>原因：GitHub Pages默认是从main生成页面，但本地设置部署参数是branch一项中填写的是master<br>Debug：修改该repository设置中pages的source一项或将前面提到的修改博客配置文件的branch参数为main</p>
+<h3 id="一些有用的命令"><a href="#一些有用的命令" class="headerlink" title="一些有用的命令"></a>一些有用的命令</h3><pre><code>hexo clean = hexo c #清除本地缓存，也就是清除public/文件夹和db.json文件
+hexo generate = hexo g #将souce文件夹下的Markdown和HTML文件解析到了public文件夹下，并生成了db.json文件
+hexo server = hexo s #开启本地调试模式
+hexo deploy = hexo d #将本地资源部署到GithubPages
+</code></pre>
+<h2 id="修改主题"><a href="#修改主题" class="headerlink" title="修改主题"></a>修改主题</h2><h3 id="选择主题"><a href="#选择主题" class="headerlink" title="选择主题"></a>选择主题</h3><p>Hexo的官网上即可找到许多可用主题，或搜索Hexo theme也可以找到。官网中列出的主题直达：<a href="https://hexo.io/themes/">https://hexo.io/themes/</a><br>找主题除了符合自己的审美之外，也要注意该主题是否一直有人维护。较长时间无人维护的主题可能由于版本问题无法顺利安装使用。</p>
+<h3 id="安装主题"><a href="#安装主题" class="headerlink" title="安装主题"></a>安装主题</h3><p>本博客选择的主题是Next，安装步骤如下：<br>将主题clone到theme文件夹下</p>
+<pre><code>$ cd blog
+$ git clone https://github.com/next-theme/hexo-theme-next themes/next
+</code></pre>
+<p>然后在hexo配置文件中修改themes为next</p>
+<pre><code>themes: next
+</code></pre>
+<h3 id="一些小改动"><a href="#一些小改动" class="headerlink" title="一些小改动"></a>一些小改动</h3><p>根据next的说明文件，可以在该主题的配置文件中对细节进行修改。<br>对博客名、描述以及作者等的修改在根目录的配置文件中进行。</p>
+]]></content>
+      <categories>
+        <category>Blog</category>
+        <category>Building</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>Github</tag>
+        <tag>Blog</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>在文章中插入图片的各种方式</title>
     <url>/2021/10/19/imginblog/</url>
     <content><![CDATA[<center>终于还是没能避免想要在文章中用到图片，所以有了本文记录在Hexo博客中插入图片的各种方式</center>  
 <span id="more"></span>  
 
-<h2 id="本地引用"><a href="#本地引用" class="headerlink" title="本地引用"></a>本地引用</h2><h3 id="绝对路径"><a href="#绝对路径" class="headerlink" title="绝对路径"></a>绝对路径</h3><p>当整个博客图片内容较少时，可将所有的图片都放在<code>source/images</code>文件夹下，通过<code>markdown</code>语法访问。  </p>
+<h2 id="本地引用"><a href="#本地引用" class="headerlink" title="本地引用"></a>本地引用</h2><h3 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h3><p>安装插件<code>hexo-asset-image</code></p>
+<pre><code>npm install hexo-asset-image --save
+</code></pre>
+<p>安装成功后，打开<code>/node_modules/hexo-asset-image/index.js</code>，替换成下列内容：</p>
+<pre><code>&#39;use strict&#39;;
+var cheerio = require(&#39;cheerio&#39;);
+
+// http://stackoverflow.com/questions/14480345/how-to-get-the-nth-occurrence-in-a-string
+function getPosition(str, m, i) &#123;
+return str.split(m, i).join(m).length;
+&#125;
+
+var version = String(hexo.version).split(&#39;.&#39;);
+hexo.extend.filter.register(&#39;after_post_render&#39;, function(data)&#123;
+var config = hexo.config;
+if(config.post_asset_folder)&#123;
+    var link = data.permalink;
+if(version.length &gt; 0 &amp;&amp; Number(version[0]) == 3)
+    var beginPos = getPosition(link, &#39;/&#39;, 1) + 1;
+else
+    var beginPos = getPosition(link, &#39;/&#39;, 3) + 1;
+// In hexo 3.1.1, the permalink of &quot;about&quot; page is like &quot;.../about/index.html&quot;.
+var endPos = link.lastIndexOf(&#39;/&#39;) + 1;
+    link = link.substring(beginPos, endPos);
+var toprocess = [&#39;excerpt&#39;, &#39;more&#39;, &#39;content&#39;];
+for(var i = 0; i &lt; toprocess.length; i++)&#123;
+var key = toprocess[i];
+
+var $ = cheerio.load(data[key], &#123;
+    ignoreWhitespace: false,
+    xmlMode: false,
+    lowerCaseTags: false,
+    decodeEntities: false
+&#125;);
+
+$(&#39;img&#39;).each(function()&#123;
+if ($(this).attr(&#39;src&#39;))&#123;
+// For windows style path, we replace &#39;\&#39; to &#39;/&#39;.
+var src = $(this).attr(&#39;src&#39;).replace(&#39;\\&#39;, &#39;/&#39;);
+if(!/http[s]*.*|\/\/.*/.test(src) &amp;&amp;
+    !/^\s*\//.test(src)) &#123;
+    // For &quot;about&quot; page, the first part of &quot;src&quot; can&#39;t be removed.
+    // In addition, to support multi-level local directory.
+    var linkArray = link.split(&#39;/&#39;).filter(function(elem)&#123;
+    return elem != &#39;&#39;;
+    &#125;);
+    var srcArray = src.split(&#39;/&#39;).filter(function(elem)&#123;
+    return elem != &#39;&#39; &amp;&amp; elem != &#39;.&#39;;
+    &#125;);
+    if(srcArray.length &gt; 1)
+    srcArray.shift();
+    src = srcArray.join(&#39;/&#39;);
+    $(this).attr(&#39;src&#39;, config.root + link + src);
+    console.info&amp;&amp;console.info(&quot;update link as:--&gt;&quot;+config.root + link + src);
+&#125;
+&#125;else&#123;
+console.info&amp;&amp;console.info(&quot;no src attr, skipped...&quot;);
+console.info&amp;&amp;console.info($(this));
+    &#125;
+&#125;);
+data[key] = $.html();
+    &#125;
+&#125;
+&#125;);
+</code></pre>
+<h3 id="绝对路径"><a href="#绝对路径" class="headerlink" title="绝对路径"></a>绝对路径</h3><p>当整个博客图片内容较少时，可将所有的图片都放在<code>source/images</code>文件夹下，通过<code>markdown</code>语法访问。  </p>
 <pre><code>![](/images/img1.png)
 </code></pre>
 <p>对于图片较少切命名清晰的情况，这种方式存放图片足够。</p>
@@ -362,7 +427,7 @@ main() # 运行上述函数
 <p>当图片内容较多，使用相对路径存放图片的方式更易于整理。</p>
 <h4 id="小提示"><a href="#小提示" class="headerlink" title="小提示"></a>小提示</h4><p>如遇到修改配置文件后运行<code>hexo new newblog</code>命令无法正常建立一个同名文件夹，可以手动在<code>_POST</code>目录下建立一个同名文件夹，仍能够达到同样的效果。<br>实际上，md文件也可以手动新建。根据使用者的习惯，怎么新建md文件和同名文件夹都是可以的。<br>平时写文章不常用到图片，也可以使用手动建立同名文件夹的方式。  </p>
 <h2 id="CDN引用"><a href="#CDN引用" class="headerlink" title="CDN引用"></a>CDN引用</h2><p>将图片上传到一些CDN服务中并使用对应的url地址引用图片也是一个很好的方式。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>[1] <a href="https://yanyinhong.github.io/2017/05/02/How-to-insert-image-in-hexo-post/">Hexo博客搭建之在文章中插入图片</a><br>[2] <a href="https://fuhailin.github.io/Hexo-images/">在Hexo博客中插入图片的各种方式</a><br>[3] <a href="https://www.cxyzjd.com/article/m0_43401436/107191688">hexo博客中插入图片失败——解决思路及个人最终解决办法</a></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>[1] <a href="https://yanyinhong.github.io/2017/05/02/How-to-insert-image-in-hexo-post/">Hexo博客搭建之在文章中插入图片</a><br>[2] <a href="https://fuhailin.github.io/Hexo-images/">在Hexo博客中插入图片的各种方式</a><br>[3] <a href="https://www.cxyzjd.com/article/m0_43401436/107191688">hexo博客中插入图片失败——解决思路及个人最终解决办法</a><br>[4] <a href="http://sdman.tech/2019/07/23/%E8%A7%A3%E5%86%B3Hexo%E6%A1%86%E6%9E%B6%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87%E4%B8%8D%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98/">解决 Hexo 框架博客图片不显示的问题</a></p>
 ]]></content>
       <categories>
         <category>Blog</category>
