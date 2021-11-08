@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="proBatch: Tools for Diagnostics and Corrections of Batch Effects in Proteomics">
+<meta property="og:type" content="article">
+<meta property="og:title" content="识别和消除批次效应的R包proBatch的使用">
+<meta property="og:url" content="http://example.com/2021/11/08/proBatch/index.html">
+<meta property="og:site_name" content="Bugrocery">
+<meta property="og:description" content="proBatch: Tools for Diagnostics and Corrections of Batch Effects in Proteomics">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2021/11/08/proBatch/value0.png">
+<meta property="og:image" content="http://example.com/2021/11/08/proBatch/valueNA.png">
+<meta property="article:published_time" content="2021-11-08T06:30:26.000Z">
+<meta property="article:modified_time" content="2021-11-08T08:50:06.976Z">
+<meta property="article:author" content="R">
+<meta property="article:tag" content="Rpackage">
+<meta property="article:tag" content="BatchEffect">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/11/08/proBatch/value0.png">
+
+
+<link rel="canonical" href="http://example.com/2021/11/08/proBatch/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2021/11/08/proBatch/","path":"2021/11/08/proBatch/","title":"识别和消除批次效应的R包proBatch的使用"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>识别和消除批次效应的R包proBatch的使用 | Bugrocery</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Bugrocery</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#proBatch%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">proBatch简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%89%80%E9%9C%80%E7%9A%84%E5%85%B6%E5%AE%83%E5%8C%85"><span class="nav-number">2.1.</span> <span class="nav-text">安装所需的其它包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85proBatch"><span class="nav-number">2.2.</span> <span class="nav-text">安装proBatch</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#proBatch%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">proBatch的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%89%8D%E7%9A%84tips"><span class="nav-number">3.1.</span> <span class="nav-text">使用前的tips</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Preparing-for-data-analysis"><span class="nav-number">3.2.</span> <span class="nav-text">Preparing for data analysis</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Loading-the-libraries"><span class="nav-number">3.2.1.</span> <span class="nav-text">Loading the libraries</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Input-data"><span class="nav-number">3.2.2.</span> <span class="nav-text">Input data</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B6%E5%AE%83%E6%9C%89%E7%94%A8%E7%9A%84%E5%87%BD%E6%95%B0"><span class="nav-number">3.2.3.</span> <span class="nav-text">其它有用的函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Initial-assessment-of-the-raw-data-matrix"><span class="nav-number">3.3.</span> <span class="nav-text">Initial assessment of the raw data matrix</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Plotting-the-sample-mean"><span class="nav-number">3.3.1.</span> <span class="nav-text">Plotting the sample mean</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Plotting-boxplots"><span class="nav-number">3.3.2.</span> <span class="nav-text">Plotting boxplots</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Normalization"><span class="nav-number">3.4.</span> <span class="nav-text">Normalization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Diagnostics-of-batch-effects-in-normalized-data"><span class="nav-number">3.5.</span> <span class="nav-text">Diagnostics of batch effects in normalized data</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Hierarchical-clustering-amp-heatmap"><span class="nav-number">3.5.1.</span> <span class="nav-text">Hierarchical clustering &amp; heatmap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PCA-amp-PVCA"><span class="nav-number">3.5.2.</span> <span class="nav-text">PCA &amp; PVCA</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Peptide-level-diagnostics-and-spike-ins"><span class="nav-number">3.5.3.</span> <span class="nav-text">Peptide-level diagnostics and spike-ins</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#correction-batch-effect"><span class="nav-number">3.6.</span> <span class="nav-text">correction batch effect</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Continuous-drift-correction"><span class="nav-number">3.6.1.</span> <span class="nav-text">Continuous drift correction</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Discrete-batch-correction"><span class="nav-number">3.6.2.</span> <span class="nav-text">Discrete batch correction</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Correct-batch-effects-universal-function"><span class="nav-number">3.6.3.</span> <span class="nav-text">Correct batch effects: universal function</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Quality-control"><span class="nav-number">3.7.</span> <span class="nav-text">Quality control</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Heatmap-of-selected-replicate-samples"><span class="nav-number">3.7.1.</span> <span class="nav-text">Heatmap of selected replicate samples</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Correlation-distribution-of-samples"><span class="nav-number">3.7.2.</span> <span class="nav-text">Correlation distribution of samples</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Correlation-of-peptide-distributions-within-and-between-proteins"><span class="nav-number">3.7.3.</span> <span class="nav-text">Correlation of peptide distributions within and between proteins</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="R"
+      src="/images/Head.jpg">
+  <p class="site-author-name" itemprop="name">R</p>
+  <div class="site-description" itemprop="description">It's no use to be hardworking.</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/08/proBatch/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/Head.jpg">
+      <meta itemprop="name" content="R">
+      <meta itemprop="description" content="It's no use to be hardworking.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bugrocery">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          识别和消除批次效应的R包proBatch的使用
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-11-08 14:30:26 / Modified: 16:50:06" itemprop="dateCreated datePublished" datetime="2021-11-08T14:30:26+08:00">2021-11-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Tools/proBatch/" itemprop="url" rel="index"><span itemprop="name">proBatch</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>13k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>12 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <center>proBatch: Tools for Diagnostics and Corrections of Batch Effects in Proteomics</center>
+<span id="more"></span>
+
+<h2 id="proBatch简介"><a href="#proBatch简介" class="headerlink" title="proBatch简介"></a>proBatch简介</h2><p>proBatch是便于在高通量实验中进行批量效应分析和校正的分析工具。主要为质谱蛋白质组学(DIA/SWATH)开发，但也可在调整后应用于大多数的Omic数据。<br>proBatch包含  </p>
+<ul>
+<li>诊断(蛋白质组/基因组范围和特征水平)  </li>
+<li>校正(归一化和批次效应校正)  </li>
+<li>基于非线性拟合的方法来处理复杂的、质谱特有的信号漂移</li>
+<li>质量控制<br>功能。  </li>
+</ul>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="安装所需的其它包"><a href="#安装所需的其它包" class="headerlink" title="安装所需的其它包"></a>安装所需的其它包</h3><p>proBatch主要通过调用其它包中的函数实现功能，因此依赖于许多其它已有的R包。如果其中一些包未安装，则需要在运行proBatch之前安装。  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">bioc_deps &lt;- <span class="built_in">c</span>(<span class="string">&quot;GO.db&quot;</span>, <span class="string">&quot;impute&quot;</span>, <span class="string">&quot;preprocessCore&quot;</span>, <span class="string">&quot;pvca&quot;</span>,<span class="string">&quot;sva&quot;</span> )</span><br><span class="line">cran_deps &lt;- <span class="built_in">c</span>(<span class="string">&quot;corrplot&quot;</span>, <span class="string">&quot;data.table&quot;</span>, <span class="string">&quot;ggplot2&quot;</span>, <span class="string">&quot;ggfortify&quot;</span>,<span class="string">&quot;lazyeval&quot;</span>, <span class="string">&quot;lubridate&quot;</span>, <span class="string">&quot;pheatmap&quot;</span>, <span class="string">&quot;reshape2&quot;</span>,<span class="string">&quot;readr&quot;</span>, <span class="string">&quot;rlang&quot;</span>, <span class="string">&quot;tibble&quot;</span>, <span class="string">&quot;dplyr&quot;</span>, <span class="string">&quot;tidyr&quot;</span>, <span class="string">&quot;wesanderson&quot;</span>,<span class="string">&quot;WGCNA&quot;</span>)</span><br><span class="line"><span class="keyword">if</span> (!requireNamespace(<span class="string">&quot;BiocManager&quot;</span>, quietly = <span class="literal">TRUE</span>))</span><br><span class="line">  install.packages(<span class="string">&quot;BiocManager&quot;</span>)</span><br><span class="line">BiocManager::install(bioc_deps)</span><br><span class="line">install.packages(cran_deps)</span><br></pre></td></tr></table></figure>
+<h3 id="安装proBatch"><a href="#安装proBatch" class="headerlink" title="安装proBatch"></a>安装proBatch</h3><p>可通过以下三个途径获取proBatch包：  </p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.bioconductor.org/packages/release/bioc/html/proBatch.html">Bioconductor</a>  <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (!requireNamespace(<span class="string">&quot;BiocManager&quot;</span>, quietly = <span class="literal">TRUE</span>))</span><br><span class="line">        install.packages(<span class="string">&quot;BiocManager&quot;</span>)</span><br><span class="line"></span><br><span class="line">    BiocManager::install(<span class="string">&quot;proBatch&quot;</span>)</span><br><span class="line">    ```  </span><br><span class="line">- [Docker container](https://hub.docker.com/r/digitalproteomes/probatch)  </span><br><span class="line">- [GitHub repository](https://github.com/symbioticMe/batch_effects_workflow_code)  </span><br><span class="line">  ```R</span><br><span class="line">    library(devtools)</span><br><span class="line">    install_github(<span class="string">&quot;symbioticMe/proBatch&quot;</span>, build_vignettes = <span class="literal">TRUE</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="proBatch的使用"><a href="#proBatch的使用" class="headerlink" title="proBatch的使用"></a>proBatch的使用</h2>要查看与系统中安装的proBatch版本相对应的说明文档，启动R并输入:  <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">browseVignettes(<span class="string">&quot;proBatch&quot;</span>)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="使用前的tips"><a href="#使用前的tips" class="headerlink" title="使用前的tips"></a>使用前的tips</h3><ul>
+<li>一些基本的数据处理步骤已经完成，如已经完成搜库比对、FDR control、log-transformation等  </li>
+<li>数据过滤。应过滤掉诱饵测量值(decoy measurements)以确保正确的样本强度分布对齐。过滤掉低质量的样本(通常通过鉴定肽的总强度或样品的相关性来确定)  </li>
+<li>建议在批次效应校正之前不要填补缺失值  </li>
+<li>在消除批次效应之后再进行蛋白质定量  </li>
+</ul>
+<h3 id="Preparing-for-data-analysis"><a href="#Preparing-for-data-analysis" class="headerlink" title="Preparing for data analysis"></a>Preparing for data analysis</h3><h4 id="Loading-the-libraries"><a href="#Loading-the-libraries" class="headerlink" title="Loading the libraries"></a>Loading the libraries</h4><p>加载所需的包，以便后续步骤的使用。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">require(dplyr)</span><br><span class="line">require(tibble)</span><br><span class="line">require(ggplot2)</span><br><span class="line">library(proBatch)</span><br></pre></td></tr></table></figure>
+<h4 id="Input-data"><a href="#Input-data" class="headerlink" title="Input data"></a>Input data</h4><p>数据分析需要三个数据表，即：  </p>
+<ol>
+<li>measurement (data matrix)  </li>
+<li>sample annotation  </li>
+<li>feature annotation (optional) tables  </li>
+</ol>
+<p>如果对BioBase数据比较熟悉，则可认为上述的三种数据是：  </p>
+<ol>
+<li>assayData  </li>
+<li>joined phenoData and protocolData  </li>
+<li>featureData  </li>
+</ol>
+<p>三种数据可参考包中给出的示例数据</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data(<span class="string">&#x27;example_proteome&#x27;</span>, <span class="string">&#x27;example_sample_annotation&#x27;</span>, <span class="string">&#x27;example_peptide_annotation&#x27;</span>, package = <span class="string">&#x27;proBatch&#x27;</span>)  </span><br></pre></td></tr></table></figure>
+<p>或<a target="_blank" rel="noopener" href="http://www.bioconductor.org/packages/release/bioc/vignettes/proBatch/inst/doc/proBatch.pdf">proBatch overview</a>中的详细说明。  </p>
+<h4 id="其它有用的函数"><a href="#其它有用的函数" class="headerlink" title="其它有用的函数"></a>其它有用的函数</h4><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Transforming the data to long or wide format</span></span><br><span class="line">example_matrix &lt;- long_to_matrix(example_proteome, feature_id_col = <span class="string">&#x27;peptide_group_label&#x27;</span>, measure_col = <span class="string">&#x27;Intensity&#x27;</span>, sample_id_col = <span class="string">&#x27;FullRunName&#x27;</span>)</span><br><span class="line"><span class="comment"># Transforming the data to log scale</span></span><br><span class="line"><span class="comment"># 零值会被保留为零</span></span><br><span class="line">log_transformed_matrix &lt;- log_transform_dm(example_matrix, log_base = <span class="number">2</span>, offset = <span class="number">1</span>)</span><br><span class="line"><span class="comment"># Defining the color scheme</span></span><br><span class="line">color_list &lt;- sample_annotation_to_colors(example_sample_annotation, factor_columns = <span class="built_in">c</span>(<span class="string">&#x27;MS_batch&#x27;</span>, <span class="string">&#x27;digestion_batch&#x27;</span>, <span class="string">&#x27;EarTag&#x27;</span>, <span class="string">&#x27;Strain&#x27;</span>, <span class="string">&#x27;Diet&#x27;</span>, <span class="string">&#x27;Sex&#x27;</span>), numeric_columns = <span class="built_in">c</span>(<span class="string">&#x27;DateTime&#x27;</span>,<span class="string">&#x27;order&#x27;</span>))</span><br></pre></td></tr></table></figure>
+<h3 id="Initial-assessment-of-the-raw-data-matrix"><a href="#Initial-assessment-of-the-raw-data-matrix" class="headerlink" title="Initial assessment of the raw data matrix"></a>Initial assessment of the raw data matrix</h3><h4 id="Plotting-the-sample-mean"><a href="#Plotting-the-sample-mean" class="headerlink" title="Plotting the sample mean"></a>Plotting the sample mean</h4><p>proBatch建议在处理批次效应之后再填补缺失值，但包中没有兼容存在缺失值的情况，如果有缺失值无法计算mean。<br><code>plot_sample_mean</code>函数主要实现的功能为计算样本均值并绘制样本均值散点图，横坐标为样本顺序(order)，纵坐标为样本均值(Mean_Intensity)，并以不同颜色表示样本的batch。可通过自行编写能够兼容缺失值的代码实现这一功能。  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">plot_sample &lt;- data.frame(row.names = colnames(log_transformed_matrix))</span><br><span class="line">colnum &lt;- ncol(log_transformed_matrix)</span><br><span class="line"><span class="keyword">for</span>(i <span class="keyword">in</span> <span class="built_in">c</span>(<span class="number">1</span>:colnum))</span><br><span class="line">&#123;</span><br><span class="line">  item &lt;- colnames(log_transformed_matrix)[i]</span><br><span class="line">  plot_sample[item, <span class="string">&quot;mean&quot;</span>] &lt;- mean(log_transformed_matrix[,i], na.rm=<span class="built_in">T</span>)</span><br><span class="line">  plot_sample[item,<span class="string">&quot;MS_batch&quot;</span>] &lt;- sample_anno[i,<span class="string">&quot;MS_batch&quot;</span>]</span><br><span class="line">  plot_sample[item,<span class="string">&quot;order&quot;</span>] &lt;- sample_anno[i,<span class="string">&quot;order&quot;</span>]</span><br><span class="line">&#125;</span><br><span class="line">ggplot(plot_sample, aes(order, mean, color = MS_batch)) + geom_point() + xlab(<span class="string">&quot;order&quot;</span>) + ylab(<span class="string">&quot;Mean_intensity&quot;</span>) + ylim(<span class="number">0</span>,<span class="number">15</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="Plotting-boxplots"><a href="#Plotting-boxplots" class="headerlink" title="Plotting boxplots"></a>Plotting boxplots</h4><p>绘制箱图观察数据：  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">log_transformed_long &lt;- matrix_to_long(log_transformed_matrix)</span><br><span class="line">batch_col = <span class="string">&#x27;MS_batch&#x27;</span></span><br><span class="line">plot_boxplot(log_transformed_long, example_sample_annotation, batch_col = batch_col, color_scheme = color_list[[batch_col]])</span><br></pre></td></tr></table></figure>
+<p>利用PEAKS数据做到这一步时发现产生的箱图向0偏，即含有大量0值。这是PEAKS搜库结果的一个特点，除了缺失值还会有大量intensity被定量为0。在之前处理PEAKS数据时，log-transformation步骤会将0转换为NA，在后续步骤也当作缺失值处理。<br><img src="/2021/11/08/proBatch/value0.png" alt="含有大量0值"><br>而proBatch包针对的是openSWATH产生的tsv数据。该包中的函数<code>log_transform_dm</code>会将0保留为0，导致使用PEAKS数据画箱图时出现问题。返回log-transformation步骤使用自己写的处理代码处理数据后，箱图绘制与预期一致。<br><img src="/2021/11/08/proBatch/valueNA.png" alt="将0转换为NA">  </p>
+<h3 id="Normalization"><a href="#Normalization" class="headerlink" title="Normalization"></a>Normalization</h3><p>包中提供Median Normalization和Quantiles Normalization，可直接使用。  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Median Normalization</span></span><br><span class="line"><span class="comment"># If data has been log transformed</span></span><br><span class="line">median_normalized_matrix = normalize_data_dm(log_transformed_matrix, normalize_func = <span class="string">&#x27;medianCentering&#x27;</span>)</span><br><span class="line"><span class="comment"># if data hasn&#x27;t been log transformed</span></span><br><span class="line">median_normalized_matrix = normalize_data_dm(example_matrix, normalize_func = <span class="string">&#x27;medianCentering&#x27;</span>, log_base = <span class="number">2</span>, offset = <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Quantile Normalization</span></span><br><span class="line">quantile_normalized_matrix = normalize_data_dm(log_transformed_matrix, normalize_func = <span class="string">&#x27;quantile&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>后续相应的画图观察处理后的数据时，应注意Inf值的影响。数据中如有<code>Inf</code>或<code>-Inf</code>，可通过<code>data[data == Inf] &lt;- NA</code>或<code>data[data == -Inf] &lt;- NA</code>将其替换。Inf出现是因为在log转换时没有处理好0值。  </p>
+<h3 id="Diagnostics-of-batch-effects-in-normalized-data"><a href="#Diagnostics-of-batch-effects-in-normalized-data" class="headerlink" title="Diagnostics of batch effects in normalized data"></a>Diagnostics of batch effects in normalized data</h3><h4 id="Hierarchical-clustering-amp-heatmap"><a href="#Hierarchical-clustering-amp-heatmap" class="headerlink" title="Hierarchical clustering &amp; heatmap"></a>Hierarchical clustering &amp; heatmap</h4><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">selected_annotations &lt;- <span class="built_in">c</span>(<span class="string">&#x27;MS_batch&#x27;</span>, <span class="string">&#x27;digestion_batch&#x27;</span>, <span class="string">&#x27;Diet&#x27;</span>)</span><br><span class="line"><span class="comment"># Plot clustering between samples</span></span><br><span class="line">plot_hierarchical_clustering(quantile_normalized_matrix, sample_annotation = example_sample_annotation, color_list = color_list, factors_to_plot = selected_annotations, distance = <span class="string">&#x27;euclidean&#x27;</span>, agglomeration = <span class="string">&#x27;complete&#x27;</span>, label_samples = <span class="literal">FALSE</span>)</span><br><span class="line"><span class="comment"># Heatmap</span></span><br><span class="line">plot_heatmap_diagnostic(quantile_normalized_matrix, example_sample_annotation, factors_to_plot = selected_annotations, cluster_cols = <span class="literal">TRUE</span>, color_list = color_list, show_rownames = <span class="literal">FALSE</span>, show_colnames = <span class="literal">FALSE</span>)</span><br></pre></td></tr></table></figure>
+<p>根据报错信息可知color_list一项一直与我的数据不兼容，因此注释行显示不完全。<br>修改color_list或根据数据需要重写聚类绘图函数即可。   </p>
+<h4 id="PCA-amp-PVCA"><a href="#PCA-amp-PVCA" class="headerlink" title="PCA &amp; PVCA"></a>PCA &amp; PVCA</h4><p>PCA和PVCA使用时，缺失值会被直接填为-1。<br>PVCA对计算的要求很高，且耗时较长，尤其是数据量大的情况。建议在性能较好的机器上运行这一步骤。  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pca</span></span><br><span class="line">pca1 = plot_PCA(median_normalized_matrix, sample_anno, color_by = <span class="string">&#x27;MS_batch&#x27;</span>, plot_title = <span class="string">&#x27;MS batch&#x27;</span>, color_scheme = color_list[[<span class="string">&#x27;MS_batch&#x27;</span>]])</span><br><span class="line">pca2 = plot_PCA(median_normalized_matrix, sample_anno, color_by = <span class="string">&#x27;digestion_batch&#x27;</span>, plot_title = <span class="string">&#x27;Digestion batch&#x27;</span>, color_scheme = color_list[[<span class="string">&#x27;digestion_batch&#x27;</span>]])</span><br><span class="line">pca3 = plot_PCA(median_normalized_matrix, sample_anno, color_by = <span class="string">&#x27;order&#x27;</span>, plot_title = <span class="string">&#x27;order&#x27;</span>, color_scheme = color_list[[<span class="string">&#x27;order&#x27;</span>]])</span><br><span class="line">pca4 = plot_PCA(median_normalized_matrix, sample_anno, color_by = <span class="string">&#x27;DateTime&#x27;</span>, plot_title = <span class="string">&#x27;DateTime&#x27;</span>, color_scheme = color_list[[<span class="string">&#x27;DateTime&#x27;</span>]])</span><br><span class="line">library(ggpubr)</span><br><span class="line">ggarrange(pca1, pca2, pca3, pca4, ncol = <span class="number">2</span>, nrow = <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># pvca</span></span><br><span class="line">technical_factors = <span class="built_in">c</span>(<span class="string">&#x27;MS_batch&#x27;</span>, <span class="string">&#x27;digestion_batch&#x27;</span>)</span><br><span class="line">biological_factors = <span class="literal">NULL</span></span><br><span class="line">biospecimen_id_col = <span class="string">&#x27;EarTag&#x27;</span></span><br><span class="line">plot_PVCA(median_normalized_matrix, sample_anno, technical_factors = technical_factors, biological_factors = biological_factors)</span><br></pre></td></tr></table></figure>
+
+<h4 id="Peptide-level-diagnostics-and-spike-ins"><a href="#Peptide-level-diagnostics-and-spike-ins" class="headerlink" title="Peptide-level diagnostics and spike-ins"></a>Peptide-level diagnostics and spike-ins</h4><p>这一步骤需要将来自同一蛋白的肽段注释在一起。如果缺少肽段的注释信息，这一步骤无法正常进行。  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">median_normalized_long &lt;- matrix_to_long(median_normalized_matrix)</span><br><span class="line">plot_spike_in(median_normalized_long, sample_anno, peptide_annotation = peptide_anno, protein_col = <span class="string">&#x27;Gene&#x27;</span>, spike_ins = <span class="string">&#x27;BOVINE_A1ag&#x27;</span>, plot_title = <span class="string">&#x27;Spike-in BOVINE protein peptides&#x27;</span>, color_by_batch = <span class="literal">TRUE</span>, color_scheme = color_list[[batch_col]])</span><br></pre></td></tr></table></figure>
+
+<h3 id="correction-batch-effect"><a href="#correction-batch-effect" class="headerlink" title="correction batch effect"></a>correction batch effect</h3><h4 id="Continuous-drift-correction"><a href="#Continuous-drift-correction" class="headerlink" title="Continuous drift correction"></a>Continuous drift correction</h4><p>处理连续型批次效应使用LOESS拟合。  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">loess_fit_df &lt;- adjust_batch_trend_df(quantile_normalized_long, example_sample_annotation)</span><br><span class="line">loess_fit_70 &lt;- adjust_batch_trend_df(median_normalized_long, sample_anno, span = <span class="number">0.7</span>)</span><br><span class="line">plot_with_fitting_curve(feature_name = <span class="string">&#x27;N(+.98)NATVHEQVGGPSLTSDLQAQSK&#x27;</span>, fit_df = loess_fit_70, fit_value_col = <span class="string">&#x27;fit&#x27;</span>, df_long = median_normalized_long, sample_annotation = sample_anno, color_by_batch = <span class="literal">TRUE</span>, color_scheme = color_list[[batch_col]], plot_title = <span class="string">&#x27;Span = 70%&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="Discrete-batch-correction"><a href="#Discrete-batch-correction" class="headerlink" title="Discrete batch correction"></a>Discrete batch correction</h4><p>处理离散型批次效应可通过median centering (per feature per batch)和ComBat进行。  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># median centering</span></span><br><span class="line">peptide_median_df &lt;- center_feature_batch_medians_df(loess_fit_df, sample_anno)</span><br><span class="line">plot_single_feature(feature_name = <span class="string">&#x27;N(+.98)NATVHEQVGGPSLTSDLQAQSK&#x27;</span>, df_long = peptide_median_df, sample_annotation = sample_anno, measure_col = <span class="string">&#x27;Intensity&#x27;</span>, plot_title = <span class="string">&#x27;Feature-level Median Centered&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ComBat</span></span><br><span class="line">comBat_df &lt;- correct_with_ComBat_df(loess_fit_df, example_sample_annotation)</span><br><span class="line">plot_single_feature(feature_name = <span class="string">&#x27;10231_QDVDVWLWQQEGSSK_2&#x27;</span>, df_long = loess_fit_df, sample_annotation = example_sample_annotation, plot_title = <span class="string">&#x27;Loess Fitted&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="Correct-batch-effects-universal-function"><a href="#Correct-batch-effects-universal-function" class="headerlink" title="Correct batch effects: universal function"></a>Correct batch effects: universal function</h4><p>proBatch提供一个方便的多合一的函数来进行批量校正。<br>函数<code>correct_batch_effects_df()</code>能在一次函数调用中可修正MS信号漂移和离散位移。只需在<code>discrete_func</code>中指定首选的离散校正方法，即<code>&quot;ComBat &quot;</code>或 <code>&quot;MedianCentering&quot;</code>。并补充其他参数，如<code>adjust_batch_trend_df()</code>中的<code>span</code>、<code>abs_threshold</code>或<code>pct_threshold</code>。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">batch_corrected_df &lt;- correct_batch_effects_df(df_long = median_normalized_long, sample_annotation = sample_anno,discrete_func = <span class="string">&#x27;ComBat&#x27;</span>,continuous_func = <span class="string">&#x27;loess_regression&#x27;</span>,abs_threshold = <span class="number">5</span>, pct_threshold = <span class="number">0.20</span>)</span><br><span class="line">batch_corrected_matrix &lt;- long_to_matrix(batch_corrected_df)</span><br></pre></td></tr></table></figure>
+<h3 id="Quality-control"><a href="#Quality-control" class="headerlink" title="Quality control"></a>Quality control</h3><h4 id="Heatmap-of-selected-replicate-samples"><a href="#Heatmap-of-selected-replicate-samples" class="headerlink" title="Heatmap of selected replicate samples"></a>Heatmap of selected replicate samples</h4><p>挑选重复组计算相关性并绘制热图观察批次效应处理结果。  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># specify which samples to correlate</span></span><br><span class="line">earTags &lt;- <span class="built_in">c</span>(<span class="string">&#x27;ET1524&#x27;</span>, <span class="string">&#x27;ET2078&#x27;</span>, <span class="string">&#x27;ET1322&#x27;</span>, <span class="string">&#x27;ET1566&#x27;</span>, <span class="string">&#x27;ET1354&#x27;</span>, <span class="string">&#x27;ET1420&#x27;</span>, <span class="string">&#x27;ET2154&#x27;</span>, <span class="string">&#x27;ET1515&#x27;</span>, <span class="string">&#x27;ET1506&#x27;</span>, <span class="string">&#x27;ET2577&#x27;</span>, <span class="string">&#x27;ET1681&#x27;</span>, <span class="string">&#x27;ET1585&#x27;</span>, <span class="string">&#x27;ET1518&#x27;</span>, <span class="string">&#x27;ET1906&#x27;</span>)</span><br><span class="line">replicate_filenames = example_sample_annotation %&gt;% filter(MS_batch %in% <span class="built_in">c</span>(<span class="string">&#x27;Batch_2&#x27;</span>, <span class="string">&#x27;Batch_3&#x27;</span>)) %&gt;% filter(EarTag %in% earTags) %&gt;% pull(!!sym(<span class="string">&#x27;FullRunName&#x27;</span>))</span><br><span class="line"><span class="comment"># plot the ‘exploratory’ correlation matrix, which can be further beautified</span></span><br><span class="line">p1_exp = plot_sample_corr_heatmap(log_transformed_matrix, samples_to_plot = replicate_filenames, plot_title = <span class="string">&#x27;Correlation of selected samples&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># To ensure the color scale for correlation is consistent between two plots, we create a color vector and breaks</span></span><br><span class="line">breaksList &lt;- seq(<span class="number">0.7</span>, <span class="number">1</span>, by = <span class="number">0.01</span>)</span><br><span class="line"><span class="comment"># color scale of pheatmap</span></span><br><span class="line">heatmap_colors = colorRampPalette(rev(RColorBrewer::brewer.pal(n = <span class="number">7</span>, name = <span class="string">&#x27;RdYlBu&#x27;</span>)))(<span class="built_in">length</span>(breaksList) + <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Plot the heatmap with annotations for the chosen samples</span></span><br><span class="line">factors_to_show = <span class="built_in">c</span>(batch_col, biospecimen_id_col)</span><br><span class="line">p1 = plot_sample_corr_heatmap(log_transformed_matrix, samples_to_plot = replicate_filenames,sample_annotation = example_sample_annotation, factors_to_plot = factors_to_show, plot_title = <span class="string">&#x27;Log transformed correlation matrix of selected replicated samples&#x27;</span>, color_list = color_list, heatmap_color = heatmap_colors, breaks = breaksList, cluster_rows= <span class="literal">FALSE</span>, cluster_cols=<span class="literal">FALSE</span>,fontsize = <span class="number">4</span>, annotation_names_col = <span class="literal">TRUE</span>, annotation_legend = <span class="literal">FALSE</span>, show_colnames = <span class="literal">FALSE</span>)</span><br><span class="line">p2 = plot_sample_corr_heatmap(batch_corrected_matrix, samples_to_plot = replicate_filenames, sample_annotation = example_sample_annotation, factors_to_plot = factors_to_show, plot_title = <span class="string">&#x27;Batch Corrected selected replicated samples&#x27;</span>, color_list = color_list, heatmap_color = heatmap_colors, breaks = breaksList, cluster_rows= <span class="literal">FALSE</span>, cluster_cols=<span class="literal">FALSE</span>,fontsize = <span class="number">4</span>, annotation_names_col = <span class="literal">TRUE</span>, annotation_legend = <span class="literal">FALSE</span>, show_colnames = <span class="literal">FALSE</span>)</span><br><span class="line">library(gridExtra)</span><br><span class="line">grid.arrange(grobs = <span class="built_in">list</span>(p1$gtable, p2$gtable), ncol=<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<p>由于缺失值的存在，直接使用包中函数进行这一步骤失败，自己写代码代替。  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">library(pheatmap)</span><br><span class="line"><span class="comment"># 计算样本间的相关性</span></span><br><span class="line"><span class="comment"># completel.obs: 计算所有样本间overlap的部分，如果某一行有缺失值则这一行不加入计算</span></span><br><span class="line">mcor &lt;- cor(select_replicate_samples, method = <span class="string">&#x27;pearson&#x27;</span>, use = <span class="string">&quot;complete.obs&quot;</span>)</span><br><span class="line">pheatmap(mcor, cellwidth = <span class="number">25</span>, cellheight = <span class="number">25</span>, color = colorRampPalette(<span class="built_in">c</span>(<span class="string">&quot;#ffffff&quot;</span>, <span class="string">&quot;#4682b4&quot;</span>))(<span class="number">100</span>))</span><br></pre></td></tr></table></figure>
+<h4 id="Correlation-distribution-of-samples"><a href="#Correlation-distribution-of-samples" class="headerlink" title="Correlation distribution of samples"></a>Correlation distribution of samples</h4><p>绘制相同或不同批次的生物重复和非生物重复之间的相关分布。<br>样本相关性的比较不应该通过评估重复组内与批次内校正的单个例子来进行，而应该通过比较分布来进行。除非这些例子是在整个分布结构的背景下显示的，否则它们会导致错误的结论。样品相关性经常被用来证明测量的质量，因为它通常是非常高的(重复组相关性超过0.95的例子在质谱分析中很常见)。  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sample_cor_raw &lt;- plot_sample_corr_distribution(log_transformed_matrix, example_sample_annotation,repeated_samples = replicate_filenames, batch_col = <span class="string">&#x27;MS_batch&#x27;</span>, biospecimen_id_col = <span class="string">&#x27;EarTag&#x27;</span>, plot_title = <span class="string">&#x27;Correlation of samples (raw)&#x27;</span>, plot_param = <span class="string">&#x27;batch_replicate&#x27;</span>)</span><br><span class="line">raw_corr = sample_cor_raw + theme(axis.text.x = element_text(angle = <span class="number">45</span>, hjust = <span class="number">1</span>)) + ylim(<span class="number">0.7</span>,<span class="number">1</span>) + xlab(<span class="literal">NULL</span>)</span><br><span class="line">sample_cor_batchCor &lt;- plot_sample_corr_distribution(batch_corrected_matrix, example_sample_annotation, batch_col = <span class="string">&#x27;MS_batch&#x27;</span>, plot_title = <span class="string">&#x27;Batch corrected&#x27;</span>, plot_param = <span class="string">&#x27;batch_replicate&#x27;</span>)</span><br><span class="line">corr_corr = sample_cor_batchCor + theme(axis.text.x = element_text(angle = <span class="number">45</span>, hjust = <span class="number">1</span>)) + ylim(<span class="number">0.7</span>, <span class="number">1</span>) + xlab(<span class="literal">NULL</span>)</span><br><span class="line">library(gtable)</span><br><span class="line">library(grid)</span><br><span class="line">g2 &lt;- ggplotGrob(raw_corr)</span><br><span class="line">g3 &lt;- ggplotGrob(corr_corr)</span><br><span class="line">g &lt;- cbind(g2, g3, size = <span class="string">&#x27;first&#x27;</span>)</span><br><span class="line">grid.draw(g)</span><br></pre></td></tr></table></figure>
+
+<h4 id="Correlation-of-peptide-distributions-within-and-between-proteins"><a href="#Correlation-of-peptide-distributions-within-and-between-proteins" class="headerlink" title="Correlation of peptide distributions within and between proteins"></a>Correlation of peptide distributions within and between proteins</h4><p>来自同一蛋白的肽段之间会有更强的相关性，通过计算蛋白内和蛋白间肽段的相关性观察批次效应处理结果。<br>这一步骤对计算的要求较高，且数据量大时耗时较长。建议使用性能较好的电脑进行这一步骤的计算。  </p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">peptide_cor_raw &lt;- plot_peptide_corr_distribution(log_transformed_matrix, example_peptide_annotation, protein_col = <span class="string">&#x27;Gene&#x27;</span>, plot_title = <span class="string">&#x27;Peptide correlation (raw)&#x27;</span>)</span><br><span class="line">peptide_cor_batchCor &lt;- plot_peptide_corr_distribution(batch_corrected_matrix, example_peptide_annotation, protein_col = <span class="string">&#x27;Gene&#x27;</span>, plot_title = <span class="string">&#x27;Peptide correlation (batch correcte)&#x27;</span>)</span><br><span class="line">g2 &lt;- ggplotGrob(peptide_cor_raw+ ylim(<span class="built_in">c</span>(-<span class="number">1</span>, <span class="number">1</span>)))</span><br><span class="line">g3 &lt;- ggplotGrob(peptide_cor_batchCor+ ylim(<span class="built_in">c</span>(-<span class="number">1</span>, <span class="number">1</span>)))</span><br><span class="line">g &lt;- cbind(g2, g3, size = <span class="string">&#x27;first&#x27;</span>)</span><br><span class="line">grid.draw(g)</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>[1] <a target="_blank" rel="noopener" href="http://www.bioconductor.org/packages/release/bioc/manuals/proBatch/man/proBatch.pdf">proBatch Manual</a><br>[2] <a target="_blank" rel="noopener" href="http://www.bioconductor.org/packages/release/bioc/vignettes/proBatch/inst/doc/proBatch.pdf">proBatch Overview</a>  </p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Rpackage/" rel="tag"># Rpackage</a>
+              <a href="/tags/BatchEffect/" rel="tag"># BatchEffect</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/10/29/BatchEffect/" rel="prev" title="Batch Effects Matter and Avoid Them in Omics Data">
+                  <i class="fa fa-chevron-left"></i> Batch Effects Matter and Avoid Them in Omics Data
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">R</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>Symbols count total: </span>
+    <span title="Symbols count total">41k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>Reading time total &asymp;</span>
+    <span title="Reading time total">37 mins.</span>
+  </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
