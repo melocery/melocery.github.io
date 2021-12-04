@@ -337,6 +337,101 @@ main() # 运行上述函数
       </tags>
   </entry>
   <entry>
+    <title>长毛象使用指南</title>
+    <url>/2021/09/21/mstdn/</url>
+    <content><![CDATA[<center>不少朋友被我安利到长毛象(mastodon)玩耍，本着对他们负责的态度，写下这篇长毛象使用指南。</center>
+<span id="more"></span>
+
+<h2 id="什么是mastodon"><a href="#什么是mastodon" class="headerlink" title="什么是mastodon"></a>什么是mastodon</h2><p>Mastodon(长毛象)是一个开源、去中心化的社交平台。简单来说，这里没有屏蔽词，没有限流，没有铺天盖地的营销号，没有Doctor看了都想重启宇宙的混乱时间线，只是一个纯粹的社交平台。长毛象将内容、社交网络交还给用户，更加尊重用户而不是平台“霸权”。<br><strong>如果将联邦宇宙(Fediverse)看做一个宇宙，那么每一个长毛象站点(Mastodon Society)就像一颗颗星球。</strong> 也就是说，你可以选择任何一颗星球定居，哪怕只是居住着一个人，只要它与宇宙相通，那么你就可以联系到宇宙中任何一个人而不会孤单。(摘自pullopen对长毛象的介绍：<a href="https://pullopenbluebox.wordpress.com/2020/06/30/mastodon-introduction/">长毛象（Mastodon）：更尊重用户的社交平台</a> )</p>
+<h2 id="如何在mastodon拥有一个账号"><a href="#如何在mastodon拥有一个账号" class="headerlink" title="如何在mastodon拥有一个账号"></a>如何在mastodon拥有一个账号</h2><h3 id="选择站点"><a href="#选择站点" class="headerlink" title="选择站点"></a>选择站点</h3><p>长毛象有各种各样的站点(或称实例)，如二次元相关站、LGBTQ站、艺术类站，或者按照语言划分的小语种站点等等。可以在官网列出的<a href="https://joinmastodon.org/communities">站点列表</a>里找到一个喜欢又适合的站点。<br>一开始使用建议在一些大型的国际站点注册，限制较少，每天都有很多世界各地的人在时间线上灌水，如</p>
+<ul>
+<li><a href="https://mastodon.social/">https://mastodon.social</a></li>
+<li><a href="https://mastodon.online/">https://mastodon.online</a></li>
+<li><a href="https://mstdn.social/">https://mstdn.social</a>  </li>
+</ul>
+<p>使用一段时间，对各项操作都熟悉之后，可进一步选择更适合自己的小站点注册并迁移账号，或者继续呆在国际站点也无妨。<br>也可以在中文站点，或者中文用户较多的站点注册。这样在查看local timeline(本地轴)时都是中文，方便遇到志同道合的朋友。但无论在哪个站点注册，都建议阅读过<strong>服务器规则</strong>和<strong>服务条款</strong>后再进行，这两项通常都放在注册页面。<br>熟悉长毛象后，发现没有一个站点完全符合自己的想法，也可以自建站加入长毛象宇宙。搭建长毛象站点有很多简单易上手的教程可供参考，即使是计算机小白也能拥有属于自己的站点。可参考的教程：</p>
+<ul>
+<li><a href="https://docs.joinmastodon.org/zh-cn/admin/prerequisites/">官方建站文档</a></li>
+<li><a href="https://www.notion.so/Mastodon-042a05ee29a048df8b2c1afd49e4c49b">长毛象（Mastodon）社区搭建详解</a></li>
+<li><a href="https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/07/19/How-to-build-a-mastodon-instance.html">技术小白如何搭建Mastodon实例</a></li>
+<li><a href="https://morikka.me/blog/mastodon-personal-instance/">长毛象个人向建站</a></li>
+</ul>
+<h3 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h3><p>只要在一个站点注册，就可以连上整个长毛象宇宙，看到所有在用户和他们公开可见的嘟文，所以只需选择一个合适的站点注册账号即可。但由于站点服务器大多在中国境外，有被墙掉的风险，很多人会选择在多个站点注册账号，避免一个站点被GFW盯上ban掉就难以连上长毛象宇宙。<br>邮箱是各站点注册的必须品，注册成功后也可以更改。建议使用gmail、protonmail等邮箱服务，避免使用qq邮箱一类能直接指向使用者的邮箱。一些站点还需要填写入站申请或入站理由等以便站长和管理员审核注册人，通过审核之后便可成功注册，在长毛象宇宙自由玩耍。</p>
+<h2 id="如何使用mastodon"><a href="#如何使用mastodon" class="headerlink" title="如何使用mastodon"></a>如何使用mastodon</h2><h3 id="Timeline-时间轴"><a href="#Timeline-时间轴" class="headerlink" title="Timeline(时间轴)"></a>Timeline(时间轴)</h3><p>Timeline简称为TL，完全按照时间来排列嘟文，不必担心出现时间线混乱、只给你看热度高的嘟文或塞给你不想看的广告、推广。<br>一般情况下，时间线有三种：</p>
+<ul>
+<li><strong>Home</strong> timeline，简称HTL，即首页。这是账号持有人自行关注而产生的时间线，能看到public、unlist、followers-only的嘟文(包括回复)以及提到你的direct message。</li>
+<li><strong>Local</strong> timeline，简称LTL，即本站(地)轴。这是账号所在站点的时间线，只有该站点的公开嘟文会出现在这里。</li>
+<li><strong>Federate</strong> timeline，简称FTL，即跨站轴。这是无论站点、所有账号嘟出的public内容共同组成的时间轴，能够看到世界各地的人都在这里发出自己的嘟嘟。</li>
+</ul>
+<p>通过设置<code>preferences (首选项) -&gt; other (其它) -&gt; PUBLIC TIMELINES-Filter languages (公共时间轴-语言过滤)</code>，可过滤时间线上的语言，只留下自己想看的语言。但这个过滤并不完全，公共轴或本站轴仍会出现一些应该被过滤掉的语言。 </p>
+<h3 id="基本功能"><a href="#基本功能" class="headerlink" title="基本功能"></a>基本功能</h3><ul>
+<li><p>发嘟  </p>
+<ul>
+<li>可见范围<br>发嘟可选择四种可见范围：public (公开)，unlist (公开，但不出现在公共时间轴)，followers-only (仅关注者可见)，direct message (私信，也可用作发仅自己可见的嘟文)。在设置中可以选择默认发嘟可见范围。</li>
+<li>cw折叠功能<br>一些不想被直接看到或者含有可能令人不适内容的嘟文推荐使用cw。点击发嘟窗口下方的cw就会出现一个新的小窗口，在这个新的小窗口填上内容提示信息，在发嘟主要窗口填写主要内容。<del>这个功能也很好地被用来讲冷笑话</del>  </li>
+<li>标记敏感内容<br>如果发的嘟文/图片含有not safe for work(NSFW，包括色情、暴力、血腥等)的内容，需要在发嘟时将图片标记为敏感信息，且善用cw折叠功能。</li>
+</ul>
+</li>
+<li><p>回复<br>左下角箭头是回复功能，回复也可以设置不同的可见范围。在此处如果设置followers-only，被回复者即使没有关注你，也可以看到。回复的嘟嘟仅会出现在同时关注对话双方的账号首页时间线(Home Timeline)。这样尽最大可能避免参与对话者以外的人的打扰，使对话双方处于平等地位，不会出现因一方粉丝过多看到回复一拥而上的现象。各个时间轴设置(一般在主区域右上角)中可设置该时间轴不显示回复类嘟文。</p>
+</li>
+<li><p>转发<br>长毛象的转发是仅转发，不能带文字。这样很好的避免了类似微博上转发挂人形成骂战的现象。在账号设置中选择<code>在时间轴中合并转嘟</code>，以避免一篇嘟文被太多人转发刷屏时间轴的情况。各个时间轴设置(一般在主区域右上角)中可设置该时间轴不显示转发类嘟文，公共轴一般默认不显示转发。</p>
+</li>
+<li><p>喜欢<br>这里的⭐是favourite的意思，类似点赞功能。点赞代表赞同、安慰还是这里有个言论我mark一下就看使用者自己的想法，但通常来说都是<strong>赞</strong>！  </p>
+</li>
+<li><p>书签<br>bookmark是书签，或者称为收藏功能，这个功能与大多数平台相似，不再赘述。</p>
+</li>
+</ul>
+<h3 id="头像、昵称、profile、标签"><a href="#头像、昵称、profile、标签" class="headerlink" title="头像、昵称、profile、标签"></a>头像、昵称、profile、标签</h3><p>一些站点固定期限内没有头像、昵称和嘟文的“三无账号”会被清除收回，注意阅读站点规则避免注册之后账号被回收。既然已经决定抛弃微博等在用户时间线上搞动作的平台，就不要只是注册个账号放着，用起来！</p>
+<h3 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h3><ul>
+<li><p>锁嘟<br>锁定账号(选项在个人资料页面)，需要手动审核所有关注请求。即每个想要关注你账号的人需要先发送关注请求，你通过之后方可关注你的账号以及看到你的followers-only的嘟文。与instgram的锁账号不同，即使挂上小锁其他人仍能看到公开可见的嘟文。如果有较多敏感嘟文不想随意被人看到，可定期删除或选择followers-only、direct message这两种可见范围。</p>
+</li>
+<li><p>语言<br>通过<code>Preferences (首选项) -&gt; Appearance (外观) -&gt; Interface language (界面语言)</code>设置平台语言。由于各语种都是志愿者翻译，可能会出现错误或词不达意，但基本不影响使用。</p>
+</li>
+<li><p>过滤器<br>这里的过滤器是真的过滤掉包含关键字的嘟文，但可能会在原本应该是一条嘟文的地方出现<code>filtered</code>的提醒。过滤器可以设置失效时间、作用场景等。</p>
+</li>
+<li><p>邮件通知<br><code>Preferences (首选项) -&gt; Notifications (通知)</code>里的邮件提醒建议关掉，避免发送过多邮件给站长的邮件服务造成不必要的负担。</p>
+</li>
+<li><p>其它<br>界面语言设置为惯用语言后，其它设置可自行探索。</p>
+</li>
+</ul>
+<h3 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h3><p>Mastodon故意弱化了搜索功能，避免形成“广场”，从而导致有人随便搜索一个关键词便前来抬杠或骂人的行为。但这也在一定程度上造成使用者的不便，比如明明有印象一条嘟嘟，但根本找不到，所以需要使用者自己多注意收藏有用的信息。有些站点开了全文搜索，会让搜索结果好一些，如自己的嘟文或转发、点赞过的嘟文能够搜索，但无法实现真正的“搜索”。 </p>
+<h3 id="block-mute"><a href="#block-mute" class="headerlink" title="block / mute"></a>block / mute</h3><p>block即拉黑/屏蔽。拉黑后，该账号无法与你互动、关注，嘟文不会出现在你的时间线。<br>mute即隐藏。隐藏后，该账号的嘟文不会出现在你的时间线，但仍可与你互动、关注，而你不会收到任何提醒。</p>
+<h3 id="迁移账号"><a href="#迁移账号" class="headerlink" title="迁移账号"></a>迁移账号</h3><p>长毛象的一大优点就是站点多，且类型丰富。如果看上了别的站点，可以在新站点注册账号后将账号迁移过去。迁移账号可以自动将followers/following转移到新账号，但无法迁移旧帐号的嘟文。</p>
+<h3 id="账号备份"><a href="#账号备份" class="headerlink" title="账号备份"></a>账号备份</h3><p>长毛象自带的备份功能可以备份follower列表、following列表、mute列表、block列表等。如果想要备份嘟文，可以使用象友提供的<a href="https://github.com/slashyn/mastodon-archive-viewer-modified">备份插件</a>。<br>由于各个站点的维护仅依赖站长和可能有的站点管理员，所以可能会有不稳定、服务器出问题等状况出现，有时整个站点也会关闭不再运行，及时备份账号内容是个好习惯。</p>
+<h3 id="app"><a href="#app" class="headerlink" title="app"></a>app</h3><p>长毛象作为一个去中心化的平台，最佳访问方式是直接浏览器访问，如Chrome、Firefox、safari等。这些浏览器可以在手机主屏幕创建快捷方式，在手机桌面单独形成一个图标和有一个app没有太大差别。<br>如果仍需要一个app，可选择的有：</p>
+<ul>
+<li><p><strong>Android</strong>: Tusky, Subway Tooter, Fedilab(付费)</p>
+</li>
+<li><p><strong>iOS</strong>: Metatext, Mercury, iMast, Amaroq, Mast(付费), Toot!(付费)  </p>
+</li>
+<li><p><strong>tooot</strong>：对于中文用户，推荐使用tooot。这是一个专注于中文社区的简洁、开源长毛象手机客户端，跨平台支持iOS和Android。 </p>
+</li>
+<li><p><strong>其它</strong>：其它平台应用推荐可查看<a href="https://joinmastodon.org/apps">官网应用推荐</a>。  </p>
+</li>
+</ul>
+<h3 id="tag"><a href="#tag" class="headerlink" title="tag"></a>tag</h3><p>作为一个公共社交网络，这里也可以带话题(tag)发嘟。格式和Instagram一样，只需要一个<code>#</code>，如<code>#tag</code>。<br>长毛象已经有很多有趣或有用的tag，如<code>#长毛象中文使用指南</code>、<code>#长毛象安利交换大会</code>、<code>#资源分享</code>、<code>#菜谱</code>，还有季节性的赏花、赏月tag。也可以创建自己的专属tag，把某类嘟文存在这个tag下，方便自己查看。</p>
+<h3 id="一些好玩的账号"><a href="#一些好玩的账号" class="headerlink" title="一些好玩的账号"></a>一些好玩的账号</h3><ul>
+<li><p>骰寶機<br>吃喝玩乐都可以找它！想不到晚饭吃什么，发嘟@骰宝问吃什么，不出一分钟就会回复一种食物。问它喝什么同理。还有好玩又有趣的答案之书和对不对判断。具体玩法可查看骰宝账号主页了解。</p>
+</li>
+<li><p>妙仙包<br>想知道心中之事的结果？找大师求签、塔罗牌都能给你一个奇妙的答案。选择困难症？找包包真普选，轻松治愈选择困难。心中有愿还可对着大师许愿，有机会被大师选中实现。具体玩法查看妙仙包账号主页了解。</p>
+</li>
+<li><p>sci咖啡屋<br>这里可以点单饮品、套餐，但一定要吃完不可浪费。累了还可以在这里撸猫，猫猫送上缓解疲惫。具体玩法查看sci咖啡屋账号主页了解。</p>
+</li>
+<li><p>Mature[マツレ]<br>Mature是长毛象上最早的科学期刊之一，也是长毛象最权威及最有名望的学术期刊之一。每周最重要、最前沿的研究结果是在「Mature」中以论文导读的形式发表的。欢迎订阅，支持投稿。投稿方法详见Mature账号主页。</p>
+</li>
+</ul>
+<p>以上有趣账号可通过搜索名称获得，在此不提供具体账号以免给站点造成麻烦。</p>
+<h2 id="More-than-Mastodon"><a href="#More-than-Mastodon" class="headerlink" title="More than Mastodon"></a>More than Mastodon</h2><p>其实mastodon只是这个宇宙中的一部分，还有Misskey、pleroma、funkwhale、peertube等和mastodon类似的社交平台共同组成整个联邦宇宙。<br>何必拘泥于处处受限的一隅，这里有更广阔的宇宙等你。<br>Enjoy yourself！</p>
+]]></content>
+      <categories>
+        <category>Mastodon</category>
+      </categories>
+      <tags>
+        <tag>Mastodon</tag>
+        <tag>UserGuide</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>在文章中插入图片的各种方式</title>
     <url>/2021/10/19/imginblog/</url>
     <content><![CDATA[<center>终于还是没能避免想要在文章中用到图片，所以有了本文记录在Hexo博客中插入图片的各种方式</center>  
@@ -439,101 +534,6 @@ data[key] = $.html();
       </tags>
   </entry>
   <entry>
-    <title>长毛象使用指南</title>
-    <url>/2021/09/21/mstdn/</url>
-    <content><![CDATA[<center>不少朋友被我安利到长毛象(mastodon)玩耍，本着对他们负责的态度，写下这篇长毛象使用指南。</center>
-<span id="more"></span>
-
-<h2 id="什么是mastodon"><a href="#什么是mastodon" class="headerlink" title="什么是mastodon"></a>什么是mastodon</h2><p>Mastodon(长毛象)是一个开源、去中心化的社交平台。简单来说，这里没有屏蔽词，没有限流，没有铺天盖地的营销号，没有Doctor看了都想重启宇宙的混乱时间线，只是一个纯粹的社交平台。长毛象将内容、社交网络交还给用户，更加尊重用户而不是平台“霸权”。<br><strong>如果将联邦宇宙(Fediverse)看做一个宇宙，那么每一个长毛象站点(Mastodon Society)就像一颗颗星球。</strong> 也就是说，你可以选择任何一颗星球定居，哪怕只是居住着一个人，只要它与宇宙相通，那么你就可以联系到宇宙中任何一个人而不会孤单。(摘自pullopen对长毛象的介绍：<a href="https://pullopenbluebox.wordpress.com/2020/06/30/mastodon-introduction/">长毛象（Mastodon）：更尊重用户的社交平台</a> )</p>
-<h2 id="如何在mastodon拥有一个账号"><a href="#如何在mastodon拥有一个账号" class="headerlink" title="如何在mastodon拥有一个账号"></a>如何在mastodon拥有一个账号</h2><h3 id="选择站点"><a href="#选择站点" class="headerlink" title="选择站点"></a>选择站点</h3><p>长毛象有各种各样的站点(或称实例)，如二次元相关站、LGBTQ站、艺术类站，或者按照语言划分的小语种站点等等。可以在官网列出的<a href="https://joinmastodon.org/communities">站点列表</a>里找到一个喜欢又适合的站点。<br>一开始使用建议在一些大型的国际站点注册，限制较少，每天都有很多世界各地的人在时间线上灌水，如</p>
-<ul>
-<li><a href="https://mastodon.social/">https://mastodon.social</a></li>
-<li><a href="https://mastodon.online/">https://mastodon.online</a></li>
-<li><a href="https://mstdn.social/">https://mstdn.social</a>  </li>
-</ul>
-<p>使用一段时间，对各项操作都熟悉之后，可进一步选择更适合自己的小站点注册并迁移账号，或者继续呆在国际站点也无妨。<br>也可以在中文站点，或者中文用户较多的站点注册。这样在查看local timeline(本地轴)时都是中文，方便遇到志同道合的朋友。但无论在哪个站点注册，都建议阅读过<strong>服务器规则</strong>和<strong>服务条款</strong>后再进行，这两项通常都放在注册页面。<br>熟悉长毛象后，发现没有一个站点完全符合自己的想法，也可以自建站加入长毛象宇宙。搭建长毛象站点有很多简单易上手的教程可供参考，即使是计算机小白也能拥有属于自己的站点。可参考的教程：</p>
-<ul>
-<li><a href="https://docs.joinmastodon.org/zh-cn/admin/prerequisites/">官方建站文档</a></li>
-<li><a href="https://www.notion.so/Mastodon-042a05ee29a048df8b2c1afd49e4c49b">长毛象（Mastodon）社区搭建详解</a></li>
-<li><a href="https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/07/19/How-to-build-a-mastodon-instance.html">技术小白如何搭建Mastodon实例</a></li>
-<li><a href="https://morikka.me/blog/mastodon-personal-instance/">长毛象个人向建站</a></li>
-</ul>
-<h3 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h3><p>只要在一个站点注册，就可以连上整个长毛象宇宙，看到所有在用户和他们公开可见的嘟文，所以只需选择一个合适的站点注册账号即可。但由于站点服务器大多在中国境外，有被墙掉的风险，很多人会选择在多个站点注册账号，避免一个站点被GFW盯上ban掉就难以连上长毛象宇宙。<br>邮箱是各站点注册的必须品，注册成功后也可以更改。建议使用gmail、protonmail等邮箱服务，避免使用qq邮箱一类能直接指向使用者的邮箱。一些站点还需要填写入站申请或入站理由等以便站长和管理员审核注册人，通过审核之后便可成功注册，在长毛象宇宙自由玩耍。</p>
-<h2 id="如何使用mastodon"><a href="#如何使用mastodon" class="headerlink" title="如何使用mastodon"></a>如何使用mastodon</h2><h3 id="Timeline-时间轴"><a href="#Timeline-时间轴" class="headerlink" title="Timeline(时间轴)"></a>Timeline(时间轴)</h3><p>Timeline简称为TL，完全按照时间来排列嘟文，不必担心出现时间线混乱、只给你看热度高的嘟文或塞给你不想看的广告、推广。<br>一般情况下，时间线有三种：</p>
-<ul>
-<li><strong>Home</strong> timeline，简称HTL，即首页。这是账号持有人自行关注而产生的时间线，能看到public、unlist、followers-only的嘟文(包括回复)以及提到你的direct message。</li>
-<li><strong>Local</strong> timeline，简称LTL，即本站(地)轴。这是账号所在站点的时间线，只有该站点的公开嘟文会出现在这里。</li>
-<li><strong>Federate</strong> timeline，简称FTL，即跨站轴。这是无论站点、所有账号嘟出的public内容共同组成的时间轴，能够看到世界各地的人都在这里发出自己的嘟嘟。</li>
-</ul>
-<p>通过设置<code>preferences (首选项) -&gt; other (其它) -&gt; PUBLIC TIMELINES-Filter languages (公共时间轴-语言过滤)</code>，可过滤时间线上的语言，只留下自己想看的语言。但这个过滤并不完全，公共轴或本站轴仍会出现一些应该被过滤掉的语言。 </p>
-<h3 id="基本功能"><a href="#基本功能" class="headerlink" title="基本功能"></a>基本功能</h3><ul>
-<li><p>发嘟  </p>
-<ul>
-<li>可见范围<br>发嘟可选择四种可见范围：public (公开)，unlist (公开，但不出现在公共时间轴)，followers-only (仅关注者可见)，direct message (私信，也可用作发仅自己可见的嘟文)。在设置中可以选择默认发嘟可见范围。</li>
-<li>cw折叠功能<br>一些不想被直接看到或者含有可能令人不适内容的嘟文推荐使用cw。点击发嘟窗口下方的cw就会出现一个新的小窗口，在这个新的小窗口填上内容提示信息，在发嘟主要窗口填写主要内容。<del>这个功能也很好地被用来讲冷笑话</del>  </li>
-<li>标记敏感内容<br>如果发的嘟文/图片含有not safe for work(NSFW，包括色情、暴力、血腥等)的内容，需要在发嘟时将图片标记为敏感信息，且善用cw折叠功能。</li>
-</ul>
-</li>
-<li><p>回复<br>左下角箭头是回复功能，回复也可以设置不同的可见范围。在此处如果设置followers-only，被回复者即使没有关注你，也可以看到。回复的嘟嘟仅会出现在同时关注对话双方的账号首页时间线(Home Timeline)。这样尽最大可能避免参与对话者以外的人的打扰，使对话双方处于平等地位，不会出现因一方粉丝过多看到回复一拥而上的现象。各个时间轴设置(一般在主区域右上角)中可设置该时间轴不显示回复类嘟文。</p>
-</li>
-<li><p>转发<br>长毛象的转发是仅转发，不能带文字。这样很好的避免了类似微博上转发挂人形成骂战的现象。在账号设置中选择<code>在时间轴中合并转嘟</code>，以避免一篇嘟文被太多人转发刷屏时间轴的情况。各个时间轴设置(一般在主区域右上角)中可设置该时间轴不显示转发类嘟文，公共轴一般默认不显示转发。</p>
-</li>
-<li><p>喜欢<br>这里的⭐是favourite的意思，类似点赞功能。点赞代表赞同、安慰还是这里有个言论我mark一下就看使用者自己的想法，但通常来说都是<strong>赞</strong>！  </p>
-</li>
-<li><p>书签<br>bookmark是书签，或者称为收藏功能，这个功能与大多数平台相似，不再赘述。</p>
-</li>
-</ul>
-<h3 id="头像、昵称、profile、标签"><a href="#头像、昵称、profile、标签" class="headerlink" title="头像、昵称、profile、标签"></a>头像、昵称、profile、标签</h3><p>一些站点固定期限内没有头像、昵称和嘟文的“三无账号”会被清除收回，注意阅读站点规则避免注册之后账号被回收。既然已经决定抛弃微博等在用户时间线上搞动作的平台，就不要只是注册个账号放着，用起来！</p>
-<h3 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h3><ul>
-<li><p>锁嘟<br>锁定账号(选项在个人资料页面)，需要手动审核所有关注请求。即每个想要关注你账号的人需要先发送关注请求，你通过之后方可关注你的账号以及看到你的followers-only的嘟文。与instgram的锁账号不同，即使挂上小锁其他人仍能看到公开可见的嘟文。如果有较多敏感嘟文不想随意被人看到，可定期删除或选择followers-only、direct message这两种可见范围。</p>
-</li>
-<li><p>语言<br>通过<code>Preferences (首选项) -&gt; Appearance (外观) -&gt; Interface language (界面语言)</code>设置平台语言。由于各语种都是志愿者翻译，可能会出现错误或词不达意，但基本不影响使用。</p>
-</li>
-<li><p>过滤器<br>这里的过滤器是真的过滤掉包含关键字的嘟文，但可能会在原本应该是一条嘟文的地方出现<code>filtered</code>的提醒。过滤器可以设置失效时间、作用场景等。</p>
-</li>
-<li><p>邮件通知<br><code>Preferences (首选项) -&gt; Notifications (通知)</code>里的邮件提醒建议关掉，避免发送过多邮件给站长的邮件服务造成不必要的负担。</p>
-</li>
-<li><p>其它<br>界面语言设置为惯用语言后，其它设置可自行探索。</p>
-</li>
-</ul>
-<h3 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h3><p>Mastodon故意弱化了搜索功能，避免形成“广场”，从而导致有人随便搜索一个关键词便前来抬杠或骂人的行为。但这也在一定程度上造成使用者的不便，比如明明有印象一条嘟嘟，但根本找不到，所以需要使用者自己多注意收藏有用的信息。有些站点开了全文搜索，会让搜索结果好一些，如自己的嘟文或转发、点赞过的嘟文能够搜索，但无法实现真正的“搜索”。 </p>
-<h3 id="block-mute"><a href="#block-mute" class="headerlink" title="block / mute"></a>block / mute</h3><p>block即拉黑/屏蔽。拉黑后，该账号无法与你互动、关注，嘟文不会出现在你的时间线。<br>mute即隐藏。隐藏后，该账号的嘟文不会出现在你的时间线，但仍可与你互动、关注，而你不会收到任何提醒。</p>
-<h3 id="迁移账号"><a href="#迁移账号" class="headerlink" title="迁移账号"></a>迁移账号</h3><p>长毛象的一大优点就是站点多，且类型丰富。如果看上了别的站点，可以在新站点注册账号后将账号迁移过去。迁移账号可以自动将followers/following转移到新账号，但无法迁移旧帐号的嘟文。</p>
-<h3 id="账号备份"><a href="#账号备份" class="headerlink" title="账号备份"></a>账号备份</h3><p>长毛象自带的备份功能可以备份follower列表、following列表、mute列表、block列表等。如果想要备份嘟文，可以使用象友提供的<a href="https://github.com/slashyn/mastodon-archive-viewer-modified">备份插件</a>。<br>由于各个站点的维护仅依赖站长和可能有的站点管理员，所以可能会有不稳定、服务器出问题等状况出现，有时整个站点也会关闭不再运行，及时备份账号内容是个好习惯。</p>
-<h3 id="app"><a href="#app" class="headerlink" title="app"></a>app</h3><p>长毛象作为一个去中心化的平台，最佳访问方式是直接浏览器访问，如Chrome、Firefox、safari等。这些浏览器可以在手机主屏幕创建快捷方式，在手机桌面单独形成一个图标和有一个app没有太大差别。<br>如果仍需要一个app，可选择的有：</p>
-<ul>
-<li><p><strong>Android</strong>: Tusky, Subway Tooter, Fedilab(付费)</p>
-</li>
-<li><p><strong>iOS</strong>: Metatext, Mercury, iMast, Amaroq, Mast(付费), Toot!(付费)  </p>
-</li>
-<li><p><strong>tooot</strong>：对于中文用户，推荐使用tooot。这是一个专注于中文社区的简洁、开源长毛象手机客户端，跨平台支持iOS和Android。 </p>
-</li>
-<li><p><strong>其它</strong>：其它平台应用推荐可查看<a href="https://joinmastodon.org/apps">官网应用推荐</a>。  </p>
-</li>
-</ul>
-<h3 id="tag"><a href="#tag" class="headerlink" title="tag"></a>tag</h3><p>作为一个公共社交网络，这里也可以带话题(tag)发嘟。格式和Instagram一样，只需要一个<code>#</code>，如<code>#tag</code>。<br>长毛象已经有很多有趣或有用的tag，如<code>#长毛象中文使用指南</code>、<code>#长毛象安利交换大会</code>、<code>#资源分享</code>、<code>#菜谱</code>，还有季节性的赏花、赏月tag。也可以创建自己的专属tag，把某类嘟文存在这个tag下，方便自己查看。</p>
-<h3 id="一些好玩的账号"><a href="#一些好玩的账号" class="headerlink" title="一些好玩的账号"></a>一些好玩的账号</h3><ul>
-<li><p>骰寶機<br>吃喝玩乐都可以找它！想不到晚饭吃什么，发嘟@骰宝问吃什么，不出一分钟就会回复一种食物。问它喝什么同理。还有好玩又有趣的答案之书和对不对判断。具体玩法可查看骰宝账号主页了解。</p>
-</li>
-<li><p>妙仙包<br>想知道心中之事的结果？找大师求签、塔罗牌都能给你一个奇妙的答案。选择困难症？找包包真普选，轻松治愈选择困难。心中有愿还可对着大师许愿，有机会被大师选中实现。具体玩法查看妙仙包账号主页了解。</p>
-</li>
-<li><p>sci咖啡屋<br>这里可以点单饮品、套餐，但一定要吃完不可浪费。累了还可以在这里撸猫，猫猫送上缓解疲惫。具体玩法查看sci咖啡屋账号主页了解。</p>
-</li>
-<li><p>Mature[マツレ]<br>Mature是长毛象上最早的科学期刊之一，也是长毛象最权威及最有名望的学术期刊之一。每周最重要、最前沿的研究结果是在「Mature」中以论文导读的形式发表的。欢迎订阅，支持投稿。投稿方法详见Mature账号主页。</p>
-</li>
-</ul>
-<p>以上有趣账号可通过搜索名称获得，在此不提供具体账号以免给站点造成麻烦。</p>
-<h2 id="More-than-Mastodon"><a href="#More-than-Mastodon" class="headerlink" title="More than Mastodon"></a>More than Mastodon</h2><p>其实mastodon只是这个宇宙中的一部分，还有Misskey、pleroma、funkwhale、peertube等和mastodon类似的社交平台共同组成整个联邦宇宙。<br>何必拘泥于处处受限的一隅，这里有更广阔的宇宙等你。<br>Enjoy yourself！</p>
-]]></content>
-      <categories>
-        <category>Mastodon</category>
-      </categories>
-      <tags>
-        <tag>Mastodon</tag>
-        <tag>UserGuide</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Methods to Analyze Multi-Omicis Data</title>
     <url>/2021/12/01/multiomics/</url>
     <content><![CDATA[<center>文献阅读：多组学数据的整合、解读方法及公开可用的多组学数据库</center>
@@ -563,12 +563,12 @@ data[key] = $.html();
 <h3 id="TARGET"><a href="#TARGET" class="headerlink" title="TARGET"></a>TARGET</h3><p><a href="https://ocg.cancer.gov/programs/target">TARGET</a> 包含 24 种癌症分子类型的临床信息、基因表达、miRNA 表达、拷贝数和测序数据。  </p>
 <h3 id="OmicsDI"><a href="#OmicsDI" class="headerlink" title="OmicsDI"></a>OmicsDI</h3><p>Omics Discovery Index (<a href="https://www.omicsdi.org/">OmicsDI</a>) 包含来自公共数据结构中的 11 个存储库的数据集。是一个开源平台，用于访问、发现和整合基因组学、转录组学、蛋白质组学和代谢组学数据集。包含来自人类、模式生物和非模式生物的数据集。  </p>
 <h2 id="多组学数据分析方法"><a href="#多组学数据分析方法" class="headerlink" title="多组学数据分析方法"></a>多组学数据分析方法</h2><p>根据算法思想，可将目前已有的多组学数据分析方法分为几个大类：<br><img src="/2021/12/01/multiomics/methods.png">  </p>
-<h3 id="Network-Based"><a href="#Network-Based" class="headerlink" title="Network Based"></a>Network Based</h3><p>**Similarity network fusion (SNF)**是一种基于网络的方法，使用网络融合方法整合多组学数据集。它为每种数据类型创建一个单独的网络，然后使用非线性网络融合方法将它们融合成一个单一的相似性网络。 融合步骤基于消息传递理论，使网络在每次迭代中更像其他网络。<br>**Network-based integration of multi-omics data (NetICS)**为基于网络的多组学数据集成提供了一个框架，用于癌症基因优先排序。可预测遗传畸变、表观遗传变化和miRNA对相互作用网络中下游基因和蛋白质(表达)的影响。在有向功能交互网络上使用每个样本的网络扩散模型，并通过聚合个体排名得出种群水平的基因排名，并为所有样本提供全局排名。  </p>
-<h3 id="Bayesian-approach"><a href="#Bayesian-approach" class="headerlink" title="Bayesian approach"></a>Bayesian approach</h3><p><strong>iCluster</strong>根据多种数据类型同时推断，为样本生成一个单一的聚类分配。这种无监督方法使用联合潜在变量模型进行集成聚类，并在单个框架中结合不同数据类型之间的关联以及数据类型内的方差-协方差结构，同时降低数据集的维度。通过期望最大化算法获得似然推理。<br><strong>iClusterPlus</strong>是iCluster的增强版，使用广义线性回归来确定综合基因组、表观基因组和转录组分析的分类和数字(连续和计数)变量的联合模型。该方法使用一组潜在变量”k”来代表驱动因素，这些因素预测关键的基因组变量，从而捕捉生物变异。此外，使用Lasso回归方法，iClusterPlus确定了有助于亚型之间生物变化的特征子集。<br><strong>LRAcluster</strong>使用概率模型与低秩近似法来寻找主要的低维子空间，以对全基因组数据进行分类。在这种方法中，每个组学数据都以大小匹配的参数矩阵为条件，并且这个低秩参数矩阵可以在低维空间中表示。 用户定义的维度参数(基于数据的解释方差)和聚类数(基于轮廓值)有助于更快地降维和更好地聚类疾病亚型。<br>**Patient-specific data fusion (PSDF)**该方法使用贝叶斯非参数模型(Dirichlet 过程混合模型)来整合CNV和基因表达数据，以将样本分层为子组。每个样本根据它们在2个数据集之间的一致性被分配一个二元状态。只有表现出一致性的样本融合在一起，而其他样本保持未融合，因此考虑了患者特定的融合模型。<br>**Bayesian consensus clustering (BCC)**提出了一种数据驱动的共识聚类方法，该方法对源特定特征以及使用有限狄利克雷混合模型扩展以解释多个数据源的整体聚类进行建模。<br><strong>Joint Bayesian factor</strong>使用非参数贝叶斯因子分析来整合组学数据集。 这种方法使用 beta-Bernoulli 过程将特征空间分解为共享的和特定于数据的组件。<br>**Multiple dataset integration (MDI)**使用 Dirichlet 混合模型对每个数据源进行聚类，同时对聚类之间的成对依赖性进行建模。 MDI 在分配给组件（如基因组特征）的变量级别链接模型。 组件变量级链接允许捕获多组学数据之间的依赖关系。<br>**Multi-omics factor analysis (MOFA)**是一种无监督方法，用于在相同或部分重叠的样本上整合多组学数据类型。<br><strong>PARADIGM</strong>的应用可以扩展到对所研究疾病的发现。  </p>
-<h3 id="Fusion-based-approaches"><a href="#Fusion-based-approaches" class="headerlink" title="Fusion-based approaches"></a>Fusion-based approaches</h3><p>**Pattern fusion analysis (PFA)**允许在低维特征空间中跨异质基因组谱识别集成样本模式。首先使用主成分分析获得局部样本模式。 其后将这些局部样本模式与公共特征空间对齐，并跨大多数数据类型合成全局样本模式。在此过程中，将定量测量每种数据类型(或单个样本)对全局样本频谱的贡献，并迭代降低偏差或系统噪声的影响以更好地拟合数据。  </p>
-<h3 id="Similarity-based-approaches"><a href="#Similarity-based-approaches" class="headerlink" title="Similarity-based approaches"></a>Similarity-based approaches</h3><p>**Perturbation clustering for data integration and disease subtyping (PINSPlus)**是一种无监督的聚类方法，有助于从多组学数据中识别亚型。为了识别亚型，该算法确定患者在单个集群中分组的频率(1)当数据受到干扰时，(2)使用不同类型的组学数据时，(3)使用不同的聚类技术时。 所有场景中的强关联患者都聚集在一起形成一个亚型。<br>**Neighborhood-based multi-omics clustering (NEMO)**是一种基于相似性的简单多组学聚类方法，它进一步建立在先前建立的聚类方法（如 SNF 和 rMKL-LPP）的基础上。该方法最初为每个输入组学数据集构建基于患者间相似性矩阵的欧几里德距离。然后将每个组学的相似性矩阵整合到一个矩阵中，然后使用光谱聚类方法对其进行聚类。  </p>
+<h3 id="Network-Based"><a href="#Network-Based" class="headerlink" title="Network Based"></a>Network Based</h3><p><strong>SNF</strong> (Similarity network fusion)是一种基于网络的方法，使用网络融合方法整合多组学数据集。它为每种数据类型创建一个单独的网络，然后使用非线性网络融合方法将它们融合成一个单一的相似性网络。 融合步骤基于消息传递理论，使网络在每次迭代中更像其他网络。<br><strong>NetICS</strong> (Network-based integration of multi-omics data)为基于网络的多组学数据集成提供了一个框架，用于癌症基因优先排序。可预测遗传畸变、表观遗传变化和miRNA对相互作用网络中下游基因和蛋白质(表达)的影响。在有向功能交互网络上使用每个样本的网络扩散模型，并通过聚合个体排名得出种群水平的基因排名，并为所有样本提供全局排名。  </p>
+<h3 id="Bayesian-approach"><a href="#Bayesian-approach" class="headerlink" title="Bayesian approach"></a>Bayesian approach</h3><p><strong>iCluster</strong>根据多种数据类型同时推断，为样本生成一个单一的聚类分配。这种无监督方法使用联合潜在变量模型进行集成聚类，并在单个框架中结合不同数据类型之间的关联以及数据类型内的方差-协方差结构，同时降低数据集的维度。通过期望最大化算法获得似然推理。<br><strong>iClusterPlus</strong>是iCluster的增强版，使用广义线性回归来确定综合基因组、表观基因组和转录组分析的分类和数字(连续和计数)变量的联合模型。该方法使用一组潜在变量”k”来代表驱动因素，这些因素预测关键的基因组变量，从而捕捉生物变异。此外，使用Lasso回归方法，iClusterPlus确定了有助于亚型之间生物变化的特征子集。<br><strong>LRAcluster</strong>使用概率模型与低秩近似法来寻找主要的低维子空间，以对全基因组数据进行分类。在这种方法中，每个组学数据都以大小匹配的参数矩阵为条件，并且这个低秩参数矩阵可以在低维空间中表示。 用户定义的维度参数(基于数据的解释方差)和聚类数(基于轮廓值)有助于更快地降维和更好地聚类疾病亚型。<br><strong>PSDF</strong> (Patient-specific data fusion)该方法使用贝叶斯非参数模型(Dirichlet 过程混合模型)来整合CNV和基因表达数据，以将样本分层为子组。每个样本根据它们在2个数据集之间的一致性被分配一个二元状态。只有表现出一致性的样本融合在一起，而其他样本保持未融合，因此考虑了患者特定的融合模型。<br><strong>BCC</strong> (Bayesian consensus clustering)提出了一种数据驱动的共识聚类方法，该方法对源特定特征以及使用有限狄利克雷混合模型扩展以解释多个数据源的整体聚类进行建模。<br><strong>Joint Bayesian factor</strong>使用非参数贝叶斯因子分析来整合组学数据集。 这种方法使用 beta-Bernoulli 过程将特征空间分解为共享的和特定于数据的组件。<br><strong>MDI</strong> (Multiple dataset integration)使用 Dirichlet 混合模型对每个数据源进行聚类，同时对聚类之间的成对依赖性进行建模。MDI在分配给组件(如基因组特征)的变量级别链接模型。组件变量级链接允许捕获多组学数据之间的依赖关系。<br><strong>MOFA</strong> (Multi-omics factor analysis)是一种无监督方法，用于在相同或部分重叠的样本上整合多组学数据类型。<br><strong>PARADIGM</strong>的应用可以扩展到对所研究疾病的发现。  </p>
+<h3 id="Fusion-based-approaches"><a href="#Fusion-based-approaches" class="headerlink" title="Fusion-based approaches"></a>Fusion-based approaches</h3><p><strong>PFA</strong> (Pattern fusion analysis)允许在低维特征空间中跨异质基因组谱识别集成样本模式。首先使用主成分分析获得局部样本模式。 其后将这些局部样本模式与公共特征空间对齐，并跨大多数数据类型合成全局样本模式。在此过程中，将定量测量每种数据类型(或单个样本)对全局样本频谱的贡献，并迭代降低偏差或系统噪声的影响以更好地拟合数据。  </p>
+<h3 id="Similarity-based-approaches"><a href="#Similarity-based-approaches" class="headerlink" title="Similarity-based approaches"></a>Similarity-based approaches</h3><p><strong>PINSPlus</strong> (Perturbation clustering for data integration and disease subtyping)是一种无监督的聚类方法，有助于从多组学数据中识别亚型。为了识别亚型，该算法确定患者在单个集群中分组的频率(1)当数据受到干扰时，(2)使用不同类型的组学数据时，(3)使用不同的聚类技术时。 所有场景中的强关联患者都聚集在一起形成一个亚型。<br>**Neighborhood-based multi-omics clustering (NEMO)**是一种基于相似性的简单多组学聚类方法，它进一步建立在先前建立的聚类方法（如 SNF 和 rMKL-LPP）的基础上。该方法最初为每个输入组学数据集构建基于患者间相似性矩阵的欧几里德距离。然后将每个组学的相似性矩阵整合到一个矩阵中，然后使用光谱聚类方法对其进行聚类。  </p>
 <h3 id="Correlation-based-approaches"><a href="#Correlation-based-approaches" class="headerlink" title="Correlation based approaches"></a>Correlation based approaches</h3><p><strong>CNAmet</strong>用于对拷贝数改变、DNA 甲基化和基因表达数据进行综合分析。  </p>
-<h3 id="Other-multivariate-approaches"><a href="#Other-multivariate-approaches" class="headerlink" title="Other multivariate approaches"></a>Other multivariate approaches</h3><p><strong>mixOmics</strong>提供了一组有监督和无监督的多元方法来执行多组学数据集的整合，重点是变量选择。<br><strong>moCluster</strong>使用多表多元分析方法来识别跨多组学数据集的模式。<br>**Multiple co-inertia analysis (MCIA)**是一种探索性数据分析方法，它捕捉多个高维数据集（如基因表达、miRNA表达、蛋白质表达）之间的相互关系。<br>**Joint and individual variation explained (JIVE)**通过分离数据集的联合效应和个体效应来整合多组学数据。<br>**Multiple factor analysis (MFA)**是一种通过将其投影到低维变量空间来帮助整合组学数据集的方法。<br><strong>rMKL-LPP</strong>使用多核学习来集成异构多数据并执行子类型识别。<br>**Integrative nonnegative matrix factorization (iNMF)**扩展了NMF框架以在集成多个数据时考虑异构效应。<br>**Feature selection multiple kernel learning (FSMKL)**是一种监督分类方法，使用多个内核来捕获数据集之间的相似性，以识别疾病进展的特征。<br>**Sparse multi-block partial least squares (sMBPLS)**允许多块输入包含多个调控组学数据集，例如 CNV、DNA 甲基化和调控基因表达的 miRNA 表达。<br>**Thresholding singular value decomposition (T-SVD)**有助于识别 2 个组学数据集之间的调控机制，尤其是当调控特征大于测量样本时。<br><strong>Joint NMF</strong>该分解框架从多个数据集(相同样本)中识别相关模块，以推导出 md 模块，以揭示潜在的多层监管因素。  </p>
+<h3 id="Other-multivariate-approaches"><a href="#Other-multivariate-approaches" class="headerlink" title="Other multivariate approaches"></a>Other multivariate approaches</h3><p><strong>mixOmics</strong>提供了一组有监督和无监督的多元方法来执行多组学数据集的整合，重点是变量选择。<br><strong>moCluster</strong>使用多表多元分析方法来识别跨多组学数据集的模式。<br><strong>MCIA</strong> (Multiple co-inertia analysis)是一种探索性数据分析方法，它捕捉多个高维数据集（如基因表达、miRNA表达、蛋白质表达）之间的相互关系。<br><strong>JIVE</strong> (Joint and individual variation explained)通过分离数据集的联合效应和个体效应来整合多组学数据。<br><strong>MFA</strong> (Multiple factor analysis)是一种通过将其投影到低维变量空间来帮助整合组学数据集的方法。<br><strong>rMKL-LPP</strong> 使用多核学习来集成异构多数据并执行子类型识别。<br><strong>iNMF</strong> (Integrative nonnegative matrix factorization)扩展了NMF框架以在集成多个数据时考虑异构效应。<br><strong>FSMKL</strong> (Feature selection multiple kernel learning)是一种监督分类方法，使用多个内核来捕获数据集之间的相似性，以识别疾病进展的特征。<br><strong>sMBPLS</strong> (Sparse multi-block partial least squares)允许多块输入包含多个调控组学数据集，例如 CNV、DNA 甲基化和调控基因表达的 miRNA 表达。<br><strong>T-SVD</strong> (Thresholding singular value decomposition)有助于识别 2 个组学数据集之间的调控机制，尤其是当调控特征大于测量样本时。<br><strong>Joint NMF</strong> 该分解框架从多个数据集(相同样本)中识别相关模块，以推导出 md 模块，以揭示潜在的多层监管因素。  </p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1] Subramanian I, Verma S, Kumar S, Jere A, Anamika K. Multi-omics Data Integration, Interpretation, and Its Application. Bioinformatics and Biology Insights. January 2020. <a href="doi:10.1177/1177932219899051">doi:10.1177/1177932219899051</a><br>[2] López de Maturana E, Alonso L, Alarcón P, Martín-Antoniano IA, Pineda S, Piorno L, Calle ML, Malats N. Challenges in the Integration of Omics and Non-Omics Data. Genes (Basel). 2019 Mar 20;10(3):238. <a href="doi:10.3390/genes10030238">doi:10.3390/genes10030238</a></p>
 ]]></content>
       <categories>
@@ -578,6 +578,84 @@ data[key] = $.html();
       <tags>
         <tag>MultiOmics</tag>
         <tag>Bioinformatics</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo + Markdown写博客</title>
+    <url>/2021/09/16/writenewblog/</url>
+    <content><![CDATA[<center>创建、发布新文章；用vscode + markdown编辑文章；给文章添加分类和标签。</center>
+<span id="more"></span>
+
+<h2 id="新建文章-create-a-post"><a href="#新建文章-create-a-post" class="headerlink" title="新建文章 create a post"></a>新建文章 create a post</h2><p>在博客目录运行命令：</p>
+<pre><code>$ hexo new [layout] title
+# layout有三种:post, draft, page, 默认是post，可以在博客配置文件中更改default_layout来更改默认设置
+# Hexo会根据scaffolds文件夹内相对应的文件来建立md文件
+# 当创建不同布局的md文件时，它们会存储在不同路径
+
+$ hexo new &quot;My New Post&quot;
+#新建一个名为&quot;My New Post&quot;的md文件
+</code></pre>
+<p>后续编辑这个文件即可。</p>
+<h2 id="vscode-markdown写文章"><a href="#vscode-markdown写文章" class="headerlink" title="vscode + markdown写文章"></a>vscode + markdown写文章</h2><p>可按照以下步骤编辑一遍博客文章：</p>
+<ol>
+<li>从<a href="https://code.visualstudio.com/">官网</a>下载vscode，并安装。  </li>
+<li>安装markdown插件：<ul>
+<li>Markdown All in One: 组合包，把最常用的Markdown优化全部装好</li>
+<li>Markdown Preview Github Styling: 在本地就能预览Markdown文件最终在Github Pages中显示的效果</li>
+</ul>
+</li>
+<li>学习基本的markdown语法，利用vscode编辑文章。同时，利用”Open Preview to the Side”按键或快捷键可同时预览文章</li>
+<li>写完这篇文章</li>
+</ol>
+<h2 id="categories"><a href="#categories" class="headerlink" title="categories"></a>categories</h2><h3 id="生成categories页并修改type属性"><a href="#生成categories页并修改type属性" class="headerlink" title="生成categories页并修改type属性"></a>生成categories页并修改type属性</h3><p>在博客目录运行命令行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new page categories</span><br></pre></td></tr></table></figure>
+<p>运行成功后会提示：</p>
+<pre><code>INFO  Created: ~/Documents/blog/source/categories/index.md
+</code></pre>
+<p>根据所给路径找到index.md文件，在文件的框架内添加一行：</p>
+<pre><code>type: &quot;categories&quot;
+</code></pre>
+<h3 id="给文章添加categories"><a href="#给文章添加categories" class="headerlink" title="给文章添加categories"></a>给文章添加categories</h3><p>在文章头的<code>categories:</code>后以<code>-</code>为标志添加标签，如本文的标签：</p>
+<pre><code>categories:
+- Blog #注意“-”后一定要加空格
+</code></pre>
+<h2 id="tag"><a href="#tag" class="headerlink" title="tag"></a>tag</h2><h3 id="生成tag页并修改type属性"><a href="#生成tag页并修改type属性" class="headerlink" title="生成tag页并修改type属性"></a>生成tag页并修改type属性</h3><p>在博客目录运行命令行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new page tags</span><br></pre></td></tr></table></figure>
+<p>运行成功后会提示：</p>
+<pre><code>INFO  Created: ~/Documents/blog/source/tags/index.md
+</code></pre>
+<p>根据所给路径找到index.md文件，在文件的框架内添加一行：</p>
+<pre><code>type: &quot;tags&quot;
+</code></pre>
+<h3 id="给文章添加tag"><a href="#给文章添加tag" class="headerlink" title="给文章添加tag"></a>给文章添加tag</h3><p>在文章头的<code>tags:</code>后以<code>-</code>为标志添加标签，如本文的标签：</p>
+<pre><code>tags: 
+- Blog #注意“-”后一定要加空格
+- Hexo
+- Markdown
+- vscode
+</code></pre>
+<h2 id="文章的发布"><a href="#文章的发布" class="headerlink" title="文章的发布"></a>文章的发布</h2><p>在博客目录运行命令：</p>
+<pre><code>$ hexo generate
+$ hexo server  # 本地预查看
+$ hexo deploy  # 部署到GitHub Pages
+
+# 此步骤报错可先检查文件头等文章各部分是否缺少空格
+</code></pre>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a href="https://zhuanlan.zhihu.com/p/156915260">Hexo博客写文章及基本操作</a></li>
+<li><a href="https://linlif.github.io/2017/05/27/Hexo%E4%BD%BF%E7%94%A8%E6%94%BB%E7%95%A5-%E6%B7%BB%E5%8A%A0%E5%88%86%E7%B1%BB%E5%8F%8A%E6%A0%87%E7%AD%BE/">Hexo使用攻略-添加分类及标签</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/56943330">[Markdown] 使用vscode开始Markdown写作之旅</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>Blog</category>
+        <category>Writing</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>Blog</tag>
+        <tag>Markdown</tag>
+        <tag>vscode</tag>
       </tags>
   </entry>
   <entry>
@@ -740,84 +818,6 @@ data[key] = $.html();
       <tags>
         <tag>Bioinformatics</tag>
         <tag>BatchEffects</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo + Markdown写博客</title>
-    <url>/2021/09/16/writenewblog/</url>
-    <content><![CDATA[<center>创建、发布新文章；用vscode + markdown编辑文章；给文章添加分类和标签。</center>
-<span id="more"></span>
-
-<h2 id="新建文章-create-a-post"><a href="#新建文章-create-a-post" class="headerlink" title="新建文章 create a post"></a>新建文章 create a post</h2><p>在博客目录运行命令：</p>
-<pre><code>$ hexo new [layout] title
-# layout有三种:post, draft, page, 默认是post，可以在博客配置文件中更改default_layout来更改默认设置
-# Hexo会根据scaffolds文件夹内相对应的文件来建立md文件
-# 当创建不同布局的md文件时，它们会存储在不同路径
-
-$ hexo new &quot;My New Post&quot;
-#新建一个名为&quot;My New Post&quot;的md文件
-</code></pre>
-<p>后续编辑这个文件即可。</p>
-<h2 id="vscode-markdown写文章"><a href="#vscode-markdown写文章" class="headerlink" title="vscode + markdown写文章"></a>vscode + markdown写文章</h2><p>可按照以下步骤编辑一遍博客文章：</p>
-<ol>
-<li>从<a href="https://code.visualstudio.com/">官网</a>下载vscode，并安装。  </li>
-<li>安装markdown插件：<ul>
-<li>Markdown All in One: 组合包，把最常用的Markdown优化全部装好</li>
-<li>Markdown Preview Github Styling: 在本地就能预览Markdown文件最终在Github Pages中显示的效果</li>
-</ul>
-</li>
-<li>学习基本的markdown语法，利用vscode编辑文章。同时，利用”Open Preview to the Side”按键或快捷键可同时预览文章</li>
-<li>写完这篇文章</li>
-</ol>
-<h2 id="categories"><a href="#categories" class="headerlink" title="categories"></a>categories</h2><h3 id="生成categories页并修改type属性"><a href="#生成categories页并修改type属性" class="headerlink" title="生成categories页并修改type属性"></a>生成categories页并修改type属性</h3><p>在博客目录运行命令行：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new page categories</span><br></pre></td></tr></table></figure>
-<p>运行成功后会提示：</p>
-<pre><code>INFO  Created: ~/Documents/blog/source/categories/index.md
-</code></pre>
-<p>根据所给路径找到index.md文件，在文件的框架内添加一行：</p>
-<pre><code>type: &quot;categories&quot;
-</code></pre>
-<h3 id="给文章添加categories"><a href="#给文章添加categories" class="headerlink" title="给文章添加categories"></a>给文章添加categories</h3><p>在文章头的<code>categories:</code>后以<code>-</code>为标志添加标签，如本文的标签：</p>
-<pre><code>categories:
-- Blog #注意“-”后一定要加空格
-</code></pre>
-<h2 id="tag"><a href="#tag" class="headerlink" title="tag"></a>tag</h2><h3 id="生成tag页并修改type属性"><a href="#生成tag页并修改type属性" class="headerlink" title="生成tag页并修改type属性"></a>生成tag页并修改type属性</h3><p>在博客目录运行命令行：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new page tags</span><br></pre></td></tr></table></figure>
-<p>运行成功后会提示：</p>
-<pre><code>INFO  Created: ~/Documents/blog/source/tags/index.md
-</code></pre>
-<p>根据所给路径找到index.md文件，在文件的框架内添加一行：</p>
-<pre><code>type: &quot;tags&quot;
-</code></pre>
-<h3 id="给文章添加tag"><a href="#给文章添加tag" class="headerlink" title="给文章添加tag"></a>给文章添加tag</h3><p>在文章头的<code>tags:</code>后以<code>-</code>为标志添加标签，如本文的标签：</p>
-<pre><code>tags: 
-- Blog #注意“-”后一定要加空格
-- Hexo
-- Markdown
-- vscode
-</code></pre>
-<h2 id="文章的发布"><a href="#文章的发布" class="headerlink" title="文章的发布"></a>文章的发布</h2><p>在博客目录运行命令：</p>
-<pre><code>$ hexo generate
-$ hexo server  # 本地预查看
-$ hexo deploy  # 部署到GitHub Pages
-
-# 此步骤报错可先检查文件头等文章各部分是否缺少空格
-</code></pre>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
-<li><a href="https://zhuanlan.zhihu.com/p/156915260">Hexo博客写文章及基本操作</a></li>
-<li><a href="https://linlif.github.io/2017/05/27/Hexo%E4%BD%BF%E7%94%A8%E6%94%BB%E7%95%A5-%E6%B7%BB%E5%8A%A0%E5%88%86%E7%B1%BB%E5%8F%8A%E6%A0%87%E7%AD%BE/">Hexo使用攻略-添加分类及标签</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/56943330">[Markdown] 使用vscode开始Markdown写作之旅</a></li>
-</ol>
-]]></content>
-      <categories>
-        <category>Blog</category>
-        <category>Writing</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>Blog</tag>
-        <tag>Markdown</tag>
-        <tag>vscode</tag>
       </tags>
   </entry>
   <entry>
