@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"tech.musain.club","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="文献阅读：解卷积可从混合的生物学数据中解得各细胞类型比例，或估计各细胞类型的表达谱，为研究提供更准确的样本数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Computational Deconvolution for More Precise Biological Data">
+<meta property="og:url" content="https://tech.musain.club/2021/12/08/deconmixeddata/index.html">
+<meta property="og:site_name" content="Bugrocery">
+<meta property="og:description" content="文献阅读：解卷积可从混合的生物学数据中解得各细胞类型比例，或估计各细胞类型的表达谱，为研究提供更准确的样本数据">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://tech.musain.club/2021/12/08/deconmixeddata/decon.png">
+<meta property="og:image" content="https://tech.musain.club/2021/12/08/deconmixeddata/LinSeed.jpg">
+<meta property="og:image" content="https://tech.musain.club/2021/12/08/deconmixeddata/Debledner.jpg">
+<meta property="og:image" content="https://tech.musain.club/2021/12/08/deconmixeddata/CDSeq1.jpg">
+<meta property="og:image" content="https://tech.musain.club/2021/12/08/deconmixeddata/CDSeq2.jpg">
+<meta property="og:image" content="https://tech.musain.club/2021/12/08/deconmixeddata/csSAM.jpg">
+<meta property="article:published_time" content="2021-12-08T12:48:51.000Z">
+<meta property="article:modified_time" content="2021-12-10T05:41:20.518Z">
+<meta property="article:author" content="R">
+<meta property="article:tag" content="DeconvoluteMixedBioData">
+<meta property="article:tag" content="Bioinformatics">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tech.musain.club/2021/12/08/deconmixeddata/decon.png">
+
+
+<link rel="canonical" href="https://tech.musain.club/2021/12/08/deconmixeddata/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://tech.musain.club/2021/12/08/deconmixeddata/","path":"2021/12/08/deconmixeddata/","title":"Computational Deconvolution for More Precise Biological Data"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Computational Deconvolution for More Precise Biological Data | Bugrocery</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Bugrocery</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Deconvolution"><span class="nav-number">1.</span> <span class="nav-text">Deconvolution</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">基本模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%8D%B7%E7%A7%AF%E7%AE%97%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">解卷积算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%8C%E5%85%A8%E8%A7%A3%E5%8D%B7%E7%A7%AF"><span class="nav-number">3.1.</span> <span class="nav-text">完全解卷积</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#LinSeed"><span class="nav-number">3.1.1.</span> <span class="nav-text">LinSeed</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Deblender"><span class="nav-number">3.1.2.</span> <span class="nav-text">Deblender</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CDSeq"><span class="nav-number">3.1.3.</span> <span class="nav-text">CDSeq</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Deconf"><span class="nav-number">3.1.4.</span> <span class="nav-text">Deconf</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%AE%8C%E5%85%A8%E8%A7%A3%E5%8D%B7%E7%A7%AF"><span class="nav-number">3.2.</span> <span class="nav-text">不完全解卷积</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Rodeo"><span class="nav-number">3.2.1.</span> <span class="nav-text">Rodeo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cs-lsfit-amp-cs-qprog"><span class="nav-number">3.2.2.</span> <span class="nav-text">cs-lsfit &amp; cs-qprog</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LRCDE"><span class="nav-number">3.2.3.</span> <span class="nav-text">LRCDE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#csSAM"><span class="nav-number">3.2.4.</span> <span class="nav-text">csSAM</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="R"
+      src="/images/Head.jpg">
+  <p class="site-author-name" itemprop="name">R</p>
+  <div class="site-description" itemprop="description">It's no use to be hardworking.</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tech.musain.club/2021/12/08/deconmixeddata/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/Head.jpg">
+      <meta itemprop="name" content="R">
+      <meta itemprop="description" content="It's no use to be hardworking.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bugrocery">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Computational Deconvolution for More Precise Biological Data
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-12-08 20:48:51" itemprop="dateCreated datePublished" datetime="2021-12-08T20:48:51+08:00">2021-12-08</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-12-10 13:41:20" itemprop="dateModified" datetime="2021-12-10T13:41:20+08:00">2021-12-10</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Paper/" itemprop="url" rel="index"><span itemprop="name">Paper</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Paper/DeconvoluteMixedBioData/" itemprop="url" rel="index"><span itemprop="name">DeconvoluteMixedBioData</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>2k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>2 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <center> 文献阅读：解卷积可从混合的生物学数据中解得各细胞类型比例，或估计各细胞类型的表达谱，为研究提供更准确的样本数据 </center>
+<span id="more"></span>
+
+<h2 id="Deconvolution"><a href="#Deconvolution" class="headerlink" title="Deconvolution"></a>Deconvolution</h2><p><strong>Deconvolution</strong> 译作反卷积或解卷积。解卷积是一种基于算法的过程，用于反转卷积对记录数据的影响。<br>生物学数据，如 DNA expression、RNA sequencing、Protein expression 等，很难真正得到来自特定组织的“纯数据”。如血液中含有来自不同组织的细胞、外泌体等，由此得来的生物学数据将是不同类型细胞的混合数据。这时就需要通过解卷积，从混合的生物数据中解得不同类型细胞的比例、表达谱。  </p>
+<h2 id="基本模型"><a href="#基本模型" class="headerlink" title="基本模型"></a>基本模型</h2><p>测得的数据为不同类型细胞按照一定比例混合在一起的结果。  </p>
+<ul>
+<li>测得的表达矩阵为 <em>X</em>，则 x<sub>ij</sub> 表示 gene<sub>i</sub> 在 sample<sub>j</sub> 中的表达量或表达强度  </li>
+<li>比例矩阵为 <em>R</em>，则 r<sub>kj</sub> 表示 k 类细胞在 sample<sub>j</sub> 中所占比例  </li>
+<li>各细胞真实表达谱组成的矩阵为 <em>S</em>，则 s<sub>ik</sub> 表示表示 gene<sub>i</sub> 在 k 类细胞中的表达量或表达强度  </li>
+</ul>
+<p><img src="/2021/12/08/deconmixeddata/decon.png">  </p>
+<h2 id="解卷积算法"><a href="#解卷积算法" class="headerlink" title="解卷积算法"></a>解卷积算法</h2><p>针对不同情况有不同的算法，根据项目中的先验知识选择合适的解卷积方法以达到最佳效果。<br>生物数据解卷积分为完全解卷积和不完全解卷积。  </p>
+<ul>
+<li><strong>完全解卷积</strong>：指混合细胞类型数目、比例和各细胞表达谱未知，仅依赖混合表达数据将它们解出来，即已知混合表达矩阵 <em>X</em>，解比例矩阵 <em>R</em> 和各细胞表达矩阵 <em>S</em>。完全解卷积的完全指细胞表达谱和比例都在算法中一次性解得。  </li>
+<li><strong>不完全解卷积</strong>：指已知混合表达谱、细胞类型数目、比例，解各细胞表达谱，即已知比例矩阵 <em>R</em> 和混合表达矩阵 <em>X</em>，解矩阵各细胞表达矩阵 <em>S</em>。不完全是相对于完全解卷积而言，仅解得各细胞表达谱。  </li>
+</ul>
+<h3 id="完全解卷积"><a href="#完全解卷积" class="headerlink" title="完全解卷积"></a>完全解卷积</h3><h4 id="LinSeed"><a href="#LinSeed" class="headerlink" title="LinSeed"></a><a target="_blank" rel="noopener" href="https://doi.org/10.1038/s41467-019-09990-5">LinSeed</a></h4><p>通过计算共线性网络 (Collinearity Network) 得到各类型细胞的 markers，利用 markers 对混合数据进行完全解卷积，同时得到各组分的比例和表达谱。<br><img src="/2021/12/08/deconmixeddata/LinSeed.jpg"></p>
+<p><strong>Code availability:</strong>   </p>
+<ul>
+<li>R  </li>
+<li><a target="_blank" rel="noopener" href="https://github.com/ctlab/linseed">https://github.com/ctlab/linseed</a>  </li>
+</ul>
+<h4 id="Deblender"><a href="#Deblender" class="headerlink" title="Deblender"></a><a target="_blank" rel="noopener" href="https://doi.org/10.1186/s12859-018-2442-5">Deblender</a></h4><p>Deblender 是一个灵活的完全去卷积工具。基于用户对已知标记基因列表和细胞/组织组成信息的访问 (access)，以半/无监督模式运行。在没有先验知识的情况下，全局基因表达的变异性被用于混合数据的聚类，以聚类集代替标记集。<br><img src="/2021/12/08/deconmixeddata/Debledner.jpg">  </p>
+<p><strong>Code availability:</strong>   </p>
+<ul>
+<li>MATLAB  </li>
+<li><a target="_blank" rel="noopener" href="https://github.com/kondim1983/Deblender/">https://github.com/kondim1983/Deblender/</a>  </li>
+</ul>
+<h4 id="CDSeq"><a href="#CDSeq" class="headerlink" title="CDSeq"></a><a target="_blank" rel="noopener" href="https://doi.org/10.1371/journal.pcbi.1007510">CDSeq</a></h4><p>CDSeq 仅使用来自大量组织样本的 RNA-Seq 数据来同时估计细胞类型比例和细胞类型特异性表达谱。<br><img src="/2021/12/08/deconmixeddata/CDSeq1.jpg"><br><img src="/2021/12/08/deconmixeddata/CDSeq2.jpg">  </p>
+<p><strong>Code availability:</strong>   </p>
+<ul>
+<li>MATLAB and Octave  </li>
+<li><a target="_blank" rel="noopener" href="https://github.com/kkang7/CDSeq">https://github.com/kkang7/CDSeq</a>  </li>
+</ul>
+<h4 id="Deconf"><a href="#Deconf" class="headerlink" title="Deconf"></a><a target="_blank" rel="noopener" href="https://doi.org/10.1186/1471-2105-11-27">Deconf</a></h4><p>Deconf 证明了从单个样本的基因表达数据中预测构成细胞类型的比例的可行性，这是基于去粗取精的分类方法的前提条件。  </p>
+<p><strong>Code availability:</strong>   </p>
+<ul>
+<li>R  </li>
+<li><a target="_blank" rel="noopener" href="https://static-content.springer.com/esm/art%3A10.1186%2F1471-2105-11-27/MediaObjects/12859_2009_3484_MOESM1_ESM.ZIP">example data and script</a>  </li>
+</ul>
+<h3 id="不完全解卷积"><a href="#不完全解卷积" class="headerlink" title="不完全解卷积"></a>不完全解卷积</h3><h4 id="Rodeo"><a href="#Rodeo" class="headerlink" title="Rodeo"></a><a target="_blank" rel="noopener" href="https://doi.org/10.1093/nargab/lqaa110">Rodeo</a></h4><p>Rodeo 是一种基于稳健线性回归的方法，可以实现简单而稳健的表达式反卷积。  </p>
+<p><strong>Code availability:</strong>   </p>
+<ul>
+<li>R  </li>
+<li><a target="_blank" rel="noopener" href="https://github.com/elolab/Rodeo">https://github.com/elolab/Rodeo</a></li>
+</ul>
+<h4 id="cs-lsfit-amp-cs-qprog"><a href="#cs-lsfit-amp-cs-qprog" class="headerlink" title="cs-lsfit &amp; cs-qprog"></a><a target="_blank" rel="noopener" href="https://doi.org/10.1371/journal.pone.0006098">cs-lsfit &amp; cs-qprog</a></h4><p>cs-lsfit 和 cs-qprog 属于 CellMix 中的两个解卷积算法，使用CellMix时可选择使用哪一个来进行解卷积步骤。</p>
+<p><strong>Code availability:</strong>   </p>
+<ul>
+<li>R  </li>
+<li><a target="_blank" rel="noopener" href="https://github.com/r-forge/cellmix/tree/master/pkg/CellMix">https://github.com/r-forge/cellmix/tree/master/pkg/CellMix</a></li>
+</ul>
+<h4 id="LRCDE"><a href="#LRCDE" class="headerlink" title="LRCDE"></a><a target="_blank" rel="noopener" href="https://doi.org/10.1186/s12859-016-1226-z">LRCDE</a></h4><p>LRCDE 在逐个基因的基础上执行基于线性回归的细胞类型特异性差异表达(反卷积)检测。考虑到细胞类型特异性基因表达估计的变异性，它计算差异检测的每个基因 t 统计量、p 值、基于 t 统计量的灵敏度、组特异性均方误差和几个基因特异性诊断指标。  </p>
+<p><strong>Code availability:</strong>   </p>
+<ul>
+<li>R  </li>
+<li><a target="_blank" rel="noopener" href="https://github.com/ERGlass/lrcde.dev">https://github.com/ERGlass/lrcde.dev</a></li>
+</ul>
+<h4 id="csSAM"><a href="#csSAM" class="headerlink" title="csSAM"></a><a target="_blank" rel="noopener" href="https://doi.org/10.1038/nmeth.1439">csSAM</a></h4><p>csSAM 根据测量的细胞比例计算细胞特异性差异表达。<br><img src="/2021/12/08/deconmixeddata/csSAM.jpg"></p>
+<p><strong>Code availability:</strong>   </p>
+<ul>
+<li>R  </li>
+<li><a target="_blank" rel="noopener" href="https://github.com/shenorrLab/csSAM">https://github.com/shenorrLab/csSAM</a>  </li>
+</ul>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1] Maria K Jaakkola, Laura L Elo, Computational deconvolution to estimate cell type-specific gene expression from bulk data, NAR Genomics and Bioinformatics, Volume 3, Issue 1, March 2021, lqaa110, <a target="_blank" rel="noopener" href="https://doi.org/10.1093/nargab/lqaa110">https://doi.org/10.1093/nargab/lqaa110</a><br>[2] 具体算法参考文献见算法介绍部分</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/DeconvoluteMixedBioData/" rel="tag"># DeconvoluteMixedBioData</a>
+              <a href="/tags/Bioinformatics/" rel="tag"># Bioinformatics</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/12/01/multiomics/" rel="prev" title="Methods to Analyze Multi-Omicis Data">
+                  <i class="fa fa-chevron-left"></i> Methods to Analyze Multi-Omicis Data
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">R</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>Symbols count total: </span>
+    <span title="Symbols count total">48k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>Reading time total &asymp;</span>
+    <span title="Reading time total">44 mins.</span>
+  </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
