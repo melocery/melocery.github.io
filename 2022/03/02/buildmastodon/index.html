@@ -20,31 +20,28 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"tech.musain.club","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="创建、发布新文章；用vscode + markdown编辑文章；给文章添加分类和标签。">
+<meta name="description" content="mastodon建站笔记：慢慢来，6月之前搞完就行；不要怕，不行就重启试试">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo + Markdown写博客">
-<meta property="og:url" content="https://tech.musain.club/2021/09/16/writenewblog/index.html">
+<meta property="og:title" content="Mastodon建站笔记(缓慢搭建中，目前仅到购买VPS)">
+<meta property="og:url" content="https://tech.musain.club/2022/03/02/buildmastodon/index.html">
 <meta property="og:site_name" content="Bugrocery">
-<meta property="og:description" content="创建、发布新文章；用vscode + markdown编辑文章；给文章添加分类和标签。">
+<meta property="og:description" content="mastodon建站笔记：慢慢来，6月之前搞完就行；不要怕，不行就重启试试">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-09-16T09:35:43.000Z">
-<meta property="article:modified_time" content="2021-10-18T08:06:51.618Z">
+<meta property="article:published_time" content="2022-03-02T06:52:02.000Z">
+<meta property="article:modified_time" content="2022-03-02T08:01:42.838Z">
 <meta property="article:author" content="R">
-<meta property="article:tag" content="Hexo">
-<meta property="article:tag" content="Blog">
-<meta property="article:tag" content="Markdown">
-<meta property="article:tag" content="vscode">
+<meta property="article:tag" content="Mastodon">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://tech.musain.club/2021/09/16/writenewblog/">
+<link rel="canonical" href="https://tech.musain.club/2022/03/02/buildmastodon/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://tech.musain.club/2021/09/16/writenewblog/","path":"2021/09/16/writenewblog/","title":"Hexo + Markdown写博客"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://tech.musain.club/2022/03/02/buildmastodon/","path":"2022/03/02/buildmastodon/","title":"Mastodon建站笔记(缓慢搭建中，目前仅到购买VPS)"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Hexo + Markdown写博客 | Bugrocery</title>
+<title>Mastodon建站笔记(缓慢搭建中，目前仅到购买VPS) | Bugrocery</title>
   
 
 
@@ -149,7 +146,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E6%96%87%E7%AB%A0-create-a-post"><span class="nav-number">1.</span> <span class="nav-text">新建文章 create a post</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vscode-markdown%E5%86%99%E6%96%87%E7%AB%A0"><span class="nav-number">2.</span> <span class="nav-text">vscode + markdown写文章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#categories"><span class="nav-number">3.</span> <span class="nav-text">categories</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90categories%E9%A1%B5%E5%B9%B6%E4%BF%AE%E6%94%B9type%E5%B1%9E%E6%80%A7"><span class="nav-number">3.1.</span> <span class="nav-text">生成categories页并修改type属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%99%E6%96%87%E7%AB%A0%E6%B7%BB%E5%8A%A0categories"><span class="nav-number">3.2.</span> <span class="nav-text">给文章添加categories</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tag"><span class="nav-number">4.</span> <span class="nav-text">tag</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90tag%E9%A1%B5%E5%B9%B6%E4%BF%AE%E6%94%B9type%E5%B1%9E%E6%80%A7"><span class="nav-number">4.1.</span> <span class="nav-text">生成tag页并修改type属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%99%E6%96%87%E7%AB%A0%E6%B7%BB%E5%8A%A0tag"><span class="nav-number">4.2.</span> <span class="nav-text">给文章添加tag</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E7%AB%A0%E7%9A%84%E5%8F%91%E5%B8%83"><span class="nav-number">5.</span> <span class="nav-text">文章的发布</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">1.</span> <span class="nav-text">参考</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87"><span class="nav-number">2.</span> <span class="nav-text">前期准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%9F%E5%90%8D"><span class="nav-number">2.1.</span> <span class="nav-text">域名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1"><span class="nav-number">2.2.</span> <span class="nav-text">邮件服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%AD%E4%B9%B0VPS"><span class="nav-number">2.3.</span> <span class="nav-text">购买VPS</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -214,7 +211,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://tech.musain.club/2021/09/16/writenewblog/">
+    <link itemprop="mainEntityOfPage" href="https://tech.musain.club/2022/03/02/buildmastodon/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/Head.jpg">
@@ -227,7 +224,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hexo + Markdown写博客
+          Mastodon建站笔记(缓慢搭建中，目前仅到购买VPS)
         </h1>
 
         <div class="post-meta-container">
@@ -237,27 +234,21 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
+      
 
-      <time title="Created: 2021-09-16 17:35:43" itemprop="dateCreated datePublished" datetime="2021-09-16T17:35:43+08:00">2021-09-16</time>
+      <time title="Created: 2022-03-02 14:52:02 / Modified: 16:01:42" itemprop="dateCreated datePublished" datetime="2022-03-02T14:52:02+08:00">2022-03-02</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-10-18 16:06:51" itemprop="dateModified" datetime="2021-10-18T16:06:51+08:00">2021-10-18</time>
-      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
       </span>
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Blog/" itemprop="url" rel="index"><span itemprop="name">Blog</span></a>
+          <a href="/categories/Mastodon/" itemprop="url" rel="index"><span itemprop="name">Mastodon</span></a>
         </span>
           , 
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Blog/Writing/" itemprop="url" rel="index"><span itemprop="name">Writing</span></a>
+          <a href="/categories/Mastodon/Build/" itemprop="url" rel="index"><span itemprop="name">Build</span></a>
         </span>
     </span>
 
@@ -268,7 +259,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>1.2k</span>
+      <span>626</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
@@ -286,69 +277,13 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <center>创建、发布新文章；用vscode + markdown编辑文章；给文章添加分类和标签。</center>
+        <center> mastodon建站笔记：慢慢来，6月之前搞完就行；不要怕，不行就重启试试 </center>
 <span id="more"></span>
 
-<h2 id="新建文章-create-a-post"><a href="#新建文章-create-a-post" class="headerlink" title="新建文章 create a post"></a>新建文章 create a post</h2><p>在博客目录运行命令：</p>
-<pre><code>$ hexo new [layout] title
-# layout有三种:post, draft, page, 默认是post，可以在博客配置文件中更改default_layout来更改默认设置
-# Hexo会根据scaffolds文件夹内相对应的文件来建立md文件
-# 当创建不同布局的md文件时，它们会存储在不同路径
-
-$ hexo new &quot;My New Post&quot;
-#新建一个名为&quot;My New Post&quot;的md文件
-</code></pre>
-<p>后续编辑这个文件即可。</p>
-<h2 id="vscode-markdown写文章"><a href="#vscode-markdown写文章" class="headerlink" title="vscode + markdown写文章"></a>vscode + markdown写文章</h2><p>可按照以下步骤编辑一遍博客文章：</p>
-<ol>
-<li>从<a target="_blank" rel="noopener" href="https://code.visualstudio.com/">官网</a>下载vscode，并安装。  </li>
-<li>安装markdown插件：<ul>
-<li>Markdown All in One: 组合包，把最常用的Markdown优化全部装好</li>
-<li>Markdown Preview Github Styling: 在本地就能预览Markdown文件最终在Github Pages中显示的效果</li>
-</ul>
-</li>
-<li>学习基本的markdown语法，利用vscode编辑文章。同时，利用”Open Preview to the Side”按键或快捷键可同时预览文章</li>
-<li>写完这篇文章</li>
-</ol>
-<h2 id="categories"><a href="#categories" class="headerlink" title="categories"></a>categories</h2><h3 id="生成categories页并修改type属性"><a href="#生成categories页并修改type属性" class="headerlink" title="生成categories页并修改type属性"></a>生成categories页并修改type属性</h3><p>在博客目录运行命令行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new page categories</span><br></pre></td></tr></table></figure>
-<p>运行成功后会提示：</p>
-<pre><code>INFO  Created: ~/Documents/blog/source/categories/index.md
-</code></pre>
-<p>根据所给路径找到index.md文件，在文件的框架内添加一行：</p>
-<pre><code>type: &quot;categories&quot;
-</code></pre>
-<h3 id="给文章添加categories"><a href="#给文章添加categories" class="headerlink" title="给文章添加categories"></a>给文章添加categories</h3><p>在文章头的<code>categories:</code>后以<code>-</code>为标志添加标签，如本文的标签：</p>
-<pre><code>categories:
-- Blog #注意“-”后一定要加空格
-</code></pre>
-<h2 id="tag"><a href="#tag" class="headerlink" title="tag"></a>tag</h2><h3 id="生成tag页并修改type属性"><a href="#生成tag页并修改type属性" class="headerlink" title="生成tag页并修改type属性"></a>生成tag页并修改type属性</h3><p>在博客目录运行命令行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new page tags</span><br></pre></td></tr></table></figure>
-<p>运行成功后会提示：</p>
-<pre><code>INFO  Created: ~/Documents/blog/source/tags/index.md
-</code></pre>
-<p>根据所给路径找到index.md文件，在文件的框架内添加一行：</p>
-<pre><code>type: &quot;tags&quot;
-</code></pre>
-<h3 id="给文章添加tag"><a href="#给文章添加tag" class="headerlink" title="给文章添加tag"></a>给文章添加tag</h3><p>在文章头的<code>tags:</code>后以<code>-</code>为标志添加标签，如本文的标签：</p>
-<pre><code>tags: 
-- Blog #注意“-”后一定要加空格
-- Hexo
-- Markdown
-- vscode
-</code></pre>
-<h2 id="文章的发布"><a href="#文章的发布" class="headerlink" title="文章的发布"></a>文章的发布</h2><p>在博客目录运行命令：</p>
-<pre><code>$ hexo generate
-$ hexo server  # 本地预查看
-$ hexo deploy  # 部署到GitHub Pages
-
-# 此步骤报错可先检查文件头等文章各部分是否缺少空格
-</code></pre>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/156915260">Hexo博客写文章及基本操作</a></li>
-<li><a target="_blank" rel="noopener" href="https://linlif.github.io/2017/05/27/Hexo%E4%BD%BF%E7%94%A8%E6%94%BB%E7%95%A5-%E6%B7%BB%E5%8A%A0%E5%88%86%E7%B1%BB%E5%8F%8A%E6%A0%87%E7%AD%BE/">Hexo使用攻略-添加分类及标签</a></li>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/56943330">[Markdown] 使用vscode开始Markdown写作之旅</a></li>
-</ol>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>参考蓝盒子站长的<a target="_blank" rel="noopener" href="https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/10/19/Mastodon-on-Docker.html">利用docker搭建Mastodon实例</a>，并结合小球飞鱼的<a target="_blank" rel="noopener" href="https://mantyke.icu/2021/mastodon-bulid/">小球飞象建站笔记</a> 和此方的<a target="_blank" rel="noopener" href="https://tech.konata.co/2022-02-10-build-a-mastodon/">Mastodon 建站笔记</a>。<br>感谢大家在建站的同时写下详细的教程和笔记！  </p>
+<h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><h3 id="域名"><a href="#域名" class="headerlink" title="域名"></a>域名</h3><p>常用的域名提供商很多，比如<a target="_blank" rel="noopener" href="https://www.namecheap.com/">NameCheap</a>，<a target="_blank" rel="noopener" href="https://sg.godaddy.com/">godaddy</a>和<a target="_blank" rel="noopener" href="https://www.dynadot.com/">dynadot</a>。可参考o3o站长给出的<a target="_blank" rel="noopener" href="https://www.notion.so/c66e3332f4824f71b9d7d1dc8db410c7">域名选购指南</a>。<br>本站根据蓝盒子站长的推荐，在 NameCheap 购买域名。由于之前给博客换域名(早知道我这么快就要自建站，博客就换个域名了!两年后我博客必换域名!)已经在 NameCheap 买过一次，而且很早就想好要买什么域名，所以这一步成为这个跨越几个月的搭建过程中最简单、最快速的一步。</p>
+<h3 id="邮件服务"><a href="#邮件服务" class="headerlink" title="邮件服务"></a>邮件服务</h3><p>使用 Zoho Mail 提供的 Business Mail 服务中的 Forever Free Plan。<br>由于本人需要很详细的操作步骤才敢进行下一步，这里找了个注册 Zoho Mail 的详细教程 —— <a target="_blank" rel="noopener" href="https://www.dreambuildinglab.com/website-construction/email/how-to-register-free-zoho-business-email.html">注册zoho免费企业邮箱</a>。这个教程虽然详细，但稍微有些过时，有些操作的名称略有更改。如有需要，可再找其它教程参考。  </p>
+<h3 id="购买VPS"><a href="#购买VPS" class="headerlink" title="购买VPS"></a>购买VPS</h3><p>选择 <a target="_blank" rel="noopener" href="https://contabo.com/en/">Contabo</a> 购买 VPS，在购买前将价格修改为欧元，选择德国的服务器，一次性购买 12 个月。<br>这里<a target="_blank" rel="noopener" href="https://mantyke.icu/2021/mastodon-bulid/#%E8%B4%AD%E4%B9%B0vps">小球飞鱼</a>提醒 Contabo 审核严格，最好真实 IP 购买，填写信息时不要太扯，不然会被要求提供身份证明。但我就是那个认真填写还被要求提供护照的倒霉蛋。可能由于时差，上午提供护照信息之后，一直还没收到确认邮件。  </p>
 
     </div>
 
@@ -358,24 +293,18 @@ $ hexo deploy  # 部署到GitHub Pages
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Hexo/" rel="tag"># Hexo</a>
-              <a href="/tags/Blog/" rel="tag"># Blog</a>
-              <a href="/tags/Markdown/" rel="tag"># Markdown</a>
-              <a href="/tags/vscode/" rel="tag"># vscode</a>
+              <a href="/tags/Mastodon/" rel="tag"># Mastodon</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2021/09/16/Hexo-GitHubPages/" rel="prev" title="Hexo + GitHub Pages搭建个人博客">
-                  <i class="fa fa-chevron-left"></i> Hexo + GitHub Pages搭建个人博客
+                <a href="/2021/12/08/deconmixeddata/" rel="prev" title="Computational Deconvolution for More Precise Biological Data">
+                  <i class="fa fa-chevron-left"></i> Computational Deconvolution for More Precise Biological Data
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2021/09/16/blastp/" rel="next" title="blastp的本地化使用">
-                  blastp的本地化使用 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
