@@ -22,13 +22,13 @@
 <script class="next-config" data-name="main" type="application/json">{"hostname":"tech.musain.club","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 <meta name="description" content="mastodon建站笔记：慢慢来，6月之前搞完就行；不要怕，不行就重启试试">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mastodon建站笔记(缓慢搭建中，目前仅到购买VPS)">
+<meta property="og:title" content="Mastodon建站笔记(缓慢搭建中，目前仅到配置系统)">
 <meta property="og:url" content="https://tech.musain.club/2022/03/02/buildmastodon/index.html">
 <meta property="og:site_name" content="Bugrocery">
 <meta property="og:description" content="mastodon建站笔记：慢慢来，6月之前搞完就行；不要怕，不行就重启试试">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-03-02T06:52:02.000Z">
-<meta property="article:modified_time" content="2022-03-02T09:15:16.262Z">
+<meta property="article:modified_time" content="2022-03-03T12:51:46.898Z">
 <meta property="article:author" content="R">
 <meta property="article:tag" content="Mastodon">
 <meta name="twitter:card" content="summary">
@@ -38,10 +38,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://tech.musain.club/2022/03/02/buildmastodon/","path":"2022/03/02/buildmastodon/","title":"Mastodon建站笔记(缓慢搭建中，目前仅到购买VPS)"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://tech.musain.club/2022/03/02/buildmastodon/","path":"2022/03/02/buildmastodon/","title":"Mastodon建站笔记(缓慢搭建中，目前仅到配置系统)"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Mastodon建站笔记(缓慢搭建中，目前仅到购买VPS) | Bugrocery</title>
+<title>Mastodon建站笔记(缓慢搭建中，目前仅到配置系统) | Bugrocery</title>
   
 
 
@@ -146,7 +146,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E7%82%B9%E8%AF%B4%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text">一点说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E4%B8%8E%E8%87%B4%E8%B0%A2"><span class="nav-number">2.</span> <span class="nav-text">参考与致谢</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87"><span class="nav-number">3.</span> <span class="nav-text">前期准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%9F%E5%90%8D"><span class="nav-number">3.1.</span> <span class="nav-text">域名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1"><span class="nav-number">3.2.</span> <span class="nav-text">邮件服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%AD%E4%B9%B0VPS"><span class="nav-number">3.3.</span> <span class="nav-text">购买VPS</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E7%82%B9%E8%AF%B4%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text">一点说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E4%B8%8E%E8%87%B4%E8%B0%A2"><span class="nav-number">2.</span> <span class="nav-text">参考与致谢</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87"><span class="nav-number">3.</span> <span class="nav-text">前期准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%9F%E5%90%8D"><span class="nav-number">3.1.</span> <span class="nav-text">域名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1"><span class="nav-number">3.2.</span> <span class="nav-text">邮件服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%AD%E4%B9%B0VPS"><span class="nav-number">3.3.</span> <span class="nav-text">购买VPS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E7%AB%99"><span class="nav-number">4.</span> <span class="nav-text">建站</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%B3%BB%E7%BB%9F"><span class="nav-number">4.1.</span> <span class="nav-text">配置系统</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -224,7 +224,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Mastodon建站笔记(缓慢搭建中，目前仅到购买VPS)
+          Mastodon建站笔记(缓慢搭建中，目前仅到配置系统)
         </h1>
 
         <div class="post-meta-container">
@@ -234,10 +234,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2022-03-02 14:52:02 / Modified: 17:15:16" itemprop="dateCreated datePublished" datetime="2022-03-02T14:52:02+08:00">2022-03-02</time>
+      <time title="Created: 2022-03-02 14:52:02" itemprop="dateCreated datePublished" datetime="2022-03-02T14:52:02+08:00">2022-03-02</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2022-03-03 20:51:46" itemprop="dateModified" datetime="2022-03-03T20:51:46+08:00">2022-03-03</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -259,14 +265,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>1k</span>
+      <span>1.9k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>1 mins.</span>
+      <span>2 mins.</span>
     </span>
 </div>
 
@@ -280,15 +286,27 @@
         <center> mastodon建站笔记：慢慢来，6月之前搞完就行；不要怕，不行就重启试试 </center>
 <span id="more"></span>
 
-<h2 id="一点说明"><a href="#一点说明" class="headerlink" title="一点说明"></a>一点说明</h2><p>本文所记录的搭建过程非常缓慢而随性，开始搭建于二月，但给自己设定的 DDL 在六月。每一步完成于哪一天、大概耗时都有记录，给想搭建却又嫌麻烦、觉得需要特意安排时间的朋友提供一个佛系搭建参考。  </p>
+<h2 id="一点说明"><a href="#一点说明" class="headerlink" title="一点说明"></a>一点说明</h2><p>本文所记录的搭建非常缓慢，开始于二月，但给自己设定的 DDL 在六月。搭建过程完全碎片化，每次推进都基于“这会儿没什么事情不如搞一搞建站”，且超过一小时就会先放着下次再说，非常随性随意。每一步完成于哪一天、大概耗时都有记录，给想搭建却又嫌麻烦、觉得需要特意安排时间的朋友提供一个佛系搭建参考。  </p>
 <h2 id="参考与致谢"><a href="#参考与致谢" class="headerlink" title="参考与致谢"></a>参考与致谢</h2><p>参考蓝盒子站长的<a target="_blank" rel="noopener" href="https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/10/19/Mastodon-on-Docker.html">利用docker搭建Mastodon实例</a>，并结合塔塔的<a target="_blank" rel="noopener" href="https://mantyke.icu/2021/mastodon-bulid/">小球飞象建站笔记</a> 和此方的<a target="_blank" rel="noopener" href="https://tech.konata.co/2022-02-10-build-a-mastodon/">Mastodon 建站笔记</a>。  </p>
-<p>感谢嘎嘎、塔塔、此方和其他在建站的同时写下详细的教程和笔记的朋友！因为你们和你们的教程，我这种没有参考不敢做事的人才能一点点把实例搭建起来。<br>特别感谢塔塔，给我每完成一步的嘟嘟点星星，给予我很大鼓励！  </p>
-<h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><h3 id="域名"><a href="#域名" class="headerlink" title="域名"></a>域名</h3><p>常用的域名提供商很多，比如<a target="_blank" rel="noopener" href="https://www.namecheap.com/">NameCheap</a>，<a target="_blank" rel="noopener" href="https://sg.godaddy.com/">godaddy</a>和<a target="_blank" rel="noopener" href="https://www.dynadot.com/">dynadot</a>。可参考o3o站长给出的<a target="_blank" rel="noopener" href="https://www.notion.so/c66e3332f4824f71b9d7d1dc8db410c7">域名选购指南</a>。<br>本站根据蓝盒子站长的推荐，在 NameCheap 购买域名。由于之前给博客换域名(早知道我这么快就要自建站，博客就换个域名了!两年后我博客必换域名!)已经在 NameCheap 买过一次，而且很早就想好要买什么域名，所以这一步成为这个跨越几个月的搭建过程中最简单、最快速的一步。  </p>
-<p>该步骤完成于 2022.02.17。约耗时 15 分钟，主要在犹豫到底要不要今天买。</p>
-<h3 id="邮件服务"><a href="#邮件服务" class="headerlink" title="邮件服务"></a>邮件服务</h3><p>使用 Zoho Mail 提供的 Business Mail 服务中的 Forever Free Plan。<br>由于本人需要很详细的操作步骤才敢进行下一步，这里找了个注册 Zoho Mail 的详细教程 —— <a target="_blank" rel="noopener" href="https://www.dreambuildinglab.com/website-construction/email/how-to-register-free-zoho-business-email.html">注册zoho免费企业邮箱</a>。这个教程虽然详细，但稍微有些过时，有些操作的名称略有更改。如有需要，可再找其它教程参考。  </p>
-<p>该步骤完成于 2022.02.21。约耗时 1 小时，因为一些步骤没有明确的参考不太敢试。但实际上没关系，大胆试，不行重来嘛！  </p>
+<p>感谢嘎嘎、塔塔、此方和其他写下详细教程和笔记的朋友！因为你们和你们的教程，我这种没有参考不敢做事的人才能一点点把实例搭建起来。<br>特别感谢塔塔，给我每完成一步的嘟嘟点星星，给予我很大鼓励！  </p>
+<h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><p>前期准备主要是花钱，大多数运营商都支持 Visa、MasterCard 或 PayPal，godaddy 支持支付宝付款。<br>为能有更多选择，个人建议开通 PayPal，比办信用卡方便一些。本文中的所有支付就是通过 PayPal 完成。如使用 PayPal 付款，建议付款时直接使用目标货币，而不使用 PayPal 提供的转换为人民币付款。这种情况下付款使用的是银行汇率，会比 PayPal 划算。  </p>
+<h3 id="域名"><a href="#域名" class="headerlink" title="域名"></a>域名</h3><p>常用的域名提供商很多，比如<a target="_blank" rel="noopener" href="https://www.namecheap.com/">NameCheap</a>，<a target="_blank" rel="noopener" href="https://sg.godaddy.com/">godaddy</a>和<a target="_blank" rel="noopener" href="https://www.dynadot.com/">dynadot</a>。可参考o3o站长给出的<a target="_blank" rel="noopener" href="https://www.notion.so/c66e3332f4824f71b9d7d1dc8db410c7">域名选购指南</a>。<br>本站根据蓝盒子站长的推荐，在 NameCheap 购买域名。由于之前给博客换域名(早知道我这么快就要自建站，博客就换个域名了!两年后我博客必换域名!)已经在 NameCheap 买过一次，而且很早就想好要买什么域名，所以这一步成为这个跨越几个月的搭建过程中最简单、最快速的一步。  </p>
+<p>该步骤完成于 2022.02.17。约耗时 15 分钟，主要在犹豫到底要不要这天买，实际操作只用掉两三分钟。</p>
+<h3 id="邮件服务"><a href="#邮件服务" class="headerlink" title="邮件服务"></a>邮件服务</h3><p>使用 Zoho Mail 提供的 Business Mail 服务中的 Forever Free Plan。<br>由于本人需要很详细的操作步骤才敢进行下一步，这里找了个注册 Zoho Mail 的详细教程 —— <a target="_blank" rel="noopener" href="https://www.dreambuildinglab.com/website-construction/email/how-to-register-free-zoho-business-email.html">注册zoho免费企业邮箱</a>。这个教程虽然详细，但稍微有点过时，有些操作的名称略有更改。如有需要，可再找其它教程参考。  </p>
+<p>该步骤完成于 2022.02.21。约耗时 40 分钟，因为一些步骤没有明确的参考不太敢试，必须找到别人这一步怎么做才动手。但实际上没关系，大胆试，不行重来嘛！  </p>
 <h3 id="购买VPS"><a href="#购买VPS" class="headerlink" title="购买VPS"></a>购买VPS</h3><p>选择 <a target="_blank" rel="noopener" href="https://contabo.com/en/">Contabo</a> 购买 VPS，在购买前将价格修改为欧元，选择5欧套餐，德国服务器，一次性购买 12 个月，其它选项全部默认。<br>这里塔塔提醒<a target="_blank" rel="noopener" href="https://mantyke.icu/2021/mastodon-bulid/#%E8%B4%AD%E4%B9%B0vps"> Contabo 审核严格</a>，最好真实 IP 购买，填写信息时不要太扯，不然会被要求提供身份证明。但我就是那个认真填写还被要求提供护照的倒霉蛋。由于目前和德国有 7 个小时时差，上午提供护照信息后，一直到下午四点多才收到确认邮件。  </p>
-<p>该步骤完成于 2022.03.02。约耗时 15 分钟加 19 小时，15 分钟是实际需要操作的时间，包括提供护照信息；19 小时是由于买服务器时护照不在手边，第二天上午才回复，下午收到确认。</p>
+<p>该步骤完成于 2022.03.02。约耗时 15 分钟加 19 小时，15 分钟是实际需要操作的时间，包括提供护照信息；19 小时是由于买服务器时护照不在手边，第二天上午才回复，下午收到确认。  </p>
+<h2 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h2><h3 id="配置系统"><a href="#配置系统" class="headerlink" title="配置系统"></a>配置系统</h3><p>这一部分参考<a target="_blank" rel="noopener" href="https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/10/19/Mastodon-on-Docker.html">蓝盒子站长教程</a>。  </p>
+<ul>
+<li><p>配置 ssh-key<br>首先查看电脑当前用户的目录下是否存在.ssh目录，以及目录中是否存在<code>id_rsa</code>和<code>id_rsa.pub</code>两个文件。如果存在，公钥即为<code>id_rsa.pub</code>中的内容。如果不存在，则输入命令：  </p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C “your_email”</span><br></pre></td></tr></table></figure>
+<p>一路回车，直到生成一个矩形的图案为止，生成的这串字符就是后面需要的公钥。  </p>
+<p>接下来的步骤全部按照蓝盒子站长的教程进行，但我遇到了一个愚蠢的问题，不会保存 nano 编辑的内容并退出。即使编辑器下方有两行提醒，也没能正确保存文件。万一有朋友和我一样，可参考以下保存并退出的方法：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># ^ 为键盘上的 Ctrl 键，以下方法直接使用 Ctrl 代替</span><br><span class="line"># 退出，并根据提示保存</span><br><span class="line">Ctrl + X 退出，按 y 选择保存，提示 file name to write，利用上下左右键选择要保存到的文件，回车保存</span><br><span class="line"># 退出，并保存</span><br><span class="line">Ctrl + X 退出，按 y 选择保存，回车</span><br><span class="line"># 先保存，后退出</span><br><span class="line">Ctrl + O 并回车保存，Ctrl + X 退出</span><br></pre></td></tr></table></figure></li>
+<li><p>安装常用命令和配置防火墙<br>直接照抄蓝盒子站长给的命令，都非常顺利。  </p>
+</li>
+</ul>
+<p>该步骤完成于 2022.03.03。约耗时 55 分钟，主要由于不会保存 nano 编辑的内容，根据各种教程也总是保存失败。中途一度试图换回之前常用的 vim，但事实证明两年没用就会忘记一切。如果能顺利保存，这一步十分钟以内就可以完成。  </p>
 
     </div>
 
@@ -342,7 +360,7 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>Symbols count total: </span>
-    <span title="Symbols count total">49k</span>
+    <span title="Symbols count total">50k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">

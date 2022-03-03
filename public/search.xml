@@ -337,20 +337,32 @@ main() # 运行上述函数
       </tags>
   </entry>
   <entry>
-    <title>Mastodon建站笔记(缓慢搭建中，目前仅到购买VPS)</title>
+    <title>Mastodon建站笔记(缓慢搭建中，目前仅到配置系统)</title>
     <url>/2022/03/02/buildmastodon/</url>
     <content><![CDATA[<center> mastodon建站笔记：慢慢来，6月之前搞完就行；不要怕，不行就重启试试 </center>
 <span id="more"></span>
 
-<h2 id="一点说明"><a href="#一点说明" class="headerlink" title="一点说明"></a>一点说明</h2><p>本文所记录的搭建过程非常缓慢而随性，开始搭建于二月，但给自己设定的 DDL 在六月。每一步完成于哪一天、大概耗时都有记录，给想搭建却又嫌麻烦、觉得需要特意安排时间的朋友提供一个佛系搭建参考。  </p>
+<h2 id="一点说明"><a href="#一点说明" class="headerlink" title="一点说明"></a>一点说明</h2><p>本文所记录的搭建非常缓慢，开始于二月，但给自己设定的 DDL 在六月。搭建过程完全碎片化，每次推进都基于“这会儿没什么事情不如搞一搞建站”，且超过一小时就会先放着下次再说，非常随性随意。每一步完成于哪一天、大概耗时都有记录，给想搭建却又嫌麻烦、觉得需要特意安排时间的朋友提供一个佛系搭建参考。  </p>
 <h2 id="参考与致谢"><a href="#参考与致谢" class="headerlink" title="参考与致谢"></a>参考与致谢</h2><p>参考蓝盒子站长的<a href="https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/10/19/Mastodon-on-Docker.html">利用docker搭建Mastodon实例</a>，并结合塔塔的<a href="https://mantyke.icu/2021/mastodon-bulid/">小球飞象建站笔记</a> 和此方的<a href="https://tech.konata.co/2022-02-10-build-a-mastodon/">Mastodon 建站笔记</a>。  </p>
-<p>感谢嘎嘎、塔塔、此方和其他在建站的同时写下详细的教程和笔记的朋友！因为你们和你们的教程，我这种没有参考不敢做事的人才能一点点把实例搭建起来。<br>特别感谢塔塔，给我每完成一步的嘟嘟点星星，给予我很大鼓励！  </p>
-<h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><h3 id="域名"><a href="#域名" class="headerlink" title="域名"></a>域名</h3><p>常用的域名提供商很多，比如<a href="https://www.namecheap.com/">NameCheap</a>，<a href="https://sg.godaddy.com/">godaddy</a>和<a href="https://www.dynadot.com/">dynadot</a>。可参考o3o站长给出的<a href="https://www.notion.so/c66e3332f4824f71b9d7d1dc8db410c7">域名选购指南</a>。<br>本站根据蓝盒子站长的推荐，在 NameCheap 购买域名。由于之前给博客换域名(早知道我这么快就要自建站，博客就换个域名了!两年后我博客必换域名!)已经在 NameCheap 买过一次，而且很早就想好要买什么域名，所以这一步成为这个跨越几个月的搭建过程中最简单、最快速的一步。  </p>
-<p>该步骤完成于 2022.02.17。约耗时 15 分钟，主要在犹豫到底要不要今天买。</p>
-<h3 id="邮件服务"><a href="#邮件服务" class="headerlink" title="邮件服务"></a>邮件服务</h3><p>使用 Zoho Mail 提供的 Business Mail 服务中的 Forever Free Plan。<br>由于本人需要很详细的操作步骤才敢进行下一步，这里找了个注册 Zoho Mail 的详细教程 —— <a href="https://www.dreambuildinglab.com/website-construction/email/how-to-register-free-zoho-business-email.html">注册zoho免费企业邮箱</a>。这个教程虽然详细，但稍微有些过时，有些操作的名称略有更改。如有需要，可再找其它教程参考。  </p>
-<p>该步骤完成于 2022.02.21。约耗时 1 小时，因为一些步骤没有明确的参考不太敢试。但实际上没关系，大胆试，不行重来嘛！  </p>
+<p>感谢嘎嘎、塔塔、此方和其他写下详细教程和笔记的朋友！因为你们和你们的教程，我这种没有参考不敢做事的人才能一点点把实例搭建起来。<br>特别感谢塔塔，给我每完成一步的嘟嘟点星星，给予我很大鼓励！  </p>
+<h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><p>前期准备主要是花钱，大多数运营商都支持 Visa、MasterCard 或 PayPal，godaddy 支持支付宝付款。<br>为能有更多选择，个人建议开通 PayPal，比办信用卡方便一些。本文中的所有支付就是通过 PayPal 完成。如使用 PayPal 付款，建议付款时直接使用目标货币，而不使用 PayPal 提供的转换为人民币付款。这种情况下付款使用的是银行汇率，会比 PayPal 划算。  </p>
+<h3 id="域名"><a href="#域名" class="headerlink" title="域名"></a>域名</h3><p>常用的域名提供商很多，比如<a href="https://www.namecheap.com/">NameCheap</a>，<a href="https://sg.godaddy.com/">godaddy</a>和<a href="https://www.dynadot.com/">dynadot</a>。可参考o3o站长给出的<a href="https://www.notion.so/c66e3332f4824f71b9d7d1dc8db410c7">域名选购指南</a>。<br>本站根据蓝盒子站长的推荐，在 NameCheap 购买域名。由于之前给博客换域名(早知道我这么快就要自建站，博客就换个域名了!两年后我博客必换域名!)已经在 NameCheap 买过一次，而且很早就想好要买什么域名，所以这一步成为这个跨越几个月的搭建过程中最简单、最快速的一步。  </p>
+<p>该步骤完成于 2022.02.17。约耗时 15 分钟，主要在犹豫到底要不要这天买，实际操作只用掉两三分钟。</p>
+<h3 id="邮件服务"><a href="#邮件服务" class="headerlink" title="邮件服务"></a>邮件服务</h3><p>使用 Zoho Mail 提供的 Business Mail 服务中的 Forever Free Plan。<br>由于本人需要很详细的操作步骤才敢进行下一步，这里找了个注册 Zoho Mail 的详细教程 —— <a href="https://www.dreambuildinglab.com/website-construction/email/how-to-register-free-zoho-business-email.html">注册zoho免费企业邮箱</a>。这个教程虽然详细，但稍微有点过时，有些操作的名称略有更改。如有需要，可再找其它教程参考。  </p>
+<p>该步骤完成于 2022.02.21。约耗时 40 分钟，因为一些步骤没有明确的参考不太敢试，必须找到别人这一步怎么做才动手。但实际上没关系，大胆试，不行重来嘛！  </p>
 <h3 id="购买VPS"><a href="#购买VPS" class="headerlink" title="购买VPS"></a>购买VPS</h3><p>选择 <a href="https://contabo.com/en/">Contabo</a> 购买 VPS，在购买前将价格修改为欧元，选择5欧套餐，德国服务器，一次性购买 12 个月，其它选项全部默认。<br>这里塔塔提醒<a href="https://mantyke.icu/2021/mastodon-bulid/#%E8%B4%AD%E4%B9%B0vps"> Contabo 审核严格</a>，最好真实 IP 购买，填写信息时不要太扯，不然会被要求提供身份证明。但我就是那个认真填写还被要求提供护照的倒霉蛋。由于目前和德国有 7 个小时时差，上午提供护照信息后，一直到下午四点多才收到确认邮件。  </p>
-<p>该步骤完成于 2022.03.02。约耗时 15 分钟加 19 小时，15 分钟是实际需要操作的时间，包括提供护照信息；19 小时是由于买服务器时护照不在手边，第二天上午才回复，下午收到确认。</p>
+<p>该步骤完成于 2022.03.02。约耗时 15 分钟加 19 小时，15 分钟是实际需要操作的时间，包括提供护照信息；19 小时是由于买服务器时护照不在手边，第二天上午才回复，下午收到确认。  </p>
+<h2 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h2><h3 id="配置系统"><a href="#配置系统" class="headerlink" title="配置系统"></a>配置系统</h3><p>这一部分参考<a href="https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/10/19/Mastodon-on-Docker.html">蓝盒子站长教程</a>。  </p>
+<ul>
+<li><p>配置 ssh-key<br>首先查看电脑当前用户的目录下是否存在.ssh目录，以及目录中是否存在<code>id_rsa</code>和<code>id_rsa.pub</code>两个文件。如果存在，公钥即为<code>id_rsa.pub</code>中的内容。如果不存在，则输入命令：  </p>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C “your_email”</span><br></pre></td></tr></table></figure>
+<p>一路回车，直到生成一个矩形的图案为止，生成的这串字符就是后面需要的公钥。  </p>
+<p>接下来的步骤全部按照蓝盒子站长的教程进行，但我遇到了一个愚蠢的问题，不会保存 nano 编辑的内容并退出。即使编辑器下方有两行提醒，也没能正确保存文件。万一有朋友和我一样，可参考以下保存并退出的方法：  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># ^ 为键盘上的 Ctrl 键，以下方法直接使用 Ctrl 代替</span><br><span class="line"># 退出，并根据提示保存</span><br><span class="line">Ctrl + X 退出，按 y 选择保存，提示 file name to write，利用上下左右键选择要保存到的文件，回车保存</span><br><span class="line"># 退出，并保存</span><br><span class="line">Ctrl + X 退出，按 y 选择保存，回车</span><br><span class="line"># 先保存，后退出</span><br><span class="line">Ctrl + O 并回车保存，Ctrl + X 退出</span><br></pre></td></tr></table></figure></li>
+<li><p>安装常用命令和配置防火墙<br>直接照抄蓝盒子站长给的命令，都非常顺利。  </p>
+</li>
+</ul>
+<p>该步骤完成于 2022.03.03。约耗时 55 分钟，主要由于不会保存 nano 编辑的内容，根据各种教程也总是保存失败。中途一度试图换回之前常用的 vim，但事实证明两年没用就会忘记一切。如果能顺利保存，这一步十分钟以内就可以完成。  </p>
 ]]></content>
       <categories>
         <category>Mastodon</category>
@@ -361,81 +373,99 @@ main() # 运行上述函数
       </tags>
   </entry>
   <entry>
-    <title>Computational Deconvolution for More Precise Biological Data</title>
-    <url>/2021/12/08/deconmixeddata/</url>
-    <content><![CDATA[<center> 文献阅读：解卷积可从混合的生物学数据中解得各细胞类型比例，或估计各细胞类型的表达谱，为研究提供更准确的样本数据 </center>
+    <title>长毛象使用指南</title>
+    <url>/2021/09/21/mstdn/</url>
+    <content><![CDATA[<center>不少朋友被我安利到长毛象(mastodon)玩耍，本着对他们负责的态度，写下这篇长毛象使用指南。</center>
 <span id="more"></span>
 
-<h2 id="Deconvolution"><a href="#Deconvolution" class="headerlink" title="Deconvolution"></a>Deconvolution</h2><p><strong>Deconvolution</strong> 译作反卷积或解卷积。解卷积是一种基于算法的过程，用于反转卷积对记录数据的影响。<br>生物学数据，如 DNA expression、RNA sequencing、Protein expression 等，很难真正得到来自特定组织的“纯数据”。如血液中含有来自不同组织的细胞、外泌体等，由此得来的生物学数据将是不同类型细胞的混合数据。这时就需要通过解卷积，从混合的生物数据中解得不同类型细胞的比例、表达谱。  </p>
-<h2 id="基本模型"><a href="#基本模型" class="headerlink" title="基本模型"></a>基本模型</h2><p>测得的数据为不同类型细胞按照一定比例混合在一起的结果。  </p>
+<h2 id="什么是mastodon"><a href="#什么是mastodon" class="headerlink" title="什么是mastodon"></a>什么是mastodon</h2><p>Mastodon(长毛象)是一个开源、去中心化的社交平台。简单来说，这里没有屏蔽词，没有限流，没有铺天盖地的营销号，没有Doctor看了都想重启宇宙的混乱时间线，只是一个纯粹的社交平台。长毛象将内容、社交网络交还给用户，更加尊重用户而不是平台“霸权”。<br><strong>如果将联邦宇宙(Fediverse)看做一个宇宙，那么每一个长毛象站点(Mastodon Society)就像一颗颗星球。</strong> 也就是说，你可以选择任何一颗星球定居，哪怕只是居住着一个人，只要它与宇宙相通，那么你就可以联系到宇宙中任何一个人而不会孤单。(摘自pullopen对长毛象的介绍：<a href="https://pullopenbluebox.wordpress.com/2020/06/30/mastodon-introduction/">长毛象（Mastodon）：更尊重用户的社交平台</a> )</p>
+<h2 id="如何在mastodon拥有一个账号"><a href="#如何在mastodon拥有一个账号" class="headerlink" title="如何在mastodon拥有一个账号"></a>如何在mastodon拥有一个账号</h2><h3 id="选择站点"><a href="#选择站点" class="headerlink" title="选择站点"></a>选择站点</h3><p>长毛象有各种各样的站点(或称实例)，如二次元相关站、LGBTQ站、艺术类站，或者按照语言划分的小语种站点等等。可以在官网列出的<a href="https://joinmastodon.org/communities">站点列表</a>里找到一个喜欢又适合的站点。<br>一开始使用建议在一些大型的国际站点注册，限制较少，每天都有很多世界各地的人在时间线上灌水，如</p>
 <ul>
-<li>测得的表达矩阵为 <em>X</em>，则 x<sub>ij</sub> 表示 gene<sub>i</sub> 在 sample<sub>j</sub> 中的表达量或表达强度  </li>
-<li>比例矩阵为 <em>R</em>，则 r<sub>kj</sub> 表示 k 类细胞在 sample<sub>j</sub> 中所占比例  </li>
-<li>各细胞真实表达谱组成的矩阵为 <em>S</em>，则 s<sub>ik</sub> 表示表示 gene<sub>i</sub> 在 k 类细胞中的表达量或表达强度  </li>
+<li><a href="https://mastodon.social/">https://mastodon.social</a></li>
+<li><a href="https://mastodon.online/">https://mastodon.online</a></li>
+<li><a href="https://mstdn.social/">https://mstdn.social</a>  </li>
 </ul>
-<p><img src="/2021/12/08/deconmixeddata/decon.png">  </p>
-<h2 id="解卷积算法"><a href="#解卷积算法" class="headerlink" title="解卷积算法"></a>解卷积算法</h2><p>针对不同情况有不同的算法，根据项目中的先验知识选择合适的解卷积方法以达到最佳效果。<br>生物数据解卷积分为完全解卷积和不完全解卷积。  </p>
+<p>使用一段时间，对各项操作都熟悉之后，可进一步选择更适合自己的小站点注册并迁移账号，或者继续呆在国际站点也无妨。<br>也可以在中文站点，或者中文用户较多的站点注册。这样在查看local timeline(本地轴)时都是中文，方便遇到志同道合的朋友。但无论在哪个站点注册，都建议阅读过<strong>服务器规则</strong>和<strong>服务条款</strong>后再进行，这两项通常都放在注册页面。<br>熟悉长毛象后，发现没有一个站点完全符合自己的想法，也可以自建站加入长毛象宇宙。搭建长毛象站点有很多简单易上手的教程可供参考，即使是计算机小白也能拥有属于自己的站点。可参考的教程：</p>
 <ul>
-<li><strong>完全解卷积</strong>：指混合细胞类型数目、比例和各细胞表达谱未知，仅依赖混合表达数据将它们解出来，即已知混合表达矩阵 <em>X</em>，解比例矩阵 <em>R</em> 和各细胞表达矩阵 <em>S</em>。完全解卷积的完全指细胞表达谱和比例都在算法中一次性解得。  </li>
-<li><strong>不完全解卷积</strong>：指已知混合表达谱、细胞类型数目、比例，解各细胞表达谱，即已知比例矩阵 <em>R</em> 和混合表达矩阵 <em>X</em>，解矩阵各细胞表达矩阵 <em>S</em>。不完全是相对于完全解卷积而言，仅解得各细胞表达谱。  </li>
+<li><a href="https://docs.joinmastodon.org/zh-cn/admin/prerequisites/">官方建站文档</a></li>
+<li><a href="https://www.notion.so/Mastodon-042a05ee29a048df8b2c1afd49e4c49b">长毛象（Mastodon）社区搭建详解</a></li>
+<li><a href="https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/07/19/How-to-build-a-mastodon-instance.html">技术小白如何搭建Mastodon实例</a></li>
+<li><a href="https://morikka.me/blog/mastodon-personal-instance/">长毛象个人向建站</a></li>
 </ul>
-<h3 id="完全解卷积"><a href="#完全解卷积" class="headerlink" title="完全解卷积"></a>完全解卷积</h3><h4 id="LinSeed"><a href="#LinSeed" class="headerlink" title="LinSeed"></a><a href="https://doi.org/10.1038/s41467-019-09990-5">LinSeed</a></h4><p>通过计算共线性网络 (Collinearity Network) 得到各类型细胞的 markers，利用 markers 对混合数据进行完全解卷积，同时得到各组分的比例和表达谱。<br><img src="/2021/12/08/deconmixeddata/LinSeed.jpg"></p>
-<p><strong>Code availability:</strong>   </p>
+<h3 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h3><p>只要在一个站点注册，就可以连上整个长毛象宇宙，看到所有在用户和他们公开可见的嘟文，所以只需选择一个合适的站点注册账号即可。但由于站点服务器大多在中国境外，有被墙掉的风险，很多人会选择在多个站点注册账号，避免一个站点被GFW盯上ban掉就难以连上长毛象宇宙。<br>邮箱是各站点注册的必须品，注册成功后也可以更改。建议使用gmail、protonmail等邮箱服务，避免使用qq邮箱一类能直接指向使用者的邮箱。一些站点还需要填写入站申请或入站理由等以便站长和管理员审核注册人，通过审核之后便可成功注册，在长毛象宇宙自由玩耍。</p>
+<h2 id="如何使用mastodon"><a href="#如何使用mastodon" class="headerlink" title="如何使用mastodon"></a>如何使用mastodon</h2><h3 id="Timeline-时间轴"><a href="#Timeline-时间轴" class="headerlink" title="Timeline(时间轴)"></a>Timeline(时间轴)</h3><p>Timeline简称为TL，完全按照时间来排列嘟文，不必担心出现时间线混乱、只给你看热度高的嘟文或塞给你不想看的广告、推广。<br>一般情况下，时间线有三种：</p>
 <ul>
-<li>R  </li>
-<li><a href="https://github.com/ctlab/linseed">https://github.com/ctlab/linseed</a>  </li>
+<li><strong>Home</strong> timeline，简称HTL，即首页。这是账号持有人自行关注而产生的时间线，能看到public、unlist、followers-only的嘟文(包括回复)以及提到你的direct message。</li>
+<li><strong>Local</strong> timeline，简称LTL，即本站(地)轴。这是账号所在站点的时间线，只有该站点的公开嘟文会出现在这里。</li>
+<li><strong>Federate</strong> timeline，简称FTL，即跨站轴。这是无论站点、所有账号嘟出的public内容共同组成的时间轴，能够看到世界各地的人都在这里发出自己的嘟嘟。</li>
 </ul>
-<h4 id="Deblender"><a href="#Deblender" class="headerlink" title="Deblender"></a><a href="https://doi.org/10.1186/s12859-018-2442-5">Deblender</a></h4><p>Deblender 是一个灵活的完全去卷积工具。基于用户对已知标记基因列表和细胞/组织组成信息的访问 (access)，以半/无监督模式运行。在没有先验知识的情况下，全局基因表达的变异性被用于混合数据的聚类，以聚类集代替标记集。<br><img src="/2021/12/08/deconmixeddata/Debledner.jpg">  </p>
-<p><strong>Code availability:</strong>   </p>
+<p>通过设置<code>preferences (首选项) -&gt; other (其它) -&gt; PUBLIC TIMELINES-Filter languages (公共时间轴-语言过滤)</code>，可过滤时间线上的语言，只留下自己想看的语言。但这个过滤并不完全，公共轴或本站轴仍会出现一些应该被过滤掉的语言。 </p>
+<h3 id="基本功能"><a href="#基本功能" class="headerlink" title="基本功能"></a>基本功能</h3><ul>
+<li><p>发嘟  </p>
 <ul>
-<li>MATLAB  </li>
-<li><a href="https://github.com/kondim1983/Deblender/">https://github.com/kondim1983/Deblender/</a>  </li>
+<li>可见范围<br>发嘟可选择四种可见范围：public (公开)，unlist (公开，但不出现在公共时间轴)，followers-only (仅关注者可见)，direct message (私信，也可用作发仅自己可见的嘟文)。在设置中可以选择默认发嘟可见范围。</li>
+<li>cw折叠功能<br>一些不想被直接看到或者含有可能令人不适内容的嘟文推荐使用cw。点击发嘟窗口下方的cw就会出现一个新的小窗口，在这个新的小窗口填上内容提示信息，在发嘟主要窗口填写主要内容。<del>这个功能也很好地被用来讲冷笑话</del>  </li>
+<li>标记敏感内容<br>如果发的嘟文/图片含有not safe for work(NSFW，包括色情、暴力、血腥等)的内容，需要在发嘟时将图片标记为敏感信息，且善用cw折叠功能。</li>
 </ul>
-<h4 id="CDSeq"><a href="#CDSeq" class="headerlink" title="CDSeq"></a><a href="https://doi.org/10.1371/journal.pcbi.1007510">CDSeq</a></h4><p>CDSeq 仅使用来自大量组织样本的 RNA-Seq 数据来同时估计细胞类型比例和细胞类型特异性表达谱。<br><img src="/2021/12/08/deconmixeddata/CDSeq1.jpg"><br><img src="/2021/12/08/deconmixeddata/CDSeq2.jpg">  </p>
-<p><strong>Code availability:</strong>   </p>
+</li>
+<li><p>回复<br>左下角箭头是回复功能，回复也可以设置不同的可见范围。在此处如果设置followers-only，被回复者即使没有关注你，也可以看到。回复的嘟嘟仅会出现在同时关注对话双方的账号首页时间线(Home Timeline)。这样尽最大可能避免参与对话者以外的人的打扰，使对话双方处于平等地位，不会出现因一方粉丝过多看到回复一拥而上的现象。各个时间轴设置(一般在主区域右上角)中可设置该时间轴不显示回复类嘟文。</p>
+</li>
+<li><p>转发<br>长毛象的转发是仅转发，不能带文字。这样很好的避免了类似微博上转发挂人形成骂战的现象。在账号设置中选择<code>在时间轴中合并转嘟</code>，以避免一篇嘟文被太多人转发刷屏时间轴的情况。各个时间轴设置(一般在主区域右上角)中可设置该时间轴不显示转发类嘟文，公共轴一般默认不显示转发。</p>
+</li>
+<li><p>喜欢<br>这里的⭐是favourite的意思，类似点赞功能。点赞代表赞同、安慰还是这里有个言论我mark一下就看使用者自己的想法，但通常来说都是<strong>赞</strong>！  </p>
+</li>
+<li><p>书签<br>bookmark是书签，或者称为收藏功能，这个功能与大多数平台相似，不再赘述。</p>
+</li>
+</ul>
+<h3 id="头像、昵称、profile、标签"><a href="#头像、昵称、profile、标签" class="headerlink" title="头像、昵称、profile、标签"></a>头像、昵称、profile、标签</h3><p>一些站点固定期限内没有头像、昵称和嘟文的“三无账号”会被清除收回，注意阅读站点规则避免注册之后账号被回收。既然已经决定抛弃微博等在用户时间线上搞动作的平台，就不要只是注册个账号放着，用起来！</p>
+<h3 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h3><ul>
+<li><p>锁嘟<br>锁定账号(选项在个人资料页面)，需要手动审核所有关注请求。即每个想要关注你账号的人需要先发送关注请求，你通过之后方可关注你的账号以及看到你的followers-only的嘟文。与instgram的锁账号不同，即使挂上小锁其他人仍能看到公开可见的嘟文。如果有较多敏感嘟文不想随意被人看到，可定期删除或选择followers-only、direct message这两种可见范围。</p>
+</li>
+<li><p>语言<br>通过<code>Preferences (首选项) -&gt; Appearance (外观) -&gt; Interface language (界面语言)</code>设置平台语言。由于各语种都是志愿者翻译，可能会出现错误或词不达意，但基本不影响使用。</p>
+</li>
+<li><p>过滤器<br>这里的过滤器是真的过滤掉包含关键字的嘟文，但可能会在原本应该是一条嘟文的地方出现<code>filtered</code>的提醒。过滤器可以设置失效时间、作用场景等。</p>
+</li>
+<li><p>邮件通知<br><code>Preferences (首选项) -&gt; Notifications (通知)</code>里的邮件提醒建议关掉，避免发送过多邮件给站长的邮件服务造成不必要的负担。</p>
+</li>
+<li><p>其它<br>界面语言设置为惯用语言后，其它设置可自行探索。</p>
+</li>
+</ul>
+<h3 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h3><p>Mastodon故意弱化了搜索功能，避免形成“广场”，从而导致有人随便搜索一个关键词便前来抬杠或骂人的行为。但这也在一定程度上造成使用者的不便，比如明明有印象一条嘟嘟，但根本找不到，所以需要使用者自己多注意收藏有用的信息。有些站点开了全文搜索，会让搜索结果好一些，如自己的嘟文或转发、点赞过的嘟文能够搜索，但无法实现真正的“搜索”。 </p>
+<h3 id="block-mute"><a href="#block-mute" class="headerlink" title="block / mute"></a>block / mute</h3><p>block即拉黑/屏蔽。拉黑后，该账号无法与你互动、关注，嘟文不会出现在你的时间线。<br>mute即隐藏。隐藏后，该账号的嘟文不会出现在你的时间线，但仍可与你互动、关注，而你不会收到任何提醒。</p>
+<h3 id="迁移账号"><a href="#迁移账号" class="headerlink" title="迁移账号"></a>迁移账号</h3><p>长毛象的一大优点就是站点多，且类型丰富。如果看上了别的站点，可以在新站点注册账号后将账号迁移过去。迁移账号可以自动将followers/following转移到新账号，但无法迁移旧帐号的嘟文。</p>
+<h3 id="账号备份"><a href="#账号备份" class="headerlink" title="账号备份"></a>账号备份</h3><p>长毛象自带的备份功能可以备份follower列表、following列表、mute列表、block列表等。如果想要备份嘟文，可以使用象友提供的<a href="https://github.com/slashyn/mastodon-archive-viewer-modified">备份插件</a>。<br>由于各个站点的维护仅依赖站长和可能有的站点管理员，所以可能会有不稳定、服务器出问题等状况出现，有时整个站点也会关闭不再运行，及时备份账号内容是个好习惯。</p>
+<h3 id="app"><a href="#app" class="headerlink" title="app"></a>app</h3><p>长毛象作为一个去中心化的平台，最佳访问方式是直接浏览器访问，如Chrome、Firefox、safari等。这些浏览器可以在手机主屏幕创建快捷方式，在手机桌面单独形成一个图标和有一个app没有太大差别。<br>如果仍需要一个app，可选择的有：</p>
 <ul>
-<li>MATLAB and Octave  </li>
-<li><a href="https://github.com/kkang7/CDSeq">https://github.com/kkang7/CDSeq</a>  </li>
+<li><p><strong>Android</strong>: Tusky, Subway Tooter, Fedilab(付费)</p>
+</li>
+<li><p><strong>iOS</strong>: Metatext, Mercury, iMast, Amaroq, Mast(付费), Toot!(付费)  </p>
+</li>
+<li><p><strong>tooot</strong>：对于中文用户，推荐使用tooot。这是一个专注于中文社区的简洁、开源长毛象手机客户端，跨平台支持iOS和Android。 </p>
+</li>
+<li><p><strong>其它</strong>：其它平台应用推荐可查看<a href="https://joinmastodon.org/apps">官网应用推荐</a>。  </p>
+</li>
 </ul>
-<h4 id="Deconf"><a href="#Deconf" class="headerlink" title="Deconf"></a><a href="https://doi.org/10.1186/1471-2105-11-27">Deconf</a></h4><p>Deconf 证明了从单个样本的基因表达数据中预测构成细胞类型的比例的可行性，这是基于去粗取精的分类方法的前提条件。  </p>
-<p><strong>Code availability:</strong>   </p>
-<ul>
-<li>R  </li>
-<li><a href="https://static-content.springer.com/esm/art%3A10.1186%2F1471-2105-11-27/MediaObjects/12859_2009_3484_MOESM1_ESM.ZIP">example data and script</a>  </li>
+<h3 id="tag"><a href="#tag" class="headerlink" title="tag"></a>tag</h3><p>作为一个公共社交网络，这里也可以带话题(tag)发嘟。格式和Instagram一样，只需要一个<code>#</code>，如<code>#tag</code>。<br>长毛象已经有很多有趣或有用的tag，如<code>#长毛象中文使用指南</code>、<code>#长毛象安利交换大会</code>、<code>#资源分享</code>、<code>#菜谱</code>，还有季节性的赏花、赏月tag。也可以创建自己的专属tag，把某类嘟文存在这个tag下，方便自己查看。</p>
+<h3 id="一些好玩的账号"><a href="#一些好玩的账号" class="headerlink" title="一些好玩的账号"></a>一些好玩的账号</h3><ul>
+<li><p>骰寶機<br>吃喝玩乐都可以找它！想不到晚饭吃什么，发嘟@骰宝问吃什么，不出一分钟就会回复一种食物。问它喝什么同理。还有好玩又有趣的答案之书和对不对判断。具体玩法可查看骰宝账号主页了解。</p>
+</li>
+<li><p>妙仙包<br>想知道心中之事的结果？找大师求签、塔罗牌都能给你一个奇妙的答案。选择困难症？找包包真普选，轻松治愈选择困难。心中有愿还可对着大师许愿，有机会被大师选中实现。具体玩法查看妙仙包账号主页了解。</p>
+</li>
+<li><p>sci咖啡屋<br>这里可以点单饮品、套餐，但一定要吃完不可浪费。累了还可以在这里撸猫，猫猫送上缓解疲惫。具体玩法查看sci咖啡屋账号主页了解。</p>
+</li>
+<li><p>Mature[マツレ]<br>Mature是长毛象上最早的科学期刊之一，也是长毛象最权威及最有名望的学术期刊之一。每周最重要、最前沿的研究结果是在「Mature」中以论文导读的形式发表的。欢迎订阅，支持投稿。投稿方法详见Mature账号主页。</p>
+</li>
 </ul>
-<h3 id="不完全解卷积"><a href="#不完全解卷积" class="headerlink" title="不完全解卷积"></a>不完全解卷积</h3><h4 id="Rodeo"><a href="#Rodeo" class="headerlink" title="Rodeo"></a><a href="https://doi.org/10.1093/nargab/lqaa110">Rodeo</a></h4><p>Rodeo 是一种基于稳健线性回归的方法，可以实现简单而稳健的表达式反卷积。  </p>
-<p><strong>Code availability:</strong>   </p>
-<ul>
-<li>R  </li>
-<li><a href="https://github.com/elolab/Rodeo">https://github.com/elolab/Rodeo</a></li>
-</ul>
-<h4 id="cs-lsfit-amp-cs-qprog"><a href="#cs-lsfit-amp-cs-qprog" class="headerlink" title="cs-lsfit &amp; cs-qprog"></a><a href="https://doi.org/10.1371/journal.pone.0006098">cs-lsfit &amp; cs-qprog</a></h4><p>cs-lsfit 和 cs-qprog 属于 CellMix 中的两个解卷积算法，使用CellMix时可选择使用哪一个来进行解卷积步骤。</p>
-<p><strong>Code availability:</strong>   </p>
-<ul>
-<li>R  </li>
-<li><a href="https://github.com/r-forge/cellmix/tree/master/pkg/CellMix">https://github.com/r-forge/cellmix/tree/master/pkg/CellMix</a></li>
-</ul>
-<h4 id="LRCDE"><a href="#LRCDE" class="headerlink" title="LRCDE"></a><a href="https://doi.org/10.1186/s12859-016-1226-z">LRCDE</a></h4><p>LRCDE 在逐个基因的基础上执行基于线性回归的细胞类型特异性差异表达(反卷积)检测。考虑到细胞类型特异性基因表达估计的变异性，它计算差异检测的每个基因 t 统计量、p 值、基于 t 统计量的灵敏度、组特异性均方误差和几个基因特异性诊断指标。  </p>
-<p><strong>Code availability:</strong>   </p>
-<ul>
-<li>R  </li>
-<li><a href="https://github.com/ERGlass/lrcde.dev">https://github.com/ERGlass/lrcde.dev</a></li>
-</ul>
-<h4 id="csSAM"><a href="#csSAM" class="headerlink" title="csSAM"></a><a href="https://doi.org/10.1038/nmeth.1439">csSAM</a></h4><p>csSAM 根据测量的细胞比例计算细胞特异性差异表达。<br><img src="/2021/12/08/deconmixeddata/csSAM.jpg"></p>
-<p><strong>Code availability:</strong>   </p>
-<ul>
-<li>R  </li>
-<li><a href="https://github.com/shenorrLab/csSAM">https://github.com/shenorrLab/csSAM</a>  </li>
-</ul>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1] Maria K Jaakkola, Laura L Elo, Computational deconvolution to estimate cell type-specific gene expression from bulk data, NAR Genomics and Bioinformatics, Volume 3, Issue 1, March 2021, lqaa110, <a href="https://doi.org/10.1093/nargab/lqaa110">https://doi.org/10.1093/nargab/lqaa110</a><br>[2] 具体算法参考文献见算法介绍部分</p>
+<p>以上有趣账号可通过搜索名称获得，在此不提供具体账号以免给站点造成麻烦。</p>
+<h2 id="More-than-Mastodon"><a href="#More-than-Mastodon" class="headerlink" title="More than Mastodon"></a>More than Mastodon</h2><p>其实mastodon只是这个宇宙中的一部分，还有Misskey、pleroma、funkwhale、peertube等和mastodon类似的社交平台共同组成整个联邦宇宙。<br>何必拘泥于处处受限的一隅，这里有更广阔的宇宙等你。<br>Enjoy yourself！</p>
 ]]></content>
       <categories>
-        <category>Paper</category>
-        <category>DeconvoluteMixedBioData</category>
+        <category>Mastodon</category>
+        <category>Use</category>
       </categories>
       <tags>
-        <tag>DeconvoluteMixedBioData</tag>
-        <tag>Bioinformatics</tag>
+        <tag>Mastodon</tag>
+        <tag>UserGuide</tag>
       </tags>
   </entry>
   <entry>
@@ -541,99 +571,81 @@ data[key] = $.html();
       </tags>
   </entry>
   <entry>
-    <title>长毛象使用指南</title>
-    <url>/2021/09/21/mstdn/</url>
-    <content><![CDATA[<center>不少朋友被我安利到长毛象(mastodon)玩耍，本着对他们负责的态度，写下这篇长毛象使用指南。</center>
+    <title>Computational Deconvolution for More Precise Biological Data</title>
+    <url>/2021/12/08/deconmixeddata/</url>
+    <content><![CDATA[<center> 文献阅读：解卷积可从混合的生物学数据中解得各细胞类型比例，或估计各细胞类型的表达谱，为研究提供更准确的样本数据 </center>
 <span id="more"></span>
 
-<h2 id="什么是mastodon"><a href="#什么是mastodon" class="headerlink" title="什么是mastodon"></a>什么是mastodon</h2><p>Mastodon(长毛象)是一个开源、去中心化的社交平台。简单来说，这里没有屏蔽词，没有限流，没有铺天盖地的营销号，没有Doctor看了都想重启宇宙的混乱时间线，只是一个纯粹的社交平台。长毛象将内容、社交网络交还给用户，更加尊重用户而不是平台“霸权”。<br><strong>如果将联邦宇宙(Fediverse)看做一个宇宙，那么每一个长毛象站点(Mastodon Society)就像一颗颗星球。</strong> 也就是说，你可以选择任何一颗星球定居，哪怕只是居住着一个人，只要它与宇宙相通，那么你就可以联系到宇宙中任何一个人而不会孤单。(摘自pullopen对长毛象的介绍：<a href="https://pullopenbluebox.wordpress.com/2020/06/30/mastodon-introduction/">长毛象（Mastodon）：更尊重用户的社交平台</a> )</p>
-<h2 id="如何在mastodon拥有一个账号"><a href="#如何在mastodon拥有一个账号" class="headerlink" title="如何在mastodon拥有一个账号"></a>如何在mastodon拥有一个账号</h2><h3 id="选择站点"><a href="#选择站点" class="headerlink" title="选择站点"></a>选择站点</h3><p>长毛象有各种各样的站点(或称实例)，如二次元相关站、LGBTQ站、艺术类站，或者按照语言划分的小语种站点等等。可以在官网列出的<a href="https://joinmastodon.org/communities">站点列表</a>里找到一个喜欢又适合的站点。<br>一开始使用建议在一些大型的国际站点注册，限制较少，每天都有很多世界各地的人在时间线上灌水，如</p>
+<h2 id="Deconvolution"><a href="#Deconvolution" class="headerlink" title="Deconvolution"></a>Deconvolution</h2><p><strong>Deconvolution</strong> 译作反卷积或解卷积。解卷积是一种基于算法的过程，用于反转卷积对记录数据的影响。<br>生物学数据，如 DNA expression、RNA sequencing、Protein expression 等，很难真正得到来自特定组织的“纯数据”。如血液中含有来自不同组织的细胞、外泌体等，由此得来的生物学数据将是不同类型细胞的混合数据。这时就需要通过解卷积，从混合的生物数据中解得不同类型细胞的比例、表达谱。  </p>
+<h2 id="基本模型"><a href="#基本模型" class="headerlink" title="基本模型"></a>基本模型</h2><p>测得的数据为不同类型细胞按照一定比例混合在一起的结果。  </p>
 <ul>
-<li><a href="https://mastodon.social/">https://mastodon.social</a></li>
-<li><a href="https://mastodon.online/">https://mastodon.online</a></li>
-<li><a href="https://mstdn.social/">https://mstdn.social</a>  </li>
+<li>测得的表达矩阵为 <em>X</em>，则 x<sub>ij</sub> 表示 gene<sub>i</sub> 在 sample<sub>j</sub> 中的表达量或表达强度  </li>
+<li>比例矩阵为 <em>R</em>，则 r<sub>kj</sub> 表示 k 类细胞在 sample<sub>j</sub> 中所占比例  </li>
+<li>各细胞真实表达谱组成的矩阵为 <em>S</em>，则 s<sub>ik</sub> 表示表示 gene<sub>i</sub> 在 k 类细胞中的表达量或表达强度  </li>
 </ul>
-<p>使用一段时间，对各项操作都熟悉之后，可进一步选择更适合自己的小站点注册并迁移账号，或者继续呆在国际站点也无妨。<br>也可以在中文站点，或者中文用户较多的站点注册。这样在查看local timeline(本地轴)时都是中文，方便遇到志同道合的朋友。但无论在哪个站点注册，都建议阅读过<strong>服务器规则</strong>和<strong>服务条款</strong>后再进行，这两项通常都放在注册页面。<br>熟悉长毛象后，发现没有一个站点完全符合自己的想法，也可以自建站加入长毛象宇宙。搭建长毛象站点有很多简单易上手的教程可供参考，即使是计算机小白也能拥有属于自己的站点。可参考的教程：</p>
+<p><img src="/2021/12/08/deconmixeddata/decon.png">  </p>
+<h2 id="解卷积算法"><a href="#解卷积算法" class="headerlink" title="解卷积算法"></a>解卷积算法</h2><p>针对不同情况有不同的算法，根据项目中的先验知识选择合适的解卷积方法以达到最佳效果。<br>生物数据解卷积分为完全解卷积和不完全解卷积。  </p>
 <ul>
-<li><a href="https://docs.joinmastodon.org/zh-cn/admin/prerequisites/">官方建站文档</a></li>
-<li><a href="https://www.notion.so/Mastodon-042a05ee29a048df8b2c1afd49e4c49b">长毛象（Mastodon）社区搭建详解</a></li>
-<li><a href="https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/07/19/How-to-build-a-mastodon-instance.html">技术小白如何搭建Mastodon实例</a></li>
-<li><a href="https://morikka.me/blog/mastodon-personal-instance/">长毛象个人向建站</a></li>
+<li><strong>完全解卷积</strong>：指混合细胞类型数目、比例和各细胞表达谱未知，仅依赖混合表达数据将它们解出来，即已知混合表达矩阵 <em>X</em>，解比例矩阵 <em>R</em> 和各细胞表达矩阵 <em>S</em>。完全解卷积的完全指细胞表达谱和比例都在算法中一次性解得。  </li>
+<li><strong>不完全解卷积</strong>：指已知混合表达谱、细胞类型数目、比例，解各细胞表达谱，即已知比例矩阵 <em>R</em> 和混合表达矩阵 <em>X</em>，解矩阵各细胞表达矩阵 <em>S</em>。不完全是相对于完全解卷积而言，仅解得各细胞表达谱。  </li>
 </ul>
-<h3 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h3><p>只要在一个站点注册，就可以连上整个长毛象宇宙，看到所有在用户和他们公开可见的嘟文，所以只需选择一个合适的站点注册账号即可。但由于站点服务器大多在中国境外，有被墙掉的风险，很多人会选择在多个站点注册账号，避免一个站点被GFW盯上ban掉就难以连上长毛象宇宙。<br>邮箱是各站点注册的必须品，注册成功后也可以更改。建议使用gmail、protonmail等邮箱服务，避免使用qq邮箱一类能直接指向使用者的邮箱。一些站点还需要填写入站申请或入站理由等以便站长和管理员审核注册人，通过审核之后便可成功注册，在长毛象宇宙自由玩耍。</p>
-<h2 id="如何使用mastodon"><a href="#如何使用mastodon" class="headerlink" title="如何使用mastodon"></a>如何使用mastodon</h2><h3 id="Timeline-时间轴"><a href="#Timeline-时间轴" class="headerlink" title="Timeline(时间轴)"></a>Timeline(时间轴)</h3><p>Timeline简称为TL，完全按照时间来排列嘟文，不必担心出现时间线混乱、只给你看热度高的嘟文或塞给你不想看的广告、推广。<br>一般情况下，时间线有三种：</p>
+<h3 id="完全解卷积"><a href="#完全解卷积" class="headerlink" title="完全解卷积"></a>完全解卷积</h3><h4 id="LinSeed"><a href="#LinSeed" class="headerlink" title="LinSeed"></a><a href="https://doi.org/10.1038/s41467-019-09990-5">LinSeed</a></h4><p>通过计算共线性网络 (Collinearity Network) 得到各类型细胞的 markers，利用 markers 对混合数据进行完全解卷积，同时得到各组分的比例和表达谱。<br><img src="/2021/12/08/deconmixeddata/LinSeed.jpg"></p>
+<p><strong>Code availability:</strong>   </p>
 <ul>
-<li><strong>Home</strong> timeline，简称HTL，即首页。这是账号持有人自行关注而产生的时间线，能看到public、unlist、followers-only的嘟文(包括回复)以及提到你的direct message。</li>
-<li><strong>Local</strong> timeline，简称LTL，即本站(地)轴。这是账号所在站点的时间线，只有该站点的公开嘟文会出现在这里。</li>
-<li><strong>Federate</strong> timeline，简称FTL，即跨站轴。这是无论站点、所有账号嘟出的public内容共同组成的时间轴，能够看到世界各地的人都在这里发出自己的嘟嘟。</li>
+<li>R  </li>
+<li><a href="https://github.com/ctlab/linseed">https://github.com/ctlab/linseed</a>  </li>
 </ul>
-<p>通过设置<code>preferences (首选项) -&gt; other (其它) -&gt; PUBLIC TIMELINES-Filter languages (公共时间轴-语言过滤)</code>，可过滤时间线上的语言，只留下自己想看的语言。但这个过滤并不完全，公共轴或本站轴仍会出现一些应该被过滤掉的语言。 </p>
-<h3 id="基本功能"><a href="#基本功能" class="headerlink" title="基本功能"></a>基本功能</h3><ul>
-<li><p>发嘟  </p>
+<h4 id="Deblender"><a href="#Deblender" class="headerlink" title="Deblender"></a><a href="https://doi.org/10.1186/s12859-018-2442-5">Deblender</a></h4><p>Deblender 是一个灵活的完全去卷积工具。基于用户对已知标记基因列表和细胞/组织组成信息的访问 (access)，以半/无监督模式运行。在没有先验知识的情况下，全局基因表达的变异性被用于混合数据的聚类，以聚类集代替标记集。<br><img src="/2021/12/08/deconmixeddata/Debledner.jpg">  </p>
+<p><strong>Code availability:</strong>   </p>
 <ul>
-<li>可见范围<br>发嘟可选择四种可见范围：public (公开)，unlist (公开，但不出现在公共时间轴)，followers-only (仅关注者可见)，direct message (私信，也可用作发仅自己可见的嘟文)。在设置中可以选择默认发嘟可见范围。</li>
-<li>cw折叠功能<br>一些不想被直接看到或者含有可能令人不适内容的嘟文推荐使用cw。点击发嘟窗口下方的cw就会出现一个新的小窗口，在这个新的小窗口填上内容提示信息，在发嘟主要窗口填写主要内容。<del>这个功能也很好地被用来讲冷笑话</del>  </li>
-<li>标记敏感内容<br>如果发的嘟文/图片含有not safe for work(NSFW，包括色情、暴力、血腥等)的内容，需要在发嘟时将图片标记为敏感信息，且善用cw折叠功能。</li>
+<li>MATLAB  </li>
+<li><a href="https://github.com/kondim1983/Deblender/">https://github.com/kondim1983/Deblender/</a>  </li>
 </ul>
-</li>
-<li><p>回复<br>左下角箭头是回复功能，回复也可以设置不同的可见范围。在此处如果设置followers-only，被回复者即使没有关注你，也可以看到。回复的嘟嘟仅会出现在同时关注对话双方的账号首页时间线(Home Timeline)。这样尽最大可能避免参与对话者以外的人的打扰，使对话双方处于平等地位，不会出现因一方粉丝过多看到回复一拥而上的现象。各个时间轴设置(一般在主区域右上角)中可设置该时间轴不显示回复类嘟文。</p>
-</li>
-<li><p>转发<br>长毛象的转发是仅转发，不能带文字。这样很好的避免了类似微博上转发挂人形成骂战的现象。在账号设置中选择<code>在时间轴中合并转嘟</code>，以避免一篇嘟文被太多人转发刷屏时间轴的情况。各个时间轴设置(一般在主区域右上角)中可设置该时间轴不显示转发类嘟文，公共轴一般默认不显示转发。</p>
-</li>
-<li><p>喜欢<br>这里的⭐是favourite的意思，类似点赞功能。点赞代表赞同、安慰还是这里有个言论我mark一下就看使用者自己的想法，但通常来说都是<strong>赞</strong>！  </p>
-</li>
-<li><p>书签<br>bookmark是书签，或者称为收藏功能，这个功能与大多数平台相似，不再赘述。</p>
-</li>
-</ul>
-<h3 id="头像、昵称、profile、标签"><a href="#头像、昵称、profile、标签" class="headerlink" title="头像、昵称、profile、标签"></a>头像、昵称、profile、标签</h3><p>一些站点固定期限内没有头像、昵称和嘟文的“三无账号”会被清除收回，注意阅读站点规则避免注册之后账号被回收。既然已经决定抛弃微博等在用户时间线上搞动作的平台，就不要只是注册个账号放着，用起来！</p>
-<h3 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h3><ul>
-<li><p>锁嘟<br>锁定账号(选项在个人资料页面)，需要手动审核所有关注请求。即每个想要关注你账号的人需要先发送关注请求，你通过之后方可关注你的账号以及看到你的followers-only的嘟文。与instgram的锁账号不同，即使挂上小锁其他人仍能看到公开可见的嘟文。如果有较多敏感嘟文不想随意被人看到，可定期删除或选择followers-only、direct message这两种可见范围。</p>
-</li>
-<li><p>语言<br>通过<code>Preferences (首选项) -&gt; Appearance (外观) -&gt; Interface language (界面语言)</code>设置平台语言。由于各语种都是志愿者翻译，可能会出现错误或词不达意，但基本不影响使用。</p>
-</li>
-<li><p>过滤器<br>这里的过滤器是真的过滤掉包含关键字的嘟文，但可能会在原本应该是一条嘟文的地方出现<code>filtered</code>的提醒。过滤器可以设置失效时间、作用场景等。</p>
-</li>
-<li><p>邮件通知<br><code>Preferences (首选项) -&gt; Notifications (通知)</code>里的邮件提醒建议关掉，避免发送过多邮件给站长的邮件服务造成不必要的负担。</p>
-</li>
-<li><p>其它<br>界面语言设置为惯用语言后，其它设置可自行探索。</p>
-</li>
-</ul>
-<h3 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h3><p>Mastodon故意弱化了搜索功能，避免形成“广场”，从而导致有人随便搜索一个关键词便前来抬杠或骂人的行为。但这也在一定程度上造成使用者的不便，比如明明有印象一条嘟嘟，但根本找不到，所以需要使用者自己多注意收藏有用的信息。有些站点开了全文搜索，会让搜索结果好一些，如自己的嘟文或转发、点赞过的嘟文能够搜索，但无法实现真正的“搜索”。 </p>
-<h3 id="block-mute"><a href="#block-mute" class="headerlink" title="block / mute"></a>block / mute</h3><p>block即拉黑/屏蔽。拉黑后，该账号无法与你互动、关注，嘟文不会出现在你的时间线。<br>mute即隐藏。隐藏后，该账号的嘟文不会出现在你的时间线，但仍可与你互动、关注，而你不会收到任何提醒。</p>
-<h3 id="迁移账号"><a href="#迁移账号" class="headerlink" title="迁移账号"></a>迁移账号</h3><p>长毛象的一大优点就是站点多，且类型丰富。如果看上了别的站点，可以在新站点注册账号后将账号迁移过去。迁移账号可以自动将followers/following转移到新账号，但无法迁移旧帐号的嘟文。</p>
-<h3 id="账号备份"><a href="#账号备份" class="headerlink" title="账号备份"></a>账号备份</h3><p>长毛象自带的备份功能可以备份follower列表、following列表、mute列表、block列表等。如果想要备份嘟文，可以使用象友提供的<a href="https://github.com/slashyn/mastodon-archive-viewer-modified">备份插件</a>。<br>由于各个站点的维护仅依赖站长和可能有的站点管理员，所以可能会有不稳定、服务器出问题等状况出现，有时整个站点也会关闭不再运行，及时备份账号内容是个好习惯。</p>
-<h3 id="app"><a href="#app" class="headerlink" title="app"></a>app</h3><p>长毛象作为一个去中心化的平台，最佳访问方式是直接浏览器访问，如Chrome、Firefox、safari等。这些浏览器可以在手机主屏幕创建快捷方式，在手机桌面单独形成一个图标和有一个app没有太大差别。<br>如果仍需要一个app，可选择的有：</p>
+<h4 id="CDSeq"><a href="#CDSeq" class="headerlink" title="CDSeq"></a><a href="https://doi.org/10.1371/journal.pcbi.1007510">CDSeq</a></h4><p>CDSeq 仅使用来自大量组织样本的 RNA-Seq 数据来同时估计细胞类型比例和细胞类型特异性表达谱。<br><img src="/2021/12/08/deconmixeddata/CDSeq1.jpg"><br><img src="/2021/12/08/deconmixeddata/CDSeq2.jpg">  </p>
+<p><strong>Code availability:</strong>   </p>
 <ul>
-<li><p><strong>Android</strong>: Tusky, Subway Tooter, Fedilab(付费)</p>
-</li>
-<li><p><strong>iOS</strong>: Metatext, Mercury, iMast, Amaroq, Mast(付费), Toot!(付费)  </p>
-</li>
-<li><p><strong>tooot</strong>：对于中文用户，推荐使用tooot。这是一个专注于中文社区的简洁、开源长毛象手机客户端，跨平台支持iOS和Android。 </p>
-</li>
-<li><p><strong>其它</strong>：其它平台应用推荐可查看<a href="https://joinmastodon.org/apps">官网应用推荐</a>。  </p>
-</li>
+<li>MATLAB and Octave  </li>
+<li><a href="https://github.com/kkang7/CDSeq">https://github.com/kkang7/CDSeq</a>  </li>
 </ul>
-<h3 id="tag"><a href="#tag" class="headerlink" title="tag"></a>tag</h3><p>作为一个公共社交网络，这里也可以带话题(tag)发嘟。格式和Instagram一样，只需要一个<code>#</code>，如<code>#tag</code>。<br>长毛象已经有很多有趣或有用的tag，如<code>#长毛象中文使用指南</code>、<code>#长毛象安利交换大会</code>、<code>#资源分享</code>、<code>#菜谱</code>，还有季节性的赏花、赏月tag。也可以创建自己的专属tag，把某类嘟文存在这个tag下，方便自己查看。</p>
-<h3 id="一些好玩的账号"><a href="#一些好玩的账号" class="headerlink" title="一些好玩的账号"></a>一些好玩的账号</h3><ul>
-<li><p>骰寶機<br>吃喝玩乐都可以找它！想不到晚饭吃什么，发嘟@骰宝问吃什么，不出一分钟就会回复一种食物。问它喝什么同理。还有好玩又有趣的答案之书和对不对判断。具体玩法可查看骰宝账号主页了解。</p>
-</li>
-<li><p>妙仙包<br>想知道心中之事的结果？找大师求签、塔罗牌都能给你一个奇妙的答案。选择困难症？找包包真普选，轻松治愈选择困难。心中有愿还可对着大师许愿，有机会被大师选中实现。具体玩法查看妙仙包账号主页了解。</p>
-</li>
-<li><p>sci咖啡屋<br>这里可以点单饮品、套餐，但一定要吃完不可浪费。累了还可以在这里撸猫，猫猫送上缓解疲惫。具体玩法查看sci咖啡屋账号主页了解。</p>
-</li>
-<li><p>Mature[マツレ]<br>Mature是长毛象上最早的科学期刊之一，也是长毛象最权威及最有名望的学术期刊之一。每周最重要、最前沿的研究结果是在「Mature」中以论文导读的形式发表的。欢迎订阅，支持投稿。投稿方法详见Mature账号主页。</p>
-</li>
+<h4 id="Deconf"><a href="#Deconf" class="headerlink" title="Deconf"></a><a href="https://doi.org/10.1186/1471-2105-11-27">Deconf</a></h4><p>Deconf 证明了从单个样本的基因表达数据中预测构成细胞类型的比例的可行性，这是基于去粗取精的分类方法的前提条件。  </p>
+<p><strong>Code availability:</strong>   </p>
+<ul>
+<li>R  </li>
+<li><a href="https://static-content.springer.com/esm/art%3A10.1186%2F1471-2105-11-27/MediaObjects/12859_2009_3484_MOESM1_ESM.ZIP">example data and script</a>  </li>
 </ul>
-<p>以上有趣账号可通过搜索名称获得，在此不提供具体账号以免给站点造成麻烦。</p>
-<h2 id="More-than-Mastodon"><a href="#More-than-Mastodon" class="headerlink" title="More than Mastodon"></a>More than Mastodon</h2><p>其实mastodon只是这个宇宙中的一部分，还有Misskey、pleroma、funkwhale、peertube等和mastodon类似的社交平台共同组成整个联邦宇宙。<br>何必拘泥于处处受限的一隅，这里有更广阔的宇宙等你。<br>Enjoy yourself！</p>
+<h3 id="不完全解卷积"><a href="#不完全解卷积" class="headerlink" title="不完全解卷积"></a>不完全解卷积</h3><h4 id="Rodeo"><a href="#Rodeo" class="headerlink" title="Rodeo"></a><a href="https://doi.org/10.1093/nargab/lqaa110">Rodeo</a></h4><p>Rodeo 是一种基于稳健线性回归的方法，可以实现简单而稳健的表达式反卷积。  </p>
+<p><strong>Code availability:</strong>   </p>
+<ul>
+<li>R  </li>
+<li><a href="https://github.com/elolab/Rodeo">https://github.com/elolab/Rodeo</a></li>
+</ul>
+<h4 id="cs-lsfit-amp-cs-qprog"><a href="#cs-lsfit-amp-cs-qprog" class="headerlink" title="cs-lsfit &amp; cs-qprog"></a><a href="https://doi.org/10.1371/journal.pone.0006098">cs-lsfit &amp; cs-qprog</a></h4><p>cs-lsfit 和 cs-qprog 属于 CellMix 中的两个解卷积算法，使用CellMix时可选择使用哪一个来进行解卷积步骤。</p>
+<p><strong>Code availability:</strong>   </p>
+<ul>
+<li>R  </li>
+<li><a href="https://github.com/r-forge/cellmix/tree/master/pkg/CellMix">https://github.com/r-forge/cellmix/tree/master/pkg/CellMix</a></li>
+</ul>
+<h4 id="LRCDE"><a href="#LRCDE" class="headerlink" title="LRCDE"></a><a href="https://doi.org/10.1186/s12859-016-1226-z">LRCDE</a></h4><p>LRCDE 在逐个基因的基础上执行基于线性回归的细胞类型特异性差异表达(反卷积)检测。考虑到细胞类型特异性基因表达估计的变异性，它计算差异检测的每个基因 t 统计量、p 值、基于 t 统计量的灵敏度、组特异性均方误差和几个基因特异性诊断指标。  </p>
+<p><strong>Code availability:</strong>   </p>
+<ul>
+<li>R  </li>
+<li><a href="https://github.com/ERGlass/lrcde.dev">https://github.com/ERGlass/lrcde.dev</a></li>
+</ul>
+<h4 id="csSAM"><a href="#csSAM" class="headerlink" title="csSAM"></a><a href="https://doi.org/10.1038/nmeth.1439">csSAM</a></h4><p>csSAM 根据测量的细胞比例计算细胞特异性差异表达。<br><img src="/2021/12/08/deconmixeddata/csSAM.jpg"></p>
+<p><strong>Code availability:</strong>   </p>
+<ul>
+<li>R  </li>
+<li><a href="https://github.com/shenorrLab/csSAM">https://github.com/shenorrLab/csSAM</a>  </li>
+</ul>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1] Maria K Jaakkola, Laura L Elo, Computational deconvolution to estimate cell type-specific gene expression from bulk data, NAR Genomics and Bioinformatics, Volume 3, Issue 1, March 2021, lqaa110, <a href="https://doi.org/10.1093/nargab/lqaa110">https://doi.org/10.1093/nargab/lqaa110</a><br>[2] 具体算法参考文献见算法介绍部分</p>
 ]]></content>
       <categories>
-        <category>Mastodon</category>
-        <category>Use</category>
+        <category>Paper</category>
+        <category>DeconvoluteMixedBioData</category>
       </categories>
       <tags>
-        <tag>Mastodon</tag>
-        <tag>UserGuide</tag>
+        <tag>DeconvoluteMixedBioData</tag>
+        <tag>Bioinformatics</tag>
       </tags>
   </entry>
   <entry>
@@ -681,6 +693,84 @@ data[key] = $.html();
       <tags>
         <tag>Bioinformatics</tag>
         <tag>MultiOmics</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo + Markdown写博客</title>
+    <url>/2021/09/16/writenewblog/</url>
+    <content><![CDATA[<center>创建、发布新文章；用vscode + markdown编辑文章；给文章添加分类和标签。</center>
+<span id="more"></span>
+
+<h2 id="新建文章-create-a-post"><a href="#新建文章-create-a-post" class="headerlink" title="新建文章 create a post"></a>新建文章 create a post</h2><p>在博客目录运行命令：</p>
+<pre><code>$ hexo new [layout] title
+# layout有三种:post, draft, page, 默认是post，可以在博客配置文件中更改default_layout来更改默认设置
+# Hexo会根据scaffolds文件夹内相对应的文件来建立md文件
+# 当创建不同布局的md文件时，它们会存储在不同路径
+
+$ hexo new &quot;My New Post&quot;
+#新建一个名为&quot;My New Post&quot;的md文件
+</code></pre>
+<p>后续编辑这个文件即可。</p>
+<h2 id="vscode-markdown写文章"><a href="#vscode-markdown写文章" class="headerlink" title="vscode + markdown写文章"></a>vscode + markdown写文章</h2><p>可按照以下步骤编辑一遍博客文章：</p>
+<ol>
+<li>从<a href="https://code.visualstudio.com/">官网</a>下载vscode，并安装。  </li>
+<li>安装markdown插件：<ul>
+<li>Markdown All in One: 组合包，把最常用的Markdown优化全部装好</li>
+<li>Markdown Preview Github Styling: 在本地就能预览Markdown文件最终在Github Pages中显示的效果</li>
+</ul>
+</li>
+<li>学习基本的markdown语法，利用vscode编辑文章。同时，利用”Open Preview to the Side”按键或快捷键可同时预览文章</li>
+<li>写完这篇文章</li>
+</ol>
+<h2 id="categories"><a href="#categories" class="headerlink" title="categories"></a>categories</h2><h3 id="生成categories页并修改type属性"><a href="#生成categories页并修改type属性" class="headerlink" title="生成categories页并修改type属性"></a>生成categories页并修改type属性</h3><p>在博客目录运行命令行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new page categories</span><br></pre></td></tr></table></figure>
+<p>运行成功后会提示：</p>
+<pre><code>INFO  Created: ~/Documents/blog/source/categories/index.md
+</code></pre>
+<p>根据所给路径找到index.md文件，在文件的框架内添加一行：</p>
+<pre><code>type: &quot;categories&quot;
+</code></pre>
+<h3 id="给文章添加categories"><a href="#给文章添加categories" class="headerlink" title="给文章添加categories"></a>给文章添加categories</h3><p>在文章头的<code>categories:</code>后以<code>-</code>为标志添加标签，如本文的标签：</p>
+<pre><code>categories:
+- Blog #注意“-”后一定要加空格
+</code></pre>
+<h2 id="tag"><a href="#tag" class="headerlink" title="tag"></a>tag</h2><h3 id="生成tag页并修改type属性"><a href="#生成tag页并修改type属性" class="headerlink" title="生成tag页并修改type属性"></a>生成tag页并修改type属性</h3><p>在博客目录运行命令行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new page tags</span><br></pre></td></tr></table></figure>
+<p>运行成功后会提示：</p>
+<pre><code>INFO  Created: ~/Documents/blog/source/tags/index.md
+</code></pre>
+<p>根据所给路径找到index.md文件，在文件的框架内添加一行：</p>
+<pre><code>type: &quot;tags&quot;
+</code></pre>
+<h3 id="给文章添加tag"><a href="#给文章添加tag" class="headerlink" title="给文章添加tag"></a>给文章添加tag</h3><p>在文章头的<code>tags:</code>后以<code>-</code>为标志添加标签，如本文的标签：</p>
+<pre><code>tags: 
+- Blog #注意“-”后一定要加空格
+- Hexo
+- Markdown
+- vscode
+</code></pre>
+<h2 id="文章的发布"><a href="#文章的发布" class="headerlink" title="文章的发布"></a>文章的发布</h2><p>在博客目录运行命令：</p>
+<pre><code>$ hexo generate
+$ hexo server  # 本地预查看
+$ hexo deploy  # 部署到GitHub Pages
+
+# 此步骤报错可先检查文件头等文章各部分是否缺少空格
+</code></pre>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a href="https://zhuanlan.zhihu.com/p/156915260">Hexo博客写文章及基本操作</a></li>
+<li><a href="https://linlif.github.io/2017/05/27/Hexo%E4%BD%BF%E7%94%A8%E6%94%BB%E7%95%A5-%E6%B7%BB%E5%8A%A0%E5%88%86%E7%B1%BB%E5%8F%8A%E6%A0%87%E7%AD%BE/">Hexo使用攻略-添加分类及标签</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/56943330">[Markdown] 使用vscode开始Markdown写作之旅</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>Blog</category>
+        <category>Writing</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>Blog</tag>
+        <tag>Markdown</tag>
+        <tag>vscode</tag>
       </tags>
   </entry>
   <entry>
@@ -843,84 +933,6 @@ data[key] = $.html();
       <tags>
         <tag>Bioinformatics</tag>
         <tag>BatchEffects</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo + Markdown写博客</title>
-    <url>/2021/09/16/writenewblog/</url>
-    <content><![CDATA[<center>创建、发布新文章；用vscode + markdown编辑文章；给文章添加分类和标签。</center>
-<span id="more"></span>
-
-<h2 id="新建文章-create-a-post"><a href="#新建文章-create-a-post" class="headerlink" title="新建文章 create a post"></a>新建文章 create a post</h2><p>在博客目录运行命令：</p>
-<pre><code>$ hexo new [layout] title
-# layout有三种:post, draft, page, 默认是post，可以在博客配置文件中更改default_layout来更改默认设置
-# Hexo会根据scaffolds文件夹内相对应的文件来建立md文件
-# 当创建不同布局的md文件时，它们会存储在不同路径
-
-$ hexo new &quot;My New Post&quot;
-#新建一个名为&quot;My New Post&quot;的md文件
-</code></pre>
-<p>后续编辑这个文件即可。</p>
-<h2 id="vscode-markdown写文章"><a href="#vscode-markdown写文章" class="headerlink" title="vscode + markdown写文章"></a>vscode + markdown写文章</h2><p>可按照以下步骤编辑一遍博客文章：</p>
-<ol>
-<li>从<a href="https://code.visualstudio.com/">官网</a>下载vscode，并安装。  </li>
-<li>安装markdown插件：<ul>
-<li>Markdown All in One: 组合包，把最常用的Markdown优化全部装好</li>
-<li>Markdown Preview Github Styling: 在本地就能预览Markdown文件最终在Github Pages中显示的效果</li>
-</ul>
-</li>
-<li>学习基本的markdown语法，利用vscode编辑文章。同时，利用”Open Preview to the Side”按键或快捷键可同时预览文章</li>
-<li>写完这篇文章</li>
-</ol>
-<h2 id="categories"><a href="#categories" class="headerlink" title="categories"></a>categories</h2><h3 id="生成categories页并修改type属性"><a href="#生成categories页并修改type属性" class="headerlink" title="生成categories页并修改type属性"></a>生成categories页并修改type属性</h3><p>在博客目录运行命令行：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new page categories</span><br></pre></td></tr></table></figure>
-<p>运行成功后会提示：</p>
-<pre><code>INFO  Created: ~/Documents/blog/source/categories/index.md
-</code></pre>
-<p>根据所给路径找到index.md文件，在文件的框架内添加一行：</p>
-<pre><code>type: &quot;categories&quot;
-</code></pre>
-<h3 id="给文章添加categories"><a href="#给文章添加categories" class="headerlink" title="给文章添加categories"></a>给文章添加categories</h3><p>在文章头的<code>categories:</code>后以<code>-</code>为标志添加标签，如本文的标签：</p>
-<pre><code>categories:
-- Blog #注意“-”后一定要加空格
-</code></pre>
-<h2 id="tag"><a href="#tag" class="headerlink" title="tag"></a>tag</h2><h3 id="生成tag页并修改type属性"><a href="#生成tag页并修改type属性" class="headerlink" title="生成tag页并修改type属性"></a>生成tag页并修改type属性</h3><p>在博客目录运行命令行：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new page tags</span><br></pre></td></tr></table></figure>
-<p>运行成功后会提示：</p>
-<pre><code>INFO  Created: ~/Documents/blog/source/tags/index.md
-</code></pre>
-<p>根据所给路径找到index.md文件，在文件的框架内添加一行：</p>
-<pre><code>type: &quot;tags&quot;
-</code></pre>
-<h3 id="给文章添加tag"><a href="#给文章添加tag" class="headerlink" title="给文章添加tag"></a>给文章添加tag</h3><p>在文章头的<code>tags:</code>后以<code>-</code>为标志添加标签，如本文的标签：</p>
-<pre><code>tags: 
-- Blog #注意“-”后一定要加空格
-- Hexo
-- Markdown
-- vscode
-</code></pre>
-<h2 id="文章的发布"><a href="#文章的发布" class="headerlink" title="文章的发布"></a>文章的发布</h2><p>在博客目录运行命令：</p>
-<pre><code>$ hexo generate
-$ hexo server  # 本地预查看
-$ hexo deploy  # 部署到GitHub Pages
-
-# 此步骤报错可先检查文件头等文章各部分是否缺少空格
-</code></pre>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
-<li><a href="https://zhuanlan.zhihu.com/p/156915260">Hexo博客写文章及基本操作</a></li>
-<li><a href="https://linlif.github.io/2017/05/27/Hexo%E4%BD%BF%E7%94%A8%E6%94%BB%E7%95%A5-%E6%B7%BB%E5%8A%A0%E5%88%86%E7%B1%BB%E5%8F%8A%E6%A0%87%E7%AD%BE/">Hexo使用攻略-添加分类及标签</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/56943330">[Markdown] 使用vscode开始Markdown写作之旅</a></li>
-</ol>
-]]></content>
-      <categories>
-        <category>Blog</category>
-        <category>Writing</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>Blog</tag>
-        <tag>Markdown</tag>
-        <tag>vscode</tag>
       </tags>
   </entry>
   <entry>
