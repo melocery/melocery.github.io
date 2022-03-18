@@ -54,7 +54,7 @@
 <meta property="og:image" content="https://tech.musain.club/2022/03/14/computernetworknotes1/ISO.png">
 <meta property="og:image" content="https://tech.musain.club/2022/03/14/computernetworknotes1/seal.png">
 <meta property="article:published_time" content="2022-03-14T08:50:29.000Z">
-<meta property="article:modified_time" content="2022-03-18T12:43:17.538Z">
+<meta property="article:modified_time" content="2022-03-18T12:54:42.877Z">
 <meta property="article:author" content="R">
 <meta property="article:tag" content="ComputerNetwork">
 <meta name="twitter:card" content="summary">
@@ -269,7 +269,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2022-03-18 20:43:17" itemprop="dateModified" datetime="2022-03-18T20:43:17+08:00">2022-03-18</time>
+        <time title="Modified: 2022-03-18 20:54:42" itemprop="dateModified" datetime="2022-03-18T20:54:42+08:00">2022-03-18</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -513,7 +513,7 @@
 <li>不能同时上网和打电话，且不能总是在线  </li>
 <li>利用已有的线路</li>
 </ul>
-<p>**Digital Subscribe Line (DSL)**：采用现存的到交换局 DLSAM 的电话线  </p>
+<p><strong>Digital Subscribe Line (DSL)：</strong>采用现存的到交换局 DLSAM 的电话线  </p>
 <ul>
 <li>语音、数据在专享线路的不同波段传播</li>
 <li>DSL 线路上的数据波传到互联网 (&gt; 4 kHz，上下传输带宽分布不均时称为 ADSL)  </li>
@@ -740,13 +740,13 @@
 
 <h2 id="协议层次和服务模型"><a href="#协议层次和服务模型" class="headerlink" title="协议层次和服务模型"></a>协议层次和服务模型</h2><h3 id="网络是一个复杂系统"><a href="#网络是一个复杂系统" class="headerlink" title="网络是一个复杂系统"></a>网络是一个复杂系统</h3><p><strong>网络功能繁杂</strong>：数字信号的物理信号承载、点到点、路由、rdt、进程区分、应用等<br><strong>网络有许多构成元素和设备</strong>：主机、路由器、各种媒体的链路、应用、协议、硬件、软件等<br>如何规划这样一个复杂系统：模块化、<strong>层次化</strong></p>
 <h3 id="层次化方式实现复杂网络功能"><a href="#层次化方式实现复杂网络功能" class="headerlink" title="层次化方式实现复杂网络功能"></a>层次化方式实现复杂网络功能</h3><p>将网络复杂的功能分层功能明确的<strong>层次</strong>，每一层实现了其中一个或一组<strong>功能</strong>，功能中有其上层可以使用的功能：<strong>服务</strong><br>本层协议实体相互交互执行本层的<strong>协议动作</strong>，目的是实现本层功能，通过接口为上层提供更好的服务<br>在实现本层协议时，直接<strong>利用下层所提供的服务</strong><br>本层的服务：借助下层服务实现的本层协议实体之间交互带来的 (上层可以利用的) 新功能 + 更下层所提供的服务  </p>
-<h3 id="服务和服务访问点"><a href="#服务和服务访问点" class="headerlink" title="服务和服务访问点"></a>服务和服务访问点</h3><p>**服务 (Service)**：低层实体向上层实体提供它们之间通信的能力  </p>
+<h3 id="服务和服务访问点"><a href="#服务和服务访问点" class="headerlink" title="服务和服务访问点"></a>服务和服务访问点</h3><p><strong>服务 (Service)：</strong>低层实体向上层实体提供它们之间通信的能力  </p>
 <ul>
 <li>服务用户 (service user)  </li>
 <li>服务提供者 (service provider)  </li>
 </ul>
-<p>**原语 (primitive)**：上层使用下层服务的形式，高层使用低层提供的服务，以及低层向高层提供服务都是通过服务访问原语来进行交互的 —— <strong>提供服务的形式</strong>  </p>
-<p>**服务访问点 SAP (Services Access Point)**：上层使用下层提供的服务通过层间的接口 —— <strong>提供服务的地点</strong>  </p>
+<p><strong>原语 (primitive)：</strong>上层使用下层服务的形式，高层使用低层提供的服务，以及低层向高层提供服务都是通过服务访问原语来进行交互的 —— <strong>提供服务的形式</strong>  </p>
+<p><strong>服务访问点 SAP (Services Access Point)：</strong>上层使用下层提供的服务通过层间的接口 —— <strong>提供服务的地点</strong>  </p>
 <ul>
 <li>eg. 邮箱  </li>
 <li>地址 (address)：下层的一个实体支撑着上层的多个实体，SAP 有标志不同上层实体的作用  </li>
