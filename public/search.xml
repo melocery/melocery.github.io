@@ -378,6 +378,84 @@ main() # 运行上述函数
       </tags>
   </entry>
   <entry>
+    <title>Computational Deconvolution for More Precise Biological Data</title>
+    <url>/2021/12/08/deconmixeddata/</url>
+    <content><![CDATA[<center> 文献阅读：解卷积可从混合的生物学数据中解得各细胞类型比例，或估计各细胞类型的表达谱，为研究提供更准确的样本数据 </center>
+<span id="more"></span>
+
+<h2 id="Deconvolution"><a href="#Deconvolution" class="headerlink" title="Deconvolution"></a>Deconvolution</h2><p><strong>Deconvolution</strong> 译作反卷积或解卷积。解卷积是一种基于算法的过程，用于反转卷积对记录数据的影响。<br>生物学数据，如 DNA expression、RNA sequencing、Protein expression 等，很难真正得到来自特定组织的“纯数据”。如血液中含有来自不同组织的细胞、外泌体等，由此得来的生物学数据将是不同类型细胞的混合数据。这时就需要通过解卷积，从混合的生物数据中解得不同类型细胞的比例、表达谱。  </p>
+<h2 id="基本模型"><a href="#基本模型" class="headerlink" title="基本模型"></a>基本模型</h2><p>测得的数据为不同类型细胞按照一定比例混合在一起的结果。  </p>
+<ul>
+<li>测得的表达矩阵为 <em>X</em>，则 x<sub>ij</sub> 表示 gene<sub>i</sub> 在 sample<sub>j</sub> 中的表达量或表达强度  </li>
+<li>比例矩阵为 <em>R</em>，则 r<sub>kj</sub> 表示 k 类细胞在 sample<sub>j</sub> 中所占比例  </li>
+<li>各细胞真实表达谱组成的矩阵为 <em>S</em>，则 s<sub>ik</sub> 表示表示 gene<sub>i</sub> 在 k 类细胞中的表达量或表达强度  </li>
+</ul>
+<p><img src="/2021/12/08/deconmixeddata/decon.png">  </p>
+<h2 id="解卷积算法"><a href="#解卷积算法" class="headerlink" title="解卷积算法"></a>解卷积算法</h2><p>针对不同情况有不同的算法，根据项目中的先验知识选择合适的解卷积方法以达到最佳效果。<br>生物数据解卷积分为完全解卷积和不完全解卷积。  </p>
+<ul>
+<li><strong>完全解卷积</strong>：指混合细胞类型数目、比例和各细胞表达谱未知，仅依赖混合表达数据将它们解出来，即已知混合表达矩阵 <em>X</em>，解比例矩阵 <em>R</em> 和各细胞表达矩阵 <em>S</em>。完全解卷积的完全指细胞表达谱和比例都在算法中一次性解得。  </li>
+<li><strong>不完全解卷积</strong>：指已知混合表达谱、细胞类型数目、比例，解各细胞表达谱，即已知比例矩阵 <em>R</em> 和混合表达矩阵 <em>X</em>，解矩阵各细胞表达矩阵 <em>S</em>。不完全是相对于完全解卷积而言，仅解得各细胞表达谱。  </li>
+</ul>
+<h3 id="完全解卷积"><a href="#完全解卷积" class="headerlink" title="完全解卷积"></a>完全解卷积</h3><h4 id="LinSeed"><a href="#LinSeed" class="headerlink" title="LinSeed"></a><a href="https://doi.org/10.1038/s41467-019-09990-5">LinSeed</a></h4><p>通过计算共线性网络 (Collinearity Network) 得到各类型细胞的 markers，利用 markers 对混合数据进行完全解卷积，同时得到各组分的比例和表达谱。<br><img src="/2021/12/08/deconmixeddata/LinSeed.jpg"></p>
+<p><strong>Code availability:</strong>   </p>
+<ul>
+<li>R  </li>
+<li><a href="https://github.com/ctlab/linseed">https://github.com/ctlab/linseed</a>  </li>
+</ul>
+<h4 id="Deblender"><a href="#Deblender" class="headerlink" title="Deblender"></a><a href="https://doi.org/10.1186/s12859-018-2442-5">Deblender</a></h4><p>Deblender 是一个灵活的完全去卷积工具。基于用户对已知标记基因列表和细胞/组织组成信息的访问 (access)，以半/无监督模式运行。在没有先验知识的情况下，全局基因表达的变异性被用于混合数据的聚类，以聚类集代替标记集。<br><img src="/2021/12/08/deconmixeddata/Debledner.jpg">  </p>
+<p><strong>Code availability:</strong>   </p>
+<ul>
+<li>MATLAB  </li>
+<li><a href="https://github.com/kondim1983/Deblender/">https://github.com/kondim1983/Deblender/</a>  </li>
+</ul>
+<h4 id="CDSeq"><a href="#CDSeq" class="headerlink" title="CDSeq"></a><a href="https://doi.org/10.1371/journal.pcbi.1007510">CDSeq</a></h4><p>CDSeq 仅使用来自大量组织样本的 RNA-Seq 数据来同时估计细胞类型比例和细胞类型特异性表达谱。<br><img src="/2021/12/08/deconmixeddata/CDSeq1.jpg"><br><img src="/2021/12/08/deconmixeddata/CDSeq2.jpg">  </p>
+<p><strong>Code availability:</strong>   </p>
+<ul>
+<li>MATLAB and Octave  </li>
+<li><a href="https://github.com/kkang7/CDSeq">https://github.com/kkang7/CDSeq</a>  </li>
+</ul>
+<h4 id="Deconf"><a href="#Deconf" class="headerlink" title="Deconf"></a><a href="https://doi.org/10.1186/1471-2105-11-27">Deconf</a></h4><p>Deconf 证明了从单个样本的基因表达数据中预测构成细胞类型的比例的可行性，这是基于去粗取精的分类方法的前提条件。  </p>
+<p><strong>Code availability:</strong>   </p>
+<ul>
+<li>R  </li>
+<li><a href="https://static-content.springer.com/esm/art%3A10.1186%2F1471-2105-11-27/MediaObjects/12859_2009_3484_MOESM1_ESM.ZIP">example data and script</a>  </li>
+</ul>
+<h3 id="不完全解卷积"><a href="#不完全解卷积" class="headerlink" title="不完全解卷积"></a>不完全解卷积</h3><h4 id="Rodeo"><a href="#Rodeo" class="headerlink" title="Rodeo"></a><a href="https://doi.org/10.1093/nargab/lqaa110">Rodeo</a></h4><p>Rodeo 是一种基于稳健线性回归的方法，可以实现简单而稳健的表达式反卷积。  </p>
+<p><strong>Code availability:</strong>   </p>
+<ul>
+<li>R  </li>
+<li><a href="https://github.com/elolab/Rodeo">https://github.com/elolab/Rodeo</a></li>
+</ul>
+<h4 id="cs-lsfit-amp-cs-qprog"><a href="#cs-lsfit-amp-cs-qprog" class="headerlink" title="cs-lsfit &amp; cs-qprog"></a><a href="https://doi.org/10.1371/journal.pone.0006098">cs-lsfit &amp; cs-qprog</a></h4><p>cs-lsfit 和 cs-qprog 属于 CellMix 中的两个解卷积算法，使用CellMix时可选择使用哪一个来进行解卷积步骤。</p>
+<p><strong>Code availability:</strong>   </p>
+<ul>
+<li>R  </li>
+<li><a href="https://github.com/r-forge/cellmix/tree/master/pkg/CellMix">https://github.com/r-forge/cellmix/tree/master/pkg/CellMix</a></li>
+</ul>
+<h4 id="LRCDE"><a href="#LRCDE" class="headerlink" title="LRCDE"></a><a href="https://doi.org/10.1186/s12859-016-1226-z">LRCDE</a></h4><p>LRCDE 在逐个基因的基础上执行基于线性回归的细胞类型特异性差异表达(反卷积)检测。考虑到细胞类型特异性基因表达估计的变异性，它计算差异检测的每个基因 t 统计量、p 值、基于 t 统计量的灵敏度、组特异性均方误差和几个基因特异性诊断指标。  </p>
+<p><strong>Code availability:</strong>   </p>
+<ul>
+<li>R  </li>
+<li><a href="https://github.com/ERGlass/lrcde.dev">https://github.com/ERGlass/lrcde.dev</a></li>
+</ul>
+<h4 id="csSAM"><a href="#csSAM" class="headerlink" title="csSAM"></a><a href="https://doi.org/10.1038/nmeth.1439">csSAM</a></h4><p>csSAM 根据测量的细胞比例计算细胞特异性差异表达。<br><img src="/2021/12/08/deconmixeddata/csSAM.jpg"></p>
+<p><strong>Code availability:</strong>   </p>
+<ul>
+<li>R  </li>
+<li><a href="https://github.com/shenorrLab/csSAM">https://github.com/shenorrLab/csSAM</a>  </li>
+</ul>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1] Maria K Jaakkola, Laura L Elo, Computational deconvolution to estimate cell type-specific gene expression from bulk data, NAR Genomics and Bioinformatics, Volume 3, Issue 1, March 2021, lqaa110, <a href="https://doi.org/10.1093/nargab/lqaa110">https://doi.org/10.1093/nargab/lqaa110</a><br>[2] 具体算法参考文献见算法介绍部分</p>
+]]></content>
+      <categories>
+        <category>Paper</category>
+        <category>DeconvoluteMixedBioData</category>
+      </categories>
+      <tags>
+        <tag>DeconvoluteMixedBioData</tag>
+        <tag>Bioinformatics</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>在文章中插入图片的各种方式</title>
     <url>/2021/10/19/imginblog/</url>
     <content><![CDATA[<center>终于还是没能避免想要在文章中用到图片，所以有了本文记录在Hexo博客中插入图片的各种方式</center>  
@@ -480,131 +558,6 @@ data[key] = $.html();
       </tags>
   </entry>
   <entry>
-    <title>Computational Deconvolution for More Precise Biological Data</title>
-    <url>/2021/12/08/deconmixeddata/</url>
-    <content><![CDATA[<center> 文献阅读：解卷积可从混合的生物学数据中解得各细胞类型比例，或估计各细胞类型的表达谱，为研究提供更准确的样本数据 </center>
-<span id="more"></span>
-
-<h2 id="Deconvolution"><a href="#Deconvolution" class="headerlink" title="Deconvolution"></a>Deconvolution</h2><p><strong>Deconvolution</strong> 译作反卷积或解卷积。解卷积是一种基于算法的过程，用于反转卷积对记录数据的影响。<br>生物学数据，如 DNA expression、RNA sequencing、Protein expression 等，很难真正得到来自特定组织的“纯数据”。如血液中含有来自不同组织的细胞、外泌体等，由此得来的生物学数据将是不同类型细胞的混合数据。这时就需要通过解卷积，从混合的生物数据中解得不同类型细胞的比例、表达谱。  </p>
-<h2 id="基本模型"><a href="#基本模型" class="headerlink" title="基本模型"></a>基本模型</h2><p>测得的数据为不同类型细胞按照一定比例混合在一起的结果。  </p>
-<ul>
-<li>测得的表达矩阵为 <em>X</em>，则 x<sub>ij</sub> 表示 gene<sub>i</sub> 在 sample<sub>j</sub> 中的表达量或表达强度  </li>
-<li>比例矩阵为 <em>R</em>，则 r<sub>kj</sub> 表示 k 类细胞在 sample<sub>j</sub> 中所占比例  </li>
-<li>各细胞真实表达谱组成的矩阵为 <em>S</em>，则 s<sub>ik</sub> 表示表示 gene<sub>i</sub> 在 k 类细胞中的表达量或表达强度  </li>
-</ul>
-<p><img src="/2021/12/08/deconmixeddata/decon.png">  </p>
-<h2 id="解卷积算法"><a href="#解卷积算法" class="headerlink" title="解卷积算法"></a>解卷积算法</h2><p>针对不同情况有不同的算法，根据项目中的先验知识选择合适的解卷积方法以达到最佳效果。<br>生物数据解卷积分为完全解卷积和不完全解卷积。  </p>
-<ul>
-<li><strong>完全解卷积</strong>：指混合细胞类型数目、比例和各细胞表达谱未知，仅依赖混合表达数据将它们解出来，即已知混合表达矩阵 <em>X</em>，解比例矩阵 <em>R</em> 和各细胞表达矩阵 <em>S</em>。完全解卷积的完全指细胞表达谱和比例都在算法中一次性解得。  </li>
-<li><strong>不完全解卷积</strong>：指已知混合表达谱、细胞类型数目、比例，解各细胞表达谱，即已知比例矩阵 <em>R</em> 和混合表达矩阵 <em>X</em>，解矩阵各细胞表达矩阵 <em>S</em>。不完全是相对于完全解卷积而言，仅解得各细胞表达谱。  </li>
-</ul>
-<h3 id="完全解卷积"><a href="#完全解卷积" class="headerlink" title="完全解卷积"></a>完全解卷积</h3><h4 id="LinSeed"><a href="#LinSeed" class="headerlink" title="LinSeed"></a><a href="https://doi.org/10.1038/s41467-019-09990-5">LinSeed</a></h4><p>通过计算共线性网络 (Collinearity Network) 得到各类型细胞的 markers，利用 markers 对混合数据进行完全解卷积，同时得到各组分的比例和表达谱。<br><img src="/2021/12/08/deconmixeddata/LinSeed.jpg"></p>
-<p><strong>Code availability:</strong>   </p>
-<ul>
-<li>R  </li>
-<li><a href="https://github.com/ctlab/linseed">https://github.com/ctlab/linseed</a>  </li>
-</ul>
-<h4 id="Deblender"><a href="#Deblender" class="headerlink" title="Deblender"></a><a href="https://doi.org/10.1186/s12859-018-2442-5">Deblender</a></h4><p>Deblender 是一个灵活的完全去卷积工具。基于用户对已知标记基因列表和细胞/组织组成信息的访问 (access)，以半/无监督模式运行。在没有先验知识的情况下，全局基因表达的变异性被用于混合数据的聚类，以聚类集代替标记集。<br><img src="/2021/12/08/deconmixeddata/Debledner.jpg">  </p>
-<p><strong>Code availability:</strong>   </p>
-<ul>
-<li>MATLAB  </li>
-<li><a href="https://github.com/kondim1983/Deblender/">https://github.com/kondim1983/Deblender/</a>  </li>
-</ul>
-<h4 id="CDSeq"><a href="#CDSeq" class="headerlink" title="CDSeq"></a><a href="https://doi.org/10.1371/journal.pcbi.1007510">CDSeq</a></h4><p>CDSeq 仅使用来自大量组织样本的 RNA-Seq 数据来同时估计细胞类型比例和细胞类型特异性表达谱。<br><img src="/2021/12/08/deconmixeddata/CDSeq1.jpg"><br><img src="/2021/12/08/deconmixeddata/CDSeq2.jpg">  </p>
-<p><strong>Code availability:</strong>   </p>
-<ul>
-<li>MATLAB and Octave  </li>
-<li><a href="https://github.com/kkang7/CDSeq">https://github.com/kkang7/CDSeq</a>  </li>
-</ul>
-<h4 id="Deconf"><a href="#Deconf" class="headerlink" title="Deconf"></a><a href="https://doi.org/10.1186/1471-2105-11-27">Deconf</a></h4><p>Deconf 证明了从单个样本的基因表达数据中预测构成细胞类型的比例的可行性，这是基于去粗取精的分类方法的前提条件。  </p>
-<p><strong>Code availability:</strong>   </p>
-<ul>
-<li>R  </li>
-<li><a href="https://static-content.springer.com/esm/art%3A10.1186%2F1471-2105-11-27/MediaObjects/12859_2009_3484_MOESM1_ESM.ZIP">example data and script</a>  </li>
-</ul>
-<h3 id="不完全解卷积"><a href="#不完全解卷积" class="headerlink" title="不完全解卷积"></a>不完全解卷积</h3><h4 id="Rodeo"><a href="#Rodeo" class="headerlink" title="Rodeo"></a><a href="https://doi.org/10.1093/nargab/lqaa110">Rodeo</a></h4><p>Rodeo 是一种基于稳健线性回归的方法，可以实现简单而稳健的表达式反卷积。  </p>
-<p><strong>Code availability:</strong>   </p>
-<ul>
-<li>R  </li>
-<li><a href="https://github.com/elolab/Rodeo">https://github.com/elolab/Rodeo</a></li>
-</ul>
-<h4 id="cs-lsfit-amp-cs-qprog"><a href="#cs-lsfit-amp-cs-qprog" class="headerlink" title="cs-lsfit &amp; cs-qprog"></a><a href="https://doi.org/10.1371/journal.pone.0006098">cs-lsfit &amp; cs-qprog</a></h4><p>cs-lsfit 和 cs-qprog 属于 CellMix 中的两个解卷积算法，使用CellMix时可选择使用哪一个来进行解卷积步骤。</p>
-<p><strong>Code availability:</strong>   </p>
-<ul>
-<li>R  </li>
-<li><a href="https://github.com/r-forge/cellmix/tree/master/pkg/CellMix">https://github.com/r-forge/cellmix/tree/master/pkg/CellMix</a></li>
-</ul>
-<h4 id="LRCDE"><a href="#LRCDE" class="headerlink" title="LRCDE"></a><a href="https://doi.org/10.1186/s12859-016-1226-z">LRCDE</a></h4><p>LRCDE 在逐个基因的基础上执行基于线性回归的细胞类型特异性差异表达(反卷积)检测。考虑到细胞类型特异性基因表达估计的变异性，它计算差异检测的每个基因 t 统计量、p 值、基于 t 统计量的灵敏度、组特异性均方误差和几个基因特异性诊断指标。  </p>
-<p><strong>Code availability:</strong>   </p>
-<ul>
-<li>R  </li>
-<li><a href="https://github.com/ERGlass/lrcde.dev">https://github.com/ERGlass/lrcde.dev</a></li>
-</ul>
-<h4 id="csSAM"><a href="#csSAM" class="headerlink" title="csSAM"></a><a href="https://doi.org/10.1038/nmeth.1439">csSAM</a></h4><p>csSAM 根据测量的细胞比例计算细胞特异性差异表达。<br><img src="/2021/12/08/deconmixeddata/csSAM.jpg"></p>
-<p><strong>Code availability:</strong>   </p>
-<ul>
-<li>R  </li>
-<li><a href="https://github.com/shenorrLab/csSAM">https://github.com/shenorrLab/csSAM</a>  </li>
-</ul>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1] Maria K Jaakkola, Laura L Elo, Computational deconvolution to estimate cell type-specific gene expression from bulk data, NAR Genomics and Bioinformatics, Volume 3, Issue 1, March 2021, lqaa110, <a href="https://doi.org/10.1093/nargab/lqaa110">https://doi.org/10.1093/nargab/lqaa110</a><br>[2] 具体算法参考文献见算法介绍部分</p>
-]]></content>
-      <categories>
-        <category>Paper</category>
-        <category>DeconvoluteMixedBioData</category>
-      </categories>
-      <tags>
-        <tag>DeconvoluteMixedBioData</tag>
-        <tag>Bioinformatics</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Methods to Analyze Multi-Omicis Data</title>
-    <url>/2021/12/01/multiomics/</url>
-    <content><![CDATA[<center>文献阅读：多组学数据的整合、解读方法及公开可用的多组学数据库</center>
-<span id="more"></span>
-
-<h2 id="Multi-Omics"><a href="#Multi-Omics" class="headerlink" title="Multi-Omics"></a>Multi-Omics</h2><p><strong>Multi-Omics</strong>指同时获得两个或两个以上组学数据，如基因组、转录组、蛋白质组等，并将它们结合在一起分析、挖掘，以获得更全面、更系统的生物学解释、分子作用机制等。  </p>
-<h2 id="多组学研究的意义"><a href="#多组学研究的意义" class="headerlink" title="多组学研究的意义"></a>多组学研究的意义</h2><p>整合多组学数据，提供不同层次的生物分子信息，有望系统地、整体地理解复杂的生物学。<br>多组学研究以顺序或同时的方式结合各组学数据，以了解分子之间的相互作用。<br>有助于评估从一个组学水平到另一个组学水平的信息流，从而有助于弥合从基因型到表型的差距。<br>多组学数据能够为研究提供整体视角，有助于提高疾病表型的预后和预测准确性，进而帮助更好地治疗和预防。  </p>
-<h2 id="多组学研究的困难"><a href="#多组学研究的困难" class="headerlink" title="多组学研究的困难"></a>多组学研究的困难</h2><p>多组学的研究通常与非组学数据相关联，如临床数据等，这导致多组学研究面临许多困难。  </p>
-<h3 id="非组学数据复杂且主观定义"><a href="#非组学数据复杂且主观定义" class="headerlink" title="非组学数据复杂且主观定义"></a>非组学数据复杂且主观定义</h3><p>非组学数据通常十分复杂且主观性较强，需要标准化后将其加入预测或分类模型中。流行病学数据受制于调查模式、调查问题标准化以及背景，这可能会影响数据质量和可比性，并最终影响这些变量在结果预测中的贡献。不同研究者或组织由于收集程序不一致，也可能产生差异。临床数据受到其定义复杂性的影响，需要有统一的标准。目前有一些标准化的规则可供使用，如Clinical Data Interchange Standards Consortium (CDISC)，Study Data Tabulation Model (SDTM)，Analysis Data Model (ADaM)。这些非组学数据是基于评估者的技能和先前知识的复杂阐述过程产生的主观评估，这可能会导致报告偏差。  </p>
-<h3 id="非组学数据具有异质性"><a href="#非组学数据具有异质性" class="headerlink" title="非组学数据具有异质性"></a>非组学数据具有异质性</h3><p>非组学数据缺乏统一性，如不同尺度测量的定性或定量变量等，在分析之前需要对它们进行数据转换或归一化步骤。  </p>
-<h3 id="非组学数据规模大"><a href="#非组学数据规模大" class="headerlink" title="非组学数据规模大"></a>非组学数据规模大</h3><p>目前，许多多组学数据与非组学数据相结合的研究方法基于小尺度、低纬度的数据，而现在的非组学数据已经成为“大数据”——大规模，高维度。可穿戴监测装置和EHR (e-health records)的出现使非组学数据更易获取并向更高维度发展，且在处理客观和主观特征以及结构化和非结构化数据方面也更具有挑战性。<br>非组学数据的高维度也意味着存在</p>
-<ul>
-<li>变量之间的相关结构  </li>
-<li>大规模纵向数据  </li>
-<li>数据稀疏性（即药物、实验室或诊断测试）  </li>
-<li>与组学数据相比，数据缺失与参与个体无关  </li>
-</ul>
-<p>这些因素都需要在后续分析建模时，将其考虑在内。  </p>
-<h3 id="将组学和非组学数据联系"><a href="#将组学和非组学数据联系" class="headerlink" title="将组学和非组学数据联系"></a>将组学和非组学数据联系</h3><p>在病例对照设计中，组学数据和非组学数据的整合可能会受到确认偏差的影响。<br>组学和非组学数据之间的相互作用也会对研究产生影响。在建模的过程中，重要的是要将这种相互作用考虑在内。这些相互作用也可能非常复杂，如基因表达变化可能意味着表型异常，这导致分子数据和临床数据之间的关系更加复杂。  </p>
-<h3 id="其它困难"><a href="#其它困难" class="headerlink" title="其它困难"></a>其它困难</h3><p>每个变量或块对结果的贡献是否应该相等。<br>当与高通量数据集结合时，如何防止临床变量被惩罚(penalized)。<br>亚型的出现会给模型增加复杂性，在建模时是否要将亚型考虑在内。</p>
-<h2 id="多组学数据库"><a href="#多组学数据库" class="headerlink" title="多组学数据库"></a>多组学数据库</h2><p>多组学数据覆盖基因组、蛋白组、转录组、代谢组和表观遗传组的数据，含有这些组学数据两种或两种以上的数据库可成为多组学数据库。  </p>
-<h3 id="TCGA"><a href="#TCGA" class="headerlink" title="TCGA"></a>TCGA</h3><p>The Cancer Genome Altas (<a href="https://cancergenome.nih.gov/">TCGA</a>) 是最大的多组学数据库之一，涵盖超过 33 种不同类型癌症的20000个个体肿瘤样本。TCGA旨在产生、整合、分析和解释肿瘤样本产生的DNA、RNA、蛋白质及表观遗传数据的特征以及临床和组织学数据。</p>
-<h3 id="CPTAC"><a href="#CPTAC" class="headerlink" title="CPTAC"></a>CPTAC</h3><p>Clinical Proteomic Tumor Analysis Consortium (<a href="https://cptac-data-portal.georgetown.edu/cptacPublic/">CPTAC</a>) 是通过对TCGA库中的生物样本通过质谱技术进行分析，获取的蛋白质组数据。如果实验中同时测得基因组数据，也可在该库获得。  </p>
-<h3 id="ICGC"><a href="#ICGC" class="headerlink" title="ICGC"></a>ICGC</h3><p>International Cancer Genomics Consortium (<a href="https://icgc.org/">ICGC</a>) 从20383名捐献者的21个原发癌位点的76个癌症项目中协调大规模生成基因组研究。  </p>
-<h3 id="CCLE"><a href="#CCLE" class="headerlink" title="CCLE"></a>CCLE</h3><p>Cancer Cell Line Encyclopedia (<a href="https://portals.broadinstitute.org/ccle">CCLE</a>) 包含947种人类细胞系和36种肿瘤的基因表达、拷贝数和测序数据。还包含479种癌细胞系中24种抗癌药物的药理学特征。  </p>
-<h3 id="METABRIC"><a href="#METABRIC" class="headerlink" title="METABRIC"></a>METABRIC</h3><p>Molecular Taxonomy of Breast Cancer International Consortium (<a href="http://molonc.bccrc.ca/apariciolab/research/metabric/">METABRIC</a>) 包含来自乳腺肿瘤的临床特征、表达、单核苷酸多态性和拷贝数变异数据。  </p>
-<h3 id="TARGET"><a href="#TARGET" class="headerlink" title="TARGET"></a>TARGET</h3><p><a href="https://ocg.cancer.gov/programs/target">TARGET</a> 包含 24 种癌症分子类型的临床信息、基因表达、miRNA 表达、拷贝数和测序数据。  </p>
-<h3 id="OmicsDI"><a href="#OmicsDI" class="headerlink" title="OmicsDI"></a>OmicsDI</h3><p>Omics Discovery Index (<a href="https://www.omicsdi.org/">OmicsDI</a>) 包含来自公共数据结构中的 11 个存储库的数据集。是一个开源平台，用于访问、发现和整合基因组学、转录组学、蛋白质组学和代谢组学数据集。包含来自人类、模式生物和非模式生物的数据集。  </p>
-<h2 id="多组学数据分析方法"><a href="#多组学数据分析方法" class="headerlink" title="多组学数据分析方法"></a>多组学数据分析方法</h2><p>根据算法思想，可将目前已有的多组学数据分析方法分为几个大类：<br><img src="/2021/12/01/multiomics/methods.png">  </p>
-<h3 id="Network-Based"><a href="#Network-Based" class="headerlink" title="Network Based"></a>Network Based</h3><p><strong>SNF</strong> (Similarity network fusion)是一种基于网络的方法，使用网络融合方法整合多组学数据集。它为每种数据类型创建一个单独的网络，然后使用非线性网络融合方法将它们融合成一个单一的相似性网络。 融合步骤基于消息传递理论，使网络在每次迭代中更像其他网络。<br><strong>NetICS</strong> (Network-based integration of multi-omics data)为基于网络的多组学数据集成提供了一个框架，用于癌症基因优先排序。可预测遗传畸变、表观遗传变化和miRNA对相互作用网络中下游基因和蛋白质(表达)的影响。在有向功能交互网络上使用每个样本的网络扩散模型，并通过聚合个体排名得出种群水平的基因排名，并为所有样本提供全局排名。  </p>
-<h3 id="Bayesian-approach"><a href="#Bayesian-approach" class="headerlink" title="Bayesian approach"></a>Bayesian approach</h3><p><strong>iCluster</strong>根据多种数据类型同时推断，为样本生成一个单一的聚类分配。这种无监督方法使用联合潜在变量模型进行集成聚类，并在单个框架中结合不同数据类型之间的关联以及数据类型内的方差-协方差结构，同时降低数据集的维度。通过期望最大化算法获得似然推理。<br><strong>iClusterPlus</strong>是iCluster的增强版，使用广义线性回归来确定综合基因组、表观基因组和转录组分析的分类和数字(连续和计数)变量的联合模型。该方法使用一组潜在变量”k”来代表驱动因素，这些因素预测关键的基因组变量，从而捕捉生物变异。此外，使用Lasso回归方法，iClusterPlus确定了有助于亚型之间生物变化的特征子集。<br><strong>LRAcluster</strong>使用概率模型与低秩近似法来寻找主要的低维子空间，以对全基因组数据进行分类。在这种方法中，每个组学数据都以大小匹配的参数矩阵为条件，并且这个低秩参数矩阵可以在低维空间中表示。 用户定义的维度参数(基于数据的解释方差)和聚类数(基于轮廓值)有助于更快地降维和更好地聚类疾病亚型。<br><strong>PSDF</strong> (Patient-specific data fusion)该方法使用贝叶斯非参数模型(Dirichlet 过程混合模型)来整合CNV和基因表达数据，以将样本分层为子组。每个样本根据它们在2个数据集之间的一致性被分配一个二元状态。只有表现出一致性的样本融合在一起，而其他样本保持未融合，因此考虑了患者特定的融合模型。<br><strong>BCC</strong> (Bayesian consensus clustering)提出了一种数据驱动的共识聚类方法，该方法对源特定特征以及使用有限狄利克雷混合模型扩展以解释多个数据源的整体聚类进行建模。<br><strong>Joint Bayesian factor</strong>使用非参数贝叶斯因子分析来整合组学数据集。 这种方法使用 beta-Bernoulli 过程将特征空间分解为共享的和特定于数据的组件。<br><strong>MDI</strong> (Multiple dataset integration)使用 Dirichlet 混合模型对每个数据源进行聚类，同时对聚类之间的成对依赖性进行建模。MDI在分配给组件(如基因组特征)的变量级别链接模型。组件变量级链接允许捕获多组学数据之间的依赖关系。<br><strong>MOFA</strong> (Multi-omics factor analysis)是一种无监督方法，用于在相同或部分重叠的样本上整合多组学数据类型。<br><strong>PARADIGM</strong>的应用可以扩展到对所研究疾病的发现。  </p>
-<h3 id="Fusion-based-approaches"><a href="#Fusion-based-approaches" class="headerlink" title="Fusion-based approaches"></a>Fusion-based approaches</h3><p><strong>PFA</strong> (Pattern fusion analysis)允许在低维特征空间中跨异质基因组谱识别集成样本模式。首先使用主成分分析获得局部样本模式。 其后将这些局部样本模式与公共特征空间对齐，并跨大多数数据类型合成全局样本模式。在此过程中，将定量测量每种数据类型(或单个样本)对全局样本频谱的贡献，并迭代降低偏差或系统噪声的影响以更好地拟合数据。  </p>
-<h3 id="Similarity-based-approaches"><a href="#Similarity-based-approaches" class="headerlink" title="Similarity-based approaches"></a>Similarity-based approaches</h3><p><strong>PINSPlus</strong> (Perturbation clustering for data integration and disease subtyping)是一种无监督的聚类方法，有助于从多组学数据中识别亚型。为了识别亚型，该算法确定患者在单个集群中分组的频率(1)当数据受到干扰时，(2)使用不同类型的组学数据时，(3)使用不同的聚类技术时。 所有场景中的强关联患者都聚集在一起形成一个亚型。<br><strong>NEMO</strong>(Neighborhood-based multi-omics clustering) 是一种基于相似性的简单多组学聚类方法，它进一步建立在先前建立的聚类方法（如 SNF 和 rMKL-LPP）的基础上。该方法最初为每个输入组学数据集构建基于患者间相似性矩阵的欧几里德距离。然后将每个组学的相似性矩阵整合到一个矩阵中，然后使用光谱聚类方法对其进行聚类。  </p>
-<h3 id="Correlation-based-approaches"><a href="#Correlation-based-approaches" class="headerlink" title="Correlation based approaches"></a>Correlation based approaches</h3><p><strong>CNAmet</strong>用于对拷贝数改变、DNA 甲基化和基因表达数据进行综合分析。  </p>
-<h3 id="Other-multivariate-approaches"><a href="#Other-multivariate-approaches" class="headerlink" title="Other multivariate approaches"></a>Other multivariate approaches</h3><p><strong>mixOmics</strong>提供了一组有监督和无监督的多元方法来执行多组学数据集的整合，重点是变量选择。<br><strong>moCluster</strong>使用多表多元分析方法来识别跨多组学数据集的模式。<br><strong>MCIA</strong> (Multiple co-inertia analysis)是一种探索性数据分析方法，它捕捉多个高维数据集（如基因表达、miRNA表达、蛋白质表达）之间的相互关系。<br><strong>JIVE</strong> (Joint and individual variation explained)通过分离数据集的联合效应和个体效应来整合多组学数据。<br><strong>MFA</strong> (Multiple factor analysis)是一种通过将其投影到低维变量空间来帮助整合组学数据集的方法。<br><strong>rMKL-LPP</strong> 使用多核学习来集成异构多数据并执行子类型识别。<br><strong>iNMF</strong> (Integrative nonnegative matrix factorization)扩展了NMF框架以在集成多个数据时考虑异构效应。<br><strong>FSMKL</strong> (Feature selection multiple kernel learning)是一种监督分类方法，使用多个内核来捕获数据集之间的相似性，以识别疾病进展的特征。<br><strong>sMBPLS</strong> (Sparse multi-block partial least squares)允许多块输入包含多个调控组学数据集，例如 CNV、DNA 甲基化和调控基因表达的 miRNA 表达。<br><strong>T-SVD</strong> (Thresholding singular value decomposition)有助于识别 2 个组学数据集之间的调控机制，尤其是当调控特征大于测量样本时。<br><strong>Joint NMF</strong> 该分解框架从多个数据集(相同样本)中识别相关模块，以推导出 md 模块，以揭示潜在的多层监管因素。  </p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1] Subramanian I, Verma S, Kumar S, Jere A, Anamika K. Multi-omics Data Integration, Interpretation, and Its Application. Bioinformatics and Biology Insights. January 2020. <a href="doi:10.1177/1177932219899051">doi:10.1177/1177932219899051</a><br>[2] López de Maturana E, Alonso L, Alarcón P, Martín-Antoniano IA, Pineda S, Piorno L, Calle ML, Malats N. Challenges in the Integration of Omics and Non-Omics Data. Genes (Basel). 2019 Mar 20;10(3):238. <a href="doi:10.3390/genes10030238">doi:10.3390/genes10030238</a></p>
-]]></content>
-      <categories>
-        <category>Paper</category>
-        <category>MultiOmics</category>
-      </categories>
-      <tags>
-        <tag>Bioinformatics</tag>
-        <tag>MultiOmics</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>长毛象使用指南</title>
     <url>/2021/09/21/mstdn/</url>
     <content><![CDATA[<center>不少朋友被我安利到长毛象(mastodon)玩耍，本着对他们负责的态度，写下这篇长毛象使用指南。</center>
@@ -698,6 +651,53 @@ data[key] = $.html();
       <tags>
         <tag>Mastodon</tag>
         <tag>UserGuide</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Methods to Analyze Multi-Omicis Data</title>
+    <url>/2021/12/01/multiomics/</url>
+    <content><![CDATA[<center>文献阅读：多组学数据的整合、解读方法及公开可用的多组学数据库</center>
+<span id="more"></span>
+
+<h2 id="Multi-Omics"><a href="#Multi-Omics" class="headerlink" title="Multi-Omics"></a>Multi-Omics</h2><p><strong>Multi-Omics</strong>指同时获得两个或两个以上组学数据，如基因组、转录组、蛋白质组等，并将它们结合在一起分析、挖掘，以获得更全面、更系统的生物学解释、分子作用机制等。  </p>
+<h2 id="多组学研究的意义"><a href="#多组学研究的意义" class="headerlink" title="多组学研究的意义"></a>多组学研究的意义</h2><p>整合多组学数据，提供不同层次的生物分子信息，有望系统地、整体地理解复杂的生物学。<br>多组学研究以顺序或同时的方式结合各组学数据，以了解分子之间的相互作用。<br>有助于评估从一个组学水平到另一个组学水平的信息流，从而有助于弥合从基因型到表型的差距。<br>多组学数据能够为研究提供整体视角，有助于提高疾病表型的预后和预测准确性，进而帮助更好地治疗和预防。  </p>
+<h2 id="多组学研究的困难"><a href="#多组学研究的困难" class="headerlink" title="多组学研究的困难"></a>多组学研究的困难</h2><p>多组学的研究通常与非组学数据相关联，如临床数据等，这导致多组学研究面临许多困难。  </p>
+<h3 id="非组学数据复杂且主观定义"><a href="#非组学数据复杂且主观定义" class="headerlink" title="非组学数据复杂且主观定义"></a>非组学数据复杂且主观定义</h3><p>非组学数据通常十分复杂且主观性较强，需要标准化后将其加入预测或分类模型中。流行病学数据受制于调查模式、调查问题标准化以及背景，这可能会影响数据质量和可比性，并最终影响这些变量在结果预测中的贡献。不同研究者或组织由于收集程序不一致，也可能产生差异。临床数据受到其定义复杂性的影响，需要有统一的标准。目前有一些标准化的规则可供使用，如Clinical Data Interchange Standards Consortium (CDISC)，Study Data Tabulation Model (SDTM)，Analysis Data Model (ADaM)。这些非组学数据是基于评估者的技能和先前知识的复杂阐述过程产生的主观评估，这可能会导致报告偏差。  </p>
+<h3 id="非组学数据具有异质性"><a href="#非组学数据具有异质性" class="headerlink" title="非组学数据具有异质性"></a>非组学数据具有异质性</h3><p>非组学数据缺乏统一性，如不同尺度测量的定性或定量变量等，在分析之前需要对它们进行数据转换或归一化步骤。  </p>
+<h3 id="非组学数据规模大"><a href="#非组学数据规模大" class="headerlink" title="非组学数据规模大"></a>非组学数据规模大</h3><p>目前，许多多组学数据与非组学数据相结合的研究方法基于小尺度、低纬度的数据，而现在的非组学数据已经成为“大数据”——大规模，高维度。可穿戴监测装置和EHR (e-health records)的出现使非组学数据更易获取并向更高维度发展，且在处理客观和主观特征以及结构化和非结构化数据方面也更具有挑战性。<br>非组学数据的高维度也意味着存在</p>
+<ul>
+<li>变量之间的相关结构  </li>
+<li>大规模纵向数据  </li>
+<li>数据稀疏性（即药物、实验室或诊断测试）  </li>
+<li>与组学数据相比，数据缺失与参与个体无关  </li>
+</ul>
+<p>这些因素都需要在后续分析建模时，将其考虑在内。  </p>
+<h3 id="将组学和非组学数据联系"><a href="#将组学和非组学数据联系" class="headerlink" title="将组学和非组学数据联系"></a>将组学和非组学数据联系</h3><p>在病例对照设计中，组学数据和非组学数据的整合可能会受到确认偏差的影响。<br>组学和非组学数据之间的相互作用也会对研究产生影响。在建模的过程中，重要的是要将这种相互作用考虑在内。这些相互作用也可能非常复杂，如基因表达变化可能意味着表型异常，这导致分子数据和临床数据之间的关系更加复杂。  </p>
+<h3 id="其它困难"><a href="#其它困难" class="headerlink" title="其它困难"></a>其它困难</h3><p>每个变量或块对结果的贡献是否应该相等。<br>当与高通量数据集结合时，如何防止临床变量被惩罚(penalized)。<br>亚型的出现会给模型增加复杂性，在建模时是否要将亚型考虑在内。</p>
+<h2 id="多组学数据库"><a href="#多组学数据库" class="headerlink" title="多组学数据库"></a>多组学数据库</h2><p>多组学数据覆盖基因组、蛋白组、转录组、代谢组和表观遗传组的数据，含有这些组学数据两种或两种以上的数据库可成为多组学数据库。  </p>
+<h3 id="TCGA"><a href="#TCGA" class="headerlink" title="TCGA"></a>TCGA</h3><p>The Cancer Genome Altas (<a href="https://cancergenome.nih.gov/">TCGA</a>) 是最大的多组学数据库之一，涵盖超过 33 种不同类型癌症的20000个个体肿瘤样本。TCGA旨在产生、整合、分析和解释肿瘤样本产生的DNA、RNA、蛋白质及表观遗传数据的特征以及临床和组织学数据。</p>
+<h3 id="CPTAC"><a href="#CPTAC" class="headerlink" title="CPTAC"></a>CPTAC</h3><p>Clinical Proteomic Tumor Analysis Consortium (<a href="https://cptac-data-portal.georgetown.edu/cptacPublic/">CPTAC</a>) 是通过对TCGA库中的生物样本通过质谱技术进行分析，获取的蛋白质组数据。如果实验中同时测得基因组数据，也可在该库获得。  </p>
+<h3 id="ICGC"><a href="#ICGC" class="headerlink" title="ICGC"></a>ICGC</h3><p>International Cancer Genomics Consortium (<a href="https://icgc.org/">ICGC</a>) 从20383名捐献者的21个原发癌位点的76个癌症项目中协调大规模生成基因组研究。  </p>
+<h3 id="CCLE"><a href="#CCLE" class="headerlink" title="CCLE"></a>CCLE</h3><p>Cancer Cell Line Encyclopedia (<a href="https://portals.broadinstitute.org/ccle">CCLE</a>) 包含947种人类细胞系和36种肿瘤的基因表达、拷贝数和测序数据。还包含479种癌细胞系中24种抗癌药物的药理学特征。  </p>
+<h3 id="METABRIC"><a href="#METABRIC" class="headerlink" title="METABRIC"></a>METABRIC</h3><p>Molecular Taxonomy of Breast Cancer International Consortium (<a href="http://molonc.bccrc.ca/apariciolab/research/metabric/">METABRIC</a>) 包含来自乳腺肿瘤的临床特征、表达、单核苷酸多态性和拷贝数变异数据。  </p>
+<h3 id="TARGET"><a href="#TARGET" class="headerlink" title="TARGET"></a>TARGET</h3><p><a href="https://ocg.cancer.gov/programs/target">TARGET</a> 包含 24 种癌症分子类型的临床信息、基因表达、miRNA 表达、拷贝数和测序数据。  </p>
+<h3 id="OmicsDI"><a href="#OmicsDI" class="headerlink" title="OmicsDI"></a>OmicsDI</h3><p>Omics Discovery Index (<a href="https://www.omicsdi.org/">OmicsDI</a>) 包含来自公共数据结构中的 11 个存储库的数据集。是一个开源平台，用于访问、发现和整合基因组学、转录组学、蛋白质组学和代谢组学数据集。包含来自人类、模式生物和非模式生物的数据集。  </p>
+<h2 id="多组学数据分析方法"><a href="#多组学数据分析方法" class="headerlink" title="多组学数据分析方法"></a>多组学数据分析方法</h2><p>根据算法思想，可将目前已有的多组学数据分析方法分为几个大类：<br><img src="/2021/12/01/multiomics/methods.png">  </p>
+<h3 id="Network-Based"><a href="#Network-Based" class="headerlink" title="Network Based"></a>Network Based</h3><p><strong>SNF</strong> (Similarity network fusion)是一种基于网络的方法，使用网络融合方法整合多组学数据集。它为每种数据类型创建一个单独的网络，然后使用非线性网络融合方法将它们融合成一个单一的相似性网络。 融合步骤基于消息传递理论，使网络在每次迭代中更像其他网络。<br><strong>NetICS</strong> (Network-based integration of multi-omics data)为基于网络的多组学数据集成提供了一个框架，用于癌症基因优先排序。可预测遗传畸变、表观遗传变化和miRNA对相互作用网络中下游基因和蛋白质(表达)的影响。在有向功能交互网络上使用每个样本的网络扩散模型，并通过聚合个体排名得出种群水平的基因排名，并为所有样本提供全局排名。  </p>
+<h3 id="Bayesian-approach"><a href="#Bayesian-approach" class="headerlink" title="Bayesian approach"></a>Bayesian approach</h3><p><strong>iCluster</strong>根据多种数据类型同时推断，为样本生成一个单一的聚类分配。这种无监督方法使用联合潜在变量模型进行集成聚类，并在单个框架中结合不同数据类型之间的关联以及数据类型内的方差-协方差结构，同时降低数据集的维度。通过期望最大化算法获得似然推理。<br><strong>iClusterPlus</strong>是iCluster的增强版，使用广义线性回归来确定综合基因组、表观基因组和转录组分析的分类和数字(连续和计数)变量的联合模型。该方法使用一组潜在变量”k”来代表驱动因素，这些因素预测关键的基因组变量，从而捕捉生物变异。此外，使用Lasso回归方法，iClusterPlus确定了有助于亚型之间生物变化的特征子集。<br><strong>LRAcluster</strong>使用概率模型与低秩近似法来寻找主要的低维子空间，以对全基因组数据进行分类。在这种方法中，每个组学数据都以大小匹配的参数矩阵为条件，并且这个低秩参数矩阵可以在低维空间中表示。 用户定义的维度参数(基于数据的解释方差)和聚类数(基于轮廓值)有助于更快地降维和更好地聚类疾病亚型。<br><strong>PSDF</strong> (Patient-specific data fusion)该方法使用贝叶斯非参数模型(Dirichlet 过程混合模型)来整合CNV和基因表达数据，以将样本分层为子组。每个样本根据它们在2个数据集之间的一致性被分配一个二元状态。只有表现出一致性的样本融合在一起，而其他样本保持未融合，因此考虑了患者特定的融合模型。<br><strong>BCC</strong> (Bayesian consensus clustering)提出了一种数据驱动的共识聚类方法，该方法对源特定特征以及使用有限狄利克雷混合模型扩展以解释多个数据源的整体聚类进行建模。<br><strong>Joint Bayesian factor</strong>使用非参数贝叶斯因子分析来整合组学数据集。 这种方法使用 beta-Bernoulli 过程将特征空间分解为共享的和特定于数据的组件。<br><strong>MDI</strong> (Multiple dataset integration)使用 Dirichlet 混合模型对每个数据源进行聚类，同时对聚类之间的成对依赖性进行建模。MDI在分配给组件(如基因组特征)的变量级别链接模型。组件变量级链接允许捕获多组学数据之间的依赖关系。<br><strong>MOFA</strong> (Multi-omics factor analysis)是一种无监督方法，用于在相同或部分重叠的样本上整合多组学数据类型。<br><strong>PARADIGM</strong>的应用可以扩展到对所研究疾病的发现。  </p>
+<h3 id="Fusion-based-approaches"><a href="#Fusion-based-approaches" class="headerlink" title="Fusion-based approaches"></a>Fusion-based approaches</h3><p><strong>PFA</strong> (Pattern fusion analysis)允许在低维特征空间中跨异质基因组谱识别集成样本模式。首先使用主成分分析获得局部样本模式。 其后将这些局部样本模式与公共特征空间对齐，并跨大多数数据类型合成全局样本模式。在此过程中，将定量测量每种数据类型(或单个样本)对全局样本频谱的贡献，并迭代降低偏差或系统噪声的影响以更好地拟合数据。  </p>
+<h3 id="Similarity-based-approaches"><a href="#Similarity-based-approaches" class="headerlink" title="Similarity-based approaches"></a>Similarity-based approaches</h3><p><strong>PINSPlus</strong> (Perturbation clustering for data integration and disease subtyping)是一种无监督的聚类方法，有助于从多组学数据中识别亚型。为了识别亚型，该算法确定患者在单个集群中分组的频率(1)当数据受到干扰时，(2)使用不同类型的组学数据时，(3)使用不同的聚类技术时。 所有场景中的强关联患者都聚集在一起形成一个亚型。<br><strong>NEMO</strong>(Neighborhood-based multi-omics clustering) 是一种基于相似性的简单多组学聚类方法，它进一步建立在先前建立的聚类方法（如 SNF 和 rMKL-LPP）的基础上。该方法最初为每个输入组学数据集构建基于患者间相似性矩阵的欧几里德距离。然后将每个组学的相似性矩阵整合到一个矩阵中，然后使用光谱聚类方法对其进行聚类。  </p>
+<h3 id="Correlation-based-approaches"><a href="#Correlation-based-approaches" class="headerlink" title="Correlation based approaches"></a>Correlation based approaches</h3><p><strong>CNAmet</strong>用于对拷贝数改变、DNA 甲基化和基因表达数据进行综合分析。  </p>
+<h3 id="Other-multivariate-approaches"><a href="#Other-multivariate-approaches" class="headerlink" title="Other multivariate approaches"></a>Other multivariate approaches</h3><p><strong>mixOmics</strong>提供了一组有监督和无监督的多元方法来执行多组学数据集的整合，重点是变量选择。<br><strong>moCluster</strong>使用多表多元分析方法来识别跨多组学数据集的模式。<br><strong>MCIA</strong> (Multiple co-inertia analysis)是一种探索性数据分析方法，它捕捉多个高维数据集（如基因表达、miRNA表达、蛋白质表达）之间的相互关系。<br><strong>JIVE</strong> (Joint and individual variation explained)通过分离数据集的联合效应和个体效应来整合多组学数据。<br><strong>MFA</strong> (Multiple factor analysis)是一种通过将其投影到低维变量空间来帮助整合组学数据集的方法。<br><strong>rMKL-LPP</strong> 使用多核学习来集成异构多数据并执行子类型识别。<br><strong>iNMF</strong> (Integrative nonnegative matrix factorization)扩展了NMF框架以在集成多个数据时考虑异构效应。<br><strong>FSMKL</strong> (Feature selection multiple kernel learning)是一种监督分类方法，使用多个内核来捕获数据集之间的相似性，以识别疾病进展的特征。<br><strong>sMBPLS</strong> (Sparse multi-block partial least squares)允许多块输入包含多个调控组学数据集，例如 CNV、DNA 甲基化和调控基因表达的 miRNA 表达。<br><strong>T-SVD</strong> (Thresholding singular value decomposition)有助于识别 2 个组学数据集之间的调控机制，尤其是当调控特征大于测量样本时。<br><strong>Joint NMF</strong> 该分解框架从多个数据集(相同样本)中识别相关模块，以推导出 md 模块，以揭示潜在的多层监管因素。  </p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1] Subramanian I, Verma S, Kumar S, Jere A, Anamika K. Multi-omics Data Integration, Interpretation, and Its Application. Bioinformatics and Biology Insights. January 2020. <a href="doi:10.1177/1177932219899051">doi:10.1177/1177932219899051</a><br>[2] López de Maturana E, Alonso L, Alarcón P, Martín-Antoniano IA, Pineda S, Piorno L, Calle ML, Malats N. Challenges in the Integration of Omics and Non-Omics Data. Genes (Basel). 2019 Mar 20;10(3):238. <a href="doi:10.3390/genes10030238">doi:10.3390/genes10030238</a></p>
+]]></content>
+      <categories>
+        <category>Paper</category>
+        <category>MultiOmics</category>
+      </categories>
+      <tags>
+        <tag>Bioinformatics</tag>
+        <tag>MultiOmics</tag>
       </tags>
   </entry>
   <entry>
@@ -938,6 +938,563 @@ $ hexo deploy  # 部署到GitHub Pages
       <tags>
         <tag>Bioinformatics</tag>
         <tag>BatchEffects</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Computer Network Notes 1：the basic</title>
+    <url>/2022/03/14/computernetworknotes1/</url>
+    <content><![CDATA[<center> 把老师的 PPT 变成 md 文件之计算机网络第一章计算机网络概述自学笔记 </center>
+<span id="more"></span>
+
+<h2 id="课程来源"><a href="#课程来源" class="headerlink" title="课程来源"></a>课程来源</h2><p>bilibili 网课：<a href="https://www.bilibili.com/video/BV1JV411t7">中科大郑烇、杨坚全套《计算机网络》</a>  </p>
+<br>  
+
+<h2 id="什么是-Internet"><a href="#什么是-Internet" class="headerlink" title="什么是 Internet"></a>什么是 Internet</h2><h3 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h3><p>由节点和边构成的拓扑结构  </p>
+<h3 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h3><p>联网的计算机所构成的系统，包括主机节点 (数据源或数据目标)、数据交换节点 (路由器、中继器、交换机等)、链路  </p>
+<ul>
+<li>节点  <ul>
+<li>主机及其上运行的应用程序  </li>
+<li>路由器、交换机等网络交换设备  </li>
+</ul>
+</li>
+<li>边：通信链路  <ul>
+<li>接入网链路：主机连接到互联网的链路  </li>
+<li>主干链路：路由器间链路  </li>
+</ul>
+</li>
+<li>协议  <ul>
+<li>对等层实体在通信过程中，应该遵守的规则的集合，包括语义、语法和时序  </li>
+</ul>
+</li>
+</ul>
+<h3 id="互联网"><a href="#互联网" class="headerlink" title="互联网"></a>互联网</h3><p>数以亿计的、互联的计算设备  </p>
+<ul>
+<li>主机 = 端系统：end system / host  </li>
+<li>运行网络应用程序</li>
+</ul>
+<p>通信链路  </p>
+<ul>
+<li>光纤、同轴电缆、无线电、卫星  </li>
+<li>传输速率 = 带宽 (bps)  </li>
+</ul>
+<p>分组交换设备：转发分组 (packets)  </p>
+<ul>
+<li>路由器和交换机</li>
+</ul>
+<h3 id="Internet"><a href="#Internet" class="headerlink" title="Internet"></a>Internet</h3><p>TCP、IP 协议建立起的一个网络，也是一种计算机网络。  </p>
+<ul>
+<li>协议控制发送、接收消息：TCP、IP、HTTP、FTP、PPP 等  </li>
+<li>网络的网络：松散的层次结构，互连的 ISP；公共 Internet vs 专用 intranet  </li>
+<li>标准：RFC (Request For Comments)；IETF(Internet Engineering Task Force)  </li>
+</ul>
+<p><strong>协议</strong>定义了在两个或多个通信实体之间交换的报文格式和次序，以及在报文传输和/或接收或其他事件方面所采取的动作。  </p>
+<p>从服务角度理解 Internet</p>
+<ul>
+<li>使用通信设施进行通信的分布式应用：Web、VoIP、email、分布式游戏、电子商务、社交网络  </li>
+<li>通信基础设施为 apps 提供编程接口 (通信服务)：将发送和接收数据的 apps 与互联网连接起来；为 apps 提供服务选择，类似于邮件服务，包括无连接不可靠服务和面向连接的可靠服务  </li>
+</ul>
+<br>  
+
+<h2 id="网络边缘"><a href="#网络边缘" class="headerlink" title="网络边缘"></a>网络边缘</h2><h3 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h3><p>网络边缘 (edge)  </p>
+<ul>
+<li>主机  </li>
+<li>应用程序：客户端和服务器  </li>
+</ul>
+<p>网络核心 (core)：数据交换  </p>
+<ul>
+<li>互连着的路由器  </li>
+<li>网络的网络  </li>
+</ul>
+<p>接入网、物理媒体 (access)  </p>
+<ul>
+<li>有线或无线通信链路  </li>
+</ul>
+<h3 id="网络边缘-1"><a href="#网络边缘-1" class="headerlink" title="网络边缘"></a>网络边缘</h3><p>端系统 (主机)：运行应用程序，如 Web、Email，在“网络的边缘”  </p>
+<p>客户/服务模式  </p>
+<ul>
+<li>一种主从模式，可扩展性、可靠性有问题  </li>
+<li>客户端向服务器请求、接收服务，如 Web 浏览器/服务器，Email 客户端/服务器  </li>
+</ul>
+<p>对等 (peer - peer) 模式  </p>
+<ul>
+<li>每个节点既是客户端有时服务器  </li>
+<li>分布式的文件系统  </li>
+<li>很少 (甚至没有) 专门的服务器，如 Gmutella、KaZaA、Emule、迅雷、电驴  </li>
+</ul>
+<h4 id="面向连接的通信服务"><a href="#面向连接的通信服务" class="headerlink" title="面向连接的通信服务"></a>面向连接的通信服务</h4><p>采用网络设施的面向连接服务  </p>
+<p><strong>目标</strong>：在端系统之间传输数据  </p>
+<ul>
+<li>“握手”：在数据传输之前做好准备，为通信准备好相应的资源、设置  </li>
+<li>两个通信主机之间为连接建立状态，端系统维护连接，只有端系统“知道”连接  </li>
+</ul>
+<p><strong>TCP (Transmission Control Protocol) 传输控制协议</strong> [RFC 793]  </p>
+<ul>
+<li>Internet 上面向连接的服务  </li>
+<li>使用 TCP 的应用：HTTP (Web)、FTP (文件传输)、Telnet (远程登陆)、SMTP (Email)  </li>
+<li><strong>可靠地、按顺序地传送数据</strong>：确认和重传  </li>
+<li><strong>流量控制</strong>：平衡发送方和接收方，发送方不会淹没接收方  </li>
+<li><strong>拥塞控制</strong>：了解网络路径情况，当网络拥塞时，发送方降低发送速率  </li>
+</ul>
+<h4 id="采用基础设施的无连接服务"><a href="#采用基础设施的无连接服务" class="headerlink" title="采用基础设施的无连接服务"></a>采用基础设施的无连接服务</h4><p>目标  </p>
+<ul>
+<li>在端系统之间传输数据  </li>
+<li>无连接服务：直接发送，不打招呼  </li>
+</ul>
+<p><strong>UDP (User Datagram Protocol) 用户数据报协议</strong> [RFC 768]</p>
+<ul>
+<li>无连接  </li>
+<li>不可靠数据传输  </li>
+<li>无流量控制  </li>
+<li>无拥塞控制  </li>
+<li>使用 UDP 的应用：流媒体、远程会议、DNS、Internet 电话  </li>
+</ul>
+<br>  
+
+<h2 id="网络核心"><a href="#网络核心" class="headerlink" title="网络核心"></a>网络核心</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>路由器的网状网络  </p>
+<h3 id="通过网络传输数据的方式"><a href="#通过网络传输数据的方式" class="headerlink" title="通过网络传输数据的方式"></a>通过网络传输数据的方式</h3><h4 id="电路交换"><a href="#电路交换" class="headerlink" title="电路交换"></a>电路交换</h4><p>为每个预叫预留一条专有电路，如电话网  </p>
+<p><img src="/2022/03/14/computernetworknotes1/dianlujiaohuan.png" alt="电路交换">  </p>
+<p>为呼叫预留端-端资源  </p>
+<ul>
+<li>链路带宽，交换能力  </li>
+<li>专用资源：不共享  </li>
+<li>保证性能  </li>
+<li>要求建立呼叫链接  </li>
+</ul>
+<p>网络资源 (如带宽) 被分成片  </p>
+<ul>
+<li>可频分 (Frequency-division multiplexing, FDM)，称频段；可时分 (Time-division multiplexing, TDM)，称时间周期片；可波分 (Wave-division multiplexing, WDM)，称波段  </li>
+<li>为呼叫分配片  </li>
+<li>如果某个呼叫没有数据，则其资源片处于空闲状态 (不共享)  </li>
+</ul>
+<p>特点  </p>
+<ul>
+<li>连接建立时间长  </li>
+<li>计算机之间的通信具有突发性，若使用电路交换则浪费片较多  </li>
+<li>可靠性不高 (维护 piece 间的 mapping 关系，若核心节点损毁则会造成大面积瘫痪)  </li>
+</ul>
+<h4 id="分组交换-packet-switch"><a href="#分组交换-packet-switch" class="headerlink" title="分组交换 (packet switch)"></a>分组交换 (packet switch)</h4><p>简介  </p>
+<ul>
+<li>将要传输的数据分成一个个单位：分组  </li>
+<li>将分组从一个路由器传到一个相邻的路由器 (hop)，一段段最终从源端到目标端  </li>
+<li>每段：采用链路的最大传输能力 (带宽)  </li>
+</ul>
+<p>以分组为单位存储 - 转发方式  </p>
+<ul>
+<li>网络带宽资源不再分为一个个片，传输时使用全部带宽  </li>
+<li>主机之间传输的数据被分为一个个分组  </li>
+</ul>
+<p>资源共享，按需使用  </p>
+<ul>
+<li>存储 - 转发：分组每次移动一跳 (hop)  </li>
+<li>在转发之前，节点必须收到整个分组  </li>
+<li>延迟比线路交换大有排队时间<br><em>如果到达速率 &gt; 链路的输出速率，分组将会排队，等待传输；如果路由器缓存使用完，分组将被会抛弃。</em>  </li>
+</ul>
+<p>网络核心的关键功能  </p>
+<ul>
+<li><strong>路由</strong>：决定分组采用的源到目标的路径 (路由算法)  </li>
+<li><strong>转发</strong>：将分组从路由器的输入链路转移到输出链路  </li>
+</ul>
+<p>分组交换的分组没有固定模式，即统计多路复用。  </p>
+<h4 id="分组交换-vs-电路交换"><a href="#分组交换-vs-电路交换" class="headerlink" title="分组交换 vs 电路交换"></a>分组交换 vs 电路交换</h4><ul>
+<li>分组交换允许更多用户使用网络<br><img src="/2022/03/14/computernetworknotes1/switchcompare.png" alt="分组交换与电路交换对比">  </li>
+</ul>
+<center> *网络强度为 1 时，网络会挂，所以分组交换时用户数不能为 10* </center>  
+
+<ul>
+<li>分组交换更适合于突发式数据传输：资源共享；简单，不必建立呼叫  </li>
+<li>过度使用会造成网络拥堵：分组延时和丢失；对可靠的数据传输需要协议来约束 (拥塞控制)  </li>
+</ul>
+<h3 id="分组交换网络"><a href="#分组交换网络" class="headerlink" title="分组交换网络"></a>分组交换网络</h3><p>分组的存储 - 转发一段一段从源端传到目标端，按照有无网络层的连接分成：<br>(1) 数据报 (datagram) 网络  </p>
+<ul>
+<li>分组的目标地址决定下一跳  </li>
+<li>在不同的阶段，路由可以改变  </li>
+<li>即无连接，每一份都独立传送<ul>
+<li>通信之前无需建立连接，有数据就传输</li>
+<li>每一个分组都独立路由 (路径不一样，可能会失序)  </li>
+<li>路由器根据分组的目标地址进行路由</li>
+</ul>
+</li>
+<li>类似：问路  </li>
+<li>eg. Internet  </li>
+</ul>
+<p>(2) 虚电路 (virtual circuit) 网络  </p>
+<ul>
+<li>每个分组都带标签，虚电路标识 VC ID，标签决定下一跳  </li>
+<li>在呼叫建立时决定路径，在整个呼叫中路径保持不变  </li>
+<li>路由器维护每个呼叫的状态信息  </li>
+<li>即建立网络层的连接，每个交换节点中有相应标识  </li>
+<li>eg. X.25 和 ATM  </li>
+</ul>
+<br>  
+
+<h2 id="接入网和物理媒体"><a href="#接入网和物理媒体" class="headerlink" title="接入网和物理媒体"></a>接入网和物理媒体</h2><h3 id="接入网：怎样将端系统和边缘路由端链接"><a href="#接入网：怎样将端系统和边缘路由端链接" class="headerlink" title="接入网：怎样将端系统和边缘路由端链接"></a>接入网：怎样将端系统和边缘路由端链接</h3><ul>
+<li>住宅接入网络  </li>
+<li>单位接入网络：学校、公司  </li>
+<li>无线接入网络  </li>
+</ul>
+<p><strong>重要指标</strong>：带宽、共享/专用</p>
+<h4 id="住宅接入-modem"><a href="#住宅接入-modem" class="headerlink" title="住宅接入 (modem)"></a>住宅接入 (modem)</h4><p>将上网数据<strong>调制</strong>加载在音频信号上 (能保证的带宽只有 4 kHz)，在电话线上传输，在局端将其中的数据<strong>解调</strong>出来；反之亦然。  </p>
+<ul>
+<li>调频  </li>
+<li>调幅  </li>
+<li>调相位  </li>
+<li>综合调制  </li>
+</ul>
+<p><strong>拨号调制解调器</strong>  </p>
+<ul>
+<li>56 Kbps 的速率直接接入路由器 (通常更低)  </li>
+<li>不能同时上网和打电话，且不能总是在线  </li>
+<li>利用已有的线路</li>
+</ul>
+<p>**Digital Subscribe Line (DSL)**：采用现存的到交换局 DLSAM 的电话线  </p>
+<ul>
+<li>语音、数据在专享线路的不同波段传播</li>
+<li>DSL 线路上的数据波传到互联网 (&gt; 4 kHz，上下传输带宽分布不均时称为 ADSL)  </li>
+<li>DSL 线路上的数据波传到电话网 (&lt; 4 kHz)  </li>
+<li>传输速率<ul>
+<li>&lt; 2.5 Mbps 上行传输速率 (typically &lt; 1 Mbps)  </li>
+<li>&lt; 24 Mbps 下行传输速率 (typically &lt; 10 Mbps)  </li>
+</ul>
+</li>
+</ul>
+<p><strong>线缆网络</strong>  </p>
+<ul>
+<li>有线电视信号线缆双向改造  </li>
+<li><strong>FDM</strong>：在不同频段传输不同信道的数据，包括数字电视和上网数据 (上下行)  </li>
+<li>类似的也可以使用电网  </li>
+<li>HFC (Hybrid Fiber Coax)：非对称，最高 30 Mbps 的下行传输速率，2 Mbps 上行传输速率  </li>
+<li>线缆和光纤网络将各个家庭用户接入到 ISP 路由器</li>
+<li>个用户<strong>共享</strong>到线缆头端的接入网络 (与 DSL 不同，DSL 每个用户一个专用线路到 CO (Central Office))  </li>
+</ul>
+<p><img src="/2022/03/14/computernetworknotes1/modem.png" alt="住宅接入：电缆模式">  </p>
+<br>  
+
+<p><img src="/2022/03/14/computernetworknotes1/housenetwork.png" alt="接入网：家庭网络">  </p>
+<h4 id="企业接入网络-Ethernet"><a href="#企业接入网络-Ethernet" class="headerlink" title="企业接入网络 (Ethernet)"></a>企业接入网络 (Ethernet)</h4><p>经常被弃业或大学等机构采用</p>
+<ul>
+<li>10 Mbps，100 Mbps，1 Gbps，10 Gbps 传输率  </li>
+<li>现在端系统经常直接接到以太网络交换机上  </li>
+</ul>
+<p><img src="/2022/03/14/computernetworknotes1/Ethernet.png" alt="企业接入网络">  </p>
+<h4 id="无线接入网络"><a href="#无线接入网络" class="headerlink" title="无线接入网络"></a>无线接入网络</h4><p>各无线端系统共享无线接入网络 (端系统到无线路由器)  </p>
+<ul>
+<li>通过基站或接入点  </li>
+</ul>
+<p>无线 LANs  </p>
+<ul>
+<li>建筑物内部 (100 ft)  </li>
+<li>802.11 b/g (WiFi)：11，54 Mbps 传输速率  </li>
+</ul>
+<p>广域无线接入  </p>
+<ul>
+<li>由电信运营商提供 (Cellular)：10’s km  </li>
+<li>1 到 10 Mbps  </li>
+<li>3 G，4 G：LTE</li>
+</ul>
+<h3 id="物理媒体"><a href="#物理媒体" class="headerlink" title="物理媒体"></a>物理媒体</h3><ul>
+<li>Bit：在传输-接收对间传播  </li>
+<li>物理链路：在每个传输-接收对间跨越的一种物理媒体  </li>
+<li>导引型媒体：信号沿着固体媒介被导引，如同轴电缆、光纤、双绞线  </li>
+<li>非导引型媒体：信号自由传播，如无线电  </li>
+</ul>
+<h4 id="双绞线-TP"><a href="#双绞线-TP" class="headerlink" title="双绞线 (TP)"></a>双绞线 (TP)</h4><ul>
+<li>两根绝缘铜线  </li>
+<li>5 类：100 Mbps Ethernet、Gbps 以太网  </li>
+<li>6 类：10 Gbps </li>
+</ul>
+<h4 id="同轴电缆"><a href="#同轴电缆" class="headerlink" title="同轴电缆"></a>同轴电缆</h4><ul>
+<li>两根同心的铜导线  </li>
+<li>双向  </li>
+<li>基带电缆<ul>
+<li>电缆上一个单个信道</li>
+<li>Ethernet</li>
+</ul>
+</li>
+<li>宽带电缆<ul>
+<li>电缆上有多个信道</li>
+<li>HFC</li>
+</ul>
+</li>
+</ul>
+<h4 id="光缆"><a href="#光缆" class="headerlink" title="光缆"></a>光缆</h4><ul>
+<li>光脉冲，每个脉冲表示一个 bit，在玻璃纤维中传输  </li>
+<li>高速：点到点的告诉传输，如 10 Gbps ~ 100 Gbps 传输速率  </li>
+<li>低误码率：在两个中继器之间可以有很长的距离，不受电磁噪声的干扰  </li>
+<li>安全：全反射或垂直 (射入角度为零)；单模光纤或多模光纤  </li>
+</ul>
+<h4 id="无线链路"><a href="#无线链路" class="headerlink" title="无线链路"></a>无线链路</h4><ul>
+<li>开放空间传输电磁波，携带要传输的数据  </li>
+<li>无需物理“线缆”  </li>
+<li>双向  </li>
+<li>传播环境效应：反射、吸收、干扰  </li>
+<li>类型  <ul>
+<li>地面微波：up to 45 Mbps channels  </li>
+<li>LAN：WiFi；11 Mbps，54 Mbps，540 Mbps 等  </li>
+<li>wide area：蜂窝；3 G cellular (~ few Mbps)；4 G 10 Mbps；5 G 数 Gbps  </li>
+<li>卫星：每个信道 Kbps 到 45 Mbps，或者多个聚集信道；270 msec 端到端延迟 (延迟大)；同步静止卫星和低轨卫星  </li>
+</ul>
+</li>
+</ul>
+<br>  
+
+<h2 id="Internet-结构和-ISP"><a href="#Internet-结构和-ISP" class="headerlink" title="Internet 结构和 ISP"></a>Internet 结构和 ISP</h2><h3 id="互联网络结构：网络的网络"><a href="#互联网络结构：网络的网络" class="headerlink" title="互联网络结构：网络的网络"></a>互联网络结构：网络的网络</h3><p>端系统通过接入 ISPs (Internet Service Providers) 连接到互联网  </p>
+<ul>
+<li>住宅、公司和大学的 ISPs  </li>
+</ul>
+<p>接入 ISPs 相应的必须是互联的，因此任何两个端系统可相互发送分组到对方。<br>导致“网络的网络”非常复杂，发展和演化通过经济和国家政策来驱动。  </p>
+<h3 id="接入-ISPs-的连接方式"><a href="#接入-ISPs-的连接方式" class="headerlink" title="接入 ISPs 的连接方式"></a>接入 ISPs 的连接方式</h3><p>接入 ISPs 之间全连接：即将每两个 ISPs 直接相连，不可扩展，需要 O(n<sup>2</sup>) 连接  </p>
+<p>将每个接入 ISP 都连接到<strong>全局 ISP</strong> (全局范围内覆盖)：客户 ISPs 和提供者 ISPs 有经济合约  </p>
+<p><img src="/2022/03/14/computernetworknotes1/globalISP.png" alt="将每个接入 ISP 都连接到全局 ISP">  </p>
+<p>如果全局 ISP 事可行的业务，则一定会有不同公司<strong>竞争</strong>；通过 ISP 之间的<strong>合作</strong>可以完成业务的扩展，肯定会有互联，对等互联的结算关系  </p>
+<p><img src="/2022/03/14/computernetworknotes1/ISPpeerlink.png" alt="ISP 竞争与合作"></p>
+<p>业务细分 (全球接入和区域接入)，<strong>区域网络</strong>将出现，用于将接入 ISPs 连接到全局 ISPs  </p>
+<p><img src="/2022/03/14/computernetworknotes1/regionalnet.png" alt="局域网络">  </p>
+<p><strong>内容提供商网络</strong> (Internet Content Provider, eg. Google, Microsoft, Akamai) 可能会构建它们自己的网络，将它们的服务、内容更加靠近端用户，向用户提供更好的服务，减少自己的运营支出</p>
+<ul>
+<li>在全球各地部署自己的网络 (或靠近核心 ISP)，连接自己的数据中心机房 (Data Center)，走自己的数据  </li>
+<li>连接若干 local ISP 和各级 (包括一层) ISP，更加靠近用户  </li>
+<li>少付费，且用户访问更快</li>
+</ul>
+<p><img src="/2022/03/14/computernetworknotes1/CPN.png" alt="内容提供商网络">  </p>
+<p>在网络的最中心，有一些为数不多的充分连接大范围网络 (分布广、节点有限，但之间有多重连接)  </p>
+<ul>
+<li>“tier-1” commercial ISPs (eg. Level 3, Sprint, AT &amp; T, NTT)，国家或者国际的覆盖范围  </li>
+<li>content provider network (eg. Google)：将数据中心接入 ISP，方便周边用户的访问；通常私有网络之间用专网绕过第一层 ISP 和区域 ISPs  </li>
+</ul>
+<p><img src="/2022/03/14/computernetworknotes1/Internetstructure.png" alt="互联网络结构：网络的网络">  </p>
+<h3 id="Internet-的结构：松散的层次结构"><a href="#Internet-的结构：松散的层次结构" class="headerlink" title="Internet 的结构：松散的层次结构"></a>Internet 的结构：松散的层次结构</h3><p><strong>中心：第一层 ISP</strong> (如 UUNet，BBN/Genuity，Sprint，AT &amp; T) 国家/国际覆盖，速率极高  </p>
+<ul>
+<li>直接于其它第一层 ISP 相连  </li>
+<li>与大量的第二层 ISP 和其它客户网络相连  </li>
+</ul>
+<p><img src="/2022/03/14/computernetworknotes1/POP.png" alt="Sprint: point-of-presence">  </p>
+<p>second.png：更小些的 (通常是局域性的) ISP  </p>
+<ul>
+<li>与一个或多个第一层 ISPs 相连，也可能于其它第二层 ISP  </li>
+<li>通过合作拓展网络  </li>
+</ul>
+<p><img src="/2022/03/14/computernetworknotes1/second.png" alt="第二层 ISP">  </p>
+<p>第三层 ISP 与其它本地 ISP  </p>
+<ul>
+<li>接入网 (与端系统最近)  </li>
+<li>一个分组要经过许多网络  </li>
+</ul>
+<p><img src="/2022/03/14/computernetworknotes1/third.png" alt="第三层 ISP">  </p>
+<h3 id="ISP-之间的连接"><a href="#ISP-之间的连接" class="headerlink" title="ISP 之间的连接"></a>ISP 之间的连接</h3><p><strong>POP</strong>  </p>
+<ul>
+<li>高层 ISP 面向客户网络的接入点，涉及费用结算  </li>
+<li>多宿 (multi home)：一个低层 ISP 接入多个高层 ISP  </li>
+</ul>
+<p><strong>对等接入</strong>  </p>
+<ul>
+<li>2 个 ISP 对等互接，不涉及费用结算  </li>
+</ul>
+<p><strong>IXP</strong>  </p>
+<ul>
+<li>多个对等 ISP 互联互通之外，通常不涉及费用结算  </li>
+<li>对等接入  </li>
+</ul>
+<p><strong>ICP</strong>  </p>
+<ul>
+<li>自己部署的专用网络</li>
+<li>同时和各级 ISP 连接  </li>
+</ul>
+<br>  
+
+<h2 id="分组延时、丢失和吞吐量"><a href="#分组延时、丢失和吞吐量" class="headerlink" title="分组延时、丢失和吞吐量"></a>分组延时、丢失和吞吐量</h2><h3 id="分组丢失和延时如何产生"><a href="#分组丢失和延时如何产生" class="headerlink" title="分组丢失和延时如何产生"></a>分组丢失和延时如何产生</h3><p>在路由器缓冲区的分组队列  </p>
+<ul>
+<li>分组到达链路的速率超过了链路输出的能力  </li>
+<li>分组等待排到队头、被传输  </li>
+<li>缓冲区满，无法进入路由器  </li>
+</ul>
+<p><img src="/2022/03/14/computernetworknotes1/queueNdelay.png" alt="分组延时和丢失">  </p>
+<h3 id="分组延时"><a href="#分组延时" class="headerlink" title="分组延时"></a>分组延时</h3><p>(1) 节点处理延时</p>
+<ul>
+<li>检查 bit 级差错  </li>
+<li>检查分组首部和决定将分组导向何处  </li>
+</ul>
+<p>(2) 排队延时</p>
+<ul>
+<li>在输出链路上等待传输的时间  </li>
+<li>依赖于路由器的拥塞控制  </li>
+</ul>
+<p>(3) 传输延时</p>
+<ul>
+<li>R = 链路带宽 (bps)  </li>
+<li>L = 分组长度 (bits)  </li>
+<li>将分组发送到链路上的时间 = L / R  </li>
+<li>存储转发延时  </li>
+</ul>
+<p>(4) 传播延时</p>
+<ul>
+<li>d = 物理链路的长度</li>
+<li>s = 在媒体上的传播速度 (~ 2 x 10<sup>8</sup> m / sec)  </li>
+<li>传播延时 = d / s  </li>
+</ul>
+<p><em>R and s are very differential quantities</em>  </p>
+<p><img src="/2022/03/14/computernetworknotes1/delay.png" alt="四种分组延时"></p>
+<p><img src="/2022/03/14/computernetworknotes1/carqueue.png" alt="分组延时与车队类比">  </p>
+<p><img src="/2022/03/14/computernetworknotes1/carqueue2.png" alt="分组延时与车队类比">   </p>
+<p><em>信道容量大，可容纳的分组数量多</em>  </p>
+<h3 id="节点延时"><a href="#节点延时" class="headerlink" title="节点延时"></a>节点延时</h3><p><img src="/2022/03/14/computernetworknotes1/delaytime.png">  </p>
+<h3 id="排队延时"><a href="#排队延时" class="headerlink" title="排队延时"></a>排队延时</h3><ul>
+<li><p>R = 链路带宽 (bps)  </p>
+</li>
+<li><p>L = 分组长度 (bits)  </p>
+</li>
+<li><p>a = 分组到达队列的平均速率  </p>
+</li>
+<li><p>流量强度 I = La / R  </p>
+<ul>
+<li>La / R ~ 0：平均排队延时很小  </li>
+<li>La / R -&gt; 1：延时变得很大  </li>
+<li>La / R &gt; 1：比特到达队列的速率超过了从该队列输出的速率，平均排队延时将趋向无穷大  </li>
+</ul>
+<p><em>设计系统时流量强度不能大于1</em>  </p>
+<p><img src="/2022/03/14/computernetworknotes1/queuedelay.png"></p>
+</li>
+</ul>
+<h3 id="Internet-的延时和路由"><a href="#Internet-的延时和路由" class="headerlink" title="Internet 的延时和路由"></a>Internet 的延时和路由</h3><p><strong>Traceroute 诊断程序</strong>：提供从源端，经过路由器，到目的的延时测量  </p>
+<ul>
+<li>For all <em>i</em>：<ul>
+<li>沿着目的的路径，像每个路由器发送 3 个探测分组  </li>
+<li>路由器 <em>i</em> 将向发送方返回一个分组  </li>
+<li>发送方队发送和回复之间间隔计时  </li>
+</ul>
+</li>
+<li>ICMP 协议  </li>
+</ul>
+<h3 id="分组丢失"><a href="#分组丢失" class="headerlink" title="分组丢失"></a>分组丢失</h3><p>链路的队列缓冲区容量有限<br>当分组到达一个满的队列时，该分组将会丢失<br>丢失的分组可能会被前一个节点或源端系统重传，或根本不重传  </p>
+<p><img src="/2022/03/14/computernetworknotes1/packagelost.png" alt="分组丢失">  </p>
+<h3 id="吞吐量"><a href="#吞吐量" class="headerlink" title="吞吐量"></a>吞吐量</h3><p>在源端和目标端之间传输的速度 (数据量 / 单位时间)<br>有效的数量，要从源端确实到达目标端<br>源到端的吞吐量取决于路径上的最小吞吐量，即<strong>瓶颈链路</strong>的吞吐量<br>瓶颈链路：端到端路径上，限制端到端吞吐的链路<br><strong>瞬间吞吐量</strong>：在一个时间点的速率<br><strong>平均吞吐量</strong>：在一个长时间内平均值  </p>
+<p><img src="/2022/03/14/computernetworknotes1/tuntuliang.png" alt="吞吐量">  </p>
+<p><img src="/2022/03/14/computernetworknotes1/tuntuliang2.png" alt="吞吐量：互联网场景">  </p>
+<br>
+
+<h2 id="协议层次和服务模型"><a href="#协议层次和服务模型" class="headerlink" title="协议层次和服务模型"></a>协议层次和服务模型</h2><h3 id="网络是一个复杂系统"><a href="#网络是一个复杂系统" class="headerlink" title="网络是一个复杂系统"></a>网络是一个复杂系统</h3><p><strong>网络功能繁杂</strong>：数字信号的物理信号承载、点到点、路由、rdt、进程区分、应用等<br><strong>网络有许多构成元素和设备</strong>：主机、路由器、各种媒体的链路、应用、协议、硬件、软件等<br>如何规划这样一个复杂系统：模块化、<strong>层次化</strong></p>
+<h3 id="层次化方式实现复杂网络功能"><a href="#层次化方式实现复杂网络功能" class="headerlink" title="层次化方式实现复杂网络功能"></a>层次化方式实现复杂网络功能</h3><p>将网络复杂的功能分层功能明确的<strong>层次</strong>，每一层实现了其中一个或一组<strong>功能</strong>，功能中有其上层可以使用的功能：<strong>服务</strong><br>本层协议实体相互交互执行本层的<strong>协议动作</strong>，目的是实现本层功能，通过接口为上层提供更好的服务<br>在实现本层协议时，直接<strong>利用下层所提供的服务</strong><br>本层的服务：借助下层服务实现的本层协议实体之间交互带来的 (上层可以利用的) 新功能 + 更下层所提供的服务  </p>
+<h3 id="服务和服务访问点"><a href="#服务和服务访问点" class="headerlink" title="服务和服务访问点"></a>服务和服务访问点</h3><p>**服务 (Service)**：低层实体向上层实体提供它们之间通信的能力  </p>
+<ul>
+<li>服务用户 (service user)  </li>
+<li>服务提供者 (service provider)  </li>
+</ul>
+<p>**原语 (primitive)**：上层使用下层服务的形式，高层使用低层提供的服务，以及低层向高层提供服务都是通过服务访问原语来进行交互的 —— <strong>提供服务的形式</strong>  </p>
+<p>**服务访问点 SAP (Services Access Point)**：上层使用下层提供的服务通过层间的接口 —— <strong>提供服务的地点</strong>  </p>
+<ul>
+<li>eg. 邮箱  </li>
+<li>地址 (address)：下层的一个实体支撑着上层的多个实体，SAP 有标志不同上层实体的作用  </li>
+<li>可以有不同的实现，队列  </li>
+<li>eg. 传输层的 SAP：端口 (port)<br><em>区分数据要从哪里传到哪里，服务提供者区分不同的服务用户，层间接口</em></li>
+</ul>
+<h3 id="服务的类型"><a href="#服务的类型" class="headerlink" title="服务的类型"></a>服务的类型</h3><p><strong>面向连接的服务 (Connection-oriented Service)</strong>  </p>
+<ul>
+<li>连接 (Connection)：两个通信实体为进行通信而建立的一种结合  </li>
+<li>面向连接的服务通信过程：建立连接 (通信之前先“握手”，为通信分配资源，做好准备) -&gt; 通信 -&gt; 拆除连接  </li>
+<li>例子：网络层的连接被称为虚电路  </li>
+<li>适用范围：更适合传输大的数据块，不适合效地零星报文  </li>
+<li>特点：保序  </li>
+<li>服务类型<ul>
+<li>可靠的信息流 传送页面 (可靠的获得，通过接收方的确认：先“握手”)  </li>
+<li>可靠的字节流 远程登陆  </li>
+<li>不可靠的连接 数字化声音  </li>
+</ul>
+</li>
+</ul>
+<p><strong>无连接的服务 (Connectionless Service)</strong>  </p>
+<ul>
+<li>两个对等层实体在通信钱不需要建立一个连接，不预留资源，不需要通信双方都活跃 (例：寄信；通信之前不“握手”)  </li>
+<li>特点：不可靠、可能重复、可能失序  </li>
+<li>IP分组，数据包  </li>
+<li>适用范围：传送零星数据  </li>
+<li>服务类型<ul>
+<li>不可靠的数据报 电子方式的函件  </li>
+<li>有确认的数据包 挂号信  </li>
+<li>请求回答 信息查询  </li>
+</ul>
+</li>
+</ul>
+<h3 id="服务和协议"><a href="#服务和协议" class="headerlink" title="服务和协议"></a>服务和协议</h3><p><strong>区别</strong>  </p>
+<ul>
+<li>服务 (Service)：低层实体向上层实体提供它们之间的通信能力；通过原语 (primitive) 操作；垂直  </li>
+<li>协议 (protocol)：对等层实体 (peer entity) 之间在相互通信的过程中；需要遵循的规则的集合；水平  </li>
+</ul>
+<p><strong>联系</strong>  </p>
+<ul>
+<li>本层协议的实现要靠下层提供的服务来实现  </li>
+<li>本层实体通过协议为上层提供更高级的服务  </li>
+</ul>
+<h3 id="数据单元"><a href="#数据单元" class="headerlink" title="数据单元"></a>数据单元</h3><p><img src="/2022/03/14/computernetworknotes1/DU.png" alt="Data Unit">  </p>
+<p>SDU：上层要求传输的数据<br>ICI：接口控制信息，为更加顺利地传过层间接口<br>IDU = SDU + ICI<br>PDU：最常见的数据单元；在不同层有不同的名称，如应用报文、分组、数据报、位、帧等  </p>
+<p><strong>n-PDU的构成形式</strong><br><em>n-header：与本层交换数据所需的一些控制信息；其中，n 为层数，第 n 层</em>  </p>
+<ul>
+<li>一对一：SDU + n-header  </li>
+<li>一对多：SDU 的一部分 + n-header (PDU 大小有限，需要将 SDU 分为几个部分)  </li>
+<li>多对一：若干 SDU + n-header  </li>
+</ul>
+<h3 id="分层处理队实现复杂系统的好处"><a href="#分层处理队实现复杂系统的好处" class="headerlink" title="分层处理队实现复杂系统的好处"></a>分层处理队实现复杂系统的好处</h3><p>对复杂的系统<br><strong>概念化</strong>：结构清晰，便于标示网络组件，以及描述其相互关系</p>
+<ul>
+<li>分层参考模型  </li>
+</ul>
+<p><strong>结构化</strong>：模块化更易于维护和系统升级  </p>
+<ul>
+<li>改变某一层服务的实现不影响系统中的其它层次，对其它层次而言是透明的  </li>
+<li>eg. 如果改变登记程序并不影响系统的其他部分  </li>
+</ul>
+<p>分层的问题：效率相对较低  </p>
+<h3 id="Internet-协议栈"><a href="#Internet-协议栈" class="headerlink" title="Internet 协议栈"></a>Internet 协议栈</h3><p><strong>应用层</strong>：网络应用  </p>
+<ul>
+<li>为人类用户或其它应用进程提供网络应用服务  </li>
+<li>完成应用报文之间的交互  </li>
+<li>FTP, SMTP, HTTP, DNS  </li>
+<li>协议数据单元：报文 (message)  </li>
+</ul>
+<p><strong>传输层</strong>：主机之间的数据传输  </p>
+<ul>
+<li>在网络层提供的端到端通信基础上，细分为进程到进程，将不可靠的通信变成可靠的通信  </li>
+<li>完成进程到进程的区分  </li>
+<li>TCP, UDP  </li>
+<li>协议数据单元：报文段 (segment)；eg. TCP 段，UDP 数据报  </li>
+</ul>
+<p><strong>网络层</strong>：为数据包从源到目的选择路由  </p>
+<ul>
+<li>主机主机之间的通信，端到端通信，不可靠  </li>
+<li>传输以分组为单位的端到端的数据  </li>
+<li>IP，路由协议  </li>
+<li>协议数据单元：分组 (packet)；如果无连接方式：数据报 (datagram)  </li>
+</ul>
+<p><strong>链路层</strong>：相邻网络节点间的数据传输  </p>
+<ul>
+<li>2 个相邻 2 点的通信，点到点通信，可靠或不可靠</li>
+<li>在相邻两点之间，传输以帧为单位的数据 (Point to Point, P2P)  </li>
+<li>点对点协议 PPP，802.11 (WiFi)，Ethernet  </li>
+<li>协议数据单元：帧 (frame)  </li>
+</ul>
+<p><strong>物理层</strong>：在线路上传送 bit  </p>
+<ul>
+<li>把数据转换成物理信号承载在媒体上传输出去，接收方将物理信号再转换为数据信息  </li>
+<li>协议数据单元：位 (bit)  </li>
+</ul>
+<p><em>链路层和物理层协议一般封装在同一张网卡中</em>  </p>
+<p><img src="/2022/03/14/computernetworknotes1/Internetxieyizhan.png">  </p>
+<h3 id="ISO-OSI-参考模型"><a href="#ISO-OSI-参考模型" class="headerlink" title="ISO/OSI 参考模型"></a>ISO/OSI 参考模型</h3><p><strong>表示层</strong>：允许应用解释传输的数据  </p>
+<ul>
+<li>关心数据语义方面的信息和核心内容，而不是关心具体表达、如何编码</li>
+<li>加密、压缩、机器相关的表示转换  </li>
+</ul>
+<p><strong>会话层</strong>：数据交换的同步，检查点，恢复  </p>
+<ul>
+<li>会话管理：建立会话、维持会话  </li>
+</ul>
+<p><em>Internet 协议栈中没有以上两层，但依靠应用层来实现以上两层实现的功能</em>  </p>
+<p><img src="/2022/03/14/computernetworknotes1/ISO.png">  </p>
+<h3 id="封装和解封装"><a href="#封装和解封装" class="headerlink" title="封装和解封装"></a>封装和解封装</h3><p><img src="/2022/03/14/computernetworknotes1/seal.png" alt="封装和解封装">  </p>
+]]></content>
+      <categories>
+        <category>Notes</category>
+        <category>ComputerNetwork</category>
+      </categories>
+      <tags>
+        <tag>ComputerNetwork</tag>
       </tags>
   </entry>
   <entry>
