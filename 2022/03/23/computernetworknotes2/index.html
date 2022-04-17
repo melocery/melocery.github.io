@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"tech.musain.club","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="把老师的 PPT 变成 md 文件之计算机网络第二章应用层自学笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Computer Network Notes 2：Applications">
+<meta property="og:url" content="https://tech.musain.club/2022/03/23/computernetworknotes2/index.html">
+<meta property="og:site_name" content="Bugrocery">
+<meta property="og:description" content="把老师的 PPT 变成 md 文件之计算机网络第二章应用层自学笔记">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://tech.musain.club/2022/03/23/computernetworknotes2/TCPsocket.png">
+<meta property="og:image" content="https://tech.musain.club/2022/03/23/computernetworknotes2/UDPsocket.png">
+<meta property="og:image" content="https://tech.musain.club/2022/03/23/computernetworknotes2/URLform.png">
+<meta property="og:image" content="https://tech.musain.club/2022/03/23/computernetworknotes2/RTTmodel.png">
+<meta property="og:image" content="https://tech.musain.club/2022/03/23/computernetworknotes2/unperHTTP.png">
+<meta property="og:image" content="https://tech.musain.club/2022/03/23/computernetworknotes2/unperHTTP2.png">
+<meta property="og:image" content="https://tech.musain.club/2022/03/23/computernetworknotes2/ASCIIrequest.png">
+<meta property="og:image" content="https://tech.musain.club/2022/03/23/computernetworknotes2/HTTPnormal.png">
+<meta property="og:image" content="https://tech.musain.club/2022/03/23/computernetworknotes2/HTTPreaction.png">
+<meta property="og:image" content="https://tech.musain.club/2022/03/23/computernetworknotes2/cookies.png">
+<meta property="og:image" content="https://tech.musain.club/2022/03/23/computernetworknotes2/caches.png">
+<meta property="og:image" content="https://tech.musain.club/2022/03/23/computernetworknotes2/FTPconnect.png">
+<meta property="og:image" content="https://tech.musain.club/2022/03/23/computernetworknotes2/email.png">
+<meta property="og:image" content="https://tech.musain.club/2022/03/23/computernetworknotes2/MIME.png">
+<meta property="og:image" content="https://tech.musain.club/2022/03/23/computernetworknotes2/EmailProtocol.png">
+<meta property="og:image" content="https://tech.musain.club/2022/03/23/computernetworknotes2/DNSworkflow.png">
+<meta property="og:image" content="https://tech.musain.club/2022/03/23/computernetworknotes2/diguichaxun.png">
+<meta property="og:image" content="https://tech.musain.club/2022/03/23/computernetworknotes2/diedaichaxun.png">
+<meta property="og:image" content="https://tech.musain.club/2022/03/23/computernetworknotes2/DNSbaowen.png">
+<meta property="og:image" content="https://tech.musain.club/2022/03/23/computernetworknotes2/SCfile.png">
+<meta property="og:image" content="https://tech.musain.club/2022/03/23/computernetworknotes2/p2pfile.png">
+<meta property="og:image" content="https://tech.musain.club/2022/03/23/computernetworknotes2/filevs.png">
+<meta property="og:image" content="https://tech.musain.club/2022/03/23/computernetworknotes2/Kazaa.png">
+<meta property="og:image" content="https://tech.musain.club/2022/03/23/computernetworknotes2/titfortat.png">
+<meta property="og:image" content="https://tech.musain.club/2022/03/23/computernetworknotes2/Netflix.png">
+<meta property="og:image" content="https://tech.musain.club/2022/03/23/computernetworknotes2/socket.png">
+<meta property="og:image" content="https://tech.musain.club/2022/03/23/computernetworknotes2/CSTCPsocket.png">
+<meta property="og:image" content="https://tech.musain.club/2022/03/23/computernetworknotes2/sockaddr_in.png">
+<meta property="og:image" content="https://tech.musain.club/2022/03/23/computernetworknotes2/host_ent.png">
+<meta property="og:image" content="https://tech.musain.club/2022/03/23/computernetworknotes2/TCPjiaohu1.png">
+<meta property="og:image" content="https://tech.musain.club/2022/03/23/computernetworknotes2/clientTCP.png">
+<meta property="og:image" content="https://tech.musain.club/2022/03/23/computernetworknotes2/clientTCP2.png">
+<meta property="og:image" content="https://tech.musain.club/2022/03/23/computernetworknotes2/serverTCP.png">
+<meta property="og:image" content="https://tech.musain.club/2022/03/23/computernetworknotes2/serverTCP2.png">
+<meta property="og:image" content="https://tech.musain.club/2022/03/23/computernetworknotes2/UDPcs.png">
+<meta property="og:image" content="https://tech.musain.club/2022/03/23/computernetworknotes2/UDPccode1.png">
+<meta property="og:image" content="https://tech.musain.club/2022/03/23/computernetworknotes2/UDPccode2.png">
+<meta property="og:image" content="https://tech.musain.club/2022/03/23/computernetworknotes2/UDPscode1.png">
+<meta property="og:image" content="https://tech.musain.club/2022/03/23/computernetworknotes2/UDPscode2.png">
+<meta property="article:published_time" content="2022-03-23T14:09:38.000Z">
+<meta property="article:modified_time" content="2022-04-17T15:18:06.183Z">
+<meta property="article:author" content="R">
+<meta property="article:tag" content="ComputerNetwork">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tech.musain.club/2022/03/23/computernetworknotes2/TCPsocket.png">
+
+
+<link rel="canonical" href="https://tech.musain.club/2022/03/23/computernetworknotes2/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://tech.musain.club/2022/03/23/computernetworknotes2/","path":"2022/03/23/computernetworknotes2/","title":"Computer Network Notes 2：Applications"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Computer Network Notes 2：Applications | Bugrocery</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Bugrocery</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E7%AB%A0%E5%9F%BA%E6%9C%AC%E5%86%85%E5%AE%B9"><span class="nav-number">1.</span> <span class="nav-text">本章基本内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">创建一个新的网络应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E7%9A%84%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="nav-number">3.</span> <span class="nav-text">网络应用的体系结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7-%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%A8%A1%E5%BC%8F-C-S-client-server"><span class="nav-number">3.1.</span> <span class="nav-text">客户-服务器模式 (C&#x2F;S: client&#x2F;server)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E7%AD%89%E6%A8%A1%E5%BC%8F-P2P-Peer-to-Peer"><span class="nav-number">3.2.</span> <span class="nav-text">对等模式 (P2P: Peer to Peer)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B7%E5%90%88%E4%BD%93%EF%BC%9A%E5%AE%A2%E6%88%B7-%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%92%8C%E5%AF%B9%E7%AD%89%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="nav-number">3.3.</span> <span class="nav-text">混合体：客户-服务器和对等体系结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82%E5%8E%9F%E7%90%86-%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1"><span class="nav-number">4.</span> <span class="nav-text">应用层原理-进程通信</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">4.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1%E9%9C%80%E8%A6%81%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">4.2.</span> <span class="nav-text">分布式进程通信需要解决的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E8%BF%9B%E7%A8%8B%E8%BF%9B%E8%A1%8C%E7%BC%96%E5%9D%80-addressing"><span class="nav-number">4.2.1.</span> <span class="nav-text">对进程进行编址 (addressing)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%A0%E8%BE%93%E5%B1%82%E6%8F%90%E4%BE%9B%E7%9A%84%E6%9C%8D%E5%8A%A1-%E9%9C%80%E8%A6%81%E7%A9%BF%E8%BF%87%E5%B1%82%E9%97%B4%E7%9A%84%E4%BF%A1%E6%81%AF"><span class="nav-number">4.2.2.</span> <span class="nav-text">传输层提供的服务-需要穿过层间的信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%A0%E8%BE%93%E5%B1%82%E6%8F%90%E4%BE%9B%E7%9A%84%E6%9C%8D%E5%8A%A1-%E5%B1%82%E9%97%B4%E4%BF%A1%E6%81%AF%E7%9A%84%E4%BB%A3%E8%A1%A8"><span class="nav-number">4.2.3.</span> <span class="nav-text">传输层提供的服务-层间信息的代表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E4%BC%A0%E8%BE%93%E5%B1%82%E6%8F%90%E4%BE%9B%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%AE%9E%E7%8E%B0%E5%BA%94%E7%94%A8"><span class="nav-number">4.2.4.</span> <span class="nav-text">如何使用传输层提供的服务实现应用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web-and-HTTP"><span class="nav-number">5.</span> <span class="nav-text">Web and HTTP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Web-%E9%A1%B5"><span class="nav-number">5.1.</span> <span class="nav-text">Web 页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP-%E6%A6%82%E5%86%B5"><span class="nav-number">5.2.</span> <span class="nav-text">HTTP 概况</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP"><span class="nav-number">5.2.1.</span> <span class="nav-text">HTTP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-TCP"><span class="nav-number">5.2.2.</span> <span class="nav-text">使用 TCP</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP-%E8%BF%9E%E6%8E%A5"><span class="nav-number">5.3.</span> <span class="nav-text">HTTP 连接</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%93%8D%E5%BA%94%E6%97%B6%E9%97%B4%E6%A8%A1%E5%9E%8B"><span class="nav-number">5.3.1.</span> <span class="nav-text">响应时间模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%9E%E6%8C%81%E4%B9%85-HTTP"><span class="nav-number">5.3.2.</span> <span class="nav-text">非持久 HTTP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%81%E4%B9%85-HTTP"><span class="nav-number">5.3.3.</span> <span class="nav-text">持久 HTTP</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP-%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87"><span class="nav-number">5.4.</span> <span class="nav-text">HTTP 请求报文</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP-%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87%EF%BC%9A"><span class="nav-number">5.4.1.</span> <span class="nav-text">HTTP 请求报文：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%90%E4%BA%A4%E8%A1%A8%E5%8D%95%E8%BE%93%E5%85%A5"><span class="nav-number">5.4.2.</span> <span class="nav-text">提交表单输入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E7%B1%BB%E5%9E%8B"><span class="nav-number">5.4.3.</span> <span class="nav-text">方法类型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP-%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87"><span class="nav-number">5.5.</span> <span class="nav-text">HTTP 响应报文</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF"><span class="nav-number">5.5.1.</span> <span class="nav-text">基本信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP-%E5%93%8D%E5%BA%94%E7%8A%B6%E6%80%81%E7%A0%81"><span class="nav-number">5.5.2.</span> <span class="nav-text">HTTP 响应状态码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E6%88%B7-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%8A%B6%E6%80%81-cookies"><span class="nav-number">5.6.</span> <span class="nav-text">用户-服务器状态 cookies</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E4%B8%AA%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86"><span class="nav-number">5.6.1.</span> <span class="nav-text">4 个组成部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Cookies-%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">5.6.2.</span> <span class="nav-text">Cookies 的作用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E7%BB%B4%E6%8C%81%E7%8A%B6%E6%80%81"><span class="nav-number">5.6.3.</span> <span class="nav-text">如何维持状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Cookies-%E4%B8%8E%E9%9A%90%E7%A7%81"><span class="nav-number">5.6.4.</span> <span class="nav-text">Cookies 与隐私</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Web-%E7%BC%93%E5%AD%98-%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">5.7.</span> <span class="nav-text">Web 缓存(代理服务器)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E5%AE%9E%E7%8E%B0%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-number">5.7.1.</span> <span class="nav-text">缓存实现的方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Web-%E7%BC%93%E5%AD%98%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="nav-number">5.7.2.</span> <span class="nav-text">Web 缓存的优势</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6-GET-%E6%96%B9%E6%B3%95"><span class="nav-number">5.7.3.</span> <span class="nav-text">条件 GET 方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FTP"><span class="nav-number">6.</span> <span class="nav-text">FTP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#FTP%EF%BC%9A%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE"><span class="nav-number">6.1.</span> <span class="nav-text">FTP：文件传输协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E8%BF%9E%E6%8E%A5%E4%B8%8E%E6%95%B0%E6%8D%AE%E8%BF%9E%E6%8E%A5%E5%88%86%E5%BC%80"><span class="nav-number">6.2.</span> <span class="nav-text">控制连接与数据连接分开</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FTP-%E5%91%BD%E4%BB%A4%E3%80%81%E5%93%8D%E5%BA%94"><span class="nav-number">6.3.</span> <span class="nav-text">FTP 命令、响应</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Email"><span class="nav-number">7.</span> <span class="nav-text">Email</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6"><span class="nav-number">7.1.</span> <span class="nav-text">电子邮件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E4%BB%A3%E7%90%86"><span class="nav-number">7.1.1.</span> <span class="nav-text">用户代理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">7.1.2.</span> <span class="nav-text">邮件服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SMTP-RFC-2821"><span class="nav-number">7.1.3.</span> <span class="nav-text">SMTP [RFC 2821]</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%82%AE%E4%BB%B6%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F"><span class="nav-number">7.2.</span> <span class="nav-text">邮件报文格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%82%AE%E4%BB%B6%E8%AE%BF%E9%97%AE%E5%8D%8F%E8%AE%AE"><span class="nav-number">7.3.</span> <span class="nav-text">邮件访问协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#POP3"><span class="nav-number">7.3.1.</span> <span class="nav-text">POP3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IMAP"><span class="nav-number">7.3.2.</span> <span class="nav-text">IMAP</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DNS-Domain-Name-System"><span class="nav-number">8.</span> <span class="nav-text">DNS (Domain Name System)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BF%85%E8%A6%81%E6%80%A7"><span class="nav-number">8.1.</span> <span class="nav-text">必要性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS-%E6%80%BB%E4%BD%93%E6%80%9D%E8%B7%AF"><span class="nav-number">8.2.</span> <span class="nav-text">DNS 总体思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS-%E4%B8%BB%E8%A6%81%E7%9B%AE%E7%9A%84"><span class="nav-number">8.3.</span> <span class="nav-text">DNS 主要目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS-%E5%9F%9F%E5%90%8D%E7%BB%93%E6%9E%84"><span class="nav-number">8.4.</span> <span class="nav-text">DNS 域名结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS-%E5%90%8D%E5%AD%97%E7%A9%BA%E9%97%B4-The-DNS-Name-Space"><span class="nav-number">8.5.</span> <span class="nav-text">DNS 名字空间 (The DNS Name Space)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8D%E5%AD%97%E6%9C%8D%E5%8A%A1%E5%99%A8-Name-Server"><span class="nav-number">8.6.</span> <span class="nav-text">名字服务器 (Name Server)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9D%83%E5%A8%81-DNS-%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">8.6.1.</span> <span class="nav-text">权威 DNS 服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TLD-%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">8.6.2.</span> <span class="nav-text">TLD 服务器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%BA%E5%9F%9F%E5%90%8D%E5%AD%97%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BB%B4%E6%8A%A4%E8%B5%84%E6%BA%90%E8%AE%B0%E5%BD%95"><span class="nav-number">8.7.</span> <span class="nav-text">区域名字服务器维护资源记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS-%E8%AE%B0%E5%BD%95"><span class="nav-number">8.8.</span> <span class="nav-text">DNS 记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS-%E5%A4%A7%E8%87%B4%E5%B7%A5%E4%BD%9C%E8%BF%87%E7%A8%8B"><span class="nav-number">8.9.</span> <span class="nav-text">DNS 大致工作过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E5%90%8D%E5%AD%97%E6%9C%8D%E5%8A%A1%E5%99%A8-Local-Name-Server"><span class="nav-number">8.10.</span> <span class="nav-text">本地名字服务器 (Local Name Server)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%8D%E5%AD%97%E8%A7%A3%E6%9E%90%E8%BF%87%E7%A8%8B"><span class="nav-number">8.10.1.</span> <span class="nav-text">名字解析过程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS-%E5%8D%8F%E8%AE%AE%E3%80%81%E6%8A%A5%E6%96%87"><span class="nav-number">8.11.</span> <span class="nav-text">DNS 协议、报文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E9%AB%98%E6%80%A7%E8%83%BD%EF%BC%9A%E7%BC%93%E5%AD%98"><span class="nav-number">8.12.</span> <span class="nav-text">提高性能：缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%B4%E6%8A%A4%E9%97%AE%E9%A2%98%EF%BC%9A%E6%96%B0%E5%A2%9E%E4%B8%80%E4%B8%AA%E5%9F%9F"><span class="nav-number">8.13.</span> <span class="nav-text">维护问题：新增一个域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%BB%E5%87%BB-DNS"><span class="nav-number">8.14.</span> <span class="nav-text">攻击 DNS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DDoS-%E6%94%BB%E5%87%BB"><span class="nav-number">8.14.1.</span> <span class="nav-text">DDoS 攻击</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8D%E5%AE%9A%E5%90%91%E6%94%BB%E5%87%BB"><span class="nav-number">8.14.2.</span> <span class="nav-text">重定向攻击</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P2P-%E5%BA%94%E7%94%A8"><span class="nav-number">9.</span> <span class="nav-text">P2P 应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%AF-P2P-%E6%9E%B6%E6%9E%84"><span class="nav-number">9.1.</span> <span class="nav-text">纯 P2P 架构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%88%86%E5%8F%91%EF%BC%9AC-S-vs-P2P"><span class="nav-number">9.1.1.</span> <span class="nav-text">文件分发：C&#x2F;S vs P2P</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#P2P-%E7%9A%84%E7%AE%A1%E7%90%86%E6%A8%A1%E5%BC%8F"><span class="nav-number">9.2.</span> <span class="nav-text">P2P 的管理模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#P2P-%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">9.2.1.</span> <span class="nav-text">P2P 文件共享的问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%9E%E7%BB%93%E6%9E%84%E5%8C%96-P2P"><span class="nav-number">9.2.2.</span> <span class="nav-text">非结构化 P2P</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DHT-%E7%BB%93%E6%9E%84%E5%8C%96-P2P"><span class="nav-number">9.2.3.</span> <span class="nav-text">DHT (结构化) P2P</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CDN"><span class="nav-number">10.</span> <span class="nav-text">CDN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%86%E9%A2%91%E6%B5%81%E5%8C%96%E6%9C%8D%E5%8A%A1%E5%92%8C-CDN%EF%BC%9A%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="nav-number">10.1.</span> <span class="nav-text">视频流化服务和 CDN：上下文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E5%AA%92%E4%BD%93%EF%BC%9A%E8%A7%86%E9%A2%91"><span class="nav-number">10.2.</span> <span class="nav-text">多媒体：视频</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E5%AA%92%E4%BD%93%E6%B5%81%E5%8C%96%E6%9C%8D%E5%8A%A1%EF%BC%9ADASH"><span class="nav-number">10.3.</span> <span class="nav-text">多媒体流化服务：DASH</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Content-Distribution-Networks"><span class="nav-number">10.4.</span> <span class="nav-text">Content Distribution Networks</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%95%E4%B8%AA%E7%9A%84%E3%80%81%E5%A4%A7%E7%9A%84%E8%B6%85%E7%BA%A7%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%BF%83%EF%BC%9Amega-server"><span class="nav-number">10.4.1.</span> <span class="nav-text">单个的、大的超级服务中心：mega-server</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CDN-1"><span class="nav-number">10.4.2.</span> <span class="nav-text">CDN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#OTT-%E6%8C%91%E6%88%98%EF%BC%9A%E5%9C%A8%E6%8B%A5%E5%A1%9E%E7%9A%84%E4%BA%92%E8%81%94%E7%BD%91%E4%B8%8A%E5%A4%8D%E5%88%B6%E5%86%85%E5%AE%B9"><span class="nav-number">10.4.3.</span> <span class="nav-text">OTT 挑战：在拥塞的互联网上复制内容</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP-%E5%A5%97%E6%8E%A5%E5%AD%97%E7%BC%96%E7%A8%8B"><span class="nav-number">11.</span> <span class="nav-text">TCP 套接字编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Socket-%E7%BC%96%E7%A8%8B"><span class="nav-number">11.1.</span> <span class="nav-text">Socket 编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-%E5%A5%97%E6%8E%A5%E5%AD%97%E7%BC%96%E7%A8%8B-1"><span class="nav-number">11.2.</span> <span class="nav-text">TCP 套接字编程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP-%E8%BF%9E%E6%8E%A5%E5%BB%BA%E7%AB%8B%E6%B5%81%E7%A8%8B"><span class="nav-number">11.2.1.</span> <span class="nav-text">TCP 连接建立流程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-socket-%E7%BC%96%E7%A8%8B-C-S-%E6%A8%A1%E5%BC%8F%E5%BA%94%E7%94%A8%E6%A0%B7%E4%BE%8B%EF%BC%9A%E5%A4%A7%E5%B0%8F%E5%86%99%E8%BD%AC%E6%8D%A2"><span class="nav-number">11.3.</span> <span class="nav-text">TCP socket 编程 C&#x2F;S 模式应用样例：大小写转换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-sockaddr-in"><span class="nav-number">11.3.1.</span> <span class="nav-text">数据结构 sockaddr_in</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-hostent"><span class="nav-number">11.3.2.</span> <span class="nav-text">数据结构 hostent</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-S-socket-%E4%BA%A4%E4%BA%92%EF%BC%9ATCP"><span class="nav-number">11.3.3.</span> <span class="nav-text">C&#x2F;S socket 交互：TCP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%EF%BC%9A%E5%AE%A2%E6%88%B7%E7%AB%AF-TCP"><span class="nav-number">11.3.4.</span> <span class="nav-text">例：客户端 TCP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%EF%BC%9A%E6%9C%8D%E5%8A%A1%E5%99%A8-TCP"><span class="nav-number">11.3.5.</span> <span class="nav-text">例：服务器 TCP</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UDP-%E5%A5%97%E6%8E%A5%E5%AD%97%E7%BC%96%E7%A8%8B"><span class="nav-number">12.</span> <span class="nav-text">UDP 套接字编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UDP-Socket-%E7%BC%96%E7%A8%8B"><span class="nav-number">12.1.</span> <span class="nav-text">UDP Socket 编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Client-server-socket-%E4%BA%A4%E4%BA%92%EF%BC%9AUDP"><span class="nav-number">12.2.</span> <span class="nav-text">Client&#x2F;server socket 交互：UDP</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="R"
+      src="/images/Head.jpg">
+  <p class="site-author-name" itemprop="name">R</p>
+  <div class="site-description" itemprop="description">It's no use to be hardworking.</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tech.musain.club/2022/03/23/computernetworknotes2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/Head.jpg">
+      <meta itemprop="name" content="R">
+      <meta itemprop="description" content="It's no use to be hardworking.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bugrocery">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Computer Network Notes 2：Applications
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-03-23 22:09:38" itemprop="dateCreated datePublished" datetime="2022-03-23T22:09:38+08:00">2022-03-23</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2022-04-17 23:18:06" itemprop="dateModified" datetime="2022-04-17T23:18:06+08:00">2022-04-17</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/ComputerNetwork/" itemprop="url" rel="index"><span itemprop="name">ComputerNetwork</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>15k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>14 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <center> 把老师的 PPT 变成 md 文件之计算机网络第二章应用层自学笔记 </center>
+<span id="more"></span>
+
+<br>
+
+<h2 id="本章基本内容"><a href="#本章基本内容" class="headerlink" title="本章基本内容"></a>本章基本内容</h2><p>网络应用的<strong>原理</strong>：网络应用协议的概念和实现方面  </p>
+<ul>
+<li>传输层的服务模型  </li>
+<li>客户-服务器模式  </li>
+<li>对等模式 (peer-to-peer)  </li>
+<li>内容分发网络  </li>
+</ul>
+<p>网络应用的<strong>实例</strong>：互联网流行的应用层协议  </p>
+<ul>
+<li>HTTP</li>
+<li>FTP</li>
+<li>SMTP / POP3 / IMAP  </li>
+<li>DNS  </li>
+</ul>
+<p><strong>编程</strong>：网络应用程序</p>
+<ul>
+<li>Socket API  </li>
+</ul>
+<p>网络应用的例子：E-mail，Web，文本消息，远程登陆，P2P 文件共享，即时通信，多用户网络游戏，流媒体 (YouTube，Hulu，Netflix)，Internet 电话，实时电视会议，社交网络，搜索等  </p>
+<br>
+
+<h2 id="创建一个新的网络应用"><a href="#创建一个新的网络应用" class="headerlink" title="创建一个新的网络应用"></a>创建一个新的网络应用</h2><p>编程  </p>
+<ul>
+<li>在不同端系统上运行  </li>
+<li>通过网络基础设施提供的服务，应用进程彼此通信  </li>
+<li>eg. Web：Web服务器软件与浏览器软件通信  </li>
+</ul>
+<p>网络核心中没有应用层软件  </p>
+<ul>
+<li>网络核心没有应用层  </li>
+<li>网络应用只在端系统上存在：快速网络应用开发和部署  </li>
+</ul>
+<br>
+
+<h2 id="网络应用的体系结构"><a href="#网络应用的体系结构" class="headerlink" title="网络应用的体系结构"></a>网络应用的体系结构</h2><h3 id="客户-服务器模式-C-S-client-server"><a href="#客户-服务器模式-C-S-client-server" class="headerlink" title="客户-服务器模式 (C/S: client/server)"></a>客户-服务器模式 (C/S: client/server)</h3><p><strong>服务器</strong>  </p>
+<ul>
+<li>一直运行  </li>
+<li>固定的 IP 地址和周知的端口号 (约定)  </li>
+<li>扩展性：服务器场  <ul>
+<li>数据中心进行扩展</li>
+<li>扩展性差  </li>
+<li>可靠性差：服务非常依赖于服务器的状态  </li>
+</ul>
+</li>
+</ul>
+<p><strong>客户端</strong>  </p>
+<ul>
+<li>主动与服务器通信  </li>
+<li>与互联网各有间歇性的连接  </li>
+<li>可能是动态 IP 地址  </li>
+<li>不直接与其它客户端通信  </li>
+</ul>
+<h3 id="对等模式-P2P-Peer-to-Peer"><a href="#对等模式-P2P-Peer-to-Peer" class="headerlink" title="对等模式 (P2P: Peer to Peer)"></a>对等模式 (P2P: Peer to Peer)</h3><p>(几乎) 没有一直运行的服务器<br>任意端系统之间可以进行通信<br>每一个节点既是客户端又是服务器  </p>
+<ul>
+<li>自扩展性：新 peer 节点带来新的服务能力，也带来新的服务请求  </li>
+</ul>
+<p>参与的主机间歇性连接且可以改变 IP 地址  </p>
+<ul>
+<li>难以管理</li>
+</ul>
+<p>eg. Gnutella，迅雷  </p>
+<h3 id="混合体：客户-服务器和对等体系结构"><a href="#混合体：客户-服务器和对等体系结构" class="headerlink" title="混合体：客户-服务器和对等体系结构"></a>混合体：客户-服务器和对等体系结构</h3><p><strong>Napster</strong>  </p>
+<ul>
+<li>文件搜索：集中  <ul>
+<li>主机在中心服务器上注册其资源  </li>
+<li>主机向中心服务器查询资源位置  </li>
+</ul>
+</li>
+<li>文件传输：P2P  <ul>
+<li>任意 Peer 节点之间</li>
+</ul>
+</li>
+</ul>
+<p><strong>即时通信</strong>  </p>
+<ul>
+<li>在线检测：集中  <ul>
+<li>当用户上线时，向中心服务器注册其 IP 地址  </li>
+<li>用户与中心服务器联系，已找到其在线好友的位置  </li>
+</ul>
+</li>
+<li>两个用户之间聊天：P2P  </li>
+</ul>
+<br>  
+
+<h2 id="应用层原理-进程通信"><a href="#应用层原理-进程通信" class="headerlink" title="应用层原理-进程通信"></a>应用层原理-进程通信</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p><strong>进程</strong>：在主机上运行的应用程序  </p>
+<ul>
+<li>客户端进程：发起通信的进程 (主动)  </li>
+<li>服务器进程：等待连接的进程 (被动)  </li>
+</ul>
+<p><em>P2P 架构的应用也有客户端进程和服务器进程之分</em>  </p>
+<p>在同一个主机内，使用<strong>进程间通信机制</strong>通信 (操作系统定义)<br>不同主机，通过交换<strong>报文</strong> (Message) 来通信  </p>
+<ul>
+<li>使用 OS 提供的通信服务  </li>
+<li>按照应用协议交换报文：借助传输层提供的服务  </li>
+</ul>
+<h3 id="分布式进程通信需要解决的问题"><a href="#分布式进程通信需要解决的问题" class="headerlink" title="分布式进程通信需要解决的问题"></a>分布式进程通信需要解决的问题</h3><ol>
+<li>进程标示和寻址问题 (服务用户)  </li>
+<li>传输层-应用层如何提供服务 (服务)  <ul>
+<li>位置：层间界面的 SAP (TCP/IP: socket)  </li>
+<li>形式：应用程序接口 API (TCP/IP: socket API)  </li>
+</ul>
+</li>
+<li>如何使用传输层提供的服务，实现应用进程之间的报文交换，即实现应用 (用户使用服务)  <ul>
+<li>定义应用层协议：报文格式、解释、时序等  </li>
+<li>编制程序，使用 OS 提供的 API，调用网络基础设施提供通信服务传报文，实现应用时序等  </li>
+</ul>
+</li>
+</ol>
+<h4 id="对进程进行编址-addressing"><a href="#对进程进行编址-addressing" class="headerlink" title="对进程进行编址 (addressing)"></a>对进程进行编址 (addressing)</h4><p>进程为了接收报文，必须有一个<strong>标识</strong>，即 SAP (发送也需要标示)  </p>
+<ul>
+<li>主机：唯一的 32 位 IP 地址  <ul>
+<li>仅仅有 IP 地址不能唯一标示一个进程，在一台端系统上有很多应用进程在运行  </li>
+</ul>
+</li>
+<li>所采用的传输层协议：TCP or UDP  </li>
+<li>端口号 (Port Numbers)  <ul>
+<li>一些知名端口号例子：HTTP TCP 80；Mail TCP 25；ftp TCP 2  </li>
+</ul>
+</li>
+<li>一个进程：用 IP + port 标示，端节点  </li>
+<li>本质上，一对主机进程之间的通信由 2 个端节点 (end point) 构成  </li>
+</ul>
+<h4 id="传输层提供的服务-需要穿过层间的信息"><a href="#传输层提供的服务-需要穿过层间的信息" class="headerlink" title="传输层提供的服务-需要穿过层间的信息"></a>传输层提供的服务-需要穿过层间的信息</h4><p>层间接口必须要携带的信息  </p>
+<ul>
+<li>要传输的报文 (对于本层来说：SDU)</li>
+<li>谁传的：对方应用进程的标示 IP + TCP (UDP) 端口号  </li>
+<li>传给谁：对方的应用进程标示 对方的 IP + TCP (UDP) 端口号  </li>
+</ul>
+<p>传输层实体 (TCP 或 UDP 实体)根据这些信息进行 TCP 报文段 (UDP 数据报)的封装  </p>
+<ul>
+<li>源端口号，目标端口号，数据等  </li>
+<li>将 IP 地址往下交 IP 实体，用于封装 IP 数据报：源 IP，目标 IP  </li>
+</ul>
+<h4 id="传输层提供的服务-层间信息的代表"><a href="#传输层提供的服务-层间信息的代表" class="headerlink" title="传输层提供的服务-层间信息的代表"></a>传输层提供的服务-层间信息的代表</h4><p>如果 Socket API 每次传输报文都携带如此多的信息，太繁琐易错，不便于管理<br>用代号标示通信双方或单方：socket (代表本地 IP、本地端口和对方 IP、对方端口的一个本地标识)<br>类似 OS 打开文件返回句柄一样，对句柄的操作就是对文件的操作  </p>
+<p><strong>TCP</strong> <strong>socket</strong>  </p>
+<ul>
+<li>TCP 服务，两个进程之间的通信之前需要建立连接  <ul>
+<li>两个进程通信会<strong>持续</strong>一段时间，通信关系稳定  </li>
+</ul>
+</li>
+<li>可用一个征数标示两个应用实体之间的通信关系，<strong>本地</strong>标示 (便于本地管理引入的一个标识)  </li>
+<li>穿过层间接口的信息量<strong>最小</strong>  </li>
+<li>TCP socket：源 IP，源端口，目标IP，目标端口；用于指明应用进程会话的本地标示  </li>
+<li>TCP之上的套接字 (socket)：对于使用面向连接的服务 (TCP) 的应用而言，套接字时 4 元组的一个具有<strong>本地意义的标示</strong>  <ul>
+<li>4 元组：源 IP、源 port、目标 IP、目标 port  </li>
+<li>唯一的制定了一个会话 (2 个进程之间的会话关系)  </li>
+<li>应用使用这个标示，与远程的应用进程通信  </li>
+<li>不必在每一个报文的发送都要指定这个 4 元组  </li>
+<li>类似文件句柄，每次使用文件句柄，而不是使用文件的目录名、文件名等  </li>
+<li>简单，便于管理，层间传输的信息较少  </li>
+</ul>
+</li>
+</ul>
+<p><img src="/2022/03/23/computernetworknotes2/TCPsocket.png" alt="TCP socket">  </p>
+<p><strong>UDP</strong> <strong>socket</strong>  </p>
+<ul>
+<li>UDP 服务：两个进程之间的通信之前不需要建立连接  <ul>
+<li>每个报文都是独立传输的  </li>
+<li>前后报文可能给不同的分布式进程  </li>
+</ul>
+</li>
+<li>只能用一个征数标示本应用实体的标示，因为这个报文可能传给另外一个分布式进程  </li>
+<li>穿过层间接口的信息量最小  </li>
+<li>UDP socket：本IP，本端口；2 元组，本地标示  </li>
+<li>传输报文时，必须提供对方 IP、port；接收报文时，传输层需要上传对方的 IP、port  </li>
+<li>UDP 之上的套接字 (socket)：对于使用无连接服务 (UDP) 的应用而言，套接字是 2 元组的一个具有<strong>本地意义的标示</strong>  <ul>
+<li>2 元组：IP，port (源端指定)  </li>
+<li>UDP 套接字指定了应用所在的一个<strong>端节点</strong> (end point)  </li>
+<li>在发送数据报时，采用创建好的本地套接字 (标示 ID)，就不必在发送每个报文中指明自己所采用的 IP 和 port  </li>
+<li>在发送报文时，必须置顶对方的 IP 和 UDP port (另外一个段节点)  </li>
+</ul>
+</li>
+</ul>
+<p><img src="/2022/03/23/computernetworknotes2/UDPsocket.png" alt="UDP socket"></p>
+<p><strong>套接字</strong> (Socket)  </p>
+<ul>
+<li>进程向套接字发送报文，或从套接字接收报文  </li>
+<li>套接字 &lt;-&gt; 门户  <ul>
+<li>发送进程将报文<strong>推出</strong>门户，发送进程依赖于传输层设施在另外一侧的门将报文交付给接收进程  </li>
+<li>接收进程从另外一段的门户<strong>收到</strong>报文 (依赖于传输层设施)  </li>
+</ul>
+</li>
+</ul>
+<h4 id="如何使用传输层提供的服务实现应用"><a href="#如何使用传输层提供的服务实现应用" class="headerlink" title="如何使用传输层提供的服务实现应用"></a>如何使用传输层提供的服务实现应用</h4><p><strong>应用层协议</strong>  </p>
+<ul>
+<li>定义了运行在不同端系统上的应用进程如何相互交换报文  <ul>
+<li>交换的<strong>报文类型</strong>：请求和应答报文  </li>
+<li>各种报文类型的<strong>语法</strong>：报文中的各个字段及其描述  </li>
+<li>字段的<strong>语义</strong>：即字段取值的含义  </li>
+<li>进程何时、如何发送报文及对报文进行响应的<strong>规则</strong>  </li>
+</ul>
+</li>
+<li>应用协议仅仅是应用的一个组成部分，仅规范通信交互规则<ul>
+<li>Web 应用：HTTP 协议、web 客户端、web 服务器、HTML  </li>
+</ul>
+</li>
+<li>公开协议<ul>
+<li>由 RFC 文档定义</li>
+<li>允许互操作</li>
+<li>eg. HTTP、SMTP  </li>
+</ul>
+</li>
+<li>专用 (私有) 协议  <ul>
+<li>协议不公开</li>
+<li>eg. Skype  </li>
+</ul>
+</li>
+</ul>
+<p><strong>应用需要传输层提供什么服务</strong>  </p>
+<ul>
+<li>数据丢失率  <ul>
+<li>有些应用要求 100 % 的可靠数据传输，如文件  </li>
+<li>有些应用能容忍一定比例一下的数据丢失，如音频  </li>
+</ul>
+</li>
+<li>延迟  <ul>
+<li>一些应用出于有效性考虑，对数据传输有严格的时间限制，如 Internet 电话、交互式游戏</li>
+</ul>
+</li>
+<li>吞吐  <ul>
+<li>一些应用必须需要最小限度的吞吐，从而使得应用能够有效运转，如多媒体  </li>
+<li>一些应用能充分利用可供使用的吞吐，如弹性应用  </li>
+</ul>
+</li>
+<li>安全性  <ul>
+<li>机密性  </li>
+<li>完整性</li>
+<li>可认证性 (鉴别)  </li>
+</ul>
+</li>
+</ul>
+<p><strong>Internet</strong> <strong>传输层提供的服务</strong>  </p>
+<ul>
+<li>TCP 服务<ul>
+<li>可靠的传输服务  </li>
+<li>流量控制：发送方不会淹没接收方  </li>
+<li>拥塞控制：当网络出现拥塞时，能抑制发送方  </li>
+<li>不能提供的服务：时间保证、最小吞吐量保证和安全  </li>
+<li>面向连接：要求在客户端进程和服务器进程之间建立连接  </li>
+</ul>
+</li>
+<li>UDP 服务  <ul>
+<li>不考考的数据传输  </li>
+<li>不提供的服务：可靠、流量控制、拥塞控制、时间、带宽保证、建立连接  </li>
+</ul>
+</li>
+</ul>
+<p><em>UDP 存在的必要性</em>  </p>
+<ul>
+<li>能够区分不同的进程，而 IP 服务不能  <ul>
+<li>在 IP 提供的主机到主机端到端功能的基础上，区分了主机的应用进程  </li>
+</ul>
+</li>
+<li>无需建立连接，省去建立连接的时间，适合事务性的应用  </li>
+<li>不做可靠性的工作，如检错重发  <ul>
+<li>适合对实时性要求较高而对正确性要求不高的应用  </li>
+<li>为实现可靠性 (准确性、保序等)，必须付出时间代价 (检错重发)  </li>
+</ul>
+</li>
+<li>没有拥塞控制和流量控制，应用能够按照设定的速度发送数据  <ul>
+<li>在 TCP 上的应用，应用发送数据的速度和主机向网络发送的实际速度不一致，因为有流量控制和拥塞控制  </li>
+</ul>
+</li>
+</ul>
+<p><strong>安全</strong> <strong>TCP</strong>  </p>
+<ul>
+<li>TCP &amp; UDP  <ul>
+<li>都没有加密</li>
+<li>明文通过互联网传输，甚至密码</li>
+</ul>
+</li>
+<li>SSL (安全套接字层)  <ul>
+<li>在 TCP 上实现，提供加密的 TCP 连接  </li>
+<li>私密性  </li>
+<li>数据完整性  </li>
+<li>端到端的鉴别  </li>
+<li>SSL 在应用层：应用采用 SSL 库，SSL 库使用 TCP 通信  </li>
+<li>SSL socket API：应用通过 API 将明文交给 socket，SSL 将其加密在互联网上传输  </li>
+</ul>
+</li>
+</ul>
+<br>
+
+<h2 id="Web-and-HTTP"><a href="#Web-and-HTTP" class="headerlink" title="Web and HTTP"></a>Web and HTTP</h2><h3 id="Web-页"><a href="#Web-页" class="headerlink" title="Web 页"></a>Web 页</h3><p>由一些<strong>对象</strong>组成，对象可以是 HTML 文件、JPEG 图像、Java 小程序、声音剪辑文件等<br>Web 页含有一个基本的 HTML 文件，该基本 HTML 文件又包含若干对象的引用 (链接)<br>通过 URL (通用资源调用符)对每个对象进行引用：访问协议、用户名、口令字、端口等，支持匿名访问，默认端口为 80<br>URL 格式：<br><img src="/2022/03/23/computernetworknotes2/URLform.png">  </p>
+<h3 id="HTTP-概况"><a href="#HTTP-概况" class="headerlink" title="HTTP 概况"></a>HTTP 概况</h3><h4 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h4><p>超文本传输协议 (Hyper Text Transform Protocol)，Web 的应用层协议<br>客户/服务器模式  </p>
+<ul>
+<li>客户：请求、接收和显示 Web 对象的浏览器  </li>
+<li>服务器：对请求进行响应，发送对象的 Web 服务器  </li>
+</ul>
+<p>HTTP 1.0：RFC 1945<br>HTTP 1.1：RFC 2068  </p>
+<h4 id="使用-TCP"><a href="#使用-TCP" class="headerlink" title="使用 TCP"></a>使用 TCP</h4><ul>
+<li>客户发起一个与服务器的 TCP 连接 (建立套接字)，端口号为 80  </li>
+<li>服务器接受客户的 TCP 连接  </li>
+<li>在浏览器 (HTTP 客户端) 与 Web 服务器 (HTTP 服务器 server) 交换 HTTP 报文 (应用层协议报文)  </li>
+<li>TCP 连接关闭  </li>
+</ul>
+<p>HTTP 是无状态的：服务器并不维护关于客户的任何信息，不维护客户端的状态<br>维护状态的协议很复杂：  </p>
+<ul>
+<li>必须维护历史信息 (状态)  </li>
+<li>如果服务器/客户端死机，它们的状态信息可能不一致，二者的信息必须是一致的  </li>
+<li>无状态的服务器能够支持更多的客户端  </li>
+</ul>
+<h3 id="HTTP-连接"><a href="#HTTP-连接" class="headerlink" title="HTTP 连接"></a>HTTP 连接</h3><h4 id="响应时间模型"><a href="#响应时间模型" class="headerlink" title="响应时间模型"></a>响应时间模型</h4><p>往返时间 RTT (round-trip time)：一个小的分组从客户端到服务器，在回到客户端的时间 (传输时间忽略)<br>响应时间：  </p>
+<ul>
+<li>一个 RTT 用来发起 TCP 连接  </li>
+<li>一个 RTT 用来 HTTP 请求并等待 HTTP 响应  </li>
+<li>文件传输时间  </li>
+</ul>
+<p>  <em>共 2 RTT + 传输时间</em>  </p>
+<p><img src="/2022/03/23/computernetworknotes2/RTTmodel.png" alt="响应时间模型">  </p>
+<h4 id="非持久-HTTP"><a href="#非持久-HTTP" class="headerlink" title="非持久 HTTP"></a>非持久 HTTP</h4><p>最多只有一个对象在 TCP 连接上发送<br>下载多个对象需要多个 TCP 连接<br>HTTP 1.0 使用非持久连接<br>过程：TCP 连接请求 -&gt; TCP 连接确认 -&gt; HTTP 请求 -&gt; 对象回传 -&gt; 连接关闭请求 -&gt; 连接关闭确认  </p>
+<p><img src="/2022/03/23/computernetworknotes2/unperHTTP.png" alt="非持久 HTTP 连接"><br><img src="/2022/03/23/computernetworknotes2/unperHTTP2.png" alt="非持久 HTTP 连接">  </p>
+<p>非持久 HTTP 的缺点  </p>
+<ul>
+<li>每个对象要 2 个 RTT  </li>
+<li>操作系统必须为每个 TCP 连接分配资源  </li>
+<li>浏览器通常打开并行 TCP 连接，以获取引用对象  </li>
+</ul>
+<h4 id="持久-HTTP"><a href="#持久-HTTP" class="headerlink" title="持久 HTTP"></a>持久 HTTP</h4><p>多个对象可以在一个 (在客户端和服务器之间的) TCP 连接上传输<br>HTTP 1.1 默认使用持久连接<br>过程：TCP 连接请求 -&gt; TCP 连接确认 -&gt; HTTP 请求对象 -&gt; 对象回传；连接不关闭，之后再有请求可直接使用此路径  </p>
+<ul>
+<li>服务器在发送响应后，仍保持 TCP 连接  </li>
+<li>在相同客户端和服务器之间的后续请求和响应报文通过相同的连接进行传送  </li>
+<li>客户端在遇到一个引用对象时，可以尽快发送该对象的请求</li>
+</ul>
+<p><em>非流水方式的持久</em> <em>HTTP</em>  </p>
+<ul>
+<li>客户端只能在收到前一个响应后才能发出新的请求  </li>
+<li>每个引用对象花费一个 RTT  </li>
+</ul>
+<p><em>流水方式的持久</em> <em>HTTP</em>  </p>
+<ul>
+<li>HTTP 1.1 的默认模式  </li>
+<li>客户端遇到一个引用对象就立即产生一个请求  </li>
+<li>所有引用 (小) 对象只花费一个 RTT 是可能的</li>
+</ul>
+<h3 id="HTTP-请求报文"><a href="#HTTP-请求报文" class="headerlink" title="HTTP 请求报文"></a>HTTP 请求报文</h3><p>两种类型的 HTTP 报文：请求，响应  </p>
+<h4 id="HTTP-请求报文："><a href="#HTTP-请求报文：" class="headerlink" title="HTTP 请求报文："></a>HTTP 请求报文：</h4><p>ASCII (人能阅读，readable)<br>  <img src="/2022/03/23/computernetworknotes2/ASCIIrequest.png">  </p>
+<p>通用格式<br>  <img src="/2022/03/23/computernetworknotes2/HTTPnormal.png">  </p>
+<h4 id="提交表单输入"><a href="#提交表单输入" class="headerlink" title="提交表单输入"></a>提交表单输入</h4><p>Post 方式  </p>
+<ul>
+<li>网页通常包括表单输入  </li>
+<li>包含在实体主体 (entity body) 中的输入被提交到服务器  </li>
+</ul>
+<p>URL 方式  </p>
+<ul>
+<li>方法：GET  </li>
+<li>输入通过请求行的 URL 字段上载  </li>
+</ul>
+<h4 id="方法类型"><a href="#方法类型" class="headerlink" title="方法类型"></a>方法类型</h4><p>HTTP 1.0  </p>
+<ul>
+<li>GET  </li>
+<li>POST</li>
+<li>HEAD：要求服务器在响应报文中不包含请求对象 -&gt; 故障跟踪</li>
+</ul>
+<p>HTTP 1.1  </p>
+<ul>
+<li>GET, POST, HEAD</li>
+<li>PUT：将实体主体中的文件上载到 URL 字段规定的路径，通常用于网页内容的维护  </li>
+<li>DELETE：删除 URL 字段规定的文件，用于维护网页</li>
+</ul>
+<h3 id="HTTP-响应报文"><a href="#HTTP-响应报文" class="headerlink" title="HTTP 响应报文"></a>HTTP 响应报文</h3><p><img src="/2022/03/23/computernetworknotes2/HTTPreaction.png" alt="HTTP 响应报文格式">  </p>
+<h4 id="基本信息"><a href="#基本信息" class="headerlink" title="基本信息"></a>基本信息</h4><p><strong>状态行</strong>：协议版本、状态码 (如404、504等)和相应状态信息<br><strong>首部行</strong>：服务器、内容等的相关信息，如服务器系统信息、内容的字节长度等<br><strong>数据</strong>：如请求的 HTML 文件  </p>
+<h4 id="HTTP-响应状态码"><a href="#HTTP-响应状态码" class="headerlink" title="HTTP 响应状态码"></a>HTTP 响应状态码</h4><p>位于服务器 -&gt; 客户端的响应报文中的首行<br>例子：  </p>
+<ul>
+<li>200 OK：请求成功，请求对象包含在响应报文的后续部分  </li>
+<li>301 Moved Permanently：请求的对象已经被永久转移，新的 URL 在响应报文的 Location：首部行中指定；客户端软件自动用新的 URL 去获取对象  </li>
+<li>400 Bad Request：一个通用的差错代码，表示该请求不能被服务器解读  </li>
+<li>404 Not Found：请求的文档在服务器上没有找到  </li>
+<li>505 HTTP Version Not Supported  </li>
+</ul>
+<h3 id="用户-服务器状态-cookies"><a href="#用户-服务器状态-cookies" class="headerlink" title="用户-服务器状态 cookies"></a>用户-服务器状态 cookies</h3><p>大多数主要的门户网站使用cookies，用于维护状态  </p>
+<h4 id="4-个组成部分"><a href="#4-个组成部分" class="headerlink" title="4 个组成部分"></a>4 个组成部分</h4><p>在 HTTP 响应报文中有一个 cookie 的首部行<br>在 HTTP 请求报文含有一个 cookie 的首部行<br>在用户段系统中保留有一个 cookie 文件，由用户的浏览器管理<br>在 Web 站点有一个后端数据库<br><em>通过维护 cookie 使得 HTTP 这一无状态服务能够维护状态</em>  </p>
+<p><img src="/2022/03/23/computernetworknotes2/cookies.png" alt="Cookies: 维护状态">  </p>
+<h4 id="Cookies-的作用"><a href="#Cookies-的作用" class="headerlink" title="Cookies 的作用"></a>Cookies 的作用</h4><p>用户验证<br>购物车<br>推荐<br>用户状态 (Web Email)  </p>
+<h4 id="如何维持状态"><a href="#如何维持状态" class="headerlink" title="如何维持状态"></a>如何维持状态</h4><p>协议端节点：在多个事务上，发送端和接收端维持状态<br>cookies：http 报文携带状态信息  </p>
+<h4 id="Cookies-与隐私"><a href="#Cookies-与隐私" class="headerlink" title="Cookies 与隐私"></a>Cookies 与隐私</h4><p>Cookies 允许站点知道许多关于用户的信息<br>可能将这些信息卖给第三方<br>使用重定向和 cookie 的搜索引擎还能知道用户更多信息</p>
+<ul>
+<li>如通过某个用户在大量站点上的行为，了解其个人浏览方式的大致模式 (互联网画像)  </li>
+</ul>
+<p>广告公司从站点获得信息  </p>
+<h3 id="Web-缓存-代理服务器"><a href="#Web-缓存-代理服务器" class="headerlink" title="Web 缓存(代理服务器)"></a>Web 缓存(代理服务器)</h3><p>目标：不访问原始服务器，就满足客户的请求<br>用户设置浏览器：通过缓存访问 Web<br>缓存既是客户端又是服务器<br>通常缓存由 ISP 安装：大学、公司、居民区 ISP  </p>
+<h4 id="缓存实现的方式"><a href="#缓存实现的方式" class="headerlink" title="缓存实现的方式"></a>缓存实现的方式</h4><p>浏览器将所有的 HTTP 请求发给缓存  </p>
+<ul>
+<li>在缓存中的对象：缓存直接返回对象 (本地访问)  </li>
+<li>如对象不在缓存，缓存请求原始服务器，然后再将对象返回客户端 (远程访问)  </li>
+</ul>
+<p><img src="/2022/03/23/computernetworknotes2/caches.png">  </p>
+<h4 id="Web-缓存的优势"><a href="#Web-缓存的优势" class="headerlink" title="Web 缓存的优势"></a>Web 缓存的优势</h4><p>降低客户端的请求响应时间<br>可以大大减少一个机构内部网络与 Internet 接入链路上的流量<br>互联网大量采用缓存：可以使较弱的 ICP 也能有效提供内容  </p>
+<h4 id="条件-GET-方法"><a href="#条件-GET-方法" class="headerlink" title="条件 GET 方法"></a>条件 GET 方法</h4><p>目标：如果缓存器中的对象拷贝是最新的，就不要发送对象<br>缓存器：在 HTTP 请求中指定缓存拷贝的日期：<code>If-modified-since: &lt;date&gt;</code><br>服务器：如果缓存拷贝不陈旧，则响应报文没包含对象：HTTP/1.0 304 Not Modified  </p>
+<br>
+
+<h2 id="FTP"><a href="#FTP" class="headerlink" title="FTP"></a>FTP</h2><h3 id="FTP：文件传输协议"><a href="#FTP：文件传输协议" class="headerlink" title="FTP：文件传输协议"></a>FTP：文件传输协议</h3><p>向远程主机上传输文件或从远程主机接收文件<br>客户/服务器模式  </p>
+<ul>
+<li>客户端：发起传输的一方  </li>
+<li>服务器：远程主机  </li>
+</ul>
+<p>FTP：RFC 959<br>FTP 服务器：端口号为 21  </p>
+<h3 id="控制连接与数据连接分开"><a href="#控制连接与数据连接分开" class="headerlink" title="控制连接与数据连接分开"></a>控制连接与数据连接分开</h3><p>FTP 客户端与 FTP 服务器通过端口 21 联系，并使用 TCP 为传输协议<br>客户端通过控制连接获得身份确认<br>客户端通过控制连接非让送命令浏览远程目录<br>收到一个文件传输命令时，服务器打开一个到客户端的数据连接<br>一个文件传输完成后，服务器关闭连接  </p>
+<p><img src="/2022/03/23/computernetworknotes2/FTPconnect.png">  </p>
+<p>服务器打开第二个 TCP 数据连接用来传输另一个文件<br>控制连接：带外 (out of band) 传送<br>FTP 服务器维护用户的状态信息：当前路径、用户账户与控制连接对应 (<strong>有状态</strong>)  </p>
+<h3 id="FTP-命令、响应"><a href="#FTP-命令、响应" class="headerlink" title="FTP 命令、响应"></a>FTP 命令、响应</h3><p>命令样例：  </p>
+<ul>
+<li>在控制连接上以 ASCII 文本方式传送  </li>
+<li>USER username  </li>
+<li>PASS password  </li>
+<li>LIST：请服务器返回远程主机当前目录的文件列表  </li>
+<li>RETR filename：从远程主机的当年目录检索文件 (gets)，下载  </li>
+<li>STOR filename：向远程主机的当前目录存放文件 (puts)，上载  </li>
+</ul>
+<p><em>上和下的概念以客户端为准</em></p>
+<p>返回码样例：  </p>
+<ul>
+<li>状态码和状态信息 (同 HTTP)  </li>
+<li>331 username OK, password required  </li>
+<li>125 data connection already open; transfer starting  </li>
+<li>425 Can’t open data connection  </li>
+<li>452 Error writing file  </li>
+</ul>
+<br>
+
+<h2 id="Email"><a href="#Email" class="headerlink" title="Email"></a>Email</h2><h3 id="电子邮件"><a href="#电子邮件" class="headerlink" title="电子邮件"></a>电子邮件</h3><p>三个主要组成部分：  </p>
+<ul>
+<li>用户代理  </li>
+<li>邮件服务器  </li>
+<li>简单邮件传输协议：SMTP  </li>
+</ul>
+<p><img src="/2022/03/23/computernetworknotes2/email.png">  </p>
+<h4 id="用户代理"><a href="#用户代理" class="headerlink" title="用户代理"></a>用户代理</h4><p>又名邮件阅读器<br>撰写、编辑和阅读邮件<br>如 outlook、foxmail<br>输出和输入邮件保存在服务器上  </p>
+<h4 id="邮件服务器"><a href="#邮件服务器" class="headerlink" title="邮件服务器"></a>邮件服务器</h4><p>邮箱中管理和维护发送给用户的邮件<br>输出报文队列保持待发送邮件报文<br>邮件服务器之间的 SMTP 协议：发送 email 报文  </p>
+<ul>
+<li>客户：发送方邮件服务器  </li>
+<li>服务器：接收方邮件服务器  </li>
+</ul>
+<h4 id="SMTP-RFC-2821"><a href="#SMTP-RFC-2821" class="headerlink" title="SMTP [RFC 2821]"></a>SMTP [RFC 2821]</h4><p>使用 TCP 在客户端和服务器之间传送报文，端口号为 25<br>直接传输：从发送方服务器到接收方服务器<br>传输的三个阶段  </p>
+<ul>
+<li>握手  </li>
+<li>传输报文  </li>
+<li>关闭  </li>
+</ul>
+<p>命令/响应交互  </p>
+<ul>
+<li>命令：ASCII 文本  </li>
+<li>响应：状态码和状态信息  </li>
+</ul>
+<p>报文必须为 7 位 ASCII 码：所有内容要在 ASCII 码范围之内  </p>
+<p>SMTP 小结  </p>
+<ul>
+<li>使用持久连接  </li>
+<li>要求报文 (首部和主题) 为 7 位 ASCII 编码  </li>
+<li>SMTP 服务器使用 CRLF.CRLF 决定报文的尾部  </li>
+</ul>
+<p>与 HTTP 比较  </p>
+<ul>
+<li>HTTP：拉 (pull)  </li>
+<li>SMTP：推 (push)  </li>
+<li>二者都是 ASCII 形式的命令/响应交互、状态码  </li>
+<li>HTTP：每个对象封装在各子的响应报文中  </li>
+<li>SMTP：多个对象包含在一个报文中  </li>
+</ul>
+<h3 id="邮件报文格式"><a href="#邮件报文格式" class="headerlink" title="邮件报文格式"></a>邮件报文格式</h3><p>SMTP：交换 email 报文的协议<br>RFC 822：文本报文的标准  </p>
+<ul>
+<li>首部行  <ul>
+<li>To:  </li>
+<li>From: </li>
+<li>Subject:  </li>
+</ul>
+<em>与 SMTP 命令不同</em>  </li>
+<li>主体  <ul>
+<li>报文，只能是 ASCII 码字符  </li>
+</ul>
+</li>
+</ul>
+<p><strong>多媒体扩展</strong>  </p>
+<ul>
+<li>MIME：多媒体邮件扩展 (multimedia mail extension)，RFC 2045，2056  </li>
+<li>在报文首部用额外的行申明 MIME 内容类型</li>
+</ul>
+<p><img src="/2022/03/23/computernetworknotes2/MIME.png">  </p>
+<h3 id="邮件访问协议"><a href="#邮件访问协议" class="headerlink" title="邮件访问协议"></a>邮件访问协议</h3><p>SMTP：传送放到接收方的邮件服务器<br>邮件访问协议：从服务器访问邮件  </p>
+<ul>
+<li>POP<ul>
+<li>邮局访问协议 (Post Office Protocol) [RFC 1939]  </li>
+<li>用户身份确认 (代理&lt;–&gt;服务器) 并下载  </li>
+</ul>
+</li>
+<li>IMAP  <ul>
+<li>Internet 邮件访问协议 (Internet Mail Access Protocol) [RFC 1730]  </li>
+<li>更多特性 (更复杂)  </li>
+<li>在服务器上处理存储的报文  </li>
+</ul>
+</li>
+<li>HTTP  <ul>
+<li>Hotmail，Yahoo！Mail 等  </li>
+<li>方便  </li>
+</ul>
+</li>
+</ul>
+<p><img src="/2022/03/23/computernetworknotes2/EmailProtocol.png">  </p>
+<p><em>前两跳是推，最后一跳是拉</em>  </p>
+<h4 id="POP3"><a href="#POP3" class="headerlink" title="POP3"></a>POP3</h4><p>用户确认阶段  </p>
+<ul>
+<li>客户端命令：  <ul>
+<li>user：申明用户名  </li>
+<li>pass：口令  </li>
+</ul>
+<em>明文</em>  </li>
+<li>服务器响应：  <ul>
+<li>+OK</li>
+<li>-ERR</li>
+</ul>
+</li>
+</ul>
+<p>事务处理阶段(客户端)：</p>
+<ul>
+<li>list：报文号列表  </li>
+<li>retr：根据报文号检索报文  </li>
+<li>dele：删除  </li>
+<li>quit</li>
+</ul>
+<p>“<strong>下载并删除</strong>” 模式：如果改变客户机，不能阅读邮件<br>“<strong>下载并保留</strong>” 模式：不同客户机上为报文的拷贝<br>POP3 在会话中是无状态的，不支持远程维护，本地管理文件夹  </p>
+<h4 id="IMAP"><a href="#IMAP" class="headerlink" title="IMAP"></a>IMAP</h4><p>IMAP 服务器将每个报文与一个文件夹联系起来<br>允许用户用目录来组织报文<br>允许用户读取报文组件<br>IMAP 在会话过程中保留用户状态：用户名、报文 ID 与目录名之间映射<br>远程管理文件夹  </p>
+<br>  
+
+<h2 id="DNS-Domain-Name-System"><a href="#DNS-Domain-Name-System" class="headerlink" title="DNS (Domain Name System)"></a>DNS (Domain Name System)</h2><h3 id="必要性"><a href="#必要性" class="headerlink" title="必要性"></a>必要性</h3><p>IP 地址主要用于标识主机、路由器，但不便于人类记忆和使用<br>人类用户提供要访问机器的“字符串”名称，由 DNS 负责转换成二进制的网络地址<br>DNS 主要提供域名和 IP 地址之间的转换<br>分层的命名，分布式的解析  </p>
+<h3 id="DNS-总体思路"><a href="#DNS-总体思路" class="headerlink" title="DNS 总体思路"></a>DNS 总体思路</h3><p>分层的、基于域的命名机制<br>若干分布式的数据库完成名字到 IP 地址的转换<br>运行在 UDP 之上端口号为 53 的应用服务<br>核心的 Internet 功能，但以应用层协议实现：在网络边缘处理复杂性  </p>
+<h3 id="DNS-主要目的"><a href="#DNS-主要目的" class="headerlink" title="DNS 主要目的"></a>DNS 主要目的</h3><p>实现主机名 - IP 地址的转换 (name/IP translate)<br>主机别名 (便于用户访问) 到规范名字 (便于管理) 的转换：Host aliasing<br>邮件服务器别名到邮件服务器的正规名字的转换：Mail server aliasing<br>负载均衡：Load Distribution  </p>
+<h3 id="DNS-域名结构"><a href="#DNS-域名结构" class="headerlink" title="DNS 域名结构"></a>DNS 域名结构</h3><p>一个层次命名设备会有很多重名<br>DNS 采用层次树状结构的命名方法<br>Internet 被划分为几百个顶级域 (top level domains)  </p>
+<ul>
+<li>通用的 (generic)<br>.com, .edu, .gov, .int, .mil, .net, .org, .firm, .hsop, .web, .arts, .rec  </li>
+<li>国家的 (countries)<br>.cn, .us, .nl, .jp  </li>
+</ul>
+<p>每个(子)域下面可划分为若干子域 (subdomains)<br>树叶是主机  </p>
+<h3 id="DNS-名字空间-The-DNS-Name-Space"><a href="#DNS-名字空间-The-DNS-Name-Space" class="headerlink" title="DNS 名字空间 (The DNS Name Space)"></a>DNS 名字空间 (The DNS Name Space)</h3><p><strong>域名</strong>  </p>
+<ul>
+<li>从本域往上，直到树根  </li>
+<li>中间使用 “.” 间隔不同级别  </li>
+<li>域的域名：可以用于表示一个域  </li>
+<li>主机的域名：一个域上的一个主机  </li>
+</ul>
+<p><strong>域名的管理</strong>  </p>
+<ul>
+<li>一个域管理其下的子域  </li>
+<li>创建一个新的域，必须征得它所属的域的同意  </li>
+</ul>
+<p><strong>域域物理网络无关</strong>  </p>
+<ul>
+<li>域遵从组织界限，而不是物理网络  <ul>
+<li>一个域的主机可以不在一个网络  </li>
+<li>一个网络的主机不一定在一个域  </li>
+</ul>
+</li>
+<li>域的划分是逻辑的，而不是物理的  </li>
+</ul>
+<h3 id="名字服务器-Name-Server"><a href="#名字服务器-Name-Server" class="headerlink" title="名字服务器 (Name Server)"></a>名字服务器 (Name Server)</h3><p><strong>一个名字服务器的问题</strong>  </p>
+<ul>
+<li>可靠性：单点故障  </li>
+<li>扩展性：通信容量  </li>
+<li>维护：远距离的集中式数据库  </li>
+</ul>
+<p><strong>区域</strong> <strong>(zone)</strong>  </p>
+<ul>
+<li>区域的划分由区域管理者决定  </li>
+<li>将 DNS 名字空间划为互不相交的区域，每个区域都是树的一部分  </li>
+<li>名字服务器<ul>
+<li>每个区域有一个名字服务器，维护者它所管辖区域的权威信息 (authoritative record)  </li>
+<li>名字服务器允许被放置在区域之外，以保障可靠性</li>
+</ul>
+</li>
+</ul>
+<h4 id="权威-DNS-服务器"><a href="#权威-DNS-服务器" class="headerlink" title="权威 DNS 服务器"></a>权威 DNS 服务器</h4><p>组织机构的 DNS 服务器<br>提供组织机构服务器 (如 Web 和 Mail) 可访问的主机和 IP 之间的映射<br>组织机构可以选择自己维护或由某个服务提供商来维护  </p>
+<h4 id="TLD-服务器"><a href="#TLD-服务器" class="headerlink" title="TLD 服务器"></a>TLD 服务器</h4><p>顶级域 (TLD) 服务器<br>负责顶级域名 (如com, org, net,edu 和 gov) 和所有国家级的顶级域名 (如 cn, uk, fr, ca, jp, de 等)  </p>
+<ul>
+<li>Network solutions 公司维护 com 服务器</li>
+<li>Educause 公司维护 edu TLD 服务器  </li>
+</ul>
+<h3 id="区域名字服务器维护资源记录"><a href="#区域名字服务器维护资源记录" class="headerlink" title="区域名字服务器维护资源记录"></a>区域名字服务器维护资源记录</h3><p><strong>资源记录</strong> (resource records)  </p>
+<ul>
+<li>作用：维护域名 - IP 地址(其它)的映射关系  </li>
+<li>位置：Name Server 的分布式数据库中  </li>
+</ul>
+<p><strong>RR 格式</strong>：domain_name, ttl, type, class, Value  </p>
+<ul>
+<li>Domain_name：域名  </li>
+<li>ttl：time to live，生存时间 (权威：长期；缓冲记录：短期，一般为两天)  </li>
+<li>class：类别，对于 Internet 值为 IN  </li>
+<li>Value：值，可以是数字、域名或 ASCII 串  </li>
+<li>Type 类别：资源记录的类型</li>
+</ul>
+<h3 id="DNS-记录"><a href="#DNS-记录" class="headerlink" title="DNS 记录"></a>DNS 记录</h3><p><strong>DNS</strong>：保存资源记录 (RR) 的分布式数据库<br><strong>RR 格式</strong>：(name, value, type, ttl)<br><strong>Type</strong>  </p>
+<ul>
+<li>Type = A  <ul>
+<li>Name 为主机  </li>
+<li>Value 为 IP 地址  </li>
+</ul>
+</li>
+<li>Type = CNAME  <ul>
+<li>Name 为规范名字的别名  </li>
+<li>Value 为规范名字</li>
+</ul>
+</li>
+<li>Type = NS  <ul>
+<li>Name 为子域名 (如 foo.com)  </li>
+<li>Value 为该子域名的权威服务器的域名  </li>
+</ul>
+</li>
+<li>Type = MX  <ul>
+<li>Value 为 name 对应的邮件服务器的名字</li>
+</ul>
+</li>
+</ul>
+<p><strong>TTL</strong>：生存时间，决定了资源记录应当从缓存中删除的时间  </p>
+<h3 id="DNS-大致工作过程"><a href="#DNS-大致工作过程" class="headerlink" title="DNS 大致工作过程"></a>DNS 大致工作过程</h3><p>应用调用：解析器 (resolver)<br>解析器作为客户，向 Name Server 发出查询报文 (封装在 UDP 段中)<br>Name Server 返回响应报文 (name/ip)  </p>
+<p><img src="/2022/03/23/computernetworknotes2/DNSworkflow.png">  </p>
+<h3 id="本地名字服务器-Local-Name-Server"><a href="#本地名字服务器-Local-Name-Server" class="headerlink" title="本地名字服务器 (Local Name Server)"></a>本地名字服务器 (Local Name Server)</h3><p>并不严格属于层次结构<br>每个 ISP (居民区的 ISP、公司、大学) 都有一个本地 DNS 服务器，也称为默认名字服务器<br>当一个主机发起一个 DNS 查询时，查询被送到其本地 DNS 服务器：起着代理的作用，将查询转发到层次结构中  </p>
+<h4 id="名字解析过程"><a href="#名字解析过程" class="headerlink" title="名字解析过程"></a>名字解析过程</h4><p>目标名字在 Local Name Server 中  </p>
+<ul>
+<li>查询名字在该区域内部  </li>
+<li>缓存 (cashing)  </li>
+</ul>
+<p>缓存为了性能，删除为了一致性  </p>
+<p>当本地名字服务器不能解析名字时，联系根名字服务器，顺着根 - TLD 一直找到权威名字服务器  </p>
+<ul>
+<li><strong>递归查询</strong>  <ul>
+<li>名字解析负担都放在当前联络的名字服务器上  </li>
+<li>问题：根服务器的负担太重  </li>
+<li>解决：迭代查询 (iterated queries)  </li>
+</ul>
+</li>
+</ul>
+<p><img src="/2022/03/23/computernetworknotes2/diguichaxun.png">  </p>
+<ul>
+<li><strong>迭代查询</strong>  <ul>
+<li>根 (及各级域名) 服务器返回的不是查询结果，而是下一个 NS 的地址  </li>
+<li>最后由权威名字服务器给出解析结果  </li>
+<li>当前联络的服务器给出可以联系的服务器的名字  </li>
+<li>“我不知道这个名字，但可以向这个服务器请求”  </li>
+</ul>
+</li>
+</ul>
+<p><img src="/2022/03/23/computernetworknotes2/diedaichaxun.png">  </p>
+<h3 id="DNS-协议、报文"><a href="#DNS-协议、报文" class="headerlink" title="DNS 协议、报文"></a>DNS 协议、报文</h3><p>DNS 协议：查询和响应报文的报文格式相同  </p>
+<p><img src="/2022/03/23/computernetworknotes2/DNSbaowen.png" alt="DNS 报文格式">  </p>
+<p><strong>报文首部</strong>  </p>
+<ul>
+<li>标识符 (ID)：16 位；实现流水线查询  </li>
+<li>flags<ul>
+<li>查询/应答</li>
+<li>希望递归</li>
+<li>递归可用</li>
+<li>应答为权威</li>
+</ul>
+</li>
+</ul>
+<h3 id="提高性能：缓存"><a href="#提高性能：缓存" class="headerlink" title="提高性能：缓存"></a>提高性能：缓存</h3><p>一旦名字服务器学到一个映射，就将该映射<strong>缓存</strong>起来<br>跟服务器通常都在本地服务器中缓存着，使得根服务器不用经常被访问<br>目的：提高效率<br>可能存在的问题：如果情况变化，缓存结果和权威资源记录不一致<br>解决方案：TTL，默认 2 天  </p>
+<h3 id="维护问题：新增一个域"><a href="#维护问题：新增一个域" class="headerlink" title="维护问题：新增一个域"></a>维护问题：新增一个域</h3><p>在上级域的名字服务器中增加两条记录，指向这个新增的子域的域名和域名服务器的地址<br>在新增子域的名字服务器上运行名字服务器，负责本域的名字解析：名字 -&gt; 地址  </p>
+<h3 id="攻击-DNS"><a href="#攻击-DNS" class="headerlink" title="攻击 DNS"></a>攻击 DNS</h3><p>总体而言，DNS 比较健壮  </p>
+<h4 id="DDoS-攻击"><a href="#DDoS-攻击" class="headerlink" title="DDoS 攻击"></a>DDoS 攻击</h4><p>对根服务器进行流量轰炸攻击：发送大量 ping  </p>
+<ul>
+<li>没有成功  </li>
+<li>原因 1：根目录服务器配置了流量过滤器，防火墙  </li>
+<li>原因 2：Local DNS 服务器缓存了 TLD 服务器的 IP 地址，因此无需查询根服务器  </li>
+</ul>
+<p>向 TLD 服务器流量轰炸攻击：发送大量查询  </p>
+<ul>
+<li>可能更危险  </li>
+<li>效果一般，大部分 DNS 缓存了 TLD  </li>
+</ul>
+<h4 id="重定向攻击"><a href="#重定向攻击" class="headerlink" title="重定向攻击"></a>重定向攻击</h4><p>中间人攻击：结果查询，伪造回答，从而攻击某个 (DNS 回答指定的 IP) 站点<br>DNS 中毒：发送伪造的应答给 DNS 服务器，希望它能够缓存这个虚假的结果<br>技术上较困难：分布式截获和伪造利用 DNS 基础设施进行 DDoS<br>伪造某个 IP 进行查询，攻击这个目标 IP<br>查询放大，响应报文比查询报文大<br>效果有限  </p>
+<br>  
+
+<h2 id="P2P-应用"><a href="#P2P-应用" class="headerlink" title="P2P 应用"></a>P2P 应用</h2><h3 id="纯-P2P-架构"><a href="#纯-P2P-架构" class="headerlink" title="纯 P2P 架构"></a>纯 P2P 架构</h3><p>没有(或极少)一直运行的服务器<br>任意端系统都可以直接通信<br>利用 Peer 的服务能力<br>Peer 节点间歇上网，每次 IP 地址都有可能变化  </p>
+<p>例子：</p>
+<ul>
+<li>文件分发 (BitTorrent)  </li>
+<li>流媒体 (KanKan)  </li>
+<li>VoIP (Skype)  </li>
+</ul>
+<h4 id="文件分发：C-S-vs-P2P"><a href="#文件分发：C-S-vs-P2P" class="headerlink" title="文件分发：C/S vs P2P"></a>文件分发：C/S vs P2P</h4><p>Peer 节点上下载能力是有限的<br><strong>C/S 模式</strong>  </p>
+<ul>
+<li><strong>服务器传输</strong>：都是由服务器发送给 Peer，服务器必须顺序传输 (上载) N 个文件拷贝<ul>
+<li>发送一个 copy：F/u<sub>s</sub>  </li>
+<li>发送 N 个 copy：NF/u<sub>s</sub>  </li>
+</ul>
+</li>
+<li><strong>客户端</strong>：每个客户端必须下载一个文件拷贝  <ul>
+<li>d<sub>min</sub>：客户端最小的下载速率  </li>
+<li>下载带宽最小的客户端下载的时间：F/d<sub>min</sub>  </li>
+</ul>
+</li>
+</ul>
+<p>采用 C-S 方法将一个 F 大小的文件分发给 N 个客户端耗时 D<sub>c-s</sub> ≥ max<br>{NF/u<sub>s</sub>, F/d<sub>min</sub>}  </p>
+<ul>
+<li>随着客户端的数目 N 越多，时间越长 (线性增加)  </li>
+</ul>
+<p><img src="/2022/03/23/computernetworknotes2/SCfile.png">  </p>
+<p><strong>P2P 模式</strong>  </p>
+<ul>
+<li><strong>服务器传输</strong>：最少需要上载一份拷贝<ul>
+<li>发送一个拷贝的时间：F/u<sub>s</sub>  </li>
+</ul>
+</li>
+<li><strong>客户端</strong>：每个客户端必须下载一个拷贝  <ul>
+<li>最小下载带宽客户单耗时：F/d<sub>min</sub>  </li>
+</ul>
+</li>
+<li><strong>客户端</strong>：所有客户端总体下载量 NF  <ul>
+<li>最大上载带宽是 u<sub>s</sub> + Σu<sub>i</sub>  </li>
+<li>除了服务器可以上载，其它所有的 Peer 节点都可以上载  </li>
+</ul>
+</li>
+</ul>
+<p>采用 P2P 方法将一个 F 大小的文件分发给 N 个客户端耗时：D<sub>P2P</sub> ≥ max<br>{F/u<sub>s</sub>, F/d<sub>min</sub>, NF/(u<sub>s</sub> + Σu<sub>i</sub>)}  </p>
+<ul>
+<li>分子随着 N 线性变化，每个节点需要下载，整体下载量随着 N 增大  </li>
+<li>分母也是如此，随着 peer 节点的增多，每个 peer 也带了服务能力  </li>
+</ul>
+<p><img src="/2022/03/23/computernetworknotes2/p2pfile.png">  </p>
+<p>P2P 性能更好，可扩展性更强  </p>
+<p><img src="/2022/03/23/computernetworknotes2/filevs.png" alt="Client-Server vs P2P 文件分发速度对比">  </p>
+<h3 id="P2P-的管理模式"><a href="#P2P-的管理模式" class="headerlink" title="P2P 的管理模式"></a>P2P 的管理模式</h3><h4 id="P2P-文件共享的问题"><a href="#P2P-文件共享的问题" class="headerlink" title="P2P 文件共享的问题"></a>P2P 文件共享的问题</h4><p><strong>问题</strong>：</p>
+<ul>
+<li>如何定位所需资源  </li>
+<li>如何处理对等方的加入与离开  </li>
+</ul>
+<p><strong>可能的方案</strong>：</p>
+<ul>
+<li>集中  </li>
+<li>分散  </li>
+<li>半分散  </li>
+</ul>
+<h4 id="非结构化-P2P"><a href="#非结构化-P2P" class="headerlink" title="非结构化 P2P"></a>非结构化 P2P</h4><p>节点与节点之间是任意构建起来的 overlay  </p>
+<p><strong>集中式目录</strong>  </p>
+<ul>
+<li>当对等方连接时，告诉中心服务器：IP 地址、内容；peer A 可查询资源；peer A 从 peer B 处请求文件；下线时告诉中心服务器  </li>
+<li>存在的问题：文件传输是分散的，而定位内容则是高度集中的；单点故障，如中心服务器出现问题；性能瓶颈；侵犯版权  </li>
+</ul>
+<p><strong>完全分布式</strong>  </p>
+<ul>
+<li>没有中心服务器  </li>
+<li>全开放文件共享协议  </li>
+<li>查询泛洪：Gnutella；许多 Gnutella 客户端实现了 Gnutella 协议，类似 HTTP 有许多的浏览器  </li>
+<li>覆盖网络：图  <ul>
+<li>如果 X 和 Y 之间有一个 TCP 连接，则二者之间存在一条边  </li>
+<li>所有活动的对等方和边就是覆盖网络  </li>
+<li>边并不是物理链路  </li>
+<li>给定一个对等方，通常所连接的节点少于 10 个  </li>
+</ul>
+</li>
+<li>Gnutella 协议  <ul>
+<li>在已有的 TCP 连接上发送查询报文  </li>
+<li>对等方转发查询报文  </li>
+<li>以反方向返回查询命中报文  </li>
+</ul>
+</li>
+<li>可扩展性  <ul>
+<li>限制范围的泛洪查询  </li>
+<li>设置 ttl  </li>
+<li>让中转节点记忆查询，下次返回不再发送查询  </li>
+</ul>
+</li>
+<li>对等方加入(Gnutella)  <ul>
+<li>对等方 X 必须首先发现某些已经在覆盖网络中的其它对等方：使用可用对等方列表；自己维持一张对等方列表(经常开机的对等放的 IP)；联系维持列表的 Gnutella 站点  </li>
+<li>X 接着试图与该列表上的对等方建立 TCP 连接，直到与某个对等方 Y 建立连接  </li>
+<li>X 向 Y 发送一个 Ping 报文，Y 转发该 Ping 报文  </li>
+<li>所有收到 Ping 报文的对等方以 Pong 报文响应：IP 地址、共享文件的数量及总字节数  </li>
+<li>X 收到许多 Pong 报文，然后它能建立其它 TCP 连接  </li>
+</ul>
+</li>
+</ul>
+<p><strong>混合体</strong>：利用不匀称性 (KaZaA)  </p>
+<ul>
+<li>每个对等方要么是一个组长，要么隶属于一个组长  <ul>
+<li>对等方与其组长之间有 TCP 连接  </li>
+<li>组长对之间有 TCP 连接  </li>
+</ul>
+</li>
+<li>组长跟踪器所有的孩子的内容  </li>
+<li>组长与其他组长联系  <ul>
+<li>转发查询到其他组长  </li>
+<li>获得其他组长的数据拷贝  </li>
+</ul>
+</li>
+</ul>
+<p><img src="/2022/03/23/computernetworknotes2/Kazaa.png" alt="混合体连接示例"></p>
+<ul>
+<li>KaZaA：查询<ul>
+<li>每个文件有一个散列标识码和一个描述符  </li>
+<li>客户端向其组长发送关键字查询  </li>
+<li>组长用匹配进行响应：对每个匹配元数据、散列标识码和 IP 地址  </li>
+<li>如果组长将查询转发给其他组长，其他组长也以匹配进行响应  </li>
+<li>客户端选择要下载的文件：向拥有文件的对等方发送一个带散列标识码的 HTTP 请求  </li>
+</ul>
+</li>
+</ul>
+<p><strong>BitTorrent</strong>  </p>
+<ul>
+<li>文件被分为一个个块 256 KB；每个节点都有一张 Bit map；节点之间定期交互  </li>
+<li>网络中的这些 peers 发送接收文件块，相互服务  </li>
+<li>tracker：跟踪 torrent 中参与节点  </li>
+<li>Torrent (洪流)：节点的组，之间交换文件块  </li>
+<li>Peer 加入 torrent  <ul>
+<li>一开始没有块，但是将会通过其他节点处累积文件块  </li>
+<li>向跟踪服务器注册，获得 peer 节点列表，和部分 peer 节点构成邻居关系 (“<br>连接”)  </li>
+</ul>
+</li>
+<li>当 peer 下载时，该 peer 可以同时向其他节点提供上线服务  </li>
+<li>peer 可能会变换用于交换的块的 peer 节点  </li>
+<li>扰动 churn：peer 节点可能会上线或者下线，整个洪流具有动态性  </li>
+<li>一旦一个 peer 拥有整个文件，他会 (自私的) 离开或者保留 (利他主义) 在 torrent 中  </li>
+<li>请求块  <ul>
+<li>在任何给定时间，不同 peer 节点拥有一个文件块的子集  </li>
+<li>周期性的，某节点向邻居询问他们用有哪些块的信息  </li>
+<li>某节点向 peer 节点请求它希望的块、稀缺的块  </li>
+</ul>
+</li>
+<li>发送块：一报还一报 tit-for-tat  <ul>
+<li>某节点向 4 个 peer 发送块，这些块向它自己提供最大带宽的服务：其他 peer 被该节点阻塞，将不会从这一节点获得服务；每 10 秒重新评估一次 (前 4 位)  </li>
+<li>每 30 秒随机选择其它 peer 节点，向这个节点发送块：“优化疏通”这个节点；新选择的节点可以加入这个 top 4  </li>
+</ul>
+</li>
+</ul>
+<p><img src="/2022/03/23/computernetworknotes2/titfortat.png">  </p>
+<h4 id="DHT-结构化-P2P"><a href="#DHT-结构化-P2P" class="headerlink" title="DHT (结构化) P2P"></a>DHT (结构化) P2P</h4><p>peer 节点之间构成环、树等关系的有序拓扑 overlay<br><strong>DHT</strong>: Distributed Hash Table<br>节点 IP 和文件都有一个唯一 Hash 值用以标识<br>内容存在哪个节点是约定好的，副本数量不需要很多就可以很快地找到目标内容  </p>
+<br>  
+
+<h2 id="CDN"><a href="#CDN" class="headerlink" title="CDN"></a>CDN</h2><h3 id="视频流化服务和-CDN：上下文"><a href="#视频流化服务和-CDN：上下文" class="headerlink" title="视频流化服务和 CDN：上下文"></a>视频流化服务和 CDN：上下文</h3><p>视频流量占据互联网大部分带宽<br>挑战  </p>
+<ul>
+<li>规模性：如何服务着 ~ 1 B 用户；单个超级服务器无法提供服务  </li>
+<li>异构性：不同用户拥有不同的能力；如有线接入和移动用户、带宽丰富和受限用户  </li>
+</ul>
+<p><strong>解决方案</strong>：分布式的、应用层面的基础设施  </p>
+<h3 id="多媒体：视频"><a href="#多媒体：视频" class="headerlink" title="多媒体：视频"></a>多媒体：视频</h3><p><strong>视频</strong>：固定速率显示的图像序列<br>网络视频特点：  </p>
+<ul>
+<li>高码率：&gt; 10 x 于音频，搞得网络带宽需求  </li>
+<li>可以被压缩  </li>
+<li>90 % 以上的网络流量是视频  </li>
+</ul>
+<p><strong>数字化图像</strong>：像素的阵列，每个像素被若干 bits 标识<br><strong>编码</strong>：使用图像内和图像间的荣誉来降低编码的比特数  </p>
+<ul>
+<li>空间冗余 (图像内)  <ul>
+<li>如一张图中某颜色大面积重复，不是发送 N 个相同的颜色值，仅仅发送 2 个值：颜色和重复的个数 N  </li>
+</ul>
+</li>
+<li>时间冗余 (相邻的图像间)  <ul>
+<li>如不是发送第 i+1 帧的全部编码，而仅发送和第 i 帧差别的地方  </li>
+</ul>
+</li>
+<li>CBR (Constant Bit Rate)：以固定速率编码  </li>
+<li>VBR (Variable Bit Rate)：视频编码速率随时间的变化而变化  </li>
+</ul>
+<h3 id="多媒体流化服务：DASH"><a href="#多媒体流化服务：DASH" class="headerlink" title="多媒体流化服务：DASH"></a>多媒体流化服务：DASH</h3><p><strong>DASH</strong>: Dynamic, Adaptive Streaming over HTTP<br><strong>服务器</strong>  </p>
+<ul>
+<li>将视频分割成多个块  </li>
+<li>每个块独立存储，编码于不同码率 (8 ~ 10 种)  </li>
+<li>*告示文件 (manifest file)*：提供不同块的 URL  </li>
+</ul>
+<p><strong>客户端</strong>  </p>
+<ul>
+<li>先获取告示文件  </li>
+<li>周期性地测量服务器到客户端的带宽  </li>
+<li>查询告示文件，在一个时刻请求一个块，HTTP 头部指定字节范围  <ul>
+<li>如果带宽足够，选择最大码率的视频块  </li>
+<li>会话中的不同时刻，可以切换请求不同的编码块，取决于当时的可用带宽  </li>
+</ul>
+</li>
+</ul>
+<p><strong>智能</strong>客户端：客户端自适应决定  </p>
+<ul>
+<li>什么时候去请求块：不至于缓存挨饿或溢出  </li>
+<li>请求什么编码速率的视频块：档带宽够用时，请求高质量的视频块  </li>
+<li>那里去请求块：可以向离自己近的服务器发送 URL，或者向高可用带宽的服务器请求  </li>
+</ul>
+<h3 id="Content-Distribution-Networks"><a href="#Content-Distribution-Networks" class="headerlink" title="Content Distribution Networks"></a>Content Distribution Networks</h3><p><strong>挑战</strong>：服务器如何通过网络向上百万用户同时流化视频内容(上百万视频内容)？  </p>
+<h4 id="单个的、大的超级服务中心：mega-server"><a href="#单个的、大的超级服务中心：mega-server" class="headerlink" title="单个的、大的超级服务中心：mega-server"></a>单个的、大的超级服务中心：mega-server</h4><p>服务器到客户端路径上跳数过多，瓶颈链路的带宽小导致停顿<br>“二八定律”决定了网络同时充斥着同一个视频的多个拷贝，效率低、付费高、带宽浪费、效果差<br>单点故障，性能瓶颈<br>周边网络的拥塞会造成影响<br><strong>评述</strong>：实现相当简单，但这个方法不可扩展  </p>
+<h4 id="CDN-1"><a href="#CDN-1" class="headerlink" title="CDN"></a>CDN</h4><p>通过 <strong>CDN</strong>，全网部署缓存节点，存储服务内容，就近位用户提供服务，提高用户体验  </p>
+<p><em>enter deep</em>：将 CDN 服务器深入到许多接入网  </p>
+<ul>
+<li>更接近用户，服务器数量多，离用户近，但管理困难  </li>
+<li>Akamai，1700 个位置  </li>
+</ul>
+<p><em>bring home</em>：部署在少数 (10 个左右) <strong>关键位置</strong>，如将服务器簇安装于 POP 附近 (离若干 1st ISP POP 较近)  </p>
+<ul>
+<li>采用租用线路将服务器簇连接起来</li>
+<li>跳数稍微多一些，服务器少  </li>
+<li>Limelight  </li>
+</ul>
+<p>Content Distribution Networks (CDNs) 的<strong>应用过程</strong>：  </p>
+<ul>
+<li>部署：在 CDN 节点中存储内容的多个拷贝  </li>
+<li>用户从 CDN 中请求内容：重定向到最近的拷贝，请求内容；如果网络路径拥塞，可能选择不同的拷贝  </li>
+</ul>
+<p><em>减少跳数、增加拷贝，让内容靠近用户，总体相当于加速服务</em>  </p>
+<p><strong>over the top</strong><br>CDN 运行在应用层、网络边缘<br>互联网络主机-主机之间的通信作为一种服务向用户提供  </p>
+<h4 id="OTT-挑战：在拥塞的互联网上复制内容"><a href="#OTT-挑战：在拥塞的互联网上复制内容" class="headerlink" title="OTT 挑战：在拥塞的互联网上复制内容"></a>OTT 挑战：在拥塞的互联网上复制内容</h4><p>？从哪个 CDN 节点中获取内容<br>？用户在网络拥塞时的行为<br>？在哪些 CDN 节点中存储什么内容 (内容、节点部署策略的问题)  </p>
+<p><img src="/2022/03/23/computernetworknotes2/Netflix.png" alt="CDN 案例：Netflix"></p>
+<br>
+
+<h2 id="TCP-套接字编程"><a href="#TCP-套接字编程" class="headerlink" title="TCP 套接字编程"></a>TCP 套接字编程</h2><h3 id="Socket-编程"><a href="#Socket-编程" class="headerlink" title="Socket 编程"></a>Socket 编程</h3><p>应用进程使用传输层提供的服务才能交换报文，实现应用协议，实现应用<br>TCP/IP：应用进程使用 Socket API 访问传输服务<br>地点：界面上的 SAP(socket)<br>方式：Socket API<br>socket：分布式应用进程之间的门，传输层协议提供的端到端服务接口  </p>
+<p><img src="/2022/03/23/computernetworknotes2/socket.png">  </p>
+<p>2 种传输层服务的 socket 类型：  </p>
+<ul>
+<li>TCP：可靠的、字节流服务 (原原本本，不错不重复不丢失，保证按照流但不保证界限)  </li>
+<li>UDP：不可靠 (数据 UDP 数据报) 服务  </li>
+</ul>
+<h3 id="TCP-套接字编程-1"><a href="#TCP-套接字编程-1" class="headerlink" title="TCP 套接字编程"></a>TCP 套接字编程</h3><p><strong>套接字</strong>：应用进程与端到端传输协议 (TCP 或 UDP) 之间的门户<br><strong>TCP 服务</strong>：从一个进程向另一个进程可靠地传输字节流<br><em>类似文件句柄</em>  </p>
+<h4 id="TCP-连接建立流程"><a href="#TCP-连接建立流程" class="headerlink" title="TCP 连接建立流程"></a>TCP 连接建立流程</h4><p><strong>服务器首先运行，等待连接建立</strong>：  </p>
+<ol>
+<li>服务器进程必须先于运行状态  </li>
+</ol>
+<ul>
+<li><strong>创建</strong>欢迎 socket  </li>
+<li>和本地端口<strong>捆绑</strong>   </li>
+<li>在欢迎 socket 上阻塞式<strong>等待接收</strong>用户的连接</li>
+</ul>
+<p>  <em>创建、捆绑、等待等都是 socket 函数</em>  </p>
+<p><strong>客户端主动和服务器建立连接</strong>：  </p>
+<ol>
+<li><strong>创建</strong>客户端本地套接字 (<strong>隐式捆绑</strong>到本地 port)  </li>
+</ol>
+<ul>
+<li>指定服务器进程的 IP 地址和端口号，与服务器进程<strong>连接</strong>  </li>
+</ul>
+<ol start="3">
+<li>当与客户端连接请求到来时，服务器<strong>接受</strong>来自客户端的请求，解除阻塞式等待，返回一个新的 socket (与欢迎 socket 不一样)，与客户端通信  </li>
+</ol>
+<ul>
+<li>允许服务器与多个客户端通信  </li>
+<li>使用源 IP 和源端口来区分不同的客户端  </li>
+</ul>
+<ol start="4">
+<li>连接 API 调用有效时，客户端 P 与服务器建立了 TCP 连接</li>
+</ol>
+<p><strong>从应用进程的角度</strong>：TCP 在客户端和服务器进程之间提供了可靠的、字节流 (管道) 服务  </p>
+<h3 id="TCP-socket-编程-C-S-模式应用样例：大小写转换"><a href="#TCP-socket-编程-C-S-模式应用样例：大小写转换" class="headerlink" title="TCP socket 编程 C/S 模式应用样例：大小写转换"></a>TCP socket 编程 C/S 模式应用样例：大小写转换</h3><ol>
+<li>客户端从标准输入装置读取一行字符，发送给服务器  </li>
+<li>服务器从 socket 读取字符  </li>
+<li>服务器将字符转换成大写，然后返回给客户端  </li>
+<li>客户端从 socket 中读取一行字符，然后打印出来  </li>
+</ol>
+<p><img src="/2022/03/23/computernetworknotes2/CSTCPsocket.png">  </p>
+<p>实际上，这描述了 C-S 之间交互的动作次序  </p>
+<h4 id="数据结构-sockaddr-in"><a href="#数据结构-sockaddr-in" class="headerlink" title="数据结构 sockaddr_in"></a>数据结构 sockaddr_in</h4><p>IP 地址和 port 捆绑关系的数据结构 (标识进程的端节点)  </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span>&#123;</span></span><br><span class="line">  <span class="keyword">short</span> sin_family; <span class="comment">//AF_INET</span></span><br><span class="line">  u_short sin_port; <span class="comment">//port  </span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">in_addr</span> <span class="title">sin_addr</span>;</span> <span class="comment">//IP address, unsigned long  </span></span><br><span class="line">  <span class="keyword">char</span> sin_zero[<span class="number">8</span>]; <span class="comment">//align</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/03/23/computernetworknotes2/sockaddr_in.png">  </p>
+<h4 id="数据结构-hostent"><a href="#数据结构-hostent" class="headerlink" title="数据结构 hostent"></a>数据结构 hostent</h4><p>域名和 IP 地址的数据结构  </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">hostent</span>&#123;</span></span><br><span class="line">  <span class="keyword">char</span> *h_name;</span><br><span class="line">  <span class="keyword">char</span> **h_aliases;</span><br><span class="line">  <span class="keyword">int</span> h_addrtype;</span><br><span class="line">  <span class="keyword">int</span> h_length; <span class="comment">//地址长度  </span></span><br><span class="line">  <span class="keyword">char</span> **h_addr_list;  </span><br><span class="line">  <span class="meta">#<span class="meta-keyword">define</span> h_addr h_addr_list[0];</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/03/23/computernetworknotes2/host_ent.png">  </p>
+<p>作为调用域名解析函数时的参数<br>返回后，将 IP 地址拷贝到 sockaddr_in 的 IP 地址部分  </p>
+<h4 id="C-S-socket-交互：TCP"><a href="#C-S-socket-交互：TCP" class="headerlink" title="C/S socket 交互：TCP"></a>C/S socket 交互：TCP</h4><p><img src="/2022/03/23/computernetworknotes2/TCPjiaohu1.png">  </p>
+<h4 id="例：客户端-TCP"><a href="#例：客户端-TCP" class="headerlink" title="例：客户端 TCP"></a>例：客户端 TCP</h4><p><img src="/2022/03/23/computernetworknotes2/clientTCP.png"><br><img src="/2022/03/23/computernetworknotes2/clientTCP2.png"></p>
+<h4 id="例：服务器-TCP"><a href="#例：服务器-TCP" class="headerlink" title="例：服务器 TCP"></a>例：服务器 TCP</h4><p><img src="/2022/03/23/computernetworknotes2/serverTCP.png"><br><img src="/2022/03/23/computernetworknotes2/serverTCP2.png">  </p>
+<br>  
+
+<h2 id="UDP-套接字编程"><a href="#UDP-套接字编程" class="headerlink" title="UDP 套接字编程"></a>UDP 套接字编程</h2><h3 id="UDP-Socket-编程"><a href="#UDP-Socket-编程" class="headerlink" title="UDP Socket 编程"></a>UDP Socket 编程</h3><p>UDP：在客户端和服务器之间没有连接  </p>
+<ul>
+<li>没有握手  </li>
+<li>发送端在每一个报文中明确指定目标的 IP 地址和端口号  </li>
+<li>服务器必须从收到的分组中提取出发送端的 IP 地址和端口号  </li>
+</ul>
+<p>UDP 传送的数据可能乱序也可能丢失<br>进程视角看 UDP 服务：UDP 位客户端和服务器提供<strong>不可靠的</strong>字节组传送服务  </p>
+<h3 id="Client-server-socket-交互：UDP"><a href="#Client-server-socket-交互：UDP" class="headerlink" title="Client/server socket 交互：UDP"></a>Client/server socket 交互：UDP</h3><p><img src="/2022/03/23/computernetworknotes2/UDPcs.png"></p>
+<p><strong>C 客户端 UDP 代码</strong><br><img src="/2022/03/23/computernetworknotes2/UDPccode1.png" alt="C 客户端 UDP 代码样例">  </p>
+<p><img src="/2022/03/23/computernetworknotes2/UDPccode2.png" alt="C 客户端 UDP 代码样例"></p>
+<p><strong>C 服务器 UDP 代码</strong><br><img src="/2022/03/23/computernetworknotes2/UDPscode1.png" alt="C 服务器 UDP 代码">  </p>
+<p><img src="/2022/03/23/computernetworknotes2/UDPscode2.png" alt="C 服务器 UDP 代码"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ComputerNetwork/" rel="tag"># ComputerNetwork</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/03/14/computernetworknotes1/" rel="prev" title="Computer Network Notes 1：the basic">
+                  <i class="fa fa-chevron-left"></i> Computer Network Notes 1：the basic
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">R</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>Symbols count total: </span>
+    <span title="Symbols count total">73k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>Reading time total &asymp;</span>
+    <span title="Reading time total">1:07</span>
+  </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
