@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"tech.musain.club","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="把老师的 PPT 变成 md 文件之计算机网络第三章传输层">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Computer Network Notes 3：Transport Layer">
+<meta property="og:url" content="https://tech.musain.club/2022/04/19/computernetworknotes3/index.html">
+<meta property="og:site_name" content="Bugrocery">
+<meta property="og:description" content="把老师的 PPT 变成 md 文件之计算机网络第三章传输层">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/TCPfuyong.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/UDPfuyong.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/TCPUDPbaowen.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/UDPfuyongeg.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/mianxianglianjiedejiefuyong.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/UDPform.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/jinweihuijuan.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/RDT.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/zhuangtai.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/RDT1.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/RDT2.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/RDT21send.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/RDT21receive.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/rdt21ackerror.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/rdt21ackright.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/NAKfree.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/RDT22.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/RDT22xu.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/RDT22SR.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/RDT3send.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/RDT3delayedACK.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/RDT3xingneng.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/RDT3xingneng2.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/RDT3liushuixian.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/xiangduihuadong.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/sendingwindow.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/receivingwindow.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/WWI.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/GBNFSM.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/GBNFSMr.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/runningGBN.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/SRsummary.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/RunningSR.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/GBNvsSR.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/TCPform.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/TCPnumber.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/sampleRTT.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/TCPsendersimple.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/TCPsendersimplecode.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/TCPresend.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/TCPACKsuggestion.png">
+<meta property="article:published_time" content="2022-04-19T12:57:45.000Z">
+<meta property="article:modified_time" content="2022-04-25T14:31:48.270Z">
+<meta property="article:author" content="R">
+<meta property="article:tag" content="ComputerNetwork">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/TCPfuyong.png">
+
+
+<link rel="canonical" href="https://tech.musain.club/2022/04/19/computernetworknotes3/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://tech.musain.club/2022/04/19/computernetworknotes3/","path":"2022/04/19/computernetworknotes3/","title":"Computer Network Notes 3：Transport Layer"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Computer Network Notes 3：Transport Layer | Bugrocery</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Bugrocery</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E8%BE%93%E5%B1%82%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.</span> <span class="nav-text">传输层服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%A0%E8%BE%93%E6%9C%8D%E5%8A%A1%E5%92%8C%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.1.</span> <span class="nav-text">传输服务和协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%A0%E8%BE%93%E5%B1%82-vs-%E7%BD%91%E7%BB%9C%E5%B1%82"><span class="nav-number">1.2.</span> <span class="nav-text">传输层 vs 网络层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Internet-%E4%BC%A0%E8%BE%93%E5%B1%82%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.3.</span> <span class="nav-text">Internet 传输层协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E5%92%8C%E8%A7%A3%E5%A4%8D%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">多路复用和解复用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">2.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E8%B7%AF%E8%A7%A3%E5%A4%8D%E7%94%A8%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">2.2.</span> <span class="nav-text">多路解复用工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%A0%E8%BF%9E%E6%8E%A5-UDP-%E5%A4%9A%E8%B7%AF%E8%A7%A3%E5%A4%8D%E7%94%A8"><span class="nav-number">2.2.1.</span> <span class="nav-text">无连接 (UDP) 多路解复用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A0%E8%BF%9E%E6%8E%A5%E4%BC%A0%E8%BE%93%EF%BC%9AUDP"><span class="nav-number">3.</span> <span class="nav-text">无连接传输：UDP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UDP%EF%BC%9AUser-Datagram-Protocol-RFC-768"><span class="nav-number">3.1.</span> <span class="nav-text">UDP：User Datagram Protocol [RFC 768]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%9C%89-UDP"><span class="nav-number">3.2.</span> <span class="nav-text">为什么要有 UDP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UDP-%E6%A0%A1%E9%AA%8C%E5%92%8C-check-sum"><span class="nav-number">3.3.</span> <span class="nav-text">UDP 校验和 (check sum)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Internet-%E6%A0%A1%E9%AA%8C%E5%92%8C%E4%BE%8B%E5%AD%90%EF%BC%9A%E8%BF%9B%E4%BD%8D%E5%9B%9E%E6%BB%9A"><span class="nav-number">3.3.1.</span> <span class="nav-text">Internet 校验和例子：进位回滚</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E7%9A%84%E5%8E%9F%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">可靠数据传输的原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93-RDT"><span class="nav-number">4.1.</span> <span class="nav-text">可靠数据传输 (RDT)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%EF%BC%9A%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="nav-number">4.1.1.</span> <span class="nav-text">可靠数据传输：问题描述</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%EF%BC%9A%E5%81%9C%E6%AD%A2-%E7%AD%89%E5%BE%85"><span class="nav-number">4.2.</span> <span class="nav-text">可靠数据传输协议：停止-等待</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#RDT-1-0%EF%BC%9A%E5%9C%A8%E5%8F%AF%E9%9D%A0%E4%BF%A1%E9%81%93%E4%B8%8A%E7%9A%84%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93"><span class="nav-number">4.2.1.</span> <span class="nav-text">RDT 1.0：在可靠信道上的可靠数据传输</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RDT-2-0%EF%BC%9A%E5%85%B7%E6%9C%89%E6%AF%94%E7%89%B9%E5%B7%AE%E9%94%99%E7%9A%84%E4%BF%A1%E9%81%93"><span class="nav-number">4.2.2.</span> <span class="nav-text">RDT 2.0：具有比特差错的信道</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%BA%E9%99%B7-gt-RDT-2-1"><span class="nav-number">4.2.3.</span> <span class="nav-text">缺陷 (-&gt; RDT 2.1)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RDT-2-2%EF%BC%9A%E6%97%A0-NAK-%E7%9A%84%E5%8D%8F%E8%AE%AE"><span class="nav-number">4.2.4.</span> <span class="nav-text">RDT 2.2：无 NAK 的协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RDT-3-0%EF%BC%9A%E5%85%B7%E6%9C%89%E6%AF%94%E7%89%B9%E5%B7%AE%E9%94%99%E5%92%8C%E5%88%86%E7%BB%84%E4%B8%A2%E5%A4%B1%E7%9A%84%E4%BF%A1%E9%81%93"><span class="nav-number">4.2.5.</span> <span class="nav-text">RDT 3.0：具有比特差错和分组丢失的信道</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%EF%BC%9A%E6%B5%81%E6%B0%B4%E7%BA%BF"><span class="nav-number">4.3.</span> <span class="nav-text">可靠数据传输协议：流水线</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%81%E6%B0%B4%E7%BA%BF-pipeline-%E5%8D%8F%E8%AE%AE"><span class="nav-number">4.3.1.</span> <span class="nav-text">流水线 (pipeline) 协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E7%94%A8%EF%BC%9A%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3-slide-window-%E5%8D%8F%E8%AE%AE"><span class="nav-number">4.3.2.</span> <span class="nav-text">通用：滑动窗口 (slide window) 协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E6%83%85%E5%86%B5%E4%B8%8B-GBN-%E4%B8%8E-SR-%E5%8D%8F%E8%AE%AE%E4%B8%AD%E7%9A%84%E7%AA%97%E5%8F%A3%E4%BA%92%E5%8A%A8"><span class="nav-number">4.3.3.</span> <span class="nav-text">异常情况下 GBN 与 SR 协议中的窗口互动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-number">4.3.4.</span> <span class="nav-text">小结</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E8%BF%9E%E6%8E%A5%E7%9A%84%E4%BC%A0%E8%BE%93%EF%BC%9ATCP"><span class="nav-number">5.</span> <span class="nav-text">面向连接的传输：TCP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-%E6%A6%82%E8%BF%B0"><span class="nav-number">5.1.</span> <span class="nav-text">TCP 概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP-%E5%BA%8F%E5%8F%B7%E3%80%81%E7%A1%AE%E8%AE%A4%E5%8F%B7"><span class="nav-number">5.1.1.</span> <span class="nav-text">TCP 序号、确认号</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-%E5%BE%80%E8%BF%94%E5%BB%B6%E6%97%B6-RTT-%E5%92%8C%E8%B6%85%E6%97%B6"><span class="nav-number">5.2.</span> <span class="nav-text">TCP 往返延时 (RTT) 和超时</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%8E%E6%A0%B7%E8%AE%BE%E7%BD%AE-TCP-%E8%B6%85%E6%97%B6"><span class="nav-number">5.2.1.</span> <span class="nav-text">怎样设置 TCP 超时</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%8E%E6%A0%B7%E4%BC%B0%E8%AE%A1-RTT%EF%BC%9F"><span class="nav-number">5.2.2.</span> <span class="nav-text">怎样估计 RTT？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E8%B6%85%E6%97%B6"><span class="nav-number">5.2.3.</span> <span class="nav-text">设置超时</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP%EF%BC%9A%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93"><span class="nav-number">5.3.</span> <span class="nav-text">TCP：可靠数据传输</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%80%E5%8C%96%E7%9A%84-TCP-%E5%8F%91%E9%80%81%E6%96%B9"><span class="nav-number">5.3.1.</span> <span class="nav-text">简化的 TCP 发送方</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP-%E5%8F%91%E9%80%81%E6%96%B9%E4%BA%8B%E4%BB%B6"><span class="nav-number">5.3.2.</span> <span class="nav-text">TCP 发送方事件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%A7%E7%94%9F-TCP-ACK-%E7%9A%84%E5%BB%BA%E8%AE%AE"><span class="nav-number">5.3.3.</span> <span class="nav-text">产生 TCP ACK 的建议</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="R"
+      src="/images/Head.jpg">
+  <p class="site-author-name" itemprop="name">R</p>
+  <div class="site-description" itemprop="description">It's no use to be hardworking.</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tech.musain.club/2022/04/19/computernetworknotes3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/Head.jpg">
+      <meta itemprop="name" content="R">
+      <meta itemprop="description" content="It's no use to be hardworking.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bugrocery">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Computer Network Notes 3：Transport Layer
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-04-19 20:57:45" itemprop="dateCreated datePublished" datetime="2022-04-19T20:57:45+08:00">2022-04-19</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2022-04-25 22:31:48" itemprop="dateModified" datetime="2022-04-25T22:31:48+08:00">2022-04-25</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/ComputerNetwork/" itemprop="url" rel="index"><span itemprop="name">ComputerNetwork</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>6.3k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>6 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <center> 把老师的 PPT 变成 md 文件之计算机网络第三章传输层 </center>
+<span id="more"></span>
+
+<br>
+
+<h2 id="传输层服务"><a href="#传输层服务" class="headerlink" title="传输层服务"></a>传输层服务</h2><h3 id="传输服务和协议"><a href="#传输服务和协议" class="headerlink" title="传输服务和协议"></a>传输服务和协议</h3><p>为运行在不同主机上的应用进程提供<strong>逻辑通信</strong>，即进程到进程的远程逻辑通信  </p>
+<p>传输协议运行在<strong>端系统</strong>  </p>
+<ul>
+<li>发送方：将应用层的报文分成<strong>报文段</strong>，然后传递给网络层  </li>
+<li>接收方：将报文段重组成报文，然后传递给应用层  </li>
+</ul>
+<p>有多个传输层协议可供选择  </p>
+<ul>
+<li>Internet：TCP 和 UDP  </li>
+</ul>
+<h3 id="传输层-vs-网络层"><a href="#传输层-vs-网络层" class="headerlink" title="传输层 vs 网络层"></a>传输层 vs 网络层</h3><p>网络层服务：主机之间的逻辑通信<br>传输层服务：进程间的逻辑通信  </p>
+<ul>
+<li>依赖于网络层的服务：延时、带宽 (不可加强)  </li>
+<li>加强网络层的服务：弥补可靠性，减少数据丢失、顺序混乱 (不可靠 -&gt; 可靠)；加密 (安全)；复用/解复用  </li>
+</ul>
+<h3 id="Internet-传输层协议"><a href="#Internet-传输层协议" class="headerlink" title="Internet 传输层协议"></a>Internet 传输层协议</h3><p>可靠地、保序的传输：TCP (字节流)  </p>
+<ul>
+<li>多路复用、解复用  </li>
+<li>拥塞控制  </li>
+<li>流量控制  </li>
+<li>建立连接  </li>
+</ul>
+<p>不可靠、不保序的传输：UDP (数据报)  </p>
+<ul>
+<li>多路复用、解复用  </li>
+<li>没有为尽力而为的 IP 服务添加更多的其它额外服务  </li>
+</ul>
+<p>都不提供的服务：延时保证、带宽保证  </p>
+<br>  
+
+<h2 id="多路复用和解复用"><a href="#多路复用和解复用" class="headerlink" title="多路复用和解复用"></a>多路复用和解复用</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p><strong>在发送方主机多路复用</strong>：从多个套接字接受来自多个进程的报文，根据套接字对应的 IP 地址和端口号等信息对报文段用头部加以封装，该头部信息用于以后的解复用<br><strong>在接收方主机多路解复用</strong>：根据报文段的头部信息种的 IP 地址和端口号将接收到的报文段发给正确的套接字和对应的应用进程  </p>
+<p><img src="/2022/04/19/computernetworknotes3/TCPfuyong.png" alt="TCP 复用解复用">  </p>
+<p><img src="/2022/04/19/computernetworknotes3/UDPfuyong.png" alt="UDP 复用解复用">  </p>
+<h3 id="多路解复用工作原理"><a href="#多路解复用工作原理" class="headerlink" title="多路解复用工作原理"></a>多路解复用工作原理</h3><p><strong>解复用作用</strong>：TCP 或者 UDP 实体采用哪些信息，将报文段的数据部分交给正确的 socket，从而交给正确的进程  </p>
+<p>主机收到 IP 数据报  </p>
+<ul>
+<li>每个数据包有源 IP 地址和目标地址  </li>
+<li>每个数据报承载一个传输层报文段  </li>
+<li>每个报文段有一个源端口号和目标端口号 (特定应用有著名的端口号)  </li>
+</ul>
+<p>主机联合使用 <strong>IP 地址</strong>和<strong>端口号</strong>将报文段发送给合适的套接字  </p>
+<p><img src="/2022/04/19/computernetworknotes3/TCPUDPbaowen.png" alt="TCP/UDP 报文段格式">  </p>
+<h4 id="无连接-UDP-多路解复用"><a href="#无连接-UDP-多路解复用" class="headerlink" title="无连接 (UDP) 多路解复用"></a>无连接 (UDP) 多路解复用</h4><p><strong>创建套接字</strong>：  </p>
+<ul>
+<li>服务器端  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">serverSocket = <span class="built_in">socket</span>(PF_INET, SOCK_DGRAM, <span class="number">0</span>);  </span><br><span class="line"><span class="built_in">bind</span>(serverSocket, &amp;sad, <span class="built_in"><span class="keyword">sizeof</span></span>(sad));  </span><br><span class="line"><span class="comment">// serverSocket 和 Sad指定的端口号捆绑 (UDP 和 TCP 不同)  </span></span><br></pre></td></tr></table></figure>
+</li>
+<li>客户端  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ClientSocket = <span class="built_in">socket</span>(PF_INET, SOCK_DGRAM,<span class="number">0</span>);  </span><br><span class="line"><span class="comment">// 没有Bind、ClientSocket 和 OS 为之分配的某个端口号捆绑  </span></span><br><span class="line"><span class="comment">// 客户端使用什么端口号无所谓，客户端主动找服务器  </span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>在接收端，UDP 套接字用二元组标识 (目标 IP 地址、目标端口号)  </p>
+<p>当主机收到 UDP 报文段  </p>
+<ul>
+<li>检查报文段的目标端口号  </li>
+<li>用该端口号将报文段定位给套接字  </li>
+</ul>
+<p>如果两个不同源 IP 地址/源端口号的数据报，但是<strong>有相同的目标 IP 地址和端口号</strong>，则被定位到相同的套接字  </p>
+<ul>
+<li>创建拥有本地端口号的套接字  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DatagramSocket mySocket1 = <span class="keyword">new</span> <span class="built_in">DatagramSocket</span>(<span class="number">12534</span>);  </span><br></pre></td></tr></table></figure></li>
+<li>当创建 UDP 段采用端口号，可以指定：目标 IP 地址、目标端口号  </li>
+</ul>
+<p><img src="/2022/04/19/computernetworknotes3/UDPfuyongeg.png" alt="无连接多路复用例子">  </p>
+<p><img src="/2022/04/19/computernetworknotes3/mianxianglianjiedejiefuyong.png" alt="面向连接的解复用例子">  </p>
+<br>
+
+<h2 id="无连接传输：UDP"><a href="#无连接传输：UDP" class="headerlink" title="无连接传输：UDP"></a>无连接传输：UDP</h2><h3 id="UDP：User-Datagram-Protocol-RFC-768"><a href="#UDP：User-Datagram-Protocol-RFC-768" class="headerlink" title="UDP：User Datagram Protocol [RFC 768]"></a>UDP：User Datagram Protocol [RFC 768]</h3><p>“no frills”, “bare bones” Internet 传输协议<br>“尽力而为”的服务，报文可能丢失、送到应用程序的报文段乱序  </p>
+<p><strong>无连接</strong>  </p>
+<ul>
+<li>UDP 发送端和接收端之间没有握手  </li>
+<li>每个 UDP 报文段都被独立地处理  </li>
+</ul>
+<p>UDP 被用于  </p>
+<ul>
+<li>流媒体：丢失不敏感，速率敏感、应用可控制传输速率  </li>
+<li>DNS  </li>
+<li>SNMP  </li>
+</ul>
+<p>在 UDP 上实现可靠传输：  </p>
+<ul>
+<li>在应用层增加可靠性  </li>
+<li>应用特定的差错恢复  </li>
+</ul>
+<p><img src="/2022/04/19/computernetworknotes3/UDPform.png" alt="UDP 报文段格式">  </p>
+<h3 id="为什么要有-UDP"><a href="#为什么要有-UDP" class="headerlink" title="为什么要有 UDP"></a>为什么要有 UDP</h3><p>不建立连接(会增加延时)<br>简单：在发送端和接收端没有连接状态<br>报文段的头部很小 (开销小)<br>无拥塞控制和流量控制，UDP 可以尽可能快的发送报文段：应用 -&gt; 传输的速率 = 主机 -&gt; 网络的速率  </p>
+<h3 id="UDP-校验和-check-sum"><a href="#UDP-校验和-check-sum" class="headerlink" title="UDP 校验和 (check sum)"></a>UDP 校验和 (check sum)</h3><p><strong>目标</strong>：检测在被传输报文段种的差错，如比特反转  </p>
+<p>发送方：  </p>
+<ul>
+<li>将报文段的内容视为 16 比特的整数  </li>
+<li>校验和：报文段的加法和 (1 的补运算)  </li>
+<li>发送方将校验和放在 UDP 的校验和字段  </li>
+</ul>
+<p>接收方：  </p>
+<ul>
+<li>计算接收到的报文段的校验和  </li>
+<li>检查计算处的校验和与校验和字段的内容是否相等  <ul>
+<li>不相等 —— 检测到差错  </li>
+<li>相等 —— 没有检测到差错，但也许还是有差错 (残存错误)  </li>
+</ul>
+</li>
+</ul>
+<h4 id="Internet-校验和例子：进位回滚"><a href="#Internet-校验和例子：进位回滚" class="headerlink" title="Internet 校验和例子：进位回滚"></a>Internet 校验和例子：进位回滚</h4><p>当数字相加时，在最高位的进位要回卷，再加到结果上<br>目标端：校验范围 + 校验和 = 1111111111111111 通过校验，否则没有通过校验  </p>
+<p><img src="/2022/04/19/computernetworknotes3/jinweihuijuan.png" alt="进位回卷例子"></p>
+<p><em>求和时，必须将进位回卷到结果上</em>  </p>
+<br>  
+
+<h2 id="可靠数据传输的原理"><a href="#可靠数据传输的原理" class="headerlink" title="可靠数据传输的原理"></a>可靠数据传输的原理</h2><h3 id="可靠数据传输-RDT"><a href="#可靠数据传输-RDT" class="headerlink" title="可靠数据传输 (RDT)"></a>可靠数据传输 (RDT)</h3><p>RDT 在应用层、传输层和数据链路层都很重要<br>信道的不考考特点决定了可靠数据传输协议的复杂性  </p>
+<h4 id="可靠数据传输：问题描述"><a href="#可靠数据传输：问题描述" class="headerlink" title="可靠数据传输：问题描述"></a>可靠数据传输：问题描述</h4><p><img src="/2022/04/19/computernetworknotes3/RDT.png" alt="可靠数据传输：问题描述">  </p>
+<p>渐增式地开发可靠数据传输协议 (RDT) 的发送方和接收方<br>只考虑单项数据传输，但控制信息是双向流动的<br>双向的数据传输问题实际上是 2 个单项数据传输问题的综合<br>使用有限状态机 (FSM) 来描述发送方和接收方  </p>
+<p><strong>状态</strong>：在该状态时，下一个状态只由下一个事件唯一决定  </p>
+<p><img src="/2022/04/19/computernetworknotes3/zhuangtai.png"></p>
+<h3 id="可靠数据传输协议：停止-等待"><a href="#可靠数据传输协议：停止-等待" class="headerlink" title="可靠数据传输协议：停止-等待"></a>可靠数据传输协议：停止-等待</h3><h4 id="RDT-1-0：在可靠信道上的可靠数据传输"><a href="#RDT-1-0：在可靠信道上的可靠数据传输" class="headerlink" title="RDT 1.0：在可靠信道上的可靠数据传输"></a>RDT 1.0：在可靠信道上的可靠数据传输</h4><p>下层的信道是完全可靠的  </p>
+<ul>
+<li>没有比特出错  </li>
+<li>没有分组丢失  </li>
+</ul>
+<p>发送方和接收方的 FSM  </p>
+<ul>
+<li>发送方将数据发送到下层信道  </li>
+<li>接收方从下层信道接收数据  </li>
+</ul>
+<p><img src="/2022/04/19/computernetworknotes3/RDT1.png">  </p>
+<h4 id="RDT-2-0：具有比特差错的信道"><a href="#RDT-2-0：具有比特差错的信道" class="headerlink" title="RDT 2.0：具有比特差错的信道"></a>RDT 2.0：具有比特差错的信道</h4><p>下层信道可能会出错：将分组中的比特翻转  </p>
+<ul>
+<li>用校验和来检测比特差错  </li>
+</ul>
+<p>问题：怎样从差错中回复  </p>
+<ul>
+<li>确认 (ACK)：接收方显示地告诉发送方分组已被正确接收  </li>
+<li>否定确认 (NAK)：接收方显示地告诉发送方分组发生了差错；发送方收到 NAK 后，重传分组  </li>
+</ul>
+<p>RDT 2.0 的新机制：采用差错控制编码进行差错检测  </p>
+<ul>
+<li>发送方差错控制编码、缓存  </li>
+<li>接收方使用编码检错  </li>
+<li>接收方的反馈：控制报文 (ACK, NAK)；接收方 -&gt; 发送方  </li>
+<li>发送方收到反馈相应的动作  </li>
+</ul>
+<p><img src="/2022/04/19/computernetworknotes3/RDT2.png">  </p>
+<h4 id="缺陷-gt-RDT-2-1"><a href="#缺陷-gt-RDT-2-1" class="headerlink" title="缺陷 (-&gt; RDT 2.1)"></a>缺陷 (-&gt; RDT 2.1)</h4><p>如果 ACK/NAK 出错  </p>
+<ul>
+<li>发送方不知道接收方发生了什么事情  </li>
+<li>发送方重传，可能重复；不重传，可能死锁 (或出错)  </li>
+<li>需要引入新的机制：序号 (sequence number)  </li>
+</ul>
+<p>处理重复  </p>
+<ul>
+<li>发送方在每个分组中加入序号  </li>
+<li>如果 ACK/NAK 出错，发送方<strong>重传</strong>当前分组  </li>
+<li>接收方丢弃 (不发给上层) 重复分组  </li>
+<li><strong>停等协议</strong>：发送方发送一个分组，然后等待接收方的应答  </li>
+</ul>
+<p><img src="/2022/04/19/computernetworknotes3/RDT21send.png" alt="RDT 2.1 发送方处理出错的 ACK/NAK">  </p>
+<p><img src="/2022/04/19/computernetworknotes3/RDT21receive.png" alt="RDT 2.1 接收方处理出错的 ACK/NAK">  </p>
+<p>发送方：  </p>
+<ul>
+<li>在分组中加入序列号  </li>
+<li>两个序列号 (0, 1)就足够：一次只发送一个未经确认的分组  </li>
+<li>必须检测 ACK/NAK 是否出错 (需要 EDC)  </li>
+<li>状态数变成了两倍：必须记住当前分组的序列号是 0 还是 1  </li>
+</ul>
+<p>接收方：  </p>
+<ul>
+<li>必须检测接收到的分组是否是重复的：状态会指示希望接收到的分组的序号为 0 还是 1  </li>
+<li>接收方并不知道发送方是否正确收到了 ACK/NAK  <ul>
+<li>发送方不对收到的 ACK/NAK 给确认，没有安排确认的确认  </li>
+<li>接收方发送 ACK，如果后面接收方收到的是老分组 P0，则 ACK 错误；收到下一个分组 P1，则 ACK 正确  </li>
+</ul>
+</li>
+</ul>
+<p><img src="/2022/04/19/computernetworknotes3/rdt21ackerror.png" alt="RDT 2.1 ACK error">  </p>
+<p><img src="/2022/04/19/computernetworknotes3/rdt21ackright.png" alt="RDT 2.1 ACK right">  </p>
+<h4 id="RDT-2-2：无-NAK-的协议"><a href="#RDT-2-2：无-NAK-的协议" class="headerlink" title="RDT 2.2：无 NAK 的协议"></a>RDT 2.2：无 NAK 的协议</h4><p>功能同 RDT 2.1，但只使用 ACK (ACK 要编号)<br>接收方对<strong>最后</strong>正确接收的分组发 ACK，以替代 NAK：接收方必须显示地包含被正确接收分组的<strong>序号</strong><br>当收到重复的 ACK (如再次收到 ACK0) 时，发送方与收到 NAK 采取相同的动作：重传当前分组<br>为后面的一次发送多个数据单位做准备  </p>
+<ul>
+<li>一次能够发送多个  </li>
+<li>每一个的应答都有 ACK/NAK 麻烦  </li>
+<li>使用对前一个数据单位的 ACK，代替本数据单位的 NAK  </li>
+<li>确认信息减少一半，协议处理简单  </li>
+</ul>
+<p><img src="/2022/04/19/computernetworknotes3/NAKfree.png" alt="NAK free">  </p>
+<p><em>达成不要 NAK 的目标</em>  </p>
+<p><img src="/2022/04/19/computernetworknotes3/RDT22.png" alt="RDT 2.2 的运行">  </p>
+<p><img src="/2022/04/19/computernetworknotes3/RDT22xu.png" alt="RDT 2.2 的运行"></p>
+<p><img src="/2022/04/19/computernetworknotes3/RDT22SR.png" alt="RDT 2.2：发送方和接收方片段">  </p>
+<h4 id="RDT-3-0：具有比特差错和分组丢失的信道"><a href="#RDT-3-0：具有比特差错和分组丢失的信道" class="headerlink" title="RDT 3.0：具有比特差错和分组丢失的信道"></a>RDT 3.0：具有比特差错和分组丢失的信道</h4><p><strong>新的假设</strong>：下层信道可能会丢失分组 (数据或 ACK)  </p>
+<ul>
+<li>会死锁  </li>
+<li>机制还不够处理这种状况：检验和、序列号、ACK、重传</li>
+</ul>
+<p><strong>方法</strong>：发送方等待 ACK 一段<strong>合理的时间</strong>  </p>
+<ul>
+<li>发送端超时重传：如果到时没有收到 ACK -&gt; 重传  </li>
+<li>问题：如果分组 (或 ACK) 只是被延迟了<ul>
+<li>重传会导致数据重复，但利用<strong>序列号</strong>可以处理这个问题</li>
+<li>接收方必须指明被正确接收的序列号  </li>
+</ul>
+</li>
+<li>需要一个倒数定时器  </li>
+</ul>
+<p><img src="/2022/04/19/computernetworknotes3/RDT3send.png" alt="RDT 3.0 发送方">  </p>
+<p>过早超时 (延迟的 ACK) 也能够正常工作，但是效率较低，一般的分组和确认是重复的<br>设置一个合理的超时时间比较重要  </p>
+<p><img src="/2022/04/19/computernetworknotes3/RDT3delayedACK.png" alt="RDT 3.0 过早超时">  </p>
+<p>性能：  </p>
+<ul>
+<li>RDT 3.0 可以工作，但链路容量比较大的情况下，性能很差  <ul>
+<li>链路容量比较大，一次发一个 PDU 不能充分利用链路的传输能力</li>
+<li>瓶颈在于网络协议限制了物理资源的利用  </li>
+</ul>
+</li>
+</ul>
+<p><img src="/2022/04/19/computernetworknotes3/RDT3xingneng.png" alt="RDT 3.0 在链路容量大的情况下效率较低">  </p>
+<p><img src="/2022/04/19/computernetworknotes3/RDT3xingneng2.png" alt="RDT 3.0 停止-等待">  </p>
+<h3 id="可靠数据传输协议：流水线"><a href="#可靠数据传输协议：流水线" class="headerlink" title="可靠数据传输协议：流水线"></a>可靠数据传输协议：流水线</h3><h4 id="流水线-pipeline-协议"><a href="#流水线-pipeline-协议" class="headerlink" title="流水线 (pipeline) 协议"></a>流水线 (pipeline) 协议</h4><p><strong>流水线</strong>：允许发送方在<strong>未得到对方确认</strong>的情况下，一次发送多个分组  </p>
+<ul>
+<li>必须增加序号的范围：用多个 bit 表示分组的序号  </li>
+<li>在发送方/接收方要有缓冲区  <ul>
+<li>发送方缓冲：未得到确认，可能需要重传  </li>
+<li>接收方缓存：上层用户去用数据的速率 ≠ 接收到的数据速率；接收到的数据可能乱序，排序交付 (可靠)  </li>
+</ul>
+</li>
+<li>两种通用的流水线协议：回退 N 步 (GBN) 和选择重传 (SR)  </li>
+</ul>
+<p><img src="/2022/04/19/computernetworknotes3/RDT3liushuixian.png" alt="流水线：提高链路利用率">  </p>
+<h4 id="通用：滑动窗口-slide-window-协议"><a href="#通用：滑动窗口-slide-window-协议" class="headerlink" title="通用：滑动窗口 (slide window) 协议"></a>通用：滑动窗口 (slide window) 协议</h4><p>发送缓冲区  </p>
+<ul>
+<li>形式：内存中的一个区域，落入缓冲区的分组可以发送  </li>
+<li>功能：用于存放已发送，但是没有得到确认的分组  </li>
+<li>必要性：需要重发时可用  </li>
+</ul>
+<p>发送缓冲区的大小：一次最多可以发送多少个未经确认的分组  </p>
+<ul>
+<li>停止等待协议 = 1  </li>
+<li>流水线协议 &gt; 1；合理的值，不能很大，链路的利用率不能超过 100 %  </li>
+</ul>
+<p>发送缓冲区中的分组  </p>
+<ul>
+<li>未发送的：落入发送缓冲区中的分组，可以连续发送出去  </li>
+<li>已经发送出去的、等待对方确认的分组：发送缓冲区的分组只有得到确认才能删除  </li>
+</ul>
+<p>发送窗口滑动过程 - 相对表示方法  </p>
+<ul>
+<li>采用相对移动方式表示，分组不动  </li>
+<li>可缓冲范围移动，代表一段可以发送的权力  </li>
+</ul>
+<p><img src="/2022/04/19/computernetworknotes3/xiangduihuadong.png" alt="发送滑动窗口过程的相对表示方法">  </p>
+<p><strong>滑动窗口协议 - 发送窗口</strong>  </p>
+<ul>
+<li>发送窗口  <ul>
+<li>发送缓冲区内容的一个范围  </li>
+<li>那些已发送但是未经确认分组的序号构成的空间  </li>
+</ul>
+</li>
+<li>发送窗口的最大值 ≤ 发送缓冲区的值  </li>
+<li>一开始：没有发送任何一个分组  <ul>
+<li>后沿 = 前沿  </li>
+<li>之间为发送窗口的尺寸 = 0  </li>
+</ul>
+</li>
+<li>每发送一个分组，前沿移动一个单位  </li>
+<li>发送窗口前沿移动的极限：不能超过发送缓冲区</li>
+<li>发送窗口后沿移动  <ul>
+<li>条件：收到老分组的确认  </li>
+<li>结果：发送缓冲区罩住新的分组，来了分组可以发送  </li>
+<li>移动的极限：不能超过前沿，即后沿贴到前沿  </li>
+</ul>
+</li>
+</ul>
+<p><img src="/2022/04/19/computernetworknotes3/sendingwindow.png" alt="发送窗口 (sending window)"></p>
+<p><strong>滑动窗口协议 - 接收窗口</strong>  </p>
+<ul>
+<li>接收窗口 (receiving window) = 接收缓冲区  </li>
+<li>接收窗口用于控制那些分组可以接收  <ul>
+<li>只有收到的分组序号落入接收窗口内才允许接收  </li>
+<li>若序号再接收窗口之外，则丢弃 </li>
+</ul>
+</li>
+<li>接收窗口尺寸<ul>
+<li>接收窗口尺寸 Wr = 1，则只能顺序接收  </li>
+<li>接收窗口尺寸 Wr &gt; 1，则可以乱序接收，但提交给上层的分组要按序  </li>
+</ul>
+</li>
+<li>接收窗口的滑动  <ul>
+<li>低序号分组的到来，接收窗口移动  </li>
+<li>高序号分组乱序到，缓存但不交付 (因为要实现 RDT，不允许失序)，不滑动  </li>
+</ul>
+</li>
+<li>接收窗口的发送确认  <ul>
+<li>接收窗口尺寸 = 1：发送连续收到的最大的分组确认 (累计确认)  </li>
+<li>接收窗口尺寸 &gt; 1：收到分组，发送那个分组的确认 (非累计确认/独立确认)  </li>
+</ul>
+</li>
+</ul>
+<p><img src="/2022/04/19/computernetworknotes3/receivingwindow.png" alt="接收窗口 (receiving window)"></p>
+<p><strong>正常情况下的 2 个窗口互动</strong>  </p>
+<ul>
+<li>发送窗口  <ul>
+<li>有新的分组落入发送缓冲区范围，发送 -&gt; 前沿滑动  </li>
+<li>来了老的低序号分组的确认 -&gt; 后沿向前滑动 -&gt; 新的分组可以落入发送缓冲区的范围  </li>
+</ul>
+</li>
+<li>接收窗口  <ul>
+<li>收到分组，落入到接收窗口范围内，接收  </li>
+<li>是低序号，发送确认给对方  </li>
+</ul>
+</li>
+</ul>
+<p><img src="/2022/04/19/computernetworknotes3/WWI.png" alt="发送窗口与接收窗口的互动">  </p>
+<h4 id="异常情况下-GBN-与-SR-协议中的窗口互动"><a href="#异常情况下-GBN-与-SR-协议中的窗口互动" class="headerlink" title="异常情况下 GBN 与 SR 协议中的窗口互动"></a>异常情况下 GBN 与 SR 协议中的窗口互动</h4><p>异常情况下 GBN 的 2 窗口互动  </p>
+<ul>
+<li>发送窗口  <ul>
+<li>新分组落入发送缓冲区范围，发送 -&gt; 前沿滑动  </li>
+<li>超时重发机制让发送端将发送窗口中的所有分组发送出去  </li>
+<li>来了老分组的重复确认 -&gt; 后沿不向前滑动 -&gt; 新的分组无法落入发送缓冲区的范围 (如果此时发送缓冲区有新的分组可以发送)  </li>
+</ul>
+</li>
+<li>接收窗口  <ul>
+<li>收到乱序分组，没有落入到接收窗口范围内，抛弃  </li>
+<li>(重复) 发送老分组的确认，累计确认  </li>
+</ul>
+</li>
+</ul>
+<p>异常情况下 SR 的 2 窗口互动  </p>
+<ul>
+<li>发送窗口<ul>
+<li>新分组落入发送缓冲区范围，发送 -&gt; 前沿滑动  </li>
+<li>超时重发机制让发送端将超时的分组重新发送出去  </li>
+<li>来了乱序分组的确认 -&gt; 后沿不向前滑动 -&gt; 新的分组无法落入发送缓冲区的范围 (如果此时发送缓冲区有新的分组可以发送)  </li>
+</ul>
+</li>
+<li>接收窗口  <ul>
+<li>收到乱序分组，落入到接收窗口范围内，接收  </li>
+<li>发送该分组的确认，单独确认  </li>
+</ul>
+</li>
+</ul>
+<p><em>每发送一个分组，就要设定一个超时定时器，接收到分组确认时取消定时器</em></p>
+<p>GBN 协议和 SR 协议的相同之处    </p>
+<ul>
+<li>发送窗口 &gt; 1  </li>
+<li>一次可发送多个未经确认的分组  </li>
+</ul>
+<p>GBN 协议和 SR 协议的不同之处 (主要由于接收窗口大小不同)  </p>
+<ul>
+<li>GBN：接收窗口尺寸 = 1  <ul>
+<li>接收端：只能顺序接收  </li>
+<li>发送端：从表现来看，一旦一个分组没有发送成功，就要退回重发 (如 0，1，2，3，4 中 1 未成功，234 都发送出去，要返回 1 再发送：GB1)</li>
+</ul>
+</li>
+<li>SR：接收窗口尺寸 &gt; 1  <ul>
+<li>接收端：可以乱序接收  </li>
+<li>发送端：发送0，1，2，3，4 中 1 未成功，234 都发送出去，无需重发，选择性发送 1  </li>
+</ul>
+</li>
+</ul>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p><strong>GO-back-N</strong>  </p>
+<ul>
+<li>发送端最多在流水线中有 N 个未确认的分组  </li>
+<li>接收端只是发送累计型确认 (cumulative ack)：接收端如果发现 gap，不确认信道来的分组  </li>
+<li>发送端拥有对最老的未确认分组的定时器  <ul>
+<li>秩序设置一个定时器  </li>
+<li>当定时器到时时，重传所有未确认分组  </li>
+</ul>
+</li>
+</ul>
+<p>GBN：发送方扩展的 FSM  </p>
+<p><img src="/2022/04/19/computernetworknotes3/GBNFSM.png" alt="GBN：发送方扩展的 FSM">  </p>
+<p>GBN：接收方扩展的 FSM  </p>
+<p><img src="/2022/04/19/computernetworknotes3/GBNFSMr.png" alt="GBN：接收方扩展的 FSM">  </p>
+<ul>
+<li>只发送 ACK：对顺序接收的最高序号的分组  <ul>
+<li>可能会产生重复的 ACK  </li>
+<li>只需记住 expectedseqnum；接收窗口 = 1；只一个变量就可以表示接收窗口  </li>
+</ul>
+</li>
+<li>对乱序的分组  <ul>
+<li>丢弃 (不缓存) -&gt; 在接收方不缓存  </li>
+<li>对顺序接收的最高序号的分组进行确认 - 累计确认  </li>
+</ul>
+</li>
+</ul>
+<p><img src="/2022/04/19/computernetworknotes3/runningGBN.png" alt="运行中的 GBN"></p>
+<p><strong>Selective Repeat</strong>  </p>
+<ul>
+<li>发送端最多在流水线中有 N 个未确认的分组  </li>
+<li>接收方对每个到来的分组单独确认 ACKn (individual ack)：非累计确认  <ul>
+<li>接收窗口 &gt; 1，可以缓存乱序的分组  </li>
+<li>最终将分组按顺序交付给上层</li>
+</ul>
+</li>
+<li>发送方为每个未确认的分组保持一个定时器：当超时定时器到时时，只重发到时未确认分组  </li>
+<li>发送窗口的最大值 (发送缓冲区) 限制发送未确认分组的个数  </li>
+</ul>
+<p><img src="/2022/04/19/computernetworknotes3/SRsummary.png">  </p>
+<p><img src="/2022/04/19/computernetworknotes3/RunningSR.png" alt="选择重传 SR 的运行"></p>
+<p><strong>对比 GBN 和 SR</strong>  </p>
+<p><img src="/2022/04/19/computernetworknotes3/GBNvsSR.png">  </p>
+<p>适用范围：  </p>
+<ul>
+<li>出错率低：比较适合 GBN，出错非常罕见，没有必要用复杂的 SR，为罕见的事件做日常准备和复杂处理  </li>
+<li>链路容量大 (延迟大、带宽大)：适合 SR 而不是 GBN，否则一点出错代价太大  </li>
+</ul>
+<br>  
+
+<h2 id="面向连接的传输：TCP"><a href="#面向连接的传输：TCP" class="headerlink" title="面向连接的传输：TCP"></a>面向连接的传输：TCP</h2><h3 id="TCP-概述"><a href="#TCP-概述" class="headerlink" title="TCP 概述"></a>TCP 概述</h3><p><strong>点对点</strong>：一个发送方，一个接收方<br><strong>可靠的、按顺序的字节流</strong>：没有报文边界<br>**管道化 (流水线)**：TCP 拥塞控制和流量控制设置窗口大小<br><strong>发送和接受缓存</strong><br><strong>全双工数据</strong>：在同一连接中数据流双向流动；MSS：最大报文段<br><strong>面向连接</strong>：在数据交换之前，通过握手 (交换控制报文) 初始化发送方、接收方的状态变量<br><strong>有流量控制</strong>：发送方不会淹没接收方  </p>
+<p><img src="/2022/04/19/computernetworknotes3/TCPform.png" alt="TCP 报文段结构">  </p>
+<h4 id="TCP-序号、确认号"><a href="#TCP-序号、确认号" class="headerlink" title="TCP 序号、确认号"></a>TCP 序号、确认号</h4><p><strong>序号</strong>：报文段首字节在字节流的编号<br><strong>确认号</strong>：期望从零乙方收到的下一个字节的序号；累计确认<br>Q：接收方如何处理乱序的报文段 - 没有规定  </p>
+<p><img src="/2022/04/19/computernetworknotes3/TCPnumber.png">  </p>
+<h3 id="TCP-往返延时-RTT-和超时"><a href="#TCP-往返延时-RTT-和超时" class="headerlink" title="TCP 往返延时 (RTT) 和超时"></a>TCP 往返延时 (RTT) 和超时</h3><h4 id="怎样设置-TCP-超时"><a href="#怎样设置-TCP-超时" class="headerlink" title="怎样设置 TCP 超时"></a>怎样设置 TCP 超时</h4><p>比 RTT 要长，但 RTT 是变化的<br>太短：太早超时，不必要的重传<br>太长：对报文段丢失反应太慢，消极  </p>
+<h4 id="怎样估计-RTT？"><a href="#怎样估计-RTT？" class="headerlink" title="怎样估计 RTT？"></a>怎样估计 RTT？</h4><p>sampleRTT：测量从报文段发出到收到确认的时间</p>
+<ul>
+<li>如果又重传，忽略此次测量</li>
+<li>定期测量  </li>
+<li>sampleRTT 会变化，因此估计的 RTT 应该比较平滑</li>
+<li>对几个最近的测量值求平均，而不是仅用当前的 sampleRTT  </li>
+</ul>
+<p><img src="/2022/04/19/computernetworknotes3/sampleRTT.png">  </p>
+<h4 id="设置超时"><a href="#设置超时" class="headerlink" title="设置超时"></a>设置超时</h4><p>EstimtedRTT + 安全便捷时间：  </p>
+<ul>
+<li>EstimatedRTT 变化大 (方差大) -&gt; 较大的安全边界时间  </li>
+</ul>
+<p>SampleRTT 会偏离 EstimatedRTT 多远： </p>
+<ul>
+<li>DevRTT = (1-β) * DevRTT + β * |SampleRTT - EstimatedRTT|  </li>
+<li>推荐值：β = 0.25  </li>
+</ul>
+<p>超时时间间隔设置为：</p>
+<ul>
+<li>TimeoutInterval = EstimatedRTT + 4 * DevRTT  </li>
+</ul>
+<h3 id="TCP：可靠数据传输"><a href="#TCP：可靠数据传输" class="headerlink" title="TCP：可靠数据传输"></a>TCP：可靠数据传输</h3><p>TCP 在 IP 不可靠服务的基础上建立了 RDT  </p>
+<ul>
+<li>管道化 (pipeline) 的报文段：GBN or SR  </li>
+<li>累计确认 (像 GBN)  </li>
+<li>单个重传定时器 (像 GBN)  </li>
+<li>是否可以接受乱序报文没有规范  </li>
+</ul>
+<p>通过以下事件触发重传  </p>
+<ul>
+<li>超时：只重发那个最早的未确认段 (SR)  </li>
+<li>重复的确认：收到了 ACK50 之后又收到 3 个 ACK50  </li>
+</ul>
+<h4 id="简化的-TCP-发送方"><a href="#简化的-TCP-发送方" class="headerlink" title="简化的 TCP 发送方"></a>简化的 TCP 发送方</h4><ul>
+<li>忽略重复的确认  </li>
+<li>忽略流量控制和拥塞控制  </li>
+</ul>
+<p><img src="/2022/04/19/computernetworknotes3/TCPsendersimple.png" alt="TCP 发送方 (简化版)"></p>
+<h4 id="TCP-发送方事件"><a href="#TCP-发送方事件" class="headerlink" title="TCP 发送方事件"></a>TCP 发送方事件</h4><p>从应用层接收数据：  </p>
+<ul>
+<li>用 nextseq 创建报文段  </li>
+<li>序号 nextseq 为报文段首字节的字节流编号  </li>
+<li>如果还没有运行，启动定时器  <ul>
+<li>定时器与最早未确认的报文段关联  </li>
+<li>过期间隔：TimeOutInterval  </li>
+</ul>
+</li>
+</ul>
+<p>超时：  </p>
+<ul>
+<li>重传后沿最老的报文段  </li>
+<li>重新启动定时器  </li>
+</ul>
+<p>收到确认：  </p>
+<ul>
+<li>如果是对尚未确认的报文段确认  <ul>
+<li>更新已被确认的报文序号  </li>
+<li>如果当前还有违背确认的报文段，重新启动定时器  </li>
+</ul>
+</li>
+</ul>
+<p><img src="/2022/04/19/computernetworknotes3/TCPsendersimplecode.png" alt="简化的 TCP 发送方伪码">  </p>
+<p><img src="/2022/04/19/computernetworknotes3/TCPresend.png" alt="TCP 重传">  </p>
+<h4 id="产生-TCP-ACK-的建议"><a href="#产生-TCP-ACK-的建议" class="headerlink" title="产生 TCP ACK 的建议"></a>产生 TCP ACK 的建议</h4><p><img src="/2022/04/19/computernetworknotes3/TCPACKsuggestion.png"></p>
+<p>//51:48</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ComputerNetwork/" rel="tag"># ComputerNetwork</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/03/23/computernetworknotes2/" rel="prev" title="Computer Network Notes 2：Applications">
+                  <i class="fa fa-chevron-left"></i> Computer Network Notes 2：Applications
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">R</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>Symbols count total: </span>
+    <span title="Symbols count total">84k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>Reading time total &asymp;</span>
+    <span title="Reading time total">1:17</span>
+  </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
