@@ -1,6 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Hexo + GitHub Pages搭建个人博客</title>
+    <url>/2021/09/16/Hexo-GitHubPages/</url>
+    <content><![CDATA[<center>本博客搭建过程中参考了许多教程。本文用于记录搭建过程，以及出现的一些小问题</center>  
+<span id="more"></span>  
+
+<br>  
+<br>  
+
+<p>有需要学习搭建博客的朋友可直接参考他人成熟的教程。本文参考教程：</p>
+<ol>
+<li><a href="https://zhuanlan.zhihu.com/p/70240127">Hexo+Github Pages快速实现个人网站</a><br> 搭建流程较为清晰，整体框架都有，不想详细了解每一个步骤只是想成功搭建一个博客参考这个教程就够</li>
+<li><a href="https://juejin.cn/post/6844904131266609165">彻底搞懂如何使用Hexo+GitHubPages搭建个人博客</a><br> 对于各种概念的解释都很详细，能够学习到很多知识，有助于未来对博客进行魔改升级等高级操作</li>
+<li><a href="https://hexo.io/zh-cn/docs/">Hexo官方说明文档</a><br> Hexo官方说明文档，目前更新版本为1/9/2021。内容步骤简洁明了，跟着一步步做不会出大的差错，如有问题也可以直接提交</li>
+<li><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site">GitHub Pages官方说明文档</a><br> GitHub Pages官方说明文档，参考性不如前面三个链接，但也能提供一部分支持。</li>
+</ol>
+<h2 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h2><h3 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h3><p>Mac和Linux系统的电脑已经预装了git.<br>Windows系统的电脑可以从官网(<a href="https://git-scm.com/downloads">https://git-scm.com/downloads</a> )下载相应的版本，安装过程中选择默认选项即可。<br>由于之前简单使用过gitee加git存代码，git的配置在当初已经完成。搜索“git使用”能够找到很多有用的教程。</p>
+<h3 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h3><p>可从官网 (<a href="https://nodejs.org/en/">https://nodejs.org/en/</a>)直接下载安装，可根据需求下载最新版本或推荐版本。需要注意的是，目前Hexo官网给出的建议是Node.js版本需不低于10.13，建议使用Node.js 12.0及以上版本。此处下载了Nodejs官网的推荐版本(recommended for most users)，14.17.6 LTS.<br>由于对Node.js并不了解，安装过程中直接选择了Automatically install the necessary tools.如果想更深入了解安装过程及自定义安装，可参考官方给出的详细安装教程(<a href="https://github.com/nodejs/node-gyp#on-windows">https://github.com/nodejs/node-gyp#on-windows</a>)</p>
+<h3 id="Hexo-1"><a href="#Hexo-1" class="headerlink" title="Hexo"></a>Hexo</h3><h4 id="检查Git和node-js安装情况"><a href="#检查Git和node-js安装情况" class="headerlink" title="检查Git和node.js安装情况"></a>检查Git和node.js安装情况</h4><p>安装Hexo需要git和node.js安装完成。检查电脑中这两项安装完成后，即可安装Hexo。可使用查看版本来检查是否安装成功。  </p>
+<pre><code>$ npm -v  
+$ node -v  
+$ git --version  
+</code></pre>
+<h4 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h4><p>上述安装成功后，只需要使用npm即可完成Hexo的安装  </p>
+<pre><code>$ npm install -g hexo-cli  
+</code></pre>
+<p>对于熟悉 npm 的进阶用户，可以仅局部安装 hexo 包  </p>
+<pre><code>$ npm install hexo
+</code></pre>
+<h4 id="检查安装是否成功"><a href="#检查安装是否成功" class="headerlink" title="检查安装是否成功"></a>检查安装是否成功</h4><p>依然使用查看版本号的方式检查安装是否成功，运行命令：  </p>
+<pre><code>$ hexo - v
+</code></pre>
+<h4 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h4><pre><code>$ hexo init &lt;blogname&gt; #此处blogname可以自己起名字，此步要在空目录下进行
+$ cd blog  #进入blog目录
+$ npm install  #它会根据package.json依赖配置文件自动下载安装所需要的依赖模块node_modules
+$ hexo generate  #生成静态文件, 缩写 $ hexo g
+$ hexo server  #开启本地服务, 此时通过 http://localhost:4000 就可以访问默认样式的博客, 缩写$ hexo s
+</code></pre>
+<h4 id="小小的Debug"><a href="#小小的Debug" class="headerlink" title="小小的Debug"></a>小小的Debug</h4><p>安装时，显示在resolveNewModule步骤耗时很久，不知道是卡住还是这个步骤本就耗费时间。<br>Google找到Hexo的官方说明文档(<a href="https://hexo.io/zh-cn/docs/">https://hexo.io/zh-cn/docs/</a>)，其中提到安装只需要几分钟，并且这个几分钟可能包含前述的Git和Node.js的准备。因此意识到安装出现问题，直接停下此次安装并重新运行命令。<br>出现问题的原因可能是安装的同时在下载一个较大的文件，无论是内存占用还是网络占用都达到一定程度，使得Hexo的安装受到影响。二次运行命令行时，下载已经结束，只用时51s就完成安装。<br>多翻了几个教程，很多教程都有提到新建文件夹Hexo，在这个目录下安装Hexo。因此卸载Hexo，在目标位置建立文件夹重装。卸载命令：  </p>
+<pre><code>$ npm uninstall hexo-cli -g
+</code></pre>
+<p>这次安装同样比较顺利，很快就完成。<br>实际上，如果在安装前没有建立文件夹，只需在安装成功后建立一个新目录，后续步骤在这个空目录下进行即可。上述uninstall步骤是因为比较心急，直接推翻重来，但没有必要。</p>
+<h2 id="GitHub-Pages"><a href="#GitHub-Pages" class="headerlink" title="GitHub Pages"></a>GitHub Pages</h2><h3 id="git初始配置"><a href="#git初始配置" class="headerlink" title="git初始配置"></a>git初始配置</h3><p>Git安装完成后确认是否完成基本部署，用户名和邮箱设置是否完成。  </p>
+<pre><code>$ git config --global user.name &quot;YOUR NAME&quot;  #设置用户名称
+$ git config --global user.email &quot;YOUR EMAIL&quot;  #设置邮箱地址
+</code></pre>
+<h3 id="生成SSH-key公钥"><a href="#生成SSH-key公钥" class="headerlink" title="生成SSH key公钥"></a>生成SSH key公钥</h3><p>查看当前用户的目录下是否存在.ssh目录，如果存在进入到此目录下检查是否存在id_rsa和id_rsa.pub两个文件，这两个文件分别对应的是公钥和私钥，如果存在直接跳过此步，否则输入下面的命令：  </p>
+<pre><code>$ ssh-keygen -t rsa -C “your_github_email”
+# -t type:指定你要生成的密钥类型
+# -C commit:提供一个新的注释  
+</code></pre>
+<p>然后一路回车，直到生成一个矩形的图案为止。记下生成的这串字符，这就是后面需要给GitHub配置的公钥。</p>
+<h3 id="创建GitHub账号"><a href="#创建GitHub账号" class="headerlink" title="创建GitHub账号"></a>创建GitHub账号</h3><p>打开官网用邮箱一步步注册即可，仅有的两个可能遇到的问题:</p>
+<ul>
+<li>没想好用户名</li>
+<li>确认注册的邮件因为有链接可能会被当作垃圾邮件。</li>
+</ul>
+<h3 id="配置GitHub中的公钥"><a href="#配置GitHub中的公钥" class="headerlink" title="配置GitHub中的公钥"></a>配置GitHub中的公钥</h3><p>在GitHub账号设置中找到添加SSH key的地方，即<br>Settings -&gt; SSH and GPG keys -&gt; New SSH key<br>将前述步骤中生成的公钥贴在此处  </p>
+<h3 id="创建仓库-repository"><a href="#创建仓库-repository" class="headerlink" title="创建仓库(repository)"></a>创建仓库(repository)</h3><p>单机右上角(用户头像旁边)的“+”号即可创建New repository，会出现如图所示界面。<br>Owner处为用户名，后面的Repository name需要严格按照username.github.io填写。这样才能保证生成的是GitHub Pages页面，而不是其它代码库。  </p>
+<h3 id="GitHub-Pages-1"><a href="#GitHub-Pages-1" class="headerlink" title="GitHub Pages"></a>GitHub Pages</h3><p>创建成功后会自动进入该repository，进入setting找到Pages，进入后即可看到GitHub Pages界面。<br>这一步骤可能需要一些时间，耐心等待，一般几分钟就会显示站点发布成功。</p>
+<h4 id="小小的debug"><a href="#小小的debug" class="headerlink" title="小小的debug"></a>小小的debug</h4><p>第一次走到这一步时，此处有一句提醒，由于该GitHub仓库是空的，所以无法创建GitHub Pages站点。解决方式： </p>
+<ul>
+<li>可自己创建一个README文件</li>
+<li>粗暴删库重来，建库时选择生成默认README文件  </li>
+</ul>
+<h2 id="将Hexo部署到GitHub"><a href="#将Hexo部署到GitHub" class="headerlink" title="将Hexo部署到GitHub"></a>将Hexo部署到GitHub</h2><h3 id="安装hexo-deployer-git"><a href="#安装hexo-deployer-git" class="headerlink" title="安装hexo-deployer-git"></a>安装hexo-deployer-git</h3><p>在博客根目录下运行命令  </p>
+<pre><code>$ npm install hexo-deployer-git –save
+</code></pre>
+<h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><p>_config.yml是整个博客的配置文件，每项配置参数在Hexo官方文档可找到详细介绍。<br>使用git能将本地博客文件夹关联到GitHub的远程仓库，并把本地文件push到对应的仓库中。Hexo提供了一种更简便地方式，只需要在_config.yml中作相应的配置，通过命令行命令就可以很方便地把静态文件部署到对应的仓库中。<br>找到根目录中的_config.yml博客配置文件，在deployment配置项下设置如下参数：  </p>
+<pre><code>deploy:  
+    type: git  
+    repo: git@github.com:yourname/yourname.github.io.git  
+    branch: master  
+</code></pre>
+<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><pre><code>$ hexo generate #生成本地静态文件，可缩写为hexo g
+$ hexo deploy   #部署，可缩写为hexo d
+</code></pre>
+<p>这时回到GitHub仓库, 可以看到网站的静态文件已经上传。</p>
+<h4 id="小小的Debug-1"><a href="#小小的Debug-1" class="headerlink" title="小小的Debug"></a>小小的Debug</h4><p>部署没有报错，但网站没有更新<br>原因：GitHub Pages默认是从main生成页面，但本地设置部署参数是branch一项中填写的是master<br>Debug：修改该repository设置中pages的source一项或将前面提到的修改博客配置文件的branch参数为main</p>
+<h3 id="一些有用的命令"><a href="#一些有用的命令" class="headerlink" title="一些有用的命令"></a>一些有用的命令</h3><pre><code>hexo clean = hexo c #清除本地缓存，也就是清除public/文件夹和db.json文件
+hexo generate = hexo g #将souce文件夹下的Markdown和HTML文件解析到了public文件夹下，并生成了db.json文件
+hexo server = hexo s #开启本地调试模式
+hexo deploy = hexo d #将本地资源部署到GithubPages
+</code></pre>
+<h2 id="修改主题"><a href="#修改主题" class="headerlink" title="修改主题"></a>修改主题</h2><h3 id="选择主题"><a href="#选择主题" class="headerlink" title="选择主题"></a>选择主题</h3><p>Hexo的官网上即可找到许多可用主题，或搜索Hexo theme也可以找到。官网中列出的主题直达：<a href="https://hexo.io/themes/">https://hexo.io/themes/</a><br>找主题除了符合自己的审美之外，也要注意该主题是否一直有人维护。较长时间无人维护的主题可能由于版本问题无法顺利安装使用。</p>
+<h3 id="安装主题"><a href="#安装主题" class="headerlink" title="安装主题"></a>安装主题</h3><p>本博客选择的主题是Next，安装步骤如下：<br>将主题clone到theme文件夹下</p>
+<pre><code>$ cd blog
+$ git clone https://github.com/next-theme/hexo-theme-next themes/next
+</code></pre>
+<p>然后在hexo配置文件中修改themes为next</p>
+<pre><code>themes: next
+</code></pre>
+<h3 id="一些小改动"><a href="#一些小改动" class="headerlink" title="一些小改动"></a>一些小改动</h3><p>根据next的说明文件，可以在该主题的配置文件中对细节进行修改。<br>对博客名、描述以及作者等的修改在根目录的配置文件中进行。</p>
+]]></content>
+      <categories>
+        <category>Blog</category>
+        <category>Building</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>Github</tag>
+        <tag>Blog</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>blastp的本地化使用</title>
     <url>/2021/09/16/blastp/</url>
     <content><![CDATA[<center>blastp在Windows系统电脑上的本地使用</center>
@@ -233,110 +337,6 @@ main() # 运行上述函数
       </tags>
   </entry>
   <entry>
-    <title>Hexo + GitHub Pages搭建个人博客</title>
-    <url>/2021/09/16/Hexo-GitHubPages/</url>
-    <content><![CDATA[<center>本博客搭建过程中参考了许多教程。本文用于记录搭建过程，以及出现的一些小问题</center>  
-<span id="more"></span>  
-
-<br>  
-<br>  
-
-<p>有需要学习搭建博客的朋友可直接参考他人成熟的教程。本文参考教程：</p>
-<ol>
-<li><a href="https://zhuanlan.zhihu.com/p/70240127">Hexo+Github Pages快速实现个人网站</a><br> 搭建流程较为清晰，整体框架都有，不想详细了解每一个步骤只是想成功搭建一个博客参考这个教程就够</li>
-<li><a href="https://juejin.cn/post/6844904131266609165">彻底搞懂如何使用Hexo+GitHubPages搭建个人博客</a><br> 对于各种概念的解释都很详细，能够学习到很多知识，有助于未来对博客进行魔改升级等高级操作</li>
-<li><a href="https://hexo.io/zh-cn/docs/">Hexo官方说明文档</a><br> Hexo官方说明文档，目前更新版本为1/9/2021。内容步骤简洁明了，跟着一步步做不会出大的差错，如有问题也可以直接提交</li>
-<li><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site">GitHub Pages官方说明文档</a><br> GitHub Pages官方说明文档，参考性不如前面三个链接，但也能提供一部分支持。</li>
-</ol>
-<h2 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h2><h3 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h3><p>Mac和Linux系统的电脑已经预装了git.<br>Windows系统的电脑可以从官网(<a href="https://git-scm.com/downloads">https://git-scm.com/downloads</a> )下载相应的版本，安装过程中选择默认选项即可。<br>由于之前简单使用过gitee加git存代码，git的配置在当初已经完成。搜索“git使用”能够找到很多有用的教程。</p>
-<h3 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h3><p>可从官网 (<a href="https://nodejs.org/en/">https://nodejs.org/en/</a>)直接下载安装，可根据需求下载最新版本或推荐版本。需要注意的是，目前Hexo官网给出的建议是Node.js版本需不低于10.13，建议使用Node.js 12.0及以上版本。此处下载了Nodejs官网的推荐版本(recommended for most users)，14.17.6 LTS.<br>由于对Node.js并不了解，安装过程中直接选择了Automatically install the necessary tools.如果想更深入了解安装过程及自定义安装，可参考官方给出的详细安装教程(<a href="https://github.com/nodejs/node-gyp#on-windows">https://github.com/nodejs/node-gyp#on-windows</a>)</p>
-<h3 id="Hexo-1"><a href="#Hexo-1" class="headerlink" title="Hexo"></a>Hexo</h3><h4 id="检查Git和node-js安装情况"><a href="#检查Git和node-js安装情况" class="headerlink" title="检查Git和node.js安装情况"></a>检查Git和node.js安装情况</h4><p>安装Hexo需要git和node.js安装完成。检查电脑中这两项安装完成后，即可安装Hexo。可使用查看版本来检查是否安装成功。  </p>
-<pre><code>$ npm -v  
-$ node -v  
-$ git --version  
-</code></pre>
-<h4 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h4><p>上述安装成功后，只需要使用npm即可完成Hexo的安装  </p>
-<pre><code>$ npm install -g hexo-cli  
-</code></pre>
-<p>对于熟悉 npm 的进阶用户，可以仅局部安装 hexo 包  </p>
-<pre><code>$ npm install hexo
-</code></pre>
-<h4 id="检查安装是否成功"><a href="#检查安装是否成功" class="headerlink" title="检查安装是否成功"></a>检查安装是否成功</h4><p>依然使用查看版本号的方式检查安装是否成功，运行命令：  </p>
-<pre><code>$ hexo - v
-</code></pre>
-<h4 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h4><pre><code>$ hexo init &lt;blogname&gt; #此处blogname可以自己起名字，此步要在空目录下进行
-$ cd blog  #进入blog目录
-$ npm install  #它会根据package.json依赖配置文件自动下载安装所需要的依赖模块node_modules
-$ hexo generate  #生成静态文件, 缩写 $ hexo g
-$ hexo server  #开启本地服务, 此时通过 http://localhost:4000 就可以访问默认样式的博客, 缩写$ hexo s
-</code></pre>
-<h4 id="小小的Debug"><a href="#小小的Debug" class="headerlink" title="小小的Debug"></a>小小的Debug</h4><p>安装时，显示在resolveNewModule步骤耗时很久，不知道是卡住还是这个步骤本就耗费时间。<br>Google找到Hexo的官方说明文档(<a href="https://hexo.io/zh-cn/docs/">https://hexo.io/zh-cn/docs/</a>)，其中提到安装只需要几分钟，并且这个几分钟可能包含前述的Git和Node.js的准备。因此意识到安装出现问题，直接停下此次安装并重新运行命令。<br>出现问题的原因可能是安装的同时在下载一个较大的文件，无论是内存占用还是网络占用都达到一定程度，使得Hexo的安装受到影响。二次运行命令行时，下载已经结束，只用时51s就完成安装。<br>多翻了几个教程，很多教程都有提到新建文件夹Hexo，在这个目录下安装Hexo。因此卸载Hexo，在目标位置建立文件夹重装。卸载命令：  </p>
-<pre><code>$ npm uninstall hexo-cli -g
-</code></pre>
-<p>这次安装同样比较顺利，很快就完成。<br>实际上，如果在安装前没有建立文件夹，只需在安装成功后建立一个新目录，后续步骤在这个空目录下进行即可。上述uninstall步骤是因为比较心急，直接推翻重来，但没有必要。</p>
-<h2 id="GitHub-Pages"><a href="#GitHub-Pages" class="headerlink" title="GitHub Pages"></a>GitHub Pages</h2><h3 id="git初始配置"><a href="#git初始配置" class="headerlink" title="git初始配置"></a>git初始配置</h3><p>Git安装完成后确认是否完成基本部署，用户名和邮箱设置是否完成。  </p>
-<pre><code>$ git config --global user.name &quot;YOUR NAME&quot;  #设置用户名称
-$ git config --global user.email &quot;YOUR EMAIL&quot;  #设置邮箱地址
-</code></pre>
-<h3 id="生成SSH-key公钥"><a href="#生成SSH-key公钥" class="headerlink" title="生成SSH key公钥"></a>生成SSH key公钥</h3><p>查看当前用户的目录下是否存在.ssh目录，如果存在进入到此目录下检查是否存在id_rsa和id_rsa.pub两个文件，这两个文件分别对应的是公钥和私钥，如果存在直接跳过此步，否则输入下面的命令：  </p>
-<pre><code>$ ssh-keygen -t rsa -C “your_github_email”
-# -t type:指定你要生成的密钥类型
-# -C commit:提供一个新的注释  
-</code></pre>
-<p>然后一路回车，直到生成一个矩形的图案为止。记下生成的这串字符，这就是后面需要给GitHub配置的公钥。</p>
-<h3 id="创建GitHub账号"><a href="#创建GitHub账号" class="headerlink" title="创建GitHub账号"></a>创建GitHub账号</h3><p>打开官网用邮箱一步步注册即可，仅有的两个可能遇到的问题:</p>
-<ul>
-<li>没想好用户名</li>
-<li>确认注册的邮件因为有链接可能会被当作垃圾邮件。</li>
-</ul>
-<h3 id="配置GitHub中的公钥"><a href="#配置GitHub中的公钥" class="headerlink" title="配置GitHub中的公钥"></a>配置GitHub中的公钥</h3><p>在GitHub账号设置中找到添加SSH key的地方，即<br>Settings -&gt; SSH and GPG keys -&gt; New SSH key<br>将前述步骤中生成的公钥贴在此处  </p>
-<h3 id="创建仓库-repository"><a href="#创建仓库-repository" class="headerlink" title="创建仓库(repository)"></a>创建仓库(repository)</h3><p>单机右上角(用户头像旁边)的“+”号即可创建New repository，会出现如图所示界面。<br>Owner处为用户名，后面的Repository name需要严格按照username.github.io填写。这样才能保证生成的是GitHub Pages页面，而不是其它代码库。  </p>
-<h3 id="GitHub-Pages-1"><a href="#GitHub-Pages-1" class="headerlink" title="GitHub Pages"></a>GitHub Pages</h3><p>创建成功后会自动进入该repository，进入setting找到Pages，进入后即可看到GitHub Pages界面。<br>这一步骤可能需要一些时间，耐心等待，一般几分钟就会显示站点发布成功。</p>
-<h4 id="小小的debug"><a href="#小小的debug" class="headerlink" title="小小的debug"></a>小小的debug</h4><p>第一次走到这一步时，此处有一句提醒，由于该GitHub仓库是空的，所以无法创建GitHub Pages站点。解决方式： </p>
-<ul>
-<li>可自己创建一个README文件</li>
-<li>粗暴删库重来，建库时选择生成默认README文件  </li>
-</ul>
-<h2 id="将Hexo部署到GitHub"><a href="#将Hexo部署到GitHub" class="headerlink" title="将Hexo部署到GitHub"></a>将Hexo部署到GitHub</h2><h3 id="安装hexo-deployer-git"><a href="#安装hexo-deployer-git" class="headerlink" title="安装hexo-deployer-git"></a>安装hexo-deployer-git</h3><p>在博客根目录下运行命令  </p>
-<pre><code>$ npm install hexo-deployer-git –save
-</code></pre>
-<h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><p>_config.yml是整个博客的配置文件，每项配置参数在Hexo官方文档可找到详细介绍。<br>使用git能将本地博客文件夹关联到GitHub的远程仓库，并把本地文件push到对应的仓库中。Hexo提供了一种更简便地方式，只需要在_config.yml中作相应的配置，通过命令行命令就可以很方便地把静态文件部署到对应的仓库中。<br>找到根目录中的_config.yml博客配置文件，在deployment配置项下设置如下参数：  </p>
-<pre><code>deploy:  
-    type: git  
-    repo: git@github.com:yourname/yourname.github.io.git  
-    branch: master  
-</code></pre>
-<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><pre><code>$ hexo generate #生成本地静态文件，可缩写为hexo g
-$ hexo deploy   #部署，可缩写为hexo d
-</code></pre>
-<p>这时回到GitHub仓库, 可以看到网站的静态文件已经上传。</p>
-<h4 id="小小的Debug-1"><a href="#小小的Debug-1" class="headerlink" title="小小的Debug"></a>小小的Debug</h4><p>部署没有报错，但网站没有更新<br>原因：GitHub Pages默认是从main生成页面，但本地设置部署参数是branch一项中填写的是master<br>Debug：修改该repository设置中pages的source一项或将前面提到的修改博客配置文件的branch参数为main</p>
-<h3 id="一些有用的命令"><a href="#一些有用的命令" class="headerlink" title="一些有用的命令"></a>一些有用的命令</h3><pre><code>hexo clean = hexo c #清除本地缓存，也就是清除public/文件夹和db.json文件
-hexo generate = hexo g #将souce文件夹下的Markdown和HTML文件解析到了public文件夹下，并生成了db.json文件
-hexo server = hexo s #开启本地调试模式
-hexo deploy = hexo d #将本地资源部署到GithubPages
-</code></pre>
-<h2 id="修改主题"><a href="#修改主题" class="headerlink" title="修改主题"></a>修改主题</h2><h3 id="选择主题"><a href="#选择主题" class="headerlink" title="选择主题"></a>选择主题</h3><p>Hexo的官网上即可找到许多可用主题，或搜索Hexo theme也可以找到。官网中列出的主题直达：<a href="https://hexo.io/themes/">https://hexo.io/themes/</a><br>找主题除了符合自己的审美之外，也要注意该主题是否一直有人维护。较长时间无人维护的主题可能由于版本问题无法顺利安装使用。</p>
-<h3 id="安装主题"><a href="#安装主题" class="headerlink" title="安装主题"></a>安装主题</h3><p>本博客选择的主题是Next，安装步骤如下：<br>将主题clone到theme文件夹下</p>
-<pre><code>$ cd blog
-$ git clone https://github.com/next-theme/hexo-theme-next themes/next
-</code></pre>
-<p>然后在hexo配置文件中修改themes为next</p>
-<pre><code>themes: next
-</code></pre>
-<h3 id="一些小改动"><a href="#一些小改动" class="headerlink" title="一些小改动"></a>一些小改动</h3><p>根据next的说明文件，可以在该主题的配置文件中对细节进行修改。<br>对博客名、描述以及作者等的修改在根目录的配置文件中进行。</p>
-]]></content>
-      <categories>
-        <category>Blog</category>
-        <category>Building</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>Github</tag>
-        <tag>Blog</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Mastodon 建站笔记</title>
     <url>/2022/03/02/buildmastodon/</url>
     <content><![CDATA[<center> mastodon 建站笔记：慢慢来，6 月之前搞完就行；不要怕，不行就重启试试 </center>
@@ -364,15 +364,48 @@ $ git clone https://github.com/next-theme/hexo-theme-next themes/next
 </li>
 </ul>
 <p>该步骤完成于 2022.03.03。约耗时 55 分钟，主要由于不会保存 nano 编辑的内容，根据各种教程也总是保存失败。中途一度试图换回之前常用的 vim，但事实证明两年没用就会忘记一切。如果能顺利保存，这一步十分钟以内就可以完成。  </p>
+<p><strong>tips</strong><br>虽然上次建站配置好了服务器端的公钥，但这次登录时，MobaXterm 一直返回错误信息：  </p>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Disconnected: No supported authentication methods available (server sent: publickey)</span><br></pre></td></tr></table></figure>
+
+<p>原因是服务器已经关闭账户密码登录，但使用 MobaXterm 登录时没有勾选 <code>Use private key</code> 并指定私钥文件。具体步骤为 <code>Session -&gt; SSH -&gt; Use private key and specify a private key for passwordless login</code>。<br>设置完成后即可顺利登录。  </p>
+<h3 id="安装-docker-和-docker-compose"><a href="#安装-docker-和-docker-compose" class="headerlink" title="安装 docker 和 docker-compose"></a>安装 docker 和 docker-compose</h3><p>根据蓝盒子站长的教程，使用官方提供的一键脚本安装 docker。</p>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 代码来自蓝盒子站长教程</span><br><span class="line">bash &lt;(curl -L https://get.docker.com/)</span><br><span class="line">sudo curl -L &quot;https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose</span><br><span class="line">sudo chmod +x /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
+
+<p>该步骤完成于 2022.03.13。约耗时 15 分钟，包括一开始登录不上服务器而查找原因的时间，实际操作时间约 3 分钟。这一步骤完成后可以通过命令 <code>docker-compose -h</code> 检查 docker 是否真的安装成功。  </p>
+<h3 id="拉取-Mastodon-镜像-amp-初始化-PostgreSQL"><a href="#拉取-Mastodon-镜像-amp-初始化-PostgreSQL" class="headerlink" title="拉取 Mastodon 镜像 &amp; 初始化 PostgreSQL"></a>拉取 Mastodon 镜像 &amp; 初始化 PostgreSQL</h3><p>这几项全部根据蓝盒子站长 <a href="https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/10/19/Mastodon-on-Docker.html">2022-04-25 修改的教程</a>进行。  </p>
 <ul>
-<li>tips<br>虽然上次建站配置好了服务器端的公钥，但这次登录时，MobaXterm 一直返回错误信息：  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">  Disconnected: No supported authentication methods available (server sent: publickey)  </span><br><span class="line">  ```  </span><br><span class="line">  </span><br><span class="line">  原因是服务器已经关闭账户密码登录，但使用 MobaXterm 登录时没有勾选 `Use private key` 并指定私钥文件。具体步骤为 `Session -&gt; SSH -&gt; Use private key and specify a private key for passwordless login`。  </span><br><span class="line">  设置完成后即可顺利登录。  </span><br><span class="line"></span><br><span class="line">### 安装 docker 和 docker-compose</span><br><span class="line">根据蓝盒子站长的教程，使用官方提供的一键脚本安装 docker。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h1 id="代码来自蓝盒子站长教程"><a href="#代码来自蓝盒子站长教程" class="headerlink" title="代码来自蓝盒子站长教程"></a>代码来自蓝盒子站长教程</h1>bash &lt;(curl -L <a href="https://get.docker.com/">https://get.docker.com/</a>)<br>sudo curl -L “<a href="https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$">https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$</a>(uname -s)-$(uname -m)” -o /usr/local/bin/docker-compose<br>sudo chmod +x /usr/local/bin/docker-compose<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">该步骤完成于 2022.03.13。约耗时 15 分钟，包括一开始登录不上服务器而查找原因的时间，实际操作时间约 3 分钟。这一步骤完成后可以通过命令 `docker-compose -h` 检查 docker 是否真的安装成功。  </span><br><span class="line"></span><br><span class="line">### 拉取 Mastodon 镜像 &amp; 初始化 PostgreSQL</span><br><span class="line">这几项全部根据蓝盒子站长 [2022-04-25 修改的教程](https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/10/19/Mastodon-on-Docker.html)进行。  </span><br><span class="line"></span><br><span class="line">- 拉取 Mastodon 镜像  </span><br><span class="line">  直接复制粘贴代码，拉取版本为 `v3.5.1`，并修改 `docker-compose.yml` 配置文件。  </span><br><span class="line">- 初始化 PostgreSQL  </span><br><span class="line">  复制粘贴代码，并根据教程中的提醒检查代码运行情况。  </span><br><span class="line"></span><br><span class="line">该步骤完成于 2022.05.07。约耗时 20 分钟，大部分用于思考设个什么密码。以及如果太久没有建站，一定要先看看上一次都做了什么、用过什么命令，这次又因为忘记 `nano` 怎么退出而慌乱几秒。  </span><br><span class="line"></span><br><span class="line">### 配置 Mastodon</span><br><span class="line">这一步骤仍然按照蓝盒子站长的教程进行，根据教程一步步慢慢做，看仔细每一步都要填什么就可以。  </span><br><span class="line"></span><br><span class="line">根据[小球飞象建站笔记](https://mantyke.icu/2021/mastodon-bulid/#%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91)中踩坑提醒，如果使用的是 zoho 邮件服务，建议 SMTP server 使用国际版地址，否则可能配置失败，无法发送通知邮件。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-SMTP_SERVER=smtp.zoho.com<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">该步骤完成于 2022.05.07。耗时约 40 分钟，大多数时间消耗在 `docker-compose run --rm web bundle exec rake mastodon:setup` 的每一小步上。尤其是 zoho 还突然登录不上，而我又因为时隔近两个月，完全忘记了管理员邮箱是什么，手忙脚乱几分钟。  </span><br><span class="line">还需注意的是，在这一步中，所有的密码都不可见。一开始没有意识到这一点，以为密码没有粘贴上，同一位置贴两三遍密码导致出错。以及 .env.production 配置信息一定要在电脑上保存一遍！  </span><br><span class="line"></span><br><span class="line">### 安装并配置 nginx</span><br><span class="line">在进行这一步之前，根据蓝盒子站长的提示，先在购买域名的网站 DNS 设置中增加一个 `A Record`，将设定的域名指向服务器。  </span><br><span class="line"></span><br><span class="line">- 安装 nginx  </span><br><span class="line">直接运行命令 `sudo apt install nginx -y` 出现报错信息：  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-Err:2 <a href="http://security.ubuntu.com/ubuntu">http://security.ubuntu.com/ubuntu</a> focal-updates/main amd64 libnginx-mod-http-image-filter amd64 1.18.0-0ubuntu1.2<br>404  Not Found [IP: 213.136.72.159 80]<br>Err:3 <a href="http://security.ubuntu.com/ubuntu">http://security.ubuntu.com/ubuntu</a> focal-updates/main amd64 libnginx-mod-http-xslt-filter amd64 1.18.0-0ubuntu1.2<br>  404  Not Found [IP: 213.136.72.159 80]<br>Err:4 <a href="http://security.ubuntu.com/ubuntu">http://security.ubuntu.com/ubuntu</a> focal-updates/main amd64 libnginx-mod-mail amd64 1.18.0-0ubuntu1.2<br>  404  Not Found [IP: 213.136.72.159 80]<br>Err:5 <a href="http://security.ubuntu.com/ubuntu">http://security.ubuntu.com/ubuntu</a> focal-updates/main amd64 libnginx-mod-stream amd64 1.18.0-0ubuntu1.2<br>  404  Not Found [IP: 213.136.72.159 80]<br>Err:6 <a href="http://security.ubuntu.com/ubuntu">http://security.ubuntu.com/ubuntu</a> focal-updates/main amd64 nginx-core amd64 1.18.0-0ubuntu1.2<br>  404  Not Found [IP: 213.136.72.159 80]<br>Ign:1 <a href="http://security.ubuntu.com/ubuntu">http://security.ubuntu.com/ubuntu</a> focal-updates/main amd64 nginx-common all 1.18.0-0ubuntu1.2<br>Ign:7 <a href="http://security.ubuntu.com/ubuntu">http://security.ubuntu.com/ubuntu</a> focal-updates/main amd64 nginx all 1.18.0-0ubuntu1.2<br>Err:1 <a href="http://security.ubuntu.com/ubuntu">http://security.ubuntu.com/ubuntu</a> focal-updates/main amd64 nginx-common all 1.18.0-0ubuntu1.2<br>  404  Not Found [IP: 213.136.72.159 80]<br>Err:7 <a href="http://security.ubuntu.com/ubuntu">http://security.ubuntu.com/ubuntu</a> focal-updates/main amd64 nginx all 1.18.0-0ubuntu1.2<br>  404  Not Found [IP: 213.136.72.159 80]<br>E: Failed to fetch <a href="http://security.ubuntu.com/ubuntu/pool/main/n/nginx/nginx-common_1.18.0-0ubuntu1.2_all.deb">http://security.ubuntu.com/ubuntu/pool/main/n/nginx/nginx-common_1.18.0-0ubuntu1.2_all.deb</a>  404  Not Found [IP: 213.136.72.159 80]<br>E: Failed to fetch <a href="http://security.ubuntu.com/ubuntu/pool/main/n/nginx/libnginx-mod-http-image-filter_1.18.0-0ubuntu1.2_amd64.deb">http://security.ubuntu.com/ubuntu/pool/main/n/nginx/libnginx-mod-http-image-filter_1.18.0-0ubuntu1.2_amd64.deb</a>  404  Not Found [IP: 213.136.72.159 80]<br>E: Failed to fetch <a href="http://security.ubuntu.com/ubuntu/pool/main/n/nginx/libnginx-mod-http-xslt-filter_1.18.0-0ubuntu1.2_amd64.deb">http://security.ubuntu.com/ubuntu/pool/main/n/nginx/libnginx-mod-http-xslt-filter_1.18.0-0ubuntu1.2_amd64.deb</a>  404  Not Found [IP: 213.136.72.159 80]<br>E: Failed to fetch <a href="http://security.ubuntu.com/ubuntu/pool/main/n/nginx/libnginx-mod-mail_1.18.0-0ubuntu1.2_amd64.deb">http://security.ubuntu.com/ubuntu/pool/main/n/nginx/libnginx-mod-mail_1.18.0-0ubuntu1.2_amd64.deb</a>  404  Not Found [IP: 213.136.72.159 80]<br>E: Failed to fetch <a href="http://security.ubuntu.com/ubuntu/pool/main/n/nginx/libnginx-mod-stream_1.18.0-0ubuntu1.2_amd64.deb">http://security.ubuntu.com/ubuntu/pool/main/n/nginx/libnginx-mod-stream_1.18.0-0ubuntu1.2_amd64.deb</a>  404  Not Found [IP: 213.136.72.159 80]<br>E: Failed to fetch <a href="http://security.ubuntu.com/ubuntu/pool/main/n/nginx/nginx-core_1.18.0-0ubuntu1.2_amd64.deb">http://security.ubuntu.com/ubuntu/pool/main/n/nginx/nginx-core_1.18.0-0ubuntu1.2_amd64.deb</a>  404  Not Found [IP: 213.136.72.159 80]<br>E: Failed to fetch <a href="http://security.ubuntu.com/ubuntu/pool/main/n/nginx/nginx_1.18.0-0ubuntu1.2_all.deb">http://security.ubuntu.com/ubuntu/pool/main/n/nginx/nginx_1.18.0-0ubuntu1.2_all.deb</a>  404  Not Found [IP: 213.136.72.159 80]<br>E: Unable to fetch some archives, maybe run apt-get update or try with –fix-missing?<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">谷歌之后发现这是 `Ubuntu 20.04` 会出现的常见报错，在运行安装命令前应先运行：  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-sudo apt-get update # 运行这一行之后可以尝试运行安装命令，如果仍报错再运行下一行<br>sudo apt-get upgrade<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- 配置 nginx &amp; 配置SSL证书 &amp; 重启nginx  </span><br><span class="line">  根据蓝盒子站长的教程配置，步骤中没有出错。</span><br><span class="line"></span><br><span class="line">该步骤完成于 2022.05.07。约耗时 30 分钟，除了一开始找报错原因费点时间之外，都是运行命令、等待命令结束，操作非常简单。  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 小结</span><br><span class="line">到这里站点已经上线，后续都是一些个性化修改，可以根据不同需求找相应的教程。  </span><br><span class="line">站点搭建实际用时 230 分钟，其中很多时间浪费在不敢做和注意力不集中上。如果不是像我一样每天找一点时间随手操作其中一个小步骤，而是空出一大段时间专心建站的话，应该两到三小时就能够完成上述所有步骤。  </span><br><span class="line">如果你和我一样也记不住整个过程中太多账号、用户名和密码，可以在电脑上建一个备忘录或在其它安全的地方记住密码。</span><br><span class="line"></span><br><span class="line">## 备份 (未完成)</span><br><span class="line">参考蓝盒子站长的教程：[如何将Mastodon媒体上传至Scaleway云储存](https://pullopen.github.io/%E7%AB%99%E7%82%B9%E7%BB%B4%E6%8A%A4/2020/07/22/Move-mastodon-media-to-Scaleway.html)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 装修</span><br><span class="line">### 使用管理命令行</span><br><span class="line">- 使用脚本简化命令  </span><br><span class="line">  参考：[使用 alias 脚本缩写 tootctl 命令](https://blog.tantalum.life/posts/how-to-run-your-mastodon-by-docker/#%E4%BD%BF%E7%94%A8alias%E8%84%9A%E6%9C%AC%E7%BC%A9%E5%86%99tootctl%E5%91%BD%E4%BB%A4)。  </span><br><span class="line">  由于前面的步骤一直主要参考蓝盒子站长的教程，所以这里第一步目标文件夹应为 `/home/mastodon/mastodon`，即 `cd /home/mastodon/mastodon`。  </span><br><span class="line">- 使用命令</span><br><span class="line">  </span><br></pre></td></tr></table></figure>
-tootctl help # 帮助信息，如果正常运行说明上一步的简化命令脚本生效。<br>tootctl settings registrations close # 关闭注册<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">此处由于站点装修未完成，暂时关闭注册。也可以在网页端关闭注册。  </span><br><span class="line"></span><br><span class="line">### 开启全文搜索</span><br><span class="line">参考蓝盒子站长给出的命令修改相应的配置文件，但在重启 docker 这一步骤报错：  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-ERROR: yaml.parser.ParserError: while parsing a block mapping<br>in “./docker-compose.yml”, line 3, column 3<br>expected <block end>, but found ‘<block mapping start>‘<br>in “./docker-compose.yml”, line 26, column 4<br>```</block></block></li>
+<li>拉取 Mastodon 镜像<br>直接复制粘贴代码，拉取版本为 <code>v3.5.1</code>，并修改 <code>docker-compose.yml</code> 配置文件。  </li>
+<li>初始化 PostgreSQL<br>复制粘贴代码，并根据教程中的提醒检查代码运行情况。  </li>
 </ul>
+<p>该步骤完成于 2022.05.07。约耗时 20 分钟，大部分用于思考设个什么密码。以及如果太久没有建站，一定要先看看上一次都做了什么、用过什么命令，这次又因为忘记 <code>nano</code> 怎么退出而慌乱几秒。  </p>
+<h3 id="配置-Mastodon"><a href="#配置-Mastodon" class="headerlink" title="配置 Mastodon"></a>配置 Mastodon</h3><p>这一步骤仍然按照蓝盒子站长的教程进行，根据教程一步步慢慢做，看仔细每一步都要填什么就可以。  </p>
+<p>根据<a href="https://mantyke.icu/2021/mastodon-bulid/#%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91">小球飞象建站笔记</a>中踩坑提醒，如果使用的是 zoho 邮件服务，建议 SMTP server 使用国际版地址，否则可能配置失败，无法发送通知邮件。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SMTP_SERVER=smtp.zoho.com</span><br></pre></td></tr></table></figure>
+
+<p>该步骤完成于 2022.05.07。耗时约 40 分钟，大多数时间消耗在 <code>docker-compose run --rm web bundle exec rake mastodon:setup</code> 的每一小步上。尤其是 zoho 还突然登录不上，而我又因为时隔近两个月，完全忘记了管理员邮箱是什么，手忙脚乱几分钟。<br>还需注意的是，在这一步中，所有的密码都不可见。一开始没有意识到这一点，以为密码没有粘贴上，同一位置贴两三遍密码导致出错。以及 .env.production 配置信息一定要在电脑上保存一遍！  </p>
+<h3 id="安装并配置-nginx"><a href="#安装并配置-nginx" class="headerlink" title="安装并配置 nginx"></a>安装并配置 nginx</h3><p>在进行这一步之前，根据蓝盒子站长的提示，先在购买域名的网站 DNS 设置中增加一个 <code>A Record</code>，将设定的域名指向服务器。  </p>
+<ul>
+<li>安装 nginx<br>直接运行命令 <code>sudo apt install nginx -y</code> 出现报错信息：  </li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Err:2 http://security.ubuntu.com/ubuntu focal-updates/main amd64 libnginx-mod-http-image-filter amd64 1.18.0-0ubuntu1.2</span><br><span class="line">404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Err:3 http://security.ubuntu.com/ubuntu focal-updates/main amd64 libnginx-mod-http-xslt-filter amd64 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Err:4 http://security.ubuntu.com/ubuntu focal-updates/main amd64 libnginx-mod-mail amd64 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Err:5 http://security.ubuntu.com/ubuntu focal-updates/main amd64 libnginx-mod-stream amd64 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Err:6 http://security.ubuntu.com/ubuntu focal-updates/main amd64 nginx-core amd64 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Ign:1 http://security.ubuntu.com/ubuntu focal-updates/main amd64 nginx-common all 1.18.0-0ubuntu1.2</span><br><span class="line">Ign:7 http://security.ubuntu.com/ubuntu focal-updates/main amd64 nginx all 1.18.0-0ubuntu1.2</span><br><span class="line">Err:1 http://security.ubuntu.com/ubuntu focal-updates/main amd64 nginx-common all 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Err:7 http://security.ubuntu.com/ubuntu focal-updates/main amd64 nginx all 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/nginx-common_1.18.0-0ubuntu1.2_all.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/libnginx-mod-http-image-filter_1.18.0-0ubuntu1.2_amd64.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/libnginx-mod-http-xslt-filter_1.18.0-0ubuntu1.2_amd64.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/libnginx-mod-mail_1.18.0-0ubuntu1.2_amd64.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/libnginx-mod-stream_1.18.0-0ubuntu1.2_amd64.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/nginx-core_1.18.0-0ubuntu1.2_amd64.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/nginx_1.18.0-0ubuntu1.2_all.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?</span><br></pre></td></tr></table></figure>
+
+<p>谷歌之后发现这是 <code>Ubuntu 20.04</code> 会出现的常见报错，在运行安装命令前应先运行：  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get update # 运行这一行之后可以尝试运行安装命令，如果仍报错再运行下一行</span><br><span class="line">sudo apt-get upgrade</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置 nginx &amp; 配置SSL证书 &amp; 重启nginx<br>根据蓝盒子站长的教程配置，步骤中没有出错。</li>
+</ul>
+<p>该步骤完成于 2022.05.07。约耗时 30 分钟，除了一开始找报错原因费点时间之外，都是运行命令、等待命令结束，操作非常简单。  </p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>到这里站点已经上线，后续都是一些个性化修改，可以根据不同需求找相应的教程。<br>站点搭建实际用时 230 分钟，其中很多时间浪费在不敢做和注意力不集中上。如果不是像我一样每天找一点时间随手操作其中一个小步骤，而是空出一大段时间专心建站的话，应该两到三小时就能够完成上述所有步骤。<br>如果你和我一样也记不住整个过程中太多账号、用户名和密码，可以在电脑上建一个备忘录或在其它安全的地方记住密码。</p>
+<h2 id="备份-未完成"><a href="#备份-未完成" class="headerlink" title="备份 (未完成)"></a>备份 (未完成)</h2><p>参考蓝盒子站长的教程：<a href="https://pullopen.github.io/%E7%AB%99%E7%82%B9%E7%BB%B4%E6%8A%A4/2020/07/22/Move-mastodon-media-to-Scaleway.html">如何将Mastodon媒体上传至Scaleway云储存</a></p>
+<h2 id="装修"><a href="#装修" class="headerlink" title="装修"></a>装修</h2><h3 id="使用管理命令行"><a href="#使用管理命令行" class="headerlink" title="使用管理命令行"></a>使用管理命令行</h3><ul>
+<li>使用脚本简化命令<br>参考：<a href="https://blog.tantalum.life/posts/how-to-run-your-mastodon-by-docker/#%E4%BD%BF%E7%94%A8alias%E8%84%9A%E6%9C%AC%E7%BC%A9%E5%86%99tootctl%E5%91%BD%E4%BB%A4">使用 alias 脚本缩写 tootctl 命令</a>。<br>由于前面的步骤一直主要参考蓝盒子站长的教程，所以这里第一步目标文件夹应为 <code>/home/mastodon/mastodon</code>，即 <code>cd /home/mastodon/mastodon</code>。  </li>
+<li>使用命令<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tootctl help # 帮助信息，如果正常运行说明上一步的简化命令脚本生效。</span><br><span class="line">tootctl settings registrations close # 关闭注册</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>此处由于站点装修未完成，暂时关闭注册。也可以在网页端关闭注册。  </p>
+<h3 id="开启全文搜索"><a href="#开启全文搜索" class="headerlink" title="开启全文搜索"></a>开启全文搜索</h3><p>参考蓝盒子站长给出的命令修改相应的配置文件，但在重启 docker 这一步骤报错：  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ERROR: yaml.parser.ParserError: while parsing a block mapping</span><br><span class="line">  in &quot;./docker-compose.yml&quot;, line 3, column 3</span><br><span class="line">expected &lt;block end&gt;, but found &#x27;&lt;block mapping start&gt;&#x27;</span><br><span class="line">  in &quot;./docker-compose.yml&quot;, line 26, column 4</span><br></pre></td></tr></table></figure>
+
 <p>再次检查 <code>docker-compose.yml</code> 文件发现，只删除 <code>#</code> 会导致缩进不统一，导致对 block 的判断有误。每行在删除 <code>#</code> 的同时，应在行首再删除一个空格。<br>其余步骤根据教程中的命令，一步一步完成即可。</p>
 <h3 id="其它魔改"><a href="#其它魔改" class="headerlink" title="其它魔改"></a>其它魔改</h3><p>站点魔改有许多可用的教程，如：<br><a href="http://blog.tantalum.life/posts/how-to-run-your-mastodon-by-docker/">Mastodon | 采用docker建站后的使用与维护</a><br><a href="https://pullopen.github.io/%E7%AB%99%E7%82%B9%E7%BB%B4%E6%8A%A4/2020/11/26/mastodon-manage.html">如何装饰你的站点：自定义CSS、中继站和自定义表情</a><br><a href="https://pullopen.github.io/%E8%BF%9B%E9%98%B6%E9%AD%94%E6%94%B9/2020/11/14/mastodon-modify.html">进阶魔改：修改字数上限、媒体上限、投票上限、添加自定义主题、界面用语、非登陆用户有限显示、优化中文搜索，附阻止本站嘟文流入某站点方法</a>  </p>
 ]]></content>
@@ -565,6 +598,53 @@ data[key] = $.html();
       </tags>
   </entry>
   <entry>
+    <title>Methods to Analyze Multi-Omicis Data</title>
+    <url>/2021/12/01/multiomics/</url>
+    <content><![CDATA[<center>文献阅读：多组学数据的整合、解读方法及公开可用的多组学数据库</center>
+<span id="more"></span>
+
+<h2 id="Multi-Omics"><a href="#Multi-Omics" class="headerlink" title="Multi-Omics"></a>Multi-Omics</h2><p><strong>Multi-Omics</strong>指同时获得两个或两个以上组学数据，如基因组、转录组、蛋白质组等，并将它们结合在一起分析、挖掘，以获得更全面、更系统的生物学解释、分子作用机制等。  </p>
+<h2 id="多组学研究的意义"><a href="#多组学研究的意义" class="headerlink" title="多组学研究的意义"></a>多组学研究的意义</h2><p>整合多组学数据，提供不同层次的生物分子信息，有望系统地、整体地理解复杂的生物学。<br>多组学研究以顺序或同时的方式结合各组学数据，以了解分子之间的相互作用。<br>有助于评估从一个组学水平到另一个组学水平的信息流，从而有助于弥合从基因型到表型的差距。<br>多组学数据能够为研究提供整体视角，有助于提高疾病表型的预后和预测准确性，进而帮助更好地治疗和预防。  </p>
+<h2 id="多组学研究的困难"><a href="#多组学研究的困难" class="headerlink" title="多组学研究的困难"></a>多组学研究的困难</h2><p>多组学的研究通常与非组学数据相关联，如临床数据等，这导致多组学研究面临许多困难。  </p>
+<h3 id="非组学数据复杂且主观定义"><a href="#非组学数据复杂且主观定义" class="headerlink" title="非组学数据复杂且主观定义"></a>非组学数据复杂且主观定义</h3><p>非组学数据通常十分复杂且主观性较强，需要标准化后将其加入预测或分类模型中。流行病学数据受制于调查模式、调查问题标准化以及背景，这可能会影响数据质量和可比性，并最终影响这些变量在结果预测中的贡献。不同研究者或组织由于收集程序不一致，也可能产生差异。临床数据受到其定义复杂性的影响，需要有统一的标准。目前有一些标准化的规则可供使用，如Clinical Data Interchange Standards Consortium (CDISC)，Study Data Tabulation Model (SDTM)，Analysis Data Model (ADaM)。这些非组学数据是基于评估者的技能和先前知识的复杂阐述过程产生的主观评估，这可能会导致报告偏差。  </p>
+<h3 id="非组学数据具有异质性"><a href="#非组学数据具有异质性" class="headerlink" title="非组学数据具有异质性"></a>非组学数据具有异质性</h3><p>非组学数据缺乏统一性，如不同尺度测量的定性或定量变量等，在分析之前需要对它们进行数据转换或归一化步骤。  </p>
+<h3 id="非组学数据规模大"><a href="#非组学数据规模大" class="headerlink" title="非组学数据规模大"></a>非组学数据规模大</h3><p>目前，许多多组学数据与非组学数据相结合的研究方法基于小尺度、低纬度的数据，而现在的非组学数据已经成为“大数据”——大规模，高维度。可穿戴监测装置和EHR (e-health records)的出现使非组学数据更易获取并向更高维度发展，且在处理客观和主观特征以及结构化和非结构化数据方面也更具有挑战性。<br>非组学数据的高维度也意味着存在</p>
+<ul>
+<li>变量之间的相关结构  </li>
+<li>大规模纵向数据  </li>
+<li>数据稀疏性（即药物、实验室或诊断测试）  </li>
+<li>与组学数据相比，数据缺失与参与个体无关  </li>
+</ul>
+<p>这些因素都需要在后续分析建模时，将其考虑在内。  </p>
+<h3 id="将组学和非组学数据联系"><a href="#将组学和非组学数据联系" class="headerlink" title="将组学和非组学数据联系"></a>将组学和非组学数据联系</h3><p>在病例对照设计中，组学数据和非组学数据的整合可能会受到确认偏差的影响。<br>组学和非组学数据之间的相互作用也会对研究产生影响。在建模的过程中，重要的是要将这种相互作用考虑在内。这些相互作用也可能非常复杂，如基因表达变化可能意味着表型异常，这导致分子数据和临床数据之间的关系更加复杂。  </p>
+<h3 id="其它困难"><a href="#其它困难" class="headerlink" title="其它困难"></a>其它困难</h3><p>每个变量或块对结果的贡献是否应该相等。<br>当与高通量数据集结合时，如何防止临床变量被惩罚(penalized)。<br>亚型的出现会给模型增加复杂性，在建模时是否要将亚型考虑在内。</p>
+<h2 id="多组学数据库"><a href="#多组学数据库" class="headerlink" title="多组学数据库"></a>多组学数据库</h2><p>多组学数据覆盖基因组、蛋白组、转录组、代谢组和表观遗传组的数据，含有这些组学数据两种或两种以上的数据库可成为多组学数据库。  </p>
+<h3 id="TCGA"><a href="#TCGA" class="headerlink" title="TCGA"></a>TCGA</h3><p>The Cancer Genome Altas (<a href="https://cancergenome.nih.gov/">TCGA</a>) 是最大的多组学数据库之一，涵盖超过 33 种不同类型癌症的20000个个体肿瘤样本。TCGA旨在产生、整合、分析和解释肿瘤样本产生的DNA、RNA、蛋白质及表观遗传数据的特征以及临床和组织学数据。</p>
+<h3 id="CPTAC"><a href="#CPTAC" class="headerlink" title="CPTAC"></a>CPTAC</h3><p>Clinical Proteomic Tumor Analysis Consortium (<a href="https://cptac-data-portal.georgetown.edu/cptacPublic/">CPTAC</a>) 是通过对TCGA库中的生物样本通过质谱技术进行分析，获取的蛋白质组数据。如果实验中同时测得基因组数据，也可在该库获得。  </p>
+<h3 id="ICGC"><a href="#ICGC" class="headerlink" title="ICGC"></a>ICGC</h3><p>International Cancer Genomics Consortium (<a href="https://icgc.org/">ICGC</a>) 从20383名捐献者的21个原发癌位点的76个癌症项目中协调大规模生成基因组研究。  </p>
+<h3 id="CCLE"><a href="#CCLE" class="headerlink" title="CCLE"></a>CCLE</h3><p>Cancer Cell Line Encyclopedia (<a href="https://portals.broadinstitute.org/ccle">CCLE</a>) 包含947种人类细胞系和36种肿瘤的基因表达、拷贝数和测序数据。还包含479种癌细胞系中24种抗癌药物的药理学特征。  </p>
+<h3 id="METABRIC"><a href="#METABRIC" class="headerlink" title="METABRIC"></a>METABRIC</h3><p>Molecular Taxonomy of Breast Cancer International Consortium (<a href="http://molonc.bccrc.ca/apariciolab/research/metabric/">METABRIC</a>) 包含来自乳腺肿瘤的临床特征、表达、单核苷酸多态性和拷贝数变异数据。  </p>
+<h3 id="TARGET"><a href="#TARGET" class="headerlink" title="TARGET"></a>TARGET</h3><p><a href="https://ocg.cancer.gov/programs/target">TARGET</a> 包含 24 种癌症分子类型的临床信息、基因表达、miRNA 表达、拷贝数和测序数据。  </p>
+<h3 id="OmicsDI"><a href="#OmicsDI" class="headerlink" title="OmicsDI"></a>OmicsDI</h3><p>Omics Discovery Index (<a href="https://www.omicsdi.org/">OmicsDI</a>) 包含来自公共数据结构中的 11 个存储库的数据集。是一个开源平台，用于访问、发现和整合基因组学、转录组学、蛋白质组学和代谢组学数据集。包含来自人类、模式生物和非模式生物的数据集。  </p>
+<h2 id="多组学数据分析方法"><a href="#多组学数据分析方法" class="headerlink" title="多组学数据分析方法"></a>多组学数据分析方法</h2><p>根据算法思想，可将目前已有的多组学数据分析方法分为几个大类：<br><img src="/2021/12/01/multiomics/methods.png">  </p>
+<h3 id="Network-Based"><a href="#Network-Based" class="headerlink" title="Network Based"></a>Network Based</h3><p><strong>SNF</strong> (Similarity network fusion)是一种基于网络的方法，使用网络融合方法整合多组学数据集。它为每种数据类型创建一个单独的网络，然后使用非线性网络融合方法将它们融合成一个单一的相似性网络。 融合步骤基于消息传递理论，使网络在每次迭代中更像其他网络。<br><strong>NetICS</strong> (Network-based integration of multi-omics data)为基于网络的多组学数据集成提供了一个框架，用于癌症基因优先排序。可预测遗传畸变、表观遗传变化和miRNA对相互作用网络中下游基因和蛋白质(表达)的影响。在有向功能交互网络上使用每个样本的网络扩散模型，并通过聚合个体排名得出种群水平的基因排名，并为所有样本提供全局排名。  </p>
+<h3 id="Bayesian-approach"><a href="#Bayesian-approach" class="headerlink" title="Bayesian approach"></a>Bayesian approach</h3><p><strong>iCluster</strong>根据多种数据类型同时推断，为样本生成一个单一的聚类分配。这种无监督方法使用联合潜在变量模型进行集成聚类，并在单个框架中结合不同数据类型之间的关联以及数据类型内的方差-协方差结构，同时降低数据集的维度。通过期望最大化算法获得似然推理。<br><strong>iClusterPlus</strong>是iCluster的增强版，使用广义线性回归来确定综合基因组、表观基因组和转录组分析的分类和数字(连续和计数)变量的联合模型。该方法使用一组潜在变量”k”来代表驱动因素，这些因素预测关键的基因组变量，从而捕捉生物变异。此外，使用Lasso回归方法，iClusterPlus确定了有助于亚型之间生物变化的特征子集。<br><strong>LRAcluster</strong>使用概率模型与低秩近似法来寻找主要的低维子空间，以对全基因组数据进行分类。在这种方法中，每个组学数据都以大小匹配的参数矩阵为条件，并且这个低秩参数矩阵可以在低维空间中表示。 用户定义的维度参数(基于数据的解释方差)和聚类数(基于轮廓值)有助于更快地降维和更好地聚类疾病亚型。<br><strong>PSDF</strong> (Patient-specific data fusion)该方法使用贝叶斯非参数模型(Dirichlet 过程混合模型)来整合CNV和基因表达数据，以将样本分层为子组。每个样本根据它们在2个数据集之间的一致性被分配一个二元状态。只有表现出一致性的样本融合在一起，而其他样本保持未融合，因此考虑了患者特定的融合模型。<br><strong>BCC</strong> (Bayesian consensus clustering)提出了一种数据驱动的共识聚类方法，该方法对源特定特征以及使用有限狄利克雷混合模型扩展以解释多个数据源的整体聚类进行建模。<br><strong>Joint Bayesian factor</strong>使用非参数贝叶斯因子分析来整合组学数据集。 这种方法使用 beta-Bernoulli 过程将特征空间分解为共享的和特定于数据的组件。<br><strong>MDI</strong> (Multiple dataset integration)使用 Dirichlet 混合模型对每个数据源进行聚类，同时对聚类之间的成对依赖性进行建模。MDI在分配给组件(如基因组特征)的变量级别链接模型。组件变量级链接允许捕获多组学数据之间的依赖关系。<br><strong>MOFA</strong> (Multi-omics factor analysis)是一种无监督方法，用于在相同或部分重叠的样本上整合多组学数据类型。<br><strong>PARADIGM</strong>的应用可以扩展到对所研究疾病的发现。  </p>
+<h3 id="Fusion-based-approaches"><a href="#Fusion-based-approaches" class="headerlink" title="Fusion-based approaches"></a>Fusion-based approaches</h3><p><strong>PFA</strong> (Pattern fusion analysis)允许在低维特征空间中跨异质基因组谱识别集成样本模式。首先使用主成分分析获得局部样本模式。 其后将这些局部样本模式与公共特征空间对齐，并跨大多数数据类型合成全局样本模式。在此过程中，将定量测量每种数据类型(或单个样本)对全局样本频谱的贡献，并迭代降低偏差或系统噪声的影响以更好地拟合数据。  </p>
+<h3 id="Similarity-based-approaches"><a href="#Similarity-based-approaches" class="headerlink" title="Similarity-based approaches"></a>Similarity-based approaches</h3><p><strong>PINSPlus</strong> (Perturbation clustering for data integration and disease subtyping)是一种无监督的聚类方法，有助于从多组学数据中识别亚型。为了识别亚型，该算法确定患者在单个集群中分组的频率(1)当数据受到干扰时，(2)使用不同类型的组学数据时，(3)使用不同的聚类技术时。 所有场景中的强关联患者都聚集在一起形成一个亚型。<br><strong>NEMO</strong>(Neighborhood-based multi-omics clustering) 是一种基于相似性的简单多组学聚类方法，它进一步建立在先前建立的聚类方法（如 SNF 和 rMKL-LPP）的基础上。该方法最初为每个输入组学数据集构建基于患者间相似性矩阵的欧几里德距离。然后将每个组学的相似性矩阵整合到一个矩阵中，然后使用光谱聚类方法对其进行聚类。  </p>
+<h3 id="Correlation-based-approaches"><a href="#Correlation-based-approaches" class="headerlink" title="Correlation based approaches"></a>Correlation based approaches</h3><p><strong>CNAmet</strong>用于对拷贝数改变、DNA 甲基化和基因表达数据进行综合分析。  </p>
+<h3 id="Other-multivariate-approaches"><a href="#Other-multivariate-approaches" class="headerlink" title="Other multivariate approaches"></a>Other multivariate approaches</h3><p><strong>mixOmics</strong>提供了一组有监督和无监督的多元方法来执行多组学数据集的整合，重点是变量选择。<br><strong>moCluster</strong>使用多表多元分析方法来识别跨多组学数据集的模式。<br><strong>MCIA</strong> (Multiple co-inertia analysis)是一种探索性数据分析方法，它捕捉多个高维数据集（如基因表达、miRNA表达、蛋白质表达）之间的相互关系。<br><strong>JIVE</strong> (Joint and individual variation explained)通过分离数据集的联合效应和个体效应来整合多组学数据。<br><strong>MFA</strong> (Multiple factor analysis)是一种通过将其投影到低维变量空间来帮助整合组学数据集的方法。<br><strong>rMKL-LPP</strong> 使用多核学习来集成异构多数据并执行子类型识别。<br><strong>iNMF</strong> (Integrative nonnegative matrix factorization)扩展了NMF框架以在集成多个数据时考虑异构效应。<br><strong>FSMKL</strong> (Feature selection multiple kernel learning)是一种监督分类方法，使用多个内核来捕获数据集之间的相似性，以识别疾病进展的特征。<br><strong>sMBPLS</strong> (Sparse multi-block partial least squares)允许多块输入包含多个调控组学数据集，例如 CNV、DNA 甲基化和调控基因表达的 miRNA 表达。<br><strong>T-SVD</strong> (Thresholding singular value decomposition)有助于识别 2 个组学数据集之间的调控机制，尤其是当调控特征大于测量样本时。<br><strong>Joint NMF</strong> 该分解框架从多个数据集(相同样本)中识别相关模块，以推导出 md 模块，以揭示潜在的多层监管因素。  </p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1] Subramanian I, Verma S, Kumar S, Jere A, Anamika K. Multi-omics Data Integration, Interpretation, and Its Application. Bioinformatics and Biology Insights. January 2020. <a href="doi:10.1177/1177932219899051">doi:10.1177/1177932219899051</a><br>[2] López de Maturana E, Alonso L, Alarcón P, Martín-Antoniano IA, Pineda S, Piorno L, Calle ML, Malats N. Challenges in the Integration of Omics and Non-Omics Data. Genes (Basel). 2019 Mar 20;10(3):238. <a href="doi:10.3390/genes10030238">doi:10.3390/genes10030238</a></p>
+]]></content>
+      <categories>
+        <category>Paper</category>
+        <category>MultiOmics</category>
+      </categories>
+      <tags>
+        <tag>Bioinformatics</tag>
+        <tag>MultiOmics</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>长毛象使用指南</title>
     <url>/2021/09/21/mstdn/</url>
     <content><![CDATA[<center>不少朋友被我安利到长毛象(mastodon)玩耍，本着对他们负责的态度，写下这篇长毛象使用指南。</center>
@@ -658,53 +738,6 @@ data[key] = $.html();
       <tags>
         <tag>Mastodon</tag>
         <tag>UserGuide</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Methods to Analyze Multi-Omicis Data</title>
-    <url>/2021/12/01/multiomics/</url>
-    <content><![CDATA[<center>文献阅读：多组学数据的整合、解读方法及公开可用的多组学数据库</center>
-<span id="more"></span>
-
-<h2 id="Multi-Omics"><a href="#Multi-Omics" class="headerlink" title="Multi-Omics"></a>Multi-Omics</h2><p><strong>Multi-Omics</strong>指同时获得两个或两个以上组学数据，如基因组、转录组、蛋白质组等，并将它们结合在一起分析、挖掘，以获得更全面、更系统的生物学解释、分子作用机制等。  </p>
-<h2 id="多组学研究的意义"><a href="#多组学研究的意义" class="headerlink" title="多组学研究的意义"></a>多组学研究的意义</h2><p>整合多组学数据，提供不同层次的生物分子信息，有望系统地、整体地理解复杂的生物学。<br>多组学研究以顺序或同时的方式结合各组学数据，以了解分子之间的相互作用。<br>有助于评估从一个组学水平到另一个组学水平的信息流，从而有助于弥合从基因型到表型的差距。<br>多组学数据能够为研究提供整体视角，有助于提高疾病表型的预后和预测准确性，进而帮助更好地治疗和预防。  </p>
-<h2 id="多组学研究的困难"><a href="#多组学研究的困难" class="headerlink" title="多组学研究的困难"></a>多组学研究的困难</h2><p>多组学的研究通常与非组学数据相关联，如临床数据等，这导致多组学研究面临许多困难。  </p>
-<h3 id="非组学数据复杂且主观定义"><a href="#非组学数据复杂且主观定义" class="headerlink" title="非组学数据复杂且主观定义"></a>非组学数据复杂且主观定义</h3><p>非组学数据通常十分复杂且主观性较强，需要标准化后将其加入预测或分类模型中。流行病学数据受制于调查模式、调查问题标准化以及背景，这可能会影响数据质量和可比性，并最终影响这些变量在结果预测中的贡献。不同研究者或组织由于收集程序不一致，也可能产生差异。临床数据受到其定义复杂性的影响，需要有统一的标准。目前有一些标准化的规则可供使用，如Clinical Data Interchange Standards Consortium (CDISC)，Study Data Tabulation Model (SDTM)，Analysis Data Model (ADaM)。这些非组学数据是基于评估者的技能和先前知识的复杂阐述过程产生的主观评估，这可能会导致报告偏差。  </p>
-<h3 id="非组学数据具有异质性"><a href="#非组学数据具有异质性" class="headerlink" title="非组学数据具有异质性"></a>非组学数据具有异质性</h3><p>非组学数据缺乏统一性，如不同尺度测量的定性或定量变量等，在分析之前需要对它们进行数据转换或归一化步骤。  </p>
-<h3 id="非组学数据规模大"><a href="#非组学数据规模大" class="headerlink" title="非组学数据规模大"></a>非组学数据规模大</h3><p>目前，许多多组学数据与非组学数据相结合的研究方法基于小尺度、低纬度的数据，而现在的非组学数据已经成为“大数据”——大规模，高维度。可穿戴监测装置和EHR (e-health records)的出现使非组学数据更易获取并向更高维度发展，且在处理客观和主观特征以及结构化和非结构化数据方面也更具有挑战性。<br>非组学数据的高维度也意味着存在</p>
-<ul>
-<li>变量之间的相关结构  </li>
-<li>大规模纵向数据  </li>
-<li>数据稀疏性（即药物、实验室或诊断测试）  </li>
-<li>与组学数据相比，数据缺失与参与个体无关  </li>
-</ul>
-<p>这些因素都需要在后续分析建模时，将其考虑在内。  </p>
-<h3 id="将组学和非组学数据联系"><a href="#将组学和非组学数据联系" class="headerlink" title="将组学和非组学数据联系"></a>将组学和非组学数据联系</h3><p>在病例对照设计中，组学数据和非组学数据的整合可能会受到确认偏差的影响。<br>组学和非组学数据之间的相互作用也会对研究产生影响。在建模的过程中，重要的是要将这种相互作用考虑在内。这些相互作用也可能非常复杂，如基因表达变化可能意味着表型异常，这导致分子数据和临床数据之间的关系更加复杂。  </p>
-<h3 id="其它困难"><a href="#其它困难" class="headerlink" title="其它困难"></a>其它困难</h3><p>每个变量或块对结果的贡献是否应该相等。<br>当与高通量数据集结合时，如何防止临床变量被惩罚(penalized)。<br>亚型的出现会给模型增加复杂性，在建模时是否要将亚型考虑在内。</p>
-<h2 id="多组学数据库"><a href="#多组学数据库" class="headerlink" title="多组学数据库"></a>多组学数据库</h2><p>多组学数据覆盖基因组、蛋白组、转录组、代谢组和表观遗传组的数据，含有这些组学数据两种或两种以上的数据库可成为多组学数据库。  </p>
-<h3 id="TCGA"><a href="#TCGA" class="headerlink" title="TCGA"></a>TCGA</h3><p>The Cancer Genome Altas (<a href="https://cancergenome.nih.gov/">TCGA</a>) 是最大的多组学数据库之一，涵盖超过 33 种不同类型癌症的20000个个体肿瘤样本。TCGA旨在产生、整合、分析和解释肿瘤样本产生的DNA、RNA、蛋白质及表观遗传数据的特征以及临床和组织学数据。</p>
-<h3 id="CPTAC"><a href="#CPTAC" class="headerlink" title="CPTAC"></a>CPTAC</h3><p>Clinical Proteomic Tumor Analysis Consortium (<a href="https://cptac-data-portal.georgetown.edu/cptacPublic/">CPTAC</a>) 是通过对TCGA库中的生物样本通过质谱技术进行分析，获取的蛋白质组数据。如果实验中同时测得基因组数据，也可在该库获得。  </p>
-<h3 id="ICGC"><a href="#ICGC" class="headerlink" title="ICGC"></a>ICGC</h3><p>International Cancer Genomics Consortium (<a href="https://icgc.org/">ICGC</a>) 从20383名捐献者的21个原发癌位点的76个癌症项目中协调大规模生成基因组研究。  </p>
-<h3 id="CCLE"><a href="#CCLE" class="headerlink" title="CCLE"></a>CCLE</h3><p>Cancer Cell Line Encyclopedia (<a href="https://portals.broadinstitute.org/ccle">CCLE</a>) 包含947种人类细胞系和36种肿瘤的基因表达、拷贝数和测序数据。还包含479种癌细胞系中24种抗癌药物的药理学特征。  </p>
-<h3 id="METABRIC"><a href="#METABRIC" class="headerlink" title="METABRIC"></a>METABRIC</h3><p>Molecular Taxonomy of Breast Cancer International Consortium (<a href="http://molonc.bccrc.ca/apariciolab/research/metabric/">METABRIC</a>) 包含来自乳腺肿瘤的临床特征、表达、单核苷酸多态性和拷贝数变异数据。  </p>
-<h3 id="TARGET"><a href="#TARGET" class="headerlink" title="TARGET"></a>TARGET</h3><p><a href="https://ocg.cancer.gov/programs/target">TARGET</a> 包含 24 种癌症分子类型的临床信息、基因表达、miRNA 表达、拷贝数和测序数据。  </p>
-<h3 id="OmicsDI"><a href="#OmicsDI" class="headerlink" title="OmicsDI"></a>OmicsDI</h3><p>Omics Discovery Index (<a href="https://www.omicsdi.org/">OmicsDI</a>) 包含来自公共数据结构中的 11 个存储库的数据集。是一个开源平台，用于访问、发现和整合基因组学、转录组学、蛋白质组学和代谢组学数据集。包含来自人类、模式生物和非模式生物的数据集。  </p>
-<h2 id="多组学数据分析方法"><a href="#多组学数据分析方法" class="headerlink" title="多组学数据分析方法"></a>多组学数据分析方法</h2><p>根据算法思想，可将目前已有的多组学数据分析方法分为几个大类：<br><img src="/2021/12/01/multiomics/methods.png">  </p>
-<h3 id="Network-Based"><a href="#Network-Based" class="headerlink" title="Network Based"></a>Network Based</h3><p><strong>SNF</strong> (Similarity network fusion)是一种基于网络的方法，使用网络融合方法整合多组学数据集。它为每种数据类型创建一个单独的网络，然后使用非线性网络融合方法将它们融合成一个单一的相似性网络。 融合步骤基于消息传递理论，使网络在每次迭代中更像其他网络。<br><strong>NetICS</strong> (Network-based integration of multi-omics data)为基于网络的多组学数据集成提供了一个框架，用于癌症基因优先排序。可预测遗传畸变、表观遗传变化和miRNA对相互作用网络中下游基因和蛋白质(表达)的影响。在有向功能交互网络上使用每个样本的网络扩散模型，并通过聚合个体排名得出种群水平的基因排名，并为所有样本提供全局排名。  </p>
-<h3 id="Bayesian-approach"><a href="#Bayesian-approach" class="headerlink" title="Bayesian approach"></a>Bayesian approach</h3><p><strong>iCluster</strong>根据多种数据类型同时推断，为样本生成一个单一的聚类分配。这种无监督方法使用联合潜在变量模型进行集成聚类，并在单个框架中结合不同数据类型之间的关联以及数据类型内的方差-协方差结构，同时降低数据集的维度。通过期望最大化算法获得似然推理。<br><strong>iClusterPlus</strong>是iCluster的增强版，使用广义线性回归来确定综合基因组、表观基因组和转录组分析的分类和数字(连续和计数)变量的联合模型。该方法使用一组潜在变量”k”来代表驱动因素，这些因素预测关键的基因组变量，从而捕捉生物变异。此外，使用Lasso回归方法，iClusterPlus确定了有助于亚型之间生物变化的特征子集。<br><strong>LRAcluster</strong>使用概率模型与低秩近似法来寻找主要的低维子空间，以对全基因组数据进行分类。在这种方法中，每个组学数据都以大小匹配的参数矩阵为条件，并且这个低秩参数矩阵可以在低维空间中表示。 用户定义的维度参数(基于数据的解释方差)和聚类数(基于轮廓值)有助于更快地降维和更好地聚类疾病亚型。<br><strong>PSDF</strong> (Patient-specific data fusion)该方法使用贝叶斯非参数模型(Dirichlet 过程混合模型)来整合CNV和基因表达数据，以将样本分层为子组。每个样本根据它们在2个数据集之间的一致性被分配一个二元状态。只有表现出一致性的样本融合在一起，而其他样本保持未融合，因此考虑了患者特定的融合模型。<br><strong>BCC</strong> (Bayesian consensus clustering)提出了一种数据驱动的共识聚类方法，该方法对源特定特征以及使用有限狄利克雷混合模型扩展以解释多个数据源的整体聚类进行建模。<br><strong>Joint Bayesian factor</strong>使用非参数贝叶斯因子分析来整合组学数据集。 这种方法使用 beta-Bernoulli 过程将特征空间分解为共享的和特定于数据的组件。<br><strong>MDI</strong> (Multiple dataset integration)使用 Dirichlet 混合模型对每个数据源进行聚类，同时对聚类之间的成对依赖性进行建模。MDI在分配给组件(如基因组特征)的变量级别链接模型。组件变量级链接允许捕获多组学数据之间的依赖关系。<br><strong>MOFA</strong> (Multi-omics factor analysis)是一种无监督方法，用于在相同或部分重叠的样本上整合多组学数据类型。<br><strong>PARADIGM</strong>的应用可以扩展到对所研究疾病的发现。  </p>
-<h3 id="Fusion-based-approaches"><a href="#Fusion-based-approaches" class="headerlink" title="Fusion-based approaches"></a>Fusion-based approaches</h3><p><strong>PFA</strong> (Pattern fusion analysis)允许在低维特征空间中跨异质基因组谱识别集成样本模式。首先使用主成分分析获得局部样本模式。 其后将这些局部样本模式与公共特征空间对齐，并跨大多数数据类型合成全局样本模式。在此过程中，将定量测量每种数据类型(或单个样本)对全局样本频谱的贡献，并迭代降低偏差或系统噪声的影响以更好地拟合数据。  </p>
-<h3 id="Similarity-based-approaches"><a href="#Similarity-based-approaches" class="headerlink" title="Similarity-based approaches"></a>Similarity-based approaches</h3><p><strong>PINSPlus</strong> (Perturbation clustering for data integration and disease subtyping)是一种无监督的聚类方法，有助于从多组学数据中识别亚型。为了识别亚型，该算法确定患者在单个集群中分组的频率(1)当数据受到干扰时，(2)使用不同类型的组学数据时，(3)使用不同的聚类技术时。 所有场景中的强关联患者都聚集在一起形成一个亚型。<br><strong>NEMO</strong>(Neighborhood-based multi-omics clustering) 是一种基于相似性的简单多组学聚类方法，它进一步建立在先前建立的聚类方法（如 SNF 和 rMKL-LPP）的基础上。该方法最初为每个输入组学数据集构建基于患者间相似性矩阵的欧几里德距离。然后将每个组学的相似性矩阵整合到一个矩阵中，然后使用光谱聚类方法对其进行聚类。  </p>
-<h3 id="Correlation-based-approaches"><a href="#Correlation-based-approaches" class="headerlink" title="Correlation based approaches"></a>Correlation based approaches</h3><p><strong>CNAmet</strong>用于对拷贝数改变、DNA 甲基化和基因表达数据进行综合分析。  </p>
-<h3 id="Other-multivariate-approaches"><a href="#Other-multivariate-approaches" class="headerlink" title="Other multivariate approaches"></a>Other multivariate approaches</h3><p><strong>mixOmics</strong>提供了一组有监督和无监督的多元方法来执行多组学数据集的整合，重点是变量选择。<br><strong>moCluster</strong>使用多表多元分析方法来识别跨多组学数据集的模式。<br><strong>MCIA</strong> (Multiple co-inertia analysis)是一种探索性数据分析方法，它捕捉多个高维数据集（如基因表达、miRNA表达、蛋白质表达）之间的相互关系。<br><strong>JIVE</strong> (Joint and individual variation explained)通过分离数据集的联合效应和个体效应来整合多组学数据。<br><strong>MFA</strong> (Multiple factor analysis)是一种通过将其投影到低维变量空间来帮助整合组学数据集的方法。<br><strong>rMKL-LPP</strong> 使用多核学习来集成异构多数据并执行子类型识别。<br><strong>iNMF</strong> (Integrative nonnegative matrix factorization)扩展了NMF框架以在集成多个数据时考虑异构效应。<br><strong>FSMKL</strong> (Feature selection multiple kernel learning)是一种监督分类方法，使用多个内核来捕获数据集之间的相似性，以识别疾病进展的特征。<br><strong>sMBPLS</strong> (Sparse multi-block partial least squares)允许多块输入包含多个调控组学数据集，例如 CNV、DNA 甲基化和调控基因表达的 miRNA 表达。<br><strong>T-SVD</strong> (Thresholding singular value decomposition)有助于识别 2 个组学数据集之间的调控机制，尤其是当调控特征大于测量样本时。<br><strong>Joint NMF</strong> 该分解框架从多个数据集(相同样本)中识别相关模块，以推导出 md 模块，以揭示潜在的多层监管因素。  </p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1] Subramanian I, Verma S, Kumar S, Jere A, Anamika K. Multi-omics Data Integration, Interpretation, and Its Application. Bioinformatics and Biology Insights. January 2020. <a href="doi:10.1177/1177932219899051">doi:10.1177/1177932219899051</a><br>[2] López de Maturana E, Alonso L, Alarcón P, Martín-Antoniano IA, Pineda S, Piorno L, Calle ML, Malats N. Challenges in the Integration of Omics and Non-Omics Data. Genes (Basel). 2019 Mar 20;10(3):238. <a href="doi:10.3390/genes10030238">doi:10.3390/genes10030238</a></p>
-]]></content>
-      <categories>
-        <category>Paper</category>
-        <category>MultiOmics</category>
-      </categories>
-      <tags>
-        <tag>Bioinformatics</tag>
-        <tag>MultiOmics</tag>
       </tags>
   </entry>
   <entry>
