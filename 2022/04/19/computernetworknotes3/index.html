@@ -68,8 +68,22 @@
 <meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/TCPsendersimplecode.png">
 <meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/TCPresend.png">
 <meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/TCPACKsuggestion.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/TCPstreamcontrol.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/rcvbuffer.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/rcvwindow.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/hellofailure.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/3hello.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/3hello2.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/3helloFSM.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/jam1.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/jam2.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/jam3.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/yongseganzhi.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/sulvkongzhi.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/TCPsendercongcon.png">
+<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/inout.png">
 <meta property="article:published_time" content="2022-04-19T12:57:45.000Z">
-<meta property="article:modified_time" content="2022-04-25T14:31:48.270Z">
+<meta property="article:modified_time" content="2022-06-01T11:00:30.208Z">
 <meta property="article:author" content="R">
 <meta property="article:tag" content="ComputerNetwork">
 <meta name="twitter:card" content="summary">
@@ -188,7 +202,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E8%BE%93%E5%B1%82%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.</span> <span class="nav-text">传输层服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%A0%E8%BE%93%E6%9C%8D%E5%8A%A1%E5%92%8C%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.1.</span> <span class="nav-text">传输服务和协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%A0%E8%BE%93%E5%B1%82-vs-%E7%BD%91%E7%BB%9C%E5%B1%82"><span class="nav-number">1.2.</span> <span class="nav-text">传输层 vs 网络层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Internet-%E4%BC%A0%E8%BE%93%E5%B1%82%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.3.</span> <span class="nav-text">Internet 传输层协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E5%92%8C%E8%A7%A3%E5%A4%8D%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">多路复用和解复用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">2.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E8%B7%AF%E8%A7%A3%E5%A4%8D%E7%94%A8%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">2.2.</span> <span class="nav-text">多路解复用工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%A0%E8%BF%9E%E6%8E%A5-UDP-%E5%A4%9A%E8%B7%AF%E8%A7%A3%E5%A4%8D%E7%94%A8"><span class="nav-number">2.2.1.</span> <span class="nav-text">无连接 (UDP) 多路解复用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A0%E8%BF%9E%E6%8E%A5%E4%BC%A0%E8%BE%93%EF%BC%9AUDP"><span class="nav-number">3.</span> <span class="nav-text">无连接传输：UDP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UDP%EF%BC%9AUser-Datagram-Protocol-RFC-768"><span class="nav-number">3.1.</span> <span class="nav-text">UDP：User Datagram Protocol [RFC 768]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%9C%89-UDP"><span class="nav-number">3.2.</span> <span class="nav-text">为什么要有 UDP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UDP-%E6%A0%A1%E9%AA%8C%E5%92%8C-check-sum"><span class="nav-number">3.3.</span> <span class="nav-text">UDP 校验和 (check sum)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Internet-%E6%A0%A1%E9%AA%8C%E5%92%8C%E4%BE%8B%E5%AD%90%EF%BC%9A%E8%BF%9B%E4%BD%8D%E5%9B%9E%E6%BB%9A"><span class="nav-number">3.3.1.</span> <span class="nav-text">Internet 校验和例子：进位回滚</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E7%9A%84%E5%8E%9F%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">可靠数据传输的原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93-RDT"><span class="nav-number">4.1.</span> <span class="nav-text">可靠数据传输 (RDT)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%EF%BC%9A%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="nav-number">4.1.1.</span> <span class="nav-text">可靠数据传输：问题描述</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%EF%BC%9A%E5%81%9C%E6%AD%A2-%E7%AD%89%E5%BE%85"><span class="nav-number">4.2.</span> <span class="nav-text">可靠数据传输协议：停止-等待</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#RDT-1-0%EF%BC%9A%E5%9C%A8%E5%8F%AF%E9%9D%A0%E4%BF%A1%E9%81%93%E4%B8%8A%E7%9A%84%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93"><span class="nav-number">4.2.1.</span> <span class="nav-text">RDT 1.0：在可靠信道上的可靠数据传输</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RDT-2-0%EF%BC%9A%E5%85%B7%E6%9C%89%E6%AF%94%E7%89%B9%E5%B7%AE%E9%94%99%E7%9A%84%E4%BF%A1%E9%81%93"><span class="nav-number">4.2.2.</span> <span class="nav-text">RDT 2.0：具有比特差错的信道</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%BA%E9%99%B7-gt-RDT-2-1"><span class="nav-number">4.2.3.</span> <span class="nav-text">缺陷 (-&gt; RDT 2.1)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RDT-2-2%EF%BC%9A%E6%97%A0-NAK-%E7%9A%84%E5%8D%8F%E8%AE%AE"><span class="nav-number">4.2.4.</span> <span class="nav-text">RDT 2.2：无 NAK 的协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RDT-3-0%EF%BC%9A%E5%85%B7%E6%9C%89%E6%AF%94%E7%89%B9%E5%B7%AE%E9%94%99%E5%92%8C%E5%88%86%E7%BB%84%E4%B8%A2%E5%A4%B1%E7%9A%84%E4%BF%A1%E9%81%93"><span class="nav-number">4.2.5.</span> <span class="nav-text">RDT 3.0：具有比特差错和分组丢失的信道</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%EF%BC%9A%E6%B5%81%E6%B0%B4%E7%BA%BF"><span class="nav-number">4.3.</span> <span class="nav-text">可靠数据传输协议：流水线</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%81%E6%B0%B4%E7%BA%BF-pipeline-%E5%8D%8F%E8%AE%AE"><span class="nav-number">4.3.1.</span> <span class="nav-text">流水线 (pipeline) 协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E7%94%A8%EF%BC%9A%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3-slide-window-%E5%8D%8F%E8%AE%AE"><span class="nav-number">4.3.2.</span> <span class="nav-text">通用：滑动窗口 (slide window) 协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E6%83%85%E5%86%B5%E4%B8%8B-GBN-%E4%B8%8E-SR-%E5%8D%8F%E8%AE%AE%E4%B8%AD%E7%9A%84%E7%AA%97%E5%8F%A3%E4%BA%92%E5%8A%A8"><span class="nav-number">4.3.3.</span> <span class="nav-text">异常情况下 GBN 与 SR 协议中的窗口互动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-number">4.3.4.</span> <span class="nav-text">小结</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E8%BF%9E%E6%8E%A5%E7%9A%84%E4%BC%A0%E8%BE%93%EF%BC%9ATCP"><span class="nav-number">5.</span> <span class="nav-text">面向连接的传输：TCP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-%E6%A6%82%E8%BF%B0"><span class="nav-number">5.1.</span> <span class="nav-text">TCP 概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP-%E5%BA%8F%E5%8F%B7%E3%80%81%E7%A1%AE%E8%AE%A4%E5%8F%B7"><span class="nav-number">5.1.1.</span> <span class="nav-text">TCP 序号、确认号</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-%E5%BE%80%E8%BF%94%E5%BB%B6%E6%97%B6-RTT-%E5%92%8C%E8%B6%85%E6%97%B6"><span class="nav-number">5.2.</span> <span class="nav-text">TCP 往返延时 (RTT) 和超时</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%8E%E6%A0%B7%E8%AE%BE%E7%BD%AE-TCP-%E8%B6%85%E6%97%B6"><span class="nav-number">5.2.1.</span> <span class="nav-text">怎样设置 TCP 超时</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%8E%E6%A0%B7%E4%BC%B0%E8%AE%A1-RTT%EF%BC%9F"><span class="nav-number">5.2.2.</span> <span class="nav-text">怎样估计 RTT？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E8%B6%85%E6%97%B6"><span class="nav-number">5.2.3.</span> <span class="nav-text">设置超时</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP%EF%BC%9A%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93"><span class="nav-number">5.3.</span> <span class="nav-text">TCP：可靠数据传输</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%80%E5%8C%96%E7%9A%84-TCP-%E5%8F%91%E9%80%81%E6%96%B9"><span class="nav-number">5.3.1.</span> <span class="nav-text">简化的 TCP 发送方</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP-%E5%8F%91%E9%80%81%E6%96%B9%E4%BA%8B%E4%BB%B6"><span class="nav-number">5.3.2.</span> <span class="nav-text">TCP 发送方事件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%A7%E7%94%9F-TCP-ACK-%E7%9A%84%E5%BB%BA%E8%AE%AE"><span class="nav-number">5.3.3.</span> <span class="nav-text">产生 TCP ACK 的建议</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E8%BE%93%E5%B1%82%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.</span> <span class="nav-text">传输层服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%A0%E8%BE%93%E6%9C%8D%E5%8A%A1%E5%92%8C%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.1.</span> <span class="nav-text">传输服务和协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%A0%E8%BE%93%E5%B1%82-vs-%E7%BD%91%E7%BB%9C%E5%B1%82"><span class="nav-number">1.2.</span> <span class="nav-text">传输层 vs 网络层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Internet-%E4%BC%A0%E8%BE%93%E5%B1%82%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.3.</span> <span class="nav-text">Internet 传输层协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E5%92%8C%E8%A7%A3%E5%A4%8D%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">多路复用和解复用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">2.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E8%B7%AF%E8%A7%A3%E5%A4%8D%E7%94%A8%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">2.2.</span> <span class="nav-text">多路解复用工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%A0%E8%BF%9E%E6%8E%A5-UDP-%E5%A4%9A%E8%B7%AF%E8%A7%A3%E5%A4%8D%E7%94%A8"><span class="nav-number">2.2.1.</span> <span class="nav-text">无连接 (UDP) 多路解复用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A0%E8%BF%9E%E6%8E%A5%E4%BC%A0%E8%BE%93%EF%BC%9AUDP"><span class="nav-number">3.</span> <span class="nav-text">无连接传输：UDP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UDP%EF%BC%9AUser-Datagram-Protocol-RFC-768"><span class="nav-number">3.1.</span> <span class="nav-text">UDP：User Datagram Protocol [RFC 768]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%9C%89-UDP"><span class="nav-number">3.2.</span> <span class="nav-text">为什么要有 UDP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UDP-%E6%A0%A1%E9%AA%8C%E5%92%8C-check-sum"><span class="nav-number">3.3.</span> <span class="nav-text">UDP 校验和 (check sum)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Internet-%E6%A0%A1%E9%AA%8C%E5%92%8C%E4%BE%8B%E5%AD%90%EF%BC%9A%E8%BF%9B%E4%BD%8D%E5%9B%9E%E6%BB%9A"><span class="nav-number">3.3.1.</span> <span class="nav-text">Internet 校验和例子：进位回滚</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E7%9A%84%E5%8E%9F%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">可靠数据传输的原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93-RDT"><span class="nav-number">4.1.</span> <span class="nav-text">可靠数据传输 (RDT)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%EF%BC%9A%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="nav-number">4.1.1.</span> <span class="nav-text">可靠数据传输：问题描述</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%EF%BC%9A%E5%81%9C%E6%AD%A2-%E7%AD%89%E5%BE%85"><span class="nav-number">4.2.</span> <span class="nav-text">可靠数据传输协议：停止-等待</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#RDT-1-0%EF%BC%9A%E5%9C%A8%E5%8F%AF%E9%9D%A0%E4%BF%A1%E9%81%93%E4%B8%8A%E7%9A%84%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93"><span class="nav-number">4.2.1.</span> <span class="nav-text">RDT 1.0：在可靠信道上的可靠数据传输</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RDT-2-0%EF%BC%9A%E5%85%B7%E6%9C%89%E6%AF%94%E7%89%B9%E5%B7%AE%E9%94%99%E7%9A%84%E4%BF%A1%E9%81%93"><span class="nav-number">4.2.2.</span> <span class="nav-text">RDT 2.0：具有比特差错的信道</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%BA%E9%99%B7-gt-RDT-2-1"><span class="nav-number">4.2.3.</span> <span class="nav-text">缺陷 (-&gt; RDT 2.1)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RDT-2-2%EF%BC%9A%E6%97%A0-NAK-%E7%9A%84%E5%8D%8F%E8%AE%AE"><span class="nav-number">4.2.4.</span> <span class="nav-text">RDT 2.2：无 NAK 的协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RDT-3-0%EF%BC%9A%E5%85%B7%E6%9C%89%E6%AF%94%E7%89%B9%E5%B7%AE%E9%94%99%E5%92%8C%E5%88%86%E7%BB%84%E4%B8%A2%E5%A4%B1%E7%9A%84%E4%BF%A1%E9%81%93"><span class="nav-number">4.2.5.</span> <span class="nav-text">RDT 3.0：具有比特差错和分组丢失的信道</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%EF%BC%9A%E6%B5%81%E6%B0%B4%E7%BA%BF"><span class="nav-number">4.3.</span> <span class="nav-text">可靠数据传输协议：流水线</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%81%E6%B0%B4%E7%BA%BF-pipeline-%E5%8D%8F%E8%AE%AE"><span class="nav-number">4.3.1.</span> <span class="nav-text">流水线 (pipeline) 协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E7%94%A8%EF%BC%9A%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3-slide-window-%E5%8D%8F%E8%AE%AE"><span class="nav-number">4.3.2.</span> <span class="nav-text">通用：滑动窗口 (slide window) 协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E6%83%85%E5%86%B5%E4%B8%8B-GBN-%E4%B8%8E-SR-%E5%8D%8F%E8%AE%AE%E4%B8%AD%E7%9A%84%E7%AA%97%E5%8F%A3%E4%BA%92%E5%8A%A8"><span class="nav-number">4.3.3.</span> <span class="nav-text">异常情况下 GBN 与 SR 协议中的窗口互动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-number">4.3.4.</span> <span class="nav-text">小结</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E8%BF%9E%E6%8E%A5%E7%9A%84%E4%BC%A0%E8%BE%93%EF%BC%9ATCP"><span class="nav-number">5.</span> <span class="nav-text">面向连接的传输：TCP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-%E6%A6%82%E8%BF%B0"><span class="nav-number">5.1.</span> <span class="nav-text">TCP 概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP-%E5%BA%8F%E5%8F%B7%E3%80%81%E7%A1%AE%E8%AE%A4%E5%8F%B7"><span class="nav-number">5.1.1.</span> <span class="nav-text">TCP 序号、确认号</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-%E5%BE%80%E8%BF%94%E5%BB%B6%E6%97%B6-RTT-%E5%92%8C%E8%B6%85%E6%97%B6"><span class="nav-number">5.2.</span> <span class="nav-text">TCP 往返延时 (RTT) 和超时</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%8E%E6%A0%B7%E8%AE%BE%E7%BD%AE-TCP-%E8%B6%85%E6%97%B6"><span class="nav-number">5.2.1.</span> <span class="nav-text">怎样设置 TCP 超时</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%8E%E6%A0%B7%E4%BC%B0%E8%AE%A1-RTT%EF%BC%9F"><span class="nav-number">5.2.2.</span> <span class="nav-text">怎样估计 RTT？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E8%B6%85%E6%97%B6"><span class="nav-number">5.2.3.</span> <span class="nav-text">设置超时</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP%EF%BC%9A%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93"><span class="nav-number">5.3.</span> <span class="nav-text">TCP：可靠数据传输</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%80%E5%8C%96%E7%9A%84-TCP-%E5%8F%91%E9%80%81%E6%96%B9"><span class="nav-number">5.3.1.</span> <span class="nav-text">简化的 TCP 发送方</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP-%E5%8F%91%E9%80%81%E6%96%B9%E4%BA%8B%E4%BB%B6"><span class="nav-number">5.3.2.</span> <span class="nav-text">TCP 发送方事件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%A7%E7%94%9F-TCP-ACK-%E7%9A%84%E5%BB%BA%E8%AE%AE"><span class="nav-number">5.3.3.</span> <span class="nav-text">产生 TCP ACK 的建议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E9%87%8D%E4%BC%A0"><span class="nav-number">5.3.4.</span> <span class="nav-text">快速重传</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6"><span class="nav-number">5.4.</span> <span class="nav-text">TCP 流量控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-%E8%BF%9E%E6%8E%A5%E5%BB%BA%E7%AB%8B"><span class="nav-number">5.5.</span> <span class="nav-text">TCP 连接建立</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%8C%E6%84%8F%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5"><span class="nav-number">5.5.1.</span> <span class="nav-text">同意建立连接</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%97%AD%E8%BF%9E%E6%8E%A5"><span class="nav-number">5.6.</span> <span class="nav-text">关闭连接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6%E5%8E%9F%E7%90%86"><span class="nav-number">6.</span> <span class="nav-text">拥塞控制原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%A5%E5%A1%9E"><span class="nav-number">6.1.</span> <span class="nav-text">拥塞</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8B%A5%E5%A1%9E%E7%9A%84%E5%8E%9F%E5%9B%A0-%E4%BB%A3%E4%BB%B7%EF%BC%9A%E5%9C%BA%E6%99%AF-1"><span class="nav-number">6.1.1.</span> <span class="nav-text">拥塞的原因&#x2F;代价：场景 1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8B%A5%E5%A1%9E%E7%9A%84%E5%8E%9F%E5%9B%A0-%E4%BB%A3%E4%BB%B7%EF%BC%9A%E5%9C%BA%E6%99%AF-2"><span class="nav-number">6.1.2.</span> <span class="nav-text">拥塞的原因&#x2F;代价：场景 2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8B%A5%E5%A1%9E%E7%9A%84%E5%8E%9F%E5%9B%A0-%E4%BB%A3%E4%BB%B7%EF%BC%9A%E5%9C%BA%E6%99%AF-3"><span class="nav-number">6.1.3.</span> <span class="nav-text">拥塞的原因&#x2F;代价：场景 3</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6%E6%96%B9%E6%B3%95"><span class="nav-number">6.2.</span> <span class="nav-text">拥塞控制方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E8%BE%85%E5%8A%A9%E7%9A%84%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="nav-number">6.2.1.</span> <span class="nav-text">网络辅助的拥塞控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AB%AF%E5%88%B0%E7%AB%AF%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="nav-number">6.2.2.</span> <span class="nav-text">端到端拥塞控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ATM-ABR-%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="nav-number">6.2.3.</span> <span class="nav-text">ATM ABR 拥塞控制</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP-%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="nav-number">7.</span> <span class="nav-text">TCP 拥塞控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%BA%E5%88%B6"><span class="nav-number">7.1.</span> <span class="nav-text">机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AB%AF%E5%88%B0%E7%AB%AF%E7%9A%84%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6%E6%9C%BA%E5%88%B6"><span class="nav-number">7.1.1.</span> <span class="nav-text">端到端的拥塞控制机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6%E7%9A%84%E5%87%A0%E4%B8%AA%E9%97%AE%E9%A2%98"><span class="nav-number">7.1.2.</span> <span class="nav-text">拥塞控制的几个问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%A5%E5%A1%9E%E6%84%9F%E7%9F%A5"><span class="nav-number">7.2.</span> <span class="nav-text">拥塞感知</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%91%E9%80%81%E7%AB%AF%E5%A6%82%E4%BD%95%E6%8E%A2%E6%B5%8B%E5%88%B0%E6%8B%A5%E5%A1%9E"><span class="nav-number">7.2.1.</span> <span class="nav-text">发送端如何探测到拥塞</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9F%E7%8E%87%E6%8E%A7%E5%88%B6%E6%96%B9%E6%B3%95"><span class="nav-number">7.3.</span> <span class="nav-text">速率控制方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%8E%A7%E5%88%B6%E5%8F%91%E9%80%81%E7%AB%AF%E5%8F%91%E9%80%81%E7%9A%84%E9%80%9F%E7%8E%87"><span class="nav-number">7.3.1.</span> <span class="nav-text">如何控制发送端发送的速率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP-%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6%E5%92%8C%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6%E7%9A%84%E8%81%94%E5%90%88%E5%8A%A8%E4%BD%9C"><span class="nav-number">7.3.2.</span> <span class="nav-text">TCP 拥塞控制和流量控制的联合动作</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6%EF%BC%9A%E7%AD%96%E7%95%A5%E6%A6%82%E8%BF%B0"><span class="nav-number">7.4.</span> <span class="nav-text">TCP 拥塞控制：策略概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-%E6%85%A2%E5%90%AF%E5%8A%A8"><span class="nav-number">7.5.</span> <span class="nav-text">TCP 慢启动</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#AIMD"><span class="nav-number">7.5.1.</span> <span class="nav-text">AIMD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">7.5.2.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-%E5%90%9E%E5%90%90%E9%87%8F"><span class="nav-number">7.6.</span> <span class="nav-text">TCP 吞吐量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-%E5%85%AC%E5%B9%B3%E6%80%A7"><span class="nav-number">7.7.</span> <span class="nav-text">TCP 公平性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88-TCP-%E6%98%AF%E5%85%AC%E5%B9%B3%E7%9A%84"><span class="nav-number">7.7.1.</span> <span class="nav-text">为什么 TCP 是公平的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%AC%E5%B9%B3%E6%80%A7%E5%92%8C-UDP"><span class="nav-number">7.7.2.</span> <span class="nav-text">公平性和 UDP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%AC%E5%B9%B3%E6%80%A7%E5%92%8C%E5%B9%B6%E8%A1%8C-TCP-%E8%BF%9E%E6%8E%A5"><span class="nav-number">7.7.3.</span> <span class="nav-text">公平性和并行 TCP 连接</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Explicit-Congestion-Notification-ECN"><span class="nav-number">7.8.</span> <span class="nav-text">Explicit Congestion Notification (ECN)</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -284,7 +298,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2022-04-25 22:31:48" itemprop="dateModified" datetime="2022-04-25T22:31:48+08:00">2022-04-25</time>
+        <time title="Modified: 2022-06-01 19:00:30" itemprop="dateModified" datetime="2022-06-01T19:00:30+08:00">2022-06-01</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -307,14 +321,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>6.3k</span>
+      <span>10k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>6 mins.</span>
+      <span>9 mins.</span>
     </span>
 </div>
 
@@ -730,7 +744,7 @@
 </ul>
 <br>  
 
-<h2 id="面向连接的传输：TCP"><a href="#面向连接的传输：TCP" class="headerlink" title="面向连接的传输：TCP"></a>面向连接的传输：TCP</h2><h3 id="TCP-概述"><a href="#TCP-概述" class="headerlink" title="TCP 概述"></a>TCP 概述</h3><p><strong>点对点</strong>：一个发送方，一个接收方<br><strong>可靠的、按顺序的字节流</strong>：没有报文边界<br>**管道化 (流水线)**：TCP 拥塞控制和流量控制设置窗口大小<br><strong>发送和接受缓存</strong><br><strong>全双工数据</strong>：在同一连接中数据流双向流动；MSS：最大报文段<br><strong>面向连接</strong>：在数据交换之前，通过握手 (交换控制报文) 初始化发送方、接收方的状态变量<br><strong>有流量控制</strong>：发送方不会淹没接收方  </p>
+<h2 id="面向连接的传输：TCP"><a href="#面向连接的传输：TCP" class="headerlink" title="面向连接的传输：TCP"></a>面向连接的传输：TCP</h2><h3 id="TCP-概述"><a href="#TCP-概述" class="headerlink" title="TCP 概述"></a>TCP 概述</h3><p><strong>点对点</strong>：一个发送方，一个接收方<br><strong>可靠的、按顺序的字节流</strong>：没有报文边界<br><strong>管道化</strong> **(流水线)**：TCP 拥塞控制和流量控制设置窗口大小<br><strong>发送和接受缓存</strong><br><strong>全双工数据</strong>：在同一连接中数据流双向流动；MSS：最大报文段<br><strong>面向连接</strong>：在数据交换之前，通过握手 (交换控制报文) 初始化发送方、接收方的状态变量<br><strong>有流量控制</strong>：发送方不会淹没接收方  </p>
 <p><img src="/2022/04/19/computernetworknotes3/TCPform.png" alt="TCP 报文段结构">  </p>
 <h4 id="TCP-序号、确认号"><a href="#TCP-序号、确认号" class="headerlink" title="TCP 序号、确认号"></a>TCP 序号、确认号</h4><p><strong>序号</strong>：报文段首字节在字节流的编号<br><strong>确认号</strong>：期望从零乙方收到的下一个字节的序号；累计确认<br>Q：接收方如何处理乱序的报文段 - 没有规定  </p>
 <p><img src="/2022/04/19/computernetworknotes3/TCPnumber.png">  </p>
@@ -799,7 +813,251 @@
 <p><img src="/2022/04/19/computernetworknotes3/TCPsendersimplecode.png" alt="简化的 TCP 发送方伪码">  </p>
 <p><img src="/2022/04/19/computernetworknotes3/TCPresend.png" alt="TCP 重传">  </p>
 <h4 id="产生-TCP-ACK-的建议"><a href="#产生-TCP-ACK-的建议" class="headerlink" title="产生 TCP ACK 的建议"></a>产生 TCP ACK 的建议</h4><p><img src="/2022/04/19/computernetworknotes3/TCPACKsuggestion.png"></p>
-<p>//51:48</p>
+<h4 id="快速重传"><a href="#快速重传" class="headerlink" title="快速重传"></a>快速重传</h4><ul>
+<li>超时周期往往太长：在重传丢失报文段之前的延时太长  </li>
+<li>通过重复的 ACK 来检测报文段丢失  <ul>
+<li>发送方通常连续发送大量报文段  </li>
+<li>如果报文段丢失，通常会引起多个重复的 ACK  </li>
+</ul>
+</li>
+<li>如果发送方收到统一数据的 3 个冗余 ACK，重传最小序号的段  <ul>
+<li><strong>快速重传</strong>：在定时器过时之前重发报文段  </li>
+<li>它假设跟在呗确认的数据后面的数据丢失了  <ul>
+<li>第一个 ACK 是正常的  </li>
+<li>收到第二个该段的 ACK，表示接收方到收到一个该段后的乱序段  </li>
+<li>收到第 3、4 个该段的 ACK，表示接收方收到该段之后的 2 个、3 个乱序段，可能性非常大段丢失了  </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="TCP-流量控制"><a href="#TCP-流量控制" class="headerlink" title="TCP 流量控制"></a>TCP 流量控制</h3><p>缓冲区 TCP 往里面写，app 从当中读取  </p>
+<p><img src="/2022/04/19/computernetworknotes3/TCPstreamcontrol.png" alt="接收方协议栈">  </p>
+<p><strong>流量控制</strong>：接收方控制发送方，不让发送方发送太多、太快以至于让接收方的缓冲区溢出  </p>
+<p>接收方在其向发送方的 TCP 段头部的 rwnd 字段 “通告” 其空闲 brffer 大小  </p>
+<ul>
+<li>RcvBuffer 大小通过 socket 选项设置 (典型默认大小为 4096 字节)  </li>
+<li>很多操作系统自动调整 RcvBuffer  </li>
+</ul>
+<p>发送方限制未确认 (in-flight) 字节的个数 ≤ 接收方发送过来的 rwnd 值<br>保证接收方不会被淹没  </p>
+<p><img src="/2022/04/19/computernetworknotes3/rcvbuffer.png" alt="接收方 buffer 大小">  </p>
+<p><img src="/2022/04/19/computernetworknotes3/rcvwindow.png" alt="接收方 Recieve Window">  </p>
+<h3 id="TCP-连接建立"><a href="#TCP-连接建立" class="headerlink" title="TCP 连接建立"></a>TCP 连接建立</h3><p>在正式交换数据之前，发送方和接收方握手建立通信关系：  </p>
+<ul>
+<li>同意建立连接 (每一方抖直到对方愿意建立连接)  </li>
+<li>同意连接参数  </li>
+</ul>
+<h4 id="同意建立连接"><a href="#同意建立连接" class="headerlink" title="同意建立连接"></a>同意建立连接</h4><p>Q：在网格中，2 次握手建立连接总是可行吗？  </p>
+<ul>
+<li>变化的延迟 (连接请求的段没有丢，但可能超时)  </li>
+<li>由于丢失造成的重传 (eg. req_conn(x))  </li>
+<li>报文乱序  </li>
+<li>互相看不到对方  </li>
+</ul>
+<p><img src="/2022/04/19/computernetworknotes3/hellofailure.png" alt="2 次握手失败场景">  </p>
+<p>解决方案：变化的初始序号 + 双方确认对方的序号 (3 次握手)</p>
+<p><img src="/2022/04/19/computernetworknotes3/3hello.png" alt="TCP 3 次握手">  </p>
+<p><img src="/2022/04/19/computernetworknotes3/3hello2.png" alt="TCP 3 次握手">  </p>
+<p><img src="/2022/04/19/computernetworknotes3/3helloFSM.png" alt="TCP 3 次握手">  </p>
+<h3 id="关闭连接"><a href="#关闭连接" class="headerlink" title="关闭连接"></a>关闭连接</h3><p>客户端、服务器分别关闭自己这一侧的连接  </p>
+<ul>
+<li>发送 FIN bit = 1 的 TCP 段  </li>
+</ul>
+<p>一旦接收到 FIN，用 ACK 回应  </p>
+<ul>
+<li>接到 FIN 段，ACK 可以和它自己发出的 FIN 段一起发送</li>
+</ul>
+<p>可以处理同时的 FIN 交换  </p>
+<br>
+
+<h2 id="拥塞控制原理"><a href="#拥塞控制原理" class="headerlink" title="拥塞控制原理"></a>拥塞控制原理</h2><h3 id="拥塞"><a href="#拥塞" class="headerlink" title="拥塞"></a>拥塞</h3><p>非正式的定义：太多数据需要网络传输，超过了网络的处理能力<br>与流量控制不同<br>拥塞的表现：  </p>
+<ul>
+<li>分组丢失 (路由器缓冲区溢出)  </li>
+<li>分组经历比较长的延迟 (在路由器的队列中排队)  </li>
+</ul>
+<h4 id="拥塞的原因-代价：场景-1"><a href="#拥塞的原因-代价：场景-1" class="headerlink" title="拥塞的原因/代价：场景 1"></a>拥塞的原因/代价：场景 1</h4><p><img src="/2022/04/19/computernetworknotes3/jam1.png">  </p>
+<h4 id="拥塞的原因-代价：场景-2"><a href="#拥塞的原因-代价：场景-2" class="headerlink" title="拥塞的原因/代价：场景 2"></a>拥塞的原因/代价：场景 2</h4><p><img src="/2022/04/19/computernetworknotes3/jam2.png">  </p>
+<p>现实情况：重复  </p>
+<ul>
+<li>分组可能丢失，由于缓冲器满而被丢弃  </li>
+<li>发送端最终超时，发送第二个拷贝，两个分组都被传到  </li>
+</ul>
+<p>拥塞代价：  </p>
+<ul>
+<li>为了达到一个有效输出，网络需要做更多的工作 (重传)  </li>
+<li>没有必要的重传，链路中包括了多个分组的拷贝：是那些没有丢失，经历的时间比较长 (拥塞状态) 但超时的分组；降低了的 “goodput”  </li>
+</ul>
+<h4 id="拥塞的原因-代价：场景-3"><a href="#拥塞的原因-代价：场景-3" class="headerlink" title="拥塞的原因/代价：场景 3"></a>拥塞的原因/代价：场景 3</h4><p><img src="/2022/04/19/computernetworknotes3/jam3.png">  </p>
+<p>拥塞代价：当分组丢失时，任何 “关于这个分组的上游传输能力” 都被浪费  </p>
+<h3 id="拥塞控制方法"><a href="#拥塞控制方法" class="headerlink" title="拥塞控制方法"></a>拥塞控制方法</h3><h4 id="网络辅助的拥塞控制"><a href="#网络辅助的拥塞控制" class="headerlink" title="网络辅助的拥塞控制"></a>网络辅助的拥塞控制</h4><p>路由器提供给端系统以反馈信息  </p>
+<ul>
+<li>单个 bit 置位，显示有拥塞 (SNA，DECbit，TCP/IP ECN，ATM)  </li>
+<li>显式提供发送端可以采用的速率  </li>
+</ul>
+<h4 id="端到端拥塞控制"><a href="#端到端拥塞控制" class="headerlink" title="端到端拥塞控制"></a>端到端拥塞控制</h4><p>没有来自网络的显示反馈<br>端系统根据延迟和丢失事件推断是否有拥塞<br>TCP 采用的方法  </p>
+<h4 id="ATM-ABR-拥塞控制"><a href="#ATM-ABR-拥塞控制" class="headerlink" title="ATM ABR 拥塞控制"></a>ATM ABR 拥塞控制</h4><p>ABR：available bit rate  </p>
+<ul>
+<li>弹性服务  </li>
+<li>如果发送端的路径 “轻载”：发送方使用可用带宽  </li>
+<li>如果发送方的路径用色了，发送方限制其发送的速度到一个最小保障速率上  </li>
+</ul>
+<p>RM (资源管理) 信元  </p>
+<ul>
+<li>有发送端发送，在数据心愿中间隔插入  </li>
+<li>RM 信元中的比特被交换机设置 (网络辅助)  <ul>
+<li>NI bit：no increase in rate (轻微拥塞)速率不要增加了  </li>
+<li>CI bit：congestion indication 拥塞指示  </li>
+</ul>
+</li>
+<li>发送端发送的 RM 信元被接收端返回，接收端不做任何改变  </li>
+</ul>
+<p>在 RM 信元中的 2 个字节 ER (explicit rate) 字段  </p>
+<ul>
+<li>拥塞的交换机可能会降低信元中 ER 的值  </li>
+<li>发送端发送速度因此是最低的可支持速率  </li>
+</ul>
+<p>数据信元中的 EFCI bit：备用色的交换机设置为 1  </p>
+<ul>
+<li>如果在管理信元 RM 前面的数据信元 EFCI 被设置成了 1，接收端在返回的 RM 信元中设置 CI bit  </li>
+</ul>
+<br>
+
+<h2 id="TCP-拥塞控制"><a href="#TCP-拥塞控制" class="headerlink" title="TCP 拥塞控制"></a>TCP 拥塞控制</h2><h3 id="机制"><a href="#机制" class="headerlink" title="机制"></a>机制</h3><h4 id="端到端的拥塞控制机制"><a href="#端到端的拥塞控制机制" class="headerlink" title="端到端的拥塞控制机制"></a>端到端的拥塞控制机制</h4><p>路由器不向主机有关拥塞反馈信息  </p>
+<ul>
+<li>路由器的负担较轻  </li>
+<li>符合网络核心简单的 TCP/IP 架构远离  </li>
+</ul>
+<p>端系统根据自身的到的信息，判断是否发生拥塞，从而采取动作  </p>
+<h4 id="拥塞控制的几个问题"><a href="#拥塞控制的几个问题" class="headerlink" title="拥塞控制的几个问题"></a>拥塞控制的几个问题</h4><p>如何检测拥塞  </p>
+<ul>
+<li>轻微拥塞  </li>
+<li>拥塞  </li>
+</ul>
+<p>控制策略  </p>
+<ul>
+<li>在拥塞发生时如何动作降低速率：轻微拥塞和拥塞分别如何降低  </li>
+<li>在拥塞缓解时如何动作增加速率  </li>
+</ul>
+<h3 id="拥塞感知"><a href="#拥塞感知" class="headerlink" title="拥塞感知"></a>拥塞感知</h3><h4 id="发送端如何探测到拥塞"><a href="#发送端如何探测到拥塞" class="headerlink" title="发送端如何探测到拥塞"></a>发送端如何探测到拥塞</h4><p>某个段超时 (丢失事件)：拥塞  </p>
+<ul>
+<li>超时时间到，某个段的确认没有来  </li>
+<li>原因 1：网络拥塞 (某个路由器缓冲区没空间了，被丢弃)，概率大  </li>
+<li>原因 2：出错被丢弃 (各级错误，没有通过校验，被丢弃)，概率小  </li>
+<li>一旦超时，就认为拥塞会有一定误判，但总体控制方向是对的  </li>
+</ul>
+<p>有关某个段的 3 次重复 ACK：轻微拥塞  </p>
+<ul>
+<li>段的第 1 个 ACK，正常，确认绿段，期待红段  </li>
+<li>段的第 2 个重复 ACK，意味着红段的后一段收到了，蓝段乱序到达  </li>
+<li>段的第 2、3、4 个 ACK 重复，意味着红段的后第 2、3、4 个段收到了，橙段乱序到达，同时红段丢失的可能性很大 (后面 3 个段都到了，红段还没到)  </li>
+<li>网络这时还能够进行一定程度的传输，拥塞但情况比第一种好  </li>
+</ul>
+<p><img src="/2022/04/19/computernetworknotes3/yongseganzhi.png">  </p>
+<h3 id="速率控制方法"><a href="#速率控制方法" class="headerlink" title="速率控制方法"></a>速率控制方法</h3><h4 id="如何控制发送端发送的速率"><a href="#如何控制发送端发送的速率" class="headerlink" title="如何控制发送端发送的速率"></a>如何控制发送端发送的速率</h4><p>维持一个拥塞窗口的值：CongWin<br>发送端限制已发送但是未确认的数据量 (的上限)  </p>
+<ul>
+<li>LastByteSent-LastByteAcked ≤ CongWin  </li>
+</ul>
+<p>从而粗略地控制发送方往网络中注入的速率  </p>
+<p><img src="/2022/04/19/computernetworknotes3/sulvkongzhi.png"></p>
+<p>CongWin 是动态的，是感知到的网络拥塞程度的函数  </p>
+<ul>
+<li>超时或者 3 个重复 ACK，CongWin：<ul>
+<li>超时时：CongWin 降为 1 MSS，进入 SS 阶段然后再倍增到 CongWin / 2 (每个 RTT)，从而进入 CA 阶段  </li>
+<li>3 个重复 ACK：CongWin 降为 CongWin / 2，CA 阶段  </li>
+</ul>
+</li>
+<li>否则 (正常收到 ACK，没有发送以上情况)：CongWin 跃跃欲试  <ul>
+<li>SS 阶段：加倍增加 (每个 RTT)  </li>
+<li>CA 阶段：线性增加 (每个 RTT)</li>
+</ul>
+</li>
+</ul>
+<h4 id="TCP-拥塞控制和流量控制的联合动作"><a href="#TCP-拥塞控制和流量控制的联合动作" class="headerlink" title="TCP 拥塞控制和流量控制的联合动作"></a>TCP 拥塞控制和流量控制的联合动作</h4><p>联合控制方法：  </p>
+<ul>
+<li>发送段控制发送但是未确认的量同时也不能够超过接收窗口，满足流量控制要求  <ul>
+<li>SendWin = min{CongWin, RecvWin}  </li>
+<li>同时满足拥塞控制和流量控制要求  </li>
+</ul>
+</li>
+</ul>
+<h3 id="TCP-拥塞控制：策略概述"><a href="#TCP-拥塞控制：策略概述" class="headerlink" title="TCP 拥塞控制：策略概述"></a>TCP 拥塞控制：策略概述</h3><p>拥塞控制策略：  </p>
+<ul>
+<li>慢启动  </li>
+<li>AIMD：线性增、乘性减少  </li>
+<li>超时时间后的保守策略  </li>
+</ul>
+<h3 id="TCP-慢启动"><a href="#TCP-慢启动" class="headerlink" title="TCP 慢启动"></a>TCP 慢启动</h3><p>当连接开始时，指数性增加 (每个 RTT) 发送速率直到发生丢失事件  </p>
+<ul>
+<li>每一个 RTT，CongWin 加倍  </li>
+<li>每收到一个 ACK 时，CongWin 加 1  </li>
+<li>慢启动阶段：只要不超时或 3 个重复 ACK，一个 RTT，CongWin 加倍  </li>
+</ul>
+<p>总结：初始速率很慢，但加速确是指数性的  </p>
+<ul>
+<li>指数增加，SS 时间很短，长期来看可以忽略  </li>
+</ul>
+<h4 id="AIMD"><a href="#AIMD" class="headerlink" title="AIMD"></a>AIMD</h4><p>乘性减：丢失事件后将 CongWin 降为 1，将 CongWin / 2 作为阈值，进入到慢启动阶段 (倍增直到 CongWin / 2)<br>加性增：当 CongWin &gt; 阈值时，一个 RTT 如没有发生丢失事件，将 CongWin 加 1 MSS (探测)</p>
+<p>当收到 3 个重复的 ACKs  </p>
+<ul>
+<li>CongWin 减半  </li>
+<li>窗口 (缓冲区大小) 之后线性增长  </li>
+</ul>
+<p>当超时事件发生时  </p>
+<ul>
+<li>CongWin 被设置成 1 MSS，进入 SS 阶段  </li>
+<li>之后窗口指数增长  </li>
+<li>增长到一个阈值 (上次发生拥塞的窗口的一半) 时，再线性增加  </li>
+</ul>
+<p>思路：  </p>
+<ul>
+<li>3 个重复的 ACK 表示网络还有一定的段传输能力  </li>
+<li>超时之前的 3 个重复的 ACK 表示 “警报”  </li>
+</ul>
+<p>改进  </p>
+<ul>
+<li>什么时候应该将指数性增长变成线性  </li>
+<li>在超时之前，当 CongWin 变成上次超时时的窗口的一半  </li>
+</ul>
+<p>实现  </p>
+<ul>
+<li>变量：Threshold  </li>
+<li>出现丢失，Threshold 设置成 CongWin 的 1/2  </li>
+</ul>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>当 CongWin &lt; Threshold，发送端处于慢启动阶段 (slow-start)，窗口指数型增长<br>当 CongWin &gt; Threshold，发送端处于拥塞避免阶段 (congestion-avoidance)，窗口线性增长<br>当收到三个重复的 ACKs (triple duplicate ACK)，Threshold 设置成 CongWin / 2，CongWin = Threshold + 3<br>当超时事件发生时 (timeout)，Threshold = CongWin / 2，CongWin = 1 MSS，进入 SS 阶段</p>
+<p><img src="/2022/04/19/computernetworknotes3/TCPsendercongcon.png" alt="TCP 发送端拥塞控制"></p>
+<h3 id="TCP-吞吐量"><a href="#TCP-吞吐量" class="headerlink" title="TCP 吞吐量"></a>TCP 吞吐量</h3><p>W：发生丢失事件时的窗口尺寸 (单位：字节)  </p>
+<ul>
+<li>平均窗口尺寸 (#in-filght 字节)：3/4 W  </li>
+<li>平均吞吐量：RTT 事件吞吐 3/4 W  </li>
+</ul>
+<p><img src="/2022/04/19/computernetworknotes3/inout.png" alt="TCP 吞吐量"></p>
+<h3 id="TCP-公平性"><a href="#TCP-公平性" class="headerlink" title="TCP 公平性"></a>TCP 公平性</h3><p>公平性目标：如果 K 个 TCP 会话分享一个链路带宽为 R 的瓶颈，每一个绘画的有效带宽为 R/K  </p>
+<h4 id="为什么-TCP-是公平的"><a href="#为什么-TCP-是公平的" class="headerlink" title="为什么 TCP 是公平的"></a>为什么 TCP 是公平的</h4><p>2 个竞争的 TCP 会话：  </p>
+<ul>
+<li>加性增加，斜率为 1，吞吐量增加  </li>
+<li>乘性减，吞吐量比例减少  </li>
+</ul>
+<h4 id="公平性和-UDP"><a href="#公平性和-UDP" class="headerlink" title="公平性和 UDP"></a>公平性和 UDP</h4><p>多媒体应用通常不是 TCP  </p>
+<ul>
+<li>应用发送的数据速率希望不受拥塞控制的节制  </li>
+</ul>
+<p>使用 UDP：  </p>
+<ul>
+<li>音视频应用泵出数据的速率是恒定的，忽略数据的丢失  </li>
+</ul>
+<p>研究领域：TCP 友好性  </p>
+<h4 id="公平性和并行-TCP-连接"><a href="#公平性和并行-TCP-连接" class="headerlink" title="公平性和并行 TCP 连接"></a>公平性和并行 TCP 连接</h4><p>2 个主机间可以打开多个并行的 TCP 连接<br>Web 浏览器  </p>
+<p>例如：带宽为 R 的链路支持了 9 个连接  </p>
+<ul>
+<li>如果新的应用要求建 1 个 TCP 连接，获得带宽 R/10  </li>
+<li>如果新的应用要求建 11 个 TCP 连接，获得带宽 R/2  </li>
+</ul>
+<h3 id="Explicit-Congestion-Notification-ECN"><a href="#Explicit-Congestion-Notification-ECN" class="headerlink" title="Explicit Congestion Notification (ECN)"></a>Explicit Congestion Notification (ECN)</h3><p>网络辅助拥塞控制：  </p>
+<ul>
+<li>TOS 字段中 2 个 bit 被网络路由器标记，用于只是是否发生拥塞  </li>
+<li>拥塞指示被传送到接收主机  </li>
+<li>在接受方到发送方的 ACK 中，接收方 (在 IP 数据报中看到了拥塞指示)设置 ECE bit，指示发送方发生了拥塞</li>
+</ul>
 
     </div>
 
@@ -853,14 +1111,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>Symbols count total: </span>
-    <span title="Symbols count total">84k</span>
+    <span title="Symbols count total">88k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>Reading time total &asymp;</span>
-    <span title="Reading time total">1:16</span>
+    <span title="Reading time total">1:20</span>
   </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>

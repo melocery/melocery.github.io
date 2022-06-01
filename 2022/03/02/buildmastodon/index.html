@@ -28,7 +28,7 @@
 <meta property="og:description" content="mastodon 建站笔记：慢慢来，6 月之前搞完就行；不要怕，不行就重启试试">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-03-02T06:52:02.000Z">
-<meta property="article:modified_time" content="2022-05-24T13:12:51.090Z">
+<meta property="article:modified_time" content="2022-05-24T13:14:39.689Z">
 <meta property="article:author" content="R">
 <meta property="article:tag" content="Mastodon">
 <meta name="twitter:card" content="summary">
@@ -242,7 +242,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2022-05-24 21:12:51" itemprop="dateModified" datetime="2022-05-24T21:12:51+08:00">2022-05-24</time>
+        <time title="Modified: 2022-05-24 21:14:39" itemprop="dateModified" datetime="2022-05-24T21:14:39+08:00">2022-05-24</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -311,7 +311,7 @@
 <p><strong>tips</strong><br>虽然上次建站配置好了服务器端的公钥，但这次登录时，MobaXterm 一直返回错误信息：  </p>
   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Disconnected: No supported authentication methods available (server sent: publickey)</span><br></pre></td></tr></table></figure>
 
-<p>原因是服务器已经关闭账户密码登录，但使用 MobaXterm 登录时没有勾选 <code>Use private key</code> 并指定私钥文件。具体步骤为 <code>Session -&gt; SSH -&gt; Use private key and specify a private key for passwordless login</code>。<br>设置完成后即可顺利登录。  </p>
+<p>原因是服务器已经关闭账户密码登录，但使用 MobaXterm 登录时没有勾选 <code>Use private key</code> 并指定私钥文件。<br>具体步骤为 <code>Session -&gt; SSH -&gt; Use private key and specify a private key for passwordless login</code>。<br>设置完成后即可顺利登录。  </p>
 <h3 id="安装-docker-和-docker-compose"><a href="#安装-docker-和-docker-compose" class="headerlink" title="安装 docker 和 docker-compose"></a>安装 docker 和 docker-compose</h3><p>根据蓝盒子站长的教程，使用官方提供的一键脚本安装 docker。</p>
   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 代码来自蓝盒子站长教程</span><br><span class="line">bash &lt;(curl -L https://get.docker.com/)</span><br><span class="line">sudo curl -L &quot;https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose</span><br><span class="line">sudo chmod +x /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
 
@@ -408,14 +408,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>Symbols count total: </span>
-    <span title="Symbols count total">84k</span>
+    <span title="Symbols count total">88k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>Reading time total &asymp;</span>
-    <span title="Reading time total">1:16</span>
+    <span title="Reading time total">1:20</span>
   </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
