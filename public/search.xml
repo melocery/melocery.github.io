@@ -418,81 +418,109 @@ main() # 运行上述函数
       </tags>
   </entry>
   <entry>
-    <title>Computational Deconvolution for More Precise Biological Data</title>
-    <url>/2021/12/08/deconmixeddata/</url>
-    <content><![CDATA[<center> 文献阅读：解卷积可从混合的生物学数据中解得各细胞类型比例，或估计各细胞类型的表达谱，为研究提供更准确的样本数据 </center>
+    <title>CATsama：如何做一个定时发嘟的 Mastodon bot</title>
+    <url>/2022/07/12/catsama/</url>
+    <content><![CDATA[<center> 性感猫猫，每日上午八点半，在您的时间线上推送一个喵喵神签 </center>
 <span id="more"></span>
 
-<h2 id="Deconvolution"><a href="#Deconvolution" class="headerlink" title="Deconvolution"></a>Deconvolution</h2><p><strong>Deconvolution</strong> 译作反卷积或解卷积。解卷积是一种基于算法的过程，用于反转卷积对记录数据的影响。<br>生物学数据，如 DNA expression、RNA sequencing、Protein expression 等，很难真正得到来自特定组织的“纯数据”。如血液中含有来自不同组织的细胞、外泌体等，由此得来的生物学数据将是不同类型细胞的混合数据。这时就需要通过解卷积，从混合的生物数据中解得不同类型细胞的比例、表达谱。  </p>
-<h2 id="基本模型"><a href="#基本模型" class="headerlink" title="基本模型"></a>基本模型</h2><p>测得的数据为不同类型细胞按照一定比例混合在一起的结果。  </p>
-<ul>
-<li>测得的表达矩阵为 <em>X</em>，则 x<sub>ij</sub> 表示 gene<sub>i</sub> 在 sample<sub>j</sub> 中的表达量或表达强度  </li>
-<li>比例矩阵为 <em>R</em>，则 r<sub>kj</sub> 表示 k 类细胞在 sample<sub>j</sub> 中所占比例  </li>
-<li>各细胞真实表达谱组成的矩阵为 <em>S</em>，则 s<sub>ik</sub> 表示表示 gene<sub>i</sub> 在 k 类细胞中的表达量或表达强度  </li>
-</ul>
-<p><img src="/2021/12/08/deconmixeddata/decon.png">  </p>
-<h2 id="解卷积算法"><a href="#解卷积算法" class="headerlink" title="解卷积算法"></a>解卷积算法</h2><p>针对不同情况有不同的算法，根据项目中的先验知识选择合适的解卷积方法以达到最佳效果。<br>生物数据解卷积分为完全解卷积和不完全解卷积。  </p>
-<ul>
-<li><strong>完全解卷积</strong>：指混合细胞类型数目、比例和各细胞表达谱未知，仅依赖混合表达数据将它们解出来，即已知混合表达矩阵 <em>X</em>，解比例矩阵 <em>R</em> 和各细胞表达矩阵 <em>S</em>。完全解卷积的完全指细胞表达谱和比例都在算法中一次性解得。  </li>
-<li><strong>不完全解卷积</strong>：指已知混合表达谱、细胞类型数目、比例，解各细胞表达谱，即已知比例矩阵 <em>R</em> 和混合表达矩阵 <em>X</em>，解矩阵各细胞表达矩阵 <em>S</em>。不完全是相对于完全解卷积而言，仅解得各细胞表达谱。  </li>
-</ul>
-<h3 id="完全解卷积"><a href="#完全解卷积" class="headerlink" title="完全解卷积"></a>完全解卷积</h3><h4 id="LinSeed"><a href="#LinSeed" class="headerlink" title="LinSeed"></a><a href="https://doi.org/10.1038/s41467-019-09990-5">LinSeed</a></h4><p>通过计算共线性网络 (Collinearity Network) 得到各类型细胞的 markers，利用 markers 对混合数据进行完全解卷积，同时得到各组分的比例和表达谱。<br><img src="/2021/12/08/deconmixeddata/LinSeed.jpg"></p>
-<p><strong>Code availability:</strong>   </p>
-<ul>
-<li>R  </li>
-<li><a href="https://github.com/ctlab/linseed">https://github.com/ctlab/linseed</a>  </li>
-</ul>
-<h4 id="Deblender"><a href="#Deblender" class="headerlink" title="Deblender"></a><a href="https://doi.org/10.1186/s12859-018-2442-5">Deblender</a></h4><p>Deblender 是一个灵活的完全去卷积工具。基于用户对已知标记基因列表和细胞/组织组成信息的访问 (access)，以半/无监督模式运行。在没有先验知识的情况下，全局基因表达的变异性被用于混合数据的聚类，以聚类集代替标记集。<br><img src="/2021/12/08/deconmixeddata/Debledner.jpg">  </p>
-<p><strong>Code availability:</strong>   </p>
-<ul>
-<li>MATLAB  </li>
-<li><a href="https://github.com/kondim1983/Deblender/">https://github.com/kondim1983/Deblender/</a>  </li>
-</ul>
-<h4 id="CDSeq"><a href="#CDSeq" class="headerlink" title="CDSeq"></a><a href="https://doi.org/10.1371/journal.pcbi.1007510">CDSeq</a></h4><p>CDSeq 仅使用来自大量组织样本的 RNA-Seq 数据来同时估计细胞类型比例和细胞类型特异性表达谱。<br><img src="/2021/12/08/deconmixeddata/CDSeq1.jpg"><br><img src="/2021/12/08/deconmixeddata/CDSeq2.jpg">  </p>
-<p><strong>Code availability:</strong>   </p>
-<ul>
-<li>MATLAB and Octave  </li>
-<li><a href="https://github.com/kkang7/CDSeq">https://github.com/kkang7/CDSeq</a>  </li>
-</ul>
-<h4 id="Deconf"><a href="#Deconf" class="headerlink" title="Deconf"></a><a href="https://doi.org/10.1186/1471-2105-11-27">Deconf</a></h4><p>Deconf 证明了从单个样本的基因表达数据中预测构成细胞类型的比例的可行性，这是基于去粗取精的分类方法的前提条件。  </p>
-<p><strong>Code availability:</strong>   </p>
-<ul>
-<li>R  </li>
-<li><a href="https://static-content.springer.com/esm/art%3A10.1186%2F1471-2105-11-27/MediaObjects/12859_2009_3484_MOESM1_ESM.ZIP">example data and script</a>  </li>
-</ul>
-<h3 id="不完全解卷积"><a href="#不完全解卷积" class="headerlink" title="不完全解卷积"></a>不完全解卷积</h3><h4 id="Rodeo"><a href="#Rodeo" class="headerlink" title="Rodeo"></a><a href="https://doi.org/10.1093/nargab/lqaa110">Rodeo</a></h4><p>Rodeo 是一种基于稳健线性回归的方法，可以实现简单而稳健的表达式反卷积。  </p>
-<p><strong>Code availability:</strong>   </p>
-<ul>
-<li>R  </li>
-<li><a href="https://github.com/elolab/Rodeo">https://github.com/elolab/Rodeo</a></li>
-</ul>
-<h4 id="cs-lsfit-amp-cs-qprog"><a href="#cs-lsfit-amp-cs-qprog" class="headerlink" title="cs-lsfit &amp; cs-qprog"></a><a href="https://doi.org/10.1371/journal.pone.0006098">cs-lsfit &amp; cs-qprog</a></h4><p>cs-lsfit 和 cs-qprog 属于 CellMix 中的两个解卷积算法，使用CellMix时可选择使用哪一个来进行解卷积步骤。</p>
-<p><strong>Code availability:</strong>   </p>
-<ul>
-<li>R  </li>
-<li><a href="https://github.com/r-forge/cellmix/tree/master/pkg/CellMix">https://github.com/r-forge/cellmix/tree/master/pkg/CellMix</a></li>
-</ul>
-<h4 id="LRCDE"><a href="#LRCDE" class="headerlink" title="LRCDE"></a><a href="https://doi.org/10.1186/s12859-016-1226-z">LRCDE</a></h4><p>LRCDE 在逐个基因的基础上执行基于线性回归的细胞类型特异性差异表达(反卷积)检测。考虑到细胞类型特异性基因表达估计的变异性，它计算差异检测的每个基因 t 统计量、p 值、基于 t 统计量的灵敏度、组特异性均方误差和几个基因特异性诊断指标。  </p>
-<p><strong>Code availability:</strong>   </p>
-<ul>
-<li>R  </li>
-<li><a href="https://github.com/ERGlass/lrcde.dev">https://github.com/ERGlass/lrcde.dev</a></li>
-</ul>
-<h4 id="csSAM"><a href="#csSAM" class="headerlink" title="csSAM"></a><a href="https://doi.org/10.1038/nmeth.1439">csSAM</a></h4><p>csSAM 根据测量的细胞比例计算细胞特异性差异表达。<br><img src="/2021/12/08/deconmixeddata/csSAM.jpg"></p>
-<p><strong>Code availability:</strong>   </p>
-<ul>
-<li>R  </li>
-<li><a href="https://github.com/shenorrLab/csSAM">https://github.com/shenorrLab/csSAM</a>  </li>
-</ul>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1] Maria K Jaakkola, Laura L Elo, Computational deconvolution to estimate cell type-specific gene expression from bulk data, NAR Genomics and Bioinformatics, Volume 3, Issue 1, March 2021, lqaa110, <a href="https://doi.org/10.1093/nargab/lqaa110">https://doi.org/10.1093/nargab/lqaa110</a><br>[2] 具体算法参考文献见算法介绍部分</p>
-]]></content>
+<p>在缪尚后厅和大家聊天时，猫猫从键盘经过，留下一串神秘文字。大家一致认为这是猫猫给我们留下的忠告，因此决定在缪尚给猫猫神开个位置，就有了这个喵喵喵账号。接下来让我们有请 CAT sama！  </p>
+<h2 id="在-VPS-上安装-python"><a href="#在-VPS-上安装-python" class="headerlink" title="在 VPS 上安装 python"></a>在 VPS 上安装 python</h2><p>综合此方和塔塔的教程，决定安装 miniconda。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 在 /root 文件夹执行如下命令</span></span><br><span class="line">mkdir miniconda</span><br><span class="line"><span class="built_in">cd</span> miniconda</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载 python 最新版本并用 bash 安装</span></span><br><span class="line">wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh</span><br><span class="line">sh Miniconda3-latest-Linux-x86_64.sh //用bash安装</span><br></pre></td></tr></table></figure>
+
+<p>之后会有很长一段的文字，都是许可说明，一直按 <code>Enter</code> 即可，直到出现 <code>Do you accept the license terms? [yes|no]</code> 输入 <code>yes</code>，开启正式安装。安装路径直接使用默认 <code>/root/miniconda3</code>。<br>安装完成后会询问是否运行 <code>conda init</code> 来初始化，选择 <code>yes</code>。<br>检查是否安装成功，重启终端后输入 <code>conda --version</code>。</p>
+<h2 id="安装-bot"><a href="#安装-bot" class="headerlink" title="安装 bot"></a>安装 bot</h2><h3 id="安装前准备"><a href="#安装前准备" class="headerlink" title="安装前准备"></a>安装前准备</h3><p>注册 Mastodon 账号，在管理面板找到开发-创建新应用，创建新应用并给予读写权限，复制访问令牌。<br>由于 Fedi 有许多 bot 账号，为避免 bot 账号之间陷入无限回复循环，建议勾选账号设置中的 “这是一个机器人账户”。</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>创建存放 bot 相关文件的文件夹，这里模仿塔塔，存在 <code>/root/miniconda</code> 下。  </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 代码来源于塔塔</span></span><br><span class="line"><span class="built_in">cd</span> miniconda</span><br><span class="line">conda create -n mastbot python=3.8 <span class="comment"># 创建一个叫mastbot的版本为3.8的python虚拟环境，如果已经创建了就不用了</span></span><br><span class="line">conda activate mastbot <span class="comment"># 激活mastbot环境，root账号前会出现（mastbot）</span></span><br><span class="line">pip3 install requests beautifulsoup4 Mastodon.py <span class="comment"># 安装mastodon.py</span></span><br><span class="line">pip3 install numpy <span class="comment"># 安装 numpy，catsama 需要</span></span><br><span class="line">mkdir catsama</span><br><span class="line"><span class="built_in">cd</span> catsama</span><br><span class="line">nano mybot_usercred.secret <span class="comment"># 写入刚才复制的访问令牌，保存退出</span></span><br><span class="line">nano catsama.py <span class="comment"># 发嘟脚本</span></span><br></pre></td></tr></table></figure>
+
+<p>发嘟 python 脚本框架如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">from</span> mastodon <span class="keyword">import</span> Mastodon</span><br><span class="line"></span><br><span class="line">mastodon = Mastodon(</span><br><span class="line">    access_token = <span class="string">&#x27;mybot_usercred.secret&#x27;</span>,</span><br><span class="line">    api_base_url = <span class="string">&#x27;实例地址&#x27;</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 要发送的内容放在当前文件夹下面的 `content.txt` 里，每行一句</span></span><br><span class="line">content = random.choice(<span class="built_in">open</span>(<span class="string">&quot;content.txt&quot;</span>).read().splitlines())  </span><br><span class="line"><span class="comment"># content 即为发送嘟文的内容，可根据 bot 的需要替换为不同内容</span></span><br><span class="line"></span><br><span class="line">mastodon.status_post(content)</span><br></pre></td></tr></table></figure>
+
+<p>上述工作完成后，<code>python bot.py</code> 运行脚本。如果顺利，bot 就会发出嘟嘟；如有报错，根据报错信息修改。  </p>
+<h2 id="定时发嘟"><a href="#定时发嘟" class="headerlink" title="定时发嘟"></a>定时发嘟</h2><p>想要实现定时发嘟肯定不能人工蹲点，而要实现自动化。使用 <code>crontab</code> 设置定时任务，定时自动运行 <code>python bot.py</code> 即可实现定时发嘟。  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">30 2 * * *  cd /root/miniconda/catsama &amp;&amp; /root/miniconda3/envs/mastbot/bin/python catsama.py &gt;&gt; /root/miniconda/catsama/log.txt 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
+<p>设置为每天服务器时间 2：30 发送一条喵签。如有报错信息，将输出到 log.txt，可根据报错修改。  </p>
+<h2 id="catsama-脚本存档"><a href="#catsama-脚本存档" class="headerlink" title="catsama 脚本存档"></a>catsama 脚本存档</h2><p>生成一个含有字母、数字、特殊符号和汉字的字符串，这串字符即为喵签内容。如果遇到低概率随机生成的串为空或最终输出的部分为空，则从 ABC 的朋友们名字中选择一个作为喵签内容。  </p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np, numpy.random</span><br><span class="line"><span class="keyword">from</span> mastodon <span class="keyword">import</span> Mastodon</span><br><span class="line"></span><br><span class="line"><span class="comment"># 随机生成num个中文字符并输出为list</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">GBK2312</span>(<span class="params">num</span>):</span></span><br><span class="line">    <span class="built_in">str</span> = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> num == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">str</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,num+<span class="number">1</span>):</span><br><span class="line">        head = random.randint(<span class="number">0xb0</span>, <span class="number">0xf7</span>)</span><br><span class="line">        body = random.randint(<span class="number">0xa1</span>, <span class="number">0xfe</span>)</span><br><span class="line">        val = <span class="string">f&#x27;<span class="subst">&#123;head:x&#125;</span><span class="subst">&#123;body:x&#125;</span>&#x27;</span></span><br><span class="line">        <span class="built_in">str</span> = <span class="built_in">str</span> + <span class="built_in">bytes</span>.fromhex(val).decode(<span class="string">&#x27;gb2312&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">list</span>(<span class="built_in">str</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 随机生成num个数字并输出为list</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">listNum</span>(<span class="params">num</span>):</span></span><br><span class="line">    nums = []</span><br><span class="line">    <span class="keyword">while</span> <span class="built_in">len</span>(nums) &lt; num:</span><br><span class="line">        i = random.randint(<span class="number">0</span>,<span class="number">9</span>)</span><br><span class="line">        nums.append(i)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">list</span>(<span class="built_in">str</span>(nums))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成猫签</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">predictfuture</span>():</span></span><br><span class="line">    <span class="comment"># 随机生成n个数字</span></span><br><span class="line">    numN = random.randint(<span class="number">0</span>,<span class="number">9</span>)</span><br><span class="line">    num = listNum(numN)</span><br><span class="line">    <span class="comment"># 随机生成n个字母</span></span><br><span class="line">    src_letters = string.ascii_letters</span><br><span class="line">    letN = random.randint(<span class="number">0</span>,<span class="number">26</span>)</span><br><span class="line">    letters = random.sample(src_letters,letN)</span><br><span class="line">    <span class="comment"># 随机生成n个特殊字符</span></span><br><span class="line">    spN = random.randint(<span class="number">0</span>,<span class="number">6</span>)</span><br><span class="line">    src_special = string.punctuation</span><br><span class="line">    special = random.sample(src_special,spN)</span><br><span class="line">    <span class="comment"># 随机生成n个汉字</span></span><br><span class="line">    chN = random.randint(<span class="number">0</span>,<span class="number">26</span>)</span><br><span class="line">    chinese = GBK2312(chN)</span><br><span class="line">    <span class="comment"># 合并所有随机生成的内容</span></span><br><span class="line">    ran_list = num + letters + special + chinese</span><br><span class="line">    <span class="comment"># 随机打乱生成的内容</span></span><br><span class="line">    random.shuffle(ran_list)</span><br><span class="line">    <span class="comment"># print(ran_list)</span></span><br><span class="line">    <span class="comment"># list转str</span></span><br><span class="line">    temp = <span class="string">&#x27;&#x27;</span>.join(ran_list)</span><br><span class="line">    numS = numN + letN + spN + chN</span><br><span class="line">    <span class="comment"># 填补可能出现的所有类型字符都为0或随机长度为0的情况</span></span><br><span class="line">    ABC_list = [<span class="string">&#x27;Enjolras&#x27;</span>, <span class="string">&#x27;Combeferre&#x27;</span>, <span class="string">&#x27;Jean prouvaire&#x27;</span>, <span class="string">&#x27;Feuilly&#x27;</span>, <span class="string">&#x27;Courfeyrac&#x27;</span>,<span class="string">&#x27; Bahorel&#x27;</span>, <span class="string">&#x27;Lesgle or Laigle&#x27;</span>, <span class="string">&#x27;Joly&#x27;</span>, <span class="string">&#x27;Grantaire&#x27;</span>]</span><br><span class="line">    friendABC = random.randint(<span class="number">0</span>, <span class="built_in">len</span>(ABC_list)-<span class="number">1</span>)</span><br><span class="line">    <span class="comment"># 输出猫猫语</span></span><br><span class="line">    <span class="keyword">if</span> numS == <span class="number">0</span>:</span><br><span class="line">        catsama = ABC_list[friendABC]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        catl = random.randint(<span class="number">0</span>,numS)</span><br><span class="line">        <span class="keyword">if</span> catl == <span class="number">0</span>:</span><br><span class="line">            catsama = ABC_list[friendABC]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            catsama = temp[<span class="number">0</span>:catl]</span><br><span class="line">    <span class="keyword">return</span> catsama</span><br><span class="line"></span><br><span class="line">mastodon = Mastodon(</span><br><span class="line">    access_token = <span class="string">&#x27;mybot_usercred.secret&#x27;</span>,</span><br><span class="line">    api_base_url = <span class="string">&#x27;https://musain.cafe&#x27;</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">content = predictfuture() + <span class="string">&#x27;, miao!&#x27;</span></span><br><span class="line"><span class="comment"># print(content)</span></span><br><span class="line"></span><br><span class="line">mastodon.status_post(content)</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>Paper</category>
-        <category>DeconvoluteMixedBioData</category>
+        <category>Mastodon</category>
+        <category>Bot</category>
       </categories>
       <tags>
-        <tag>DeconvoluteMixedBioData</tag>
-        <tag>Bioinformatics</tag>
+        <tag>Mastodon</tag>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Computer Network Notes 4：Network Layer</title>
+    <url>/2022/06/07/computernetworknotes4/</url>
+    <content><![CDATA[<center> 把老师的 PPT 变成 md 文件之计算机网络第四章网络层：数据平面 </center>
+<span id="more"></span>
+
+<h2 id="导论"><a href="#导论" class="headerlink" title="导论"></a>导论</h2><h3 id="网络层服务"><a href="#网络层服务" class="headerlink" title="网络层服务"></a>网络层服务</h3><p>在发送主机和接收主机对之间传送段 (segment)<br>在发送端将段封装到数据报中<br>在接收端，将段上交给传输层实体<br>网络层协议存在于每一个主机和路由器<br>路由器检查每一个经过它的 IP 数据报的头部  </p>
+<h3 id="网络层的关键功能"><a href="#网络层的关键功能" class="headerlink" title="网络层的关键功能"></a>网络层的关键功能</h3><p><strong>转发</strong>：将分组从路由器的输入接口转发到合适的输出接口<br><strong>路由</strong>：使用路由算法来决定分组从发送主机到目标接收主机的路径  </p>
+<ul>
+<li>路由选择算法  </li>
+<li>路由选择协议  </li>
+</ul>
+<h3 id="数据平面与控制平面"><a href="#数据平面与控制平面" class="headerlink" title="数据平面与控制平面"></a>数据平面与控制平面</h3><p><strong>数据平面</strong>  </p>
+<ul>
+<li>本地，每个路由器功能  </li>
+<li>决定从路由器输入端口到达的分组如何转发到输出端口  </li>
+<li>转发功能  <ul>
+<li>传统方式：基于目标地址 + 转发表  </li>
+<li>SDN 方式：集于多个字段 + 流表  </li>
+</ul>
+</li>
+</ul>
+<p><strong>控制平面</strong>  </p>
+<ul>
+<li>网络范围内的逻辑  </li>
+<li>决定数据报如何在路由器之间路由，决定数据报从源道目标主机之间的端到端路径  </li>
+<li>2 个控制平面方法  <ul>
+<li>传统的路由算法：在路由器中被实现  </li>
+<li>software-defined networking (SND)：在远程的服务器中实现  </li>
+</ul>
+</li>
+</ul>
+<h4 id="传统方式"><a href="#传统方式" class="headerlink" title="传统方式"></a>传统方式</h4><p>每-路由器(Per-router)控制平面<br>在每一个路由器中的单独路由器算法元件，在控制平面进行交互  </p>
+<p><img src="/2022/06/07/computernetworknotes4/traditionalway.png">  </p>
+<p>控制平面、数据平面紧紧耦合<br>路由和转发的相互作用  </p>
+<p><img src="/2022/06/07/computernetworknotes4/traditional.png">  </p>
+<h4 id="SDN-方式"><a href="#SDN-方式" class="headerlink" title="SDN 方式"></a>SDN 方式</h4><p>逻辑集中的控制平面<br>一个不同的(通常是远程的)控制器与本地控制代理(CAs)交互  </p>
+<p><img src="/2022/06/07/computernetworknotes4/SDNway.png">  </p>
+<h3 id="网络服务模型"><a href="#网络服务模型" class="headerlink" title="网络服务模型"></a>网络服务模型</h3><p>对于单个数据报的服务  </p>
+<ul>
+<li>可靠传送  </li>
+<li>延迟保证，如：少于 40 ms 的延迟  </li>
+</ul>
+<p>对于数据报流的服务  </p>
+<ul>
+<li>保存数据报传送  </li>
+<li>保证流的最小带宽  </li>
+<li>分组之间的延迟差  </li>
+</ul>
+<p><img src="/2022/06/07/computernetworknotes4/servicemodel.png"></p>
+<h3 id="连接建立"><a href="#连接建立" class="headerlink" title="连接建立"></a>连接建立</h3><p>在某些网络架构中是第三个重要的功能  </p>
+<ul>
+<li>ATM, frame relay, X.25  </li>
+</ul>
+<p>在分组传输之前，在两个主机之间，再通过一些路由器所构成的路径上建立一个网络层连接  </p>
+<ul>
+<li>涉及到路由器  </li>
+</ul>
+<p>网络层和传输层连接服务区别  </p>
+<ul>
+<li><strong>网络层</strong>：在 2 个主机之间，涉及到路径上的一些路由器  </li>
+<li><strong>传输层</strong>：在 2 个进程之间，很可能只体现在端系统上 (TCP 连接)  </li>
+</ul>
+]]></content>
+      <categories>
+        <category>Notes</category>
+        <category>ComputerNetwork</category>
+      </categories>
+      <tags>
+        <tag>ComputerNetwork</tag>
       </tags>
   </entry>
   <entry>
@@ -595,6 +623,84 @@ data[key] = $.html();
         <tag>Hexo</tag>
         <tag>Blog</tag>
         <tag>Markdown</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Computational Deconvolution for More Precise Biological Data</title>
+    <url>/2021/12/08/deconmixeddata/</url>
+    <content><![CDATA[<center> 文献阅读：解卷积可从混合的生物学数据中解得各细胞类型比例，或估计各细胞类型的表达谱，为研究提供更准确的样本数据 </center>
+<span id="more"></span>
+
+<h2 id="Deconvolution"><a href="#Deconvolution" class="headerlink" title="Deconvolution"></a>Deconvolution</h2><p><strong>Deconvolution</strong> 译作反卷积或解卷积。解卷积是一种基于算法的过程，用于反转卷积对记录数据的影响。<br>生物学数据，如 DNA expression、RNA sequencing、Protein expression 等，很难真正得到来自特定组织的“纯数据”。如血液中含有来自不同组织的细胞、外泌体等，由此得来的生物学数据将是不同类型细胞的混合数据。这时就需要通过解卷积，从混合的生物数据中解得不同类型细胞的比例、表达谱。  </p>
+<h2 id="基本模型"><a href="#基本模型" class="headerlink" title="基本模型"></a>基本模型</h2><p>测得的数据为不同类型细胞按照一定比例混合在一起的结果。  </p>
+<ul>
+<li>测得的表达矩阵为 <em>X</em>，则 x<sub>ij</sub> 表示 gene<sub>i</sub> 在 sample<sub>j</sub> 中的表达量或表达强度  </li>
+<li>比例矩阵为 <em>R</em>，则 r<sub>kj</sub> 表示 k 类细胞在 sample<sub>j</sub> 中所占比例  </li>
+<li>各细胞真实表达谱组成的矩阵为 <em>S</em>，则 s<sub>ik</sub> 表示表示 gene<sub>i</sub> 在 k 类细胞中的表达量或表达强度  </li>
+</ul>
+<p><img src="/2021/12/08/deconmixeddata/decon.png">  </p>
+<h2 id="解卷积算法"><a href="#解卷积算法" class="headerlink" title="解卷积算法"></a>解卷积算法</h2><p>针对不同情况有不同的算法，根据项目中的先验知识选择合适的解卷积方法以达到最佳效果。<br>生物数据解卷积分为完全解卷积和不完全解卷积。  </p>
+<ul>
+<li><strong>完全解卷积</strong>：指混合细胞类型数目、比例和各细胞表达谱未知，仅依赖混合表达数据将它们解出来，即已知混合表达矩阵 <em>X</em>，解比例矩阵 <em>R</em> 和各细胞表达矩阵 <em>S</em>。完全解卷积的完全指细胞表达谱和比例都在算法中一次性解得。  </li>
+<li><strong>不完全解卷积</strong>：指已知混合表达谱、细胞类型数目、比例，解各细胞表达谱，即已知比例矩阵 <em>R</em> 和混合表达矩阵 <em>X</em>，解矩阵各细胞表达矩阵 <em>S</em>。不完全是相对于完全解卷积而言，仅解得各细胞表达谱。  </li>
+</ul>
+<h3 id="完全解卷积"><a href="#完全解卷积" class="headerlink" title="完全解卷积"></a>完全解卷积</h3><h4 id="LinSeed"><a href="#LinSeed" class="headerlink" title="LinSeed"></a><a href="https://doi.org/10.1038/s41467-019-09990-5">LinSeed</a></h4><p>通过计算共线性网络 (Collinearity Network) 得到各类型细胞的 markers，利用 markers 对混合数据进行完全解卷积，同时得到各组分的比例和表达谱。<br><img src="/2021/12/08/deconmixeddata/LinSeed.jpg"></p>
+<p><strong>Code availability:</strong>   </p>
+<ul>
+<li>R  </li>
+<li><a href="https://github.com/ctlab/linseed">https://github.com/ctlab/linseed</a>  </li>
+</ul>
+<h4 id="Deblender"><a href="#Deblender" class="headerlink" title="Deblender"></a><a href="https://doi.org/10.1186/s12859-018-2442-5">Deblender</a></h4><p>Deblender 是一个灵活的完全去卷积工具。基于用户对已知标记基因列表和细胞/组织组成信息的访问 (access)，以半/无监督模式运行。在没有先验知识的情况下，全局基因表达的变异性被用于混合数据的聚类，以聚类集代替标记集。<br><img src="/2021/12/08/deconmixeddata/Debledner.jpg">  </p>
+<p><strong>Code availability:</strong>   </p>
+<ul>
+<li>MATLAB  </li>
+<li><a href="https://github.com/kondim1983/Deblender/">https://github.com/kondim1983/Deblender/</a>  </li>
+</ul>
+<h4 id="CDSeq"><a href="#CDSeq" class="headerlink" title="CDSeq"></a><a href="https://doi.org/10.1371/journal.pcbi.1007510">CDSeq</a></h4><p>CDSeq 仅使用来自大量组织样本的 RNA-Seq 数据来同时估计细胞类型比例和细胞类型特异性表达谱。<br><img src="/2021/12/08/deconmixeddata/CDSeq1.jpg"><br><img src="/2021/12/08/deconmixeddata/CDSeq2.jpg">  </p>
+<p><strong>Code availability:</strong>   </p>
+<ul>
+<li>MATLAB and Octave  </li>
+<li><a href="https://github.com/kkang7/CDSeq">https://github.com/kkang7/CDSeq</a>  </li>
+</ul>
+<h4 id="Deconf"><a href="#Deconf" class="headerlink" title="Deconf"></a><a href="https://doi.org/10.1186/1471-2105-11-27">Deconf</a></h4><p>Deconf 证明了从单个样本的基因表达数据中预测构成细胞类型的比例的可行性，这是基于去粗取精的分类方法的前提条件。  </p>
+<p><strong>Code availability:</strong>   </p>
+<ul>
+<li>R  </li>
+<li><a href="https://static-content.springer.com/esm/art%3A10.1186%2F1471-2105-11-27/MediaObjects/12859_2009_3484_MOESM1_ESM.ZIP">example data and script</a>  </li>
+</ul>
+<h3 id="不完全解卷积"><a href="#不完全解卷积" class="headerlink" title="不完全解卷积"></a>不完全解卷积</h3><h4 id="Rodeo"><a href="#Rodeo" class="headerlink" title="Rodeo"></a><a href="https://doi.org/10.1093/nargab/lqaa110">Rodeo</a></h4><p>Rodeo 是一种基于稳健线性回归的方法，可以实现简单而稳健的表达式反卷积。  </p>
+<p><strong>Code availability:</strong>   </p>
+<ul>
+<li>R  </li>
+<li><a href="https://github.com/elolab/Rodeo">https://github.com/elolab/Rodeo</a></li>
+</ul>
+<h4 id="cs-lsfit-amp-cs-qprog"><a href="#cs-lsfit-amp-cs-qprog" class="headerlink" title="cs-lsfit &amp; cs-qprog"></a><a href="https://doi.org/10.1371/journal.pone.0006098">cs-lsfit &amp; cs-qprog</a></h4><p>cs-lsfit 和 cs-qprog 属于 CellMix 中的两个解卷积算法，使用CellMix时可选择使用哪一个来进行解卷积步骤。</p>
+<p><strong>Code availability:</strong>   </p>
+<ul>
+<li>R  </li>
+<li><a href="https://github.com/r-forge/cellmix/tree/master/pkg/CellMix">https://github.com/r-forge/cellmix/tree/master/pkg/CellMix</a></li>
+</ul>
+<h4 id="LRCDE"><a href="#LRCDE" class="headerlink" title="LRCDE"></a><a href="https://doi.org/10.1186/s12859-016-1226-z">LRCDE</a></h4><p>LRCDE 在逐个基因的基础上执行基于线性回归的细胞类型特异性差异表达(反卷积)检测。考虑到细胞类型特异性基因表达估计的变异性，它计算差异检测的每个基因 t 统计量、p 值、基于 t 统计量的灵敏度、组特异性均方误差和几个基因特异性诊断指标。  </p>
+<p><strong>Code availability:</strong>   </p>
+<ul>
+<li>R  </li>
+<li><a href="https://github.com/ERGlass/lrcde.dev">https://github.com/ERGlass/lrcde.dev</a></li>
+</ul>
+<h4 id="csSAM"><a href="#csSAM" class="headerlink" title="csSAM"></a><a href="https://doi.org/10.1038/nmeth.1439">csSAM</a></h4><p>csSAM 根据测量的细胞比例计算细胞特异性差异表达。<br><img src="/2021/12/08/deconmixeddata/csSAM.jpg"></p>
+<p><strong>Code availability:</strong>   </p>
+<ul>
+<li>R  </li>
+<li><a href="https://github.com/shenorrLab/csSAM">https://github.com/shenorrLab/csSAM</a>  </li>
+</ul>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1] Maria K Jaakkola, Laura L Elo, Computational deconvolution to estimate cell type-specific gene expression from bulk data, NAR Genomics and Bioinformatics, Volume 3, Issue 1, March 2021, lqaa110, <a href="https://doi.org/10.1093/nargab/lqaa110">https://doi.org/10.1093/nargab/lqaa110</a><br>[2] 具体算法参考文献见算法介绍部分</p>
+]]></content>
+      <categories>
+        <category>Paper</category>
+        <category>DeconvoluteMixedBioData</category>
+      </categories>
+      <tags>
+        <tag>DeconvoluteMixedBioData</tag>
+        <tag>Bioinformatics</tag>
       </tags>
   </entry>
   <entry>
@@ -978,6 +1084,563 @@ $ hexo deploy  # 部署到GitHub Pages
       <tags>
         <tag>Bioinformatics</tag>
         <tag>BatchEffects</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Computer Network Notes 1：the basic</title>
+    <url>/2022/03/14/computernetworknotes1/</url>
+    <content><![CDATA[<center> 把老师的 PPT 变成 md 文件之计算机网络第一章计算机网络概述自学笔记 </center>
+<span id="more"></span>
+
+<h2 id="课程来源"><a href="#课程来源" class="headerlink" title="课程来源"></a>课程来源</h2><p>bilibili 网课：<a href="https://www.bilibili.com/video/BV1JV411t7">中科大郑烇、杨坚全套《计算机网络》</a>  </p>
+<br>  
+
+<h2 id="什么是-Internet"><a href="#什么是-Internet" class="headerlink" title="什么是 Internet"></a>什么是 Internet</h2><h3 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h3><p>由节点和边构成的拓扑结构  </p>
+<h3 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h3><p>联网的计算机所构成的系统，包括主机节点 (数据源或数据目标)、数据交换节点 (路由器、中继器、交换机等)、链路  </p>
+<ul>
+<li>节点  <ul>
+<li>主机及其上运行的应用程序  </li>
+<li>路由器、交换机等网络交换设备  </li>
+</ul>
+</li>
+<li>边：通信链路  <ul>
+<li>接入网链路：主机连接到互联网的链路  </li>
+<li>主干链路：路由器间链路  </li>
+</ul>
+</li>
+<li>协议  <ul>
+<li>对等层实体在通信过程中，应该遵守的规则的集合，包括语义、语法和时序  </li>
+</ul>
+</li>
+</ul>
+<h3 id="互联网"><a href="#互联网" class="headerlink" title="互联网"></a>互联网</h3><p>数以亿计的、互联的计算设备  </p>
+<ul>
+<li>主机 = 端系统：end system / host  </li>
+<li>运行网络应用程序</li>
+</ul>
+<p>通信链路  </p>
+<ul>
+<li>光纤、同轴电缆、无线电、卫星  </li>
+<li>传输速率 = 带宽 (bps)  </li>
+</ul>
+<p>分组交换设备：转发分组 (packets)  </p>
+<ul>
+<li>路由器和交换机</li>
+</ul>
+<h3 id="Internet"><a href="#Internet" class="headerlink" title="Internet"></a>Internet</h3><p>TCP、IP 协议建立起的一个网络，也是一种计算机网络。  </p>
+<ul>
+<li>协议控制发送、接收消息：TCP、IP、HTTP、FTP、PPP 等  </li>
+<li>网络的网络：松散的层次结构，互连的 ISP；公共 Internet vs 专用 intranet  </li>
+<li>标准：RFC (Request For Comments)；IETF(Internet Engineering Task Force)  </li>
+</ul>
+<p><strong>协议</strong>定义了在两个或多个通信实体之间交换的报文格式和次序，以及在报文传输和/或接收或其他事件方面所采取的动作。  </p>
+<p>从服务角度理解 Internet</p>
+<ul>
+<li>使用通信设施进行通信的分布式应用：Web、VoIP、email、分布式游戏、电子商务、社交网络  </li>
+<li>通信基础设施为 apps 提供编程接口 (通信服务)：将发送和接收数据的 apps 与互联网连接起来；为 apps 提供服务选择，类似于邮件服务，包括无连接不可靠服务和面向连接的可靠服务  </li>
+</ul>
+<br>  
+
+<h2 id="网络边缘"><a href="#网络边缘" class="headerlink" title="网络边缘"></a>网络边缘</h2><h3 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h3><p>网络边缘 (edge)  </p>
+<ul>
+<li>主机  </li>
+<li>应用程序：客户端和服务器  </li>
+</ul>
+<p>网络核心 (core)：数据交换  </p>
+<ul>
+<li>互连着的路由器  </li>
+<li>网络的网络  </li>
+</ul>
+<p>接入网、物理媒体 (access)  </p>
+<ul>
+<li>有线或无线通信链路  </li>
+</ul>
+<h3 id="网络边缘-1"><a href="#网络边缘-1" class="headerlink" title="网络边缘"></a>网络边缘</h3><p>端系统 (主机)：运行应用程序，如 Web、Email，在“网络的边缘”  </p>
+<p>客户/服务模式  </p>
+<ul>
+<li>一种主从模式，可扩展性、可靠性有问题  </li>
+<li>客户端向服务器请求、接收服务，如 Web 浏览器/服务器，Email 客户端/服务器  </li>
+</ul>
+<p>对等 (peer - peer) 模式  </p>
+<ul>
+<li>每个节点既是客户端有时服务器  </li>
+<li>分布式的文件系统  </li>
+<li>很少 (甚至没有) 专门的服务器，如 Gmutella、KaZaA、Emule、迅雷、电驴  </li>
+</ul>
+<h4 id="面向连接的通信服务"><a href="#面向连接的通信服务" class="headerlink" title="面向连接的通信服务"></a>面向连接的通信服务</h4><p>采用网络设施的面向连接服务  </p>
+<p><strong>目标</strong>：在端系统之间传输数据  </p>
+<ul>
+<li>“握手”：在数据传输之前做好准备，为通信准备好相应的资源、设置  </li>
+<li>两个通信主机之间为连接建立状态，端系统维护连接，只有端系统“知道”连接  </li>
+</ul>
+<p><strong>TCP (Transmission Control Protocol) 传输控制协议</strong> [RFC 793]  </p>
+<ul>
+<li>Internet 上面向连接的服务  </li>
+<li>使用 TCP 的应用：HTTP (Web)、FTP (文件传输)、Telnet (远程登陆)、SMTP (Email)  </li>
+<li><strong>可靠地、按顺序地传送数据</strong>：确认和重传  </li>
+<li><strong>流量控制</strong>：平衡发送方和接收方，发送方不会淹没接收方  </li>
+<li><strong>拥塞控制</strong>：了解网络路径情况，当网络拥塞时，发送方降低发送速率  </li>
+</ul>
+<h4 id="采用基础设施的无连接服务"><a href="#采用基础设施的无连接服务" class="headerlink" title="采用基础设施的无连接服务"></a>采用基础设施的无连接服务</h4><p>目标  </p>
+<ul>
+<li>在端系统之间传输数据  </li>
+<li>无连接服务：直接发送，不打招呼  </li>
+</ul>
+<p><strong>UDP (User Datagram Protocol) 用户数据报协议</strong> [RFC 768]</p>
+<ul>
+<li>无连接  </li>
+<li>不可靠数据传输  </li>
+<li>无流量控制  </li>
+<li>无拥塞控制  </li>
+<li>使用 UDP 的应用：流媒体、远程会议、DNS、Internet 电话  </li>
+</ul>
+<br>  
+
+<h2 id="网络核心"><a href="#网络核心" class="headerlink" title="网络核心"></a>网络核心</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>路由器的网状网络  </p>
+<h3 id="通过网络传输数据的方式"><a href="#通过网络传输数据的方式" class="headerlink" title="通过网络传输数据的方式"></a>通过网络传输数据的方式</h3><h4 id="电路交换"><a href="#电路交换" class="headerlink" title="电路交换"></a>电路交换</h4><p>为每个预叫预留一条专有电路，如电话网  </p>
+<p><img src="/2022/03/14/computernetworknotes1/dianlujiaohuan.png" alt="电路交换">  </p>
+<p>为呼叫预留端-端资源  </p>
+<ul>
+<li>链路带宽，交换能力  </li>
+<li>专用资源：不共享  </li>
+<li>保证性能  </li>
+<li>要求建立呼叫链接  </li>
+</ul>
+<p>网络资源 (如带宽) 被分成片  </p>
+<ul>
+<li>可频分 (Frequency-division multiplexing, FDM)，称频段；可时分 (Time-division multiplexing, TDM)，称时间周期片；可波分 (Wave-division multiplexing, WDM)，称波段  </li>
+<li>为呼叫分配片  </li>
+<li>如果某个呼叫没有数据，则其资源片处于空闲状态 (不共享)  </li>
+</ul>
+<p>特点  </p>
+<ul>
+<li>连接建立时间长  </li>
+<li>计算机之间的通信具有突发性，若使用电路交换则浪费片较多  </li>
+<li>可靠性不高 (维护 piece 间的 mapping 关系，若核心节点损毁则会造成大面积瘫痪)  </li>
+</ul>
+<h4 id="分组交换-packet-switch"><a href="#分组交换-packet-switch" class="headerlink" title="分组交换 (packet switch)"></a>分组交换 (packet switch)</h4><p>简介  </p>
+<ul>
+<li>将要传输的数据分成一个个单位：分组  </li>
+<li>将分组从一个路由器传到一个相邻的路由器 (hop)，一段段最终从源端到目标端  </li>
+<li>每段：采用链路的最大传输能力 (带宽)  </li>
+</ul>
+<p>以分组为单位存储 - 转发方式  </p>
+<ul>
+<li>网络带宽资源不再分为一个个片，传输时使用全部带宽  </li>
+<li>主机之间传输的数据被分为一个个分组  </li>
+</ul>
+<p>资源共享，按需使用  </p>
+<ul>
+<li>存储 - 转发：分组每次移动一跳 (hop)  </li>
+<li>在转发之前，节点必须收到整个分组  </li>
+<li>延迟比线路交换大有排队时间<br><em>如果到达速率 &gt; 链路的输出速率，分组将会排队，等待传输；如果路由器缓存使用完，分组将被会抛弃。</em>  </li>
+</ul>
+<p>网络核心的关键功能  </p>
+<ul>
+<li><strong>路由</strong>：决定分组采用的源到目标的路径 (路由算法)  </li>
+<li><strong>转发</strong>：将分组从路由器的输入链路转移到输出链路  </li>
+</ul>
+<p>分组交换的分组没有固定模式，即统计多路复用。  </p>
+<h4 id="分组交换-vs-电路交换"><a href="#分组交换-vs-电路交换" class="headerlink" title="分组交换 vs 电路交换"></a>分组交换 vs 电路交换</h4><ul>
+<li>分组交换允许更多用户使用网络<br><img src="/2022/03/14/computernetworknotes1/switchcompare.png" alt="分组交换与电路交换对比">  </li>
+</ul>
+<center> *网络强度为 1 时，网络会挂，所以分组交换时用户数不能为 10* </center>  
+
+<ul>
+<li>分组交换更适合于突发式数据传输：资源共享；简单，不必建立呼叫  </li>
+<li>过度使用会造成网络拥堵：分组延时和丢失；对可靠的数据传输需要协议来约束 (拥塞控制)  </li>
+</ul>
+<h3 id="分组交换网络"><a href="#分组交换网络" class="headerlink" title="分组交换网络"></a>分组交换网络</h3><p>分组的存储 - 转发一段一段从源端传到目标端，按照有无网络层的连接分成：<br>(1) 数据报 (datagram) 网络  </p>
+<ul>
+<li>分组的目标地址决定下一跳  </li>
+<li>在不同的阶段，路由可以改变  </li>
+<li>即无连接，每一份都独立传送<ul>
+<li>通信之前无需建立连接，有数据就传输</li>
+<li>每一个分组都独立路由 (路径不一样，可能会失序)  </li>
+<li>路由器根据分组的目标地址进行路由</li>
+</ul>
+</li>
+<li>类似：问路  </li>
+<li>eg. Internet  </li>
+</ul>
+<p>(2) 虚电路 (virtual circuit) 网络  </p>
+<ul>
+<li>每个分组都带标签，虚电路标识 VC ID，标签决定下一跳  </li>
+<li>在呼叫建立时决定路径，在整个呼叫中路径保持不变  </li>
+<li>路由器维护每个呼叫的状态信息  </li>
+<li>即建立网络层的连接，每个交换节点中有相应标识  </li>
+<li>eg. X.25 和 ATM  </li>
+</ul>
+<br>  
+
+<h2 id="接入网和物理媒体"><a href="#接入网和物理媒体" class="headerlink" title="接入网和物理媒体"></a>接入网和物理媒体</h2><h3 id="接入网：怎样将端系统和边缘路由端链接"><a href="#接入网：怎样将端系统和边缘路由端链接" class="headerlink" title="接入网：怎样将端系统和边缘路由端链接"></a>接入网：怎样将端系统和边缘路由端链接</h3><ul>
+<li>住宅接入网络  </li>
+<li>单位接入网络：学校、公司  </li>
+<li>无线接入网络  </li>
+</ul>
+<p><strong>重要指标</strong>：带宽、共享/专用</p>
+<h4 id="住宅接入-modem"><a href="#住宅接入-modem" class="headerlink" title="住宅接入 (modem)"></a>住宅接入 (modem)</h4><p>将上网数据<strong>调制</strong>加载在音频信号上 (能保证的带宽只有 4 kHz)，在电话线上传输，在局端将其中的数据<strong>解调</strong>出来；反之亦然。  </p>
+<ul>
+<li>调频  </li>
+<li>调幅  </li>
+<li>调相位  </li>
+<li>综合调制  </li>
+</ul>
+<p><strong>拨号调制解调器</strong>  </p>
+<ul>
+<li>56 Kbps 的速率直接接入路由器 (通常更低)  </li>
+<li>不能同时上网和打电话，且不能总是在线  </li>
+<li>利用已有的线路</li>
+</ul>
+<p><strong>Digital Subscribe Line (DSL)：</strong>采用现存的到交换局 DLSAM 的电话线  </p>
+<ul>
+<li>语音、数据在专享线路的不同波段传播</li>
+<li>DSL 线路上的数据波传到互联网 (&gt; 4 kHz，上下传输带宽分布不均时称为 ADSL)  </li>
+<li>DSL 线路上的数据波传到电话网 (&lt; 4 kHz)  </li>
+<li>传输速率<ul>
+<li>&lt; 2.5 Mbps 上行传输速率 (typically &lt; 1 Mbps)  </li>
+<li>&lt; 24 Mbps 下行传输速率 (typically &lt; 10 Mbps)  </li>
+</ul>
+</li>
+</ul>
+<p><strong>线缆网络</strong>  </p>
+<ul>
+<li>有线电视信号线缆双向改造  </li>
+<li><strong>FDM</strong>：在不同频段传输不同信道的数据，包括数字电视和上网数据 (上下行)  </li>
+<li>类似的也可以使用电网  </li>
+<li>HFC (Hybrid Fiber Coax)：非对称，最高 30 Mbps 的下行传输速率，2 Mbps 上行传输速率  </li>
+<li>线缆和光纤网络将各个家庭用户接入到 ISP 路由器</li>
+<li>个用户<strong>共享</strong>到线缆头端的接入网络 (与 DSL 不同，DSL 每个用户一个专用线路到 CO (Central Office))  </li>
+</ul>
+<p><img src="/2022/03/14/computernetworknotes1/modem.png" alt="住宅接入：电缆模式">  </p>
+<br>  
+
+<p><img src="/2022/03/14/computernetworknotes1/housenetwork.png" alt="接入网：家庭网络">  </p>
+<h4 id="企业接入网络-Ethernet"><a href="#企业接入网络-Ethernet" class="headerlink" title="企业接入网络 (Ethernet)"></a>企业接入网络 (Ethernet)</h4><p>经常被弃业或大学等机构采用</p>
+<ul>
+<li>10 Mbps，100 Mbps，1 Gbps，10 Gbps 传输率  </li>
+<li>现在端系统经常直接接到以太网络交换机上  </li>
+</ul>
+<p><img src="/2022/03/14/computernetworknotes1/Ethernet.png" alt="企业接入网络">  </p>
+<h4 id="无线接入网络"><a href="#无线接入网络" class="headerlink" title="无线接入网络"></a>无线接入网络</h4><p>各无线端系统共享无线接入网络 (端系统到无线路由器)  </p>
+<ul>
+<li>通过基站或接入点  </li>
+</ul>
+<p>无线 LANs  </p>
+<ul>
+<li>建筑物内部 (100 ft)  </li>
+<li>802.11 b/g (WiFi)：11，54 Mbps 传输速率  </li>
+</ul>
+<p>广域无线接入  </p>
+<ul>
+<li>由电信运营商提供 (Cellular)：10’s km  </li>
+<li>1 到 10 Mbps  </li>
+<li>3 G，4 G：LTE</li>
+</ul>
+<h3 id="物理媒体"><a href="#物理媒体" class="headerlink" title="物理媒体"></a>物理媒体</h3><ul>
+<li>Bit：在传输-接收对间传播  </li>
+<li>物理链路：在每个传输-接收对间跨越的一种物理媒体  </li>
+<li>导引型媒体：信号沿着固体媒介被导引，如同轴电缆、光纤、双绞线  </li>
+<li>非导引型媒体：信号自由传播，如无线电  </li>
+</ul>
+<h4 id="双绞线-TP"><a href="#双绞线-TP" class="headerlink" title="双绞线 (TP)"></a>双绞线 (TP)</h4><ul>
+<li>两根绝缘铜线  </li>
+<li>5 类：100 Mbps Ethernet、Gbps 以太网  </li>
+<li>6 类：10 Gbps </li>
+</ul>
+<h4 id="同轴电缆"><a href="#同轴电缆" class="headerlink" title="同轴电缆"></a>同轴电缆</h4><ul>
+<li>两根同心的铜导线  </li>
+<li>双向  </li>
+<li>基带电缆<ul>
+<li>电缆上一个单个信道</li>
+<li>Ethernet</li>
+</ul>
+</li>
+<li>宽带电缆<ul>
+<li>电缆上有多个信道</li>
+<li>HFC</li>
+</ul>
+</li>
+</ul>
+<h4 id="光缆"><a href="#光缆" class="headerlink" title="光缆"></a>光缆</h4><ul>
+<li>光脉冲，每个脉冲表示一个 bit，在玻璃纤维中传输  </li>
+<li>高速：点到点的告诉传输，如 10 Gbps ~ 100 Gbps 传输速率  </li>
+<li>低误码率：在两个中继器之间可以有很长的距离，不受电磁噪声的干扰  </li>
+<li>安全：全反射或垂直 (射入角度为零)；单模光纤或多模光纤  </li>
+</ul>
+<h4 id="无线链路"><a href="#无线链路" class="headerlink" title="无线链路"></a>无线链路</h4><ul>
+<li>开放空间传输电磁波，携带要传输的数据  </li>
+<li>无需物理“线缆”  </li>
+<li>双向  </li>
+<li>传播环境效应：反射、吸收、干扰  </li>
+<li>类型  <ul>
+<li>地面微波：up to 45 Mbps channels  </li>
+<li>LAN：WiFi；11 Mbps，54 Mbps，540 Mbps 等  </li>
+<li>wide area：蜂窝；3 G cellular (~ few Mbps)；4 G 10 Mbps；5 G 数 Gbps  </li>
+<li>卫星：每个信道 Kbps 到 45 Mbps，或者多个聚集信道；270 msec 端到端延迟 (延迟大)；同步静止卫星和低轨卫星  </li>
+</ul>
+</li>
+</ul>
+<br>  
+
+<h2 id="Internet-结构和-ISP"><a href="#Internet-结构和-ISP" class="headerlink" title="Internet 结构和 ISP"></a>Internet 结构和 ISP</h2><h3 id="互联网络结构：网络的网络"><a href="#互联网络结构：网络的网络" class="headerlink" title="互联网络结构：网络的网络"></a>互联网络结构：网络的网络</h3><p>端系统通过接入 ISPs (Internet Service Providers) 连接到互联网  </p>
+<ul>
+<li>住宅、公司和大学的 ISPs  </li>
+</ul>
+<p>接入 ISPs 相应的必须是互联的，因此任何两个端系统可相互发送分组到对方。<br>导致“网络的网络”非常复杂，发展和演化通过经济和国家政策来驱动。  </p>
+<h3 id="接入-ISPs-的连接方式"><a href="#接入-ISPs-的连接方式" class="headerlink" title="接入 ISPs 的连接方式"></a>接入 ISPs 的连接方式</h3><p>接入 ISPs 之间全连接：即将每两个 ISPs 直接相连，不可扩展，需要 O(n<sup>2</sup>) 连接  </p>
+<p>将每个接入 ISP 都连接到<strong>全局 ISP</strong> (全局范围内覆盖)：客户 ISPs 和提供者 ISPs 有经济合约  </p>
+<p><img src="/2022/03/14/computernetworknotes1/globalISP.png" alt="将每个接入 ISP 都连接到全局 ISP">  </p>
+<p>如果全局 ISP 事可行的业务，则一定会有不同公司<strong>竞争</strong>；通过 ISP 之间的<strong>合作</strong>可以完成业务的扩展，肯定会有互联，对等互联的结算关系  </p>
+<p><img src="/2022/03/14/computernetworknotes1/ISPpeerlink.png" alt="ISP 竞争与合作"></p>
+<p>业务细分 (全球接入和区域接入)，<strong>区域网络</strong>将出现，用于将接入 ISPs 连接到全局 ISPs  </p>
+<p><img src="/2022/03/14/computernetworknotes1/regionalnet.png" alt="局域网络">  </p>
+<p><strong>内容提供商网络</strong> (Internet Content Provider, eg. Google, Microsoft, Akamai) 可能会构建它们自己的网络，将它们的服务、内容更加靠近端用户，向用户提供更好的服务，减少自己的运营支出</p>
+<ul>
+<li>在全球各地部署自己的网络 (或靠近核心 ISP)，连接自己的数据中心机房 (Data Center)，走自己的数据  </li>
+<li>连接若干 local ISP 和各级 (包括一层) ISP，更加靠近用户  </li>
+<li>少付费，且用户访问更快</li>
+</ul>
+<p><img src="/2022/03/14/computernetworknotes1/CPN.png" alt="内容提供商网络">  </p>
+<p>在网络的最中心，有一些为数不多的充分连接大范围网络 (分布广、节点有限，但之间有多重连接)  </p>
+<ul>
+<li>“tier-1” commercial ISPs (eg. Level 3, Sprint, AT &amp; T, NTT)，国家或者国际的覆盖范围  </li>
+<li>content provider network (eg. Google)：将数据中心接入 ISP，方便周边用户的访问；通常私有网络之间用专网绕过第一层 ISP 和区域 ISPs  </li>
+</ul>
+<p><img src="/2022/03/14/computernetworknotes1/Internetstructure.png" alt="互联网络结构：网络的网络">  </p>
+<h3 id="Internet-的结构：松散的层次结构"><a href="#Internet-的结构：松散的层次结构" class="headerlink" title="Internet 的结构：松散的层次结构"></a>Internet 的结构：松散的层次结构</h3><p><strong>中心：第一层 ISP</strong> (如 UUNet，BBN/Genuity，Sprint，AT &amp; T) 国家/国际覆盖，速率极高  </p>
+<ul>
+<li>直接于其它第一层 ISP 相连  </li>
+<li>与大量的第二层 ISP 和其它客户网络相连  </li>
+</ul>
+<p><img src="/2022/03/14/computernetworknotes1/POP.png" alt="Sprint: point-of-presence">  </p>
+<p>second.png：更小些的 (通常是局域性的) ISP  </p>
+<ul>
+<li>与一个或多个第一层 ISPs 相连，也可能于其它第二层 ISP  </li>
+<li>通过合作拓展网络  </li>
+</ul>
+<p><img src="/2022/03/14/computernetworknotes1/second.png" alt="第二层 ISP">  </p>
+<p>第三层 ISP 与其它本地 ISP  </p>
+<ul>
+<li>接入网 (与端系统最近)  </li>
+<li>一个分组要经过许多网络  </li>
+</ul>
+<p><img src="/2022/03/14/computernetworknotes1/third.png" alt="第三层 ISP">  </p>
+<h3 id="ISP-之间的连接"><a href="#ISP-之间的连接" class="headerlink" title="ISP 之间的连接"></a>ISP 之间的连接</h3><p><strong>POP</strong>  </p>
+<ul>
+<li>高层 ISP 面向客户网络的接入点，涉及费用结算  </li>
+<li>多宿 (multi home)：一个低层 ISP 接入多个高层 ISP  </li>
+</ul>
+<p><strong>对等接入</strong>  </p>
+<ul>
+<li>2 个 ISP 对等互接，不涉及费用结算  </li>
+</ul>
+<p><strong>IXP</strong>  </p>
+<ul>
+<li>多个对等 ISP 互联互通之外，通常不涉及费用结算  </li>
+<li>对等接入  </li>
+</ul>
+<p><strong>ICP</strong>  </p>
+<ul>
+<li>自己部署的专用网络</li>
+<li>同时和各级 ISP 连接  </li>
+</ul>
+<br>  
+
+<h2 id="分组延时、丢失和吞吐量"><a href="#分组延时、丢失和吞吐量" class="headerlink" title="分组延时、丢失和吞吐量"></a>分组延时、丢失和吞吐量</h2><h3 id="分组丢失和延时如何产生"><a href="#分组丢失和延时如何产生" class="headerlink" title="分组丢失和延时如何产生"></a>分组丢失和延时如何产生</h3><p>在路由器缓冲区的分组队列  </p>
+<ul>
+<li>分组到达链路的速率超过了链路输出的能力  </li>
+<li>分组等待排到队头、被传输  </li>
+<li>缓冲区满，无法进入路由器  </li>
+</ul>
+<p><img src="/2022/03/14/computernetworknotes1/queueNdelay.png" alt="分组延时和丢失">  </p>
+<h3 id="分组延时"><a href="#分组延时" class="headerlink" title="分组延时"></a>分组延时</h3><p>(1) 节点处理延时</p>
+<ul>
+<li>检查 bit 级差错  </li>
+<li>检查分组首部和决定将分组导向何处  </li>
+</ul>
+<p>(2) 排队延时</p>
+<ul>
+<li>在输出链路上等待传输的时间  </li>
+<li>依赖于路由器的拥塞控制  </li>
+</ul>
+<p>(3) 传输延时</p>
+<ul>
+<li>R = 链路带宽 (bps)  </li>
+<li>L = 分组长度 (bits)  </li>
+<li>将分组发送到链路上的时间 = L / R  </li>
+<li>存储转发延时  </li>
+</ul>
+<p>(4) 传播延时</p>
+<ul>
+<li>d = 物理链路的长度</li>
+<li>s = 在媒体上的传播速度 (~ 2 x 10<sup>8</sup> m / sec)  </li>
+<li>传播延时 = d / s  </li>
+</ul>
+<p><em>R and s are very differential quantities</em>  </p>
+<p><img src="/2022/03/14/computernetworknotes1/delay.png" alt="四种分组延时"></p>
+<p><img src="/2022/03/14/computernetworknotes1/carqueue.png" alt="分组延时与车队类比">  </p>
+<p><img src="/2022/03/14/computernetworknotes1/carqueue2.png" alt="分组延时与车队类比">   </p>
+<p><em>信道容量大，可容纳的分组数量多</em>  </p>
+<h3 id="节点延时"><a href="#节点延时" class="headerlink" title="节点延时"></a>节点延时</h3><p><img src="/2022/03/14/computernetworknotes1/delaytime.png">  </p>
+<h3 id="排队延时"><a href="#排队延时" class="headerlink" title="排队延时"></a>排队延时</h3><ul>
+<li><p>R = 链路带宽 (bps)  </p>
+</li>
+<li><p>L = 分组长度 (bits)  </p>
+</li>
+<li><p>a = 分组到达队列的平均速率  </p>
+</li>
+<li><p>流量强度 I = La / R  </p>
+<ul>
+<li>La / R ~ 0：平均排队延时很小  </li>
+<li>La / R -&gt; 1：延时变得很大  </li>
+<li>La / R &gt; 1：比特到达队列的速率超过了从该队列输出的速率，平均排队延时将趋向无穷大  </li>
+</ul>
+<p><em>设计系统时流量强度不能大于1</em>  </p>
+<p><img src="/2022/03/14/computernetworknotes1/queuedelay.png"></p>
+</li>
+</ul>
+<h3 id="Internet-的延时和路由"><a href="#Internet-的延时和路由" class="headerlink" title="Internet 的延时和路由"></a>Internet 的延时和路由</h3><p><strong>Traceroute 诊断程序</strong>：提供从源端，经过路由器，到目的的延时测量  </p>
+<ul>
+<li>For all <em>i</em>：<ul>
+<li>沿着目的的路径，像每个路由器发送 3 个探测分组  </li>
+<li>路由器 <em>i</em> 将向发送方返回一个分组  </li>
+<li>发送方队发送和回复之间间隔计时  </li>
+</ul>
+</li>
+<li>ICMP 协议  </li>
+</ul>
+<h3 id="分组丢失"><a href="#分组丢失" class="headerlink" title="分组丢失"></a>分组丢失</h3><p>链路的队列缓冲区容量有限<br>当分组到达一个满的队列时，该分组将会丢失<br>丢失的分组可能会被前一个节点或源端系统重传，或根本不重传  </p>
+<p><img src="/2022/03/14/computernetworknotes1/packagelost.png" alt="分组丢失">  </p>
+<h3 id="吞吐量"><a href="#吞吐量" class="headerlink" title="吞吐量"></a>吞吐量</h3><p>在源端和目标端之间传输的速度 (数据量 / 单位时间)<br>有效的数量，要从源端确实到达目标端<br>源到端的吞吐量取决于路径上的最小吞吐量，即<strong>瓶颈链路</strong>的吞吐量<br>瓶颈链路：端到端路径上，限制端到端吞吐的链路<br><strong>瞬间吞吐量</strong>：在一个时间点的速率<br><strong>平均吞吐量</strong>：在一个长时间内平均值  </p>
+<p><img src="/2022/03/14/computernetworknotes1/tuntuliang.png" alt="吞吐量">  </p>
+<p><img src="/2022/03/14/computernetworknotes1/tuntuliang2.png" alt="吞吐量：互联网场景">  </p>
+<br>
+
+<h2 id="协议层次和服务模型"><a href="#协议层次和服务模型" class="headerlink" title="协议层次和服务模型"></a>协议层次和服务模型</h2><h3 id="网络是一个复杂系统"><a href="#网络是一个复杂系统" class="headerlink" title="网络是一个复杂系统"></a>网络是一个复杂系统</h3><p><strong>网络功能繁杂</strong>：数字信号的物理信号承载、点到点、路由、rdt、进程区分、应用等<br><strong>网络有许多构成元素和设备</strong>：主机、路由器、各种媒体的链路、应用、协议、硬件、软件等<br>如何规划这样一个复杂系统：模块化、<strong>层次化</strong></p>
+<h3 id="层次化方式实现复杂网络功能"><a href="#层次化方式实现复杂网络功能" class="headerlink" title="层次化方式实现复杂网络功能"></a>层次化方式实现复杂网络功能</h3><p>将网络复杂的功能分层功能明确的<strong>层次</strong>，每一层实现了其中一个或一组<strong>功能</strong>，功能中有其上层可以使用的功能：<strong>服务</strong><br>本层协议实体相互交互执行本层的<strong>协议动作</strong>，目的是实现本层功能，通过接口为上层提供更好的服务<br>在实现本层协议时，直接<strong>利用下层所提供的服务</strong><br>本层的服务：借助下层服务实现的本层协议实体之间交互带来的 (上层可以利用的) 新功能 + 更下层所提供的服务  </p>
+<h3 id="服务和服务访问点"><a href="#服务和服务访问点" class="headerlink" title="服务和服务访问点"></a>服务和服务访问点</h3><p><strong>服务 (Service)：</strong>低层实体向上层实体提供它们之间通信的能力  </p>
+<ul>
+<li>服务用户 (service user)  </li>
+<li>服务提供者 (service provider)  </li>
+</ul>
+<p><strong>原语 (primitive)：</strong>上层使用下层服务的形式，高层使用低层提供的服务，以及低层向高层提供服务都是通过服务访问原语来进行交互的 —— <strong>提供服务的形式</strong>  </p>
+<p><strong>服务访问点 SAP (Services Access Point)：</strong>上层使用下层提供的服务通过层间的接口 —— <strong>提供服务的地点</strong>  </p>
+<ul>
+<li>eg. 邮箱  </li>
+<li>地址 (address)：下层的一个实体支撑着上层的多个实体，SAP 有标志不同上层实体的作用  </li>
+<li>可以有不同的实现，队列  </li>
+<li>eg. 传输层的 SAP：端口 (port)<br><em>区分数据要从哪里传到哪里，服务提供者区分不同的服务用户，层间接口</em></li>
+</ul>
+<h3 id="服务的类型"><a href="#服务的类型" class="headerlink" title="服务的类型"></a>服务的类型</h3><p><strong>面向连接的服务 (Connection-oriented Service)</strong>  </p>
+<ul>
+<li>连接 (Connection)：两个通信实体为进行通信而建立的一种结合  </li>
+<li>面向连接的服务通信过程：建立连接 (通信之前先“握手”，为通信分配资源，做好准备) -&gt; 通信 -&gt; 拆除连接  </li>
+<li>例子：网络层的连接被称为虚电路  </li>
+<li>适用范围：更适合传输大的数据块，不适合效地零星报文  </li>
+<li>特点：保序  </li>
+<li>服务类型<ul>
+<li>可靠的信息流 传送页面 (可靠的获得，通过接收方的确认：先“握手”)  </li>
+<li>可靠的字节流 远程登陆  </li>
+<li>不可靠的连接 数字化声音  </li>
+</ul>
+</li>
+</ul>
+<p><strong>无连接的服务 (Connectionless Service)</strong>  </p>
+<ul>
+<li>两个对等层实体在通信钱不需要建立一个连接，不预留资源，不需要通信双方都活跃 (例：寄信；通信之前不“握手”)  </li>
+<li>特点：不可靠、可能重复、可能失序  </li>
+<li>IP分组，数据包  </li>
+<li>适用范围：传送零星数据  </li>
+<li>服务类型<ul>
+<li>不可靠的数据报 电子方式的函件  </li>
+<li>有确认的数据包 挂号信  </li>
+<li>请求回答 信息查询  </li>
+</ul>
+</li>
+</ul>
+<h3 id="服务和协议"><a href="#服务和协议" class="headerlink" title="服务和协议"></a>服务和协议</h3><p><strong>区别</strong>  </p>
+<ul>
+<li>服务 (Service)：低层实体向上层实体提供它们之间的通信能力；通过原语 (primitive) 操作；垂直  </li>
+<li>协议 (protocol)：对等层实体 (peer entity) 之间在相互通信的过程中；需要遵循的规则的集合；水平  </li>
+</ul>
+<p><strong>联系</strong>  </p>
+<ul>
+<li>本层协议的实现要靠下层提供的服务来实现  </li>
+<li>本层实体通过协议为上层提供更高级的服务  </li>
+</ul>
+<h3 id="数据单元"><a href="#数据单元" class="headerlink" title="数据单元"></a>数据单元</h3><p><img src="/2022/03/14/computernetworknotes1/DU.png" alt="Data Unit">  </p>
+<p>SDU：上层要求传输的数据<br>ICI：接口控制信息，为更加顺利地传过层间接口<br>IDU = SDU + ICI<br>PDU：最常见的数据单元；在不同层有不同的名称，如应用报文、分组、数据报、位、帧等  </p>
+<p><strong>n-PDU的构成形式</strong><br><em>n-header：与本层交换数据所需的一些控制信息；其中，n 为层数，第 n 层</em>  </p>
+<ul>
+<li>一对一：SDU + n-header  </li>
+<li>一对多：SDU 的一部分 + n-header (PDU 大小有限，需要将 SDU 分为几个部分)  </li>
+<li>多对一：若干 SDU + n-header  </li>
+</ul>
+<h3 id="分层处理队实现复杂系统的好处"><a href="#分层处理队实现复杂系统的好处" class="headerlink" title="分层处理队实现复杂系统的好处"></a>分层处理队实现复杂系统的好处</h3><p>对复杂的系统<br><strong>概念化</strong>：结构清晰，便于标示网络组件，以及描述其相互关系</p>
+<ul>
+<li>分层参考模型  </li>
+</ul>
+<p><strong>结构化</strong>：模块化更易于维护和系统升级  </p>
+<ul>
+<li>改变某一层服务的实现不影响系统中的其它层次，对其它层次而言是透明的  </li>
+<li>eg. 如果改变登记程序并不影响系统的其他部分  </li>
+</ul>
+<p>分层的问题：效率相对较低  </p>
+<h3 id="Internet-协议栈"><a href="#Internet-协议栈" class="headerlink" title="Internet 协议栈"></a>Internet 协议栈</h3><p><strong>应用层</strong>：网络应用  </p>
+<ul>
+<li>为人类用户或其它应用进程提供网络应用服务  </li>
+<li>完成应用报文之间的交互  </li>
+<li>FTP, SMTP, HTTP, DNS  </li>
+<li>协议数据单元：报文 (message)  </li>
+</ul>
+<p><strong>传输层</strong>：主机之间的数据传输  </p>
+<ul>
+<li>在网络层提供的端到端通信基础上，细分为进程到进程，将不可靠的通信变成可靠的通信  </li>
+<li>完成进程到进程的区分  </li>
+<li>TCP, UDP  </li>
+<li>协议数据单元：报文段 (segment)；eg. TCP 段，UDP 数据报  </li>
+</ul>
+<p><strong>网络层</strong>：为数据包从源到目的选择路由  </p>
+<ul>
+<li>主机主机之间的通信，端到端通信，不可靠  </li>
+<li>传输以分组为单位的端到端的数据  </li>
+<li>IP，路由协议  </li>
+<li>协议数据单元：分组 (packet)；如果无连接方式：数据报 (datagram)  </li>
+</ul>
+<p><strong>链路层</strong>：相邻网络节点间的数据传输  </p>
+<ul>
+<li>2 个相邻 2 点的通信，点到点通信，可靠或不可靠</li>
+<li>在相邻两点之间，传输以帧为单位的数据 (Point to Point, P2P)  </li>
+<li>点对点协议 PPP，802.11 (WiFi)，Ethernet  </li>
+<li>协议数据单元：帧 (frame)  </li>
+</ul>
+<p><strong>物理层</strong>：在线路上传送 bit  </p>
+<ul>
+<li>把数据转换成物理信号承载在媒体上传输出去，接收方将物理信号再转换为数据信息  </li>
+<li>协议数据单元：位 (bit)  </li>
+</ul>
+<p><em>链路层和物理层协议一般封装在同一张网卡中</em>  </p>
+<p><img src="/2022/03/14/computernetworknotes1/Internetxieyizhan.png">  </p>
+<h3 id="ISO-OSI-参考模型"><a href="#ISO-OSI-参考模型" class="headerlink" title="ISO/OSI 参考模型"></a>ISO/OSI 参考模型</h3><p><strong>表示层</strong>：允许应用解释传输的数据  </p>
+<ul>
+<li>关心数据语义方面的信息和核心内容，而不是关心具体表达、如何编码</li>
+<li>加密、压缩、机器相关的表示转换  </li>
+</ul>
+<p><strong>会话层</strong>：数据交换的同步，检查点，恢复  </p>
+<ul>
+<li>会话管理：建立会话、维持会话  </li>
+</ul>
+<p><em>Internet 协议栈中没有以上两层，但依靠应用层来实现以上两层实现的功能</em>  </p>
+<p><img src="/2022/03/14/computernetworknotes1/ISO.png">  </p>
+<h3 id="封装和解封装"><a href="#封装和解封装" class="headerlink" title="封装和解封装"></a>封装和解封装</h3><p><img src="/2022/03/14/computernetworknotes1/seal.png" alt="封装和解封装">  </p>
+]]></content>
+      <categories>
+        <category>Notes</category>
+        <category>ComputerNetwork</category>
+      </categories>
+      <tags>
+        <tag>ComputerNetwork</tag>
       </tags>
   </entry>
   <entry>
@@ -1702,563 +2365,6 @@ $ hexo deploy  # 部署到GitHub Pages
 <li>拥塞指示被传送到接收主机  </li>
 <li>在接受方到发送方的 ACK 中，接收方 (在 IP 数据报中看到了拥塞指示)设置 ECE bit，指示发送方发生了拥塞</li>
 </ul>
-]]></content>
-      <categories>
-        <category>Notes</category>
-        <category>ComputerNetwork</category>
-      </categories>
-      <tags>
-        <tag>ComputerNetwork</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Computer Network Notes 1：the basic</title>
-    <url>/2022/03/14/computernetworknotes1/</url>
-    <content><![CDATA[<center> 把老师的 PPT 变成 md 文件之计算机网络第一章计算机网络概述自学笔记 </center>
-<span id="more"></span>
-
-<h2 id="课程来源"><a href="#课程来源" class="headerlink" title="课程来源"></a>课程来源</h2><p>bilibili 网课：<a href="https://www.bilibili.com/video/BV1JV411t7">中科大郑烇、杨坚全套《计算机网络》</a>  </p>
-<br>  
-
-<h2 id="什么是-Internet"><a href="#什么是-Internet" class="headerlink" title="什么是 Internet"></a>什么是 Internet</h2><h3 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h3><p>由节点和边构成的拓扑结构  </p>
-<h3 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h3><p>联网的计算机所构成的系统，包括主机节点 (数据源或数据目标)、数据交换节点 (路由器、中继器、交换机等)、链路  </p>
-<ul>
-<li>节点  <ul>
-<li>主机及其上运行的应用程序  </li>
-<li>路由器、交换机等网络交换设备  </li>
-</ul>
-</li>
-<li>边：通信链路  <ul>
-<li>接入网链路：主机连接到互联网的链路  </li>
-<li>主干链路：路由器间链路  </li>
-</ul>
-</li>
-<li>协议  <ul>
-<li>对等层实体在通信过程中，应该遵守的规则的集合，包括语义、语法和时序  </li>
-</ul>
-</li>
-</ul>
-<h3 id="互联网"><a href="#互联网" class="headerlink" title="互联网"></a>互联网</h3><p>数以亿计的、互联的计算设备  </p>
-<ul>
-<li>主机 = 端系统：end system / host  </li>
-<li>运行网络应用程序</li>
-</ul>
-<p>通信链路  </p>
-<ul>
-<li>光纤、同轴电缆、无线电、卫星  </li>
-<li>传输速率 = 带宽 (bps)  </li>
-</ul>
-<p>分组交换设备：转发分组 (packets)  </p>
-<ul>
-<li>路由器和交换机</li>
-</ul>
-<h3 id="Internet"><a href="#Internet" class="headerlink" title="Internet"></a>Internet</h3><p>TCP、IP 协议建立起的一个网络，也是一种计算机网络。  </p>
-<ul>
-<li>协议控制发送、接收消息：TCP、IP、HTTP、FTP、PPP 等  </li>
-<li>网络的网络：松散的层次结构，互连的 ISP；公共 Internet vs 专用 intranet  </li>
-<li>标准：RFC (Request For Comments)；IETF(Internet Engineering Task Force)  </li>
-</ul>
-<p><strong>协议</strong>定义了在两个或多个通信实体之间交换的报文格式和次序，以及在报文传输和/或接收或其他事件方面所采取的动作。  </p>
-<p>从服务角度理解 Internet</p>
-<ul>
-<li>使用通信设施进行通信的分布式应用：Web、VoIP、email、分布式游戏、电子商务、社交网络  </li>
-<li>通信基础设施为 apps 提供编程接口 (通信服务)：将发送和接收数据的 apps 与互联网连接起来；为 apps 提供服务选择，类似于邮件服务，包括无连接不可靠服务和面向连接的可靠服务  </li>
-</ul>
-<br>  
-
-<h2 id="网络边缘"><a href="#网络边缘" class="headerlink" title="网络边缘"></a>网络边缘</h2><h3 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h3><p>网络边缘 (edge)  </p>
-<ul>
-<li>主机  </li>
-<li>应用程序：客户端和服务器  </li>
-</ul>
-<p>网络核心 (core)：数据交换  </p>
-<ul>
-<li>互连着的路由器  </li>
-<li>网络的网络  </li>
-</ul>
-<p>接入网、物理媒体 (access)  </p>
-<ul>
-<li>有线或无线通信链路  </li>
-</ul>
-<h3 id="网络边缘-1"><a href="#网络边缘-1" class="headerlink" title="网络边缘"></a>网络边缘</h3><p>端系统 (主机)：运行应用程序，如 Web、Email，在“网络的边缘”  </p>
-<p>客户/服务模式  </p>
-<ul>
-<li>一种主从模式，可扩展性、可靠性有问题  </li>
-<li>客户端向服务器请求、接收服务，如 Web 浏览器/服务器，Email 客户端/服务器  </li>
-</ul>
-<p>对等 (peer - peer) 模式  </p>
-<ul>
-<li>每个节点既是客户端有时服务器  </li>
-<li>分布式的文件系统  </li>
-<li>很少 (甚至没有) 专门的服务器，如 Gmutella、KaZaA、Emule、迅雷、电驴  </li>
-</ul>
-<h4 id="面向连接的通信服务"><a href="#面向连接的通信服务" class="headerlink" title="面向连接的通信服务"></a>面向连接的通信服务</h4><p>采用网络设施的面向连接服务  </p>
-<p><strong>目标</strong>：在端系统之间传输数据  </p>
-<ul>
-<li>“握手”：在数据传输之前做好准备，为通信准备好相应的资源、设置  </li>
-<li>两个通信主机之间为连接建立状态，端系统维护连接，只有端系统“知道”连接  </li>
-</ul>
-<p><strong>TCP (Transmission Control Protocol) 传输控制协议</strong> [RFC 793]  </p>
-<ul>
-<li>Internet 上面向连接的服务  </li>
-<li>使用 TCP 的应用：HTTP (Web)、FTP (文件传输)、Telnet (远程登陆)、SMTP (Email)  </li>
-<li><strong>可靠地、按顺序地传送数据</strong>：确认和重传  </li>
-<li><strong>流量控制</strong>：平衡发送方和接收方，发送方不会淹没接收方  </li>
-<li><strong>拥塞控制</strong>：了解网络路径情况，当网络拥塞时，发送方降低发送速率  </li>
-</ul>
-<h4 id="采用基础设施的无连接服务"><a href="#采用基础设施的无连接服务" class="headerlink" title="采用基础设施的无连接服务"></a>采用基础设施的无连接服务</h4><p>目标  </p>
-<ul>
-<li>在端系统之间传输数据  </li>
-<li>无连接服务：直接发送，不打招呼  </li>
-</ul>
-<p><strong>UDP (User Datagram Protocol) 用户数据报协议</strong> [RFC 768]</p>
-<ul>
-<li>无连接  </li>
-<li>不可靠数据传输  </li>
-<li>无流量控制  </li>
-<li>无拥塞控制  </li>
-<li>使用 UDP 的应用：流媒体、远程会议、DNS、Internet 电话  </li>
-</ul>
-<br>  
-
-<h2 id="网络核心"><a href="#网络核心" class="headerlink" title="网络核心"></a>网络核心</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>路由器的网状网络  </p>
-<h3 id="通过网络传输数据的方式"><a href="#通过网络传输数据的方式" class="headerlink" title="通过网络传输数据的方式"></a>通过网络传输数据的方式</h3><h4 id="电路交换"><a href="#电路交换" class="headerlink" title="电路交换"></a>电路交换</h4><p>为每个预叫预留一条专有电路，如电话网  </p>
-<p><img src="/2022/03/14/computernetworknotes1/dianlujiaohuan.png" alt="电路交换">  </p>
-<p>为呼叫预留端-端资源  </p>
-<ul>
-<li>链路带宽，交换能力  </li>
-<li>专用资源：不共享  </li>
-<li>保证性能  </li>
-<li>要求建立呼叫链接  </li>
-</ul>
-<p>网络资源 (如带宽) 被分成片  </p>
-<ul>
-<li>可频分 (Frequency-division multiplexing, FDM)，称频段；可时分 (Time-division multiplexing, TDM)，称时间周期片；可波分 (Wave-division multiplexing, WDM)，称波段  </li>
-<li>为呼叫分配片  </li>
-<li>如果某个呼叫没有数据，则其资源片处于空闲状态 (不共享)  </li>
-</ul>
-<p>特点  </p>
-<ul>
-<li>连接建立时间长  </li>
-<li>计算机之间的通信具有突发性，若使用电路交换则浪费片较多  </li>
-<li>可靠性不高 (维护 piece 间的 mapping 关系，若核心节点损毁则会造成大面积瘫痪)  </li>
-</ul>
-<h4 id="分组交换-packet-switch"><a href="#分组交换-packet-switch" class="headerlink" title="分组交换 (packet switch)"></a>分组交换 (packet switch)</h4><p>简介  </p>
-<ul>
-<li>将要传输的数据分成一个个单位：分组  </li>
-<li>将分组从一个路由器传到一个相邻的路由器 (hop)，一段段最终从源端到目标端  </li>
-<li>每段：采用链路的最大传输能力 (带宽)  </li>
-</ul>
-<p>以分组为单位存储 - 转发方式  </p>
-<ul>
-<li>网络带宽资源不再分为一个个片，传输时使用全部带宽  </li>
-<li>主机之间传输的数据被分为一个个分组  </li>
-</ul>
-<p>资源共享，按需使用  </p>
-<ul>
-<li>存储 - 转发：分组每次移动一跳 (hop)  </li>
-<li>在转发之前，节点必须收到整个分组  </li>
-<li>延迟比线路交换大有排队时间<br><em>如果到达速率 &gt; 链路的输出速率，分组将会排队，等待传输；如果路由器缓存使用完，分组将被会抛弃。</em>  </li>
-</ul>
-<p>网络核心的关键功能  </p>
-<ul>
-<li><strong>路由</strong>：决定分组采用的源到目标的路径 (路由算法)  </li>
-<li><strong>转发</strong>：将分组从路由器的输入链路转移到输出链路  </li>
-</ul>
-<p>分组交换的分组没有固定模式，即统计多路复用。  </p>
-<h4 id="分组交换-vs-电路交换"><a href="#分组交换-vs-电路交换" class="headerlink" title="分组交换 vs 电路交换"></a>分组交换 vs 电路交换</h4><ul>
-<li>分组交换允许更多用户使用网络<br><img src="/2022/03/14/computernetworknotes1/switchcompare.png" alt="分组交换与电路交换对比">  </li>
-</ul>
-<center> *网络强度为 1 时，网络会挂，所以分组交换时用户数不能为 10* </center>  
-
-<ul>
-<li>分组交换更适合于突发式数据传输：资源共享；简单，不必建立呼叫  </li>
-<li>过度使用会造成网络拥堵：分组延时和丢失；对可靠的数据传输需要协议来约束 (拥塞控制)  </li>
-</ul>
-<h3 id="分组交换网络"><a href="#分组交换网络" class="headerlink" title="分组交换网络"></a>分组交换网络</h3><p>分组的存储 - 转发一段一段从源端传到目标端，按照有无网络层的连接分成：<br>(1) 数据报 (datagram) 网络  </p>
-<ul>
-<li>分组的目标地址决定下一跳  </li>
-<li>在不同的阶段，路由可以改变  </li>
-<li>即无连接，每一份都独立传送<ul>
-<li>通信之前无需建立连接，有数据就传输</li>
-<li>每一个分组都独立路由 (路径不一样，可能会失序)  </li>
-<li>路由器根据分组的目标地址进行路由</li>
-</ul>
-</li>
-<li>类似：问路  </li>
-<li>eg. Internet  </li>
-</ul>
-<p>(2) 虚电路 (virtual circuit) 网络  </p>
-<ul>
-<li>每个分组都带标签，虚电路标识 VC ID，标签决定下一跳  </li>
-<li>在呼叫建立时决定路径，在整个呼叫中路径保持不变  </li>
-<li>路由器维护每个呼叫的状态信息  </li>
-<li>即建立网络层的连接，每个交换节点中有相应标识  </li>
-<li>eg. X.25 和 ATM  </li>
-</ul>
-<br>  
-
-<h2 id="接入网和物理媒体"><a href="#接入网和物理媒体" class="headerlink" title="接入网和物理媒体"></a>接入网和物理媒体</h2><h3 id="接入网：怎样将端系统和边缘路由端链接"><a href="#接入网：怎样将端系统和边缘路由端链接" class="headerlink" title="接入网：怎样将端系统和边缘路由端链接"></a>接入网：怎样将端系统和边缘路由端链接</h3><ul>
-<li>住宅接入网络  </li>
-<li>单位接入网络：学校、公司  </li>
-<li>无线接入网络  </li>
-</ul>
-<p><strong>重要指标</strong>：带宽、共享/专用</p>
-<h4 id="住宅接入-modem"><a href="#住宅接入-modem" class="headerlink" title="住宅接入 (modem)"></a>住宅接入 (modem)</h4><p>将上网数据<strong>调制</strong>加载在音频信号上 (能保证的带宽只有 4 kHz)，在电话线上传输，在局端将其中的数据<strong>解调</strong>出来；反之亦然。  </p>
-<ul>
-<li>调频  </li>
-<li>调幅  </li>
-<li>调相位  </li>
-<li>综合调制  </li>
-</ul>
-<p><strong>拨号调制解调器</strong>  </p>
-<ul>
-<li>56 Kbps 的速率直接接入路由器 (通常更低)  </li>
-<li>不能同时上网和打电话，且不能总是在线  </li>
-<li>利用已有的线路</li>
-</ul>
-<p><strong>Digital Subscribe Line (DSL)：</strong>采用现存的到交换局 DLSAM 的电话线  </p>
-<ul>
-<li>语音、数据在专享线路的不同波段传播</li>
-<li>DSL 线路上的数据波传到互联网 (&gt; 4 kHz，上下传输带宽分布不均时称为 ADSL)  </li>
-<li>DSL 线路上的数据波传到电话网 (&lt; 4 kHz)  </li>
-<li>传输速率<ul>
-<li>&lt; 2.5 Mbps 上行传输速率 (typically &lt; 1 Mbps)  </li>
-<li>&lt; 24 Mbps 下行传输速率 (typically &lt; 10 Mbps)  </li>
-</ul>
-</li>
-</ul>
-<p><strong>线缆网络</strong>  </p>
-<ul>
-<li>有线电视信号线缆双向改造  </li>
-<li><strong>FDM</strong>：在不同频段传输不同信道的数据，包括数字电视和上网数据 (上下行)  </li>
-<li>类似的也可以使用电网  </li>
-<li>HFC (Hybrid Fiber Coax)：非对称，最高 30 Mbps 的下行传输速率，2 Mbps 上行传输速率  </li>
-<li>线缆和光纤网络将各个家庭用户接入到 ISP 路由器</li>
-<li>个用户<strong>共享</strong>到线缆头端的接入网络 (与 DSL 不同，DSL 每个用户一个专用线路到 CO (Central Office))  </li>
-</ul>
-<p><img src="/2022/03/14/computernetworknotes1/modem.png" alt="住宅接入：电缆模式">  </p>
-<br>  
-
-<p><img src="/2022/03/14/computernetworknotes1/housenetwork.png" alt="接入网：家庭网络">  </p>
-<h4 id="企业接入网络-Ethernet"><a href="#企业接入网络-Ethernet" class="headerlink" title="企业接入网络 (Ethernet)"></a>企业接入网络 (Ethernet)</h4><p>经常被弃业或大学等机构采用</p>
-<ul>
-<li>10 Mbps，100 Mbps，1 Gbps，10 Gbps 传输率  </li>
-<li>现在端系统经常直接接到以太网络交换机上  </li>
-</ul>
-<p><img src="/2022/03/14/computernetworknotes1/Ethernet.png" alt="企业接入网络">  </p>
-<h4 id="无线接入网络"><a href="#无线接入网络" class="headerlink" title="无线接入网络"></a>无线接入网络</h4><p>各无线端系统共享无线接入网络 (端系统到无线路由器)  </p>
-<ul>
-<li>通过基站或接入点  </li>
-</ul>
-<p>无线 LANs  </p>
-<ul>
-<li>建筑物内部 (100 ft)  </li>
-<li>802.11 b/g (WiFi)：11，54 Mbps 传输速率  </li>
-</ul>
-<p>广域无线接入  </p>
-<ul>
-<li>由电信运营商提供 (Cellular)：10’s km  </li>
-<li>1 到 10 Mbps  </li>
-<li>3 G，4 G：LTE</li>
-</ul>
-<h3 id="物理媒体"><a href="#物理媒体" class="headerlink" title="物理媒体"></a>物理媒体</h3><ul>
-<li>Bit：在传输-接收对间传播  </li>
-<li>物理链路：在每个传输-接收对间跨越的一种物理媒体  </li>
-<li>导引型媒体：信号沿着固体媒介被导引，如同轴电缆、光纤、双绞线  </li>
-<li>非导引型媒体：信号自由传播，如无线电  </li>
-</ul>
-<h4 id="双绞线-TP"><a href="#双绞线-TP" class="headerlink" title="双绞线 (TP)"></a>双绞线 (TP)</h4><ul>
-<li>两根绝缘铜线  </li>
-<li>5 类：100 Mbps Ethernet、Gbps 以太网  </li>
-<li>6 类：10 Gbps </li>
-</ul>
-<h4 id="同轴电缆"><a href="#同轴电缆" class="headerlink" title="同轴电缆"></a>同轴电缆</h4><ul>
-<li>两根同心的铜导线  </li>
-<li>双向  </li>
-<li>基带电缆<ul>
-<li>电缆上一个单个信道</li>
-<li>Ethernet</li>
-</ul>
-</li>
-<li>宽带电缆<ul>
-<li>电缆上有多个信道</li>
-<li>HFC</li>
-</ul>
-</li>
-</ul>
-<h4 id="光缆"><a href="#光缆" class="headerlink" title="光缆"></a>光缆</h4><ul>
-<li>光脉冲，每个脉冲表示一个 bit，在玻璃纤维中传输  </li>
-<li>高速：点到点的告诉传输，如 10 Gbps ~ 100 Gbps 传输速率  </li>
-<li>低误码率：在两个中继器之间可以有很长的距离，不受电磁噪声的干扰  </li>
-<li>安全：全反射或垂直 (射入角度为零)；单模光纤或多模光纤  </li>
-</ul>
-<h4 id="无线链路"><a href="#无线链路" class="headerlink" title="无线链路"></a>无线链路</h4><ul>
-<li>开放空间传输电磁波，携带要传输的数据  </li>
-<li>无需物理“线缆”  </li>
-<li>双向  </li>
-<li>传播环境效应：反射、吸收、干扰  </li>
-<li>类型  <ul>
-<li>地面微波：up to 45 Mbps channels  </li>
-<li>LAN：WiFi；11 Mbps，54 Mbps，540 Mbps 等  </li>
-<li>wide area：蜂窝；3 G cellular (~ few Mbps)；4 G 10 Mbps；5 G 数 Gbps  </li>
-<li>卫星：每个信道 Kbps 到 45 Mbps，或者多个聚集信道；270 msec 端到端延迟 (延迟大)；同步静止卫星和低轨卫星  </li>
-</ul>
-</li>
-</ul>
-<br>  
-
-<h2 id="Internet-结构和-ISP"><a href="#Internet-结构和-ISP" class="headerlink" title="Internet 结构和 ISP"></a>Internet 结构和 ISP</h2><h3 id="互联网络结构：网络的网络"><a href="#互联网络结构：网络的网络" class="headerlink" title="互联网络结构：网络的网络"></a>互联网络结构：网络的网络</h3><p>端系统通过接入 ISPs (Internet Service Providers) 连接到互联网  </p>
-<ul>
-<li>住宅、公司和大学的 ISPs  </li>
-</ul>
-<p>接入 ISPs 相应的必须是互联的，因此任何两个端系统可相互发送分组到对方。<br>导致“网络的网络”非常复杂，发展和演化通过经济和国家政策来驱动。  </p>
-<h3 id="接入-ISPs-的连接方式"><a href="#接入-ISPs-的连接方式" class="headerlink" title="接入 ISPs 的连接方式"></a>接入 ISPs 的连接方式</h3><p>接入 ISPs 之间全连接：即将每两个 ISPs 直接相连，不可扩展，需要 O(n<sup>2</sup>) 连接  </p>
-<p>将每个接入 ISP 都连接到<strong>全局 ISP</strong> (全局范围内覆盖)：客户 ISPs 和提供者 ISPs 有经济合约  </p>
-<p><img src="/2022/03/14/computernetworknotes1/globalISP.png" alt="将每个接入 ISP 都连接到全局 ISP">  </p>
-<p>如果全局 ISP 事可行的业务，则一定会有不同公司<strong>竞争</strong>；通过 ISP 之间的<strong>合作</strong>可以完成业务的扩展，肯定会有互联，对等互联的结算关系  </p>
-<p><img src="/2022/03/14/computernetworknotes1/ISPpeerlink.png" alt="ISP 竞争与合作"></p>
-<p>业务细分 (全球接入和区域接入)，<strong>区域网络</strong>将出现，用于将接入 ISPs 连接到全局 ISPs  </p>
-<p><img src="/2022/03/14/computernetworknotes1/regionalnet.png" alt="局域网络">  </p>
-<p><strong>内容提供商网络</strong> (Internet Content Provider, eg. Google, Microsoft, Akamai) 可能会构建它们自己的网络，将它们的服务、内容更加靠近端用户，向用户提供更好的服务，减少自己的运营支出</p>
-<ul>
-<li>在全球各地部署自己的网络 (或靠近核心 ISP)，连接自己的数据中心机房 (Data Center)，走自己的数据  </li>
-<li>连接若干 local ISP 和各级 (包括一层) ISP，更加靠近用户  </li>
-<li>少付费，且用户访问更快</li>
-</ul>
-<p><img src="/2022/03/14/computernetworknotes1/CPN.png" alt="内容提供商网络">  </p>
-<p>在网络的最中心，有一些为数不多的充分连接大范围网络 (分布广、节点有限，但之间有多重连接)  </p>
-<ul>
-<li>“tier-1” commercial ISPs (eg. Level 3, Sprint, AT &amp; T, NTT)，国家或者国际的覆盖范围  </li>
-<li>content provider network (eg. Google)：将数据中心接入 ISP，方便周边用户的访问；通常私有网络之间用专网绕过第一层 ISP 和区域 ISPs  </li>
-</ul>
-<p><img src="/2022/03/14/computernetworknotes1/Internetstructure.png" alt="互联网络结构：网络的网络">  </p>
-<h3 id="Internet-的结构：松散的层次结构"><a href="#Internet-的结构：松散的层次结构" class="headerlink" title="Internet 的结构：松散的层次结构"></a>Internet 的结构：松散的层次结构</h3><p><strong>中心：第一层 ISP</strong> (如 UUNet，BBN/Genuity，Sprint，AT &amp; T) 国家/国际覆盖，速率极高  </p>
-<ul>
-<li>直接于其它第一层 ISP 相连  </li>
-<li>与大量的第二层 ISP 和其它客户网络相连  </li>
-</ul>
-<p><img src="/2022/03/14/computernetworknotes1/POP.png" alt="Sprint: point-of-presence">  </p>
-<p>second.png：更小些的 (通常是局域性的) ISP  </p>
-<ul>
-<li>与一个或多个第一层 ISPs 相连，也可能于其它第二层 ISP  </li>
-<li>通过合作拓展网络  </li>
-</ul>
-<p><img src="/2022/03/14/computernetworknotes1/second.png" alt="第二层 ISP">  </p>
-<p>第三层 ISP 与其它本地 ISP  </p>
-<ul>
-<li>接入网 (与端系统最近)  </li>
-<li>一个分组要经过许多网络  </li>
-</ul>
-<p><img src="/2022/03/14/computernetworknotes1/third.png" alt="第三层 ISP">  </p>
-<h3 id="ISP-之间的连接"><a href="#ISP-之间的连接" class="headerlink" title="ISP 之间的连接"></a>ISP 之间的连接</h3><p><strong>POP</strong>  </p>
-<ul>
-<li>高层 ISP 面向客户网络的接入点，涉及费用结算  </li>
-<li>多宿 (multi home)：一个低层 ISP 接入多个高层 ISP  </li>
-</ul>
-<p><strong>对等接入</strong>  </p>
-<ul>
-<li>2 个 ISP 对等互接，不涉及费用结算  </li>
-</ul>
-<p><strong>IXP</strong>  </p>
-<ul>
-<li>多个对等 ISP 互联互通之外，通常不涉及费用结算  </li>
-<li>对等接入  </li>
-</ul>
-<p><strong>ICP</strong>  </p>
-<ul>
-<li>自己部署的专用网络</li>
-<li>同时和各级 ISP 连接  </li>
-</ul>
-<br>  
-
-<h2 id="分组延时、丢失和吞吐量"><a href="#分组延时、丢失和吞吐量" class="headerlink" title="分组延时、丢失和吞吐量"></a>分组延时、丢失和吞吐量</h2><h3 id="分组丢失和延时如何产生"><a href="#分组丢失和延时如何产生" class="headerlink" title="分组丢失和延时如何产生"></a>分组丢失和延时如何产生</h3><p>在路由器缓冲区的分组队列  </p>
-<ul>
-<li>分组到达链路的速率超过了链路输出的能力  </li>
-<li>分组等待排到队头、被传输  </li>
-<li>缓冲区满，无法进入路由器  </li>
-</ul>
-<p><img src="/2022/03/14/computernetworknotes1/queueNdelay.png" alt="分组延时和丢失">  </p>
-<h3 id="分组延时"><a href="#分组延时" class="headerlink" title="分组延时"></a>分组延时</h3><p>(1) 节点处理延时</p>
-<ul>
-<li>检查 bit 级差错  </li>
-<li>检查分组首部和决定将分组导向何处  </li>
-</ul>
-<p>(2) 排队延时</p>
-<ul>
-<li>在输出链路上等待传输的时间  </li>
-<li>依赖于路由器的拥塞控制  </li>
-</ul>
-<p>(3) 传输延时</p>
-<ul>
-<li>R = 链路带宽 (bps)  </li>
-<li>L = 分组长度 (bits)  </li>
-<li>将分组发送到链路上的时间 = L / R  </li>
-<li>存储转发延时  </li>
-</ul>
-<p>(4) 传播延时</p>
-<ul>
-<li>d = 物理链路的长度</li>
-<li>s = 在媒体上的传播速度 (~ 2 x 10<sup>8</sup> m / sec)  </li>
-<li>传播延时 = d / s  </li>
-</ul>
-<p><em>R and s are very differential quantities</em>  </p>
-<p><img src="/2022/03/14/computernetworknotes1/delay.png" alt="四种分组延时"></p>
-<p><img src="/2022/03/14/computernetworknotes1/carqueue.png" alt="分组延时与车队类比">  </p>
-<p><img src="/2022/03/14/computernetworknotes1/carqueue2.png" alt="分组延时与车队类比">   </p>
-<p><em>信道容量大，可容纳的分组数量多</em>  </p>
-<h3 id="节点延时"><a href="#节点延时" class="headerlink" title="节点延时"></a>节点延时</h3><p><img src="/2022/03/14/computernetworknotes1/delaytime.png">  </p>
-<h3 id="排队延时"><a href="#排队延时" class="headerlink" title="排队延时"></a>排队延时</h3><ul>
-<li><p>R = 链路带宽 (bps)  </p>
-</li>
-<li><p>L = 分组长度 (bits)  </p>
-</li>
-<li><p>a = 分组到达队列的平均速率  </p>
-</li>
-<li><p>流量强度 I = La / R  </p>
-<ul>
-<li>La / R ~ 0：平均排队延时很小  </li>
-<li>La / R -&gt; 1：延时变得很大  </li>
-<li>La / R &gt; 1：比特到达队列的速率超过了从该队列输出的速率，平均排队延时将趋向无穷大  </li>
-</ul>
-<p><em>设计系统时流量强度不能大于1</em>  </p>
-<p><img src="/2022/03/14/computernetworknotes1/queuedelay.png"></p>
-</li>
-</ul>
-<h3 id="Internet-的延时和路由"><a href="#Internet-的延时和路由" class="headerlink" title="Internet 的延时和路由"></a>Internet 的延时和路由</h3><p><strong>Traceroute 诊断程序</strong>：提供从源端，经过路由器，到目的的延时测量  </p>
-<ul>
-<li>For all <em>i</em>：<ul>
-<li>沿着目的的路径，像每个路由器发送 3 个探测分组  </li>
-<li>路由器 <em>i</em> 将向发送方返回一个分组  </li>
-<li>发送方队发送和回复之间间隔计时  </li>
-</ul>
-</li>
-<li>ICMP 协议  </li>
-</ul>
-<h3 id="分组丢失"><a href="#分组丢失" class="headerlink" title="分组丢失"></a>分组丢失</h3><p>链路的队列缓冲区容量有限<br>当分组到达一个满的队列时，该分组将会丢失<br>丢失的分组可能会被前一个节点或源端系统重传，或根本不重传  </p>
-<p><img src="/2022/03/14/computernetworknotes1/packagelost.png" alt="分组丢失">  </p>
-<h3 id="吞吐量"><a href="#吞吐量" class="headerlink" title="吞吐量"></a>吞吐量</h3><p>在源端和目标端之间传输的速度 (数据量 / 单位时间)<br>有效的数量，要从源端确实到达目标端<br>源到端的吞吐量取决于路径上的最小吞吐量，即<strong>瓶颈链路</strong>的吞吐量<br>瓶颈链路：端到端路径上，限制端到端吞吐的链路<br><strong>瞬间吞吐量</strong>：在一个时间点的速率<br><strong>平均吞吐量</strong>：在一个长时间内平均值  </p>
-<p><img src="/2022/03/14/computernetworknotes1/tuntuliang.png" alt="吞吐量">  </p>
-<p><img src="/2022/03/14/computernetworknotes1/tuntuliang2.png" alt="吞吐量：互联网场景">  </p>
-<br>
-
-<h2 id="协议层次和服务模型"><a href="#协议层次和服务模型" class="headerlink" title="协议层次和服务模型"></a>协议层次和服务模型</h2><h3 id="网络是一个复杂系统"><a href="#网络是一个复杂系统" class="headerlink" title="网络是一个复杂系统"></a>网络是一个复杂系统</h3><p><strong>网络功能繁杂</strong>：数字信号的物理信号承载、点到点、路由、rdt、进程区分、应用等<br><strong>网络有许多构成元素和设备</strong>：主机、路由器、各种媒体的链路、应用、协议、硬件、软件等<br>如何规划这样一个复杂系统：模块化、<strong>层次化</strong></p>
-<h3 id="层次化方式实现复杂网络功能"><a href="#层次化方式实现复杂网络功能" class="headerlink" title="层次化方式实现复杂网络功能"></a>层次化方式实现复杂网络功能</h3><p>将网络复杂的功能分层功能明确的<strong>层次</strong>，每一层实现了其中一个或一组<strong>功能</strong>，功能中有其上层可以使用的功能：<strong>服务</strong><br>本层协议实体相互交互执行本层的<strong>协议动作</strong>，目的是实现本层功能，通过接口为上层提供更好的服务<br>在实现本层协议时，直接<strong>利用下层所提供的服务</strong><br>本层的服务：借助下层服务实现的本层协议实体之间交互带来的 (上层可以利用的) 新功能 + 更下层所提供的服务  </p>
-<h3 id="服务和服务访问点"><a href="#服务和服务访问点" class="headerlink" title="服务和服务访问点"></a>服务和服务访问点</h3><p><strong>服务 (Service)：</strong>低层实体向上层实体提供它们之间通信的能力  </p>
-<ul>
-<li>服务用户 (service user)  </li>
-<li>服务提供者 (service provider)  </li>
-</ul>
-<p><strong>原语 (primitive)：</strong>上层使用下层服务的形式，高层使用低层提供的服务，以及低层向高层提供服务都是通过服务访问原语来进行交互的 —— <strong>提供服务的形式</strong>  </p>
-<p><strong>服务访问点 SAP (Services Access Point)：</strong>上层使用下层提供的服务通过层间的接口 —— <strong>提供服务的地点</strong>  </p>
-<ul>
-<li>eg. 邮箱  </li>
-<li>地址 (address)：下层的一个实体支撑着上层的多个实体，SAP 有标志不同上层实体的作用  </li>
-<li>可以有不同的实现，队列  </li>
-<li>eg. 传输层的 SAP：端口 (port)<br><em>区分数据要从哪里传到哪里，服务提供者区分不同的服务用户，层间接口</em></li>
-</ul>
-<h3 id="服务的类型"><a href="#服务的类型" class="headerlink" title="服务的类型"></a>服务的类型</h3><p><strong>面向连接的服务 (Connection-oriented Service)</strong>  </p>
-<ul>
-<li>连接 (Connection)：两个通信实体为进行通信而建立的一种结合  </li>
-<li>面向连接的服务通信过程：建立连接 (通信之前先“握手”，为通信分配资源，做好准备) -&gt; 通信 -&gt; 拆除连接  </li>
-<li>例子：网络层的连接被称为虚电路  </li>
-<li>适用范围：更适合传输大的数据块，不适合效地零星报文  </li>
-<li>特点：保序  </li>
-<li>服务类型<ul>
-<li>可靠的信息流 传送页面 (可靠的获得，通过接收方的确认：先“握手”)  </li>
-<li>可靠的字节流 远程登陆  </li>
-<li>不可靠的连接 数字化声音  </li>
-</ul>
-</li>
-</ul>
-<p><strong>无连接的服务 (Connectionless Service)</strong>  </p>
-<ul>
-<li>两个对等层实体在通信钱不需要建立一个连接，不预留资源，不需要通信双方都活跃 (例：寄信；通信之前不“握手”)  </li>
-<li>特点：不可靠、可能重复、可能失序  </li>
-<li>IP分组，数据包  </li>
-<li>适用范围：传送零星数据  </li>
-<li>服务类型<ul>
-<li>不可靠的数据报 电子方式的函件  </li>
-<li>有确认的数据包 挂号信  </li>
-<li>请求回答 信息查询  </li>
-</ul>
-</li>
-</ul>
-<h3 id="服务和协议"><a href="#服务和协议" class="headerlink" title="服务和协议"></a>服务和协议</h3><p><strong>区别</strong>  </p>
-<ul>
-<li>服务 (Service)：低层实体向上层实体提供它们之间的通信能力；通过原语 (primitive) 操作；垂直  </li>
-<li>协议 (protocol)：对等层实体 (peer entity) 之间在相互通信的过程中；需要遵循的规则的集合；水平  </li>
-</ul>
-<p><strong>联系</strong>  </p>
-<ul>
-<li>本层协议的实现要靠下层提供的服务来实现  </li>
-<li>本层实体通过协议为上层提供更高级的服务  </li>
-</ul>
-<h3 id="数据单元"><a href="#数据单元" class="headerlink" title="数据单元"></a>数据单元</h3><p><img src="/2022/03/14/computernetworknotes1/DU.png" alt="Data Unit">  </p>
-<p>SDU：上层要求传输的数据<br>ICI：接口控制信息，为更加顺利地传过层间接口<br>IDU = SDU + ICI<br>PDU：最常见的数据单元；在不同层有不同的名称，如应用报文、分组、数据报、位、帧等  </p>
-<p><strong>n-PDU的构成形式</strong><br><em>n-header：与本层交换数据所需的一些控制信息；其中，n 为层数，第 n 层</em>  </p>
-<ul>
-<li>一对一：SDU + n-header  </li>
-<li>一对多：SDU 的一部分 + n-header (PDU 大小有限，需要将 SDU 分为几个部分)  </li>
-<li>多对一：若干 SDU + n-header  </li>
-</ul>
-<h3 id="分层处理队实现复杂系统的好处"><a href="#分层处理队实现复杂系统的好处" class="headerlink" title="分层处理队实现复杂系统的好处"></a>分层处理队实现复杂系统的好处</h3><p>对复杂的系统<br><strong>概念化</strong>：结构清晰，便于标示网络组件，以及描述其相互关系</p>
-<ul>
-<li>分层参考模型  </li>
-</ul>
-<p><strong>结构化</strong>：模块化更易于维护和系统升级  </p>
-<ul>
-<li>改变某一层服务的实现不影响系统中的其它层次，对其它层次而言是透明的  </li>
-<li>eg. 如果改变登记程序并不影响系统的其他部分  </li>
-</ul>
-<p>分层的问题：效率相对较低  </p>
-<h3 id="Internet-协议栈"><a href="#Internet-协议栈" class="headerlink" title="Internet 协议栈"></a>Internet 协议栈</h3><p><strong>应用层</strong>：网络应用  </p>
-<ul>
-<li>为人类用户或其它应用进程提供网络应用服务  </li>
-<li>完成应用报文之间的交互  </li>
-<li>FTP, SMTP, HTTP, DNS  </li>
-<li>协议数据单元：报文 (message)  </li>
-</ul>
-<p><strong>传输层</strong>：主机之间的数据传输  </p>
-<ul>
-<li>在网络层提供的端到端通信基础上，细分为进程到进程，将不可靠的通信变成可靠的通信  </li>
-<li>完成进程到进程的区分  </li>
-<li>TCP, UDP  </li>
-<li>协议数据单元：报文段 (segment)；eg. TCP 段，UDP 数据报  </li>
-</ul>
-<p><strong>网络层</strong>：为数据包从源到目的选择路由  </p>
-<ul>
-<li>主机主机之间的通信，端到端通信，不可靠  </li>
-<li>传输以分组为单位的端到端的数据  </li>
-<li>IP，路由协议  </li>
-<li>协议数据单元：分组 (packet)；如果无连接方式：数据报 (datagram)  </li>
-</ul>
-<p><strong>链路层</strong>：相邻网络节点间的数据传输  </p>
-<ul>
-<li>2 个相邻 2 点的通信，点到点通信，可靠或不可靠</li>
-<li>在相邻两点之间，传输以帧为单位的数据 (Point to Point, P2P)  </li>
-<li>点对点协议 PPP，802.11 (WiFi)，Ethernet  </li>
-<li>协议数据单元：帧 (frame)  </li>
-</ul>
-<p><strong>物理层</strong>：在线路上传送 bit  </p>
-<ul>
-<li>把数据转换成物理信号承载在媒体上传输出去，接收方将物理信号再转换为数据信息  </li>
-<li>协议数据单元：位 (bit)  </li>
-</ul>
-<p><em>链路层和物理层协议一般封装在同一张网卡中</em>  </p>
-<p><img src="/2022/03/14/computernetworknotes1/Internetxieyizhan.png">  </p>
-<h3 id="ISO-OSI-参考模型"><a href="#ISO-OSI-参考模型" class="headerlink" title="ISO/OSI 参考模型"></a>ISO/OSI 参考模型</h3><p><strong>表示层</strong>：允许应用解释传输的数据  </p>
-<ul>
-<li>关心数据语义方面的信息和核心内容，而不是关心具体表达、如何编码</li>
-<li>加密、压缩、机器相关的表示转换  </li>
-</ul>
-<p><strong>会话层</strong>：数据交换的同步，检查点，恢复  </p>
-<ul>
-<li>会话管理：建立会话、维持会话  </li>
-</ul>
-<p><em>Internet 协议栈中没有以上两层，但依靠应用层来实现以上两层实现的功能</em>  </p>
-<p><img src="/2022/03/14/computernetworknotes1/ISO.png">  </p>
-<h3 id="封装和解封装"><a href="#封装和解封装" class="headerlink" title="封装和解封装"></a>封装和解封装</h3><p><img src="/2022/03/14/computernetworknotes1/seal.png" alt="封装和解封装">  </p>
 ]]></content>
       <categories>
         <category>Notes</category>
