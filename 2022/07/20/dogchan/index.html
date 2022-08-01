@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"tech.musain.club","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="任何时间，任何地点，可爱狗狗，认真汪汪！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DOGchan：如何做一个能够自动回复的 Mastodon bot">
+<meta property="og:url" content="https://tech.musain.club/2022/07/20/dogchan/index.html">
+<meta property="og:site_name" content="Bugrocery">
+<meta property="og:description" content="任何时间，任何地点，可爱狗狗，认真汪汪！">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://tech.musain.club/2022/07/20/dogchan/repository.png">
+<meta property="article:published_time" content="2022-07-20T04:44:09.000Z">
+<meta property="article:modified_time" content="2022-08-01T10:20:12.742Z">
+<meta property="article:author" content="Udon">
+<meta property="article:tag" content="Mastodon">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tech.musain.club/2022/07/20/dogchan/repository.png">
+
+
+<link rel="canonical" href="https://tech.musain.club/2022/07/20/dogchan/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://tech.musain.club/2022/07/20/dogchan/","path":"2022/07/20/dogchan/","title":"DOGchan：如何做一个能够自动回复的 Mastodon bot"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>DOGchan：如何做一个能够自动回复的 Mastodon bot | Bugrocery</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Bugrocery</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A9%E7%94%A8-Node-%E5%8F%8A-mastodon-api-%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E5%9B%9E%E5%A4%8D-bot"><span class="nav-number">1.</span> <span class="nav-text">利用 Node 及 mastodon-api 实现自动回复 bot</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">1.1.</span> <span class="nav-text">参考</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E5%86%8C%E8%B4%A6%E5%8F%B7"><span class="nav-number">1.2.</span> <span class="nav-text">注册账号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-node"><span class="nav-number">1.3.</span> <span class="nav-text">安装 node</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83"><span class="nav-number">1.4.</span> <span class="nav-text">配置环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#connect-to-mastodon"><span class="nav-number">1.5.</span> <span class="nav-text">connect to mastodon</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#log-file"><span class="nav-number">1.6.</span> <span class="nav-text">log file</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#streaming-api-user"><span class="nav-number">1.7.</span> <span class="nav-text">streaming api: user</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A9%E7%94%A8-Mastodon-py-%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E5%9B%9E%E5%A4%8D-bot"><span class="nav-number">2.</span> <span class="nav-text">利用 Mastodon.py 实现自动回复 bot</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83-1"><span class="nav-number">2.1.</span> <span class="nav-text">参考</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E5%86%8C%E8%B4%A6%E5%8F%B7-1"><span class="nav-number">2.2.</span> <span class="nav-text">注册账号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-Mastodon-py"><span class="nav-number">2.3.</span> <span class="nav-text">安装 Mastodon.py</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%BE%91%E8%84%9A%E6%9C%AC"><span class="nav-number">2.4.</span> <span class="nav-text">编辑脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E5%9B%9E%E5%A4%8D%E8%84%9A%E6%9C%AC"><span class="nav-number">2.4.1.</span> <span class="nav-text">自动回复脚本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E5%8F%91%E5%98%9F%E8%84%9A%E6%9C%AC"><span class="nav-number">2.4.2.</span> <span class="nav-text">自动发嘟脚本</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A5%87%E6%80%AA%E7%9A%84%E6%8A%A5%E9%94%99"><span class="nav-number">2.5.</span> <span class="nav-text">奇怪的报错</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%86%E4%BB%A3%E7%A0%81%E4%B8%8A%E4%BC%A0%E8%87%B3-GitHub"><span class="nav-number">3.</span> <span class="nav-text">将代码上传至 GitHub</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%BB%93%E5%BA%93"><span class="nav-number">3.1.</span> <span class="nav-text">创建仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%86%E9%92%A5"><span class="nav-number">3.2.</span> <span class="nav-text">密钥</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Personal-access-tokens"><span class="nav-number">3.3.</span> <span class="nav-text">Personal access tokens</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8A%E4%BC%A0"><span class="nav-number">3.4.</span> <span class="nav-text">上传</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8E%E8%AE%B0"><span class="nav-number">4.</span> <span class="nav-text">后记</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Udon"
+      src="/images/img.png">
+  <p class="site-author-name" itemprop="name">Udon</p>
+  <div class="site-description" itemprop="description">It's no use to be hardworking.</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/melocery" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;melocery" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:slyinmusain@gmail.com" title="E-Mail → mailto:slyinmusain@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tech.musain.club/2022/07/20/dogchan/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/img.png">
+      <meta itemprop="name" content="Udon">
+      <meta itemprop="description" content="It's no use to be hardworking.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bugrocery">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          DOGchan：如何做一个能够自动回复的 Mastodon bot
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-07-20 12:44:09" itemprop="dateCreated datePublished" datetime="2022-07-20T12:44:09+08:00">2022-07-20</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2022-08-01 18:20:12" itemprop="dateModified" datetime="2022-08-01T18:20:12+08:00">2022-08-01</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Mastodon/" itemprop="url" rel="index"><span itemprop="name">Mastodon</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Mastodon/Bot/" itemprop="url" rel="index"><span itemprop="name">Bot</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>12k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>10 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <center> 任何时间，任何地点，可爱狗狗，认真汪汪！ </center>
+<span id="more"></span>
+
+<p>缪尚咖啡馆已经有只傲娇猫猫，当然也要有可爱狗狗！于是决定学习制作一个能够自动回复的狗狗 bot，让缪尚咖啡馆实现猫狗双全。让我们有请小狗汪汪！  </p>
+<h2 id="利用-Node-及-mastodon-api-实现自动回复-bot"><a href="#利用-Node-及-mastodon-api-实现自动回复-bot" class="headerlink" title="利用 Node 及 mastodon-api 实现自动回复 bot"></a>利用 Node 及 mastodon-api 实现自动回复 bot</h2><p>由于这一方法在尝试过程中 bug 百出，且没有找到合适的解决方案，暂时搁置，转而使用 <code>Mastodon.py</code>。<br>但此方法本身较为好懂，油管教程也也非常详细、容易上手。虽然很不想承认，但我没有搭建成功应该是我的问题，可能会在以后更熟悉 JavaScript 时再回头看这个教程。  </p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>长毛象顶流：<a target="_blank" rel="noopener" href="https://github.com/TheTarr/mastodon_bot">操操</a><br>油管教程：<a target="_blank" rel="noopener" href="https://www.youtube.com/playlist?list=PLRqwX-V7Uu6byiVX7_Z1rclitVhMBmNFQ">Mastodon API and Bots: Node.js</a>  </p>
+<h3 id="注册账号"><a href="#注册账号" class="headerlink" title="注册账号"></a>注册账号</h3><p>选择一个合适的站点注册 bot 账号，并修改资料，注意选中 “这是一个 bot 账号 / This is a bot account”。<br>在管理面板找到开发/Development-创建新应用/New Application，创建新应用并给予读写权限，复制访问令牌。  </p>
+<h3 id="安装-node"><a href="#安装-node" class="headerlink" title="安装 node"></a>安装 node</h3><p>由于服务器上还没有安装 npm，所以第一步需要先安装。直接使用命令安装。  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apt install npm</span><br><span class="line">mkdir dogchan <span class="comment"># 为 bot 相关文件新建目录</span></span><br><span class="line"><span class="built_in">cd</span> dogchan</span><br></pre></td></tr></table></figure>
+
+<p>接下来运行命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm init</span><br></pre></td></tr></table></figure>
+
+<p>根据提示一步步填写初始化信息：  </p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">This utility will walk you through creating a package.json file.</span><br><span class="line">It only covers the most common items, and tries to guess sensible defaults.</span><br><span class="line"></span><br><span class="line">See `npm help json` for definitive documentation on these fields</span><br><span class="line">and exactly what they do.</span><br><span class="line"></span><br><span class="line">Use `npm install &lt;pkg&gt;` afterwards to install a package and</span><br><span class="line">save it as a dependency in the package.json file.</span><br><span class="line"></span><br><span class="line">Press ^C at any time to quit.</span><br><span class="line">package name: (dogchan) dogchan</span><br><span class="line">version: (<span class="number">1.0</span><span class="number">.0</span>) <span class="number">0.0</span><span class="number">.1</span></span><br><span class="line">description: A dog bot</span><br><span class="line">entry point: (index.js) bot.js</span><br><span class="line">test command:</span><br><span class="line">git repository:</span><br><span class="line">keywords: bot, mastodon</span><br><span class="line">author: melocery</span><br><span class="line">license: (ISC) MIT</span><br><span class="line">About to write to /root/miniconda/dogchan/package.json:</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"><span class="attr">&quot;name&quot;</span>: <span class="string">&quot;dogchan&quot;</span>,</span><br><span class="line"><span class="attr">&quot;version&quot;</span>: <span class="string">&quot;0.0.1&quot;</span>,</span><br><span class="line"><span class="attr">&quot;description&quot;</span>: <span class="string">&quot;A dog bot&quot;</span>,</span><br><span class="line"><span class="attr">&quot;main&quot;</span>: <span class="string">&quot;bot.js&quot;</span>,</span><br><span class="line"><span class="attr">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;test&quot;</span>: <span class="string">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span></span><br><span class="line">&#125;,</span><br><span class="line"><span class="attr">&quot;keywords&quot;</span>: [</span><br><span class="line">    <span class="string">&quot;bot&quot;</span>,</span><br><span class="line">    <span class="string">&quot;mastodon&quot;</span></span><br><span class="line">],</span><br><span class="line"><span class="attr">&quot;author&quot;</span>: <span class="string">&quot;melocery&quot;</span>,</span><br><span class="line"><span class="attr">&quot;license&quot;</span>: <span class="string">&quot;MIT&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Is this OK? (yes) yes</span><br></pre></td></tr></table></figure>
+
+<p>现在查看 <code>dogchan</code> 目录下会多出一个名为 <code>package.json</code> 的文件，内容是刚才初始化填写的信息。  </p>
+<h3 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h3><p>运行命令：  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install dotenv</span><br></pre></td></tr></table></figure>
+
+<p>出现问题：  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm WARN notsup Unsupported engine <span class="keyword">for</span> dotenv@16.0.1: wanted: &#123;<span class="string">&quot;node&quot;</span>:<span class="string">&quot;&gt;=12&quot;</span>&#125; (current: &#123;<span class="string">&quot;node&quot;</span>:<span class="string">&quot;10.19.0&quot;</span>,<span class="string">&quot;npm&quot;</span>:<span class="string">&quot;6.14.4&quot;</span>&#125;)</span><br><span class="line">npm WARN notsup Not compatible with your version of node/npm: dotenv@16.0.1</span><br></pre></td></tr></table></figure>
+
+<p>提醒安装的 <code>node</code> 和 <code>npm</code> 版本不足。查找教程升级版本后，再次运行命令出现新的报错：  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">node:internal/modules/cjs/loader:936</span><br><span class="line">  throw err;</span><br><span class="line">  ^</span><br><span class="line"></span><br><span class="line">Error: Cannot find module <span class="string">&#x27;semver&#x27;</span></span><br><span class="line">Require stack:</span><br><span class="line">- /usr/share/npm/lib/utils/unsupported.js</span><br><span class="line">- /usr/share/npm/bin/npm-cli.js</span><br><span class="line">    at Function.Module._resolveFilename (node:internal/modules/cjs/loader:933:15)</span><br><span class="line">    at Function.Module._load (node:internal/modules/cjs/loader:778:27)</span><br><span class="line">    at Module.require (node:internal/modules/cjs/loader:1005:19)</span><br><span class="line">    at require (node:internal/modules/cjs/helpers:102:18)</span><br><span class="line">    at Object.&lt;anonymous&gt; (/usr/share/npm/lib/utils/unsupported.js:2:14)</span><br><span class="line">    at Module._compile (node:internal/modules/cjs/loader:1105:14)</span><br><span class="line">    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)</span><br><span class="line">    at Module.load (node:internal/modules/cjs/loader:981:32)</span><br><span class="line">    at Function.Module._load (node:internal/modules/cjs/loader:822:12)</span><br><span class="line">    at Module.require (node:internal/modules/cjs/loader:1005:19) &#123;</span><br><span class="line">code: <span class="string">&#x27;MODULE_NOT_FOUND&#x27;</span>,</span><br><span class="line">requireStack: [</span><br><span class="line">    <span class="string">&#x27;/usr/share/npm/lib/utils/unsupported.js&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;/usr/share/npm/bin/npm-cli.js&#x27;</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>谷歌解决方法大多数是完全卸载后重装，但无论卸载重装多少次，总会遇到 <code>Error: Cannot find module &#39;semver&#39;</code>。最后的解决方式是：  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 完全 uninstall node 和 npm</span></span><br><span class="line">sudo rm -rf /usr/<span class="built_in">local</span>/bin/npm /usr/<span class="built_in">local</span>/share/man/man1/node* ~/.npm</span><br><span class="line">sudo rm -rf /usr/<span class="built_in">local</span>/lib/node*</span><br><span class="line">sudo rm -rf /usr/<span class="built_in">local</span>/bin/node*</span><br><span class="line">sudo rm -rf /usr/<span class="built_in">local</span>/include/node*</span><br><span class="line"></span><br><span class="line">sudo apt-get purge nodejs npm</span><br><span class="line">sudo apt autoremove</span><br><span class="line"></span><br><span class="line"><span class="comment"># reinstall</span></span><br><span class="line">wget https://nodejs.org/dist/v16.16.0/node-v16.16.0-linux-x64.tar.xz</span><br><span class="line">tar -xf node-v16.16.0-linux-x64.tar.xz</span><br><span class="line">sudo mv node-v16.16.0-linux-x64/bin/* /usr/<span class="built_in">local</span>/bin/</span><br><span class="line">sudo mv node-v16.16.0-linux-x64/lib/node_modules/ /usr/<span class="built_in">local</span>/lib/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查安装情况</span></span><br><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+
+<p>这里再次出现状况，运行 <code>npm -v</code> 时报错：  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-bash: /usr/bin/npm: No such file or directory</span><br></pre></td></tr></table></figure>
+
+<p>但如果换为运行 <code>/usr/local/bin/npm -v</code> 则能够正常显示版本号。没有再次搜索问题原因，直接在 <code>.bashrc</code> 文件中增加一行：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias npm=&#x27;/usr/local/bin/npm&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>而后执行 <code>source .bashrc</code>。此时运行 <code>npm -v</code> 即可正常显示版本号。  </p>
+<p>重新进行关于 npm 的所有命令，直到安装完成 <code>dotenv</code>。安装完成后出现提醒信息：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">added 1 package, and audited 236 packages in 1s</span><br><span class="line"></span><br><span class="line">5 packages are looking for funding</span><br><span class="line">run `npm fund` for details</span><br><span class="line"></span><br><span class="line">8 vulnerabilities (2 moderate, 3 high, 3 critical)</span><br><span class="line"></span><br><span class="line">To address issues that do not require attention, run:</span><br><span class="line">npm audit fix</span><br><span class="line"></span><br><span class="line">Some issues need review, and may require choosing</span><br><span class="line">a different dependency.</span><br><span class="line"></span><br><span class="line">Run `npm audit` for details.</span><br></pre></td></tr></table></figure>
+
+<p>没有找到解决方法，运行 <code>npm audit fix --force</code> 也无法解决 8 vulnerabilities，暂时搁置。  </p>
+<p>新建文件 <code>.env</code>，将前述步骤中得到的 bot 访问令牌填入文件：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 应用 ID</span><br><span class="line">CLIENT_KEY= </span><br><span class="line"># 应用密钥</span><br><span class="line">CLIENT_SECRET=</span><br><span class="line"># 访问令牌</span><br><span class="line">ACCESS_TOKEN= </span><br><span class="line"># bot 所在站点</span><br><span class="line">API_URL=https://musain.cafe/api/v1/ </span><br></pre></td></tr></table></figure>
+
+<p>保存并退出。<br>新建 <code>bot.js</code> 文件，在文件内写入：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;dotenv&#x27;</span>).config();</span><br></pre></td></tr></table></figure>
+
+<p>由于后续会将整个 bot 的代码上传至 github，所以需要将真正的 <code>.env</code> 隐藏起来而上传一个示例文件。  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">nano .env-example</span><br><span class="line"></span><br><span class="line"><span class="comment">## 写入如下内容后保存并退出，文件中不需要 &#x27;#&#x27;，此处该符号仅为标记文件内容</span></span><br><span class="line"><span class="comment"># CLIENT_KEY=</span></span><br><span class="line"><span class="comment"># CLIENT_SECRET=</span></span><br><span class="line"><span class="comment"># ACCESS_TOKEN=</span></span><br><span class="line"><span class="comment"># API_URL=https://musain.cafe/api/v1/</span></span><br><span class="line"></span><br><span class="line">nano .gitignore</span><br><span class="line"><span class="comment">## 写入如下内容后保存并退出，文件中不需要 &#x27;#&#x27;，此处该符号仅为标记文件内容</span></span><br><span class="line"><span class="comment"># .env</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="connect-to-mastodon"><a href="#connect-to-mastodon" class="headerlink" title="connect to mastodon"></a>connect to mastodon</h3><p>与 mastodon 连接需要使用 node package (<a target="_blank" rel="noopener" href="https://github.com/vanita5/mastodon-api">mastodon-api</a>)，安装命令：  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save mastodon-api</span><br></pre></td></tr></table></figure>
+
+<p>安装完成后目录下会多出一个目录 <code>node_modules</code> 和一个文件 <code>package-lock.json</code>。查看 <code>package.json</code> 会发现其中多出一段：  </p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;dependencies&quot;</span>:&#123;</span><br><span class="line">    <span class="attr">&quot;mastodon-api&quot;</span>: <span class="string">&quot;^1.3.0&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>想要连接 mastodon 则需要编辑 <code>bot.js</code> 文件，在文件内写入：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mastodon = <span class="built_in">require</span>(<span class="string">&#x27;mastodon-api&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> M = <span class="keyword">new</span> Mastodon(&#123;</span><br><span class="line"><span class="attr">client_key</span>: process.env.CLIENT_KEY, <span class="comment">// read the .env file</span></span><br><span class="line"><span class="attr">client_secret</span>: process.env.CLIENT_SECRET,</span><br><span class="line"><span class="attr">access_token</span>: process.env.ACCESS_TOKEN,</span><br><span class="line"><span class="attr">timeout_ms</span>: <span class="number">60</span> * <span class="number">1000</span>,  <span class="comment">// optional HTTP request timeout to apply to all requests.</span></span><br><span class="line"><span class="attr">api_url</span>: process.env.API_URL, <span class="comment">// optional, defaults to https://mastodon.social/api/v1/</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="log-file"><a href="#log-file" class="headerlink" title="log file"></a>log file</h3><p>每一次发送嘟文会在屏幕上打印一大串内容，包括嘟文发送情况、嘟文的链接等等，但并不需要每一次都打印详细信息，只需要将 debug 所需的信息输出到 log 文件即可。<br>在 <code>bot.js</code> 文件中写入：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// toot example</span></span><br><span class="line"><span class="keyword">const</span> num = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.randon()*<span class="number">100</span>);</span><br><span class="line"><span class="keyword">const</span> params = &#123;</span><br><span class="line">    <span class="attr">status</span>: <span class="string">`The meaning of life is <span class="subst">$&#123;num&#125;</span>`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// log</span></span><br><span class="line">M.post(<span class="string">&#x27;statuses&#x27;</span>, params, <span class="function">(<span class="params">error, data</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (error) &#123;</span><br><span class="line">        <span class="built_in">console</span>.error(error);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// fs.writeFileSync(&#x27;data.json&#x27;, JSON.stringify(data, null, 2));</span></span><br><span class="line">        <span class="comment">// console.log(data);</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`ID: <span class="subst">$&#123;data.id&#125;</span> and timestamp: <span class="subst">$&#123;data.created_at&#125;</span>`</span>); <span class="comment">// get the id and time</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`Posted: <span class="subst">$&#123;data.content&#125;</span>`</span>); <span class="comment">// get the content of toot</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>上述代码实际实现了一次完整的发送嘟文，因此可以封装为一个函数，即：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line"><span class="comment">// toot function: pick a random num, create a status, and toot it</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">toot</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// toot example</span></span><br><span class="line">    <span class="keyword">const</span> num = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.randon()*<span class="number">100</span>);</span><br><span class="line">    <span class="keyword">const</span> params = &#123;</span><br><span class="line">        <span class="attr">status</span>: <span class="string">`The meaning of life is <span class="subst">$&#123;num&#125;</span>`</span></span><br><span class="line">        <span class="comment">// if want to use cw</span></span><br><span class="line">        <span class="comment">// spoiler_text: &quot; The meaning of life is&quot;,</span></span><br><span class="line">        <span class="comment">// status: num</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// log</span></span><br><span class="line">    M.post(<span class="string">&#x27;statuses&#x27;</span>, params, <span class="function">(<span class="params">error, data</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (error) &#123;</span><br><span class="line">            <span class="built_in">console</span>.error(error);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// fs.writeFileSync(&#x27;data.json&#x27;, JSON.stringify(data, null, 2));</span></span><br><span class="line">            <span class="comment">// console.log(data);</span></span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">`ID: <span class="subst">$&#123;data.id&#125;</span> and timestamp: <span class="subst">$&#123;data.created_at&#125;</span>`</span>); <span class="comment">// get the id and time</span></span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">`Posted: <span class="subst">$&#123;data.content&#125;</span>`</span>); <span class="comment">// get the content of toot</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="streaming-api-user"><a href="#streaming-api-user" class="headerlink" title="streaming api: user"></a>streaming api: user</h3><p>目前 bot 已经实现自动发嘟，但如果想做一个可以自动回复、给特定人点星而不是随机骚扰用户，则需要监听 streaming api 中的用户部分，并根据所得信息进行相应回应。<br>在 <code>bot.js</code> 文件中写入：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> listener = M.stream(<span class="string">&#x27;streaming/user&#x27;</span>)</span><br><span class="line"></span><br><span class="line">listener.on(<span class="string">&#x27;message&#x27;</span>, <span class="function"><span class="params">msg</span> =&gt;</span> &#123;</span><br><span class="line">    fs.writeFileSync(<span class="string">`data<span class="subst">$&#123;<span class="keyword">new</span> <span class="built_in">Date</span>().getTime()&#125;</span>.json`</span>, <span class="built_in">JSON</span>.stringify(msg, <span class="literal">null</span>, <span class="number">2</span>));</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`usr event`</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>通过 <code>node bot.js</code> 运行 bot，并利用其它账号 @bot 或关注等操作测试 bot 是否正确运行。这一步遇到问题：  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Mastodon Bot starting...</span><br><span class="line">node:events:505</span><br><span class="line">    throw er; // Unhandled <span class="string">&#x27;error&#x27;</span> event</span><br><span class="line">    ^</span><br><span class="line"></span><br><span class="line">Error: aborted</span><br><span class="line">    at connResetException (node:internal/errors:692:14)</span><br><span class="line">    at TLSSocket.socketCloseListener (node:_http_client:414:19)</span><br><span class="line">    at TLSSocket.emit (node:events:539:35)</span><br><span class="line">    at node:net:709:12</span><br><span class="line">    at TCP.done (node:_tls_wrap:582:7)</span><br><span class="line">Emitted <span class="string">&#x27;error&#x27;</span> event on StreamingAPIConnection instance at:</span><br><span class="line">    at IncomingMessage.&lt;anonymous&gt; (/root/miniconda/dogchan/node_modules/mastodon-api/lib/streaming-api-connection.js:141:30)</span><br><span class="line">    at IncomingMessage.emit (node:events:539:35)</span><br><span class="line">    at emitErrorNT (node:internal/streams/destroy:157:8)</span><br><span class="line">    at emitErrorCloseNT (node:internal/streams/destroy:122:3)</span><br><span class="line">    at processTicksAndRejections (node:internal/process/task_queues:83:21) &#123;</span><br><span class="line">code: <span class="string">&#x27;ECONNRESET&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>经过一整天的搜索和试图 debug 决定放弃，转而使用 python 中的 <code>Mastodon.py</code>，即 CATsama 使用的包。  </p>
+<h2 id="利用-Mastodon-py-实现自动回复-bot"><a href="#利用-Mastodon-py-实现自动回复-bot" class="headerlink" title="利用 Mastodon.py 实现自动回复 bot"></a>利用 Mastodon.py 实现自动回复 bot</h2><h3 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a>参考</h3><p>Mastodon.py: <a target="_blank" rel="noopener" href="https://mastodonpy.readthedocs.io/en/stable/index.html#">Docs</a> , <a target="_blank" rel="noopener" href="https://github.com/halcy/Mastodon.py">GitHub</a><br>mastodon-bot-template: <a target="_blank" rel="noopener" href="https://github.com/Lynnesbian/mastodon-bot-template/blob/9e72f6a490734f7af5897c40f20b4aecb0c2308b/reply.py">reply.py</a><br>mstdn-ebooks: <a target="_blank" rel="noopener" href="https://github.com/Lynnesbian/mstdn-ebooks/blob/master/reply.py">reply.py</a></p>
+<h3 id="注册账号-1"><a href="#注册账号-1" class="headerlink" title="注册账号"></a>注册账号</h3><p>选择一个合适的站点注册 bot 账号，并修改资料，注意选中 “这是一个 bot 账号 / This is a bot account”。<br>在管理面板找到开发/Development-创建新应用/New Application，创建新应用并给予读写权限，复制访问令牌。  </p>
+<h3 id="安装-Mastodon-py"><a href="#安装-Mastodon-py" class="headerlink" title="安装 Mastodon.py"></a>安装 Mastodon.py</h3><p>安装 miniconda3：  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mkdir miniconda</span><br><span class="line"><span class="built_in">cd</span> miniconda</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载 python 最新版本并用 bash 安装</span></span><br><span class="line">wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh</span><br><span class="line">sh Miniconda3-latest-Linux-x86_64.sh //用bash安装</span><br></pre></td></tr></table></figure>
+
+<p>通过 <code>pip</code> 安装 Mastodon.py：  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pip3 install requests beautifulsoup4 Mastodon.py <span class="comment"># 安装mastodon.py</span></span><br><span class="line">mkdir dogchan</span><br><span class="line"><span class="built_in">cd</span> dogchan</span><br><span class="line">nano mybot_usercred.secret <span class="comment"># 写入刚才复制的访问令牌，保存退出</span></span><br><span class="line">nano dogchan.py <span class="comment"># 发嘟脚本</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="编辑脚本"><a href="#编辑脚本" class="headerlink" title="编辑脚本"></a>编辑脚本</h3><p>整个过程基本上属于一边参考现有的利用 Mastodon.py 实现自动回复的库，一边自己悟每一步都是做什么的。<br>其中最实用的一个库是: <a target="_blank" rel="noopener" href="https://github.com/Lynnesbian/mastodon-bot-template/">mastodon-bot-template</a>。这个库不仅包括了自动回复模板，也包括了自动发嘟模板。本项目中的 <code>extract_text</code> 函数、<code>process_mention</code> 函数和处理 notifications 都直接借用模板或稍加修改。模板作者要求使用该模板时引用原库，且使用同样的 license (AGPL-3.0 license)。  </p>
+<h4 id="自动回复脚本"><a href="#自动回复脚本" class="headerlink" title="自动回复脚本"></a>自动回复脚本</h4><p>自动回复脚本需要完成接收到 notification、判定 notification 是 mention 、对 mention 嘟文内容进行处理、作出相应的回复。其中所需的函数较多，因此将大多数函数存在 <code>Woof.py</code> 中，大框架放在 <code>dogchan.py</code> 中。<br>代码基本参考前面提到的 <a target="_blank" rel="noopener" href="https://github.com/Lynnesbian/mastodon-bot-template/blob/9e72f6a490734f7af5897c40f20b4aecb0c2308b/reply.py">mastodon-bot-template: reply.py</a>。其中代码的注释非常详细，此处不再重复。  </p>
+<p>完成脚本后使用 <code>systemd</code> 设置定时任务，让服务器自动每 30 秒执行一次脚本。这里的自动执行不如前面尝试失败的方法 <code>利用 mastodon-api 实现自动回复 bot</code> 优雅，如果能够进一步提升将在此处指出。<br>在服务器上安装 systemd:  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install systemd</span><br></pre></td></tr></table></figure>
+
+<p>任务设置模板 (来自于 mastodon-bot-template)：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># an example for systemd</span><br><span class="line"></span><br><span class="line">[Unit]</span><br><span class="line">Description=Reply service for my bot</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">User=bots</span><br><span class="line">WorkingDirectory=/path/to/bot</span><br><span class="line">ExecStart=/usr/bin/python3 /path/to/bot/reply.py</span><br><span class="line">TimeoutSec=3600</span><br><span class="line">Restart=always</span><br><span class="line">RestartSec=30</span><br><span class="line">StartLimitBurst=3</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+
+<h4 id="自动发嘟脚本"><a href="#自动发嘟脚本" class="headerlink" title="自动发嘟脚本"></a>自动发嘟脚本</h4><p>自动发嘟脚本 <code>selfie.py</code> 主要用于实现每周三上午九点发一张汪汪照片。相关代码可参考 <a target="_blank" rel="noopener" href="https://gist.github.com/RustingSword/772f0c5582bb55a50270c339e948fc76">一个简单的 mastodon bot</a> 或前面提到的 <a target="_blank" rel="noopener" href="https://github.com/Lynnesbian/mastodon-bot-template/">mastodon-bot-template</a>。<br>若想要在嘟嘟中添加图片，则需要调用模板以外的函数，具体如下：  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 随机选取指定目录中的一个文件，path2selfie.txt 中含有该目录下所有文件的绝对路径</span></span><br><span class="line">media_file = random.choice(<span class="built_in">open</span>(<span class="string">&quot;path2selfie.txt&quot;</span>).read().splitlines())</span><br><span class="line"><span class="comment"># 处理图片路径，使其成为可用于 mastodon.status_post 的参数</span></span><br><span class="line">selfie =  mastodon.media_post(media_file)</span><br><span class="line"><span class="comment"># 带上图片发嘟</span></span><br><span class="line">mastodon.status_post(</span><br><span class="line">        status = content,</span><br><span class="line">        media_ids = selfie,</span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+
+<p>定时每周三上午九点发送一张带有照片的嘟嘟：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 9 * * 3  cd /root/miniconda/dogchan &amp;&amp; /root/miniconda3/envs/mastbot/bin/python selfie.py &gt;&gt; /root/miniconda/dogchan/log/selfie_log.txt 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
+<h3 id="奇怪的报错"><a href="#奇怪的报错" class="headerlink" title="奇怪的报错"></a>奇怪的报错</h3><p>谷歌一圈，也在 Mastodon.py 提了 <a target="_blank" rel="noopener" href="https://github.com/halcy/Mastodon.py/issues/243">issue</a>，还是没有解决。推测这个 bug 是我的站点设置造成的，但完全没有头绪究竟是哪里有问题，用 mstdn.social 的账号测试就没有问题。所以目前先开始自动发嘟，自动回复暂时搁置，等有空再详细看一下站点设置。  </p>
+<h2 id="将代码上传至-GitHub"><a href="#将代码上传至-GitHub" class="headerlink" title="将代码上传至 GitHub"></a>将代码上传至 GitHub</h2><p>之前的 CATsama 已经上传过一次，但这次上传还是完全不记得怎么搞，所以决定记录一下。  </p>
+<h3 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h3><p>在 GitHub 创建新的仓库以存放代码。根据实际需要，为仓库添加 <code>README.md</code> 和 <code>license</code>。创建完成后，在仓库右上角点击绿色的 <code>Code</code>，复制相应链接。  </p>
+<p><img src="/2022/07/20/dogchan/repository.png"></p>
+<h3 id="密钥"><a href="#密钥" class="headerlink" title="密钥"></a>密钥</h3><p>可直接参考 <a target="_blank" rel="noopener" href="https://docs.github.com/cn/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">生成新 SSH 密钥并添加到 ssh-agent</a>  </p>
+<h3 id="Personal-access-tokens"><a href="#Personal-access-tokens" class="headerlink" title="Personal access tokens"></a>Personal access tokens</h3><p>在 GitHub 创建 token 以便于后续代码上传时身份验证。<code>点击个人头像 - Setting -  Developer settings - Personal access tokens - Generate new token</code>，根据实际情况选择 token 的执行权限，完成后复制 token。<br>将创建的 Personal access tokens 整合到前述步骤复制的仓库链接中备用，具体格式如下：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://Personal_access_tokens@github.com/your_username/repository_name.git</span><br></pre></td></tr></table></figure>
+
+<h3 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h3><p>在服务器上存放代码的目录下执行如下操作：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"># GitHub 默认分支已经改为 main，但 git init 的默认分支还是 master，这一步用于将 git 的默认分支改为 main</span><br><span class="line">git config --global init.defaultBranch main</span><br><span class="line"></span><br><span class="line"># 初始化库</span><br><span class="line">git init</span><br><span class="line"></span><br><span class="line"># 添加当前目录下所有文件，也可添加指定文件</span><br><span class="line">git add .</span><br><span class="line"></span><br><span class="line"># commit</span><br><span class="line">git commit -m &quot;first commit&quot;</span><br><span class="line"></span><br><span class="line"># 添加远程仓库并命名为 origin，粘贴前述步骤中整合后的仓库链接</span><br><span class="line">git remote add origin https://Personal_access_tokens@github.com/your_username/repository_name.git</span><br><span class="line"></span><br><span class="line"># 如果提示远程仓库已存在，则执行如下命令后再添加一次</span><br><span class="line"># git remote rm origin</span><br><span class="line"></span><br><span class="line"># 拉取远程仓库中的内容，否则 push 时也会因为未同步远程仓库内容而失败</span><br><span class="line"># 如果远程仓库为空，则不需要这一步</span><br><span class="line">git pull origin main --allow-unrelated-histories</span><br><span class="line"></span><br><span class="line"># 将 commit 推送到远程仓库</span><br><span class="line">git push origin main</span><br></pre></td></tr></table></figure>
+
+<p>此时刷新 GitHub 库的页面，即可看到新上传的内容。<br>DOGchan 的 GitHub 库：<a target="_blank" rel="noopener" href="https://github.com/melocery/DOGchan">DOGchan：一个能够关键字触发自动回复的长毛象机器人</a>  </p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>整个搭建过程非常漫长，先是觉得油管教程很详细不可能有任何问题，但随着一步步搭建发现问题不少，而且由于对 node.js 完全不熟悉，连报错都看不懂，只能粘贴到谷歌搜索，但也不能得到很好的解决。又问了很多在象上拥有自动回复 bot 的象友，想参考一下，但大家的方法也不能完全适用。最后还是在 GitHub 一个个项目看过去 (感谢愿意开源的人们)，找到了现在参考的这个方法。虽然也有不足，但是是目前确实能顺利运行一段时间的方法。接下来只需要思考为什么我的站点 streaming 不能长时间访问，修改好就能顺利运行。<br>总得来说，也算是一次很快乐的尝试。做这些小小的 project 比科研有趣多了！或许以后还会做这些有趣的小项目，快乐的同时还能丰富 GitHub 的库。  </p>
+<p>一开始这个 bot 只是为了让缪尚猫狗双全，但做着做着就想起家里的狗狗。在真实世界它已经返回汪星，但它在我自己搭建的赛博世界玩耍。因此从发嘟的照片和头像都用了狗狗的照片，就让它在我的咖啡馆继续做一只快乐小狗吧！  </p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Mastodon/" rel="tag"># Mastodon</a>
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/07/12/catsama/" rel="prev" title="CATsama：如何做一个定时发嘟的 Mastodon bot">
+                  <i class="fa fa-chevron-left"></i> CATsama：如何做一个定时发嘟的 Mastodon bot
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Udon</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>Symbols count total: </span>
+    <span title="Symbols count total">103k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>Reading time total &asymp;</span>
+    <span title="Reading time total">1:34</span>
+  </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

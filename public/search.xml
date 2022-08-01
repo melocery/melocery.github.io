@@ -423,11 +423,11 @@ main() # 运行上述函数
     <content><![CDATA[<center> 性感猫猫，每日上午八点半，在您的时间线上推送一个喵喵神签 </center>
 <span id="more"></span>
 
-<p>在缪尚后厅和大家聊天时，猫猫从键盘经过，留下一串神秘文字。大家一致认为这是猫猫给我们留下的忠告，因此决定在缪尚给猫猫神开个位置，就有了这个喵喵喵账号。接下来让我们有请 CAT sama！  </p>
+<p>在缪尚后厅和大家聊天时，猫猫从键盘经过，留下一串神秘文字。大家一致认为这是猫猫给我们留下的忠告，因此决定在缪尚给猫猫神开个位置，就有了这个喵喵喵账号。让我们有请 CATsama！  </p>
 <h2 id="在-VPS-上安装-python"><a href="#在-VPS-上安装-python" class="headerlink" title="在 VPS 上安装 python"></a>在 VPS 上安装 python</h2><p>综合此方和塔塔的教程，决定安装 miniconda。</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 在 /root 文件夹执行如下命令</span></span><br><span class="line">mkdir miniconda</span><br><span class="line"><span class="built_in">cd</span> miniconda</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载 python 最新版本并用 bash 安装</span></span><br><span class="line">wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh</span><br><span class="line">sh Miniconda3-latest-Linux-x86_64.sh //用bash安装</span><br></pre></td></tr></table></figure>
 
-<p>之后会有很长一段的文字，都是许可说明，一直按 <code>Enter</code> 即可，直到出现 <code>Do you accept the license terms? [yes|no]</code> 输入 <code>yes</code>，开启正式安装。安装路径直接使用默认 <code>/root/miniconda3</code>。<br>安装完成后会询问是否运行 <code>conda init</code> 来初始化，选择 <code>yes</code>。<br>检查是否安装成功，重启终端后输入 <code>conda --version</code>。</p>
+<p>之后会有很长一段的文字，都是许可说明，一直按 <code>Enter</code> 即可，直到出现 <code>Do you accept the license terms? [yes|no]</code> 输入 <code>yes</code>，开启正式安装。安装路径直接使用默认 <code>/root/miniconda3</code>。<br>安装完成后会询问是否运行 <code>conda init</code> 来初始化，选择 <code>yes</code>。<br>检查是否安装成功，重启终端后输入 <code>conda --version</code>。  </p>
 <h2 id="安装-bot"><a href="#安装-bot" class="headerlink" title="安装 bot"></a>安装 bot</h2><h3 id="安装前准备"><a href="#安装前准备" class="headerlink" title="安装前准备"></a>安装前准备</h3><p>注册 Mastodon 账号，在管理面板找到开发-创建新应用，创建新应用并给予读写权限，复制访问令牌。<br>由于 Fedi 有许多 bot 账号，为避免 bot 账号之间陷入无限回复循环，建议勾选账号设置中的 “这是一个机器人账户”。</p>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>创建存放 bot 相关文件的文件夹，这里模仿塔塔，存在 <code>/root/miniconda</code> 下。  </p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 代码来源于塔塔</span></span><br><span class="line"><span class="built_in">cd</span> miniconda</span><br><span class="line">conda create -n mastbot python=3.8 <span class="comment"># 创建一个叫mastbot的版本为3.8的python虚拟环境，如果已经创建了就不用了</span></span><br><span class="line">conda activate mastbot <span class="comment"># 激活mastbot环境，root账号前会出现（mastbot）</span></span><br><span class="line">pip3 install requests beautifulsoup4 Mastodon.py <span class="comment"># 安装mastodon.py</span></span><br><span class="line">pip3 install numpy <span class="comment"># 安装 numpy，catsama 需要</span></span><br><span class="line">mkdir catsama</span><br><span class="line"><span class="built_in">cd</span> catsama</span><br><span class="line">nano mybot_usercred.secret <span class="comment"># 写入刚才复制的访问令牌，保存退出</span></span><br><span class="line">nano catsama.py <span class="comment"># 发嘟脚本</span></span><br></pre></td></tr></table></figure>
@@ -449,6 +449,84 @@ main() # 运行上述函数
       <tags>
         <tag>Mastodon</tag>
         <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Computational Deconvolution for More Precise Biological Data</title>
+    <url>/2021/12/08/deconmixeddata/</url>
+    <content><![CDATA[<center> 文献阅读：解卷积可从混合的生物学数据中解得各细胞类型比例，或估计各细胞类型的表达谱，为研究提供更准确的样本数据 </center>
+<span id="more"></span>
+
+<h2 id="Deconvolution"><a href="#Deconvolution" class="headerlink" title="Deconvolution"></a>Deconvolution</h2><p><strong>Deconvolution</strong> 译作反卷积或解卷积。解卷积是一种基于算法的过程，用于反转卷积对记录数据的影响。<br>生物学数据，如 DNA expression、RNA sequencing、Protein expression 等，很难真正得到来自特定组织的“纯数据”。如血液中含有来自不同组织的细胞、外泌体等，由此得来的生物学数据将是不同类型细胞的混合数据。这时就需要通过解卷积，从混合的生物数据中解得不同类型细胞的比例、表达谱。  </p>
+<h2 id="基本模型"><a href="#基本模型" class="headerlink" title="基本模型"></a>基本模型</h2><p>测得的数据为不同类型细胞按照一定比例混合在一起的结果。  </p>
+<ul>
+<li>测得的表达矩阵为 <em>X</em>，则 x<sub>ij</sub> 表示 gene<sub>i</sub> 在 sample<sub>j</sub> 中的表达量或表达强度  </li>
+<li>比例矩阵为 <em>R</em>，则 r<sub>kj</sub> 表示 k 类细胞在 sample<sub>j</sub> 中所占比例  </li>
+<li>各细胞真实表达谱组成的矩阵为 <em>S</em>，则 s<sub>ik</sub> 表示表示 gene<sub>i</sub> 在 k 类细胞中的表达量或表达强度  </li>
+</ul>
+<p><img src="/2021/12/08/deconmixeddata/decon.png">  </p>
+<h2 id="解卷积算法"><a href="#解卷积算法" class="headerlink" title="解卷积算法"></a>解卷积算法</h2><p>针对不同情况有不同的算法，根据项目中的先验知识选择合适的解卷积方法以达到最佳效果。<br>生物数据解卷积分为完全解卷积和不完全解卷积。  </p>
+<ul>
+<li><strong>完全解卷积</strong>：指混合细胞类型数目、比例和各细胞表达谱未知，仅依赖混合表达数据将它们解出来，即已知混合表达矩阵 <em>X</em>，解比例矩阵 <em>R</em> 和各细胞表达矩阵 <em>S</em>。完全解卷积的完全指细胞表达谱和比例都在算法中一次性解得。  </li>
+<li><strong>不完全解卷积</strong>：指已知混合表达谱、细胞类型数目、比例，解各细胞表达谱，即已知比例矩阵 <em>R</em> 和混合表达矩阵 <em>X</em>，解矩阵各细胞表达矩阵 <em>S</em>。不完全是相对于完全解卷积而言，仅解得各细胞表达谱。  </li>
+</ul>
+<h3 id="完全解卷积"><a href="#完全解卷积" class="headerlink" title="完全解卷积"></a>完全解卷积</h3><h4 id="LinSeed"><a href="#LinSeed" class="headerlink" title="LinSeed"></a><a href="https://doi.org/10.1038/s41467-019-09990-5">LinSeed</a></h4><p>通过计算共线性网络 (Collinearity Network) 得到各类型细胞的 markers，利用 markers 对混合数据进行完全解卷积，同时得到各组分的比例和表达谱。<br><img src="/2021/12/08/deconmixeddata/LinSeed.jpg"></p>
+<p><strong>Code availability:</strong>   </p>
+<ul>
+<li>R  </li>
+<li><a href="https://github.com/ctlab/linseed">https://github.com/ctlab/linseed</a>  </li>
+</ul>
+<h4 id="Deblender"><a href="#Deblender" class="headerlink" title="Deblender"></a><a href="https://doi.org/10.1186/s12859-018-2442-5">Deblender</a></h4><p>Deblender 是一个灵活的完全去卷积工具。基于用户对已知标记基因列表和细胞/组织组成信息的访问 (access)，以半/无监督模式运行。在没有先验知识的情况下，全局基因表达的变异性被用于混合数据的聚类，以聚类集代替标记集。<br><img src="/2021/12/08/deconmixeddata/Debledner.jpg">  </p>
+<p><strong>Code availability:</strong>   </p>
+<ul>
+<li>MATLAB  </li>
+<li><a href="https://github.com/kondim1983/Deblender/">https://github.com/kondim1983/Deblender/</a>  </li>
+</ul>
+<h4 id="CDSeq"><a href="#CDSeq" class="headerlink" title="CDSeq"></a><a href="https://doi.org/10.1371/journal.pcbi.1007510">CDSeq</a></h4><p>CDSeq 仅使用来自大量组织样本的 RNA-Seq 数据来同时估计细胞类型比例和细胞类型特异性表达谱。<br><img src="/2021/12/08/deconmixeddata/CDSeq1.jpg"><br><img src="/2021/12/08/deconmixeddata/CDSeq2.jpg">  </p>
+<p><strong>Code availability:</strong>   </p>
+<ul>
+<li>MATLAB and Octave  </li>
+<li><a href="https://github.com/kkang7/CDSeq">https://github.com/kkang7/CDSeq</a>  </li>
+</ul>
+<h4 id="Deconf"><a href="#Deconf" class="headerlink" title="Deconf"></a><a href="https://doi.org/10.1186/1471-2105-11-27">Deconf</a></h4><p>Deconf 证明了从单个样本的基因表达数据中预测构成细胞类型的比例的可行性，这是基于去粗取精的分类方法的前提条件。  </p>
+<p><strong>Code availability:</strong>   </p>
+<ul>
+<li>R  </li>
+<li><a href="https://static-content.springer.com/esm/art%3A10.1186%2F1471-2105-11-27/MediaObjects/12859_2009_3484_MOESM1_ESM.ZIP">example data and script</a>  </li>
+</ul>
+<h3 id="不完全解卷积"><a href="#不完全解卷积" class="headerlink" title="不完全解卷积"></a>不完全解卷积</h3><h4 id="Rodeo"><a href="#Rodeo" class="headerlink" title="Rodeo"></a><a href="https://doi.org/10.1093/nargab/lqaa110">Rodeo</a></h4><p>Rodeo 是一种基于稳健线性回归的方法，可以实现简单而稳健的表达式反卷积。  </p>
+<p><strong>Code availability:</strong>   </p>
+<ul>
+<li>R  </li>
+<li><a href="https://github.com/elolab/Rodeo">https://github.com/elolab/Rodeo</a></li>
+</ul>
+<h4 id="cs-lsfit-amp-cs-qprog"><a href="#cs-lsfit-amp-cs-qprog" class="headerlink" title="cs-lsfit &amp; cs-qprog"></a><a href="https://doi.org/10.1371/journal.pone.0006098">cs-lsfit &amp; cs-qprog</a></h4><p>cs-lsfit 和 cs-qprog 属于 CellMix 中的两个解卷积算法，使用CellMix时可选择使用哪一个来进行解卷积步骤。</p>
+<p><strong>Code availability:</strong>   </p>
+<ul>
+<li>R  </li>
+<li><a href="https://github.com/r-forge/cellmix/tree/master/pkg/CellMix">https://github.com/r-forge/cellmix/tree/master/pkg/CellMix</a></li>
+</ul>
+<h4 id="LRCDE"><a href="#LRCDE" class="headerlink" title="LRCDE"></a><a href="https://doi.org/10.1186/s12859-016-1226-z">LRCDE</a></h4><p>LRCDE 在逐个基因的基础上执行基于线性回归的细胞类型特异性差异表达(反卷积)检测。考虑到细胞类型特异性基因表达估计的变异性，它计算差异检测的每个基因 t 统计量、p 值、基于 t 统计量的灵敏度、组特异性均方误差和几个基因特异性诊断指标。  </p>
+<p><strong>Code availability:</strong>   </p>
+<ul>
+<li>R  </li>
+<li><a href="https://github.com/ERGlass/lrcde.dev">https://github.com/ERGlass/lrcde.dev</a></li>
+</ul>
+<h4 id="csSAM"><a href="#csSAM" class="headerlink" title="csSAM"></a><a href="https://doi.org/10.1038/nmeth.1439">csSAM</a></h4><p>csSAM 根据测量的细胞比例计算细胞特异性差异表达。<br><img src="/2021/12/08/deconmixeddata/csSAM.jpg"></p>
+<p><strong>Code availability:</strong>   </p>
+<ul>
+<li>R  </li>
+<li><a href="https://github.com/shenorrLab/csSAM">https://github.com/shenorrLab/csSAM</a>  </li>
+</ul>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1] Maria K Jaakkola, Laura L Elo, Computational deconvolution to estimate cell type-specific gene expression from bulk data, NAR Genomics and Bioinformatics, Volume 3, Issue 1, March 2021, lqaa110, <a href="https://doi.org/10.1093/nargab/lqaa110">https://doi.org/10.1093/nargab/lqaa110</a><br>[2] 具体算法参考文献见算法介绍部分</p>
+]]></content>
+      <categories>
+        <category>Paper</category>
+        <category>DeconvoluteMixedBioData</category>
+      </categories>
+      <tags>
+        <tag>DeconvoluteMixedBioData</tag>
+        <tag>Bioinformatics</tag>
       </tags>
   </entry>
   <entry>
@@ -521,6 +599,53 @@ main() # 运行上述函数
       </categories>
       <tags>
         <tag>ComputerNetwork</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Methods to Analyze Multi-Omicis Data</title>
+    <url>/2021/12/01/multiomics/</url>
+    <content><![CDATA[<center>文献阅读：多组学数据的整合、解读方法及公开可用的多组学数据库</center>
+<span id="more"></span>
+
+<h2 id="Multi-Omics"><a href="#Multi-Omics" class="headerlink" title="Multi-Omics"></a>Multi-Omics</h2><p><strong>Multi-Omics</strong>指同时获得两个或两个以上组学数据，如基因组、转录组、蛋白质组等，并将它们结合在一起分析、挖掘，以获得更全面、更系统的生物学解释、分子作用机制等。  </p>
+<h2 id="多组学研究的意义"><a href="#多组学研究的意义" class="headerlink" title="多组学研究的意义"></a>多组学研究的意义</h2><p>整合多组学数据，提供不同层次的生物分子信息，有望系统地、整体地理解复杂的生物学。<br>多组学研究以顺序或同时的方式结合各组学数据，以了解分子之间的相互作用。<br>有助于评估从一个组学水平到另一个组学水平的信息流，从而有助于弥合从基因型到表型的差距。<br>多组学数据能够为研究提供整体视角，有助于提高疾病表型的预后和预测准确性，进而帮助更好地治疗和预防。  </p>
+<h2 id="多组学研究的困难"><a href="#多组学研究的困难" class="headerlink" title="多组学研究的困难"></a>多组学研究的困难</h2><p>多组学的研究通常与非组学数据相关联，如临床数据等，这导致多组学研究面临许多困难。  </p>
+<h3 id="非组学数据复杂且主观定义"><a href="#非组学数据复杂且主观定义" class="headerlink" title="非组学数据复杂且主观定义"></a>非组学数据复杂且主观定义</h3><p>非组学数据通常十分复杂且主观性较强，需要标准化后将其加入预测或分类模型中。流行病学数据受制于调查模式、调查问题标准化以及背景，这可能会影响数据质量和可比性，并最终影响这些变量在结果预测中的贡献。不同研究者或组织由于收集程序不一致，也可能产生差异。临床数据受到其定义复杂性的影响，需要有统一的标准。目前有一些标准化的规则可供使用，如Clinical Data Interchange Standards Consortium (CDISC)，Study Data Tabulation Model (SDTM)，Analysis Data Model (ADaM)。这些非组学数据是基于评估者的技能和先前知识的复杂阐述过程产生的主观评估，这可能会导致报告偏差。  </p>
+<h3 id="非组学数据具有异质性"><a href="#非组学数据具有异质性" class="headerlink" title="非组学数据具有异质性"></a>非组学数据具有异质性</h3><p>非组学数据缺乏统一性，如不同尺度测量的定性或定量变量等，在分析之前需要对它们进行数据转换或归一化步骤。  </p>
+<h3 id="非组学数据规模大"><a href="#非组学数据规模大" class="headerlink" title="非组学数据规模大"></a>非组学数据规模大</h3><p>目前，许多多组学数据与非组学数据相结合的研究方法基于小尺度、低纬度的数据，而现在的非组学数据已经成为“大数据”——大规模，高维度。可穿戴监测装置和EHR (e-health records)的出现使非组学数据更易获取并向更高维度发展，且在处理客观和主观特征以及结构化和非结构化数据方面也更具有挑战性。<br>非组学数据的高维度也意味着存在</p>
+<ul>
+<li>变量之间的相关结构  </li>
+<li>大规模纵向数据  </li>
+<li>数据稀疏性（即药物、实验室或诊断测试）  </li>
+<li>与组学数据相比，数据缺失与参与个体无关  </li>
+</ul>
+<p>这些因素都需要在后续分析建模时，将其考虑在内。  </p>
+<h3 id="将组学和非组学数据联系"><a href="#将组学和非组学数据联系" class="headerlink" title="将组学和非组学数据联系"></a>将组学和非组学数据联系</h3><p>在病例对照设计中，组学数据和非组学数据的整合可能会受到确认偏差的影响。<br>组学和非组学数据之间的相互作用也会对研究产生影响。在建模的过程中，重要的是要将这种相互作用考虑在内。这些相互作用也可能非常复杂，如基因表达变化可能意味着表型异常，这导致分子数据和临床数据之间的关系更加复杂。  </p>
+<h3 id="其它困难"><a href="#其它困难" class="headerlink" title="其它困难"></a>其它困难</h3><p>每个变量或块对结果的贡献是否应该相等。<br>当与高通量数据集结合时，如何防止临床变量被惩罚(penalized)。<br>亚型的出现会给模型增加复杂性，在建模时是否要将亚型考虑在内。</p>
+<h2 id="多组学数据库"><a href="#多组学数据库" class="headerlink" title="多组学数据库"></a>多组学数据库</h2><p>多组学数据覆盖基因组、蛋白组、转录组、代谢组和表观遗传组的数据，含有这些组学数据两种或两种以上的数据库可成为多组学数据库。  </p>
+<h3 id="TCGA"><a href="#TCGA" class="headerlink" title="TCGA"></a>TCGA</h3><p>The Cancer Genome Altas (<a href="https://cancergenome.nih.gov/">TCGA</a>) 是最大的多组学数据库之一，涵盖超过 33 种不同类型癌症的20000个个体肿瘤样本。TCGA旨在产生、整合、分析和解释肿瘤样本产生的DNA、RNA、蛋白质及表观遗传数据的特征以及临床和组织学数据。</p>
+<h3 id="CPTAC"><a href="#CPTAC" class="headerlink" title="CPTAC"></a>CPTAC</h3><p>Clinical Proteomic Tumor Analysis Consortium (<a href="https://cptac-data-portal.georgetown.edu/cptacPublic/">CPTAC</a>) 是通过对TCGA库中的生物样本通过质谱技术进行分析，获取的蛋白质组数据。如果实验中同时测得基因组数据，也可在该库获得。  </p>
+<h3 id="ICGC"><a href="#ICGC" class="headerlink" title="ICGC"></a>ICGC</h3><p>International Cancer Genomics Consortium (<a href="https://icgc.org/">ICGC</a>) 从20383名捐献者的21个原发癌位点的76个癌症项目中协调大规模生成基因组研究。  </p>
+<h3 id="CCLE"><a href="#CCLE" class="headerlink" title="CCLE"></a>CCLE</h3><p>Cancer Cell Line Encyclopedia (<a href="https://portals.broadinstitute.org/ccle">CCLE</a>) 包含947种人类细胞系和36种肿瘤的基因表达、拷贝数和测序数据。还包含479种癌细胞系中24种抗癌药物的药理学特征。  </p>
+<h3 id="METABRIC"><a href="#METABRIC" class="headerlink" title="METABRIC"></a>METABRIC</h3><p>Molecular Taxonomy of Breast Cancer International Consortium (<a href="http://molonc.bccrc.ca/apariciolab/research/metabric/">METABRIC</a>) 包含来自乳腺肿瘤的临床特征、表达、单核苷酸多态性和拷贝数变异数据。  </p>
+<h3 id="TARGET"><a href="#TARGET" class="headerlink" title="TARGET"></a>TARGET</h3><p><a href="https://ocg.cancer.gov/programs/target">TARGET</a> 包含 24 种癌症分子类型的临床信息、基因表达、miRNA 表达、拷贝数和测序数据。  </p>
+<h3 id="OmicsDI"><a href="#OmicsDI" class="headerlink" title="OmicsDI"></a>OmicsDI</h3><p>Omics Discovery Index (<a href="https://www.omicsdi.org/">OmicsDI</a>) 包含来自公共数据结构中的 11 个存储库的数据集。是一个开源平台，用于访问、发现和整合基因组学、转录组学、蛋白质组学和代谢组学数据集。包含来自人类、模式生物和非模式生物的数据集。  </p>
+<h2 id="多组学数据分析方法"><a href="#多组学数据分析方法" class="headerlink" title="多组学数据分析方法"></a>多组学数据分析方法</h2><p>根据算法思想，可将目前已有的多组学数据分析方法分为几个大类：<br><img src="/2021/12/01/multiomics/methods.png">  </p>
+<h3 id="Network-Based"><a href="#Network-Based" class="headerlink" title="Network Based"></a>Network Based</h3><p><strong>SNF</strong> (Similarity network fusion)是一种基于网络的方法，使用网络融合方法整合多组学数据集。它为每种数据类型创建一个单独的网络，然后使用非线性网络融合方法将它们融合成一个单一的相似性网络。 融合步骤基于消息传递理论，使网络在每次迭代中更像其他网络。<br><strong>NetICS</strong> (Network-based integration of multi-omics data)为基于网络的多组学数据集成提供了一个框架，用于癌症基因优先排序。可预测遗传畸变、表观遗传变化和miRNA对相互作用网络中下游基因和蛋白质(表达)的影响。在有向功能交互网络上使用每个样本的网络扩散模型，并通过聚合个体排名得出种群水平的基因排名，并为所有样本提供全局排名。  </p>
+<h3 id="Bayesian-approach"><a href="#Bayesian-approach" class="headerlink" title="Bayesian approach"></a>Bayesian approach</h3><p><strong>iCluster</strong>根据多种数据类型同时推断，为样本生成一个单一的聚类分配。这种无监督方法使用联合潜在变量模型进行集成聚类，并在单个框架中结合不同数据类型之间的关联以及数据类型内的方差-协方差结构，同时降低数据集的维度。通过期望最大化算法获得似然推理。<br><strong>iClusterPlus</strong>是iCluster的增强版，使用广义线性回归来确定综合基因组、表观基因组和转录组分析的分类和数字(连续和计数)变量的联合模型。该方法使用一组潜在变量”k”来代表驱动因素，这些因素预测关键的基因组变量，从而捕捉生物变异。此外，使用Lasso回归方法，iClusterPlus确定了有助于亚型之间生物变化的特征子集。<br><strong>LRAcluster</strong>使用概率模型与低秩近似法来寻找主要的低维子空间，以对全基因组数据进行分类。在这种方法中，每个组学数据都以大小匹配的参数矩阵为条件，并且这个低秩参数矩阵可以在低维空间中表示。 用户定义的维度参数(基于数据的解释方差)和聚类数(基于轮廓值)有助于更快地降维和更好地聚类疾病亚型。<br><strong>PSDF</strong> (Patient-specific data fusion)该方法使用贝叶斯非参数模型(Dirichlet 过程混合模型)来整合CNV和基因表达数据，以将样本分层为子组。每个样本根据它们在2个数据集之间的一致性被分配一个二元状态。只有表现出一致性的样本融合在一起，而其他样本保持未融合，因此考虑了患者特定的融合模型。<br><strong>BCC</strong> (Bayesian consensus clustering)提出了一种数据驱动的共识聚类方法，该方法对源特定特征以及使用有限狄利克雷混合模型扩展以解释多个数据源的整体聚类进行建模。<br><strong>Joint Bayesian factor</strong>使用非参数贝叶斯因子分析来整合组学数据集。 这种方法使用 beta-Bernoulli 过程将特征空间分解为共享的和特定于数据的组件。<br><strong>MDI</strong> (Multiple dataset integration)使用 Dirichlet 混合模型对每个数据源进行聚类，同时对聚类之间的成对依赖性进行建模。MDI在分配给组件(如基因组特征)的变量级别链接模型。组件变量级链接允许捕获多组学数据之间的依赖关系。<br><strong>MOFA</strong> (Multi-omics factor analysis)是一种无监督方法，用于在相同或部分重叠的样本上整合多组学数据类型。<br><strong>PARADIGM</strong>的应用可以扩展到对所研究疾病的发现。  </p>
+<h3 id="Fusion-based-approaches"><a href="#Fusion-based-approaches" class="headerlink" title="Fusion-based approaches"></a>Fusion-based approaches</h3><p><strong>PFA</strong> (Pattern fusion analysis)允许在低维特征空间中跨异质基因组谱识别集成样本模式。首先使用主成分分析获得局部样本模式。 其后将这些局部样本模式与公共特征空间对齐，并跨大多数数据类型合成全局样本模式。在此过程中，将定量测量每种数据类型(或单个样本)对全局样本频谱的贡献，并迭代降低偏差或系统噪声的影响以更好地拟合数据。  </p>
+<h3 id="Similarity-based-approaches"><a href="#Similarity-based-approaches" class="headerlink" title="Similarity-based approaches"></a>Similarity-based approaches</h3><p><strong>PINSPlus</strong> (Perturbation clustering for data integration and disease subtyping)是一种无监督的聚类方法，有助于从多组学数据中识别亚型。为了识别亚型，该算法确定患者在单个集群中分组的频率(1)当数据受到干扰时，(2)使用不同类型的组学数据时，(3)使用不同的聚类技术时。 所有场景中的强关联患者都聚集在一起形成一个亚型。<br><strong>NEMO</strong>(Neighborhood-based multi-omics clustering) 是一种基于相似性的简单多组学聚类方法，它进一步建立在先前建立的聚类方法（如 SNF 和 rMKL-LPP）的基础上。该方法最初为每个输入组学数据集构建基于患者间相似性矩阵的欧几里德距离。然后将每个组学的相似性矩阵整合到一个矩阵中，然后使用光谱聚类方法对其进行聚类。  </p>
+<h3 id="Correlation-based-approaches"><a href="#Correlation-based-approaches" class="headerlink" title="Correlation based approaches"></a>Correlation based approaches</h3><p><strong>CNAmet</strong>用于对拷贝数改变、DNA 甲基化和基因表达数据进行综合分析。  </p>
+<h3 id="Other-multivariate-approaches"><a href="#Other-multivariate-approaches" class="headerlink" title="Other multivariate approaches"></a>Other multivariate approaches</h3><p><strong>mixOmics</strong>提供了一组有监督和无监督的多元方法来执行多组学数据集的整合，重点是变量选择。<br><strong>moCluster</strong>使用多表多元分析方法来识别跨多组学数据集的模式。<br><strong>MCIA</strong> (Multiple co-inertia analysis)是一种探索性数据分析方法，它捕捉多个高维数据集（如基因表达、miRNA表达、蛋白质表达）之间的相互关系。<br><strong>JIVE</strong> (Joint and individual variation explained)通过分离数据集的联合效应和个体效应来整合多组学数据。<br><strong>MFA</strong> (Multiple factor analysis)是一种通过将其投影到低维变量空间来帮助整合组学数据集的方法。<br><strong>rMKL-LPP</strong> 使用多核学习来集成异构多数据并执行子类型识别。<br><strong>iNMF</strong> (Integrative nonnegative matrix factorization)扩展了NMF框架以在集成多个数据时考虑异构效应。<br><strong>FSMKL</strong> (Feature selection multiple kernel learning)是一种监督分类方法，使用多个内核来捕获数据集之间的相似性，以识别疾病进展的特征。<br><strong>sMBPLS</strong> (Sparse multi-block partial least squares)允许多块输入包含多个调控组学数据集，例如 CNV、DNA 甲基化和调控基因表达的 miRNA 表达。<br><strong>T-SVD</strong> (Thresholding singular value decomposition)有助于识别 2 个组学数据集之间的调控机制，尤其是当调控特征大于测量样本时。<br><strong>Joint NMF</strong> 该分解框架从多个数据集(相同样本)中识别相关模块，以推导出 md 模块，以揭示潜在的多层监管因素。  </p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1] Subramanian I, Verma S, Kumar S, Jere A, Anamika K. Multi-omics Data Integration, Interpretation, and Its Application. Bioinformatics and Biology Insights. January 2020. <a href="doi:10.1177/1177932219899051">doi:10.1177/1177932219899051</a><br>[2] López de Maturana E, Alonso L, Alarcón P, Martín-Antoniano IA, Pineda S, Piorno L, Calle ML, Malats N. Challenges in the Integration of Omics and Non-Omics Data. Genes (Basel). 2019 Mar 20;10(3):238. <a href="doi:10.3390/genes10030238">doi:10.3390/genes10030238</a></p>
+]]></content>
+      <categories>
+        <category>Paper</category>
+        <category>MultiOmics</category>
+      </categories>
+      <tags>
+        <tag>Bioinformatics</tag>
+        <tag>MultiOmics</tag>
       </tags>
   </entry>
   <entry>
@@ -626,84 +751,6 @@ data[key] = $.html();
       </tags>
   </entry>
   <entry>
-    <title>Computational Deconvolution for More Precise Biological Data</title>
-    <url>/2021/12/08/deconmixeddata/</url>
-    <content><![CDATA[<center> 文献阅读：解卷积可从混合的生物学数据中解得各细胞类型比例，或估计各细胞类型的表达谱，为研究提供更准确的样本数据 </center>
-<span id="more"></span>
-
-<h2 id="Deconvolution"><a href="#Deconvolution" class="headerlink" title="Deconvolution"></a>Deconvolution</h2><p><strong>Deconvolution</strong> 译作反卷积或解卷积。解卷积是一种基于算法的过程，用于反转卷积对记录数据的影响。<br>生物学数据，如 DNA expression、RNA sequencing、Protein expression 等，很难真正得到来自特定组织的“纯数据”。如血液中含有来自不同组织的细胞、外泌体等，由此得来的生物学数据将是不同类型细胞的混合数据。这时就需要通过解卷积，从混合的生物数据中解得不同类型细胞的比例、表达谱。  </p>
-<h2 id="基本模型"><a href="#基本模型" class="headerlink" title="基本模型"></a>基本模型</h2><p>测得的数据为不同类型细胞按照一定比例混合在一起的结果。  </p>
-<ul>
-<li>测得的表达矩阵为 <em>X</em>，则 x<sub>ij</sub> 表示 gene<sub>i</sub> 在 sample<sub>j</sub> 中的表达量或表达强度  </li>
-<li>比例矩阵为 <em>R</em>，则 r<sub>kj</sub> 表示 k 类细胞在 sample<sub>j</sub> 中所占比例  </li>
-<li>各细胞真实表达谱组成的矩阵为 <em>S</em>，则 s<sub>ik</sub> 表示表示 gene<sub>i</sub> 在 k 类细胞中的表达量或表达强度  </li>
-</ul>
-<p><img src="/2021/12/08/deconmixeddata/decon.png">  </p>
-<h2 id="解卷积算法"><a href="#解卷积算法" class="headerlink" title="解卷积算法"></a>解卷积算法</h2><p>针对不同情况有不同的算法，根据项目中的先验知识选择合适的解卷积方法以达到最佳效果。<br>生物数据解卷积分为完全解卷积和不完全解卷积。  </p>
-<ul>
-<li><strong>完全解卷积</strong>：指混合细胞类型数目、比例和各细胞表达谱未知，仅依赖混合表达数据将它们解出来，即已知混合表达矩阵 <em>X</em>，解比例矩阵 <em>R</em> 和各细胞表达矩阵 <em>S</em>。完全解卷积的完全指细胞表达谱和比例都在算法中一次性解得。  </li>
-<li><strong>不完全解卷积</strong>：指已知混合表达谱、细胞类型数目、比例，解各细胞表达谱，即已知比例矩阵 <em>R</em> 和混合表达矩阵 <em>X</em>，解矩阵各细胞表达矩阵 <em>S</em>。不完全是相对于完全解卷积而言，仅解得各细胞表达谱。  </li>
-</ul>
-<h3 id="完全解卷积"><a href="#完全解卷积" class="headerlink" title="完全解卷积"></a>完全解卷积</h3><h4 id="LinSeed"><a href="#LinSeed" class="headerlink" title="LinSeed"></a><a href="https://doi.org/10.1038/s41467-019-09990-5">LinSeed</a></h4><p>通过计算共线性网络 (Collinearity Network) 得到各类型细胞的 markers，利用 markers 对混合数据进行完全解卷积，同时得到各组分的比例和表达谱。<br><img src="/2021/12/08/deconmixeddata/LinSeed.jpg"></p>
-<p><strong>Code availability:</strong>   </p>
-<ul>
-<li>R  </li>
-<li><a href="https://github.com/ctlab/linseed">https://github.com/ctlab/linseed</a>  </li>
-</ul>
-<h4 id="Deblender"><a href="#Deblender" class="headerlink" title="Deblender"></a><a href="https://doi.org/10.1186/s12859-018-2442-5">Deblender</a></h4><p>Deblender 是一个灵活的完全去卷积工具。基于用户对已知标记基因列表和细胞/组织组成信息的访问 (access)，以半/无监督模式运行。在没有先验知识的情况下，全局基因表达的变异性被用于混合数据的聚类，以聚类集代替标记集。<br><img src="/2021/12/08/deconmixeddata/Debledner.jpg">  </p>
-<p><strong>Code availability:</strong>   </p>
-<ul>
-<li>MATLAB  </li>
-<li><a href="https://github.com/kondim1983/Deblender/">https://github.com/kondim1983/Deblender/</a>  </li>
-</ul>
-<h4 id="CDSeq"><a href="#CDSeq" class="headerlink" title="CDSeq"></a><a href="https://doi.org/10.1371/journal.pcbi.1007510">CDSeq</a></h4><p>CDSeq 仅使用来自大量组织样本的 RNA-Seq 数据来同时估计细胞类型比例和细胞类型特异性表达谱。<br><img src="/2021/12/08/deconmixeddata/CDSeq1.jpg"><br><img src="/2021/12/08/deconmixeddata/CDSeq2.jpg">  </p>
-<p><strong>Code availability:</strong>   </p>
-<ul>
-<li>MATLAB and Octave  </li>
-<li><a href="https://github.com/kkang7/CDSeq">https://github.com/kkang7/CDSeq</a>  </li>
-</ul>
-<h4 id="Deconf"><a href="#Deconf" class="headerlink" title="Deconf"></a><a href="https://doi.org/10.1186/1471-2105-11-27">Deconf</a></h4><p>Deconf 证明了从单个样本的基因表达数据中预测构成细胞类型的比例的可行性，这是基于去粗取精的分类方法的前提条件。  </p>
-<p><strong>Code availability:</strong>   </p>
-<ul>
-<li>R  </li>
-<li><a href="https://static-content.springer.com/esm/art%3A10.1186%2F1471-2105-11-27/MediaObjects/12859_2009_3484_MOESM1_ESM.ZIP">example data and script</a>  </li>
-</ul>
-<h3 id="不完全解卷积"><a href="#不完全解卷积" class="headerlink" title="不完全解卷积"></a>不完全解卷积</h3><h4 id="Rodeo"><a href="#Rodeo" class="headerlink" title="Rodeo"></a><a href="https://doi.org/10.1093/nargab/lqaa110">Rodeo</a></h4><p>Rodeo 是一种基于稳健线性回归的方法，可以实现简单而稳健的表达式反卷积。  </p>
-<p><strong>Code availability:</strong>   </p>
-<ul>
-<li>R  </li>
-<li><a href="https://github.com/elolab/Rodeo">https://github.com/elolab/Rodeo</a></li>
-</ul>
-<h4 id="cs-lsfit-amp-cs-qprog"><a href="#cs-lsfit-amp-cs-qprog" class="headerlink" title="cs-lsfit &amp; cs-qprog"></a><a href="https://doi.org/10.1371/journal.pone.0006098">cs-lsfit &amp; cs-qprog</a></h4><p>cs-lsfit 和 cs-qprog 属于 CellMix 中的两个解卷积算法，使用CellMix时可选择使用哪一个来进行解卷积步骤。</p>
-<p><strong>Code availability:</strong>   </p>
-<ul>
-<li>R  </li>
-<li><a href="https://github.com/r-forge/cellmix/tree/master/pkg/CellMix">https://github.com/r-forge/cellmix/tree/master/pkg/CellMix</a></li>
-</ul>
-<h4 id="LRCDE"><a href="#LRCDE" class="headerlink" title="LRCDE"></a><a href="https://doi.org/10.1186/s12859-016-1226-z">LRCDE</a></h4><p>LRCDE 在逐个基因的基础上执行基于线性回归的细胞类型特异性差异表达(反卷积)检测。考虑到细胞类型特异性基因表达估计的变异性，它计算差异检测的每个基因 t 统计量、p 值、基于 t 统计量的灵敏度、组特异性均方误差和几个基因特异性诊断指标。  </p>
-<p><strong>Code availability:</strong>   </p>
-<ul>
-<li>R  </li>
-<li><a href="https://github.com/ERGlass/lrcde.dev">https://github.com/ERGlass/lrcde.dev</a></li>
-</ul>
-<h4 id="csSAM"><a href="#csSAM" class="headerlink" title="csSAM"></a><a href="https://doi.org/10.1038/nmeth.1439">csSAM</a></h4><p>csSAM 根据测量的细胞比例计算细胞特异性差异表达。<br><img src="/2021/12/08/deconmixeddata/csSAM.jpg"></p>
-<p><strong>Code availability:</strong>   </p>
-<ul>
-<li>R  </li>
-<li><a href="https://github.com/shenorrLab/csSAM">https://github.com/shenorrLab/csSAM</a>  </li>
-</ul>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1] Maria K Jaakkola, Laura L Elo, Computational deconvolution to estimate cell type-specific gene expression from bulk data, NAR Genomics and Bioinformatics, Volume 3, Issue 1, March 2021, lqaa110, <a href="https://doi.org/10.1093/nargab/lqaa110">https://doi.org/10.1093/nargab/lqaa110</a><br>[2] 具体算法参考文献见算法介绍部分</p>
-]]></content>
-      <categories>
-        <category>Paper</category>
-        <category>DeconvoluteMixedBioData</category>
-      </categories>
-      <tags>
-        <tag>DeconvoluteMixedBioData</tag>
-        <tag>Bioinformatics</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>长毛象使用指南</title>
     <url>/2021/09/21/mstdn/</url>
     <content><![CDATA[<center>不少朋友被我安利到长毛象(mastodon)玩耍，本着对他们负责的态度，写下这篇长毛象使用指南。</center>
@@ -797,53 +844,6 @@ data[key] = $.html();
       <tags>
         <tag>Mastodon</tag>
         <tag>UserGuide</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Methods to Analyze Multi-Omicis Data</title>
-    <url>/2021/12/01/multiomics/</url>
-    <content><![CDATA[<center>文献阅读：多组学数据的整合、解读方法及公开可用的多组学数据库</center>
-<span id="more"></span>
-
-<h2 id="Multi-Omics"><a href="#Multi-Omics" class="headerlink" title="Multi-Omics"></a>Multi-Omics</h2><p><strong>Multi-Omics</strong>指同时获得两个或两个以上组学数据，如基因组、转录组、蛋白质组等，并将它们结合在一起分析、挖掘，以获得更全面、更系统的生物学解释、分子作用机制等。  </p>
-<h2 id="多组学研究的意义"><a href="#多组学研究的意义" class="headerlink" title="多组学研究的意义"></a>多组学研究的意义</h2><p>整合多组学数据，提供不同层次的生物分子信息，有望系统地、整体地理解复杂的生物学。<br>多组学研究以顺序或同时的方式结合各组学数据，以了解分子之间的相互作用。<br>有助于评估从一个组学水平到另一个组学水平的信息流，从而有助于弥合从基因型到表型的差距。<br>多组学数据能够为研究提供整体视角，有助于提高疾病表型的预后和预测准确性，进而帮助更好地治疗和预防。  </p>
-<h2 id="多组学研究的困难"><a href="#多组学研究的困难" class="headerlink" title="多组学研究的困难"></a>多组学研究的困难</h2><p>多组学的研究通常与非组学数据相关联，如临床数据等，这导致多组学研究面临许多困难。  </p>
-<h3 id="非组学数据复杂且主观定义"><a href="#非组学数据复杂且主观定义" class="headerlink" title="非组学数据复杂且主观定义"></a>非组学数据复杂且主观定义</h3><p>非组学数据通常十分复杂且主观性较强，需要标准化后将其加入预测或分类模型中。流行病学数据受制于调查模式、调查问题标准化以及背景，这可能会影响数据质量和可比性，并最终影响这些变量在结果预测中的贡献。不同研究者或组织由于收集程序不一致，也可能产生差异。临床数据受到其定义复杂性的影响，需要有统一的标准。目前有一些标准化的规则可供使用，如Clinical Data Interchange Standards Consortium (CDISC)，Study Data Tabulation Model (SDTM)，Analysis Data Model (ADaM)。这些非组学数据是基于评估者的技能和先前知识的复杂阐述过程产生的主观评估，这可能会导致报告偏差。  </p>
-<h3 id="非组学数据具有异质性"><a href="#非组学数据具有异质性" class="headerlink" title="非组学数据具有异质性"></a>非组学数据具有异质性</h3><p>非组学数据缺乏统一性，如不同尺度测量的定性或定量变量等，在分析之前需要对它们进行数据转换或归一化步骤。  </p>
-<h3 id="非组学数据规模大"><a href="#非组学数据规模大" class="headerlink" title="非组学数据规模大"></a>非组学数据规模大</h3><p>目前，许多多组学数据与非组学数据相结合的研究方法基于小尺度、低纬度的数据，而现在的非组学数据已经成为“大数据”——大规模，高维度。可穿戴监测装置和EHR (e-health records)的出现使非组学数据更易获取并向更高维度发展，且在处理客观和主观特征以及结构化和非结构化数据方面也更具有挑战性。<br>非组学数据的高维度也意味着存在</p>
-<ul>
-<li>变量之间的相关结构  </li>
-<li>大规模纵向数据  </li>
-<li>数据稀疏性（即药物、实验室或诊断测试）  </li>
-<li>与组学数据相比，数据缺失与参与个体无关  </li>
-</ul>
-<p>这些因素都需要在后续分析建模时，将其考虑在内。  </p>
-<h3 id="将组学和非组学数据联系"><a href="#将组学和非组学数据联系" class="headerlink" title="将组学和非组学数据联系"></a>将组学和非组学数据联系</h3><p>在病例对照设计中，组学数据和非组学数据的整合可能会受到确认偏差的影响。<br>组学和非组学数据之间的相互作用也会对研究产生影响。在建模的过程中，重要的是要将这种相互作用考虑在内。这些相互作用也可能非常复杂，如基因表达变化可能意味着表型异常，这导致分子数据和临床数据之间的关系更加复杂。  </p>
-<h3 id="其它困难"><a href="#其它困难" class="headerlink" title="其它困难"></a>其它困难</h3><p>每个变量或块对结果的贡献是否应该相等。<br>当与高通量数据集结合时，如何防止临床变量被惩罚(penalized)。<br>亚型的出现会给模型增加复杂性，在建模时是否要将亚型考虑在内。</p>
-<h2 id="多组学数据库"><a href="#多组学数据库" class="headerlink" title="多组学数据库"></a>多组学数据库</h2><p>多组学数据覆盖基因组、蛋白组、转录组、代谢组和表观遗传组的数据，含有这些组学数据两种或两种以上的数据库可成为多组学数据库。  </p>
-<h3 id="TCGA"><a href="#TCGA" class="headerlink" title="TCGA"></a>TCGA</h3><p>The Cancer Genome Altas (<a href="https://cancergenome.nih.gov/">TCGA</a>) 是最大的多组学数据库之一，涵盖超过 33 种不同类型癌症的20000个个体肿瘤样本。TCGA旨在产生、整合、分析和解释肿瘤样本产生的DNA、RNA、蛋白质及表观遗传数据的特征以及临床和组织学数据。</p>
-<h3 id="CPTAC"><a href="#CPTAC" class="headerlink" title="CPTAC"></a>CPTAC</h3><p>Clinical Proteomic Tumor Analysis Consortium (<a href="https://cptac-data-portal.georgetown.edu/cptacPublic/">CPTAC</a>) 是通过对TCGA库中的生物样本通过质谱技术进行分析，获取的蛋白质组数据。如果实验中同时测得基因组数据，也可在该库获得。  </p>
-<h3 id="ICGC"><a href="#ICGC" class="headerlink" title="ICGC"></a>ICGC</h3><p>International Cancer Genomics Consortium (<a href="https://icgc.org/">ICGC</a>) 从20383名捐献者的21个原发癌位点的76个癌症项目中协调大规模生成基因组研究。  </p>
-<h3 id="CCLE"><a href="#CCLE" class="headerlink" title="CCLE"></a>CCLE</h3><p>Cancer Cell Line Encyclopedia (<a href="https://portals.broadinstitute.org/ccle">CCLE</a>) 包含947种人类细胞系和36种肿瘤的基因表达、拷贝数和测序数据。还包含479种癌细胞系中24种抗癌药物的药理学特征。  </p>
-<h3 id="METABRIC"><a href="#METABRIC" class="headerlink" title="METABRIC"></a>METABRIC</h3><p>Molecular Taxonomy of Breast Cancer International Consortium (<a href="http://molonc.bccrc.ca/apariciolab/research/metabric/">METABRIC</a>) 包含来自乳腺肿瘤的临床特征、表达、单核苷酸多态性和拷贝数变异数据。  </p>
-<h3 id="TARGET"><a href="#TARGET" class="headerlink" title="TARGET"></a>TARGET</h3><p><a href="https://ocg.cancer.gov/programs/target">TARGET</a> 包含 24 种癌症分子类型的临床信息、基因表达、miRNA 表达、拷贝数和测序数据。  </p>
-<h3 id="OmicsDI"><a href="#OmicsDI" class="headerlink" title="OmicsDI"></a>OmicsDI</h3><p>Omics Discovery Index (<a href="https://www.omicsdi.org/">OmicsDI</a>) 包含来自公共数据结构中的 11 个存储库的数据集。是一个开源平台，用于访问、发现和整合基因组学、转录组学、蛋白质组学和代谢组学数据集。包含来自人类、模式生物和非模式生物的数据集。  </p>
-<h2 id="多组学数据分析方法"><a href="#多组学数据分析方法" class="headerlink" title="多组学数据分析方法"></a>多组学数据分析方法</h2><p>根据算法思想，可将目前已有的多组学数据分析方法分为几个大类：<br><img src="/2021/12/01/multiomics/methods.png">  </p>
-<h3 id="Network-Based"><a href="#Network-Based" class="headerlink" title="Network Based"></a>Network Based</h3><p><strong>SNF</strong> (Similarity network fusion)是一种基于网络的方法，使用网络融合方法整合多组学数据集。它为每种数据类型创建一个单独的网络，然后使用非线性网络融合方法将它们融合成一个单一的相似性网络。 融合步骤基于消息传递理论，使网络在每次迭代中更像其他网络。<br><strong>NetICS</strong> (Network-based integration of multi-omics data)为基于网络的多组学数据集成提供了一个框架，用于癌症基因优先排序。可预测遗传畸变、表观遗传变化和miRNA对相互作用网络中下游基因和蛋白质(表达)的影响。在有向功能交互网络上使用每个样本的网络扩散模型，并通过聚合个体排名得出种群水平的基因排名，并为所有样本提供全局排名。  </p>
-<h3 id="Bayesian-approach"><a href="#Bayesian-approach" class="headerlink" title="Bayesian approach"></a>Bayesian approach</h3><p><strong>iCluster</strong>根据多种数据类型同时推断，为样本生成一个单一的聚类分配。这种无监督方法使用联合潜在变量模型进行集成聚类，并在单个框架中结合不同数据类型之间的关联以及数据类型内的方差-协方差结构，同时降低数据集的维度。通过期望最大化算法获得似然推理。<br><strong>iClusterPlus</strong>是iCluster的增强版，使用广义线性回归来确定综合基因组、表观基因组和转录组分析的分类和数字(连续和计数)变量的联合模型。该方法使用一组潜在变量”k”来代表驱动因素，这些因素预测关键的基因组变量，从而捕捉生物变异。此外，使用Lasso回归方法，iClusterPlus确定了有助于亚型之间生物变化的特征子集。<br><strong>LRAcluster</strong>使用概率模型与低秩近似法来寻找主要的低维子空间，以对全基因组数据进行分类。在这种方法中，每个组学数据都以大小匹配的参数矩阵为条件，并且这个低秩参数矩阵可以在低维空间中表示。 用户定义的维度参数(基于数据的解释方差)和聚类数(基于轮廓值)有助于更快地降维和更好地聚类疾病亚型。<br><strong>PSDF</strong> (Patient-specific data fusion)该方法使用贝叶斯非参数模型(Dirichlet 过程混合模型)来整合CNV和基因表达数据，以将样本分层为子组。每个样本根据它们在2个数据集之间的一致性被分配一个二元状态。只有表现出一致性的样本融合在一起，而其他样本保持未融合，因此考虑了患者特定的融合模型。<br><strong>BCC</strong> (Bayesian consensus clustering)提出了一种数据驱动的共识聚类方法，该方法对源特定特征以及使用有限狄利克雷混合模型扩展以解释多个数据源的整体聚类进行建模。<br><strong>Joint Bayesian factor</strong>使用非参数贝叶斯因子分析来整合组学数据集。 这种方法使用 beta-Bernoulli 过程将特征空间分解为共享的和特定于数据的组件。<br><strong>MDI</strong> (Multiple dataset integration)使用 Dirichlet 混合模型对每个数据源进行聚类，同时对聚类之间的成对依赖性进行建模。MDI在分配给组件(如基因组特征)的变量级别链接模型。组件变量级链接允许捕获多组学数据之间的依赖关系。<br><strong>MOFA</strong> (Multi-omics factor analysis)是一种无监督方法，用于在相同或部分重叠的样本上整合多组学数据类型。<br><strong>PARADIGM</strong>的应用可以扩展到对所研究疾病的发现。  </p>
-<h3 id="Fusion-based-approaches"><a href="#Fusion-based-approaches" class="headerlink" title="Fusion-based approaches"></a>Fusion-based approaches</h3><p><strong>PFA</strong> (Pattern fusion analysis)允许在低维特征空间中跨异质基因组谱识别集成样本模式。首先使用主成分分析获得局部样本模式。 其后将这些局部样本模式与公共特征空间对齐，并跨大多数数据类型合成全局样本模式。在此过程中，将定量测量每种数据类型(或单个样本)对全局样本频谱的贡献，并迭代降低偏差或系统噪声的影响以更好地拟合数据。  </p>
-<h3 id="Similarity-based-approaches"><a href="#Similarity-based-approaches" class="headerlink" title="Similarity-based approaches"></a>Similarity-based approaches</h3><p><strong>PINSPlus</strong> (Perturbation clustering for data integration and disease subtyping)是一种无监督的聚类方法，有助于从多组学数据中识别亚型。为了识别亚型，该算法确定患者在单个集群中分组的频率(1)当数据受到干扰时，(2)使用不同类型的组学数据时，(3)使用不同的聚类技术时。 所有场景中的强关联患者都聚集在一起形成一个亚型。<br><strong>NEMO</strong>(Neighborhood-based multi-omics clustering) 是一种基于相似性的简单多组学聚类方法，它进一步建立在先前建立的聚类方法（如 SNF 和 rMKL-LPP）的基础上。该方法最初为每个输入组学数据集构建基于患者间相似性矩阵的欧几里德距离。然后将每个组学的相似性矩阵整合到一个矩阵中，然后使用光谱聚类方法对其进行聚类。  </p>
-<h3 id="Correlation-based-approaches"><a href="#Correlation-based-approaches" class="headerlink" title="Correlation based approaches"></a>Correlation based approaches</h3><p><strong>CNAmet</strong>用于对拷贝数改变、DNA 甲基化和基因表达数据进行综合分析。  </p>
-<h3 id="Other-multivariate-approaches"><a href="#Other-multivariate-approaches" class="headerlink" title="Other multivariate approaches"></a>Other multivariate approaches</h3><p><strong>mixOmics</strong>提供了一组有监督和无监督的多元方法来执行多组学数据集的整合，重点是变量选择。<br><strong>moCluster</strong>使用多表多元分析方法来识别跨多组学数据集的模式。<br><strong>MCIA</strong> (Multiple co-inertia analysis)是一种探索性数据分析方法，它捕捉多个高维数据集（如基因表达、miRNA表达、蛋白质表达）之间的相互关系。<br><strong>JIVE</strong> (Joint and individual variation explained)通过分离数据集的联合效应和个体效应来整合多组学数据。<br><strong>MFA</strong> (Multiple factor analysis)是一种通过将其投影到低维变量空间来帮助整合组学数据集的方法。<br><strong>rMKL-LPP</strong> 使用多核学习来集成异构多数据并执行子类型识别。<br><strong>iNMF</strong> (Integrative nonnegative matrix factorization)扩展了NMF框架以在集成多个数据时考虑异构效应。<br><strong>FSMKL</strong> (Feature selection multiple kernel learning)是一种监督分类方法，使用多个内核来捕获数据集之间的相似性，以识别疾病进展的特征。<br><strong>sMBPLS</strong> (Sparse multi-block partial least squares)允许多块输入包含多个调控组学数据集，例如 CNV、DNA 甲基化和调控基因表达的 miRNA 表达。<br><strong>T-SVD</strong> (Thresholding singular value decomposition)有助于识别 2 个组学数据集之间的调控机制，尤其是当调控特征大于测量样本时。<br><strong>Joint NMF</strong> 该分解框架从多个数据集(相同样本)中识别相关模块，以推导出 md 模块，以揭示潜在的多层监管因素。  </p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1] Subramanian I, Verma S, Kumar S, Jere A, Anamika K. Multi-omics Data Integration, Interpretation, and Its Application. Bioinformatics and Biology Insights. January 2020. <a href="doi:10.1177/1177932219899051">doi:10.1177/1177932219899051</a><br>[2] López de Maturana E, Alonso L, Alarcón P, Martín-Antoniano IA, Pineda S, Piorno L, Calle ML, Malats N. Challenges in the Integration of Omics and Non-Omics Data. Genes (Basel). 2019 Mar 20;10(3):238. <a href="doi:10.3390/genes10030238">doi:10.3390/genes10030238</a></p>
-]]></content>
-      <categories>
-        <category>Paper</category>
-        <category>MultiOmics</category>
-      </categories>
-      <tags>
-        <tag>Bioinformatics</tag>
-        <tag>MultiOmics</tag>
       </tags>
   </entry>
   <entry>
@@ -2372,6 +2372,127 @@ $ hexo deploy  # 部署到GitHub Pages
       </categories>
       <tags>
         <tag>ComputerNetwork</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>DOGchan：如何做一个能够自动回复的 Mastodon bot</title>
+    <url>/2022/07/20/dogchan/</url>
+    <content><![CDATA[<center> 任何时间，任何地点，可爱狗狗，认真汪汪！ </center>
+<span id="more"></span>
+
+<p>缪尚咖啡馆已经有只傲娇猫猫，当然也要有可爱狗狗！于是决定学习制作一个能够自动回复的狗狗 bot，让缪尚咖啡馆实现猫狗双全。让我们有请小狗汪汪！  </p>
+<h2 id="利用-Node-及-mastodon-api-实现自动回复-bot"><a href="#利用-Node-及-mastodon-api-实现自动回复-bot" class="headerlink" title="利用 Node 及 mastodon-api 实现自动回复 bot"></a>利用 Node 及 mastodon-api 实现自动回复 bot</h2><p>由于这一方法在尝试过程中 bug 百出，且没有找到合适的解决方案，暂时搁置，转而使用 <code>Mastodon.py</code>。<br>但此方法本身较为好懂，油管教程也也非常详细、容易上手。虽然很不想承认，但我没有搭建成功应该是我的问题，可能会在以后更熟悉 JavaScript 时再回头看这个教程。  </p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>长毛象顶流：<a href="https://github.com/TheTarr/mastodon_bot">操操</a><br>油管教程：<a href="https://www.youtube.com/playlist?list=PLRqwX-V7Uu6byiVX7_Z1rclitVhMBmNFQ">Mastodon API and Bots: Node.js</a>  </p>
+<h3 id="注册账号"><a href="#注册账号" class="headerlink" title="注册账号"></a>注册账号</h3><p>选择一个合适的站点注册 bot 账号，并修改资料，注意选中 “这是一个 bot 账号 / This is a bot account”。<br>在管理面板找到开发/Development-创建新应用/New Application，创建新应用并给予读写权限，复制访问令牌。  </p>
+<h3 id="安装-node"><a href="#安装-node" class="headerlink" title="安装 node"></a>安装 node</h3><p>由于服务器上还没有安装 npm，所以第一步需要先安装。直接使用命令安装。  </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt install npm</span><br><span class="line">mkdir dogchan <span class="comment"># 为 bot 相关文件新建目录</span></span><br><span class="line"><span class="built_in">cd</span> dogchan</span><br></pre></td></tr></table></figure>
+
+<p>接下来运行命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm init</span><br></pre></td></tr></table></figure>
+
+<p>根据提示一步步填写初始化信息：  </p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">This utility will walk you through creating a package.json file.</span><br><span class="line">It only covers the most common items, and tries to guess sensible defaults.</span><br><span class="line"></span><br><span class="line">See `npm help json` for definitive documentation on these fields</span><br><span class="line">and exactly what they do.</span><br><span class="line"></span><br><span class="line">Use `npm install &lt;pkg&gt;` afterwards to install a package and</span><br><span class="line">save it as a dependency in the package.json file.</span><br><span class="line"></span><br><span class="line">Press ^C at any time to quit.</span><br><span class="line">package name: (dogchan) dogchan</span><br><span class="line">version: (<span class="number">1.0</span><span class="number">.0</span>) <span class="number">0.0</span><span class="number">.1</span></span><br><span class="line">description: A dog bot</span><br><span class="line">entry point: (index.js) bot.js</span><br><span class="line">test command:</span><br><span class="line">git repository:</span><br><span class="line">keywords: bot, mastodon</span><br><span class="line">author: melocery</span><br><span class="line">license: (ISC) MIT</span><br><span class="line">About to write to /root/miniconda/dogchan/package.json:</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"><span class="attr">&quot;name&quot;</span>: <span class="string">&quot;dogchan&quot;</span>,</span><br><span class="line"><span class="attr">&quot;version&quot;</span>: <span class="string">&quot;0.0.1&quot;</span>,</span><br><span class="line"><span class="attr">&quot;description&quot;</span>: <span class="string">&quot;A dog bot&quot;</span>,</span><br><span class="line"><span class="attr">&quot;main&quot;</span>: <span class="string">&quot;bot.js&quot;</span>,</span><br><span class="line"><span class="attr">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;test&quot;</span>: <span class="string">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span></span><br><span class="line">&#125;,</span><br><span class="line"><span class="attr">&quot;keywords&quot;</span>: [</span><br><span class="line">    <span class="string">&quot;bot&quot;</span>,</span><br><span class="line">    <span class="string">&quot;mastodon&quot;</span></span><br><span class="line">],</span><br><span class="line"><span class="attr">&quot;author&quot;</span>: <span class="string">&quot;melocery&quot;</span>,</span><br><span class="line"><span class="attr">&quot;license&quot;</span>: <span class="string">&quot;MIT&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Is this OK? (yes) yes</span><br></pre></td></tr></table></figure>
+
+<p>现在查看 <code>dogchan</code> 目录下会多出一个名为 <code>package.json</code> 的文件，内容是刚才初始化填写的信息。  </p>
+<h3 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h3><p>运行命令：  </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install dotenv</span><br></pre></td></tr></table></figure>
+
+<p>出现问题：  </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm WARN notsup Unsupported engine <span class="keyword">for</span> dotenv@16.0.1: wanted: &#123;<span class="string">&quot;node&quot;</span>:<span class="string">&quot;&gt;=12&quot;</span>&#125; (current: &#123;<span class="string">&quot;node&quot;</span>:<span class="string">&quot;10.19.0&quot;</span>,<span class="string">&quot;npm&quot;</span>:<span class="string">&quot;6.14.4&quot;</span>&#125;)</span><br><span class="line">npm WARN notsup Not compatible with your version of node/npm: dotenv@16.0.1</span><br></pre></td></tr></table></figure>
+
+<p>提醒安装的 <code>node</code> 和 <code>npm</code> 版本不足。查找教程升级版本后，再次运行命令出现新的报错：  </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">node:internal/modules/cjs/loader:936</span><br><span class="line">  throw err;</span><br><span class="line">  ^</span><br><span class="line"></span><br><span class="line">Error: Cannot find module <span class="string">&#x27;semver&#x27;</span></span><br><span class="line">Require stack:</span><br><span class="line">- /usr/share/npm/lib/utils/unsupported.js</span><br><span class="line">- /usr/share/npm/bin/npm-cli.js</span><br><span class="line">    at Function.Module._resolveFilename (node:internal/modules/cjs/loader:933:15)</span><br><span class="line">    at Function.Module._load (node:internal/modules/cjs/loader:778:27)</span><br><span class="line">    at Module.require (node:internal/modules/cjs/loader:1005:19)</span><br><span class="line">    at require (node:internal/modules/cjs/helpers:102:18)</span><br><span class="line">    at Object.&lt;anonymous&gt; (/usr/share/npm/lib/utils/unsupported.js:2:14)</span><br><span class="line">    at Module._compile (node:internal/modules/cjs/loader:1105:14)</span><br><span class="line">    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)</span><br><span class="line">    at Module.load (node:internal/modules/cjs/loader:981:32)</span><br><span class="line">    at Function.Module._load (node:internal/modules/cjs/loader:822:12)</span><br><span class="line">    at Module.require (node:internal/modules/cjs/loader:1005:19) &#123;</span><br><span class="line">code: <span class="string">&#x27;MODULE_NOT_FOUND&#x27;</span>,</span><br><span class="line">requireStack: [</span><br><span class="line">    <span class="string">&#x27;/usr/share/npm/lib/utils/unsupported.js&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;/usr/share/npm/bin/npm-cli.js&#x27;</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>谷歌解决方法大多数是完全卸载后重装，但无论卸载重装多少次，总会遇到 <code>Error: Cannot find module &#39;semver&#39;</code>。最后的解决方式是：  </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 完全 uninstall node 和 npm</span></span><br><span class="line">sudo rm -rf /usr/<span class="built_in">local</span>/bin/npm /usr/<span class="built_in">local</span>/share/man/man1/node* ~/.npm</span><br><span class="line">sudo rm -rf /usr/<span class="built_in">local</span>/lib/node*</span><br><span class="line">sudo rm -rf /usr/<span class="built_in">local</span>/bin/node*</span><br><span class="line">sudo rm -rf /usr/<span class="built_in">local</span>/include/node*</span><br><span class="line"></span><br><span class="line">sudo apt-get purge nodejs npm</span><br><span class="line">sudo apt autoremove</span><br><span class="line"></span><br><span class="line"><span class="comment"># reinstall</span></span><br><span class="line">wget https://nodejs.org/dist/v16.16.0/node-v16.16.0-linux-x64.tar.xz</span><br><span class="line">tar -xf node-v16.16.0-linux-x64.tar.xz</span><br><span class="line">sudo mv node-v16.16.0-linux-x64/bin/* /usr/<span class="built_in">local</span>/bin/</span><br><span class="line">sudo mv node-v16.16.0-linux-x64/lib/node_modules/ /usr/<span class="built_in">local</span>/lib/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查安装情况</span></span><br><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+
+<p>这里再次出现状况，运行 <code>npm -v</code> 时报错：  </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">-bash: /usr/bin/npm: No such file or directory</span><br></pre></td></tr></table></figure>
+
+<p>但如果换为运行 <code>/usr/local/bin/npm -v</code> 则能够正常显示版本号。没有再次搜索问题原因，直接在 <code>.bashrc</code> 文件中增加一行：  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">alias npm=&#x27;/usr/local/bin/npm&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>而后执行 <code>source .bashrc</code>。此时运行 <code>npm -v</code> 即可正常显示版本号。  </p>
+<p>重新进行关于 npm 的所有命令，直到安装完成 <code>dotenv</code>。安装完成后出现提醒信息：  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">added 1 package, and audited 236 packages in 1s</span><br><span class="line"></span><br><span class="line">5 packages are looking for funding</span><br><span class="line">run `npm fund` for details</span><br><span class="line"></span><br><span class="line">8 vulnerabilities (2 moderate, 3 high, 3 critical)</span><br><span class="line"></span><br><span class="line">To address issues that do not require attention, run:</span><br><span class="line">npm audit fix</span><br><span class="line"></span><br><span class="line">Some issues need review, and may require choosing</span><br><span class="line">a different dependency.</span><br><span class="line"></span><br><span class="line">Run `npm audit` for details.</span><br></pre></td></tr></table></figure>
+
+<p>没有找到解决方法，运行 <code>npm audit fix --force</code> 也无法解决 8 vulnerabilities，暂时搁置。  </p>
+<p>新建文件 <code>.env</code>，将前述步骤中得到的 bot 访问令牌填入文件：  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 应用 ID</span><br><span class="line">CLIENT_KEY= </span><br><span class="line"># 应用密钥</span><br><span class="line">CLIENT_SECRET=</span><br><span class="line"># 访问令牌</span><br><span class="line">ACCESS_TOKEN= </span><br><span class="line"># bot 所在站点</span><br><span class="line">API_URL=https://musain.cafe/api/v1/ </span><br></pre></td></tr></table></figure>
+
+<p>保存并退出。<br>新建 <code>bot.js</code> 文件，在文件内写入：  </p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;dotenv&#x27;</span>).config();</span><br></pre></td></tr></table></figure>
+
+<p>由于后续会将整个 bot 的代码上传至 github，所以需要将真正的 <code>.env</code> 隐藏起来而上传一个示例文件。  </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nano .env-example</span><br><span class="line"></span><br><span class="line"><span class="comment">## 写入如下内容后保存并退出，文件中不需要 &#x27;#&#x27;，此处该符号仅为标记文件内容</span></span><br><span class="line"><span class="comment"># CLIENT_KEY=</span></span><br><span class="line"><span class="comment"># CLIENT_SECRET=</span></span><br><span class="line"><span class="comment"># ACCESS_TOKEN=</span></span><br><span class="line"><span class="comment"># API_URL=https://musain.cafe/api/v1/</span></span><br><span class="line"></span><br><span class="line">nano .gitignore</span><br><span class="line"><span class="comment">## 写入如下内容后保存并退出，文件中不需要 &#x27;#&#x27;，此处该符号仅为标记文件内容</span></span><br><span class="line"><span class="comment"># .env</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="connect-to-mastodon"><a href="#connect-to-mastodon" class="headerlink" title="connect to mastodon"></a>connect to mastodon</h3><p>与 mastodon 连接需要使用 node package (<a href="https://github.com/vanita5/mastodon-api">mastodon-api</a>)，安装命令：  </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install --save mastodon-api</span><br></pre></td></tr></table></figure>
+
+<p>安装完成后目录下会多出一个目录 <code>node_modules</code> 和一个文件 <code>package-lock.json</code>。查看 <code>package.json</code> 会发现其中多出一段：  </p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;dependencies&quot;</span>:&#123;</span><br><span class="line">    <span class="attr">&quot;mastodon-api&quot;</span>: <span class="string">&quot;^1.3.0&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>想要连接 mastodon 则需要编辑 <code>bot.js</code> 文件，在文件内写入：  </p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> mastodon = <span class="built_in">require</span>(<span class="string">&#x27;mastodon-api&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> M = <span class="keyword">new</span> Mastodon(&#123;</span><br><span class="line"><span class="attr">client_key</span>: process.env.CLIENT_KEY, <span class="comment">// read the .env file</span></span><br><span class="line"><span class="attr">client_secret</span>: process.env.CLIENT_SECRET,</span><br><span class="line"><span class="attr">access_token</span>: process.env.ACCESS_TOKEN,</span><br><span class="line"><span class="attr">timeout_ms</span>: <span class="number">60</span> * <span class="number">1000</span>,  <span class="comment">// optional HTTP request timeout to apply to all requests.</span></span><br><span class="line"><span class="attr">api_url</span>: process.env.API_URL, <span class="comment">// optional, defaults to https://mastodon.social/api/v1/</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="log-file"><a href="#log-file" class="headerlink" title="log file"></a>log file</h3><p>每一次发送嘟文会在屏幕上打印一大串内容，包括嘟文发送情况、嘟文的链接等等，但并不需要每一次都打印详细信息，只需要将 debug 所需的信息输出到 log 文件即可。<br>在 <code>bot.js</code> 文件中写入：  </p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// toot example</span></span><br><span class="line"><span class="keyword">const</span> num = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.randon()*<span class="number">100</span>);</span><br><span class="line"><span class="keyword">const</span> params = &#123;</span><br><span class="line">    <span class="attr">status</span>: <span class="string">`The meaning of life is <span class="subst">$&#123;num&#125;</span>`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// log</span></span><br><span class="line">M.post(<span class="string">&#x27;statuses&#x27;</span>, params, <span class="function">(<span class="params">error, data</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (error) &#123;</span><br><span class="line">        <span class="built_in">console</span>.error(error);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// fs.writeFileSync(&#x27;data.json&#x27;, JSON.stringify(data, null, 2));</span></span><br><span class="line">        <span class="comment">// console.log(data);</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`ID: <span class="subst">$&#123;data.id&#125;</span> and timestamp: <span class="subst">$&#123;data.created_at&#125;</span>`</span>); <span class="comment">// get the id and time</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`Posted: <span class="subst">$&#123;data.content&#125;</span>`</span>); <span class="comment">// get the content of toot</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>上述代码实际实现了一次完整的发送嘟文，因此可以封装为一个函数，即：  </p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line"><span class="comment">// toot function: pick a random num, create a status, and toot it</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">toot</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// toot example</span></span><br><span class="line">    <span class="keyword">const</span> num = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.randon()*<span class="number">100</span>);</span><br><span class="line">    <span class="keyword">const</span> params = &#123;</span><br><span class="line">        <span class="attr">status</span>: <span class="string">`The meaning of life is <span class="subst">$&#123;num&#125;</span>`</span></span><br><span class="line">        <span class="comment">// if want to use cw</span></span><br><span class="line">        <span class="comment">// spoiler_text: &quot; The meaning of life is&quot;,</span></span><br><span class="line">        <span class="comment">// status: num</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// log</span></span><br><span class="line">    M.post(<span class="string">&#x27;statuses&#x27;</span>, params, <span class="function">(<span class="params">error, data</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (error) &#123;</span><br><span class="line">            <span class="built_in">console</span>.error(error);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// fs.writeFileSync(&#x27;data.json&#x27;, JSON.stringify(data, null, 2));</span></span><br><span class="line">            <span class="comment">// console.log(data);</span></span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">`ID: <span class="subst">$&#123;data.id&#125;</span> and timestamp: <span class="subst">$&#123;data.created_at&#125;</span>`</span>); <span class="comment">// get the id and time</span></span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">`Posted: <span class="subst">$&#123;data.content&#125;</span>`</span>); <span class="comment">// get the content of toot</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="streaming-api-user"><a href="#streaming-api-user" class="headerlink" title="streaming api: user"></a>streaming api: user</h3><p>目前 bot 已经实现自动发嘟，但如果想做一个可以自动回复、给特定人点星而不是随机骚扰用户，则需要监听 streaming api 中的用户部分，并根据所得信息进行相应回应。<br>在 <code>bot.js</code> 文件中写入：  </p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> listener = M.stream(<span class="string">&#x27;streaming/user&#x27;</span>)</span><br><span class="line"></span><br><span class="line">listener.on(<span class="string">&#x27;message&#x27;</span>, <span class="function"><span class="params">msg</span> =&gt;</span> &#123;</span><br><span class="line">    fs.writeFileSync(<span class="string">`data<span class="subst">$&#123;<span class="keyword">new</span> <span class="built_in">Date</span>().getTime()&#125;</span>.json`</span>, <span class="built_in">JSON</span>.stringify(msg, <span class="literal">null</span>, <span class="number">2</span>));</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`usr event`</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>通过 <code>node bot.js</code> 运行 bot，并利用其它账号 @bot 或关注等操作测试 bot 是否正确运行。这一步遇到问题：  </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Mastodon Bot starting...</span><br><span class="line">node:events:505</span><br><span class="line">    throw er; // Unhandled <span class="string">&#x27;error&#x27;</span> event</span><br><span class="line">    ^</span><br><span class="line"></span><br><span class="line">Error: aborted</span><br><span class="line">    at connResetException (node:internal/errors:692:14)</span><br><span class="line">    at TLSSocket.socketCloseListener (node:_http_client:414:19)</span><br><span class="line">    at TLSSocket.emit (node:events:539:35)</span><br><span class="line">    at node:net:709:12</span><br><span class="line">    at TCP.done (node:_tls_wrap:582:7)</span><br><span class="line">Emitted <span class="string">&#x27;error&#x27;</span> event on StreamingAPIConnection instance at:</span><br><span class="line">    at IncomingMessage.&lt;anonymous&gt; (/root/miniconda/dogchan/node_modules/mastodon-api/lib/streaming-api-connection.js:141:30)</span><br><span class="line">    at IncomingMessage.emit (node:events:539:35)</span><br><span class="line">    at emitErrorNT (node:internal/streams/destroy:157:8)</span><br><span class="line">    at emitErrorCloseNT (node:internal/streams/destroy:122:3)</span><br><span class="line">    at processTicksAndRejections (node:internal/process/task_queues:83:21) &#123;</span><br><span class="line">code: <span class="string">&#x27;ECONNRESET&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>经过一整天的搜索和试图 debug 决定放弃，转而使用 python 中的 <code>Mastodon.py</code>，即 CATsama 使用的包。  </p>
+<h2 id="利用-Mastodon-py-实现自动回复-bot"><a href="#利用-Mastodon-py-实现自动回复-bot" class="headerlink" title="利用 Mastodon.py 实现自动回复 bot"></a>利用 Mastodon.py 实现自动回复 bot</h2><h3 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a>参考</h3><p>Mastodon.py: <a href="https://mastodonpy.readthedocs.io/en/stable/index.html#">Docs</a> , <a href="https://github.com/halcy/Mastodon.py">GitHub</a><br>mastodon-bot-template: <a href="https://github.com/Lynnesbian/mastodon-bot-template/blob/9e72f6a490734f7af5897c40f20b4aecb0c2308b/reply.py">reply.py</a><br>mstdn-ebooks: <a href="https://github.com/Lynnesbian/mstdn-ebooks/blob/master/reply.py">reply.py</a></p>
+<h3 id="注册账号-1"><a href="#注册账号-1" class="headerlink" title="注册账号"></a>注册账号</h3><p>选择一个合适的站点注册 bot 账号，并修改资料，注意选中 “这是一个 bot 账号 / This is a bot account”。<br>在管理面板找到开发/Development-创建新应用/New Application，创建新应用并给予读写权限，复制访问令牌。  </p>
+<h3 id="安装-Mastodon-py"><a href="#安装-Mastodon-py" class="headerlink" title="安装 Mastodon.py"></a>安装 Mastodon.py</h3><p>安装 miniconda3：  </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir miniconda</span><br><span class="line"><span class="built_in">cd</span> miniconda</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载 python 最新版本并用 bash 安装</span></span><br><span class="line">wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh</span><br><span class="line">sh Miniconda3-latest-Linux-x86_64.sh //用bash安装</span><br></pre></td></tr></table></figure>
+
+<p>通过 <code>pip</code> 安装 Mastodon.py：  </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip3 install requests beautifulsoup4 Mastodon.py <span class="comment"># 安装mastodon.py</span></span><br><span class="line">mkdir dogchan</span><br><span class="line"><span class="built_in">cd</span> dogchan</span><br><span class="line">nano mybot_usercred.secret <span class="comment"># 写入刚才复制的访问令牌，保存退出</span></span><br><span class="line">nano dogchan.py <span class="comment"># 发嘟脚本</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="编辑脚本"><a href="#编辑脚本" class="headerlink" title="编辑脚本"></a>编辑脚本</h3><p>整个过程基本上属于一边参考现有的利用 Mastodon.py 实现自动回复的库，一边自己悟每一步都是做什么的。<br>其中最实用的一个库是: <a href="https://github.com/Lynnesbian/mastodon-bot-template/">mastodon-bot-template</a>。这个库不仅包括了自动回复模板，也包括了自动发嘟模板。本项目中的 <code>extract_text</code> 函数、<code>process_mention</code> 函数和处理 notifications 都直接借用模板或稍加修改。模板作者要求使用该模板时引用原库，且使用同样的 license (AGPL-3.0 license)。  </p>
+<h4 id="自动回复脚本"><a href="#自动回复脚本" class="headerlink" title="自动回复脚本"></a>自动回复脚本</h4><p>自动回复脚本需要完成接收到 notification、判定 notification 是 mention 、对 mention 嘟文内容进行处理、作出相应的回复。其中所需的函数较多，因此将大多数函数存在 <code>Woof.py</code> 中，大框架放在 <code>dogchan.py</code> 中。<br>代码基本参考前面提到的 <a href="https://github.com/Lynnesbian/mastodon-bot-template/blob/9e72f6a490734f7af5897c40f20b4aecb0c2308b/reply.py">mastodon-bot-template: reply.py</a>。其中代码的注释非常详细，此处不再重复。  </p>
+<p>完成脚本后使用 <code>systemd</code> 设置定时任务，让服务器自动每 30 秒执行一次脚本。这里的自动执行不如前面尝试失败的方法 <code>利用 mastodon-api 实现自动回复 bot</code> 优雅，如果能够进一步提升将在此处指出。<br>在服务器上安装 systemd:  </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install systemd</span><br></pre></td></tr></table></figure>
+
+<p>任务设置模板 (来自于 mastodon-bot-template)：  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># an example for systemd</span><br><span class="line"></span><br><span class="line">[Unit]</span><br><span class="line">Description=Reply service for my bot</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">User=bots</span><br><span class="line">WorkingDirectory=/path/to/bot</span><br><span class="line">ExecStart=/usr/bin/python3 /path/to/bot/reply.py</span><br><span class="line">TimeoutSec=3600</span><br><span class="line">Restart=always</span><br><span class="line">RestartSec=30</span><br><span class="line">StartLimitBurst=3</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+
+<h4 id="自动发嘟脚本"><a href="#自动发嘟脚本" class="headerlink" title="自动发嘟脚本"></a>自动发嘟脚本</h4><p>自动发嘟脚本 <code>selfie.py</code> 主要用于实现每周三上午九点发一张汪汪照片。相关代码可参考 <a href="https://gist.github.com/RustingSword/772f0c5582bb55a50270c339e948fc76">一个简单的 mastodon bot</a> 或前面提到的 <a href="https://github.com/Lynnesbian/mastodon-bot-template/">mastodon-bot-template</a>。<br>若想要在嘟嘟中添加图片，则需要调用模板以外的函数，具体如下：  </p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 随机选取指定目录中的一个文件，path2selfie.txt 中含有该目录下所有文件的绝对路径</span></span><br><span class="line">media_file = random.choice(<span class="built_in">open</span>(<span class="string">&quot;path2selfie.txt&quot;</span>).read().splitlines())</span><br><span class="line"><span class="comment"># 处理图片路径，使其成为可用于 mastodon.status_post 的参数</span></span><br><span class="line">selfie =  mastodon.media_post(media_file)</span><br><span class="line"><span class="comment"># 带上图片发嘟</span></span><br><span class="line">mastodon.status_post(</span><br><span class="line">        status = content,</span><br><span class="line">        media_ids = selfie,</span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+
+<p>定时每周三上午九点发送一张带有照片的嘟嘟：  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">0 9 * * 3  cd /root/miniconda/dogchan &amp;&amp; /root/miniconda3/envs/mastbot/bin/python selfie.py &gt;&gt; /root/miniconda/dogchan/log/selfie_log.txt 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
+<h3 id="奇怪的报错"><a href="#奇怪的报错" class="headerlink" title="奇怪的报错"></a>奇怪的报错</h3><p>谷歌一圈，也在 Mastodon.py 提了 <a href="https://github.com/halcy/Mastodon.py/issues/243">issue</a>，还是没有解决。推测这个 bug 是我的站点设置造成的，但完全没有头绪究竟是哪里有问题，用 mstdn.social 的账号测试就没有问题。所以目前先开始自动发嘟，自动回复暂时搁置，等有空再详细看一下站点设置。  </p>
+<h2 id="将代码上传至-GitHub"><a href="#将代码上传至-GitHub" class="headerlink" title="将代码上传至 GitHub"></a>将代码上传至 GitHub</h2><p>之前的 CATsama 已经上传过一次，但这次上传还是完全不记得怎么搞，所以决定记录一下。  </p>
+<h3 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h3><p>在 GitHub 创建新的仓库以存放代码。根据实际需要，为仓库添加 <code>README.md</code> 和 <code>license</code>。创建完成后，在仓库右上角点击绿色的 <code>Code</code>，复制相应链接。  </p>
+<p><img src="/2022/07/20/dogchan/repository.png"></p>
+<h3 id="密钥"><a href="#密钥" class="headerlink" title="密钥"></a>密钥</h3><p>可直接参考 <a href="https://docs.github.com/cn/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">生成新 SSH 密钥并添加到 ssh-agent</a>  </p>
+<h3 id="Personal-access-tokens"><a href="#Personal-access-tokens" class="headerlink" title="Personal access tokens"></a>Personal access tokens</h3><p>在 GitHub 创建 token 以便于后续代码上传时身份验证。<code>点击个人头像 - Setting -  Developer settings - Personal access tokens - Generate new token</code>，根据实际情况选择 token 的执行权限，完成后复制 token。<br>将创建的 Personal access tokens 整合到前述步骤复制的仓库链接中备用，具体格式如下：  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://Personal_access_tokens@github.com/your_username/repository_name.git</span><br></pre></td></tr></table></figure>
+
+<h3 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h3><p>在服务器上存放代码的目录下执行如下操作：  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># GitHub 默认分支已经改为 main，但 git init 的默认分支还是 master，这一步用于将 git 的默认分支改为 main</span><br><span class="line">git config --global init.defaultBranch main</span><br><span class="line"></span><br><span class="line"># 初始化库</span><br><span class="line">git init</span><br><span class="line"></span><br><span class="line"># 添加当前目录下所有文件，也可添加指定文件</span><br><span class="line">git add .</span><br><span class="line"></span><br><span class="line"># commit</span><br><span class="line">git commit -m &quot;first commit&quot;</span><br><span class="line"></span><br><span class="line"># 添加远程仓库并命名为 origin，粘贴前述步骤中整合后的仓库链接</span><br><span class="line">git remote add origin https://Personal_access_tokens@github.com/your_username/repository_name.git</span><br><span class="line"></span><br><span class="line"># 如果提示远程仓库已存在，则执行如下命令后再添加一次</span><br><span class="line"># git remote rm origin</span><br><span class="line"></span><br><span class="line"># 拉取远程仓库中的内容，否则 push 时也会因为未同步远程仓库内容而失败</span><br><span class="line"># 如果远程仓库为空，则不需要这一步</span><br><span class="line">git pull origin main --allow-unrelated-histories</span><br><span class="line"></span><br><span class="line"># 将 commit 推送到远程仓库</span><br><span class="line">git push origin main</span><br></pre></td></tr></table></figure>
+
+<p>此时刷新 GitHub 库的页面，即可看到新上传的内容。<br>DOGchan 的 GitHub 库：<a href="https://github.com/melocery/DOGchan">DOGchan：一个能够关键字触发自动回复的长毛象机器人</a>  </p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>整个搭建过程非常漫长，先是觉得油管教程很详细不可能有任何问题，但随着一步步搭建发现问题不少，而且由于对 node.js 完全不熟悉，连报错都看不懂，只能粘贴到谷歌搜索，但也不能得到很好的解决。又问了很多在象上拥有自动回复 bot 的象友，想参考一下，但大家的方法也不能完全适用。最后还是在 GitHub 一个个项目看过去 (感谢愿意开源的人们)，找到了现在参考的这个方法。虽然也有不足，但是是目前确实能顺利运行一段时间的方法。接下来只需要思考为什么我的站点 streaming 不能长时间访问，修改好就能顺利运行。<br>总得来说，也算是一次很快乐的尝试。做这些小小的 project 比科研有趣多了！或许以后还会做这些有趣的小项目，快乐的同时还能丰富 GitHub 的库。  </p>
+<p>一开始这个 bot 只是为了让缪尚猫狗双全，但做着做着就想起家里的狗狗。在真实世界它已经返回汪星，但它在我自己搭建的赛博世界玩耍。因此从发嘟的照片和头像都用了狗狗的照片，就让它在我的咖啡馆继续做一只快乐小狗吧！  </p>
+]]></content>
+      <categories>
+        <category>Mastodon</category>
+        <category>Bot</category>
+      </categories>
+      <tags>
+        <tag>Mastodon</tag>
+        <tag>Python</tag>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
