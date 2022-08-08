@@ -105,87 +105,6 @@ $ git clone https://github.com/next-theme/hexo-theme-next themes/next
       </tags>
   </entry>
   <entry>
-    <title>Mastodon 建站笔记</title>
-    <url>/2022/03/02/buildmastodon/</url>
-    <content><![CDATA[<center> mastodon 建站笔记：慢慢来，6 月之前搞完就行；不要怕，不行就重启试试 </center>
-<span id="more"></span>
-
-<h2 id="一点说明"><a href="#一点说明" class="headerlink" title="一点说明"></a>一点说明</h2><p>本文所记录的搭建非常缓慢，开始于二月，但给自己设定的 DDL 在六月。搭建过程完全碎片化，每次推进都基于“这会儿没什么事情不如搞一搞建站”，且超过一小时就会先放着下次再说，非常随性随意。每一步完成于哪一天、大概耗时都有记录，给想搭建却又嫌麻烦、觉得需要特意安排时间的朋友提供一个佛系搭建参考。  </p>
-<h2 id="参考与致谢"><a href="#参考与致谢" class="headerlink" title="参考与致谢"></a>参考与致谢</h2><p>参考：蓝盒子站长的<a href="https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/10/19/Mastodon-on-Docker.html">利用 docker 搭建 Mastodon 实例</a>和塔塔的<a href="https://mantyke.icu/2021/mastodon-bulid/">小球飞象建站笔记</a>。  </p>
-<p>感谢嘎嘎、塔塔和其他写下详细教程和笔记的朋友！因为你们和你们的教程，我这种没有参考不敢做事的人才能一点点把实例搭建起来。<br>特别感谢塔塔，给我每完成一步的嘟嘟点星星，给予我很大鼓励！  </p>
-<h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><p>前期准备主要是花钱，大多数运营商都支持 Visa、MasterCard 或 PayPal，godaddy 支持支付宝付款。<br>为能有更多选择，个人建议开通 PayPal，比办信用卡方便一些。本文中除 Scaleway 以外，所有支付都通过 PayPal 完成。如使用 PayPal 付款，建议付款时直接使用目标货币，而不使用 PayPal 提供的转换为人民币付款。这种情况下付款使用的是银行汇率，会比 PayPal 划算。  </p>
-<h3 id="域名"><a href="#域名" class="headerlink" title="域名"></a>域名</h3><p>常用的域名提供商很多，比如 <a href="https://www.namecheap.com/">NameCheap</a>，<a href="https://sg.godaddy.com/">godaddy</a> 和 <a href="https://www.dynadot.com/">dynadot</a>。可参考o3o站长给出的<a href="https://www.notion.so/c66e3332f4824f71b9d7d1dc8db410c7">域名选购指南</a>。<br>本站根据蓝盒子站长的推荐，在 NameCheap 购买域名。由于之前给博客换域名已经在 NameCheap 买过一次，而且很早就想好要买什么域名，所以这一步成为这个跨越几个月的搭建过程中最简单、最快速的一步。  </p>
-<p>该步骤完成于 2022.02.17。约耗时 15 分钟，主要在犹豫到底要不要这天买，实际操作只用掉两三分钟。以及早知道我这么快就要自建站，博客就换个域名了！两年后我博客必换域名！</p>
-<h3 id="邮件服务"><a href="#邮件服务" class="headerlink" title="邮件服务"></a>邮件服务</h3><p>使用 Zoho Mail 提供的 Business Mail 服务中的 Forever Free Plan。<br>由于本人需要很详细的操作步骤才敢进行下一步，这里找了个注册 Zoho Mail 的详细教程 —— <a href="https://www.dreambuildinglab.com/website-construction/email/how-to-register-free-zoho-business-email.html">注册zoho免费企业邮箱</a>。这个教程虽然详细，但稍微有点过时，有些操作的名称略有更改。如有需要，可再找其它教程参考。  </p>
-<p>该步骤完成于 2022.02.21。约耗时 40 分钟，因为一些步骤没有明确的参考不太敢试，必须找到别人这一步怎么做才动手。但实际上没关系，大胆试，不行重来嘛！  </p>
-<h3 id="购买VPS"><a href="#购买VPS" class="headerlink" title="购买VPS"></a>购买VPS</h3><p>选择 <a href="https://contabo.com/en/">Contabo</a> 购买 VPS，在购买前将价格修改为欧元，选择5欧套餐，德国服务器，一次性购买 12 个月，其它选项全部默认。<br>这里塔塔提醒<a href="https://mantyke.icu/2021/mastodon-bulid/#%E8%B4%AD%E4%B9%B0vps"> Contabo 审核严格</a>，最好真实 IP 购买，填写信息时不要太扯，不然会被要求提供身份证明。但我就是那个认真填写还被要求提供护照的倒霉蛋。由于目前和德国有 7 个小时时差，上午提供护照信息后，一直到下午四点多才收到确认邮件。  </p>
-<p>该步骤完成于 2022.03.02。约耗时 15 分钟加 19 小时，15 分钟是实际需要操作的时间，包括提供护照信息；19 小时是由于买服务器时护照不在手边，第二天上午才回复，下午收到确认。  </p>
-<h2 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h2><h3 id="配置系统"><a href="#配置系统" class="headerlink" title="配置系统"></a>配置系统</h3><p>这一部分参考<a href="https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/10/19/Mastodon-on-Docker.html">蓝盒子站长教程</a>。  </p>
-<ul>
-<li><p>配置 ssh-key<br>首先查看电脑当前用户的目录下是否存在.ssh目录，以及目录中是否存在<code>id_rsa</code>和<code>id_rsa.pub</code>两个文件。如果存在，公钥即为<code>id_rsa.pub</code>中的内容。如果不存在，则输入命令：  </p>
-  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C “your_email”</span><br></pre></td></tr></table></figure>
-
-<p>一路回车，直到生成一个矩形的图案为止，生成的这串字符就是后面需要的公钥。  </p>
-<p>接下来的步骤全部按照蓝盒子站长的教程进行，但我遇到了一个愚蠢的问题，不会保存 nano 编辑的内容并退出。即使编辑器下方有两行提醒，也没能正确保存文件。万一有朋友和我一样，可参考以下保存并退出的方法：  </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># ^ 为键盘上的 Ctrl 键，以下方法直接使用 Ctrl 代替</span><br><span class="line"># 退出，并根据提示保存</span><br><span class="line">Ctrl + X 退出，按 y 选择保存，提示 file name to write，利用上下左右键选择要保存到的文件，回车保存</span><br><span class="line"># 退出，并保存</span><br><span class="line">Ctrl + X 退出，按 y 选择保存，回车</span><br><span class="line"># 先保存，后退出</span><br><span class="line">Ctrl + O 并回车保存，Ctrl + X 退出</span><br></pre></td></tr></table></figure></li>
-<li><p>安装常用命令和配置防火墙<br>直接照抄蓝盒子站长给的命令，都非常顺利。  </p>
-</li>
-</ul>
-<p>该步骤完成于 2022.03.03。约耗时 55 分钟，主要由于不会保存 nano 编辑的内容，根据各种教程也总是保存失败。中途一度试图换回之前常用的 vim，但事实证明两年没用就会忘记一切。如果能顺利保存，这一步十分钟以内就可以完成。  </p>
-<p><strong>tips</strong><br>虽然上次建站配置好了服务器端的公钥，但这次登录时，MobaXterm 一直返回错误信息：  </p>
-  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Disconnected: No supported authentication methods available (server sent: publickey)</span><br></pre></td></tr></table></figure>
-
-<p>原因是服务器已经关闭账户密码登录，但使用 MobaXterm 登录时没有勾选 <code>Use private key</code> 并指定私钥文件。<br>具体步骤为 <code>Session -&gt; SSH -&gt; Use private key and specify a private key for passwordless login</code>。<br>设置完成后即可顺利登录。  </p>
-<h3 id="安装-docker-和-docker-compose"><a href="#安装-docker-和-docker-compose" class="headerlink" title="安装 docker 和 docker-compose"></a>安装 docker 和 docker-compose</h3><p>根据蓝盒子站长的教程，使用官方提供的一键脚本安装 docker。</p>
-  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 代码来自蓝盒子站长教程</span><br><span class="line">bash &lt;(curl -L https://get.docker.com/)</span><br><span class="line">sudo curl -L &quot;https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose</span><br><span class="line">sudo chmod +x /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
-
-<p>该步骤完成于 2022.03.13。约耗时 15 分钟，包括一开始登录不上服务器而查找原因的时间，实际操作时间约 3 分钟。这一步骤完成后可以通过命令 <code>docker-compose -h</code> 检查 docker 是否真的安装成功。  </p>
-<h3 id="拉取-Mastodon-镜像-amp-初始化-PostgreSQL"><a href="#拉取-Mastodon-镜像-amp-初始化-PostgreSQL" class="headerlink" title="拉取 Mastodon 镜像 &amp; 初始化 PostgreSQL"></a>拉取 Mastodon 镜像 &amp; 初始化 PostgreSQL</h3><p>这几项全部根据蓝盒子站长 <a href="https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/10/19/Mastodon-on-Docker.html">2022-04-25 修改的教程</a>进行。  </p>
-<ul>
-<li>拉取 Mastodon 镜像<br>直接复制粘贴代码，拉取版本为 <code>v3.5.1</code>，并修改 <code>docker-compose.yml</code> 配置文件。  </li>
-<li>初始化 PostgreSQL<br>复制粘贴代码，并根据教程中的提醒检查代码运行情况。  </li>
-</ul>
-<p>该步骤完成于 2022.05.07。约耗时 20 分钟，大部分用于思考设个什么密码。以及如果太久没有建站，一定要先看看上一次都做了什么、用过什么命令，这次又因为忘记 <code>nano</code> 怎么退出而慌乱几秒。  </p>
-<h3 id="配置-Mastodon"><a href="#配置-Mastodon" class="headerlink" title="配置 Mastodon"></a>配置 Mastodon</h3><p>这一步骤仍然按照蓝盒子站长的教程进行，根据教程一步步慢慢做，看仔细每一步都要填什么就可以。  </p>
-<p>根据<a href="https://mantyke.icu/2021/mastodon-bulid/#%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91">小球飞象建站笔记</a>中踩坑提醒，如果使用的是 zoho 邮件服务，建议 SMTP server 使用国际版地址，否则可能配置失败，无法发送通知邮件。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SMTP_SERVER=smtp.zoho.com</span><br></pre></td></tr></table></figure>
-
-<p>该步骤完成于 2022.05.07。耗时约 40 分钟，大多数时间消耗在 <code>docker-compose run --rm web bundle exec rake mastodon:setup</code> 的每一小步上。尤其是 zoho 还突然登录不上，而我又因为时隔近两个月，完全忘记了管理员邮箱是什么，手忙脚乱几分钟。<br>还需注意的是，在这一步中，所有的密码都不可见。一开始没有意识到这一点，以为密码没有粘贴上，同一位置贴两三遍密码导致出错。以及 .env.production 配置信息一定要在电脑上保存一遍！  </p>
-<h3 id="安装并配置-nginx"><a href="#安装并配置-nginx" class="headerlink" title="安装并配置 nginx"></a>安装并配置 nginx</h3><p>在进行这一步之前，根据蓝盒子站长的提示，先在购买域名的网站 DNS 设置中增加一个 <code>A Record</code>，将设定的域名指向服务器。  </p>
-<ul>
-<li>安装 nginx<br>直接运行命令 <code>sudo apt install nginx -y</code> 出现报错信息：  </li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Err:2 http://security.ubuntu.com/ubuntu focal-updates/main amd64 libnginx-mod-http-image-filter amd64 1.18.0-0ubuntu1.2</span><br><span class="line">404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Err:3 http://security.ubuntu.com/ubuntu focal-updates/main amd64 libnginx-mod-http-xslt-filter amd64 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Err:4 http://security.ubuntu.com/ubuntu focal-updates/main amd64 libnginx-mod-mail amd64 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Err:5 http://security.ubuntu.com/ubuntu focal-updates/main amd64 libnginx-mod-stream amd64 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Err:6 http://security.ubuntu.com/ubuntu focal-updates/main amd64 nginx-core amd64 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Ign:1 http://security.ubuntu.com/ubuntu focal-updates/main amd64 nginx-common all 1.18.0-0ubuntu1.2</span><br><span class="line">Ign:7 http://security.ubuntu.com/ubuntu focal-updates/main amd64 nginx all 1.18.0-0ubuntu1.2</span><br><span class="line">Err:1 http://security.ubuntu.com/ubuntu focal-updates/main amd64 nginx-common all 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Err:7 http://security.ubuntu.com/ubuntu focal-updates/main amd64 nginx all 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/nginx-common_1.18.0-0ubuntu1.2_all.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/libnginx-mod-http-image-filter_1.18.0-0ubuntu1.2_amd64.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/libnginx-mod-http-xslt-filter_1.18.0-0ubuntu1.2_amd64.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/libnginx-mod-mail_1.18.0-0ubuntu1.2_amd64.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/libnginx-mod-stream_1.18.0-0ubuntu1.2_amd64.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/nginx-core_1.18.0-0ubuntu1.2_amd64.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/nginx_1.18.0-0ubuntu1.2_all.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?</span><br></pre></td></tr></table></figure>
-
-<p>谷歌之后发现这是 <code>Ubuntu 20.04</code> 会出现的常见报错，在运行安装命令前应先运行：  </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get update # 运行这一行之后可以尝试运行安装命令，如果仍报错再运行下一行</span><br><span class="line">sudo apt-get upgrade</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>配置 nginx &amp; 配置SSL证书 &amp; 重启nginx<br>根据蓝盒子站长的教程配置，步骤中没有出错。</li>
-</ul>
-<p>该步骤完成于 2022.05.07。约耗时 30 分钟，除了一开始找报错原因费点时间之外，都是运行命令、等待命令结束，操作非常简单。  </p>
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>到这里站点已经上线，后续都是一些个性化修改，可以根据不同需求找相应的教程。<br>站点搭建实际用时 230 分钟，其中很多时间浪费在不敢做和注意力不集中上。如果不是像我一样每天找一点时间随手操作其中一个小步骤，而是空出一大段时间专心建站的话，应该两到三小时就能够完成上述所有步骤。<br>如果你和我一样也记不住整个过程中太多账号、用户名和密码，可以在电脑上建一个备忘录或在其它安全的地方记住密码。</p>
-<h2 id="备份-未完成"><a href="#备份-未完成" class="headerlink" title="备份 (未完成)"></a>备份 (未完成)</h2><p>参考蓝盒子站长的教程：<a href="https://pullopen.github.io/%E7%AB%99%E7%82%B9%E7%BB%B4%E6%8A%A4/2020/07/22/Move-mastodon-media-to-Scaleway.html">如何将Mastodon媒体上传至Scaleway云储存</a></p>
-<h2 id="装修"><a href="#装修" class="headerlink" title="装修"></a>装修</h2><h3 id="使用管理命令行"><a href="#使用管理命令行" class="headerlink" title="使用管理命令行"></a>使用管理命令行</h3><ul>
-<li>使用脚本简化命令<br>参考：<a href="https://blog.tantalum.life/posts/how-to-run-your-mastodon-by-docker/#%E4%BD%BF%E7%94%A8alias%E8%84%9A%E6%9C%AC%E7%BC%A9%E5%86%99tootctl%E5%91%BD%E4%BB%A4">使用 alias 脚本缩写 tootctl 命令</a>。<br>由于前面的步骤一直主要参考蓝盒子站长的教程，所以这里第一步目标文件夹应为 <code>/home/mastodon/mastodon</code>，即 <code>cd /home/mastodon/mastodon</code>。  </li>
-<li>使用命令<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tootctl help # 帮助信息，如果正常运行说明上一步的简化命令脚本生效。</span><br><span class="line">tootctl settings registrations close # 关闭注册</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>此处由于站点装修未完成，暂时关闭注册。也可以在网页端关闭注册。  </p>
-<h3 id="开启全文搜索"><a href="#开启全文搜索" class="headerlink" title="开启全文搜索"></a>开启全文搜索</h3><p>参考蓝盒子站长给出的命令修改相应的配置文件，但在重启 docker 这一步骤报错：  </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ERROR: yaml.parser.ParserError: while parsing a block mapping</span><br><span class="line">  in &quot;./docker-compose.yml&quot;, line 3, column 3</span><br><span class="line">expected &lt;block end&gt;, but found &#x27;&lt;block mapping start&gt;&#x27;</span><br><span class="line">  in &quot;./docker-compose.yml&quot;, line 26, column 4</span><br></pre></td></tr></table></figure>
-
-<p>再次检查 <code>docker-compose.yml</code> 文件发现，只删除 <code>#</code> 会导致缩进不统一，导致对 block 的判断有误。每行在删除 <code>#</code> 的同时，应在行首再删除一个空格。<br>其余步骤根据教程中的命令，一步一步完成即可。</p>
-<h3 id="其它魔改"><a href="#其它魔改" class="headerlink" title="其它魔改"></a>其它魔改</h3><p>站点魔改有许多可用的教程，如：<br><a href="http://blog.tantalum.life/posts/how-to-run-your-mastodon-by-docker/">Mastodon | 采用docker建站后的使用与维护</a><br><a href="https://pullopen.github.io/%E7%AB%99%E7%82%B9%E7%BB%B4%E6%8A%A4/2020/11/26/mastodon-manage.html">如何装饰你的站点：自定义CSS、中继站和自定义表情</a><br><a href="https://pullopen.github.io/%E8%BF%9B%E9%98%B6%E9%AD%94%E6%94%B9/2020/11/14/mastodon-modify.html">进阶魔改：修改字数上限、媒体上限、投票上限、添加自定义主题、界面用语、非登陆用户有限显示、优化中文搜索，附阻止本站嘟文流入某站点方法</a>  </p>
-]]></content>
-      <categories>
-        <category>Mastodon</category>
-        <category>Build</category>
-      </categories>
-      <tags>
-        <tag>Mastodon</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>blastp的本地化使用</title>
     <url>/2021/09/16/blastp/</url>
     <content><![CDATA[<center>blastp在Windows系统电脑上的本地使用</center>
@@ -415,6 +334,87 @@ main() # 运行上述函数
       </categories>
       <tags>
         <tag>BLAST</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Mastodon 建站笔记</title>
+    <url>/2022/03/02/buildmastodon/</url>
+    <content><![CDATA[<center> mastodon 建站笔记：慢慢来，6 月之前搞完就行；不要怕，不行就重启试试 </center>
+<span id="more"></span>
+
+<h2 id="一点说明"><a href="#一点说明" class="headerlink" title="一点说明"></a>一点说明</h2><p>本文所记录的搭建非常缓慢，开始于二月，但给自己设定的 DDL 在六月。搭建过程完全碎片化，每次推进都基于“这会儿没什么事情不如搞一搞建站”，且超过一小时就会先放着下次再说，非常随性随意。每一步完成于哪一天、大概耗时都有记录，给想搭建却又嫌麻烦、觉得需要特意安排时间的朋友提供一个佛系搭建参考。  </p>
+<h2 id="参考与致谢"><a href="#参考与致谢" class="headerlink" title="参考与致谢"></a>参考与致谢</h2><p>参考：蓝盒子站长的<a href="https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/10/19/Mastodon-on-Docker.html">利用 docker 搭建 Mastodon 实例</a>和塔塔的<a href="https://mantyke.icu/2021/mastodon-bulid/">小球飞象建站笔记</a>。  </p>
+<p>感谢嘎嘎、塔塔和其他写下详细教程和笔记的朋友！因为你们和你们的教程，我这种没有参考不敢做事的人才能一点点把实例搭建起来。<br>特别感谢塔塔，给我每完成一步的嘟嘟点星星，给予我很大鼓励！  </p>
+<h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><p>前期准备主要是花钱，大多数运营商都支持 Visa、MasterCard 或 PayPal，godaddy 支持支付宝付款。<br>为能有更多选择，个人建议开通 PayPal，比办信用卡方便一些。本文中除 Scaleway 以外，所有支付都通过 PayPal 完成。如使用 PayPal 付款，建议付款时直接使用目标货币，而不使用 PayPal 提供的转换为人民币付款。这种情况下付款使用的是银行汇率，会比 PayPal 划算。  </p>
+<h3 id="域名"><a href="#域名" class="headerlink" title="域名"></a>域名</h3><p>常用的域名提供商很多，比如 <a href="https://www.namecheap.com/">NameCheap</a>，<a href="https://sg.godaddy.com/">godaddy</a> 和 <a href="https://www.dynadot.com/">dynadot</a>。可参考o3o站长给出的<a href="https://www.notion.so/c66e3332f4824f71b9d7d1dc8db410c7">域名选购指南</a>。<br>本站根据蓝盒子站长的推荐，在 NameCheap 购买域名。由于之前给博客换域名已经在 NameCheap 买过一次，而且很早就想好要买什么域名，所以这一步成为这个跨越几个月的搭建过程中最简单、最快速的一步。  </p>
+<p>该步骤完成于 2022.02.17。约耗时 15 分钟，主要在犹豫到底要不要这天买，实际操作只用掉两三分钟。以及早知道我这么快就要自建站，博客就换个域名了！两年后我博客必换域名！</p>
+<h3 id="邮件服务"><a href="#邮件服务" class="headerlink" title="邮件服务"></a>邮件服务</h3><p>使用 Zoho Mail 提供的 Business Mail 服务中的 Forever Free Plan。<br>由于本人需要很详细的操作步骤才敢进行下一步，这里找了个注册 Zoho Mail 的详细教程 —— <a href="https://www.dreambuildinglab.com/website-construction/email/how-to-register-free-zoho-business-email.html">注册zoho免费企业邮箱</a>。这个教程虽然详细，但稍微有点过时，有些操作的名称略有更改。如有需要，可再找其它教程参考。  </p>
+<p>该步骤完成于 2022.02.21。约耗时 40 分钟，因为一些步骤没有明确的参考不太敢试，必须找到别人这一步怎么做才动手。但实际上没关系，大胆试，不行重来嘛！  </p>
+<h3 id="购买VPS"><a href="#购买VPS" class="headerlink" title="购买VPS"></a>购买VPS</h3><p>选择 <a href="https://contabo.com/en/">Contabo</a> 购买 VPS，在购买前将价格修改为欧元，选择5欧套餐，德国服务器，一次性购买 12 个月，其它选项全部默认。<br>这里塔塔提醒<a href="https://mantyke.icu/2021/mastodon-bulid/#%E8%B4%AD%E4%B9%B0vps"> Contabo 审核严格</a>，最好真实 IP 购买，填写信息时不要太扯，不然会被要求提供身份证明。但我就是那个认真填写还被要求提供护照的倒霉蛋。由于目前和德国有 7 个小时时差，上午提供护照信息后，一直到下午四点多才收到确认邮件。  </p>
+<p>该步骤完成于 2022.03.02。约耗时 15 分钟加 19 小时，15 分钟是实际需要操作的时间，包括提供护照信息；19 小时是由于买服务器时护照不在手边，第二天上午才回复，下午收到确认。  </p>
+<h2 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h2><h3 id="配置系统"><a href="#配置系统" class="headerlink" title="配置系统"></a>配置系统</h3><p>这一部分参考<a href="https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/10/19/Mastodon-on-Docker.html">蓝盒子站长教程</a>。  </p>
+<ul>
+<li><p>配置 ssh-key<br>首先查看电脑当前用户的目录下是否存在.ssh目录，以及目录中是否存在<code>id_rsa</code>和<code>id_rsa.pub</code>两个文件。如果存在，公钥即为<code>id_rsa.pub</code>中的内容。如果不存在，则输入命令：  </p>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C “your_email”</span><br></pre></td></tr></table></figure>
+
+<p>一路回车，直到生成一个矩形的图案为止，生成的这串字符就是后面需要的公钥。  </p>
+<p>接下来的步骤全部按照蓝盒子站长的教程进行，但我遇到了一个愚蠢的问题，不会保存 nano 编辑的内容并退出。即使编辑器下方有两行提醒，也没能正确保存文件。万一有朋友和我一样，可参考以下保存并退出的方法：  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># ^ 为键盘上的 Ctrl 键，以下方法直接使用 Ctrl 代替</span><br><span class="line"># 退出，并根据提示保存</span><br><span class="line">Ctrl + X 退出，按 y 选择保存，提示 file name to write，利用上下左右键选择要保存到的文件，回车保存</span><br><span class="line"># 退出，并保存</span><br><span class="line">Ctrl + X 退出，按 y 选择保存，回车</span><br><span class="line"># 先保存，后退出</span><br><span class="line">Ctrl + O 并回车保存，Ctrl + X 退出</span><br></pre></td></tr></table></figure></li>
+<li><p>安装常用命令和配置防火墙<br>直接照抄蓝盒子站长给的命令，都非常顺利。  </p>
+</li>
+</ul>
+<p>该步骤完成于 2022.03.03。约耗时 55 分钟，主要由于不会保存 nano 编辑的内容，根据各种教程也总是保存失败。中途一度试图换回之前常用的 vim，但事实证明两年没用就会忘记一切。如果能顺利保存，这一步十分钟以内就可以完成。  </p>
+<p><strong>tips</strong><br>虽然上次建站配置好了服务器端的公钥，但这次登录时，MobaXterm 一直返回错误信息：  </p>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Disconnected: No supported authentication methods available (server sent: publickey)</span><br></pre></td></tr></table></figure>
+
+<p>原因是服务器已经关闭账户密码登录，但使用 MobaXterm 登录时没有勾选 <code>Use private key</code> 并指定私钥文件。<br>具体步骤为 <code>Session -&gt; SSH -&gt; Use private key and specify a private key for passwordless login</code>。<br>设置完成后即可顺利登录。  </p>
+<h3 id="安装-docker-和-docker-compose"><a href="#安装-docker-和-docker-compose" class="headerlink" title="安装 docker 和 docker-compose"></a>安装 docker 和 docker-compose</h3><p>根据蓝盒子站长的教程，使用官方提供的一键脚本安装 docker。</p>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 代码来自蓝盒子站长教程</span><br><span class="line">bash &lt;(curl -L https://get.docker.com/)</span><br><span class="line">sudo curl -L &quot;https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose</span><br><span class="line">sudo chmod +x /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
+
+<p>该步骤完成于 2022.03.13。约耗时 15 分钟，包括一开始登录不上服务器而查找原因的时间，实际操作时间约 3 分钟。这一步骤完成后可以通过命令 <code>docker-compose -h</code> 检查 docker 是否真的安装成功。  </p>
+<h3 id="拉取-Mastodon-镜像-amp-初始化-PostgreSQL"><a href="#拉取-Mastodon-镜像-amp-初始化-PostgreSQL" class="headerlink" title="拉取 Mastodon 镜像 &amp; 初始化 PostgreSQL"></a>拉取 Mastodon 镜像 &amp; 初始化 PostgreSQL</h3><p>这几项全部根据蓝盒子站长 <a href="https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/10/19/Mastodon-on-Docker.html">2022-04-25 修改的教程</a>进行。  </p>
+<ul>
+<li>拉取 Mastodon 镜像<br>直接复制粘贴代码，拉取版本为 <code>v3.5.1</code>，并修改 <code>docker-compose.yml</code> 配置文件。  </li>
+<li>初始化 PostgreSQL<br>复制粘贴代码，并根据教程中的提醒检查代码运行情况。  </li>
+</ul>
+<p>该步骤完成于 2022.05.07。约耗时 20 分钟，大部分用于思考设个什么密码。以及如果太久没有建站，一定要先看看上一次都做了什么、用过什么命令，这次又因为忘记 <code>nano</code> 怎么退出而慌乱几秒。  </p>
+<h3 id="配置-Mastodon"><a href="#配置-Mastodon" class="headerlink" title="配置 Mastodon"></a>配置 Mastodon</h3><p>这一步骤仍然按照蓝盒子站长的教程进行，根据教程一步步慢慢做，看仔细每一步都要填什么就可以。  </p>
+<p>根据<a href="https://mantyke.icu/2021/mastodon-bulid/#%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91">小球飞象建站笔记</a>中踩坑提醒，如果使用的是 zoho 邮件服务，建议 SMTP server 使用国际版地址，否则可能配置失败，无法发送通知邮件。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SMTP_SERVER=smtp.zoho.com</span><br></pre></td></tr></table></figure>
+
+<p>该步骤完成于 2022.05.07。耗时约 40 分钟，大多数时间消耗在 <code>docker-compose run --rm web bundle exec rake mastodon:setup</code> 的每一小步上。尤其是 zoho 还突然登录不上，而我又因为时隔近两个月，完全忘记了管理员邮箱是什么，手忙脚乱几分钟。<br>还需注意的是，在这一步中，所有的密码都不可见。一开始没有意识到这一点，以为密码没有粘贴上，同一位置贴两三遍密码导致出错。以及 .env.production 配置信息一定要在电脑上保存一遍！  </p>
+<h3 id="安装并配置-nginx"><a href="#安装并配置-nginx" class="headerlink" title="安装并配置 nginx"></a>安装并配置 nginx</h3><p>在进行这一步之前，根据蓝盒子站长的提示，先在购买域名的网站 DNS 设置中增加一个 <code>A Record</code>，将设定的域名指向服务器。  </p>
+<ul>
+<li>安装 nginx<br>直接运行命令 <code>sudo apt install nginx -y</code> 出现报错信息：  </li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Err:2 http://security.ubuntu.com/ubuntu focal-updates/main amd64 libnginx-mod-http-image-filter amd64 1.18.0-0ubuntu1.2</span><br><span class="line">404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Err:3 http://security.ubuntu.com/ubuntu focal-updates/main amd64 libnginx-mod-http-xslt-filter amd64 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Err:4 http://security.ubuntu.com/ubuntu focal-updates/main amd64 libnginx-mod-mail amd64 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Err:5 http://security.ubuntu.com/ubuntu focal-updates/main amd64 libnginx-mod-stream amd64 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Err:6 http://security.ubuntu.com/ubuntu focal-updates/main amd64 nginx-core amd64 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Ign:1 http://security.ubuntu.com/ubuntu focal-updates/main amd64 nginx-common all 1.18.0-0ubuntu1.2</span><br><span class="line">Ign:7 http://security.ubuntu.com/ubuntu focal-updates/main amd64 nginx all 1.18.0-0ubuntu1.2</span><br><span class="line">Err:1 http://security.ubuntu.com/ubuntu focal-updates/main amd64 nginx-common all 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Err:7 http://security.ubuntu.com/ubuntu focal-updates/main amd64 nginx all 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/nginx-common_1.18.0-0ubuntu1.2_all.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/libnginx-mod-http-image-filter_1.18.0-0ubuntu1.2_amd64.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/libnginx-mod-http-xslt-filter_1.18.0-0ubuntu1.2_amd64.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/libnginx-mod-mail_1.18.0-0ubuntu1.2_amd64.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/libnginx-mod-stream_1.18.0-0ubuntu1.2_amd64.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/nginx-core_1.18.0-0ubuntu1.2_amd64.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/nginx_1.18.0-0ubuntu1.2_all.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?</span><br></pre></td></tr></table></figure>
+
+<p>谷歌之后发现这是 <code>Ubuntu 20.04</code> 会出现的常见报错，在运行安装命令前应先运行：  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get update # 运行这一行之后可以尝试运行安装命令，如果仍报错再运行下一行</span><br><span class="line">sudo apt-get upgrade</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置 nginx &amp; 配置SSL证书 &amp; 重启nginx<br>根据蓝盒子站长的教程配置，步骤中没有出错。</li>
+</ul>
+<p>该步骤完成于 2022.05.07。约耗时 30 分钟，除了一开始找报错原因费点时间之外，都是运行命令、等待命令结束，操作非常简单。  </p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>到这里站点已经上线，后续都是一些个性化修改，可以根据不同需求找相应的教程。<br>站点搭建实际用时 230 分钟，其中很多时间浪费在不敢做和注意力不集中上。如果不是像我一样每天找一点时间随手操作其中一个小步骤，而是空出一大段时间专心建站的话，应该两到三小时就能够完成上述所有步骤。<br>如果你和我一样也记不住整个过程中太多账号、用户名和密码，可以在电脑上建一个备忘录或在其它安全的地方记住密码。</p>
+<h2 id="备份-未完成"><a href="#备份-未完成" class="headerlink" title="备份 (未完成)"></a>备份 (未完成)</h2><p>参考蓝盒子站长的教程：<a href="https://pullopen.github.io/%E7%AB%99%E7%82%B9%E7%BB%B4%E6%8A%A4/2020/07/22/Move-mastodon-media-to-Scaleway.html">如何将Mastodon媒体上传至Scaleway云储存</a></p>
+<h2 id="装修"><a href="#装修" class="headerlink" title="装修"></a>装修</h2><h3 id="使用管理命令行"><a href="#使用管理命令行" class="headerlink" title="使用管理命令行"></a>使用管理命令行</h3><ul>
+<li>使用脚本简化命令<br>参考：<a href="https://blog.tantalum.life/posts/how-to-run-your-mastodon-by-docker/#%E4%BD%BF%E7%94%A8alias%E8%84%9A%E6%9C%AC%E7%BC%A9%E5%86%99tootctl%E5%91%BD%E4%BB%A4">使用 alias 脚本缩写 tootctl 命令</a>。<br>由于前面的步骤一直主要参考蓝盒子站长的教程，所以这里第一步目标文件夹应为 <code>/home/mastodon/mastodon</code>，即 <code>cd /home/mastodon/mastodon</code>。  </li>
+<li>使用命令<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tootctl help # 帮助信息，如果正常运行说明上一步的简化命令脚本生效。</span><br><span class="line">tootctl settings registrations close # 关闭注册</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>此处由于站点装修未完成，暂时关闭注册。也可以在网页端关闭注册。  </p>
+<h3 id="开启全文搜索"><a href="#开启全文搜索" class="headerlink" title="开启全文搜索"></a>开启全文搜索</h3><p>参考蓝盒子站长给出的命令修改相应的配置文件，但在重启 docker 这一步骤报错：  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ERROR: yaml.parser.ParserError: while parsing a block mapping</span><br><span class="line">  in &quot;./docker-compose.yml&quot;, line 3, column 3</span><br><span class="line">expected &lt;block end&gt;, but found &#x27;&lt;block mapping start&gt;&#x27;</span><br><span class="line">  in &quot;./docker-compose.yml&quot;, line 26, column 4</span><br></pre></td></tr></table></figure>
+
+<p>再次检查 <code>docker-compose.yml</code> 文件发现，只删除 <code>#</code> 会导致缩进不统一，导致对 block 的判断有误。每行在删除 <code>#</code> 的同时，应在行首再删除一个空格。<br>其余步骤根据教程中的命令，一步一步完成即可。</p>
+<h3 id="其它魔改"><a href="#其它魔改" class="headerlink" title="其它魔改"></a>其它魔改</h3><p>站点魔改有许多可用的教程，如：<br><a href="http://blog.tantalum.life/posts/how-to-run-your-mastodon-by-docker/">Mastodon | 采用docker建站后的使用与维护</a><br><a href="https://pullopen.github.io/%E7%AB%99%E7%82%B9%E7%BB%B4%E6%8A%A4/2020/11/26/mastodon-manage.html">如何装饰你的站点：自定义CSS、中继站和自定义表情</a><br><a href="https://pullopen.github.io/%E8%BF%9B%E9%98%B6%E9%AD%94%E6%94%B9/2020/11/14/mastodon-modify.html">进阶魔改：修改字数上限、媒体上限、投票上限、添加自定义主题、界面用语、非登陆用户有限显示、优化中文搜索，附阻止本站嘟文流入某站点方法</a>  </p>
+]]></content>
+      <categories>
+        <category>Mastodon</category>
+        <category>Build</category>
+      </categories>
+      <tags>
+        <tag>Mastodon</tag>
       </tags>
   </entry>
   <entry>
@@ -2470,7 +2470,8 @@ $ hexo deploy  # 部署到GitHub Pages
 <p>定时每周三上午九点发送一张带有照片的嘟嘟：  </p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">0 9 * * 3  cd /root/miniconda/dogchan &amp;&amp; /root/miniconda3/envs/mastbot/bin/python selfie.py &gt;&gt; /root/miniconda/dogchan/log/selfie_log.txt 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
 
-<h3 id="奇怪的报错"><a href="#奇怪的报错" class="headerlink" title="奇怪的报错"></a>奇怪的报错</h3><p>谷歌一圈，也在 Mastodon.py 提了 <a href="https://github.com/halcy/Mastodon.py/issues/243">issue</a>，还是没有解决。推测这个 bug 是我的站点设置造成的，但完全没有头绪究竟是哪里有问题，用 mstdn.social 的账号测试就没有问题。回看尝试 Node.js 放弃时的报错，很有可能也是同样的问题导致 API 报错，但已经懒得验证。<br>目前先开始自动发嘟，自动回复暂时搁置，等有空再详细看一下站点设置。  </p>
+<h3 id="奇怪的报错"><a href="#奇怪的报错" class="headerlink" title="奇怪的报错"></a>奇怪的报错</h3><p>谷歌一圈，也在 Mastodon.py 提了 <a href="https://github.com/halcy/Mastodon.py/issues/243">issue</a>，还是没有解决。推测这个 bug 是我的站点设置造成的，但完全没有头绪究竟是哪里有问题，用 mstdn.social 的账号测试就没有问题。回看尝试 Node.js 放弃时的报错，很有可能也是同样的问题导致 API 报错，但已经懒得验证。  </p>
+<h4 id="2022-08-08-更新"><a href="#2022-08-08-更新" class="headerlink" title="2022.08.08 更新"></a>2022.08.08 更新</h4><p>提的 <a href="https://github.com/halcy/Mastodon.py/issues/243">issue</a> 得到回复，确定是站点设置的问题。但作者不清楚是哪里出现问题，给出的建议是每当出现该报错就重建一次 streaming，但有可能丢失部分 notifications。<br>还有一个解决办法是每十分钟从上次读到的 notifications 并进行操作以实现自动回复。这种方法其实是 “伪自动回复”，因此需要设置定时任务，如每十分钟执行一次脚本。目前 DOGchan 使用这种方法实现自动回复。  </p>
 <h2 id="将代码上传至-GitHub"><a href="#将代码上传至-GitHub" class="headerlink" title="将代码上传至 GitHub"></a>将代码上传至 GitHub</h2><p>之前的 CATsama 已经上传过一次，但这次上传还是完全不记得怎么搞，所以决定记录一下。  </p>
 <h3 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h3><p>在 GitHub 创建新的仓库以存放代码。根据实际需要，为仓库添加 <code>README.md</code> 和 <code>license</code>。创建完成后，在仓库右上角点击绿色的 <code>Code</code>，复制相应链接。  </p>
 <p><img src="/2022/07/20/dogchan/repository.png"></p>
