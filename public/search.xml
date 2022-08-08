@@ -337,6 +337,40 @@ main() # 运行上述函数
       </tags>
   </entry>
   <entry>
+    <title>CATsama：如何做一个定时发嘟的 Mastodon bot</title>
+    <url>/2022/07/12/catsama/</url>
+    <content><![CDATA[<center> 性感猫猫，每日上午八点半，在您的时间线上推送一个喵喵神签 </center>
+<span id="more"></span>
+
+<p>在缪尚后厅和大家聊天时，猫猫从键盘经过，留下一串神秘文字。大家一致认为这是猫猫给我们留下的忠告，因此决定在缪尚给猫猫神开个位置，就有了这个喵喵喵账号。让我们有请 CATsama！  </p>
+<h2 id="在-VPS-上安装-python"><a href="#在-VPS-上安装-python" class="headerlink" title="在 VPS 上安装 python"></a>在 VPS 上安装 python</h2><p>综合此方和塔塔的教程，决定安装 miniconda。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 在 /root 文件夹执行如下命令</span></span><br><span class="line">mkdir miniconda</span><br><span class="line"><span class="built_in">cd</span> miniconda</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载 python 最新版本并用 bash 安装</span></span><br><span class="line">wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh</span><br><span class="line">sh Miniconda3-latest-Linux-x86_64.sh //用bash安装</span><br></pre></td></tr></table></figure>
+
+<p>之后会有很长一段的文字，都是许可说明，一直按 <code>Enter</code> 即可，直到出现 <code>Do you accept the license terms? [yes|no]</code> 输入 <code>yes</code>，开启正式安装。安装路径直接使用默认 <code>/root/miniconda3</code>。<br>安装完成后会询问是否运行 <code>conda init</code> 来初始化，选择 <code>yes</code>。<br>检查是否安装成功，重启终端后输入 <code>conda --version</code>。  </p>
+<h2 id="安装-bot"><a href="#安装-bot" class="headerlink" title="安装 bot"></a>安装 bot</h2><h3 id="安装前准备"><a href="#安装前准备" class="headerlink" title="安装前准备"></a>安装前准备</h3><p>注册 Mastodon 账号，在管理面板找到开发-创建新应用，创建新应用并给予读写权限，复制访问令牌。<br>由于 Fedi 有许多 bot 账号，为避免 bot 账号之间陷入无限回复循环，建议勾选账号设置中的 “这是一个机器人账户”。</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>创建存放 bot 相关文件的文件夹，这里模仿塔塔，存在 <code>/root/miniconda</code> 下。  </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 代码来源于塔塔</span></span><br><span class="line"><span class="built_in">cd</span> miniconda</span><br><span class="line">conda create -n mastbot python=3.8 <span class="comment"># 创建一个叫mastbot的版本为3.8的python虚拟环境，如果已经创建了就不用了</span></span><br><span class="line">conda activate mastbot <span class="comment"># 激活mastbot环境，root账号前会出现（mastbot）</span></span><br><span class="line">pip3 install requests beautifulsoup4 Mastodon.py <span class="comment"># 安装mastodon.py</span></span><br><span class="line">pip3 install numpy <span class="comment"># 安装 numpy，catsama 需要</span></span><br><span class="line">mkdir catsama</span><br><span class="line"><span class="built_in">cd</span> catsama</span><br><span class="line">nano mybot_usercred.secret <span class="comment"># 写入刚才复制的访问令牌，保存退出</span></span><br><span class="line">nano catsama.py <span class="comment"># 发嘟脚本</span></span><br></pre></td></tr></table></figure>
+
+<p>发嘟 python 脚本框架如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">from</span> mastodon <span class="keyword">import</span> Mastodon</span><br><span class="line"></span><br><span class="line">mastodon = Mastodon(</span><br><span class="line">    access_token = <span class="string">&#x27;mybot_usercred.secret&#x27;</span>,</span><br><span class="line">    api_base_url = <span class="string">&#x27;实例地址&#x27;</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 要发送的内容放在当前文件夹下面的 `content.txt` 里，每行一句</span></span><br><span class="line">content = random.choice(<span class="built_in">open</span>(<span class="string">&quot;content.txt&quot;</span>).read().splitlines())  </span><br><span class="line"><span class="comment"># content 即为发送嘟文的内容，可根据 bot 的需要替换为不同内容</span></span><br><span class="line"></span><br><span class="line">mastodon.status_post(content)</span><br></pre></td></tr></table></figure>
+
+<p>上述工作完成后，<code>python bot.py</code> 运行脚本。如果顺利，bot 就会发出嘟嘟；如有报错，根据报错信息修改。  </p>
+<h2 id="定时发嘟"><a href="#定时发嘟" class="headerlink" title="定时发嘟"></a>定时发嘟</h2><p>想要实现定时发嘟肯定不能人工蹲点，而要实现自动化。使用 <code>crontab</code> 设置定时任务，定时自动运行 <code>python bot.py</code> 即可实现定时发嘟。  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">30 2 * * *  cd /root/miniconda/catsama &amp;&amp; /root/miniconda3/envs/mastbot/bin/python catsama.py &gt;&gt; /root/miniconda/catsama/log.txt 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
+<p>设置为每天服务器时间 2：30 发送一条喵签。如有报错信息，将输出到 log.txt，可根据报错修改。  </p>
+<h2 id="catsama-脚本存档"><a href="#catsama-脚本存档" class="headerlink" title="catsama 脚本存档"></a>catsama 脚本存档</h2><p>生成一个含有字母、数字、特殊符号和汉字的字符串，这串字符即为喵签内容。如果遇到低概率随机生成的串为空或最终输出的部分为空，则从 ABC 的朋友们名字中选择一个作为喵签内容。  </p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np, numpy.random</span><br><span class="line"><span class="keyword">from</span> mastodon <span class="keyword">import</span> Mastodon</span><br><span class="line"></span><br><span class="line"><span class="comment"># 随机生成num个中文字符并输出为list</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">GBK2312</span>(<span class="params">num</span>):</span></span><br><span class="line">    <span class="built_in">str</span> = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> num == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">str</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,num+<span class="number">1</span>):</span><br><span class="line">        head = random.randint(<span class="number">0xb0</span>, <span class="number">0xf7</span>)</span><br><span class="line">        body = random.randint(<span class="number">0xa1</span>, <span class="number">0xfe</span>)</span><br><span class="line">        val = <span class="string">f&#x27;<span class="subst">&#123;head:x&#125;</span><span class="subst">&#123;body:x&#125;</span>&#x27;</span></span><br><span class="line">        <span class="built_in">str</span> = <span class="built_in">str</span> + <span class="built_in">bytes</span>.fromhex(val).decode(<span class="string">&#x27;gb2312&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">list</span>(<span class="built_in">str</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 随机生成num个数字并输出为list</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">listNum</span>(<span class="params">num</span>):</span></span><br><span class="line">    nums = []</span><br><span class="line">    <span class="keyword">while</span> <span class="built_in">len</span>(nums) &lt; num:</span><br><span class="line">        i = random.randint(<span class="number">0</span>,<span class="number">9</span>)</span><br><span class="line">        nums.append(i)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">list</span>(<span class="built_in">str</span>(nums))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成猫签</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">predictfuture</span>():</span></span><br><span class="line">    <span class="comment"># 随机生成n个数字</span></span><br><span class="line">    numN = random.randint(<span class="number">0</span>,<span class="number">9</span>)</span><br><span class="line">    num = listNum(numN)</span><br><span class="line">    <span class="comment"># 随机生成n个字母</span></span><br><span class="line">    src_letters = string.ascii_letters</span><br><span class="line">    letN = random.randint(<span class="number">0</span>,<span class="number">26</span>)</span><br><span class="line">    letters = random.sample(src_letters,letN)</span><br><span class="line">    <span class="comment"># 随机生成n个特殊字符</span></span><br><span class="line">    spN = random.randint(<span class="number">0</span>,<span class="number">6</span>)</span><br><span class="line">    src_special = string.punctuation</span><br><span class="line">    special = random.sample(src_special,spN)</span><br><span class="line">    <span class="comment"># 随机生成n个汉字</span></span><br><span class="line">    chN = random.randint(<span class="number">0</span>,<span class="number">26</span>)</span><br><span class="line">    chinese = GBK2312(chN)</span><br><span class="line">    <span class="comment"># 合并所有随机生成的内容</span></span><br><span class="line">    ran_list = num + letters + special + chinese</span><br><span class="line">    <span class="comment"># 随机打乱生成的内容</span></span><br><span class="line">    random.shuffle(ran_list)</span><br><span class="line">    <span class="comment"># print(ran_list)</span></span><br><span class="line">    <span class="comment"># list转str</span></span><br><span class="line">    temp = <span class="string">&#x27;&#x27;</span>.join(ran_list)</span><br><span class="line">    numS = numN + letN + spN + chN</span><br><span class="line">    <span class="comment"># 填补可能出现的所有类型字符都为0或随机长度为0的情况</span></span><br><span class="line">    ABC_list = [<span class="string">&#x27;Enjolras&#x27;</span>, <span class="string">&#x27;Combeferre&#x27;</span>, <span class="string">&#x27;Jean prouvaire&#x27;</span>, <span class="string">&#x27;Feuilly&#x27;</span>, <span class="string">&#x27;Courfeyrac&#x27;</span>,<span class="string">&#x27; Bahorel&#x27;</span>, <span class="string">&#x27;Lesgle or Laigle&#x27;</span>, <span class="string">&#x27;Joly&#x27;</span>, <span class="string">&#x27;Grantaire&#x27;</span>]</span><br><span class="line">    friendABC = random.randint(<span class="number">0</span>, <span class="built_in">len</span>(ABC_list)-<span class="number">1</span>)</span><br><span class="line">    <span class="comment"># 输出猫猫语</span></span><br><span class="line">    <span class="keyword">if</span> numS == <span class="number">0</span>:</span><br><span class="line">        catsama = ABC_list[friendABC]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        catl = random.randint(<span class="number">0</span>,numS)</span><br><span class="line">        <span class="keyword">if</span> catl == <span class="number">0</span>:</span><br><span class="line">            catsama = ABC_list[friendABC]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            catsama = temp[<span class="number">0</span>:catl]</span><br><span class="line">    <span class="keyword">return</span> catsama</span><br><span class="line"></span><br><span class="line">mastodon = Mastodon(</span><br><span class="line">    access_token = <span class="string">&#x27;mybot_usercred.secret&#x27;</span>,</span><br><span class="line">    api_base_url = <span class="string">&#x27;https://musain.cafe&#x27;</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">content = predictfuture() + <span class="string">&#x27;, miao!&#x27;</span></span><br><span class="line"><span class="comment"># print(content)</span></span><br><span class="line"></span><br><span class="line">mastodon.status_post(content)</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Mastodon</category>
+        <category>Bot</category>
+      </categories>
+      <tags>
+        <tag>Mastodon</tag>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Mastodon 建站笔记</title>
     <url>/2022/03/02/buildmastodon/</url>
     <content><![CDATA[<center> mastodon 建站笔记：慢慢来，6 月之前搞完就行；不要怕，不行就重启试试 </center>
@@ -418,112 +452,6 @@ main() # 运行上述函数
       </tags>
   </entry>
   <entry>
-    <title>CATsama：如何做一个定时发嘟的 Mastodon bot</title>
-    <url>/2022/07/12/catsama/</url>
-    <content><![CDATA[<center> 性感猫猫，每日上午八点半，在您的时间线上推送一个喵喵神签 </center>
-<span id="more"></span>
-
-<p>在缪尚后厅和大家聊天时，猫猫从键盘经过，留下一串神秘文字。大家一致认为这是猫猫给我们留下的忠告，因此决定在缪尚给猫猫神开个位置，就有了这个喵喵喵账号。让我们有请 CATsama！  </p>
-<h2 id="在-VPS-上安装-python"><a href="#在-VPS-上安装-python" class="headerlink" title="在 VPS 上安装 python"></a>在 VPS 上安装 python</h2><p>综合此方和塔塔的教程，决定安装 miniconda。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 在 /root 文件夹执行如下命令</span></span><br><span class="line">mkdir miniconda</span><br><span class="line"><span class="built_in">cd</span> miniconda</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载 python 最新版本并用 bash 安装</span></span><br><span class="line">wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh</span><br><span class="line">sh Miniconda3-latest-Linux-x86_64.sh //用bash安装</span><br></pre></td></tr></table></figure>
-
-<p>之后会有很长一段的文字，都是许可说明，一直按 <code>Enter</code> 即可，直到出现 <code>Do you accept the license terms? [yes|no]</code> 输入 <code>yes</code>，开启正式安装。安装路径直接使用默认 <code>/root/miniconda3</code>。<br>安装完成后会询问是否运行 <code>conda init</code> 来初始化，选择 <code>yes</code>。<br>检查是否安装成功，重启终端后输入 <code>conda --version</code>。  </p>
-<h2 id="安装-bot"><a href="#安装-bot" class="headerlink" title="安装 bot"></a>安装 bot</h2><h3 id="安装前准备"><a href="#安装前准备" class="headerlink" title="安装前准备"></a>安装前准备</h3><p>注册 Mastodon 账号，在管理面板找到开发-创建新应用，创建新应用并给予读写权限，复制访问令牌。<br>由于 Fedi 有许多 bot 账号，为避免 bot 账号之间陷入无限回复循环，建议勾选账号设置中的 “这是一个机器人账户”。</p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>创建存放 bot 相关文件的文件夹，这里模仿塔塔，存在 <code>/root/miniconda</code> 下。  </p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 代码来源于塔塔</span></span><br><span class="line"><span class="built_in">cd</span> miniconda</span><br><span class="line">conda create -n mastbot python=3.8 <span class="comment"># 创建一个叫mastbot的版本为3.8的python虚拟环境，如果已经创建了就不用了</span></span><br><span class="line">conda activate mastbot <span class="comment"># 激活mastbot环境，root账号前会出现（mastbot）</span></span><br><span class="line">pip3 install requests beautifulsoup4 Mastodon.py <span class="comment"># 安装mastodon.py</span></span><br><span class="line">pip3 install numpy <span class="comment"># 安装 numpy，catsama 需要</span></span><br><span class="line">mkdir catsama</span><br><span class="line"><span class="built_in">cd</span> catsama</span><br><span class="line">nano mybot_usercred.secret <span class="comment"># 写入刚才复制的访问令牌，保存退出</span></span><br><span class="line">nano catsama.py <span class="comment"># 发嘟脚本</span></span><br></pre></td></tr></table></figure>
-
-<p>发嘟 python 脚本框架如下：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">from</span> mastodon <span class="keyword">import</span> Mastodon</span><br><span class="line"></span><br><span class="line">mastodon = Mastodon(</span><br><span class="line">    access_token = <span class="string">&#x27;mybot_usercred.secret&#x27;</span>,</span><br><span class="line">    api_base_url = <span class="string">&#x27;实例地址&#x27;</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 要发送的内容放在当前文件夹下面的 `content.txt` 里，每行一句</span></span><br><span class="line">content = random.choice(<span class="built_in">open</span>(<span class="string">&quot;content.txt&quot;</span>).read().splitlines())  </span><br><span class="line"><span class="comment"># content 即为发送嘟文的内容，可根据 bot 的需要替换为不同内容</span></span><br><span class="line"></span><br><span class="line">mastodon.status_post(content)</span><br></pre></td></tr></table></figure>
-
-<p>上述工作完成后，<code>python bot.py</code> 运行脚本。如果顺利，bot 就会发出嘟嘟；如有报错，根据报错信息修改。  </p>
-<h2 id="定时发嘟"><a href="#定时发嘟" class="headerlink" title="定时发嘟"></a>定时发嘟</h2><p>想要实现定时发嘟肯定不能人工蹲点，而要实现自动化。使用 <code>crontab</code> 设置定时任务，定时自动运行 <code>python bot.py</code> 即可实现定时发嘟。  </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">30 2 * * *  cd /root/miniconda/catsama &amp;&amp; /root/miniconda3/envs/mastbot/bin/python catsama.py &gt;&gt; /root/miniconda/catsama/log.txt 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
-
-<p>设置为每天服务器时间 2：30 发送一条喵签。如有报错信息，将输出到 log.txt，可根据报错修改。  </p>
-<h2 id="catsama-脚本存档"><a href="#catsama-脚本存档" class="headerlink" title="catsama 脚本存档"></a>catsama 脚本存档</h2><p>生成一个含有字母、数字、特殊符号和汉字的字符串，这串字符即为喵签内容。如果遇到低概率随机生成的串为空或最终输出的部分为空，则从 ABC 的朋友们名字中选择一个作为喵签内容。  </p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np, numpy.random</span><br><span class="line"><span class="keyword">from</span> mastodon <span class="keyword">import</span> Mastodon</span><br><span class="line"></span><br><span class="line"><span class="comment"># 随机生成num个中文字符并输出为list</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">GBK2312</span>(<span class="params">num</span>):</span></span><br><span class="line">    <span class="built_in">str</span> = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> num == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">str</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,num+<span class="number">1</span>):</span><br><span class="line">        head = random.randint(<span class="number">0xb0</span>, <span class="number">0xf7</span>)</span><br><span class="line">        body = random.randint(<span class="number">0xa1</span>, <span class="number">0xfe</span>)</span><br><span class="line">        val = <span class="string">f&#x27;<span class="subst">&#123;head:x&#125;</span><span class="subst">&#123;body:x&#125;</span>&#x27;</span></span><br><span class="line">        <span class="built_in">str</span> = <span class="built_in">str</span> + <span class="built_in">bytes</span>.fromhex(val).decode(<span class="string">&#x27;gb2312&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">list</span>(<span class="built_in">str</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 随机生成num个数字并输出为list</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">listNum</span>(<span class="params">num</span>):</span></span><br><span class="line">    nums = []</span><br><span class="line">    <span class="keyword">while</span> <span class="built_in">len</span>(nums) &lt; num:</span><br><span class="line">        i = random.randint(<span class="number">0</span>,<span class="number">9</span>)</span><br><span class="line">        nums.append(i)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">list</span>(<span class="built_in">str</span>(nums))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成猫签</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">predictfuture</span>():</span></span><br><span class="line">    <span class="comment"># 随机生成n个数字</span></span><br><span class="line">    numN = random.randint(<span class="number">0</span>,<span class="number">9</span>)</span><br><span class="line">    num = listNum(numN)</span><br><span class="line">    <span class="comment"># 随机生成n个字母</span></span><br><span class="line">    src_letters = string.ascii_letters</span><br><span class="line">    letN = random.randint(<span class="number">0</span>,<span class="number">26</span>)</span><br><span class="line">    letters = random.sample(src_letters,letN)</span><br><span class="line">    <span class="comment"># 随机生成n个特殊字符</span></span><br><span class="line">    spN = random.randint(<span class="number">0</span>,<span class="number">6</span>)</span><br><span class="line">    src_special = string.punctuation</span><br><span class="line">    special = random.sample(src_special,spN)</span><br><span class="line">    <span class="comment"># 随机生成n个汉字</span></span><br><span class="line">    chN = random.randint(<span class="number">0</span>,<span class="number">26</span>)</span><br><span class="line">    chinese = GBK2312(chN)</span><br><span class="line">    <span class="comment"># 合并所有随机生成的内容</span></span><br><span class="line">    ran_list = num + letters + special + chinese</span><br><span class="line">    <span class="comment"># 随机打乱生成的内容</span></span><br><span class="line">    random.shuffle(ran_list)</span><br><span class="line">    <span class="comment"># print(ran_list)</span></span><br><span class="line">    <span class="comment"># list转str</span></span><br><span class="line">    temp = <span class="string">&#x27;&#x27;</span>.join(ran_list)</span><br><span class="line">    numS = numN + letN + spN + chN</span><br><span class="line">    <span class="comment"># 填补可能出现的所有类型字符都为0或随机长度为0的情况</span></span><br><span class="line">    ABC_list = [<span class="string">&#x27;Enjolras&#x27;</span>, <span class="string">&#x27;Combeferre&#x27;</span>, <span class="string">&#x27;Jean prouvaire&#x27;</span>, <span class="string">&#x27;Feuilly&#x27;</span>, <span class="string">&#x27;Courfeyrac&#x27;</span>,<span class="string">&#x27; Bahorel&#x27;</span>, <span class="string">&#x27;Lesgle or Laigle&#x27;</span>, <span class="string">&#x27;Joly&#x27;</span>, <span class="string">&#x27;Grantaire&#x27;</span>]</span><br><span class="line">    friendABC = random.randint(<span class="number">0</span>, <span class="built_in">len</span>(ABC_list)-<span class="number">1</span>)</span><br><span class="line">    <span class="comment"># 输出猫猫语</span></span><br><span class="line">    <span class="keyword">if</span> numS == <span class="number">0</span>:</span><br><span class="line">        catsama = ABC_list[friendABC]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        catl = random.randint(<span class="number">0</span>,numS)</span><br><span class="line">        <span class="keyword">if</span> catl == <span class="number">0</span>:</span><br><span class="line">            catsama = ABC_list[friendABC]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            catsama = temp[<span class="number">0</span>:catl]</span><br><span class="line">    <span class="keyword">return</span> catsama</span><br><span class="line"></span><br><span class="line">mastodon = Mastodon(</span><br><span class="line">    access_token = <span class="string">&#x27;mybot_usercred.secret&#x27;</span>,</span><br><span class="line">    api_base_url = <span class="string">&#x27;https://musain.cafe&#x27;</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">content = predictfuture() + <span class="string">&#x27;, miao!&#x27;</span></span><br><span class="line"><span class="comment"># print(content)</span></span><br><span class="line"></span><br><span class="line">mastodon.status_post(content)</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>Mastodon</category>
-        <category>Bot</category>
-      </categories>
-      <tags>
-        <tag>Mastodon</tag>
-        <tag>Python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Computer Network Notes 4：Network Layer</title>
-    <url>/2022/06/07/computernetworknotes4/</url>
-    <content><![CDATA[<center> 把老师的 PPT 变成 md 文件之计算机网络第四章网络层：数据平面 </center>
-<span id="more"></span>
-
-<h2 id="导论"><a href="#导论" class="headerlink" title="导论"></a>导论</h2><h3 id="网络层服务"><a href="#网络层服务" class="headerlink" title="网络层服务"></a>网络层服务</h3><p>在发送主机和接收主机对之间传送段 (segment)<br>在发送端将段封装到数据报中<br>在接收端，将段上交给传输层实体<br>网络层协议存在于每一个主机和路由器<br>路由器检查每一个经过它的 IP 数据报的头部  </p>
-<h3 id="网络层的关键功能"><a href="#网络层的关键功能" class="headerlink" title="网络层的关键功能"></a>网络层的关键功能</h3><p><strong>转发</strong>：将分组从路由器的输入接口转发到合适的输出接口<br><strong>路由</strong>：使用路由算法来决定分组从发送主机到目标接收主机的路径  </p>
-<ul>
-<li>路由选择算法  </li>
-<li>路由选择协议  </li>
-</ul>
-<h3 id="数据平面与控制平面"><a href="#数据平面与控制平面" class="headerlink" title="数据平面与控制平面"></a>数据平面与控制平面</h3><p><strong>数据平面</strong>  </p>
-<ul>
-<li>本地，每个路由器功能  </li>
-<li>决定从路由器输入端口到达的分组如何转发到输出端口  </li>
-<li>转发功能  <ul>
-<li>传统方式：基于目标地址 + 转发表  </li>
-<li>SDN 方式：集于多个字段 + 流表  </li>
-</ul>
-</li>
-</ul>
-<p><strong>控制平面</strong>  </p>
-<ul>
-<li>网络范围内的逻辑  </li>
-<li>决定数据报如何在路由器之间路由，决定数据报从源道目标主机之间的端到端路径  </li>
-<li>2 个控制平面方法  <ul>
-<li>传统的路由算法：在路由器中被实现  </li>
-<li>software-defined networking (SND)：在远程的服务器中实现  </li>
-</ul>
-</li>
-</ul>
-<h4 id="传统方式"><a href="#传统方式" class="headerlink" title="传统方式"></a>传统方式</h4><p>每-路由器(Per-router)控制平面<br>在每一个路由器中的单独路由器算法元件，在控制平面进行交互  </p>
-<p><img src="/2022/06/07/computernetworknotes4/traditionalway.png">  </p>
-<p>控制平面、数据平面紧紧耦合<br>路由和转发的相互作用  </p>
-<p><img src="/2022/06/07/computernetworknotes4/traditional.png">  </p>
-<h4 id="SDN-方式"><a href="#SDN-方式" class="headerlink" title="SDN 方式"></a>SDN 方式</h4><p>逻辑集中的控制平面<br>一个不同的(通常是远程的)控制器与本地控制代理(CAs)交互  </p>
-<p><img src="/2022/06/07/computernetworknotes4/SDNway.png">  </p>
-<h3 id="网络服务模型"><a href="#网络服务模型" class="headerlink" title="网络服务模型"></a>网络服务模型</h3><p>对于单个数据报的服务  </p>
-<ul>
-<li>可靠传送  </li>
-<li>延迟保证，如：少于 40 ms 的延迟  </li>
-</ul>
-<p>对于数据报流的服务  </p>
-<ul>
-<li>保存数据报传送  </li>
-<li>保证流的最小带宽  </li>
-<li>分组之间的延迟差  </li>
-</ul>
-<p><img src="/2022/06/07/computernetworknotes4/servicemodel.png"></p>
-<h3 id="连接建立"><a href="#连接建立" class="headerlink" title="连接建立"></a>连接建立</h3><p>在某些网络架构中是第三个重要的功能  </p>
-<ul>
-<li>ATM, frame relay, X.25  </li>
-</ul>
-<p>在分组传输之前，在两个主机之间，再通过一些路由器所构成的路径上建立一个网络层连接  </p>
-<ul>
-<li>涉及到路由器  </li>
-</ul>
-<p>网络层和传输层连接服务区别  </p>
-<ul>
-<li><strong>网络层</strong>：在 2 个主机之间，涉及到路径上的一些路由器  </li>
-<li><strong>传输层</strong>：在 2 个进程之间，很可能只体现在端系统上 (TCP 连接)  </li>
-</ul>
-]]></content>
-      <categories>
-        <category>Notes</category>
-        <category>ComputerNetwork</category>
-      </categories>
-      <tags>
-        <tag>ComputerNetwork</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Computational Deconvolution for More Precise Biological Data</title>
     <url>/2021/12/08/deconmixeddata/</url>
     <content><![CDATA[<center> 文献阅读：解卷积可从混合的生物学数据中解得各细胞类型比例，或估计各细胞类型的表达谱，为研究提供更准确的样本数据 </center>
@@ -599,6 +527,78 @@ main() # 运行上述函数
       <tags>
         <tag>DeconvoluteMixedBioData</tag>
         <tag>Bioinformatics</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Computer Network Notes 4：Network Layer</title>
+    <url>/2022/06/07/computernetworknotes4/</url>
+    <content><![CDATA[<center> 把老师的 PPT 变成 md 文件之计算机网络第四章网络层：数据平面 </center>
+<span id="more"></span>
+
+<h2 id="导论"><a href="#导论" class="headerlink" title="导论"></a>导论</h2><h3 id="网络层服务"><a href="#网络层服务" class="headerlink" title="网络层服务"></a>网络层服务</h3><p>在发送主机和接收主机对之间传送段 (segment)<br>在发送端将段封装到数据报中<br>在接收端，将段上交给传输层实体<br>网络层协议存在于每一个主机和路由器<br>路由器检查每一个经过它的 IP 数据报的头部  </p>
+<h3 id="网络层的关键功能"><a href="#网络层的关键功能" class="headerlink" title="网络层的关键功能"></a>网络层的关键功能</h3><p><strong>转发</strong>：将分组从路由器的输入接口转发到合适的输出接口<br><strong>路由</strong>：使用路由算法来决定分组从发送主机到目标接收主机的路径  </p>
+<ul>
+<li>路由选择算法  </li>
+<li>路由选择协议  </li>
+</ul>
+<h3 id="数据平面与控制平面"><a href="#数据平面与控制平面" class="headerlink" title="数据平面与控制平面"></a>数据平面与控制平面</h3><p><strong>数据平面</strong>  </p>
+<ul>
+<li>本地，每个路由器功能  </li>
+<li>决定从路由器输入端口到达的分组如何转发到输出端口  </li>
+<li>转发功能  <ul>
+<li>传统方式：基于目标地址 + 转发表  </li>
+<li>SDN 方式：集于多个字段 + 流表  </li>
+</ul>
+</li>
+</ul>
+<p><strong>控制平面</strong>  </p>
+<ul>
+<li>网络范围内的逻辑  </li>
+<li>决定数据报如何在路由器之间路由，决定数据报从源道目标主机之间的端到端路径  </li>
+<li>2 个控制平面方法  <ul>
+<li>传统的路由算法：在路由器中被实现  </li>
+<li>software-defined networking (SND)：在远程的服务器中实现  </li>
+</ul>
+</li>
+</ul>
+<h4 id="传统方式"><a href="#传统方式" class="headerlink" title="传统方式"></a>传统方式</h4><p>每-路由器(Per-router)控制平面<br>在每一个路由器中的单独路由器算法元件，在控制平面进行交互  </p>
+<p><img src="/2022/06/07/computernetworknotes4/traditionalway.png">  </p>
+<p>控制平面、数据平面紧紧耦合<br>路由和转发的相互作用  </p>
+<p><img src="/2022/06/07/computernetworknotes4/traditional.png">  </p>
+<h4 id="SDN-方式"><a href="#SDN-方式" class="headerlink" title="SDN 方式"></a>SDN 方式</h4><p>逻辑集中的控制平面<br>一个不同的(通常是远程的)控制器与本地控制代理(CAs)交互  </p>
+<p><img src="/2022/06/07/computernetworknotes4/SDNway.png">  </p>
+<h3 id="网络服务模型"><a href="#网络服务模型" class="headerlink" title="网络服务模型"></a>网络服务模型</h3><p>对于单个数据报的服务  </p>
+<ul>
+<li>可靠传送  </li>
+<li>延迟保证，如：少于 40 ms 的延迟  </li>
+</ul>
+<p>对于数据报流的服务  </p>
+<ul>
+<li>保存数据报传送  </li>
+<li>保证流的最小带宽  </li>
+<li>分组之间的延迟差  </li>
+</ul>
+<p><img src="/2022/06/07/computernetworknotes4/servicemodel.png"></p>
+<h3 id="连接建立"><a href="#连接建立" class="headerlink" title="连接建立"></a>连接建立</h3><p>在某些网络架构中是第三个重要的功能  </p>
+<ul>
+<li>ATM, frame relay, X.25  </li>
+</ul>
+<p>在分组传输之前，在两个主机之间，再通过一些路由器所构成的路径上建立一个网络层连接  </p>
+<ul>
+<li>涉及到路由器  </li>
+</ul>
+<p>网络层和传输层连接服务区别  </p>
+<ul>
+<li><strong>网络层</strong>：在 2 个主机之间，涉及到路径上的一些路由器  </li>
+<li><strong>传输层</strong>：在 2 个进程之间，很可能只体现在端系统上 (TCP 连接)  </li>
+</ul>
+]]></content>
+      <categories>
+        <category>Notes</category>
+        <category>ComputerNetwork</category>
+      </categories>
+      <tags>
+        <tag>ComputerNetwork</tag>
       </tags>
   </entry>
   <entry>
