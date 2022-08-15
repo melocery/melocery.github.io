@@ -20,30 +20,28 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"tech.musain.club","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="终于还是没能避免想要在文章中用到图片，所以有了本文记录在Hexo博客中插入图片的各种方式">
+<meta name="description" content="简单总结一下在 VPS 上折腾的一些小东西">
 <meta property="og:type" content="article">
-<meta property="og:title" content="在文章中插入图片的各种方式">
-<meta property="og:url" content="https://tech.musain.club/2021/10/19/imginblog/index.html">
+<meta property="og:title" content="VPS：一款赛博乐高">
+<meta property="og:url" content="https://tech.musain.club/2022/08/13/cyberlego/index.html">
 <meta property="og:site_name" content="Bugrocery">
-<meta property="og:description" content="终于还是没能避免想要在文章中用到图片，所以有了本文记录在Hexo博客中插入图片的各种方式">
+<meta property="og:description" content="简单总结一下在 VPS 上折腾的一些小东西">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-10-19T03:39:39.000Z">
-<meta property="article:modified_time" content="2021-10-29T06:42:43.109Z">
+<meta property="article:published_time" content="2022-08-13T06:56:34.000Z">
+<meta property="article:modified_time" content="2022-08-15T13:28:29.687Z">
 <meta property="article:author" content="Udon">
-<meta property="article:tag" content="Hexo">
-<meta property="article:tag" content="Blog">
-<meta property="article:tag" content="Markdown">
+<meta property="article:tag" content="VPS">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://tech.musain.club/2021/10/19/imginblog/">
+<link rel="canonical" href="https://tech.musain.club/2022/08/13/cyberlego/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://tech.musain.club/2021/10/19/imginblog/","path":"2021/10/19/imginblog/","title":"在文章中插入图片的各种方式"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://tech.musain.club/2022/08/13/cyberlego/","path":"2022/08/13/cyberlego/","title":"VPS：一款赛博乐高"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>在文章中插入图片的各种方式 | Bugrocery</title>
+<title>VPS：一款赛博乐高 | Bugrocery</title>
   
 
 
@@ -149,7 +147,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E5%BC%95%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">本地引用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6"><span class="nav-number">1.1.</span> <span class="nav-text">安装插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84"><span class="nav-number">1.2.</span> <span class="nav-text">绝对路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84"><span class="nav-number">1.3.</span> <span class="nav-text">相对路径</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.1.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%8F%E6%8F%90%E7%A4%BA"><span class="nav-number">1.3.2.</span> <span class="nav-text">小提示</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CDN%E5%BC%95%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">CDN引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Mastodon"><span class="nav-number">1.</span> <span class="nav-text">Mastodon</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Plume"><span class="nav-number">2.</span> <span class="nav-text">Plume</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Matrix"><span class="nav-number">3.</span> <span class="nav-text">Matrix</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bot"><span class="nav-number">4.</span> <span class="nav-text">Bot</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E5%8F%91%E5%98%9F%E7%9A%84%E5%96%B5%E5%96%B5%E5%96%B5"><span class="nav-number">4.1.</span> <span class="nav-text">自动发嘟的喵喵喵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E5%9B%9E%E5%A4%8D%E7%9A%84%E6%B1%AA%E6%B1%AA%E6%B1%AA"><span class="nav-number">4.2.</span> <span class="nav-text">自动回复的汪汪汪</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B4%E7%82%B9%E6%84%9F%E6%83%B3"><span class="nav-number">5.</span> <span class="nav-text">说点感想</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -222,7 +220,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://tech.musain.club/2021/10/19/imginblog/">
+    <link itemprop="mainEntityOfPage" href="https://tech.musain.club/2022/08/13/cyberlego/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/img.png">
@@ -235,7 +233,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          在文章中插入图片的各种方式
+          VPS：一款赛博乐高
         </h1>
 
         <div class="post-meta-container">
@@ -246,14 +244,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2021-10-19 11:39:39" itemprop="dateCreated datePublished" datetime="2021-10-19T11:39:39+08:00">2021-10-19</time>
+      <time title="Created: 2022-08-13 14:56:34" itemprop="dateCreated datePublished" datetime="2022-08-13T14:56:34+08:00">2022-08-13</time>
     </span>
       <span class="post-meta-item">
         <span class="post-meta-item-icon">
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-10-29 14:42:43" itemprop="dateModified" datetime="2021-10-29T14:42:43+08:00">2021-10-29</time>
+        <time title="Modified: 2022-08-15 21:28:29" itemprop="dateModified" datetime="2022-08-15T21:28:29+08:00">2022-08-15</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -261,11 +259,7 @@
       </span>
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Blog/" itemprop="url" rel="index"><span itemprop="name">Blog</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Blog/Writing/" itemprop="url" rel="index"><span itemprop="name">Writing</span></a>
+          <a href="/categories/VPS/" itemprop="url" rel="index"><span itemprop="name">VPS</span></a>
         </span>
     </span>
 
@@ -276,14 +270,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>2.9k</span>
+      <span>1.9k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>3 mins.</span>
+      <span>2 mins.</span>
     </span>
 </div>
 
@@ -294,94 +288,16 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <center>终于还是没能避免想要在文章中用到图片，所以有了本文记录在Hexo博客中插入图片的各种方式</center>  
-<span id="more"></span>  
+        <center> 简单总结一下在 VPS 上折腾的一些小东西 </center>
+<span id="more"></span>
 
-<h2 id="本地引用"><a href="#本地引用" class="headerlink" title="本地引用"></a>本地引用</h2><h3 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h3><p>安装插件<code>hexo-asset-image</code></p>
-<pre><code>npm install hexo-asset-image --save
-</code></pre>
-<p>安装成功后，打开<code>/node_modules/hexo-asset-image/index.js</code>，替换成下列内容：</p>
-<pre><code>&#39;use strict&#39;;
-var cheerio = require(&#39;cheerio&#39;);
-
-// http://stackoverflow.com/questions/14480345/how-to-get-the-nth-occurrence-in-a-string
-function getPosition(str, m, i) &#123;
-return str.split(m, i).join(m).length;
-&#125;
-
-var version = String(hexo.version).split(&#39;.&#39;);
-hexo.extend.filter.register(&#39;after_post_render&#39;, function(data)&#123;
-var config = hexo.config;
-if(config.post_asset_folder)&#123;
-    var link = data.permalink;
-if(version.length &gt; 0 &amp;&amp; Number(version[0]) == 3)
-    var beginPos = getPosition(link, &#39;/&#39;, 1) + 1;
-else
-    var beginPos = getPosition(link, &#39;/&#39;, 3) + 1;
-// In hexo 3.1.1, the permalink of &quot;about&quot; page is like &quot;.../about/index.html&quot;.
-var endPos = link.lastIndexOf(&#39;/&#39;) + 1;
-    link = link.substring(beginPos, endPos);
-var toprocess = [&#39;excerpt&#39;, &#39;more&#39;, &#39;content&#39;];
-for(var i = 0; i &lt; toprocess.length; i++)&#123;
-var key = toprocess[i];
-
-var $ = cheerio.load(data[key], &#123;
-    ignoreWhitespace: false,
-    xmlMode: false,
-    lowerCaseTags: false,
-    decodeEntities: false
-&#125;);
-
-$(&#39;img&#39;).each(function()&#123;
-if ($(this).attr(&#39;src&#39;))&#123;
-// For windows style path, we replace &#39;\&#39; to &#39;/&#39;.
-var src = $(this).attr(&#39;src&#39;).replace(&#39;\\&#39;, &#39;/&#39;);
-if(!/http[s]*.*|\/\/.*/.test(src) &amp;&amp;
-    !/^\s*\//.test(src)) &#123;
-    // For &quot;about&quot; page, the first part of &quot;src&quot; can&#39;t be removed.
-    // In addition, to support multi-level local directory.
-    var linkArray = link.split(&#39;/&#39;).filter(function(elem)&#123;
-    return elem != &#39;&#39;;
-    &#125;);
-    var srcArray = src.split(&#39;/&#39;).filter(function(elem)&#123;
-    return elem != &#39;&#39; &amp;&amp; elem != &#39;.&#39;;
-    &#125;);
-    if(srcArray.length &gt; 1)
-    srcArray.shift();
-    src = srcArray.join(&#39;/&#39;);
-    $(this).attr(&#39;src&#39;, config.root + link + src);
-    console.info&amp;&amp;console.info(&quot;update link as:--&gt;&quot;+config.root + link + src);
-&#125;
-&#125;else&#123;
-console.info&amp;&amp;console.info(&quot;no src attr, skipped...&quot;);
-console.info&amp;&amp;console.info($(this));
-    &#125;
-&#125;);
-data[key] = $.html();
-    &#125;
-&#125;
-&#125;);
-</code></pre>
-<h3 id="绝对路径"><a href="#绝对路径" class="headerlink" title="绝对路径"></a>绝对路径</h3><p>当整个博客图片内容较少时，可将所有的图片都放在<code>source/images</code>文件夹下，通过<code>markdown</code>语法访问。  </p>
-<pre><code>![](/images/img1.png)
-</code></pre>
-<p>对于图片较少切命名清晰的情况，这种方式存放图片足够。</p>
-<h3 id="相对路径"><a href="#相对路径" class="headerlink" title="相对路径"></a>相对路径</h3><h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><p>除了将图片存放在<code>source/images</code>文件夹下，还可以将图片存放在文章自己的目录中。文章目录可通过修改配置文件生成：  </p>
-<pre><code>post_asset_folder: true  
-</code></pre>
-<p>将配置文件中<code>post_asset_folder</code>修改为<code>true</code>后，执行命令</p>
-<pre><code>hexo new post newblog
-</code></pre>
-<p>会在<code>source/_posts</code>生成<code>newblog.md</code>和同名文件夹<code>newblog</code>。将图片存在该同名文件夹中，即可通过相对路径的方式在文章中添加图片。</p>
-<pre><code>![](img.png)
-</code></pre>
-<p>这一方法能够在文章中显示图片，但无法在首页正常显示图片，如需在首页显示图片可使用如下方式：</p>
-<pre><code>&#123;% asset_img img.png This is an image %&#125;
-</code></pre>
-<p>当图片内容较多，使用相对路径存放图片的方式更易于整理。</p>
-<h4 id="小提示"><a href="#小提示" class="headerlink" title="小提示"></a>小提示</h4><p>如遇到修改配置文件后运行<code>hexo new newblog</code>命令无法正常建立一个同名文件夹，可以手动在<code>_POST</code>目录下建立一个同名文件夹，仍能够达到同样的效果。<br>实际上，md文件也可以手动新建。根据使用者的习惯，怎么新建md文件和同名文件夹都是可以的。<br>平时写文章不常用到图片，也可以使用手动建立同名文件夹的方式。  </p>
-<h2 id="CDN引用"><a href="#CDN引用" class="headerlink" title="CDN引用"></a>CDN引用</h2><p>将图片上传到一些CDN服务中并使用对应的url地址引用图片也是一个很好的方式。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>[1] <a target="_blank" rel="noopener" href="https://yanyinhong.github.io/2017/05/02/How-to-insert-image-in-hexo-post/">Hexo博客搭建之在文章中插入图片</a><br>[2] <a target="_blank" rel="noopener" href="https://fuhailin.github.io/Hexo-images/">在Hexo博客中插入图片的各种方式</a><br>[3] <a target="_blank" rel="noopener" href="https://www.cxyzjd.com/article/m0_43401436/107191688">hexo博客中插入图片失败——解决思路及个人最终解决办法</a><br>[4] <a target="_blank" rel="noopener" href="http://sdman.tech/2019/07/23/%E8%A7%A3%E5%86%B3Hexo%E6%A1%86%E6%9E%B6%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87%E4%B8%8D%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98/">解决 Hexo 框架博客图片不显示的问题</a></p>
+<h2 id="Mastodon"><a href="#Mastodon" class="headerlink" title="Mastodon"></a>Mastodon</h2><p>买这个 VPS 就是为了长毛象，搭建过程非常缓慢，详细搭建过程见：<a href="https://tech.musain.club/2022/03/02/buildmastodon/">Mastodon 建站笔记</a>。搭建过程中遇到的很多问题，都在这篇中有提到。搭建一个长毛象实例并不难，后期装修维护才是挑战。各种各样零散的问题都会出现，甚至直到前几天才发现原来之前一直看错了 dockerhub 的报错信息。等有空需要给所有装修都总结成一篇装修笔记，以免以后忘记做过哪些东西。<br>目前站点除去朋友注册和 bot 账号约有四十多人，但由于很多人都只是建个魂器，所以总体开销并没有预期大，保持目前的配置扩建至 100 人应该没有问题。不过人少也有人少的好处，站点真的像一个咖啡馆，有经常来的熟客也有偶尔来喝一杯的生客。总得来说达到了我预想的结果，后续如果能有更多熟客就更好了。  </p>
+<h2 id="Plume"><a href="#Plume" class="headerlink" title="Plume"></a>Plume</h2><p>虽然已经有很多博客，但还是搭建了 plume。一开始的想法是来咖啡馆的人应该多多少少都会写同人，搭个 plume 比在咖啡馆直接发长文好，还能和咖啡馆直接互通，对创作者和读者之间的交流十分友好。但实际上大多数人都只是注册一下，然后放着不用。就连我自己也只是注册了一个账号，没有往这个账号搬运任何文。对我来说 plume 只是一个替代平台，除非 hugo + vercel 和 AO3 (甚至是 wordpress) 都不好用才会考虑用 plume。<br>搭建 plume 并不难，只在配置 ngnix 时出错重来过一次。也有很多教程，所以没有记录如何搭建。在这里存一个教程：<a target="_blank" rel="noopener" href="https://blog.tantalum.life/posts/build-plume-in-docker/">Plume | 利用Docker-compose搭建Fedi开源博客平台</a></p>
+<h2 id="Matrix"><a href="#Matrix" class="headerlink" title="Matrix"></a>Matrix</h2><p>之前为了找一个不受审查还不被墙的即时聊天软件搜遍全网，直到自己有了一台 VPS，终于依靠搭建 matrix 从这种情况中脱离出来。虽然 matrix 由于发送每条消息都需要加密，所以发送图片还是很慢，但日常聊天可以忍这一点小毛病。这也是除了 mastodon 以外，我服务器上最活跃的应用。拼 lego 是自嗨游戏，搭好之后还是有人用更快乐。<br>不过 matrix 也不是没有被墙的风险，但和 mastodon 类似，一个服务器被墙还有无数个服务器可以选择。唯一的问题是很多搭建 matrix 的站长都不喜欢对外开放注册，我也是这样，而 matrix 大站已经被墙。这其实间接导致很多人无法真正开始使用 matrix，毕竟朋友都不能用的话，聊天软件也就失去意义。可能这就是为什么站内要账号的人不少，真正使用的人不多吧。<br>搭建 matrix 主要参考了两个教程：<a target="_blank" rel="noopener" href="https://www.b612.me/code/223.html">使用docker搭建Synapse(Matrix)</a> 和 <a target="_blank" rel="noopener" href="https://tech.konata.co/2022-04-10-matrix/">Matrix | 使用 docker 搭建 Synapse 记录</a>。我的搭建过程并没有记录下来，现在想想虽然都是别人写过的东西，也还是应该记录一份自己完成的过程。下次一定。  </p>
+<h2 id="Bot"><a href="#Bot" class="headerlink" title="Bot"></a>Bot</h2><p>这部分算是我的一时兴起，以及想知道如何做到这件事而进行的两个尝试。即使一开始就知道写的 bot 无人在意，但还是很用心地完成了这两个 bot。算是我买了这个 VPS 之后最意外的收获，发现自己竟还有探索欲，竟然能够纯粹为了满足自己而去做一件事。  </p>
+<h3 id="自动发嘟的喵喵喵"><a href="#自动发嘟的喵喵喵" class="headerlink" title="自动发嘟的喵喵喵"></a>自动发嘟的喵喵喵</h3><p>象上实现自动发嘟的 bot 有很多，在没有自己的站点和服务器时就很好奇这些 bot 如何运营。稍微看点教程就发现如果只是在自己电脑上运行的话，很可能需要一直开着电脑。如果想要完全自动化，最好还是有一个自己的服务器。所以在建好站点之后，有个很小的由头就火速写了喵喵喵。关于 bot 背后的原理其实并不完全清楚，但不知道 why 并不影响 how，所以还是很顺利完成了这个非常简单的 bot。<br>搭建过程：<a href="https://tech.musain.club/2022/07/12/catsama/">CATsama：如何做一个定时发嘟的 Mastodon bot</a><br>喵喵本喵：<a target="_blank" rel="noopener" href="https://musain.cafe/@CATsama">喵喵喵</a>  </p>
+<h3 id="自动回复的汪汪汪"><a href="#自动回复的汪汪汪" class="headerlink" title="自动回复的汪汪汪"></a>自动回复的汪汪汪</h3><p>学会了自动发嘟就自然而然想学会自动回复，但整个过程比自动发嘟波折得多。幸好即使最初参考的教程非常详细，也在一开始就边做边记录，所以整个波折的过程也被写下来。虽然可能不具有什么真正的参考性，但自己回顾时会觉得很开心，抓耳挠腮想办法也很开心。最后这个 bot 只能说是可以运行，并没有真正实现我一开始想要的那种自动回复。但由于问题在站点设置，而不在代码，站点又是我根据教程一步步来的，完全不知道从何改起，目前来讲这个 bot 只能这样子了。<br>搭建过程：<a href="https://tech.musain.club/2022/07/20/dogchan/">DOGchan：如何做一个能够自动回复的 Mastodon bot</a><br>汪汪本汪：<a target="_blank" rel="noopener" href="https://musain.cafe/@DOGchan">汪汪汪</a>  </p>
+<h2 id="说点感想"><a href="#说点感想" class="headerlink" title="说点感想"></a>说点感想</h2><p>写完才发现其实在 VPS 上搞的东西也不算多，但每一个都是自己想去做就做了的。就像在 bot 部分说的，这个 VPS 带给我的最大惊喜是竟然还有这么多东西我想去探索、想知道如何实现。这个列表在未来还会继续变多，说不定什么时候看到感兴趣的东西就又在服务器上折腾点什么。但目前来讲更重要的是维护已有东西的稳定，在此基础之上搞搞装修。<br>忘记是哪里看到的，说 VPS 就是一款赛博乐高，的确如此。  </p>
 
     </div>
 
@@ -391,23 +307,18 @@ data[key] = $.html();
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Hexo/" rel="tag"># Hexo</a>
-              <a href="/tags/Blog/" rel="tag"># Blog</a>
-              <a href="/tags/Markdown/" rel="tag"># Markdown</a>
+              <a href="/tags/VPS/" rel="tag"># VPS</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2021/09/21/mstdn/" rel="prev" title="长毛象使用指南">
-                  <i class="fa fa-chevron-left"></i> 长毛象使用指南
+                <a href="/2022/07/20/dogchan/" rel="prev" title="DOGchan：如何做一个能够自动回复的 Mastodon bot">
+                  <i class="fa fa-chevron-left"></i> DOGchan：如何做一个能够自动回复的 Mastodon bot
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2021/10/29/BatchEffect/" rel="next" title="Batch Effects Matter and Avoid Them in Omics Data">
-                  Batch Effects Matter and Avoid Them in Omics Data <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
