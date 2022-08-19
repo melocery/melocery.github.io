@@ -105,87 +105,6 @@ $ git clone https://github.com/next-theme/hexo-theme-next themes/next
       </tags>
   </entry>
   <entry>
-    <title>Mastodon 建站笔记</title>
-    <url>/2022/03/02/buildmastodon/</url>
-    <content><![CDATA[<center> mastodon 建站笔记：慢慢来，6 月之前搞完就行；不要怕，不行就重启试试 </center>
-<span id="more"></span>
-
-<h2 id="一点说明"><a href="#一点说明" class="headerlink" title="一点说明"></a>一点说明</h2><p>本文所记录的搭建非常缓慢，开始于二月，但给自己设定的 DDL 在六月。搭建过程完全碎片化，每次推进都基于“这会儿没什么事情不如搞一搞建站”，且超过一小时就会先放着下次再说，非常随性随意。每一步完成于哪一天、大概耗时都有记录，给想搭建却又嫌麻烦、觉得需要特意安排时间的朋友提供一个佛系搭建参考。  </p>
-<h2 id="参考与致谢"><a href="#参考与致谢" class="headerlink" title="参考与致谢"></a>参考与致谢</h2><p>参考：蓝盒子站长的<a href="https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/10/19/Mastodon-on-Docker.html">利用 docker 搭建 Mastodon 实例</a>和塔塔的<a href="https://mantyke.icu/2021/mastodon-bulid/">小球飞象建站笔记</a>。  </p>
-<p>感谢嘎嘎、塔塔和其他写下详细教程和笔记的朋友！因为你们和你们的教程，我这种没有参考不敢做事的人才能一点点把实例搭建起来。<br>特别感谢塔塔，给我每完成一步的嘟嘟点星星，给予我很大鼓励！  </p>
-<h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><p>前期准备主要是花钱，大多数运营商都支持 Visa、MasterCard 或 PayPal，godaddy 支持支付宝付款。<br>为能有更多选择，个人建议开通 PayPal，比办信用卡方便一些。本文中除 Scaleway 以外，所有支付都通过 PayPal 完成。如使用 PayPal 付款，建议付款时直接使用目标货币，而不使用 PayPal 提供的转换为人民币付款。这种情况下付款使用的是银行汇率，会比 PayPal 划算。  </p>
-<h3 id="域名"><a href="#域名" class="headerlink" title="域名"></a>域名</h3><p>常用的域名提供商很多，比如 <a href="https://www.namecheap.com/">NameCheap</a>，<a href="https://sg.godaddy.com/">godaddy</a> 和 <a href="https://www.dynadot.com/">dynadot</a>。可参考o3o站长给出的<a href="https://www.notion.so/c66e3332f4824f71b9d7d1dc8db410c7">域名选购指南</a>。<br>本站根据蓝盒子站长的推荐，在 NameCheap 购买域名。由于之前给博客换域名已经在 NameCheap 买过一次，而且很早就想好要买什么域名，所以这一步成为这个跨越几个月的搭建过程中最简单、最快速的一步。  </p>
-<p>该步骤完成于 2022.02.17。约耗时 15 分钟，主要在犹豫到底要不要这天买，实际操作只用掉两三分钟。以及早知道我这么快就要自建站，博客就换个域名了！两年后我博客必换域名！</p>
-<h3 id="邮件服务"><a href="#邮件服务" class="headerlink" title="邮件服务"></a>邮件服务</h3><p>使用 Zoho Mail 提供的 Business Mail 服务中的 Forever Free Plan。<br>由于本人需要很详细的操作步骤才敢进行下一步，这里找了个注册 Zoho Mail 的详细教程 —— <a href="https://www.dreambuildinglab.com/website-construction/email/how-to-register-free-zoho-business-email.html">注册zoho免费企业邮箱</a>。这个教程虽然详细，但稍微有点过时，有些操作的名称略有更改。如有需要，可再找其它教程参考。  </p>
-<p>该步骤完成于 2022.02.21。约耗时 40 分钟，因为一些步骤没有明确的参考不太敢试，必须找到别人这一步怎么做才动手。但实际上没关系，大胆试，不行重来嘛！  </p>
-<h3 id="购买VPS"><a href="#购买VPS" class="headerlink" title="购买VPS"></a>购买VPS</h3><p>选择 <a href="https://contabo.com/en/">Contabo</a> 购买 VPS，在购买前将价格修改为欧元，选择5欧套餐，德国服务器，一次性购买 12 个月，其它选项全部默认。<br>这里塔塔提醒<a href="https://mantyke.icu/2021/mastodon-bulid/#%E8%B4%AD%E4%B9%B0vps"> Contabo 审核严格</a>，最好真实 IP 购买，填写信息时不要太扯，不然会被要求提供身份证明。但我就是那个认真填写还被要求提供护照的倒霉蛋。由于目前和德国有 7 个小时时差，上午提供护照信息后，一直到下午四点多才收到确认邮件。  </p>
-<p>该步骤完成于 2022.03.02。约耗时 15 分钟加 19 小时，15 分钟是实际需要操作的时间，包括提供护照信息；19 小时是由于买服务器时护照不在手边，第二天上午才回复，下午收到确认。  </p>
-<h2 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h2><h3 id="配置系统"><a href="#配置系统" class="headerlink" title="配置系统"></a>配置系统</h3><p>这一部分参考<a href="https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/10/19/Mastodon-on-Docker.html">蓝盒子站长教程</a>。  </p>
-<ul>
-<li><p>配置 ssh-key<br>首先查看电脑当前用户的目录下是否存在.ssh目录，以及目录中是否存在<code>id_rsa</code>和<code>id_rsa.pub</code>两个文件。如果存在，公钥即为<code>id_rsa.pub</code>中的内容。如果不存在，则输入命令：  </p>
-  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C “your_email”</span><br></pre></td></tr></table></figure>
-
-<p>一路回车，直到生成一个矩形的图案为止，生成的这串字符就是后面需要的公钥。  </p>
-<p>接下来的步骤全部按照蓝盒子站长的教程进行，但我遇到了一个愚蠢的问题，不会保存 nano 编辑的内容并退出。即使编辑器下方有两行提醒，也没能正确保存文件。万一有朋友和我一样，可参考以下保存并退出的方法：  </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># ^ 为键盘上的 Ctrl 键，以下方法直接使用 Ctrl 代替</span><br><span class="line"># 退出，并根据提示保存</span><br><span class="line">Ctrl + X 退出，按 y 选择保存，提示 file name to write，利用上下左右键选择要保存到的文件，回车保存</span><br><span class="line"># 退出，并保存</span><br><span class="line">Ctrl + X 退出，按 y 选择保存，回车</span><br><span class="line"># 先保存，后退出</span><br><span class="line">Ctrl + O 并回车保存，Ctrl + X 退出</span><br></pre></td></tr></table></figure></li>
-<li><p>安装常用命令和配置防火墙<br>直接照抄蓝盒子站长给的命令，都非常顺利。  </p>
-</li>
-</ul>
-<p>该步骤完成于 2022.03.03。约耗时 55 分钟，主要由于不会保存 nano 编辑的内容，根据各种教程也总是保存失败。中途一度试图换回之前常用的 vim，但事实证明两年没用就会忘记一切。如果能顺利保存，这一步十分钟以内就可以完成。  </p>
-<p><strong>tips</strong><br>虽然上次建站配置好了服务器端的公钥，但这次登录时，MobaXterm 一直返回错误信息：  </p>
-  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Disconnected: No supported authentication methods available (server sent: publickey)</span><br></pre></td></tr></table></figure>
-
-<p>原因是服务器已经关闭账户密码登录，但使用 MobaXterm 登录时没有勾选 <code>Use private key</code> 并指定私钥文件。<br>具体步骤为 <code>Session -&gt; SSH -&gt; Use private key and specify a private key for passwordless login</code>。<br>设置完成后即可顺利登录。  </p>
-<h3 id="安装-docker-和-docker-compose"><a href="#安装-docker-和-docker-compose" class="headerlink" title="安装 docker 和 docker-compose"></a>安装 docker 和 docker-compose</h3><p>根据蓝盒子站长的教程，使用官方提供的一键脚本安装 docker。</p>
-  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 代码来自蓝盒子站长教程</span><br><span class="line">bash &lt;(curl -L https://get.docker.com/)</span><br><span class="line">sudo curl -L &quot;https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose</span><br><span class="line">sudo chmod +x /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
-
-<p>该步骤完成于 2022.03.13。约耗时 15 分钟，包括一开始登录不上服务器而查找原因的时间，实际操作时间约 3 分钟。这一步骤完成后可以通过命令 <code>docker-compose -h</code> 检查 docker 是否真的安装成功。  </p>
-<h3 id="拉取-Mastodon-镜像-amp-初始化-PostgreSQL"><a href="#拉取-Mastodon-镜像-amp-初始化-PostgreSQL" class="headerlink" title="拉取 Mastodon 镜像 &amp; 初始化 PostgreSQL"></a>拉取 Mastodon 镜像 &amp; 初始化 PostgreSQL</h3><p>这几项全部根据蓝盒子站长 <a href="https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/10/19/Mastodon-on-Docker.html">2022-04-25 修改的教程</a>进行。  </p>
-<ul>
-<li>拉取 Mastodon 镜像<br>直接复制粘贴代码，拉取版本为 <code>v3.5.1</code>，并修改 <code>docker-compose.yml</code> 配置文件。  </li>
-<li>初始化 PostgreSQL<br>复制粘贴代码，并根据教程中的提醒检查代码运行情况。  </li>
-</ul>
-<p>该步骤完成于 2022.05.07。约耗时 20 分钟，大部分用于思考设个什么密码。以及如果太久没有建站，一定要先看看上一次都做了什么、用过什么命令，这次又因为忘记 <code>nano</code> 怎么退出而慌乱几秒。  </p>
-<h3 id="配置-Mastodon"><a href="#配置-Mastodon" class="headerlink" title="配置 Mastodon"></a>配置 Mastodon</h3><p>这一步骤仍然按照蓝盒子站长的教程进行，根据教程一步步慢慢做，看仔细每一步都要填什么就可以。  </p>
-<p>根据<a href="https://mantyke.icu/2021/mastodon-bulid/#%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91">小球飞象建站笔记</a>中踩坑提醒，如果使用的是 zoho 邮件服务，建议 SMTP server 使用国际版地址，否则可能配置失败，无法发送通知邮件。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SMTP_SERVER=smtp.zoho.com</span><br></pre></td></tr></table></figure>
-
-<p>该步骤完成于 2022.05.07。耗时约 40 分钟，大多数时间消耗在 <code>docker-compose run --rm web bundle exec rake mastodon:setup</code> 的每一小步上。尤其是 zoho 还突然登录不上，而我又因为时隔近两个月，完全忘记了管理员邮箱是什么，手忙脚乱几分钟。<br>还需注意的是，在这一步中，所有的密码都不可见。一开始没有意识到这一点，以为密码没有粘贴上，同一位置贴两三遍密码导致出错。以及 .env.production 配置信息一定要在电脑上保存一遍！  </p>
-<h3 id="安装并配置-nginx"><a href="#安装并配置-nginx" class="headerlink" title="安装并配置 nginx"></a>安装并配置 nginx</h3><p>在进行这一步之前，根据蓝盒子站长的提示，先在购买域名的网站 DNS 设置中增加一个 <code>A Record</code>，将设定的域名指向服务器。  </p>
-<ul>
-<li>安装 nginx<br>直接运行命令 <code>sudo apt install nginx -y</code> 出现报错信息：  </li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Err:2 http://security.ubuntu.com/ubuntu focal-updates/main amd64 libnginx-mod-http-image-filter amd64 1.18.0-0ubuntu1.2</span><br><span class="line">404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Err:3 http://security.ubuntu.com/ubuntu focal-updates/main amd64 libnginx-mod-http-xslt-filter amd64 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Err:4 http://security.ubuntu.com/ubuntu focal-updates/main amd64 libnginx-mod-mail amd64 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Err:5 http://security.ubuntu.com/ubuntu focal-updates/main amd64 libnginx-mod-stream amd64 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Err:6 http://security.ubuntu.com/ubuntu focal-updates/main amd64 nginx-core amd64 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Ign:1 http://security.ubuntu.com/ubuntu focal-updates/main amd64 nginx-common all 1.18.0-0ubuntu1.2</span><br><span class="line">Ign:7 http://security.ubuntu.com/ubuntu focal-updates/main amd64 nginx all 1.18.0-0ubuntu1.2</span><br><span class="line">Err:1 http://security.ubuntu.com/ubuntu focal-updates/main amd64 nginx-common all 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Err:7 http://security.ubuntu.com/ubuntu focal-updates/main amd64 nginx all 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/nginx-common_1.18.0-0ubuntu1.2_all.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/libnginx-mod-http-image-filter_1.18.0-0ubuntu1.2_amd64.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/libnginx-mod-http-xslt-filter_1.18.0-0ubuntu1.2_amd64.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/libnginx-mod-mail_1.18.0-0ubuntu1.2_amd64.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/libnginx-mod-stream_1.18.0-0ubuntu1.2_amd64.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/nginx-core_1.18.0-0ubuntu1.2_amd64.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/nginx_1.18.0-0ubuntu1.2_all.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?</span><br></pre></td></tr></table></figure>
-
-<p>谷歌之后发现这是 <code>Ubuntu 20.04</code> 会出现的常见报错，在运行安装命令前应先运行：  </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get update # 运行这一行之后可以尝试运行安装命令，如果仍报错再运行下一行</span><br><span class="line">sudo apt-get upgrade</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>配置 nginx &amp; 配置SSL证书 &amp; 重启nginx<br>根据蓝盒子站长的教程配置，步骤中没有出错。</li>
-</ul>
-<p>该步骤完成于 2022.05.07。约耗时 30 分钟，除了一开始找报错原因费点时间之外，都是运行命令、等待命令结束，操作非常简单。  </p>
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>到这里站点已经上线，后续都是一些个性化修改，可以根据不同需求找相应的教程。<br>站点搭建实际用时 230 分钟，其中很多时间浪费在不敢做和注意力不集中上。如果不是像我一样每天找一点时间随手操作其中一个小步骤，而是空出一大段时间专心建站的话，应该两到三小时就能够完成上述所有步骤。<br>如果你和我一样也记不住整个过程中太多账号、用户名和密码，可以在电脑上建一个备忘录或在其它安全的地方记住密码。</p>
-<h2 id="备份-未完成"><a href="#备份-未完成" class="headerlink" title="备份 (未完成)"></a>备份 (未完成)</h2><p>参考蓝盒子站长的教程：<a href="https://pullopen.github.io/%E7%AB%99%E7%82%B9%E7%BB%B4%E6%8A%A4/2020/07/22/Move-mastodon-media-to-Scaleway.html">如何将Mastodon媒体上传至Scaleway云储存</a></p>
-<h2 id="装修"><a href="#装修" class="headerlink" title="装修"></a>装修</h2><h3 id="使用管理命令行"><a href="#使用管理命令行" class="headerlink" title="使用管理命令行"></a>使用管理命令行</h3><ul>
-<li>使用脚本简化命令<br>参考：<a href="https://blog.tantalum.life/posts/how-to-run-your-mastodon-by-docker/#%E4%BD%BF%E7%94%A8alias%E8%84%9A%E6%9C%AC%E7%BC%A9%E5%86%99tootctl%E5%91%BD%E4%BB%A4">使用 alias 脚本缩写 tootctl 命令</a>。<br>由于前面的步骤一直主要参考蓝盒子站长的教程，所以这里第一步目标文件夹应为 <code>/home/mastodon/mastodon</code>，即 <code>cd /home/mastodon/mastodon</code>。  </li>
-<li>使用命令<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tootctl help # 帮助信息，如果正常运行说明上一步的简化命令脚本生效。</span><br><span class="line">tootctl settings registrations close # 关闭注册</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>此处由于站点装修未完成，暂时关闭注册。也可以在网页端关闭注册。  </p>
-<h3 id="开启全文搜索"><a href="#开启全文搜索" class="headerlink" title="开启全文搜索"></a>开启全文搜索</h3><p>参考蓝盒子站长给出的命令修改相应的配置文件，但在重启 docker 这一步骤报错：  </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ERROR: yaml.parser.ParserError: while parsing a block mapping</span><br><span class="line">  in &quot;./docker-compose.yml&quot;, line 3, column 3</span><br><span class="line">expected &lt;block end&gt;, but found &#x27;&lt;block mapping start&gt;&#x27;</span><br><span class="line">  in &quot;./docker-compose.yml&quot;, line 26, column 4</span><br></pre></td></tr></table></figure>
-
-<p>再次检查 <code>docker-compose.yml</code> 文件发现，只删除 <code>#</code> 会导致缩进不统一，导致对 block 的判断有误。每行在删除 <code>#</code> 的同时，应在行首再删除一个空格。<br>其余步骤根据教程中的命令，一步一步完成即可。</p>
-<h3 id="其它魔改"><a href="#其它魔改" class="headerlink" title="其它魔改"></a>其它魔改</h3><p>站点魔改有许多可用的教程，如：<br><a href="http://blog.tantalum.life/posts/how-to-run-your-mastodon-by-docker/">Mastodon | 采用docker建站后的使用与维护</a><br><a href="https://pullopen.github.io/%E7%AB%99%E7%82%B9%E7%BB%B4%E6%8A%A4/2020/11/26/mastodon-manage.html">如何装饰你的站点：自定义CSS、中继站和自定义表情</a><br><a href="https://pullopen.github.io/%E8%BF%9B%E9%98%B6%E9%AD%94%E6%94%B9/2020/11/14/mastodon-modify.html">进阶魔改：修改字数上限、媒体上限、投票上限、添加自定义主题、界面用语、非登陆用户有限显示、优化中文搜索，附阻止本站嘟文流入某站点方法</a>  </p>
-]]></content>
-      <categories>
-        <category>Mastodon</category>
-        <category>Build</category>
-      </categories>
-      <tags>
-        <tag>Mastodon</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>blastp的本地化使用</title>
     <url>/2021/09/16/blastp/</url>
     <content><![CDATA[<center>blastp在Windows系统电脑上的本地使用</center>
@@ -418,6 +337,87 @@ main() # 运行上述函数
       </tags>
   </entry>
   <entry>
+    <title>Mastodon 建站笔记</title>
+    <url>/2022/03/02/buildmastodon/</url>
+    <content><![CDATA[<center> mastodon 建站笔记：慢慢来，6 月之前搞完就行；不要怕，不行就重启试试 </center>
+<span id="more"></span>
+
+<h2 id="一点说明"><a href="#一点说明" class="headerlink" title="一点说明"></a>一点说明</h2><p>本文所记录的搭建非常缓慢，开始于二月，但给自己设定的 DDL 在六月。搭建过程完全碎片化，每次推进都基于“这会儿没什么事情不如搞一搞建站”，且超过一小时就会先放着下次再说，非常随性随意。每一步完成于哪一天、大概耗时都有记录，给想搭建却又嫌麻烦、觉得需要特意安排时间的朋友提供一个佛系搭建参考。  </p>
+<h2 id="参考与致谢"><a href="#参考与致谢" class="headerlink" title="参考与致谢"></a>参考与致谢</h2><p>参考：蓝盒子站长的<a href="https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/10/19/Mastodon-on-Docker.html">利用 docker 搭建 Mastodon 实例</a>和塔塔的<a href="https://mantyke.icu/2021/mastodon-bulid/">小球飞象建站笔记</a>。  </p>
+<p>感谢嘎嘎、塔塔和其他写下详细教程和笔记的朋友！因为你们和你们的教程，我这种没有参考不敢做事的人才能一点点把实例搭建起来。<br>特别感谢塔塔，给我每完成一步的嘟嘟点星星，给予我很大鼓励！  </p>
+<h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><p>前期准备主要是花钱，大多数运营商都支持 Visa、MasterCard 或 PayPal，godaddy 支持支付宝付款。<br>为能有更多选择，个人建议开通 PayPal，比办信用卡方便一些。本文中除 Scaleway 以外，所有支付都通过 PayPal 完成。如使用 PayPal 付款，建议付款时直接使用目标货币，而不使用 PayPal 提供的转换为人民币付款。这种情况下付款使用的是银行汇率，会比 PayPal 划算。  </p>
+<h3 id="域名"><a href="#域名" class="headerlink" title="域名"></a>域名</h3><p>常用的域名提供商很多，比如 <a href="https://www.namecheap.com/">NameCheap</a>，<a href="https://sg.godaddy.com/">godaddy</a> 和 <a href="https://www.dynadot.com/">dynadot</a>。可参考o3o站长给出的<a href="https://www.notion.so/c66e3332f4824f71b9d7d1dc8db410c7">域名选购指南</a>。<br>本站根据蓝盒子站长的推荐，在 NameCheap 购买域名。由于之前给博客换域名已经在 NameCheap 买过一次，而且很早就想好要买什么域名，所以这一步成为这个跨越几个月的搭建过程中最简单、最快速的一步。  </p>
+<p>该步骤完成于 2022.02.17。约耗时 15 分钟，主要在犹豫到底要不要这天买，实际操作只用掉两三分钟。以及早知道我这么快就要自建站，博客就换个域名了！两年后我博客必换域名！</p>
+<h3 id="邮件服务"><a href="#邮件服务" class="headerlink" title="邮件服务"></a>邮件服务</h3><p>使用 Zoho Mail 提供的 Business Mail 服务中的 Forever Free Plan。<br>由于本人需要很详细的操作步骤才敢进行下一步，这里找了个注册 Zoho Mail 的详细教程 —— <a href="https://www.dreambuildinglab.com/website-construction/email/how-to-register-free-zoho-business-email.html">注册zoho免费企业邮箱</a>。这个教程虽然详细，但稍微有点过时，有些操作的名称略有更改。如有需要，可再找其它教程参考。  </p>
+<p>该步骤完成于 2022.02.21。约耗时 40 分钟，因为一些步骤没有明确的参考不太敢试，必须找到别人这一步怎么做才动手。但实际上没关系，大胆试，不行重来嘛！  </p>
+<h3 id="购买VPS"><a href="#购买VPS" class="headerlink" title="购买VPS"></a>购买VPS</h3><p>选择 <a href="https://contabo.com/en/">Contabo</a> 购买 VPS，在购买前将价格修改为欧元，选择5欧套餐，德国服务器，一次性购买 12 个月，其它选项全部默认。<br>这里塔塔提醒<a href="https://mantyke.icu/2021/mastodon-bulid/#%E8%B4%AD%E4%B9%B0vps"> Contabo 审核严格</a>，最好真实 IP 购买，填写信息时不要太扯，不然会被要求提供身份证明。但我就是那个认真填写还被要求提供护照的倒霉蛋。由于目前和德国有 7 个小时时差，上午提供护照信息后，一直到下午四点多才收到确认邮件。  </p>
+<p>该步骤完成于 2022.03.02。约耗时 15 分钟加 19 小时，15 分钟是实际需要操作的时间，包括提供护照信息；19 小时是由于买服务器时护照不在手边，第二天上午才回复，下午收到确认。  </p>
+<h2 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h2><h3 id="配置系统"><a href="#配置系统" class="headerlink" title="配置系统"></a>配置系统</h3><p>这一部分参考<a href="https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/10/19/Mastodon-on-Docker.html">蓝盒子站长教程</a>。  </p>
+<ul>
+<li><p>配置 ssh-key<br>首先查看电脑当前用户的目录下是否存在.ssh目录，以及目录中是否存在<code>id_rsa</code>和<code>id_rsa.pub</code>两个文件。如果存在，公钥即为<code>id_rsa.pub</code>中的内容。如果不存在，则输入命令：  </p>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C “your_email”</span><br></pre></td></tr></table></figure>
+
+<p>一路回车，直到生成一个矩形的图案为止，生成的这串字符就是后面需要的公钥。  </p>
+<p>接下来的步骤全部按照蓝盒子站长的教程进行，但我遇到了一个愚蠢的问题，不会保存 nano 编辑的内容并退出。即使编辑器下方有两行提醒，也没能正确保存文件。万一有朋友和我一样，可参考以下保存并退出的方法：  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># ^ 为键盘上的 Ctrl 键，以下方法直接使用 Ctrl 代替</span><br><span class="line"># 退出，并根据提示保存</span><br><span class="line">Ctrl + X 退出，按 y 选择保存，提示 file name to write，利用上下左右键选择要保存到的文件，回车保存</span><br><span class="line"># 退出，并保存</span><br><span class="line">Ctrl + X 退出，按 y 选择保存，回车</span><br><span class="line"># 先保存，后退出</span><br><span class="line">Ctrl + O 并回车保存，Ctrl + X 退出</span><br></pre></td></tr></table></figure></li>
+<li><p>安装常用命令和配置防火墙<br>直接照抄蓝盒子站长给的命令，都非常顺利。  </p>
+</li>
+</ul>
+<p>该步骤完成于 2022.03.03。约耗时 55 分钟，主要由于不会保存 nano 编辑的内容，根据各种教程也总是保存失败。中途一度试图换回之前常用的 vim，但事实证明两年没用就会忘记一切。如果能顺利保存，这一步十分钟以内就可以完成。  </p>
+<p><strong>tips</strong><br>虽然上次建站配置好了服务器端的公钥，但这次登录时，MobaXterm 一直返回错误信息：  </p>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Disconnected: No supported authentication methods available (server sent: publickey)</span><br></pre></td></tr></table></figure>
+
+<p>原因是服务器已经关闭账户密码登录，但使用 MobaXterm 登录时没有勾选 <code>Use private key</code> 并指定私钥文件。<br>具体步骤为 <code>Session -&gt; SSH -&gt; Use private key and specify a private key for passwordless login</code>。<br>设置完成后即可顺利登录。  </p>
+<h3 id="安装-docker-和-docker-compose"><a href="#安装-docker-和-docker-compose" class="headerlink" title="安装 docker 和 docker-compose"></a>安装 docker 和 docker-compose</h3><p>根据蓝盒子站长的教程，使用官方提供的一键脚本安装 docker。</p>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 代码来自蓝盒子站长教程</span><br><span class="line">bash &lt;(curl -L https://get.docker.com/)</span><br><span class="line">sudo curl -L &quot;https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose</span><br><span class="line">sudo chmod +x /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
+
+<p>该步骤完成于 2022.03.13。约耗时 15 分钟，包括一开始登录不上服务器而查找原因的时间，实际操作时间约 3 分钟。这一步骤完成后可以通过命令 <code>docker-compose -h</code> 检查 docker 是否真的安装成功。  </p>
+<h3 id="拉取-Mastodon-镜像-amp-初始化-PostgreSQL"><a href="#拉取-Mastodon-镜像-amp-初始化-PostgreSQL" class="headerlink" title="拉取 Mastodon 镜像 &amp; 初始化 PostgreSQL"></a>拉取 Mastodon 镜像 &amp; 初始化 PostgreSQL</h3><p>这几项全部根据蓝盒子站长 <a href="https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/10/19/Mastodon-on-Docker.html">2022-04-25 修改的教程</a>进行。  </p>
+<ul>
+<li>拉取 Mastodon 镜像<br>直接复制粘贴代码，拉取版本为 <code>v3.5.1</code>，并修改 <code>docker-compose.yml</code> 配置文件。  </li>
+<li>初始化 PostgreSQL<br>复制粘贴代码，并根据教程中的提醒检查代码运行情况。  </li>
+</ul>
+<p>该步骤完成于 2022.05.07。约耗时 20 分钟，大部分用于思考设个什么密码。以及如果太久没有建站，一定要先看看上一次都做了什么、用过什么命令，这次又因为忘记 <code>nano</code> 怎么退出而慌乱几秒。  </p>
+<h3 id="配置-Mastodon"><a href="#配置-Mastodon" class="headerlink" title="配置 Mastodon"></a>配置 Mastodon</h3><p>这一步骤仍然按照蓝盒子站长的教程进行，根据教程一步步慢慢做，看仔细每一步都要填什么就可以。  </p>
+<p>根据<a href="https://mantyke.icu/2021/mastodon-bulid/#%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91">小球飞象建站笔记</a>中踩坑提醒，如果使用的是 zoho 邮件服务，建议 SMTP server 使用国际版地址，否则可能配置失败，无法发送通知邮件。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SMTP_SERVER=smtp.zoho.com</span><br></pre></td></tr></table></figure>
+
+<p>该步骤完成于 2022.05.07。耗时约 40 分钟，大多数时间消耗在 <code>docker-compose run --rm web bundle exec rake mastodon:setup</code> 的每一小步上。尤其是 zoho 还突然登录不上，而我又因为时隔近两个月，完全忘记了管理员邮箱是什么，手忙脚乱几分钟。<br>还需注意的是，在这一步中，所有的密码都不可见。一开始没有意识到这一点，以为密码没有粘贴上，同一位置贴两三遍密码导致出错。以及 .env.production 配置信息一定要在电脑上保存一遍！  </p>
+<h3 id="安装并配置-nginx"><a href="#安装并配置-nginx" class="headerlink" title="安装并配置 nginx"></a>安装并配置 nginx</h3><p>在进行这一步之前，根据蓝盒子站长的提示，先在购买域名的网站 DNS 设置中增加一个 <code>A Record</code>，将设定的域名指向服务器。  </p>
+<ul>
+<li>安装 nginx<br>直接运行命令 <code>sudo apt install nginx -y</code> 出现报错信息：  </li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Err:2 http://security.ubuntu.com/ubuntu focal-updates/main amd64 libnginx-mod-http-image-filter amd64 1.18.0-0ubuntu1.2</span><br><span class="line">404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Err:3 http://security.ubuntu.com/ubuntu focal-updates/main amd64 libnginx-mod-http-xslt-filter amd64 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Err:4 http://security.ubuntu.com/ubuntu focal-updates/main amd64 libnginx-mod-mail amd64 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Err:5 http://security.ubuntu.com/ubuntu focal-updates/main amd64 libnginx-mod-stream amd64 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Err:6 http://security.ubuntu.com/ubuntu focal-updates/main amd64 nginx-core amd64 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Ign:1 http://security.ubuntu.com/ubuntu focal-updates/main amd64 nginx-common all 1.18.0-0ubuntu1.2</span><br><span class="line">Ign:7 http://security.ubuntu.com/ubuntu focal-updates/main amd64 nginx all 1.18.0-0ubuntu1.2</span><br><span class="line">Err:1 http://security.ubuntu.com/ubuntu focal-updates/main amd64 nginx-common all 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Err:7 http://security.ubuntu.com/ubuntu focal-updates/main amd64 nginx all 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/nginx-common_1.18.0-0ubuntu1.2_all.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/libnginx-mod-http-image-filter_1.18.0-0ubuntu1.2_amd64.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/libnginx-mod-http-xslt-filter_1.18.0-0ubuntu1.2_amd64.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/libnginx-mod-mail_1.18.0-0ubuntu1.2_amd64.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/libnginx-mod-stream_1.18.0-0ubuntu1.2_amd64.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/nginx-core_1.18.0-0ubuntu1.2_amd64.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/nginx_1.18.0-0ubuntu1.2_all.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?</span><br></pre></td></tr></table></figure>
+
+<p>谷歌之后发现这是 <code>Ubuntu 20.04</code> 会出现的常见报错，在运行安装命令前应先运行：  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get update # 运行这一行之后可以尝试运行安装命令，如果仍报错再运行下一行</span><br><span class="line">sudo apt-get upgrade</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置 nginx &amp; 配置SSL证书 &amp; 重启nginx<br>根据蓝盒子站长的教程配置，步骤中没有出错。</li>
+</ul>
+<p>该步骤完成于 2022.05.07。约耗时 30 分钟，除了一开始找报错原因费点时间之外，都是运行命令、等待命令结束，操作非常简单。  </p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>到这里站点已经上线，后续都是一些个性化修改，可以根据不同需求找相应的教程。<br>站点搭建实际用时 230 分钟，其中很多时间浪费在不敢做和注意力不集中上。如果不是像我一样每天找一点时间随手操作其中一个小步骤，而是空出一大段时间专心建站的话，应该两到三小时就能够完成上述所有步骤。<br>如果你和我一样也记不住整个过程中太多账号、用户名和密码，可以在电脑上建一个备忘录或在其它安全的地方记住密码。</p>
+<h2 id="备份-未完成"><a href="#备份-未完成" class="headerlink" title="备份 (未完成)"></a>备份 (未完成)</h2><p>参考蓝盒子站长的教程：<a href="https://pullopen.github.io/%E7%AB%99%E7%82%B9%E7%BB%B4%E6%8A%A4/2020/07/22/Move-mastodon-media-to-Scaleway.html">如何将Mastodon媒体上传至Scaleway云储存</a></p>
+<h2 id="装修"><a href="#装修" class="headerlink" title="装修"></a>装修</h2><h3 id="使用管理命令行"><a href="#使用管理命令行" class="headerlink" title="使用管理命令行"></a>使用管理命令行</h3><ul>
+<li>使用脚本简化命令<br>参考：<a href="https://blog.tantalum.life/posts/how-to-run-your-mastodon-by-docker/#%E4%BD%BF%E7%94%A8alias%E8%84%9A%E6%9C%AC%E7%BC%A9%E5%86%99tootctl%E5%91%BD%E4%BB%A4">使用 alias 脚本缩写 tootctl 命令</a>。<br>由于前面的步骤一直主要参考蓝盒子站长的教程，所以这里第一步目标文件夹应为 <code>/home/mastodon/mastodon</code>，即 <code>cd /home/mastodon/mastodon</code>。  </li>
+<li>使用命令<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tootctl help # 帮助信息，如果正常运行说明上一步的简化命令脚本生效。</span><br><span class="line">tootctl settings registrations close # 关闭注册</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>此处由于站点装修未完成，暂时关闭注册。也可以在网页端关闭注册。  </p>
+<h3 id="开启全文搜索"><a href="#开启全文搜索" class="headerlink" title="开启全文搜索"></a>开启全文搜索</h3><p>参考蓝盒子站长给出的命令修改相应的配置文件，但在重启 docker 这一步骤报错：  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ERROR: yaml.parser.ParserError: while parsing a block mapping</span><br><span class="line">  in &quot;./docker-compose.yml&quot;, line 3, column 3</span><br><span class="line">expected &lt;block end&gt;, but found &#x27;&lt;block mapping start&gt;&#x27;</span><br><span class="line">  in &quot;./docker-compose.yml&quot;, line 26, column 4</span><br></pre></td></tr></table></figure>
+
+<p>再次检查 <code>docker-compose.yml</code> 文件发现，只删除 <code>#</code> 会导致缩进不统一，导致对 block 的判断有误。每行在删除 <code>#</code> 的同时，应在行首再删除一个空格。<br>其余步骤根据教程中的命令，一步一步完成即可。</p>
+<h3 id="其它魔改"><a href="#其它魔改" class="headerlink" title="其它魔改"></a>其它魔改</h3><p>站点魔改有许多可用的教程，如：<br><a href="http://blog.tantalum.life/posts/how-to-run-your-mastodon-by-docker/">Mastodon | 采用docker建站后的使用与维护</a><br><a href="https://pullopen.github.io/%E7%AB%99%E7%82%B9%E7%BB%B4%E6%8A%A4/2020/11/26/mastodon-manage.html">如何装饰你的站点：自定义CSS、中继站和自定义表情</a><br><a href="https://pullopen.github.io/%E8%BF%9B%E9%98%B6%E9%AD%94%E6%94%B9/2020/11/14/mastodon-modify.html">进阶魔改：修改字数上限、媒体上限、投票上限、添加自定义主题、界面用语、非登陆用户有限显示、优化中文搜索，附阻止本站嘟文流入某站点方法</a>  </p>
+]]></content>
+      <categories>
+        <category>Mastodon</category>
+        <category>Build</category>
+      </categories>
+      <tags>
+        <tag>Mastodon</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CATsama：如何做一个定时发嘟的 Mastodon bot</title>
     <url>/2022/07/12/catsama/</url>
     <content><![CDATA[<center> 性感猫猫，每日上午八点半，在您的时间线上推送一个喵喵神签 </center>
@@ -585,6 +585,97 @@ main() # 运行上述函数
 <li>一般化的 Round Robin  </li>
 <li>在一段时间内，每个队列得到的任务时间是：W<sub>i</sub>/(XIGMA(W<sub>i</sub>)) * t，和权重成正比  </li>
 <li>每个类在一个循环中获得不同权重的服务量</li>
+</ul>
+<br>
+
+<h2 id="IP-Internet-Protocol"><a href="#IP-Internet-Protocol" class="headerlink" title="IP Internet Protocol"></a>IP Internet Protocol</h2><h3 id="互联网的网络层"><a href="#互联网的网络层" class="headerlink" title="互联网的网络层"></a>互联网的网络层</h3><p>主机，路由器种的网络层功能：</p>
+<p><img src="/2022/06/07/computernetworknotes4/InternetNet.png">  </p>
+<h3 id="IP-数据报格式"><a href="#IP-数据报格式" class="headerlink" title="IP 数据报格式"></a>IP 数据报格式</h3><p>IPv4 数据报格式：  </p>
+<p><img src="/2022/06/07/computernetworknotes4/IPform.png">  </p>
+<h3 id="IP-分片和重组-Fragmentation-amp-Reassembly"><a href="#IP-分片和重组-Fragmentation-amp-Reassembly" class="headerlink" title="IP 分片和重组 (Fragmentation &amp; Reassembly)"></a>IP 分片和重组 (Fragmentation &amp; Reassembly)</h3><p>网络链路有 MTU (最大传输单元) - 链路层帧所携带的最大数据长度  </p>
+<ul>
+<li>不同的链路类型  </li>
+<li>不同的 MTU  </li>
+</ul>
+<p>大的 IP 数据报在网络上被分片 (fragmented)  </p>
+<ul>
+<li>一个数据报被分割成若干个小数据报  <ul>
+<li>相同的 ID  </li>
+<li>不同的偏移量  </li>
+<li>最后一个分片标记为 0  </li>
+</ul>
+</li>
+<li>“重组” 只在最终的目标主机进行  </li>
+<li>IP 头部的信息被用于标识、排序相关分片  </li>
+</ul>
+<p><img src="/2022/06/07/computernetworknotes4/FRexample.png">  </p>
+<h3 id="IP-编址"><a href="#IP-编址" class="headerlink" title="IP 编址"></a>IP 编址</h3><p>IP 地址：32 位标示，对主机或路由器的接口编址<br>接口：主机/路由器和物理链路的连接处  </p>
+<ul>
+<li>路由器通常拥有多个接口  </li>
+<li>主机也有可能有多个接口  </li>
+<li>IP 地址和每一个接口关联  </li>
+</ul>
+<p>一个 IP 地址和一个接口相关联<br>这些接口如何连接：  </p>
+<ul>
+<li>有线以太网网口链接到以太网络交换机连接  </li>
+<li>无线 WiFi 接口被 WiFi 基站连接  </li>
+</ul>
+<h3 id="子网-Subsets"><a href="#子网-Subsets" class="headerlink" title="子网 (Subsets)"></a>子网 (Subsets)</h3><p>IP 地址：</p>
+<ul>
+<li>子网部分 (高位 bits)  </li>
+<li>主机部分 (低位 bits)  </li>
+</ul>
+<p><strong>子网</strong>：  </p>
+<ul>
+<li>一个子网内的节点 (主机或者路由器)，它们的 <strong>IP 地址的高位部分相同</strong>，这些节点构成的网络的一部分叫做子网  </li>
+<li><strong>无需路由器介入</strong>，子网内个主机可以在物理上相互直接到达  </li>
+</ul>
+<p><strong>方法</strong>：  </p>
+<ul>
+<li>要判断一个子网，将每一个接口从主机或者路由器上分开，构成了一个个网络的孤岛  </li>
+<li>每一个孤岛 (网络) 都可以被称之为 subset  </li>
+</ul>
+<p>子网掩码：11111111 11111111 11111111 00000000<br>subset mask：/24  </p>
+<h3 id="IP-地址分类"><a href="#IP-地址分类" class="headerlink" title="IP 地址分类"></a>IP 地址分类</h3><p>单播地址：<br>Class A: 126 networks, 16 million hosts<br>Class B: 16382 networks, 64 K hosts<br>Class C: 2 million networks, 254 host<br>组播地址：<br>Class D: multicast<br>预留：<br>Class E: reserved for future  </p>
+<p><img src="/2022/06/07/computernetworknotes4/IPclass.png">  </p>
+<h3 id="特殊-IP-地址"><a href="#特殊-IP-地址" class="headerlink" title="特殊 IP 地址"></a>特殊 IP 地址</h3><p><strong>一些约定：</strong>  </p>
+<ul>
+<li>子网部分：全为 0 — 本网络  </li>
+<li>主机部分：全为 0 — 本主机  </li>
+<li>主机部分：全为 1 — 广播地址，这个网络的所有主机  </li>
+<li>127.x.x.x: 回路地址/测试地址  </li>
+</ul>
+<p><img src="/2022/06/07/computernetworknotes4/spIP.png">  </p>
+<p><strong>内网 (专用) IP 地址</strong>  </p>
+<ul>
+<li>专用地址：地址空间的一部分供专用地址使用  </li>
+<li>永远不会被当作共用地址来分配，不会与公用地址重复<ul>
+<li>只在局部网络中有意义，区分不同的设备  </li>
+</ul>
+</li>
+<li>路由器不对目标地址是专用地址的分组进行转发  </li>
+<li>专用地址范围：<ul>
+<li>Class A 10.0.0.0 - 10.255.255.255 MASK 255.0.0.0  </li>
+<li>Class B 172.16.0.0 - 172.31.255.255 MASK 255.255.0.0  </li>
+<li>Class C 192.168.0.0 - 192.168.255.255 MASK 255.255.255.0  </li>
+</ul>
+</li>
+</ul>
+<h3 id="IP-编址：CIDR"><a href="#IP-编址：CIDR" class="headerlink" title="IP 编址：CIDR"></a>IP 编址：CIDR</h3><p><strong>CIDR</strong>：Classless InterDomain Routing (无类域间路由)  </p>
+<ul>
+<li>子网部分可以在任意的位置  </li>
+<li>地址格式：a.b.c.d/x，其中 x 是地址中子网号的长度  </li>
+</ul>
+<p><img src="/2022/06/07/computernetworknotes4/CIDR.png">  </p>
+<h3 id="转发表和转发算法"><a href="#转发表和转发算法" class="headerlink" title="转发表和转发算法"></a>转发表和转发算法</h3><p>目标子网号 | 掩码 | 下一跳 | 端口  </p>
+<p><img src="/2022/06/07/computernetworknotes4/IPtransfer.png">  </p>
+<ul>
+<li>获得 IP 数据报的目标地址  </li>
+<li>对于转发表中的每一个表项  <ul>
+<li>如 (IP Des addr) &amp; (mask) == destination，则按照表项对应的接口转发该数据报  </li>
+<li>如果没有找到，则使用默认表项转发数据报  </li>
+</ul>
+</li>
 </ul>
 ]]></content>
       <categories>
@@ -893,6 +984,103 @@ data[key] = $.html();
       </tags>
   </entry>
   <entry>
+    <title>Mastodon 装修笔记：建站后还可以做什么</title>
+    <url>/2022/08/16/mstdndecoration/</url>
+    <content><![CDATA[<center> 简单记录一下建站后都对站点进行了哪些改动，文中每一步都已有大佬写过教程，本文仅作记录 </center>
+<span id="more"></span>
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>本文主要参考的教程：<br>[1] <a href="https://pullopen.github.io/%E7%AB%99%E7%82%B9%E7%BB%B4%E6%8A%A4/2020/11/26/mastodon-manage.html">如何装饰你的站点：自定义CSS、中继站和自定义表情</a><br>[2] <a href="https://pullopen.github.io/%E8%BF%9B%E9%98%B6%E9%AD%94%E6%94%B9/2020/11/14/mastodon-modify.html">进阶魔改：修改字数上限、媒体上限、投票上限、添加自定义主题、界面用语、非登陆用户有限显示、优化中文搜索，附阻止本站嘟文流入某站点方法</a>  </p>
+<h2 id="装修升级命令"><a href="#装修升级命令" class="headerlink" title="装修升级命令"></a>装修升级命令</h2><p>如果使用 DockerHub 建立镜像辅助搭建、修改实例，则每次装修可电脑上修改完成后，push 到 GitHub，GitHub 自动编译完成且推送到 DockerHub后，在服务器端直接使用命令：  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd /home/mastodon/mastodon</span><br><span class="line">docker pull melocery/mastodon:latest</span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+<p>教程：<a href="https://pullopen.github.io/%E8%BF%9B%E9%98%B6%E9%AD%94%E6%94%B9/2020/11/01/Mastodon-on-Docker-2.html">如何利用Docker搭建Mastodon实例（二）：进阶魔改篇</a>  </p>
+<h2 id="利用脚本缩写-tootctl-命令"><a href="#利用脚本缩写-tootctl-命令" class="headerlink" title="利用脚本缩写 tootctl 命令"></a>利用脚本缩写 tootctl 命令</h2><p>根据官方文档：<a href="https://docs.joinmastodon.org/zh-cn/admin/tootctl/">使用管理命令行</a>，每次需要运行的命令行很长，使用脚本可以将命令缩写。<br>打开 mastodon 的目录，并写入脚本：  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd /home/mastodon/mastodon</span><br><span class="line">nano tootctl.sh</span><br></pre></td></tr></table></figure>
+
+<p>脚本内容为：  </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">lpwd=<span class="variable">$PWD</span></span><br><span class="line">mypath=`dirname <span class="variable">$0</span>`</span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$mypath</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$#</span> -ge 1 ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">	<span class="keyword">case</span> <span class="variable">$1</span> <span class="keyword">in</span> </span><br><span class="line">		<span class="string">&quot;restart&quot;</span>)</span><br><span class="line">			docker-compose restart</span><br><span class="line">		;;</span><br><span class="line">		<span class="string">&quot;reload&quot;</span>)</span><br><span class="line">			docker-compose down &amp;&amp; docker-compose up -d</span><br><span class="line">		;;</span><br><span class="line">		<span class="string">&quot;stop&quot;</span>)</span><br><span class="line">			docker-compose down</span><br><span class="line">		;;</span><br><span class="line">		<span class="string">&quot;start&quot;</span>)</span><br><span class="line">			docker-compose up -d</span><br><span class="line">		;;</span><br><span class="line">		<span class="string">&quot;psql&quot;</span>)</span><br><span class="line">			docker-compose <span class="built_in">exec</span> db $*</span><br><span class="line">		;;</span><br><span class="line">		*)</span><br><span class="line">			docker-compose run --rm web bin/tootctl $*</span><br><span class="line">		;;</span><br><span class="line">	<span class="keyword">esac</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">&quot;please use tootctl help for help&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$lpwd</span></span><br></pre></td></tr></table></figure>
+
+<p>保存并退出后，执行命令：  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chmod +x /home/mastodon/mastodon/tootctl.sh</span><br><span class="line">echo &quot;alias tootctl=&#x27;home/mastodon/mastodon/tootctl.sh&#x27; &quot; &gt;&gt; ~/.bashrc </span><br><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<p>之后使用管理命令就可以直接使用 <code>tootctl</code>。  </p>
+<h2 id="待处理的数据库迁移"><a href="#待处理的数据库迁移" class="headerlink" title="待处理的数据库迁移"></a>待处理的数据库迁移</h2><p>这个一般出现在经历较大的站点升级或较多魔改之后 (我的站点初始搭建之后就出现了这行提醒)，在管理员账号的管理面板会出现的一个提醒：有待处理的数据库迁移。请运行它们以确保应用程序正常运行。<br>找了很多 docker 搭建教程都没有提到这一步，由于对 docker 不熟悉，也不知道从何改起，直到看到<a href="https://blog.tantalum.life/posts/notes-on-modifying-mastodon-in-docker/#%E5%90%8E%E7%BB%AD%E5%B7%A5%E4%BD%9C">Mastodon | 记录大型魔改过程</a>。此时需要数据库迁移：  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose run --rm web rails db:migrate</span><br></pre></td></tr></table></figure>
+
+<p>另外，还需要运行命令 <code>tootctl cache clear</code> 以避免出现与站外通信延迟较高的问题。成功执行后，运行命令重启服务器，否则数据库迁移不生效。  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose down</span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+<h2 id="自定义-CSS"><a href="#自定义-CSS" class="headerlink" title="自定义 CSS"></a>自定义 CSS</h2><p>参考来自：<a href="https://pullopen.github.io/%E7%AB%99%E7%82%B9%E7%BB%B4%E6%8A%A4/2020/11/26/mastodon-manage.html">如何装饰你的站点：自定义CSS、中继站和自定义表情</a><br>所有更改在 <code>管理—网站设置-自定义css</code> 进行。  </p>
+<h3 id="表情包鼠标悬停放大"><a href="#表情包鼠标悬停放大" class="headerlink" title="表情包鼠标悬停放大"></a>表情包鼠标悬停放大</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* START mastodon emoji scaling by @eh5@eh5.me */</span></span><br><span class="line"><span class="selector-class">.account__header__content</span>,</span><br><span class="line"><span class="selector-class">.reply-indicator__content</span>,</span><br><span class="line"><span class="selector-class">.status__content</span><span class="selector-pseudo">:not</span>(<span class="selector-class">.status__content--collapsed</span>) &#123;</span><br><span class="line"><span class="attribute">overflow</span>: unset;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.account__header__content</span> <span class="selector-class">.emojione</span>,</span><br><span class="line"><span class="selector-class">.reply-indicator__content</span> <span class="selector-class">.emojione</span>,</span><br><span class="line"><span class="selector-class">.status__content</span><span class="selector-pseudo">:not</span>(<span class="selector-class">.status__content--collapsed</span>) <span class="selector-class">.emojione</span> &#123;</span><br><span class="line"><span class="attribute">position</span>: relative;</span><br><span class="line"><span class="attribute">z-index</span>: <span class="number">10</span>;</span><br><span class="line"><span class="attribute">transform-origin</span>: center;</span><br><span class="line"><span class="comment">/* Animation duration */</span></span><br><span class="line"><span class="attribute">transition</span>: <span class="number">200ms</span> ease-in-out;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.account__header__content</span> <span class="selector-class">.emojione</span><span class="selector-pseudo">:hover</span>,</span><br><span class="line"><span class="selector-class">.reply-indicator__content</span> <span class="selector-class">.emojione</span><span class="selector-pseudo">:hover</span>,</span><br><span class="line"><span class="selector-class">.status__content</span><span class="selector-pseudo">:not</span>(<span class="selector-class">.status__content--collapsed</span>) <span class="selector-class">.emojione</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line"><span class="attribute">z-index</span>: <span class="number">11</span>;</span><br><span class="line"><span class="comment">/* Scale up 2.3 times */</span></span><br><span class="line"><span class="attribute">transform</span>: <span class="built_in">scale</span>(<span class="number">2.3</span>);</span><br><span class="line"><span class="comment">/* shadows around image edges */</span></span><br><span class="line"><span class="attribute">filter</span>: <span class="built_in">drop-shadow</span>(<span class="number">0</span> <span class="number">0</span> <span class="number">1px</span> <span class="number">#282c37</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.directory__card</span> <span class="selector-class">.account__header__content</span> <span class="selector-class">.emojione</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line"><span class="attribute">transform</span>: unset;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* END mastodon emoji scaling by @eh5@eh5.me */</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="长图补丁"><a href="#长图补丁" class="headerlink" title="长图补丁"></a>长图补丁</h3><p>使具体图片铺满整个页面：  </p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.image-loader</span> &#123;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.zoomable-image</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">max-height</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">max-width</span>: <span class="number">98%</span>;</span><br><span class="line">    <span class="attribute">overflow</span>: auto <span class="meta">!important</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.zoomable-image</span> <span class="selector-tag">img</span> &#123;</span><br><span class="line">	<span class="attribute">max-height</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">max-width</span>:<span class="number">100%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Tag高亮显示（蓝色）"><a href="#Tag高亮显示（蓝色）" class="headerlink" title="Tag高亮显示（蓝色）"></a>Tag高亮显示（蓝色）</h3><p>颜色可以通过修改background-color和border-color修改。  </p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*hashtag style blue by slashine 071320*/</span></span><br><span class="line"><span class="selector-class">.mention</span><span class="selector-class">.hashtag</span>&#123;</span><br><span class="line"><span class="attribute">background-color</span>: <span class="number">#93AEFD</span>36;</span><br><span class="line"><span class="attribute">padding</span>: <span class="number">0px</span> <span class="number">4px</span>;</span><br><span class="line"><span class="attribute">text-align</span>: center;</span><br><span class="line"><span class="attribute">text-decoration</span>: none;</span><br><span class="line"><span class="attribute">display</span>: inline-block;</span><br><span class="line"><span class="attribute">border-style</span>: dashed;</span><br><span class="line"><span class="attribute">border-color</span>: <span class="number">#93AEFD</span>;</span><br><span class="line"><span class="attribute">border-width</span>: <span class="number">0.5px</span>;</span><br><span class="line"><span class="attribute">border-radius</span>: <span class="number">2px</span>;</span><br><span class="line"><span class="attribute">margin-top</span>: <span class="number">2px</span>;</span><br><span class="line"><span class="attribute">margin-bottom</span>: <span class="number">2px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="自定义表情"><a href="#自定义表情" class="headerlink" title="自定义表情"></a>自定义表情</h2><h3 id="网页端：管理员界面"><a href="#网页端：管理员界面" class="headerlink" title="网页端：管理员界面"></a>网页端：管理员界面</h3><p>管理员账号的 <code>首选项 - 管理 - 自定义表情 - 上传新表情</code>，可上传大小不超过 50kb 的 png 或 gif 格式的图作为表情包。<br>偷别站表情可通过 <code>首选项 - 管理 - 自定义表情 - 远程</code>，选择想要的表情包，复制后即可在本站看到并管理该表情。  </p>
+<h3 id="服务器端：偷表情神器"><a href="#服务器端：偷表情神器" class="headerlink" title="服务器端：偷表情神器"></a>服务器端：偷表情神器</h3><p>使用 <a href="https://github.com/Starainrt/emojidownloader">emojidownloader</a> 直接从他站复制一个或多个分类下的表情。<br>在项目的 <a href="https://github.com/Starainrt/emojidownloader/releases">releases</a> 界面找到 <code>emoji_downloader_linux_x86_64</code>，右键复制链接。在服务器合适的目录下：  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget https://github.com/Starainrt/emojidownloader/releases/download/v0.1.0/emoji_downloader_linux_x86_64 # 复制的链接，可能有变化</span><br><span class="line">chmod +x ./emoji_downloader_linux_x86_64</span><br><span class="line">./emoji_downloader_linux_x86_64</span><br></pre></td></tr></table></figure>
+
+<p>运行 <code>./emoji_downloader_linux_x86_64</code>，根据提示一步步操作即可。此处具体步骤可参考：<a href="https://blog.tantalum.life/posts/notes-on-modifying-mastodon-in-docker/#%E4%BB%8E%E4%BB%96%E7%AB%99%E7%88%AC%E5%8F%96%E8%87%AA%E5%AE%9A%E4%B9%89%E8%A1%A8%E6%83%85%E5%8C%85">Mastodon | 记录大型魔改过程 #从他站爬取自定义表情包</a>  </p>
+<p>表情包下载至服务器后需要拷贝到容器中，并导入数据库：  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 以 neodb 的星星表情为例</span><br><span class="line">docker cp /root/myEmojis/neodb.tar.gz mastodon_web_1:/tmp/neodb.tar.gz</span><br><span class="line">docker-compose exec web bin/tootctl emoji import --category=neodb /tmp/neodb.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h2 id="定期清理外站存储"><a href="#定期清理外站存储" class="headerlink" title="定期清理外站存储"></a>定期清理外站存储</h2><p>参考此方的教程：<a href="https://tech.konata.co/2022-02-20-mastodon-backup/">Mastodon 媒体存储和数据库备份</a>，直接启动容器执行tootctl命令。<br>通过 <code>crontab -e</code> 设置定时任务：  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">30 2 * * *  docker exec mastodon_web_1 tootctl media remove --days=14 &gt;&gt; /home/mastodon/log/mastodon/all.log 2&gt;&amp;1</span><br><span class="line">30 2 * * *  docker exec mastodon_web_1 tootctl media remove-orphans &gt;&gt; /home/mastodon/log/mastodon/all.log 2&gt;&amp;1</span><br><span class="line">30 2 * * *  docker exec mastodon_web_1 tootctl statuses remove --days=180 &gt;&gt; /home/mastodon/log/mastodon/all.log 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改实例字数上限"><a href="#修改实例字数上限" class="headerlink" title="修改实例字数上限"></a>修改实例字数上限</h2><p>参考 <a href="https://github.com/pullopen/mastodon/commit/2bf275ba3b81e4c28d817511407680b0b7abc7fe">commit</a> 在相应位置进行修改。修改后 precompile 和重启。<br><strong>蓝盒子站长提示：</strong>3.3.0 版本后，<code>app/javascript/mastodon/features/compose/components/compose_form.js</code> 修改会发生变化，请先接受官方文件，然后在该文件中将所有 500 改成你的字数上限，一共2处。  </p>
+<h2 id="修改投票上限"><a href="#修改投票上限" class="headerlink" title="修改投票上限"></a>修改投票上限</h2><p>参考 <a href="https://github.com/pullopen/mastodon/commit/537c4fe6eb9a484546dda4776d765114fbb7c50a">Commit</a> 在相应位置进行修改。修改后 precompile 和重启。  </p>
+<h2 id="添加自定义主题"><a href="#添加自定义主题" class="headerlink" title="添加自定义主题"></a>添加自定义主题</h2><p>直接从他站拷贝主题：  </p>
+<ol>
+<li>进入他站代码库的 <code>app/javascript</code> 文件夹，在 fonts、images 和 styles 文件夹内选择想要添加的主题，将相关文件复制入代码库。  <ul>
+<li>蓝盒子站代码库：<a href="https://github.com/pullopen/mastodon/tree/master/app/javascript">pullopen</a>   </li>
+<li>蓝盒子站长提示：Win95 主题还需要在 <code>config/webpacker.yml</code> 中加一行 <code>- .gif</code> 才可编译。</li>
+</ul>
+</li>
+<li>修改 <code>config/themes.yml</code>  <ul>
+<li>根据格式 <code>witches-town: styles/witches-town.scss</code> 将添加的主题都写入文件  </li>
+</ul>
+</li>
+<li>(可选) 修改 <code>config/locales/en.yml</code> 和 <code>config/locale/zh-CN.yml</code> 的 <code>themes</code> 部分，给主题起英文名和中文名。注意这里需要按照原名的字母顺序排列。  </li>
+<li>precompile 和重启。  </li>
+</ol>
+<p>自己写主题则将主题文件放在相应的位置，修改配置文件，precompile 和重启即可。  </p>
+<h2 id="修改界面用语"><a href="#修改界面用语" class="headerlink" title="修改界面用语"></a>修改界面用语</h2><p>修改中文界面用语，可通过修改 <code>app/javascript/mastodon/locales/zh-CN.json</code> 实现。<br>如开启 “注册时需要批准” 功能，可在 “你为什么想要加入？” 下加入一段注册提示语。 在 <code>mastodon/config/locales/simple_form.zh-CN.yml</code> 找到 <code>invite_request</code> 项，修改 <code>text</code>。</p>
+<h2 id="主页对非登陆用户只显示10条嘟文"><a href="#主页对非登陆用户只显示10条嘟文" class="headerlink" title="主页对非登陆用户只显示10条嘟文"></a>主页对非登陆用户只显示10条嘟文</h2><p>根据 <a href="https://github.com/orani-admin/mastodon/commit/e06d04b7acf42137efe5b8de9c4b83839537d723">Commit</a> 修改相应文件。  </p>
+<h2 id="Docker-安装优化中文搜索"><a href="#Docker-安装优化中文搜索" class="headerlink" title="Docker 安装优化中文搜索"></a>Docker 安装优化中文搜索</h2><p>参考 <a href="https://pullopen.github.io/%E8%BF%9B%E9%98%B6%E9%AD%94%E6%94%B9/2020/11/14/mastodon-modify.html">进阶魔改：修改字数上限、媒体上限、投票上限、添加自定义主题、界面用语、非登陆用户有限显示、优化中文搜索，附阻止本站嘟文流入某站点方法</a> 的 “Docker 安装优化中文搜索（2022-04-25新增）” 部分。  </p>
+<h2 id="阻止本站嘟文流入某站"><a href="#阻止本站嘟文流入某站" class="headerlink" title="阻止本站嘟文流入某站"></a>阻止本站嘟文流入某站</h2><p>在服务器修改 nginx 配置：  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nano /etc/nginx/sites-available/musain.cafe # 以本站为例，一般为实例名</span><br></pre></td></tr></table></figure>
+
+<p>在  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">  listen 443 ssl http2;</span><br><span class="line">  server_name musian.cafe;</span><br></pre></td></tr></table></figure>
+
+<p>后添加  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">if ($http_user_agent ~* &quot;对方域名不带前后缀&quot;) &#123;</span><br><span class="line">        return 403;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>保存并退出。使用命令 <code>systemctl reload nginx</code> 重启 nginx。  </p>
+<h2 id="屏蔽国内浏览器及搜索爬虫"><a href="#屏蔽国内浏览器及搜索爬虫" class="headerlink" title="屏蔽国内浏览器及搜索爬虫"></a>屏蔽国内浏览器及搜索爬虫</h2><p><strong>蓝盒子站长提示</strong>：此方法有一定机率误伤使用国内手机的用户，请务必全面通知后再使用！  </p>
+<p>使用 Cloudflare 可在防火墙规则中添加：如果  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(http.host eq &quot;【站点地址】&quot; and not lower(http.user_agent) contains &quot;feedly&quot; and not lower(http.user_agent) contains &quot;pleroma&quot;) and ((lower(http.user_agent) contains &quot;2345&quot;) or (lower(http.user_agent) contains &quot;360&quot;) or (lower(http.user_agent) contains &quot;ali-&quot;) or (lower(http.user_agent) contains &quot;alipay&quot;) or (lower(http.user_agent) contains &quot;baidu&quot;) or (lower(http.user_agent) contains &quot;bingbot&quot;) or (lower(http.user_agent) contains &quot;bytespider&quot;) or (lower(http.user_agent) contains &quot;coolnovo&quot;) or (lower(http.user_agent) contains &quot;duckduckgo&quot;) or (lower(http.user_agent) contains &quot;easou&quot;) or (lower(http.user_agent) contains &quot;facebook&quot;) or (lower(http.user_agent) contains &quot;google&quot;) or (lower(http.user_agent) contains &quot;huaweibrowser&quot;) or (lower(http.user_agent) contains &quot;iaskspider&quot;) or (lower(http.user_agent) contains &quot;iqiyi&quot;) or (lower(http.user_agent) contains &quot;jike&quot;) or (lower(http.user_agent) contains &quot;lbbrowser&quot;) or (lower(http.user_agent) contains &quot;liebao&quot;) or (lower(http.user_agent) contains &quot;maxthon&quot;) or (lower(http.user_agent) contains &quot;meizu&quot;) or (lower(http.user_agent) contains &quot;metasr&quot;) or (lower(http.user_agent) contains &quot;micromessenger&quot;) or (lower(http.user_agent) contains &quot;miui&quot;) or (lower(http.user_agent) contains &quot;miuibrowser&quot;) or (lower(http.user_agent) contains &quot;msnbot&quot;) or (lower(http.user_agent) contains &quot;oneplus&quot;) or (lower(http.user_agent) contains &quot;oppo&quot;) or (lower(http.user_agent) contains &quot;qihoo&quot;) or (lower(http.user_agent) contains &quot;qiyu&quot;) or (lower(http.user_agent) contains &quot;qq&quot;) or (lower(http.user_agent) contains &quot;saayaa&quot;) or (lower(http.user_agent) contains &quot;se 1.x&quot;) or (lower(http.user_agent) contains &quot;se 2.x&quot;) or (lower(http.user_agent) contains &quot;sina&quot;) or (lower(http.user_agent) contains &quot;sogou&quot;) or (lower(http.user_agent) contains &quot;soso&quot;) or (lower(http.user_agent) contains &quot;taobao&quot;) or (lower(http.user_agent) contains &quot;taobrowser&quot;) or (lower(http.user_agent) contains &quot;tencent&quot;) or (lower(http.user_agent) contains &quot;teoma&quot;) or (lower(http.user_agent) contains &quot;the world&quot;) or (lower(http.user_agent) contains &quot;twitter&quot;) or (lower(http.user_agent) contains &quot;ucweb&quot;) or (lower(http.user_agent) contains &quot;vivo&quot;) or (lower(http.user_agent) contains &quot;wechat&quot;) or (lower(http.user_agent) contains &quot;weibo&quot;) or (lower(http.user_agent) contains &quot;xiaomi&quot;) or (lower(http.user_agent) contains &quot;yahoo&quot;) or (lower(http.user_agent) contains &quot;yandexbot&quot;) or (lower(http.user_agent) contains &quot;yisou&quot;) or (lower(http.user_agent) contains &quot;yodao&quot;) or (lower(http.user_agent) contains &quot;youdao&quot;) or (lower(http.user_agent) contains &quot;zte&quot;))</span><br></pre></td></tr></table></figure>
+
+<p>则阻止。  </p>
+<p>不使用 Cloudflare 可在 nginx 的配置文件的 server { } 括号中添加：  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">if ($http_user_agent ~* (2345|360|ali-|alipay|archive|baidu|bingbot|bytespider|coolnovo|duckduckgo|easou|facebook|google|huaweibrowser|iaskspider|iqiyi|jike|lbbrowser|liebao|maxthon|meizu|metasr|micromessenger|miui|miuibrowser|msnbot|oneplus|oppo|qihoo|qiyu|qq|saayaa|se\ 1.x|se\ 2.x|sina|sogou|soso|taobao|taobrowser|tencent|teoma|the\ world|twitter|ucweb|vivo|wechat|weibo|xiaomi|yahoo|yandexbot|yisou|yodao|youdao|zte)) &#123;</span><br><span class="line">    return 403;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="为站点添加-local-only"><a href="#为站点添加-local-only" class="headerlink" title="为站点添加 local-only"></a>为站点添加 local-only</h2><p>参考此方的教程：<a href="https://tech.konata.co/2022-03-16-local-only/?highlight=local">Mastodon | 以 local-only 代码合并为例浅谈如何合并特定 commit</a>，具体步骤不再赘述。  </p>
+<h2 id="增加-sidekiq-线程"><a href="#增加-sidekiq-线程" class="headerlink" title="增加 sidekiq 线程"></a>增加 sidekiq 线程</h2><p>参考 <a href="https://note.southfox.me/#/page/mastodon%20%E5%A2%9E%E5%8A%A0%20sidekiq%20%E7%BA%BF%E7%A8%8B">mastodon 增加 sidekiq 线程</a> 修改相应内容。  </p>
+<h2 id="修改昵称字数上限"><a href="#修改昵称字数上限" class="headerlink" title="修改昵称字数上限"></a>修改昵称字数上限</h2><p>参考 <a href="https://github.com/rararwg/mastodon/commit/f12b89fb3d3694223f5e55ae8907636c190b8de4">Commit</a> 修改相应内容。  </p>
+]]></content>
+      <categories>
+        <category>Mastodon</category>
+        <category>Build</category>
+      </categories>
+      <tags>
+        <tag>Mastodon</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Methods to Analyze Multi-Omicis Data</title>
     <url>/2021/12/01/multiomics/</url>
     <content><![CDATA[<center>文献阅读：多组学数据的整合、解读方法及公开可用的多组学数据库</center>
@@ -937,30 +1125,6 @@ data[key] = $.html();
       <tags>
         <tag>Bioinformatics</tag>
         <tag>MultiOmics</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Mastodon 装修笔记：建站后还可以做什么</title>
-    <url>/2022/08/16/mstdndecoration/</url>
-    <content><![CDATA[<center> 简单记录一下建站后都对站点进行了哪些改动 </center>
-<span id="more"></span>
-
-<h2 id="装修升级命令"><a href="#装修升级命令" class="headerlink" title="装修升级命令"></a>装修升级命令</h2><p>使用 dockershub 帮助</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd /home/mastodon/mastodon</span><br><span class="line">docker pull melocery/mastodon:latest</span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
-
-<h2 id="待处理的数据库迁移"><a href="#待处理的数据库迁移" class="headerlink" title="待处理的数据库迁移"></a>待处理的数据库迁移</h2><p>这个一般出现在经历较大的站点升级或较多魔改之后 (我的站点初始搭建之后就出现了这行提醒)，在管理员账号的管理面板会出现的一个提醒：有待处理的数据库迁移。请运行它们以确保应用程序正常运行。<br>找了很多 docker 搭建教程都没有提到这一步，由于对 docker 不熟悉，也不知道从何改起，直到看到<a href="https://blog.tantalum.life/posts/notes-on-modifying-mastodon-in-docker/#%E5%90%8E%E7%BB%AD%E5%B7%A5%E4%BD%9C">Mastodon | 记录大型魔改过程</a>。此时需要数据库迁移：  </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose run --rm web rails db:migrate</span><br></pre></td></tr></table></figure>
-
-<p>另外，还需要运行命令 <code>tootctl cache clear</code> 以避免出现与站外通信延迟较高的问题。成功执行后，运行命令重启服务器，否则数据库迁移不生效。  </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose down</span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>Mastodon</category>
-        <category>Build</category>
-      </categories>
-      <tags>
-        <tag>Mastodon</tag>
       </tags>
   </entry>
   <entry>

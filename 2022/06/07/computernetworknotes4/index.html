@@ -40,8 +40,15 @@
 <meta property="og:image" content="https://tech.musain.club/2022/06/07/computernetworknotes4/crossbar.png">
 <meta property="og:image" content="https://tech.musain.club/2022/06/07/computernetworknotes4/output.png">
 <meta property="og:image" content="https://tech.musain.club/2022/06/07/computernetworknotes4/outputqueue.png">
+<meta property="og:image" content="https://tech.musain.club/2022/06/07/computernetworknotes4/InternetNet.png">
+<meta property="og:image" content="https://tech.musain.club/2022/06/07/computernetworknotes4/IPform.png">
+<meta property="og:image" content="https://tech.musain.club/2022/06/07/computernetworknotes4/FRexample.png">
+<meta property="og:image" content="https://tech.musain.club/2022/06/07/computernetworknotes4/IPclass.png">
+<meta property="og:image" content="https://tech.musain.club/2022/06/07/computernetworknotes4/spIP.png">
+<meta property="og:image" content="https://tech.musain.club/2022/06/07/computernetworknotes4/CIDR.png">
+<meta property="og:image" content="https://tech.musain.club/2022/06/07/computernetworknotes4/IPtransfer.png">
 <meta property="article:published_time" content="2022-06-07T09:06:38.000Z">
-<meta property="article:modified_time" content="2022-08-16T11:30:27.838Z">
+<meta property="article:modified_time" content="2022-08-18T10:28:39.297Z">
 <meta property="article:author" content="Udon">
 <meta property="article:tag" content="ComputerNetwork">
 <meta name="twitter:card" content="summary">
@@ -161,7 +168,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BC%E8%AE%BA"><span class="nav-number">1.</span> <span class="nav-text">导论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.1.</span> <span class="nav-text">网络层服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82%E7%9A%84%E5%85%B3%E9%94%AE%E5%8A%9F%E8%83%BD"><span class="nav-number">1.2.</span> <span class="nav-text">网络层的关键功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%B9%B3%E9%9D%A2%E4%B8%8E%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2"><span class="nav-number">1.3.</span> <span class="nav-text">数据平面与控制平面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%A0%E7%BB%9F%E6%96%B9%E5%BC%8F"><span class="nav-number">1.3.1.</span> <span class="nav-text">传统方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SDN-%E6%96%B9%E5%BC%8F"><span class="nav-number">1.3.2.</span> <span class="nav-text">SDN 方式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.4.</span> <span class="nav-text">网络服务模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E5%BB%BA%E7%AB%8B"><span class="nav-number">1.5.</span> <span class="nav-text">连接建立</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E5%99%A8%E7%BB%84%E6%88%90"><span class="nav-number">2.</span> <span class="nav-text">路由器组成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E5%99%A8%E7%BB%93%E6%9E%84%E6%A6%82%E5%86%B5"><span class="nav-number">2.1.</span> <span class="nav-text">路由器结构概况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E7%AB%AF%E5%8F%A3%E5%8A%9F%E8%83%BD"><span class="nav-number">2.2.</span> <span class="nav-text">输入端口功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E7%AB%AF%E5%8F%A3%E7%BC%93%E5%AD%98"><span class="nav-number">2.3.</span> <span class="nav-text">输入端口缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%A4%E6%8D%A2%E7%BB%93%E6%9E%84"><span class="nav-number">2.4.</span> <span class="nav-text">交换结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%86%85%E5%AD%98%E4%BA%A4%E6%8D%A2"><span class="nav-number">2.4.1.</span> <span class="nav-text">通过内存交换</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%80%BB%E7%BA%BF%E4%BA%A4%E6%8D%A2"><span class="nav-number">2.5.</span> <span class="nav-text">通过总线交换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E4%BA%92%E8%81%94%E7%BD%91%E7%BB%9C-crossbar-%E7%AD%89-%E7%9A%84%E4%BA%A4%E6%8D%A2"><span class="nav-number">2.6.</span> <span class="nav-text">通过互联网络 (crossbar 等) 的交换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E7%AB%AF%E5%8F%A3"><span class="nav-number">2.7.</span> <span class="nav-text">输出端口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E7%AB%AF%E5%8F%A3%E6%8E%92%E9%98%9F"><span class="nav-number">2.8.</span> <span class="nav-text">输出端口排队</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E5%BA%A6%E6%9C%BA%E5%88%B6"><span class="nav-number">2.9.</span> <span class="nav-text">调度机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E6%9D%83"><span class="nav-number">2.9.1.</span> <span class="nav-text">优先权</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B6%E5%AE%83"><span class="nav-number">2.9.2.</span> <span class="nav-text">其它</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BC%E8%AE%BA"><span class="nav-number">1.</span> <span class="nav-text">导论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.1.</span> <span class="nav-text">网络层服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82%E7%9A%84%E5%85%B3%E9%94%AE%E5%8A%9F%E8%83%BD"><span class="nav-number">1.2.</span> <span class="nav-text">网络层的关键功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%B9%B3%E9%9D%A2%E4%B8%8E%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2"><span class="nav-number">1.3.</span> <span class="nav-text">数据平面与控制平面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%A0%E7%BB%9F%E6%96%B9%E5%BC%8F"><span class="nav-number">1.3.1.</span> <span class="nav-text">传统方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SDN-%E6%96%B9%E5%BC%8F"><span class="nav-number">1.3.2.</span> <span class="nav-text">SDN 方式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.4.</span> <span class="nav-text">网络服务模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E5%BB%BA%E7%AB%8B"><span class="nav-number">1.5.</span> <span class="nav-text">连接建立</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E5%99%A8%E7%BB%84%E6%88%90"><span class="nav-number">2.</span> <span class="nav-text">路由器组成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E5%99%A8%E7%BB%93%E6%9E%84%E6%A6%82%E5%86%B5"><span class="nav-number">2.1.</span> <span class="nav-text">路由器结构概况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E7%AB%AF%E5%8F%A3%E5%8A%9F%E8%83%BD"><span class="nav-number">2.2.</span> <span class="nav-text">输入端口功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E7%AB%AF%E5%8F%A3%E7%BC%93%E5%AD%98"><span class="nav-number">2.3.</span> <span class="nav-text">输入端口缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%A4%E6%8D%A2%E7%BB%93%E6%9E%84"><span class="nav-number">2.4.</span> <span class="nav-text">交换结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%86%85%E5%AD%98%E4%BA%A4%E6%8D%A2"><span class="nav-number">2.4.1.</span> <span class="nav-text">通过内存交换</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%80%BB%E7%BA%BF%E4%BA%A4%E6%8D%A2"><span class="nav-number">2.5.</span> <span class="nav-text">通过总线交换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E4%BA%92%E8%81%94%E7%BD%91%E7%BB%9C-crossbar-%E7%AD%89-%E7%9A%84%E4%BA%A4%E6%8D%A2"><span class="nav-number">2.6.</span> <span class="nav-text">通过互联网络 (crossbar 等) 的交换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E7%AB%AF%E5%8F%A3"><span class="nav-number">2.7.</span> <span class="nav-text">输出端口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E7%AB%AF%E5%8F%A3%E6%8E%92%E9%98%9F"><span class="nav-number">2.8.</span> <span class="nav-text">输出端口排队</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E5%BA%A6%E6%9C%BA%E5%88%B6"><span class="nav-number">2.9.</span> <span class="nav-text">调度机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E6%9D%83"><span class="nav-number">2.9.1.</span> <span class="nav-text">优先权</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B6%E5%AE%83"><span class="nav-number">2.9.2.</span> <span class="nav-text">其它</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IP-Internet-Protocol"><span class="nav-number">3.</span> <span class="nav-text">IP Internet Protocol</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%92%E8%81%94%E7%BD%91%E7%9A%84%E7%BD%91%E7%BB%9C%E5%B1%82"><span class="nav-number">3.1.</span> <span class="nav-text">互联网的网络层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IP-%E6%95%B0%E6%8D%AE%E6%8A%A5%E6%A0%BC%E5%BC%8F"><span class="nav-number">3.2.</span> <span class="nav-text">IP 数据报格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IP-%E5%88%86%E7%89%87%E5%92%8C%E9%87%8D%E7%BB%84-Fragmentation-amp-Reassembly"><span class="nav-number">3.3.</span> <span class="nav-text">IP 分片和重组 (Fragmentation &amp; Reassembly)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IP-%E7%BC%96%E5%9D%80"><span class="nav-number">3.4.</span> <span class="nav-text">IP 编址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%90%E7%BD%91-Subsets"><span class="nav-number">3.5.</span> <span class="nav-text">子网 (Subsets)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IP-%E5%9C%B0%E5%9D%80%E5%88%86%E7%B1%BB"><span class="nav-number">3.6.</span> <span class="nav-text">IP 地址分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E6%AE%8A-IP-%E5%9C%B0%E5%9D%80"><span class="nav-number">3.7.</span> <span class="nav-text">特殊 IP 地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IP-%E7%BC%96%E5%9D%80%EF%BC%9ACIDR"><span class="nav-number">3.8.</span> <span class="nav-text">IP 编址：CIDR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AC%E5%8F%91%E8%A1%A8%E5%92%8C%E8%BD%AC%E5%8F%91%E7%AE%97%E6%B3%95"><span class="nav-number">3.9.</span> <span class="nav-text">转发表和转发算法</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -265,7 +272,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2022-08-16 19:30:27" itemprop="dateModified" datetime="2022-08-16T19:30:27+08:00">2022-08-16</time>
+        <time title="Modified: 2022-08-18 18:28:39" itemprop="dateModified" datetime="2022-08-18T18:28:39+08:00">2022-08-18</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -288,14 +295,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>2.2k</span>
+      <span>3.5k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>2 mins.</span>
+      <span>3 mins.</span>
     </span>
 </div>
 
@@ -438,6 +445,97 @@
 <li>在一段时间内，每个队列得到的任务时间是：W<sub>i</sub>/(XIGMA(W<sub>i</sub>)) * t，和权重成正比  </li>
 <li>每个类在一个循环中获得不同权重的服务量</li>
 </ul>
+<br>
+
+<h2 id="IP-Internet-Protocol"><a href="#IP-Internet-Protocol" class="headerlink" title="IP Internet Protocol"></a>IP Internet Protocol</h2><h3 id="互联网的网络层"><a href="#互联网的网络层" class="headerlink" title="互联网的网络层"></a>互联网的网络层</h3><p>主机，路由器种的网络层功能：</p>
+<p><img src="/2022/06/07/computernetworknotes4/InternetNet.png">  </p>
+<h3 id="IP-数据报格式"><a href="#IP-数据报格式" class="headerlink" title="IP 数据报格式"></a>IP 数据报格式</h3><p>IPv4 数据报格式：  </p>
+<p><img src="/2022/06/07/computernetworknotes4/IPform.png">  </p>
+<h3 id="IP-分片和重组-Fragmentation-amp-Reassembly"><a href="#IP-分片和重组-Fragmentation-amp-Reassembly" class="headerlink" title="IP 分片和重组 (Fragmentation &amp; Reassembly)"></a>IP 分片和重组 (Fragmentation &amp; Reassembly)</h3><p>网络链路有 MTU (最大传输单元) - 链路层帧所携带的最大数据长度  </p>
+<ul>
+<li>不同的链路类型  </li>
+<li>不同的 MTU  </li>
+</ul>
+<p>大的 IP 数据报在网络上被分片 (fragmented)  </p>
+<ul>
+<li>一个数据报被分割成若干个小数据报  <ul>
+<li>相同的 ID  </li>
+<li>不同的偏移量  </li>
+<li>最后一个分片标记为 0  </li>
+</ul>
+</li>
+<li>“重组” 只在最终的目标主机进行  </li>
+<li>IP 头部的信息被用于标识、排序相关分片  </li>
+</ul>
+<p><img src="/2022/06/07/computernetworknotes4/FRexample.png">  </p>
+<h3 id="IP-编址"><a href="#IP-编址" class="headerlink" title="IP 编址"></a>IP 编址</h3><p>IP 地址：32 位标示，对主机或路由器的接口编址<br>接口：主机/路由器和物理链路的连接处  </p>
+<ul>
+<li>路由器通常拥有多个接口  </li>
+<li>主机也有可能有多个接口  </li>
+<li>IP 地址和每一个接口关联  </li>
+</ul>
+<p>一个 IP 地址和一个接口相关联<br>这些接口如何连接：  </p>
+<ul>
+<li>有线以太网网口链接到以太网络交换机连接  </li>
+<li>无线 WiFi 接口被 WiFi 基站连接  </li>
+</ul>
+<h3 id="子网-Subsets"><a href="#子网-Subsets" class="headerlink" title="子网 (Subsets)"></a>子网 (Subsets)</h3><p>IP 地址：</p>
+<ul>
+<li>子网部分 (高位 bits)  </li>
+<li>主机部分 (低位 bits)  </li>
+</ul>
+<p><strong>子网</strong>：  </p>
+<ul>
+<li>一个子网内的节点 (主机或者路由器)，它们的 <strong>IP 地址的高位部分相同</strong>，这些节点构成的网络的一部分叫做子网  </li>
+<li><strong>无需路由器介入</strong>，子网内个主机可以在物理上相互直接到达  </li>
+</ul>
+<p><strong>方法</strong>：  </p>
+<ul>
+<li>要判断一个子网，将每一个接口从主机或者路由器上分开，构成了一个个网络的孤岛  </li>
+<li>每一个孤岛 (网络) 都可以被称之为 subset  </li>
+</ul>
+<p>子网掩码：11111111 11111111 11111111 00000000<br>subset mask：/24  </p>
+<h3 id="IP-地址分类"><a href="#IP-地址分类" class="headerlink" title="IP 地址分类"></a>IP 地址分类</h3><p>单播地址：<br>Class A: 126 networks, 16 million hosts<br>Class B: 16382 networks, 64 K hosts<br>Class C: 2 million networks, 254 host<br>组播地址：<br>Class D: multicast<br>预留：<br>Class E: reserved for future  </p>
+<p><img src="/2022/06/07/computernetworknotes4/IPclass.png">  </p>
+<h3 id="特殊-IP-地址"><a href="#特殊-IP-地址" class="headerlink" title="特殊 IP 地址"></a>特殊 IP 地址</h3><p><strong>一些约定：</strong>  </p>
+<ul>
+<li>子网部分：全为 0 — 本网络  </li>
+<li>主机部分：全为 0 — 本主机  </li>
+<li>主机部分：全为 1 — 广播地址，这个网络的所有主机  </li>
+<li>127.x.x.x: 回路地址/测试地址  </li>
+</ul>
+<p><img src="/2022/06/07/computernetworknotes4/spIP.png">  </p>
+<p><strong>内网 (专用) IP 地址</strong>  </p>
+<ul>
+<li>专用地址：地址空间的一部分供专用地址使用  </li>
+<li>永远不会被当作共用地址来分配，不会与公用地址重复<ul>
+<li>只在局部网络中有意义，区分不同的设备  </li>
+</ul>
+</li>
+<li>路由器不对目标地址是专用地址的分组进行转发  </li>
+<li>专用地址范围：<ul>
+<li>Class A 10.0.0.0 - 10.255.255.255 MASK 255.0.0.0  </li>
+<li>Class B 172.16.0.0 - 172.31.255.255 MASK 255.255.0.0  </li>
+<li>Class C 192.168.0.0 - 192.168.255.255 MASK 255.255.255.0  </li>
+</ul>
+</li>
+</ul>
+<h3 id="IP-编址：CIDR"><a href="#IP-编址：CIDR" class="headerlink" title="IP 编址：CIDR"></a>IP 编址：CIDR</h3><p><strong>CIDR</strong>：Classless InterDomain Routing (无类域间路由)  </p>
+<ul>
+<li>子网部分可以在任意的位置  </li>
+<li>地址格式：a.b.c.d/x，其中 x 是地址中子网号的长度  </li>
+</ul>
+<p><img src="/2022/06/07/computernetworknotes4/CIDR.png">  </p>
+<h3 id="转发表和转发算法"><a href="#转发表和转发算法" class="headerlink" title="转发表和转发算法"></a>转发表和转发算法</h3><p>目标子网号 | 掩码 | 下一跳 | 端口  </p>
+<p><img src="/2022/06/07/computernetworknotes4/IPtransfer.png">  </p>
+<ul>
+<li>获得 IP 数据报的目标地址  </li>
+<li>对于转发表中的每一个表项  <ul>
+<li>如 (IP Des addr) &amp; (mask) == destination，则按照表项对应的接口转发该数据报  </li>
+<li>如果没有找到，则使用默认表项转发数据报  </li>
+</ul>
+</li>
+</ul>
 
     </div>
 
@@ -494,14 +592,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>Symbols count total: </span>
-    <span title="Symbols count total">107k</span>
+    <span title="Symbols count total">117k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>Reading time total &asymp;</span>
-    <span title="Reading time total">1:38</span>
+    <span title="Reading time total">1:46</span>
   </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
