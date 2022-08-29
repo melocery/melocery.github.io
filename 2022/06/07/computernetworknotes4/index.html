@@ -22,7 +22,7 @@
 <script class="next-config" data-name="main" type="application/json">{"hostname":"tech.musain.club","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 <meta name="description" content="把老师的 PPT 变成 md 文件之计算机网络第四章网络层：数据平面">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Computer Network Notes 4：Network Layer">
+<meta property="og:title" content="Computer Network Notes 4：Network Layer (1)">
 <meta property="og:url" content="https://tech.musain.club/2022/06/07/computernetworknotes4/index.html">
 <meta property="og:site_name" content="Bugrocery">
 <meta property="og:description" content="把老师的 PPT 变成 md 文件之计算机网络第四章网络层：数据平面">
@@ -58,7 +58,7 @@
 <meta property="og:image" content="https://tech.musain.club/2022/06/07/computernetworknotes4/IPv6Cont.png">
 <meta property="og:image" content="https://tech.musain.club/2022/06/07/computernetworknotes4/SDN.png">
 <meta property="article:published_time" content="2022-06-07T09:06:38.000Z">
-<meta property="article:modified_time" content="2022-08-21T12:29:51.247Z">
+<meta property="article:modified_time" content="2022-08-26T03:08:22.343Z">
 <meta property="article:author" content="Udon">
 <meta property="article:tag" content="ComputerNetwork">
 <meta name="twitter:card" content="summary">
@@ -69,10 +69,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://tech.musain.club/2022/06/07/computernetworknotes4/","path":"2022/06/07/computernetworknotes4/","title":"Computer Network Notes 4：Network Layer"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://tech.musain.club/2022/06/07/computernetworknotes4/","path":"2022/06/07/computernetworknotes4/","title":"Computer Network Notes 4：Network Layer (1)"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Computer Network Notes 4：Network Layer | Bugrocery</title>
+<title>Computer Network Notes 4：Network Layer (1) | Bugrocery</title>
   
 
 
@@ -193,7 +193,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-count">19</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -264,7 +264,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Computer Network Notes 4：Network Layer
+          Computer Network Notes 4：Network Layer (1)
         </h1>
 
         <div class="post-meta-container">
@@ -282,7 +282,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2022-08-21 20:29:51" itemprop="dateModified" datetime="2022-08-21T20:29:51+08:00">2022-08-21</time>
+        <time title="Modified: 2022-08-26 11:08:22" itemprop="dateModified" datetime="2022-08-26T11:08:22+08:00">2022-08-26</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -325,6 +325,8 @@
     <div class="post-body" itemprop="articleBody">
         <center> 把老师的 PPT 变成 md 文件之计算机网络第四章网络层：数据平面 </center>
 <span id="more"></span>
+
+<br>
 
 <h2 id="导论"><a href="#导论" class="headerlink" title="导论"></a>导论</h2><h3 id="网络层服务"><a href="#网络层服务" class="headerlink" title="网络层服务"></a>网络层服务</h3><p>在发送主机和接收主机对之间传送段 (segment)<br>在发送端将段封装到数据报中<br>在接收端，将段上交给传输层实体<br>网络层协议存在于每一个主机和路由器<br>路由器检查每一个经过它的 IP 数据报的头部  </p>
 <h3 id="网络层的关键功能"><a href="#网络层的关键功能" class="headerlink" title="网络层的关键功能"></a>网络层的关键功能</h3><p><strong>转发</strong>：将分组从路由器的输入接口转发到合适的输出接口<br><strong>路由</strong>：使用路由算法来决定分组从发送主机到目标接收主机的路径  </p>
@@ -854,14 +856,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>Symbols count total: </span>
-    <span title="Symbols count total">121k</span>
+    <span title="Symbols count total">128k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>Reading time total &asymp;</span>
-    <span title="Reading time total">1:50</span>
+    <span title="Reading time total">1:56</span>
   </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>

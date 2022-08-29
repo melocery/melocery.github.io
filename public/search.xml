@@ -105,87 +105,6 @@ $ git clone https://github.com/next-theme/hexo-theme-next themes/next
       </tags>
   </entry>
   <entry>
-    <title>Mastodon 建站笔记</title>
-    <url>/2022/03/02/buildmastodon/</url>
-    <content><![CDATA[<center> mastodon 建站笔记：慢慢来，6 月之前搞完就行；不要怕，不行就重启试试 </center>
-<span id="more"></span>
-
-<h2 id="一点说明"><a href="#一点说明" class="headerlink" title="一点说明"></a>一点说明</h2><p>本文所记录的搭建非常缓慢，开始于二月，但给自己设定的 DDL 在六月。搭建过程完全碎片化，每次推进都基于“这会儿没什么事情不如搞一搞建站”，且超过一小时就会先放着下次再说，非常随性随意。每一步完成于哪一天、大概耗时都有记录，给想搭建却又嫌麻烦、觉得需要特意安排时间的朋友提供一个佛系搭建参考。  </p>
-<h2 id="参考与致谢"><a href="#参考与致谢" class="headerlink" title="参考与致谢"></a>参考与致谢</h2><p>参考：蓝盒子站长的<a href="https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/10/19/Mastodon-on-Docker.html">利用 docker 搭建 Mastodon 实例</a>和塔塔的<a href="https://mantyke.icu/2021/mastodon-bulid/">小球飞象建站笔记</a>。  </p>
-<p>感谢嘎嘎、塔塔和其他写下详细教程和笔记的朋友！因为你们和你们的教程，我这种没有参考不敢做事的人才能一点点把实例搭建起来。<br>特别感谢塔塔，给我每完成一步的嘟嘟点星星，给予我很大鼓励！  </p>
-<h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><p>前期准备主要是花钱，大多数运营商都支持 Visa、MasterCard 或 PayPal，godaddy 支持支付宝付款。<br>为能有更多选择，个人建议开通 PayPal，比办信用卡方便一些。本文中除 Scaleway 以外，所有支付都通过 PayPal 完成。如使用 PayPal 付款，建议付款时直接使用目标货币，而不使用 PayPal 提供的转换为人民币付款。这种情况下付款使用的是银行汇率，会比 PayPal 划算。  </p>
-<h3 id="域名"><a href="#域名" class="headerlink" title="域名"></a>域名</h3><p>常用的域名提供商很多，比如 <a href="https://www.namecheap.com/">NameCheap</a>，<a href="https://sg.godaddy.com/">godaddy</a> 和 <a href="https://www.dynadot.com/">dynadot</a>。可参考o3o站长给出的<a href="https://www.notion.so/c66e3332f4824f71b9d7d1dc8db410c7">域名选购指南</a>。<br>本站根据蓝盒子站长的推荐，在 NameCheap 购买域名。由于之前给博客换域名已经在 NameCheap 买过一次，而且很早就想好要买什么域名，所以这一步成为这个跨越几个月的搭建过程中最简单、最快速的一步。  </p>
-<p>该步骤完成于 2022.02.17。约耗时 15 分钟，主要在犹豫到底要不要这天买，实际操作只用掉两三分钟。以及早知道我这么快就要自建站，博客就换个域名了！两年后我博客必换域名！</p>
-<h3 id="邮件服务"><a href="#邮件服务" class="headerlink" title="邮件服务"></a>邮件服务</h3><p>使用 Zoho Mail 提供的 Business Mail 服务中的 Forever Free Plan。<br>由于本人需要很详细的操作步骤才敢进行下一步，这里找了个注册 Zoho Mail 的详细教程 —— <a href="https://www.dreambuildinglab.com/website-construction/email/how-to-register-free-zoho-business-email.html">注册zoho免费企业邮箱</a>。这个教程虽然详细，但稍微有点过时，有些操作的名称略有更改。如有需要，可再找其它教程参考。  </p>
-<p>该步骤完成于 2022.02.21。约耗时 40 分钟，因为一些步骤没有明确的参考不太敢试，必须找到别人这一步怎么做才动手。但实际上没关系，大胆试，不行重来嘛！  </p>
-<h3 id="购买VPS"><a href="#购买VPS" class="headerlink" title="购买VPS"></a>购买VPS</h3><p>选择 <a href="https://contabo.com/en/">Contabo</a> 购买 VPS，在购买前将价格修改为欧元，选择5欧套餐，德国服务器，一次性购买 12 个月，其它选项全部默认。<br>这里塔塔提醒<a href="https://mantyke.icu/2021/mastodon-bulid/#%E8%B4%AD%E4%B9%B0vps"> Contabo 审核严格</a>，最好真实 IP 购买，填写信息时不要太扯，不然会被要求提供身份证明。但我就是那个认真填写还被要求提供护照的倒霉蛋。由于目前和德国有 7 个小时时差，上午提供护照信息后，一直到下午四点多才收到确认邮件。  </p>
-<p>该步骤完成于 2022.03.02。约耗时 15 分钟加 19 小时，15 分钟是实际需要操作的时间，包括提供护照信息；19 小时是由于买服务器时护照不在手边，第二天上午才回复，下午收到确认。  </p>
-<h2 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h2><h3 id="配置系统"><a href="#配置系统" class="headerlink" title="配置系统"></a>配置系统</h3><p>这一部分参考<a href="https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/10/19/Mastodon-on-Docker.html">蓝盒子站长教程</a>。  </p>
-<ul>
-<li><p>配置 ssh-key<br>首先查看电脑当前用户的目录下是否存在.ssh目录，以及目录中是否存在<code>id_rsa</code>和<code>id_rsa.pub</code>两个文件。如果存在，公钥即为<code>id_rsa.pub</code>中的内容。如果不存在，则输入命令：  </p>
-  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C “your_email”</span><br></pre></td></tr></table></figure>
-
-<p>一路回车，直到生成一个矩形的图案为止，生成的这串字符就是后面需要的公钥。  </p>
-<p>接下来的步骤全部按照蓝盒子站长的教程进行，但我遇到了一个愚蠢的问题，不会保存 nano 编辑的内容并退出。即使编辑器下方有两行提醒，也没能正确保存文件。万一有朋友和我一样，可参考以下保存并退出的方法：  </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># ^ 为键盘上的 Ctrl 键，以下方法直接使用 Ctrl 代替</span><br><span class="line"># 退出，并根据提示保存</span><br><span class="line">Ctrl + X 退出，按 y 选择保存，提示 file name to write，利用上下左右键选择要保存到的文件，回车保存</span><br><span class="line"># 退出，并保存</span><br><span class="line">Ctrl + X 退出，按 y 选择保存，回车</span><br><span class="line"># 先保存，后退出</span><br><span class="line">Ctrl + O 并回车保存，Ctrl + X 退出</span><br></pre></td></tr></table></figure></li>
-<li><p>安装常用命令和配置防火墙<br>直接照抄蓝盒子站长给的命令，都非常顺利。  </p>
-</li>
-</ul>
-<p>该步骤完成于 2022.03.03。约耗时 55 分钟，主要由于不会保存 nano 编辑的内容，根据各种教程也总是保存失败。中途一度试图换回之前常用的 vim，但事实证明两年没用就会忘记一切。如果能顺利保存，这一步十分钟以内就可以完成。  </p>
-<p><strong>tips</strong><br>虽然上次建站配置好了服务器端的公钥，但这次登录时，MobaXterm 一直返回错误信息：  </p>
-  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Disconnected: No supported authentication methods available (server sent: publickey)</span><br></pre></td></tr></table></figure>
-
-<p>原因是服务器已经关闭账户密码登录，但使用 MobaXterm 登录时没有勾选 <code>Use private key</code> 并指定私钥文件。<br>具体步骤为 <code>Session -&gt; SSH -&gt; Use private key and specify a private key for passwordless login</code>。<br>设置完成后即可顺利登录。  </p>
-<h3 id="安装-docker-和-docker-compose"><a href="#安装-docker-和-docker-compose" class="headerlink" title="安装 docker 和 docker-compose"></a>安装 docker 和 docker-compose</h3><p>根据蓝盒子站长的教程，使用官方提供的一键脚本安装 docker。</p>
-  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 代码来自蓝盒子站长教程</span><br><span class="line">bash &lt;(curl -L https://get.docker.com/)</span><br><span class="line">sudo curl -L &quot;https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose</span><br><span class="line">sudo chmod +x /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
-
-<p>该步骤完成于 2022.03.13。约耗时 15 分钟，包括一开始登录不上服务器而查找原因的时间，实际操作时间约 3 分钟。这一步骤完成后可以通过命令 <code>docker-compose -h</code> 检查 docker 是否真的安装成功。  </p>
-<h3 id="拉取-Mastodon-镜像-amp-初始化-PostgreSQL"><a href="#拉取-Mastodon-镜像-amp-初始化-PostgreSQL" class="headerlink" title="拉取 Mastodon 镜像 &amp; 初始化 PostgreSQL"></a>拉取 Mastodon 镜像 &amp; 初始化 PostgreSQL</h3><p>这几项全部根据蓝盒子站长 <a href="https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/10/19/Mastodon-on-Docker.html">2022-04-25 修改的教程</a>进行。  </p>
-<ul>
-<li>拉取 Mastodon 镜像<br>直接复制粘贴代码，拉取版本为 <code>v3.5.1</code>，并修改 <code>docker-compose.yml</code> 配置文件。  </li>
-<li>初始化 PostgreSQL<br>复制粘贴代码，并根据教程中的提醒检查代码运行情况。  </li>
-</ul>
-<p>该步骤完成于 2022.05.07。约耗时 20 分钟，大部分用于思考设个什么密码。以及如果太久没有建站，一定要先看看上一次都做了什么、用过什么命令，这次又因为忘记 <code>nano</code> 怎么退出而慌乱几秒。  </p>
-<h3 id="配置-Mastodon"><a href="#配置-Mastodon" class="headerlink" title="配置 Mastodon"></a>配置 Mastodon</h3><p>这一步骤仍然按照蓝盒子站长的教程进行，根据教程一步步慢慢做，看仔细每一步都要填什么就可以。  </p>
-<p>根据<a href="https://mantyke.icu/2021/mastodon-bulid/#%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91">小球飞象建站笔记</a>中踩坑提醒，如果使用的是 zoho 邮件服务，建议 SMTP server 使用国际版地址，否则可能配置失败，无法发送通知邮件。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SMTP_SERVER=smtp.zoho.com</span><br></pre></td></tr></table></figure>
-
-<p>该步骤完成于 2022.05.07。耗时约 40 分钟，大多数时间消耗在 <code>docker-compose run --rm web bundle exec rake mastodon:setup</code> 的每一小步上。尤其是 zoho 还突然登录不上，而我又因为时隔近两个月，完全忘记了管理员邮箱是什么，手忙脚乱几分钟。<br>还需注意的是，在这一步中，所有的密码都不可见。一开始没有意识到这一点，以为密码没有粘贴上，同一位置贴两三遍密码导致出错。以及 .env.production 配置信息一定要在电脑上保存一遍！  </p>
-<h3 id="安装并配置-nginx"><a href="#安装并配置-nginx" class="headerlink" title="安装并配置 nginx"></a>安装并配置 nginx</h3><p>在进行这一步之前，根据蓝盒子站长的提示，先在购买域名的网站 DNS 设置中增加一个 <code>A Record</code>，将设定的域名指向服务器。  </p>
-<ul>
-<li>安装 nginx<br>直接运行命令 <code>sudo apt install nginx -y</code> 出现报错信息：  </li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Err:2 http://security.ubuntu.com/ubuntu focal-updates/main amd64 libnginx-mod-http-image-filter amd64 1.18.0-0ubuntu1.2</span><br><span class="line">404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Err:3 http://security.ubuntu.com/ubuntu focal-updates/main amd64 libnginx-mod-http-xslt-filter amd64 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Err:4 http://security.ubuntu.com/ubuntu focal-updates/main amd64 libnginx-mod-mail amd64 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Err:5 http://security.ubuntu.com/ubuntu focal-updates/main amd64 libnginx-mod-stream amd64 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Err:6 http://security.ubuntu.com/ubuntu focal-updates/main amd64 nginx-core amd64 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Ign:1 http://security.ubuntu.com/ubuntu focal-updates/main amd64 nginx-common all 1.18.0-0ubuntu1.2</span><br><span class="line">Ign:7 http://security.ubuntu.com/ubuntu focal-updates/main amd64 nginx all 1.18.0-0ubuntu1.2</span><br><span class="line">Err:1 http://security.ubuntu.com/ubuntu focal-updates/main amd64 nginx-common all 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Err:7 http://security.ubuntu.com/ubuntu focal-updates/main amd64 nginx all 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/nginx-common_1.18.0-0ubuntu1.2_all.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/libnginx-mod-http-image-filter_1.18.0-0ubuntu1.2_amd64.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/libnginx-mod-http-xslt-filter_1.18.0-0ubuntu1.2_amd64.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/libnginx-mod-mail_1.18.0-0ubuntu1.2_amd64.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/libnginx-mod-stream_1.18.0-0ubuntu1.2_amd64.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/nginx-core_1.18.0-0ubuntu1.2_amd64.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/nginx_1.18.0-0ubuntu1.2_all.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?</span><br></pre></td></tr></table></figure>
-
-<p>谷歌之后发现这是 <code>Ubuntu 20.04</code> 会出现的常见报错，在运行安装命令前应先运行：  </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get update # 运行这一行之后可以尝试运行安装命令，如果仍报错再运行下一行</span><br><span class="line">sudo apt-get upgrade</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>配置 nginx &amp; 配置SSL证书 &amp; 重启nginx<br>根据蓝盒子站长的教程配置，步骤中没有出错。</li>
-</ul>
-<p>该步骤完成于 2022.05.07。约耗时 30 分钟，除了一开始找报错原因费点时间之外，都是运行命令、等待命令结束，操作非常简单。  </p>
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>到这里站点已经上线，后续都是一些个性化修改，可以根据不同需求找相应的教程。<br>站点搭建实际用时 230 分钟，其中很多时间浪费在不敢做和注意力不集中上。如果不是像我一样每天找一点时间随手操作其中一个小步骤，而是空出一大段时间专心建站的话，应该两到三小时就能够完成上述所有步骤。<br>如果你和我一样也记不住整个过程中太多账号、用户名和密码，可以在电脑上建一个备忘录或在其它安全的地方记住密码。</p>
-<h2 id="备份-未完成"><a href="#备份-未完成" class="headerlink" title="备份 (未完成)"></a>备份 (未完成)</h2><p>参考蓝盒子站长的教程：<a href="https://pullopen.github.io/%E7%AB%99%E7%82%B9%E7%BB%B4%E6%8A%A4/2020/07/22/Move-mastodon-media-to-Scaleway.html">如何将Mastodon媒体上传至Scaleway云储存</a></p>
-<h2 id="装修"><a href="#装修" class="headerlink" title="装修"></a>装修</h2><h3 id="使用管理命令行"><a href="#使用管理命令行" class="headerlink" title="使用管理命令行"></a>使用管理命令行</h3><ul>
-<li>使用脚本简化命令<br>参考：<a href="https://blog.tantalum.life/posts/how-to-run-your-mastodon-by-docker/#%E4%BD%BF%E7%94%A8alias%E8%84%9A%E6%9C%AC%E7%BC%A9%E5%86%99tootctl%E5%91%BD%E4%BB%A4">使用 alias 脚本缩写 tootctl 命令</a>。<br>由于前面的步骤一直主要参考蓝盒子站长的教程，所以这里第一步目标文件夹应为 <code>/home/mastodon/mastodon</code>，即 <code>cd /home/mastodon/mastodon</code>。  </li>
-<li>使用命令<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tootctl help # 帮助信息，如果正常运行说明上一步的简化命令脚本生效。</span><br><span class="line">tootctl settings registrations close # 关闭注册</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>此处由于站点装修未完成，暂时关闭注册。也可以在网页端关闭注册。  </p>
-<h3 id="开启全文搜索"><a href="#开启全文搜索" class="headerlink" title="开启全文搜索"></a>开启全文搜索</h3><p>参考蓝盒子站长给出的命令修改相应的配置文件，但在重启 docker 这一步骤报错：  </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ERROR: yaml.parser.ParserError: while parsing a block mapping</span><br><span class="line">  in &quot;./docker-compose.yml&quot;, line 3, column 3</span><br><span class="line">expected &lt;block end&gt;, but found &#x27;&lt;block mapping start&gt;&#x27;</span><br><span class="line">  in &quot;./docker-compose.yml&quot;, line 26, column 4</span><br></pre></td></tr></table></figure>
-
-<p>再次检查 <code>docker-compose.yml</code> 文件发现，只删除 <code>#</code> 会导致缩进不统一，导致对 block 的判断有误。每行在删除 <code>#</code> 的同时，应在行首再删除一个空格。<br>其余步骤根据教程中的命令，一步一步完成即可。</p>
-<h3 id="其它魔改"><a href="#其它魔改" class="headerlink" title="其它魔改"></a>其它魔改</h3><p>站点魔改有许多可用的教程，如：<br><a href="http://blog.tantalum.life/posts/how-to-run-your-mastodon-by-docker/">Mastodon | 采用docker建站后的使用与维护</a><br><a href="https://pullopen.github.io/%E7%AB%99%E7%82%B9%E7%BB%B4%E6%8A%A4/2020/11/26/mastodon-manage.html">如何装饰你的站点：自定义CSS、中继站和自定义表情</a><br><a href="https://pullopen.github.io/%E8%BF%9B%E9%98%B6%E9%AD%94%E6%94%B9/2020/11/14/mastodon-modify.html">进阶魔改：修改字数上限、媒体上限、投票上限、添加自定义主题、界面用语、非登陆用户有限显示、优化中文搜索，附阻止本站嘟文流入某站点方法</a>  </p>
-]]></content>
-      <categories>
-        <category>Mastodon</category>
-        <category>Build</category>
-      </categories>
-      <tags>
-        <tag>Mastodon</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>blastp的本地化使用</title>
     <url>/2021/09/16/blastp/</url>
     <content><![CDATA[<center>blastp在Windows系统电脑上的本地使用</center>
@@ -418,6 +337,87 @@ main() # 运行上述函数
       </tags>
   </entry>
   <entry>
+    <title>Mastodon 建站笔记</title>
+    <url>/2022/03/02/buildmastodon/</url>
+    <content><![CDATA[<center> mastodon 建站笔记：慢慢来，6 月之前搞完就行；不要怕，不行就重启试试 </center>
+<span id="more"></span>
+
+<h2 id="一点说明"><a href="#一点说明" class="headerlink" title="一点说明"></a>一点说明</h2><p>本文所记录的搭建非常缓慢，开始于二月，但给自己设定的 DDL 在六月。搭建过程完全碎片化，每次推进都基于“这会儿没什么事情不如搞一搞建站”，且超过一小时就会先放着下次再说，非常随性随意。每一步完成于哪一天、大概耗时都有记录，给想搭建却又嫌麻烦、觉得需要特意安排时间的朋友提供一个佛系搭建参考。  </p>
+<h2 id="参考与致谢"><a href="#参考与致谢" class="headerlink" title="参考与致谢"></a>参考与致谢</h2><p>参考：蓝盒子站长的<a href="https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/10/19/Mastodon-on-Docker.html">利用 docker 搭建 Mastodon 实例</a>和塔塔的<a href="https://mantyke.icu/2021/mastodon-bulid/">小球飞象建站笔记</a>。  </p>
+<p>感谢嘎嘎、塔塔和其他写下详细教程和笔记的朋友！因为你们和你们的教程，我这种没有参考不敢做事的人才能一点点把实例搭建起来。<br>特别感谢塔塔，给我每完成一步的嘟嘟点星星，给予我很大鼓励！  </p>
+<h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><p>前期准备主要是花钱，大多数运营商都支持 Visa、MasterCard 或 PayPal，godaddy 支持支付宝付款。<br>为能有更多选择，个人建议开通 PayPal，比办信用卡方便一些。本文中除 Scaleway 以外，所有支付都通过 PayPal 完成。如使用 PayPal 付款，建议付款时直接使用目标货币，而不使用 PayPal 提供的转换为人民币付款。这种情况下付款使用的是银行汇率，会比 PayPal 划算。  </p>
+<h3 id="域名"><a href="#域名" class="headerlink" title="域名"></a>域名</h3><p>常用的域名提供商很多，比如 <a href="https://www.namecheap.com/">NameCheap</a>，<a href="https://sg.godaddy.com/">godaddy</a> 和 <a href="https://www.dynadot.com/">dynadot</a>。可参考o3o站长给出的<a href="https://www.notion.so/c66e3332f4824f71b9d7d1dc8db410c7">域名选购指南</a>。<br>本站根据蓝盒子站长的推荐，在 NameCheap 购买域名。由于之前给博客换域名已经在 NameCheap 买过一次，而且很早就想好要买什么域名，所以这一步成为这个跨越几个月的搭建过程中最简单、最快速的一步。  </p>
+<p>该步骤完成于 2022.02.17。约耗时 15 分钟，主要在犹豫到底要不要这天买，实际操作只用掉两三分钟。以及早知道我这么快就要自建站，博客就换个域名了！两年后我博客必换域名！</p>
+<h3 id="邮件服务"><a href="#邮件服务" class="headerlink" title="邮件服务"></a>邮件服务</h3><p>使用 Zoho Mail 提供的 Business Mail 服务中的 Forever Free Plan。<br>由于本人需要很详细的操作步骤才敢进行下一步，这里找了个注册 Zoho Mail 的详细教程 —— <a href="https://www.dreambuildinglab.com/website-construction/email/how-to-register-free-zoho-business-email.html">注册zoho免费企业邮箱</a>。这个教程虽然详细，但稍微有点过时，有些操作的名称略有更改。如有需要，可再找其它教程参考。  </p>
+<p>该步骤完成于 2022.02.21。约耗时 40 分钟，因为一些步骤没有明确的参考不太敢试，必须找到别人这一步怎么做才动手。但实际上没关系，大胆试，不行重来嘛！  </p>
+<h3 id="购买VPS"><a href="#购买VPS" class="headerlink" title="购买VPS"></a>购买VPS</h3><p>选择 <a href="https://contabo.com/en/">Contabo</a> 购买 VPS，在购买前将价格修改为欧元，选择5欧套餐，德国服务器，一次性购买 12 个月，其它选项全部默认。<br>这里塔塔提醒<a href="https://mantyke.icu/2021/mastodon-bulid/#%E8%B4%AD%E4%B9%B0vps"> Contabo 审核严格</a>，最好真实 IP 购买，填写信息时不要太扯，不然会被要求提供身份证明。但我就是那个认真填写还被要求提供护照的倒霉蛋。由于目前和德国有 7 个小时时差，上午提供护照信息后，一直到下午四点多才收到确认邮件。  </p>
+<p>该步骤完成于 2022.03.02。约耗时 15 分钟加 19 小时，15 分钟是实际需要操作的时间，包括提供护照信息；19 小时是由于买服务器时护照不在手边，第二天上午才回复，下午收到确认。  </p>
+<h2 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h2><h3 id="配置系统"><a href="#配置系统" class="headerlink" title="配置系统"></a>配置系统</h3><p>这一部分参考<a href="https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/10/19/Mastodon-on-Docker.html">蓝盒子站长教程</a>。  </p>
+<ul>
+<li><p>配置 ssh-key<br>首先查看电脑当前用户的目录下是否存在.ssh目录，以及目录中是否存在<code>id_rsa</code>和<code>id_rsa.pub</code>两个文件。如果存在，公钥即为<code>id_rsa.pub</code>中的内容。如果不存在，则输入命令：  </p>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C “your_email”</span><br></pre></td></tr></table></figure>
+
+<p>一路回车，直到生成一个矩形的图案为止，生成的这串字符就是后面需要的公钥。  </p>
+<p>接下来的步骤全部按照蓝盒子站长的教程进行，但我遇到了一个愚蠢的问题，不会保存 nano 编辑的内容并退出。即使编辑器下方有两行提醒，也没能正确保存文件。万一有朋友和我一样，可参考以下保存并退出的方法：  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># ^ 为键盘上的 Ctrl 键，以下方法直接使用 Ctrl 代替</span><br><span class="line"># 退出，并根据提示保存</span><br><span class="line">Ctrl + X 退出，按 y 选择保存，提示 file name to write，利用上下左右键选择要保存到的文件，回车保存</span><br><span class="line"># 退出，并保存</span><br><span class="line">Ctrl + X 退出，按 y 选择保存，回车</span><br><span class="line"># 先保存，后退出</span><br><span class="line">Ctrl + O 并回车保存，Ctrl + X 退出</span><br></pre></td></tr></table></figure></li>
+<li><p>安装常用命令和配置防火墙<br>直接照抄蓝盒子站长给的命令，都非常顺利。  </p>
+</li>
+</ul>
+<p>该步骤完成于 2022.03.03。约耗时 55 分钟，主要由于不会保存 nano 编辑的内容，根据各种教程也总是保存失败。中途一度试图换回之前常用的 vim，但事实证明两年没用就会忘记一切。如果能顺利保存，这一步十分钟以内就可以完成。  </p>
+<p><strong>tips</strong><br>虽然上次建站配置好了服务器端的公钥，但这次登录时，MobaXterm 一直返回错误信息：  </p>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Disconnected: No supported authentication methods available (server sent: publickey)</span><br></pre></td></tr></table></figure>
+
+<p>原因是服务器已经关闭账户密码登录，但使用 MobaXterm 登录时没有勾选 <code>Use private key</code> 并指定私钥文件。<br>具体步骤为 <code>Session -&gt; SSH -&gt; Use private key and specify a private key for passwordless login</code>。<br>设置完成后即可顺利登录。  </p>
+<h3 id="安装-docker-和-docker-compose"><a href="#安装-docker-和-docker-compose" class="headerlink" title="安装 docker 和 docker-compose"></a>安装 docker 和 docker-compose</h3><p>根据蓝盒子站长的教程，使用官方提供的一键脚本安装 docker。</p>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 代码来自蓝盒子站长教程</span><br><span class="line">bash &lt;(curl -L https://get.docker.com/)</span><br><span class="line">sudo curl -L &quot;https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose</span><br><span class="line">sudo chmod +x /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
+
+<p>该步骤完成于 2022.03.13。约耗时 15 分钟，包括一开始登录不上服务器而查找原因的时间，实际操作时间约 3 分钟。这一步骤完成后可以通过命令 <code>docker-compose -h</code> 检查 docker 是否真的安装成功。  </p>
+<h3 id="拉取-Mastodon-镜像-amp-初始化-PostgreSQL"><a href="#拉取-Mastodon-镜像-amp-初始化-PostgreSQL" class="headerlink" title="拉取 Mastodon 镜像 &amp; 初始化 PostgreSQL"></a>拉取 Mastodon 镜像 &amp; 初始化 PostgreSQL</h3><p>这几项全部根据蓝盒子站长 <a href="https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/10/19/Mastodon-on-Docker.html">2022-04-25 修改的教程</a>进行。  </p>
+<ul>
+<li>拉取 Mastodon 镜像<br>直接复制粘贴代码，拉取版本为 <code>v3.5.1</code>，并修改 <code>docker-compose.yml</code> 配置文件。  </li>
+<li>初始化 PostgreSQL<br>复制粘贴代码，并根据教程中的提醒检查代码运行情况。  </li>
+</ul>
+<p>该步骤完成于 2022.05.07。约耗时 20 分钟，大部分用于思考设个什么密码。以及如果太久没有建站，一定要先看看上一次都做了什么、用过什么命令，这次又因为忘记 <code>nano</code> 怎么退出而慌乱几秒。  </p>
+<h3 id="配置-Mastodon"><a href="#配置-Mastodon" class="headerlink" title="配置 Mastodon"></a>配置 Mastodon</h3><p>这一步骤仍然按照蓝盒子站长的教程进行，根据教程一步步慢慢做，看仔细每一步都要填什么就可以。  </p>
+<p>根据<a href="https://mantyke.icu/2021/mastodon-bulid/#%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91">小球飞象建站笔记</a>中踩坑提醒，如果使用的是 zoho 邮件服务，建议 SMTP server 使用国际版地址，否则可能配置失败，无法发送通知邮件。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SMTP_SERVER=smtp.zoho.com</span><br></pre></td></tr></table></figure>
+
+<p>该步骤完成于 2022.05.07。耗时约 40 分钟，大多数时间消耗在 <code>docker-compose run --rm web bundle exec rake mastodon:setup</code> 的每一小步上。尤其是 zoho 还突然登录不上，而我又因为时隔近两个月，完全忘记了管理员邮箱是什么，手忙脚乱几分钟。<br>还需注意的是，在这一步中，所有的密码都不可见。一开始没有意识到这一点，以为密码没有粘贴上，同一位置贴两三遍密码导致出错。以及 .env.production 配置信息一定要在电脑上保存一遍！  </p>
+<h3 id="安装并配置-nginx"><a href="#安装并配置-nginx" class="headerlink" title="安装并配置 nginx"></a>安装并配置 nginx</h3><p>在进行这一步之前，根据蓝盒子站长的提示，先在购买域名的网站 DNS 设置中增加一个 <code>A Record</code>，将设定的域名指向服务器。  </p>
+<ul>
+<li>安装 nginx<br>直接运行命令 <code>sudo apt install nginx -y</code> 出现报错信息：  </li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Err:2 http://security.ubuntu.com/ubuntu focal-updates/main amd64 libnginx-mod-http-image-filter amd64 1.18.0-0ubuntu1.2</span><br><span class="line">404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Err:3 http://security.ubuntu.com/ubuntu focal-updates/main amd64 libnginx-mod-http-xslt-filter amd64 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Err:4 http://security.ubuntu.com/ubuntu focal-updates/main amd64 libnginx-mod-mail amd64 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Err:5 http://security.ubuntu.com/ubuntu focal-updates/main amd64 libnginx-mod-stream amd64 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Err:6 http://security.ubuntu.com/ubuntu focal-updates/main amd64 nginx-core amd64 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Ign:1 http://security.ubuntu.com/ubuntu focal-updates/main amd64 nginx-common all 1.18.0-0ubuntu1.2</span><br><span class="line">Ign:7 http://security.ubuntu.com/ubuntu focal-updates/main amd64 nginx all 1.18.0-0ubuntu1.2</span><br><span class="line">Err:1 http://security.ubuntu.com/ubuntu focal-updates/main amd64 nginx-common all 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">Err:7 http://security.ubuntu.com/ubuntu focal-updates/main amd64 nginx all 1.18.0-0ubuntu1.2</span><br><span class="line">  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/nginx-common_1.18.0-0ubuntu1.2_all.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/libnginx-mod-http-image-filter_1.18.0-0ubuntu1.2_amd64.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/libnginx-mod-http-xslt-filter_1.18.0-0ubuntu1.2_amd64.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/libnginx-mod-mail_1.18.0-0ubuntu1.2_amd64.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/libnginx-mod-stream_1.18.0-0ubuntu1.2_amd64.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/nginx-core_1.18.0-0ubuntu1.2_amd64.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/main/n/nginx/nginx_1.18.0-0ubuntu1.2_all.deb  404  Not Found [IP: 213.136.72.159 80]</span><br><span class="line">E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?</span><br></pre></td></tr></table></figure>
+
+<p>谷歌之后发现这是 <code>Ubuntu 20.04</code> 会出现的常见报错，在运行安装命令前应先运行：  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get update # 运行这一行之后可以尝试运行安装命令，如果仍报错再运行下一行</span><br><span class="line">sudo apt-get upgrade</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置 nginx &amp; 配置SSL证书 &amp; 重启nginx<br>根据蓝盒子站长的教程配置，步骤中没有出错。</li>
+</ul>
+<p>该步骤完成于 2022.05.07。约耗时 30 分钟，除了一开始找报错原因费点时间之外，都是运行命令、等待命令结束，操作非常简单。  </p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>到这里站点已经上线，后续都是一些个性化修改，可以根据不同需求找相应的教程。<br>站点搭建实际用时 230 分钟，其中很多时间浪费在不敢做和注意力不集中上。如果不是像我一样每天找一点时间随手操作其中一个小步骤，而是空出一大段时间专心建站的话，应该两到三小时就能够完成上述所有步骤。<br>如果你和我一样也记不住整个过程中太多账号、用户名和密码，可以在电脑上建一个备忘录或在其它安全的地方记住密码。</p>
+<h2 id="备份-未完成"><a href="#备份-未完成" class="headerlink" title="备份 (未完成)"></a>备份 (未完成)</h2><p>参考蓝盒子站长的教程：<a href="https://pullopen.github.io/%E7%AB%99%E7%82%B9%E7%BB%B4%E6%8A%A4/2020/07/22/Move-mastodon-media-to-Scaleway.html">如何将Mastodon媒体上传至Scaleway云储存</a></p>
+<h2 id="装修"><a href="#装修" class="headerlink" title="装修"></a>装修</h2><h3 id="使用管理命令行"><a href="#使用管理命令行" class="headerlink" title="使用管理命令行"></a>使用管理命令行</h3><ul>
+<li>使用脚本简化命令<br>参考：<a href="https://blog.tantalum.life/posts/how-to-run-your-mastodon-by-docker/#%E4%BD%BF%E7%94%A8alias%E8%84%9A%E6%9C%AC%E7%BC%A9%E5%86%99tootctl%E5%91%BD%E4%BB%A4">使用 alias 脚本缩写 tootctl 命令</a>。<br>由于前面的步骤一直主要参考蓝盒子站长的教程，所以这里第一步目标文件夹应为 <code>/home/mastodon/mastodon</code>，即 <code>cd /home/mastodon/mastodon</code>。  </li>
+<li>使用命令<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tootctl help # 帮助信息，如果正常运行说明上一步的简化命令脚本生效。</span><br><span class="line">tootctl settings registrations close # 关闭注册</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>此处由于站点装修未完成，暂时关闭注册。也可以在网页端关闭注册。  </p>
+<h3 id="开启全文搜索"><a href="#开启全文搜索" class="headerlink" title="开启全文搜索"></a>开启全文搜索</h3><p>参考蓝盒子站长给出的命令修改相应的配置文件，但在重启 docker 这一步骤报错：  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ERROR: yaml.parser.ParserError: while parsing a block mapping</span><br><span class="line">  in &quot;./docker-compose.yml&quot;, line 3, column 3</span><br><span class="line">expected &lt;block end&gt;, but found &#x27;&lt;block mapping start&gt;&#x27;</span><br><span class="line">  in &quot;./docker-compose.yml&quot;, line 26, column 4</span><br></pre></td></tr></table></figure>
+
+<p>再次检查 <code>docker-compose.yml</code> 文件发现，只删除 <code>#</code> 会导致缩进不统一，导致对 block 的判断有误。每行在删除 <code>#</code> 的同时，应在行首再删除一个空格。<br>其余步骤根据教程中的命令，一步一步完成即可。</p>
+<h3 id="其它魔改"><a href="#其它魔改" class="headerlink" title="其它魔改"></a>其它魔改</h3><p>站点魔改有许多可用的教程，如：<br><a href="http://blog.tantalum.life/posts/how-to-run-your-mastodon-by-docker/">Mastodon | 采用docker建站后的使用与维护</a><br><a href="https://pullopen.github.io/%E7%AB%99%E7%82%B9%E7%BB%B4%E6%8A%A4/2020/11/26/mastodon-manage.html">如何装饰你的站点：自定义CSS、中继站和自定义表情</a><br><a href="https://pullopen.github.io/%E8%BF%9B%E9%98%B6%E9%AD%94%E6%94%B9/2020/11/14/mastodon-modify.html">进阶魔改：修改字数上限、媒体上限、投票上限、添加自定义主题、界面用语、非登陆用户有限显示、优化中文搜索，附阻止本站嘟文流入某站点方法</a>  </p>
+]]></content>
+      <categories>
+        <category>Mastodon</category>
+        <category>Build</category>
+      </categories>
+      <tags>
+        <tag>Mastodon</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CATsama：如何做一个定时发嘟的 Mastodon bot</title>
     <url>/2022/07/12/catsama/</url>
     <content><![CDATA[<center> 性感猫猫，每日上午八点半，在您的时间线上推送一个喵喵神签 </center>
@@ -449,27 +449,6 @@ main() # 运行上述函数
       <tags>
         <tag>Mastodon</tag>
         <tag>Python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>VPS：一款赛博乐高</title>
-    <url>/2022/08/13/cyberlego/</url>
-    <content><![CDATA[<center> 简单总结一下在 VPS 上折腾的一些小东西 </center>
-<span id="more"></span>
-
-<h2 id="Mastodon"><a href="#Mastodon" class="headerlink" title="Mastodon"></a>Mastodon</h2><p>买这个 VPS 就是为了长毛象，搭建过程非常缓慢，详细搭建过程见：<a href="https://tech.musain.club/2022/03/02/buildmastodon/">Mastodon 建站笔记</a>。搭建过程中遇到的很多问题，都在这篇中有提到。搭建一个长毛象实例并不难，后期装修维护才是挑战。各种各样零散的问题都会出现，甚至直到前几天才发现原来之前一直看错了 dockerhub 的报错信息。等有空需要给所有装修都总结成一篇装修笔记，以免以后忘记做过哪些东西。<br>目前站点除去朋友注册和 bot 账号约有四十多人，但由于很多人都只是建个魂器，所以总体开销并没有预期大，保持目前的配置扩建至 100 人应该没有问题。不过人少也有人少的好处，站点真的像一个咖啡馆，有经常来的熟客也有偶尔来喝一杯的生客。总得来说达到了我预想的结果，后续如果能有更多熟客就更好了。  </p>
-<h2 id="Plume"><a href="#Plume" class="headerlink" title="Plume"></a>Plume</h2><p>虽然已经有很多博客，但还是搭建了 plume。一开始的想法是来咖啡馆的人应该多多少少都会写同人，搭个 plume 比在咖啡馆直接发长文好，还能和咖啡馆直接互通，对创作者和读者之间的交流十分友好。但实际上大多数人都只是注册一下，然后放着不用。就连我自己也只是注册了一个账号，没有往这个账号搬运任何文。对我来说 plume 只是一个替代平台，除非 hugo + vercel 和 AO3 (甚至是 wordpress) 都不好用才会考虑用 plume。<br>搭建 plume 并不难，只在配置 ngnix 时出错重来过一次。也有很多教程，所以没有记录如何搭建。在这里存一个教程：<a href="https://blog.tantalum.life/posts/build-plume-in-docker/">Plume | 利用Docker-compose搭建Fedi开源博客平台</a></p>
-<h2 id="Matrix"><a href="#Matrix" class="headerlink" title="Matrix"></a>Matrix</h2><p>之前为了找一个不受审查还不被墙的即时聊天软件搜遍全网，直到自己有了一台 VPS，终于依靠搭建 matrix 从这种情况中脱离出来。虽然 matrix 由于发送每条消息都需要加密，所以发送图片还是很慢，但日常聊天可以忍这一点小毛病。这也是除了 mastodon 以外，我服务器上最活跃的应用。拼 lego 是自嗨游戏，搭好之后还是有人用更快乐。<br>不过 matrix 也不是没有被墙的风险，但和 mastodon 类似，一个服务器被墙还有无数个服务器可以选择。唯一的问题是很多搭建 matrix 的站长都不喜欢对外开放注册，我也是这样，而 matrix 大站已经被墙。这其实间接导致很多人无法真正开始使用 matrix，毕竟朋友都不能用的话，聊天软件也就失去意义。可能这就是为什么站内要账号的人不少，真正使用的人不多吧。<br>搭建 matrix 主要参考了两个教程：<a href="https://www.b612.me/code/223.html">使用docker搭建Synapse(Matrix)</a> 和 <a href="https://tech.konata.co/2022-04-10-matrix/">Matrix | 使用 docker 搭建 Synapse 记录</a>。我的搭建过程并没有记录下来，现在想想虽然都是别人写过的东西，也还是应该记录一份自己完成的过程。下次一定。  </p>
-<h2 id="Bot"><a href="#Bot" class="headerlink" title="Bot"></a>Bot</h2><p>这部分算是我的一时兴起，以及想知道如何做到这件事而进行的两个尝试。即使一开始就知道写的 bot 无人在意，但还是很用心地完成了这两个 bot。算是我买了这个 VPS 之后最意外的收获，发现自己竟还有探索欲，竟然能够纯粹为了满足自己而去做一件事。  </p>
-<h3 id="自动发嘟的喵喵喵"><a href="#自动发嘟的喵喵喵" class="headerlink" title="自动发嘟的喵喵喵"></a>自动发嘟的喵喵喵</h3><p>象上实现自动发嘟的 bot 有很多，在没有自己的站点和服务器时就很好奇这些 bot 如何运营。稍微看点教程就发现如果只是在自己电脑上运行的话，很可能需要一直开着电脑。如果想要完全自动化，最好还是有一个自己的服务器。所以在建好站点之后，有个很小的由头就火速写了喵喵喵。关于 bot 背后的原理其实并不完全清楚，但不知道 why 并不影响 how，所以还是很顺利完成了这个非常简单的 bot。<br>搭建过程：<a href="https://tech.musain.club/2022/07/12/catsama/">CATsama：如何做一个定时发嘟的 Mastodon bot</a><br>喵喵本喵：<a href="https://musain.cafe/@CATsama">喵喵喵</a>  </p>
-<h3 id="自动回复的汪汪汪"><a href="#自动回复的汪汪汪" class="headerlink" title="自动回复的汪汪汪"></a>自动回复的汪汪汪</h3><p>学会了自动发嘟就自然而然想学会自动回复，但整个过程比自动发嘟波折得多。幸好即使最初参考的教程非常详细，也在一开始就边做边记录，所以整个波折的过程也被写下来。虽然可能不具有什么真正的参考性，但自己回顾时会觉得很开心，抓耳挠腮想办法也很开心。最后这个 bot 只能说是可以运行，并没有真正实现我一开始想要的那种自动回复。但由于问题在站点设置，而不在代码，站点又是我根据教程一步步来的，完全不知道从何改起，目前来讲这个 bot 只能这样子了。<br>搭建过程：<a href="https://tech.musain.club/2022/07/20/dogchan/">DOGchan：如何做一个能够自动回复的 Mastodon bot</a><br>汪汪本汪：<a href="https://musain.cafe/@DOGchan">汪汪汪</a>  </p>
-<h2 id="说点感想"><a href="#说点感想" class="headerlink" title="说点感想"></a>说点感想</h2><p>写完才发现其实在 VPS 上搞的东西也不算多，但每一个都是自己想去做就做了的。就像在 bot 部分说的，这个 VPS 带给我的最大惊喜是竟然还有这么多东西我想去探索、想知道如何实现。这个列表在未来还会继续变多，说不定什么时候看到感兴趣的东西就又在服务器上折腾点什么。但目前来讲更重要的是维护已有东西的稳定，在此基础之上搞搞装修。<br>忘记是哪里看到的，说 VPS 就是一款赛博乐高，的确如此。  </p>
-]]></content>
-      <categories>
-        <category>VPS</category>
-      </categories>
-      <tags>
-        <tag>VPS</tag>
       </tags>
   </entry>
   <entry>
@@ -548,6 +527,123 @@ main() # 运行上述函数
       <tags>
         <tag>DeconvoluteMixedBioData</tag>
         <tag>Bioinformatics</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>VPS：一款赛博乐高</title>
+    <url>/2022/08/13/cyberlego/</url>
+    <content><![CDATA[<center> 简单总结一下在 VPS 上折腾的一些小东西 </center>
+<span id="more"></span>
+
+<h2 id="Mastodon"><a href="#Mastodon" class="headerlink" title="Mastodon"></a>Mastodon</h2><p>买这个 VPS 就是为了长毛象，搭建过程非常缓慢，详细搭建过程见：<a href="https://tech.musain.club/2022/03/02/buildmastodon/">Mastodon 建站笔记</a>。搭建过程中遇到的很多问题，都在这篇中有提到。搭建一个长毛象实例并不难，后期装修维护才是挑战。各种各样零散的问题都会出现，甚至直到前几天才发现原来之前一直看错了 dockerhub 的报错信息。等有空需要给所有装修都总结成一篇装修笔记，以免以后忘记做过哪些东西。<br>目前站点除去朋友注册和 bot 账号约有四十多人，但由于很多人都只是建个魂器，所以总体开销并没有预期大，保持目前的配置扩建至 100 人应该没有问题。不过人少也有人少的好处，站点真的像一个咖啡馆，有经常来的熟客也有偶尔来喝一杯的生客。总得来说达到了我预想的结果，后续如果能有更多熟客就更好了。  </p>
+<h2 id="Plume"><a href="#Plume" class="headerlink" title="Plume"></a>Plume</h2><p>虽然已经有很多博客，但还是搭建了 plume。一开始的想法是来咖啡馆的人应该多多少少都会写同人，搭个 plume 比在咖啡馆直接发长文好，还能和咖啡馆直接互通，对创作者和读者之间的交流十分友好。但实际上大多数人都只是注册一下，然后放着不用。就连我自己也只是注册了一个账号，没有往这个账号搬运任何文。对我来说 plume 只是一个替代平台，除非 hugo + vercel 和 AO3 (甚至是 wordpress) 都不好用才会考虑用 plume。<br>搭建 plume 并不难，只在配置 ngnix 时出错重来过一次。也有很多教程，所以没有记录如何搭建。在这里存一个教程：<a href="https://blog.tantalum.life/posts/build-plume-in-docker/">Plume | 利用Docker-compose搭建Fedi开源博客平台</a></p>
+<h2 id="Matrix"><a href="#Matrix" class="headerlink" title="Matrix"></a>Matrix</h2><p>之前为了找一个不受审查还不被墙的即时聊天软件搜遍全网，直到自己有了一台 VPS，终于依靠搭建 matrix 从这种情况中脱离出来。虽然 matrix 由于发送每条消息都需要加密，所以发送图片还是很慢，但日常聊天可以忍这一点小毛病。这也是除了 mastodon 以外，我服务器上最活跃的应用。拼 lego 是自嗨游戏，搭好之后还是有人用更快乐。<br>不过 matrix 也不是没有被墙的风险，但和 mastodon 类似，一个服务器被墙还有无数个服务器可以选择。唯一的问题是很多搭建 matrix 的站长都不喜欢对外开放注册，我也是这样，而 matrix 大站已经被墙。这其实间接导致很多人无法真正开始使用 matrix，毕竟朋友都不能用的话，聊天软件也就失去意义。可能这就是为什么站内要账号的人不少，真正使用的人不多吧。<br>搭建 matrix 主要参考了两个教程：<a href="https://www.b612.me/code/223.html">使用docker搭建Synapse(Matrix)</a> 和 <a href="https://tech.konata.co/2022-04-10-matrix/">Matrix | 使用 docker 搭建 Synapse 记录</a>。我的搭建过程并没有记录下来，现在想想虽然都是别人写过的东西，也还是应该记录一份自己完成的过程。下次一定。  </p>
+<h2 id="Bot"><a href="#Bot" class="headerlink" title="Bot"></a>Bot</h2><p>这部分算是我的一时兴起，以及想知道如何做到这件事而进行的两个尝试。即使一开始就知道写的 bot 无人在意，但还是很用心地完成了这两个 bot。算是我买了这个 VPS 之后最意外的收获，发现自己竟还有探索欲，竟然能够纯粹为了满足自己而去做一件事。  </p>
+<h3 id="自动发嘟的喵喵喵"><a href="#自动发嘟的喵喵喵" class="headerlink" title="自动发嘟的喵喵喵"></a>自动发嘟的喵喵喵</h3><p>象上实现自动发嘟的 bot 有很多，在没有自己的站点和服务器时就很好奇这些 bot 如何运营。稍微看点教程就发现如果只是在自己电脑上运行的话，很可能需要一直开着电脑。如果想要完全自动化，最好还是有一个自己的服务器。所以在建好站点之后，有个很小的由头就火速写了喵喵喵。关于 bot 背后的原理其实并不完全清楚，但不知道 why 并不影响 how，所以还是很顺利完成了这个非常简单的 bot。<br>搭建过程：<a href="https://tech.musain.club/2022/07/12/catsama/">CATsama：如何做一个定时发嘟的 Mastodon bot</a><br>喵喵本喵：<a href="https://musain.cafe/@CATsama">喵喵喵</a>  </p>
+<h3 id="自动回复的汪汪汪"><a href="#自动回复的汪汪汪" class="headerlink" title="自动回复的汪汪汪"></a>自动回复的汪汪汪</h3><p>学会了自动发嘟就自然而然想学会自动回复，但整个过程比自动发嘟波折得多。幸好即使最初参考的教程非常详细，也在一开始就边做边记录，所以整个波折的过程也被写下来。虽然可能不具有什么真正的参考性，但自己回顾时会觉得很开心，抓耳挠腮想办法也很开心。最后这个 bot 只能说是可以运行，并没有真正实现我一开始想要的那种自动回复。但由于问题在站点设置，而不在代码，站点又是我根据教程一步步来的，完全不知道从何改起，目前来讲这个 bot 只能这样子了。<br>搭建过程：<a href="https://tech.musain.club/2022/07/20/dogchan/">DOGchan：如何做一个能够自动回复的 Mastodon bot</a><br>汪汪本汪：<a href="https://musain.cafe/@DOGchan">汪汪汪</a>  </p>
+<h2 id="说点感想"><a href="#说点感想" class="headerlink" title="说点感想"></a>说点感想</h2><p>写完才发现其实在 VPS 上搞的东西也不算多，但每一个都是自己想去做就做了的。就像在 bot 部分说的，这个 VPS 带给我的最大惊喜是竟然还有这么多东西我想去探索、想知道如何实现。这个列表在未来还会继续变多，说不定什么时候看到感兴趣的东西就又在服务器上折腾点什么。但目前来讲更重要的是维护已有东西的稳定，在此基础之上搞搞装修。<br>忘记是哪里看到的，说 VPS 就是一款赛博乐高，的确如此。  </p>
+]]></content>
+      <categories>
+        <category>VPS</category>
+      </categories>
+      <tags>
+        <tag>VPS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>长毛象使用指南</title>
+    <url>/2021/09/21/mstdn/</url>
+    <content><![CDATA[<center>不少朋友被我安利到长毛象(mastodon)玩耍，本着对他们负责的态度，写下这篇长毛象使用指南。</center>
+<span id="more"></span>
+
+<h2 id="什么是mastodon"><a href="#什么是mastodon" class="headerlink" title="什么是mastodon"></a>什么是mastodon</h2><p>Mastodon(长毛象)是一个开源、去中心化的社交平台。简单来说，这里没有屏蔽词，没有限流，没有铺天盖地的营销号，没有Doctor看了都想重启宇宙的混乱时间线，只是一个纯粹的社交平台。长毛象将内容、社交网络交还给用户，更加尊重用户而不是平台“霸权”。<br><strong>如果将联邦宇宙(Fediverse)看做一个宇宙，那么每一个长毛象站点(Mastodon Society)就像一颗颗星球。</strong> 也就是说，你可以选择任何一颗星球定居，哪怕只是居住着一个人，只要它与宇宙相通，那么你就可以联系到宇宙中任何一个人而不会孤单。(摘自pullopen对长毛象的介绍：<a href="https://pullopenbluebox.wordpress.com/2020/06/30/mastodon-introduction/">长毛象（Mastodon）：更尊重用户的社交平台</a> )</p>
+<h2 id="如何在mastodon拥有一个账号"><a href="#如何在mastodon拥有一个账号" class="headerlink" title="如何在mastodon拥有一个账号"></a>如何在mastodon拥有一个账号</h2><h3 id="选择站点"><a href="#选择站点" class="headerlink" title="选择站点"></a>选择站点</h3><p>长毛象有各种各样的站点(或称实例)，如二次元相关站、LGBTQ站、艺术类站，或者按照语言划分的小语种站点等等。可以在官网列出的<a href="https://joinmastodon.org/communities">站点列表</a>里找到一个喜欢又适合的站点。<br>一开始使用建议在一些大型的国际站点注册，限制较少，每天都有很多世界各地的人在时间线上灌水，如</p>
+<ul>
+<li><a href="https://mastodon.social/">https://mastodon.social</a></li>
+<li><a href="https://mastodon.online/">https://mastodon.online</a></li>
+<li><a href="https://mstdn.social/">https://mstdn.social</a>  </li>
+</ul>
+<p>使用一段时间，对各项操作都熟悉之后，可进一步选择更适合自己的小站点注册并迁移账号，或者继续呆在国际站点也无妨。<br>也可以在中文站点，或者中文用户较多的站点注册。这样在查看local timeline(本地轴)时都是中文，方便遇到志同道合的朋友。但无论在哪个站点注册，都建议阅读过<strong>服务器规则</strong>和<strong>服务条款</strong>后再进行，这两项通常都放在注册页面。<br>熟悉长毛象后，发现没有一个站点完全符合自己的想法，也可以自建站加入长毛象宇宙。搭建长毛象站点有很多简单易上手的教程可供参考，即使是计算机小白也能拥有属于自己的站点。可参考的教程：</p>
+<ul>
+<li><a href="https://docs.joinmastodon.org/zh-cn/admin/prerequisites/">官方建站文档</a></li>
+<li><a href="https://www.notion.so/Mastodon-042a05ee29a048df8b2c1afd49e4c49b">长毛象（Mastodon）社区搭建详解</a></li>
+<li><a href="https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/07/19/How-to-build-a-mastodon-instance.html">技术小白如何搭建Mastodon实例</a></li>
+<li><a href="https://morikka.me/blog/mastodon-personal-instance/">长毛象个人向建站</a></li>
+</ul>
+<h3 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h3><p>只要在一个站点注册，就可以连上整个长毛象宇宙，看到所有在用户和他们公开可见的嘟文，所以只需选择一个合适的站点注册账号即可。但由于站点服务器大多在中国境外，有被墙掉的风险，很多人会选择在多个站点注册账号，避免一个站点被GFW盯上ban掉就难以连上长毛象宇宙。<br>邮箱是各站点注册的必须品，注册成功后也可以更改。建议使用gmail、protonmail等邮箱服务，避免使用qq邮箱一类能直接指向使用者的邮箱。一些站点还需要填写入站申请或入站理由等以便站长和管理员审核注册人，通过审核之后便可成功注册，在长毛象宇宙自由玩耍。</p>
+<h2 id="如何使用mastodon"><a href="#如何使用mastodon" class="headerlink" title="如何使用mastodon"></a>如何使用mastodon</h2><h3 id="Timeline-时间轴"><a href="#Timeline-时间轴" class="headerlink" title="Timeline(时间轴)"></a>Timeline(时间轴)</h3><p>Timeline简称为TL，完全按照时间来排列嘟文，不必担心出现时间线混乱、只给你看热度高的嘟文或塞给你不想看的广告、推广。<br>一般情况下，时间线有三种：</p>
+<ul>
+<li><strong>Home</strong> timeline，简称HTL，即首页。这是账号持有人自行关注而产生的时间线，能看到public、unlist、followers-only的嘟文(包括回复)以及提到你的direct message。</li>
+<li><strong>Local</strong> timeline，简称LTL，即本站(地)轴。这是账号所在站点的时间线，只有该站点的公开嘟文会出现在这里。</li>
+<li><strong>Federate</strong> timeline，简称FTL，即跨站轴。这是无论站点、所有账号嘟出的public内容共同组成的时间轴，能够看到世界各地的人都在这里发出自己的嘟嘟。</li>
+</ul>
+<p>通过设置<code>preferences (首选项) -&gt; other (其它) -&gt; PUBLIC TIMELINES-Filter languages (公共时间轴-语言过滤)</code>，可过滤时间线上的语言，只留下自己想看的语言。但这个过滤并不完全，公共轴或本站轴仍会出现一些应该被过滤掉的语言。 </p>
+<h3 id="基本功能"><a href="#基本功能" class="headerlink" title="基本功能"></a>基本功能</h3><ul>
+<li><p>发嘟  </p>
+<ul>
+<li>可见范围<br>发嘟可选择四种可见范围：public (公开)，unlist (公开，但不出现在公共时间轴)，followers-only (仅关注者可见)，direct message (私信，也可用作发仅自己可见的嘟文)。在设置中可以选择默认发嘟可见范围。</li>
+<li>cw折叠功能<br>一些不想被直接看到或者含有可能令人不适内容的嘟文推荐使用cw。点击发嘟窗口下方的cw就会出现一个新的小窗口，在这个新的小窗口填上内容提示信息，在发嘟主要窗口填写主要内容。<del>这个功能也很好地被用来讲冷笑话</del>  </li>
+<li>标记敏感内容<br>如果发的嘟文/图片含有not safe for work(NSFW，包括色情、暴力、血腥等)的内容，需要在发嘟时将图片标记为敏感信息，且善用cw折叠功能。</li>
+</ul>
+</li>
+<li><p>回复<br>左下角箭头是回复功能，回复也可以设置不同的可见范围。在此处如果设置followers-only，被回复者即使没有关注你，也可以看到。回复的嘟嘟仅会出现在同时关注对话双方的账号首页时间线(Home Timeline)。这样尽最大可能避免参与对话者以外的人的打扰，使对话双方处于平等地位，不会出现因一方粉丝过多看到回复一拥而上的现象。各个时间轴设置(一般在主区域右上角)中可设置该时间轴不显示回复类嘟文。</p>
+</li>
+<li><p>转发<br>长毛象的转发是仅转发，不能带文字。这样很好的避免了类似微博上转发挂人形成骂战的现象。在账号设置中选择<code>在时间轴中合并转嘟</code>，以避免一篇嘟文被太多人转发刷屏时间轴的情况。各个时间轴设置(一般在主区域右上角)中可设置该时间轴不显示转发类嘟文，公共轴一般默认不显示转发。</p>
+</li>
+<li><p>喜欢<br>这里的⭐是favourite的意思，类似点赞功能。点赞代表赞同、安慰还是这里有个言论我mark一下就看使用者自己的想法，但通常来说都是<strong>赞</strong>！  </p>
+</li>
+<li><p>书签<br>bookmark是书签，或者称为收藏功能，这个功能与大多数平台相似，不再赘述。</p>
+</li>
+</ul>
+<h3 id="头像、昵称、profile、标签"><a href="#头像、昵称、profile、标签" class="headerlink" title="头像、昵称、profile、标签"></a>头像、昵称、profile、标签</h3><p>一些站点固定期限内没有头像、昵称和嘟文的“三无账号”会被清除收回，注意阅读站点规则避免注册之后账号被回收。既然已经决定抛弃微博等在用户时间线上搞动作的平台，就不要只是注册个账号放着，用起来！</p>
+<h3 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h3><ul>
+<li><p>锁嘟<br>锁定账号(选项在个人资料页面)，需要手动审核所有关注请求。即每个想要关注你账号的人需要先发送关注请求，你通过之后方可关注你的账号以及看到你的followers-only的嘟文。与instgram的锁账号不同，即使挂上小锁其他人仍能看到公开可见的嘟文。如果有较多敏感嘟文不想随意被人看到，可定期删除或选择followers-only、direct message这两种可见范围。</p>
+</li>
+<li><p>语言<br>通过<code>Preferences (首选项) -&gt; Appearance (外观) -&gt; Interface language (界面语言)</code>设置平台语言。由于各语种都是志愿者翻译，可能会出现错误或词不达意，但基本不影响使用。</p>
+</li>
+<li><p>过滤器<br>这里的过滤器是真的过滤掉包含关键字的嘟文，但可能会在原本应该是一条嘟文的地方出现<code>filtered</code>的提醒。过滤器可以设置失效时间、作用场景等。</p>
+</li>
+<li><p>邮件通知<br><code>Preferences (首选项) -&gt; Notifications (通知)</code>里的邮件提醒建议关掉，避免发送过多邮件给站长的邮件服务造成不必要的负担。</p>
+</li>
+<li><p>其它<br>界面语言设置为惯用语言后，其它设置可自行探索。</p>
+</li>
+</ul>
+<h3 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h3><p>Mastodon故意弱化了搜索功能，避免形成“广场”，从而导致有人随便搜索一个关键词便前来抬杠或骂人的行为。但这也在一定程度上造成使用者的不便，比如明明有印象一条嘟嘟，但根本找不到，所以需要使用者自己多注意收藏有用的信息。有些站点开了全文搜索，会让搜索结果好一些，如自己的嘟文或转发、点赞过的嘟文能够搜索，但无法实现真正的“搜索”。 </p>
+<h3 id="block-mute"><a href="#block-mute" class="headerlink" title="block / mute"></a>block / mute</h3><p>block即拉黑/屏蔽。拉黑后，该账号无法与你互动、关注，嘟文不会出现在你的时间线。<br>mute即隐藏。隐藏后，该账号的嘟文不会出现在你的时间线，但仍可与你互动、关注，而你不会收到任何提醒。</p>
+<h3 id="迁移账号"><a href="#迁移账号" class="headerlink" title="迁移账号"></a>迁移账号</h3><p>长毛象的一大优点就是站点多，且类型丰富。如果看上了别的站点，可以在新站点注册账号后将账号迁移过去。迁移账号可以自动将followers/following转移到新账号，但无法迁移旧帐号的嘟文。</p>
+<h3 id="账号备份"><a href="#账号备份" class="headerlink" title="账号备份"></a>账号备份</h3><p>长毛象自带的备份功能可以备份follower列表、following列表、mute列表、block列表等。如果想要备份嘟文，可以使用象友提供的<a href="https://github.com/slashyn/mastodon-archive-viewer-modified">备份插件</a>。<br>由于各个站点的维护仅依赖站长和可能有的站点管理员，所以可能会有不稳定、服务器出问题等状况出现，有时整个站点也会关闭不再运行，及时备份账号内容是个好习惯。</p>
+<h3 id="app"><a href="#app" class="headerlink" title="app"></a>app</h3><p>长毛象作为一个去中心化的平台，最佳访问方式是直接浏览器访问，如Chrome、Firefox、safari等。这些浏览器可以在手机主屏幕创建快捷方式，在手机桌面单独形成一个图标和有一个app没有太大差别。<br>如果仍需要一个app，可选择的有：</p>
+<ul>
+<li><p><strong>Android</strong>: Tusky, Subway Tooter, Fedilab(付费)</p>
+</li>
+<li><p><strong>iOS</strong>: Metatext, Mercury, iMast, Amaroq, Mast(付费), Toot!(付费)  </p>
+</li>
+<li><p><strong>tooot</strong>：对于中文用户，推荐使用tooot。这是一个专注于中文社区的简洁、开源长毛象手机客户端，跨平台支持iOS和Android。 </p>
+</li>
+<li><p><strong>其它</strong>：其它平台应用推荐可查看<a href="https://joinmastodon.org/apps">官网应用推荐</a>。  </p>
+</li>
+</ul>
+<h3 id="tag"><a href="#tag" class="headerlink" title="tag"></a>tag</h3><p>作为一个公共社交网络，这里也可以带话题(tag)发嘟。格式和Instagram一样，只需要一个<code>#</code>，如<code>#tag</code>。<br>长毛象已经有很多有趣或有用的tag，如<code>#长毛象中文使用指南</code>、<code>#长毛象安利交换大会</code>、<code>#资源分享</code>、<code>#菜谱</code>，还有季节性的赏花、赏月tag。也可以创建自己的专属tag，把某类嘟文存在这个tag下，方便自己查看。</p>
+<h3 id="一些好玩的账号"><a href="#一些好玩的账号" class="headerlink" title="一些好玩的账号"></a>一些好玩的账号</h3><ul>
+<li><p>骰寶機<br>吃喝玩乐都可以找它！想不到晚饭吃什么，发嘟@骰宝问吃什么，不出一分钟就会回复一种食物。问它喝什么同理。还有好玩又有趣的答案之书和对不对判断。具体玩法可查看骰宝账号主页了解。</p>
+</li>
+<li><p>妙仙包<br>想知道心中之事的结果？找大师求签、塔罗牌都能给你一个奇妙的答案。选择困难症？找包包真普选，轻松治愈选择困难。心中有愿还可对着大师许愿，有机会被大师选中实现。具体玩法查看妙仙包账号主页了解。</p>
+</li>
+<li><p>sci咖啡屋<br>这里可以点单饮品、套餐，但一定要吃完不可浪费。累了还可以在这里撸猫，猫猫送上缓解疲惫。具体玩法查看sci咖啡屋账号主页了解。</p>
+</li>
+<li><p>Mature[マツレ]<br>Mature是长毛象上最早的科学期刊之一，也是长毛象最权威及最有名望的学术期刊之一。每周最重要、最前沿的研究结果是在「Mature」中以论文导读的形式发表的。欢迎订阅，支持投稿。投稿方法详见Mature账号主页。</p>
+</li>
+</ul>
+<p>以上有趣账号可通过搜索名称获得，在此不提供具体账号以免给站点造成麻烦。</p>
+<h2 id="More-than-Mastodon"><a href="#More-than-Mastodon" class="headerlink" title="More than Mastodon"></a>More than Mastodon</h2><p>其实mastodon只是这个宇宙中的一部分，还有Misskey、pleroma、funkwhale、peertube等和mastodon类似的社交平台共同组成整个联邦宇宙。<br>何必拘泥于处处受限的一隅，这里有更广阔的宇宙等你。<br>Enjoy yourself！</p>
+]]></content>
+      <categories>
+        <category>Mastodon</category>
+        <category>Use</category>
+      </categories>
+      <tags>
+        <tag>Mastodon</tag>
+        <tag>UserGuide</tag>
       </tags>
   </entry>
   <entry>
@@ -650,102 +746,6 @@ data[key] = $.html();
         <tag>Hexo</tag>
         <tag>Blog</tag>
         <tag>Markdown</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>长毛象使用指南</title>
-    <url>/2021/09/21/mstdn/</url>
-    <content><![CDATA[<center>不少朋友被我安利到长毛象(mastodon)玩耍，本着对他们负责的态度，写下这篇长毛象使用指南。</center>
-<span id="more"></span>
-
-<h2 id="什么是mastodon"><a href="#什么是mastodon" class="headerlink" title="什么是mastodon"></a>什么是mastodon</h2><p>Mastodon(长毛象)是一个开源、去中心化的社交平台。简单来说，这里没有屏蔽词，没有限流，没有铺天盖地的营销号，没有Doctor看了都想重启宇宙的混乱时间线，只是一个纯粹的社交平台。长毛象将内容、社交网络交还给用户，更加尊重用户而不是平台“霸权”。<br><strong>如果将联邦宇宙(Fediverse)看做一个宇宙，那么每一个长毛象站点(Mastodon Society)就像一颗颗星球。</strong> 也就是说，你可以选择任何一颗星球定居，哪怕只是居住着一个人，只要它与宇宙相通，那么你就可以联系到宇宙中任何一个人而不会孤单。(摘自pullopen对长毛象的介绍：<a href="https://pullopenbluebox.wordpress.com/2020/06/30/mastodon-introduction/">长毛象（Mastodon）：更尊重用户的社交平台</a> )</p>
-<h2 id="如何在mastodon拥有一个账号"><a href="#如何在mastodon拥有一个账号" class="headerlink" title="如何在mastodon拥有一个账号"></a>如何在mastodon拥有一个账号</h2><h3 id="选择站点"><a href="#选择站点" class="headerlink" title="选择站点"></a>选择站点</h3><p>长毛象有各种各样的站点(或称实例)，如二次元相关站、LGBTQ站、艺术类站，或者按照语言划分的小语种站点等等。可以在官网列出的<a href="https://joinmastodon.org/communities">站点列表</a>里找到一个喜欢又适合的站点。<br>一开始使用建议在一些大型的国际站点注册，限制较少，每天都有很多世界各地的人在时间线上灌水，如</p>
-<ul>
-<li><a href="https://mastodon.social/">https://mastodon.social</a></li>
-<li><a href="https://mastodon.online/">https://mastodon.online</a></li>
-<li><a href="https://mstdn.social/">https://mstdn.social</a>  </li>
-</ul>
-<p>使用一段时间，对各项操作都熟悉之后，可进一步选择更适合自己的小站点注册并迁移账号，或者继续呆在国际站点也无妨。<br>也可以在中文站点，或者中文用户较多的站点注册。这样在查看local timeline(本地轴)时都是中文，方便遇到志同道合的朋友。但无论在哪个站点注册，都建议阅读过<strong>服务器规则</strong>和<strong>服务条款</strong>后再进行，这两项通常都放在注册页面。<br>熟悉长毛象后，发现没有一个站点完全符合自己的想法，也可以自建站加入长毛象宇宙。搭建长毛象站点有很多简单易上手的教程可供参考，即使是计算机小白也能拥有属于自己的站点。可参考的教程：</p>
-<ul>
-<li><a href="https://docs.joinmastodon.org/zh-cn/admin/prerequisites/">官方建站文档</a></li>
-<li><a href="https://www.notion.so/Mastodon-042a05ee29a048df8b2c1afd49e4c49b">长毛象（Mastodon）社区搭建详解</a></li>
-<li><a href="https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/07/19/How-to-build-a-mastodon-instance.html">技术小白如何搭建Mastodon实例</a></li>
-<li><a href="https://morikka.me/blog/mastodon-personal-instance/">长毛象个人向建站</a></li>
-</ul>
-<h3 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h3><p>只要在一个站点注册，就可以连上整个长毛象宇宙，看到所有在用户和他们公开可见的嘟文，所以只需选择一个合适的站点注册账号即可。但由于站点服务器大多在中国境外，有被墙掉的风险，很多人会选择在多个站点注册账号，避免一个站点被GFW盯上ban掉就难以连上长毛象宇宙。<br>邮箱是各站点注册的必须品，注册成功后也可以更改。建议使用gmail、protonmail等邮箱服务，避免使用qq邮箱一类能直接指向使用者的邮箱。一些站点还需要填写入站申请或入站理由等以便站长和管理员审核注册人，通过审核之后便可成功注册，在长毛象宇宙自由玩耍。</p>
-<h2 id="如何使用mastodon"><a href="#如何使用mastodon" class="headerlink" title="如何使用mastodon"></a>如何使用mastodon</h2><h3 id="Timeline-时间轴"><a href="#Timeline-时间轴" class="headerlink" title="Timeline(时间轴)"></a>Timeline(时间轴)</h3><p>Timeline简称为TL，完全按照时间来排列嘟文，不必担心出现时间线混乱、只给你看热度高的嘟文或塞给你不想看的广告、推广。<br>一般情况下，时间线有三种：</p>
-<ul>
-<li><strong>Home</strong> timeline，简称HTL，即首页。这是账号持有人自行关注而产生的时间线，能看到public、unlist、followers-only的嘟文(包括回复)以及提到你的direct message。</li>
-<li><strong>Local</strong> timeline，简称LTL，即本站(地)轴。这是账号所在站点的时间线，只有该站点的公开嘟文会出现在这里。</li>
-<li><strong>Federate</strong> timeline，简称FTL，即跨站轴。这是无论站点、所有账号嘟出的public内容共同组成的时间轴，能够看到世界各地的人都在这里发出自己的嘟嘟。</li>
-</ul>
-<p>通过设置<code>preferences (首选项) -&gt; other (其它) -&gt; PUBLIC TIMELINES-Filter languages (公共时间轴-语言过滤)</code>，可过滤时间线上的语言，只留下自己想看的语言。但这个过滤并不完全，公共轴或本站轴仍会出现一些应该被过滤掉的语言。 </p>
-<h3 id="基本功能"><a href="#基本功能" class="headerlink" title="基本功能"></a>基本功能</h3><ul>
-<li><p>发嘟  </p>
-<ul>
-<li>可见范围<br>发嘟可选择四种可见范围：public (公开)，unlist (公开，但不出现在公共时间轴)，followers-only (仅关注者可见)，direct message (私信，也可用作发仅自己可见的嘟文)。在设置中可以选择默认发嘟可见范围。</li>
-<li>cw折叠功能<br>一些不想被直接看到或者含有可能令人不适内容的嘟文推荐使用cw。点击发嘟窗口下方的cw就会出现一个新的小窗口，在这个新的小窗口填上内容提示信息，在发嘟主要窗口填写主要内容。<del>这个功能也很好地被用来讲冷笑话</del>  </li>
-<li>标记敏感内容<br>如果发的嘟文/图片含有not safe for work(NSFW，包括色情、暴力、血腥等)的内容，需要在发嘟时将图片标记为敏感信息，且善用cw折叠功能。</li>
-</ul>
-</li>
-<li><p>回复<br>左下角箭头是回复功能，回复也可以设置不同的可见范围。在此处如果设置followers-only，被回复者即使没有关注你，也可以看到。回复的嘟嘟仅会出现在同时关注对话双方的账号首页时间线(Home Timeline)。这样尽最大可能避免参与对话者以外的人的打扰，使对话双方处于平等地位，不会出现因一方粉丝过多看到回复一拥而上的现象。各个时间轴设置(一般在主区域右上角)中可设置该时间轴不显示回复类嘟文。</p>
-</li>
-<li><p>转发<br>长毛象的转发是仅转发，不能带文字。这样很好的避免了类似微博上转发挂人形成骂战的现象。在账号设置中选择<code>在时间轴中合并转嘟</code>，以避免一篇嘟文被太多人转发刷屏时间轴的情况。各个时间轴设置(一般在主区域右上角)中可设置该时间轴不显示转发类嘟文，公共轴一般默认不显示转发。</p>
-</li>
-<li><p>喜欢<br>这里的⭐是favourite的意思，类似点赞功能。点赞代表赞同、安慰还是这里有个言论我mark一下就看使用者自己的想法，但通常来说都是<strong>赞</strong>！  </p>
-</li>
-<li><p>书签<br>bookmark是书签，或者称为收藏功能，这个功能与大多数平台相似，不再赘述。</p>
-</li>
-</ul>
-<h3 id="头像、昵称、profile、标签"><a href="#头像、昵称、profile、标签" class="headerlink" title="头像、昵称、profile、标签"></a>头像、昵称、profile、标签</h3><p>一些站点固定期限内没有头像、昵称和嘟文的“三无账号”会被清除收回，注意阅读站点规则避免注册之后账号被回收。既然已经决定抛弃微博等在用户时间线上搞动作的平台，就不要只是注册个账号放着，用起来！</p>
-<h3 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h3><ul>
-<li><p>锁嘟<br>锁定账号(选项在个人资料页面)，需要手动审核所有关注请求。即每个想要关注你账号的人需要先发送关注请求，你通过之后方可关注你的账号以及看到你的followers-only的嘟文。与instgram的锁账号不同，即使挂上小锁其他人仍能看到公开可见的嘟文。如果有较多敏感嘟文不想随意被人看到，可定期删除或选择followers-only、direct message这两种可见范围。</p>
-</li>
-<li><p>语言<br>通过<code>Preferences (首选项) -&gt; Appearance (外观) -&gt; Interface language (界面语言)</code>设置平台语言。由于各语种都是志愿者翻译，可能会出现错误或词不达意，但基本不影响使用。</p>
-</li>
-<li><p>过滤器<br>这里的过滤器是真的过滤掉包含关键字的嘟文，但可能会在原本应该是一条嘟文的地方出现<code>filtered</code>的提醒。过滤器可以设置失效时间、作用场景等。</p>
-</li>
-<li><p>邮件通知<br><code>Preferences (首选项) -&gt; Notifications (通知)</code>里的邮件提醒建议关掉，避免发送过多邮件给站长的邮件服务造成不必要的负担。</p>
-</li>
-<li><p>其它<br>界面语言设置为惯用语言后，其它设置可自行探索。</p>
-</li>
-</ul>
-<h3 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h3><p>Mastodon故意弱化了搜索功能，避免形成“广场”，从而导致有人随便搜索一个关键词便前来抬杠或骂人的行为。但这也在一定程度上造成使用者的不便，比如明明有印象一条嘟嘟，但根本找不到，所以需要使用者自己多注意收藏有用的信息。有些站点开了全文搜索，会让搜索结果好一些，如自己的嘟文或转发、点赞过的嘟文能够搜索，但无法实现真正的“搜索”。 </p>
-<h3 id="block-mute"><a href="#block-mute" class="headerlink" title="block / mute"></a>block / mute</h3><p>block即拉黑/屏蔽。拉黑后，该账号无法与你互动、关注，嘟文不会出现在你的时间线。<br>mute即隐藏。隐藏后，该账号的嘟文不会出现在你的时间线，但仍可与你互动、关注，而你不会收到任何提醒。</p>
-<h3 id="迁移账号"><a href="#迁移账号" class="headerlink" title="迁移账号"></a>迁移账号</h3><p>长毛象的一大优点就是站点多，且类型丰富。如果看上了别的站点，可以在新站点注册账号后将账号迁移过去。迁移账号可以自动将followers/following转移到新账号，但无法迁移旧帐号的嘟文。</p>
-<h3 id="账号备份"><a href="#账号备份" class="headerlink" title="账号备份"></a>账号备份</h3><p>长毛象自带的备份功能可以备份follower列表、following列表、mute列表、block列表等。如果想要备份嘟文，可以使用象友提供的<a href="https://github.com/slashyn/mastodon-archive-viewer-modified">备份插件</a>。<br>由于各个站点的维护仅依赖站长和可能有的站点管理员，所以可能会有不稳定、服务器出问题等状况出现，有时整个站点也会关闭不再运行，及时备份账号内容是个好习惯。</p>
-<h3 id="app"><a href="#app" class="headerlink" title="app"></a>app</h3><p>长毛象作为一个去中心化的平台，最佳访问方式是直接浏览器访问，如Chrome、Firefox、safari等。这些浏览器可以在手机主屏幕创建快捷方式，在手机桌面单独形成一个图标和有一个app没有太大差别。<br>如果仍需要一个app，可选择的有：</p>
-<ul>
-<li><p><strong>Android</strong>: Tusky, Subway Tooter, Fedilab(付费)</p>
-</li>
-<li><p><strong>iOS</strong>: Metatext, Mercury, iMast, Amaroq, Mast(付费), Toot!(付费)  </p>
-</li>
-<li><p><strong>tooot</strong>：对于中文用户，推荐使用tooot。这是一个专注于中文社区的简洁、开源长毛象手机客户端，跨平台支持iOS和Android。 </p>
-</li>
-<li><p><strong>其它</strong>：其它平台应用推荐可查看<a href="https://joinmastodon.org/apps">官网应用推荐</a>。  </p>
-</li>
-</ul>
-<h3 id="tag"><a href="#tag" class="headerlink" title="tag"></a>tag</h3><p>作为一个公共社交网络，这里也可以带话题(tag)发嘟。格式和Instagram一样，只需要一个<code>#</code>，如<code>#tag</code>。<br>长毛象已经有很多有趣或有用的tag，如<code>#长毛象中文使用指南</code>、<code>#长毛象安利交换大会</code>、<code>#资源分享</code>、<code>#菜谱</code>，还有季节性的赏花、赏月tag。也可以创建自己的专属tag，把某类嘟文存在这个tag下，方便自己查看。</p>
-<h3 id="一些好玩的账号"><a href="#一些好玩的账号" class="headerlink" title="一些好玩的账号"></a>一些好玩的账号</h3><ul>
-<li><p>骰寶機<br>吃喝玩乐都可以找它！想不到晚饭吃什么，发嘟@骰宝问吃什么，不出一分钟就会回复一种食物。问它喝什么同理。还有好玩又有趣的答案之书和对不对判断。具体玩法可查看骰宝账号主页了解。</p>
-</li>
-<li><p>妙仙包<br>想知道心中之事的结果？找大师求签、塔罗牌都能给你一个奇妙的答案。选择困难症？找包包真普选，轻松治愈选择困难。心中有愿还可对着大师许愿，有机会被大师选中实现。具体玩法查看妙仙包账号主页了解。</p>
-</li>
-<li><p>sci咖啡屋<br>这里可以点单饮品、套餐，但一定要吃完不可浪费。累了还可以在这里撸猫，猫猫送上缓解疲惫。具体玩法查看sci咖啡屋账号主页了解。</p>
-</li>
-<li><p>Mature[マツレ]<br>Mature是长毛象上最早的科学期刊之一，也是长毛象最权威及最有名望的学术期刊之一。每周最重要、最前沿的研究结果是在「Mature」中以论文导读的形式发表的。欢迎订阅，支持投稿。投稿方法详见Mature账号主页。</p>
-</li>
-</ul>
-<p>以上有趣账号可通过搜索名称获得，在此不提供具体账号以免给站点造成麻烦。</p>
-<h2 id="More-than-Mastodon"><a href="#More-than-Mastodon" class="headerlink" title="More than Mastodon"></a>More than Mastodon</h2><p>其实mastodon只是这个宇宙中的一部分，还有Misskey、pleroma、funkwhale、peertube等和mastodon类似的社交平台共同组成整个联邦宇宙。<br>何必拘泥于处处受限的一隅，这里有更广阔的宇宙等你。<br>Enjoy yourself！</p>
-]]></content>
-      <categories>
-        <category>Mastodon</category>
-        <category>Use</category>
-      </categories>
-      <tags>
-        <tag>Mastodon</tag>
-        <tag>UserGuide</tag>
       </tags>
   </entry>
   <entry>
@@ -2421,10 +2421,12 @@ $ hexo deploy  # 部署到GitHub Pages
       </tags>
   </entry>
   <entry>
-    <title>Computer Network Notes 4：Network Layer</title>
+    <title>Computer Network Notes 4：Network Layer (1)</title>
     <url>/2022/06/07/computernetworknotes4/</url>
     <content><![CDATA[<center> 把老师的 PPT 变成 md 文件之计算机网络第四章网络层：数据平面 </center>
 <span id="more"></span>
+
+<br>
 
 <h2 id="导论"><a href="#导论" class="headerlink" title="导论"></a>导论</h2><h3 id="网络层服务"><a href="#网络层服务" class="headerlink" title="网络层服务"></a>网络层服务</h3><p>在发送主机和接收主机对之间传送段 (segment)<br>在发送端将段封装到数据报中<br>在接收端，将段上交给传输层实体<br>网络层协议存在于每一个主机和路由器<br>路由器检查每一个经过它的 IP 数据报的头部  </p>
 <h3 id="网络层的关键功能"><a href="#网络层的关键功能" class="headerlink" title="网络层的关键功能"></a>网络层的关键功能</h3><p><strong>转发</strong>：将分组从路由器的输入接口转发到合适的输出接口<br><strong>路由</strong>：使用路由算法来决定分组从发送主机到目标接收主机的路径  </p>
@@ -2897,6 +2899,500 @@ $ hexo deploy  # 部署到GitHub Pages
 <ul>
 <li>match：IP 地址和端口号  </li>
 <li>action：重写地址和端口号  </li>
+</ul>
+]]></content>
+      <categories>
+        <category>Notes</category>
+        <category>ComputerNetwork</category>
+      </categories>
+      <tags>
+        <tag>ComputerNetwork</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Computer Network Notes 4：Network Layer (2)</title>
+    <url>/2022/08/23/computernetworknotes5/</url>
+    <content><![CDATA[<center> 把老师的 PPT 变成 md 文件之计算机网络第四章网络层：控制平面 </center>
+<span id="more"></span>
+
+<br>
+
+<h2 id="路由选择算法"><a href="#路由选择算法" class="headerlink" title="路由选择算法"></a>路由选择算法</h2><h3 id="路由协议"><a href="#路由协议" class="headerlink" title="路由协议"></a>路由协议</h3><p>路由协议的目标：确定从发送主机到接收主机之间，通过路由器的网络 “较好” 的路径 (等价于路由器的序列)  </p>
+<ul>
+<li>路径：路由器的序列，分组会沿着该序列从源主机到达最后的目标主机  </li>
+<li>“较好”：最小代价、最快的、最不拥塞  </li>
+<li>一个路由器到另一个路由器的最佳路径  </li>
+</ul>
+<h3 id="路由-route"><a href="#路由-route" class="headerlink" title="路由 (route)"></a>路由 (route)</h3><p>路由：按照某种指标 (传输延迟、所经过的站点数目等) 找到一条从源节点到目标节点的较好路径  </p>
+<ul>
+<li>较好路径：按照某种指标较小的路径  </li>
+<li>指标：站数、延迟、费用、队列长度等，或者是一些单纯指标的加权平均  </li>
+<li>采用什么样的指标，标示网络使用者希望网络在什么地方表现突出，什么指标完了过使用者比较重视  </li>
+</ul>
+<p>路由器 - 路由器之间的最优路径 = 主机对之间的最优路径  </p>
+<ul>
+<li>路由器连接子网，子网到路由器之间的跳数只有一跳，必须要走  </li>
+<li>路由器到下一跳路由器 (节点到节点) 之间的最优路径也就是从源子网向目标子网所有主机对之间的最优路径  </li>
+<li>大大降低路由计算的规模  </li>
+<li>在路由计算中按照子网到子网的路径计算为目标，而不是主机到主机  </li>
+</ul>
+<p>路由选择算法 (routing algorithm)：网络层软件的一部分，完成路由功能  </p>
+<h3 id="最优化原则-optimality-principle"><a href="#最优化原则-optimality-principle" class="headerlink" title="最优化原则 (optimality principle)"></a>最优化原则 (optimality principle)</h3><p>汇集树 (sink tree)  </p>
+<ul>
+<li>此节点到所有其它节点的最优路径形成的树  </li>
+<li>路由选择算法就是为所有路由器找到并使用汇集树  </li>
+</ul>
+<p>路由选择算法的原则  </p>
+<ul>
+<li>正确性 (correctness)：算法必须是正确的、完整的，使分组一站一站接力，正确发向目标站；完整：目标所有的站地址，在路由表中都能找到相应的表项，没有处理不了的目标站地址  </li>
+<li>简单性 (simplicity)：算法在计算机上应简单；最优但复杂的算法延迟大，不实用，不应为了获取路由信息增加很多通信量  </li>
+<li>健壮性 (robustness)：算法应能适应通信量和网络拓扑的变化；通信量变化，网络拓扑的变化算法能很快适应；不向很拥挤的链路发数据，不向断了的链路发数据  </li>
+<li>稳定性 (stability)：产生的路由不应该摇摆  </li>
+<li>公平性 (fairness)：对每一个站点都公平  </li>
+<li>最优性 (optimality)：某一个指标的最优，时间、费用等指标，或综合指标；实际上，获取最优的结果代价较高，可以是次优的  </li>
+</ul>
+<h3 id="路由算法分类"><a href="#路由算法分类" class="headerlink" title="路由算法分类"></a>路由算法分类</h3><h4 id="全局或局部路由信息"><a href="#全局或局部路由信息" class="headerlink" title="全局或局部路由信息"></a>全局或局部路由信息</h4><p>全局：  </p>
+<ul>
+<li>所有的路由器拥有完整的拓扑和便的代价的信息  </li>
+<li>link state 算法  </li>
+</ul>
+<p>分布式：  </p>
+<ul>
+<li>路由器只知道与它又物理连接关系的邻居路由器，和到相应邻居路由器的代价值  </li>
+<li>迭代地与邻居交换路由信息、计算路由信息  </li>
+<li>distance vector 算法  </li>
+</ul>
+<h4 id="静态或动态"><a href="#静态或动态" class="headerlink" title="静态或动态"></a>静态或动态</h4><p>静态：路由随时间变化缓慢  </p>
+<ul>
+<li>非自适应路由选择算法 (non-adaptive algorithm)：不能适应网络拓扑和通信量的变化，路由表是事先计算好的  </li>
+</ul>
+<p>动态：路由变化很快；周期性更新，根据链路代价的变化而变化  </p>
+<ul>
+<li>自适应路由选择算法 (adaptive algorithm)：能适应网络拓扑和信息量的变化  </li>
+</ul>
+<h3 id="Link-State-路由的工作过程"><a href="#Link-State-路由的工作过程" class="headerlink" title="Link State 路由的工作过程"></a>Link State 路由的工作过程</h3><p>配置 LS 路由选择算法的路由工作过程  </p>
+<ul>
+<li>个点通过各种渠道获得整个网络拓扑，网络中所有链路代价等信息 (与算法本身没有关系，属于协议和实现)  </li>
+<li>使用 LS 路由算法，计算本站点到其它站点的最优路径 (汇集树)，得到路由表  </li>
+<li>按照此路由表转发分组 (datagram 方式)  <ul>
+<li>严格意义上说不是一个路由的步骤  </li>
+<li>分发到输入端口的网络层  </li>
+</ul>
+</li>
+</ul>
+<p>获得网络拓扑和链路代价信息 -&gt; 是用最短路由算法得到路由表  -&gt; 使用此路由表  </p>
+<p>LS 路由的基本工作过程  </p>
+<ol>
+<li>发现相邻节点，获知对方网络地址  <ul>
+<li>一个路由器上电之后，向所有线路发送 HELLO 分组  </li>
+<li>其它路由器收到 HELLO 分组，回送应答，在应答分组中告知自己的名字 (全局唯一)  </li>
+<li>在 LAN 中，通过广播 HELLO 分组获得其它路由器信息，可以认为引入一个人工节点  </li>
+</ul>
+</li>
+<li>测量到相邻节点的代价 (延迟、开销)  <ul>
+<li>实测法，发送一个分组要求对方立即响应  </li>
+<li>会送一个 ECHO 分组  </li>
+<li>通过测量时间可以估算出延迟情况  </li>
+</ul>
+</li>
+<li>组装一个 LS 分组，描述它到相邻节点的代价情况<ul>
+<li>发送者名称  </li>
+<li>序号、年龄  </li>
+<li>列表：给出它相邻节点，而它到相邻节点的延迟  </li>
+</ul>
+</li>
+<li>将分组通过扩散的方法发到所有其它路由器  <ul>
+<li>顺序号：用于控制无穷的扩散，每个路由器都记录 (源路由器，顺序号)，发现重复或老的就不扩散<br>具体问题：  <ul>
+<li>循环使用问题</li>
+<li>路由器崩溃之后序号从 0 开始  </li>
+<li>序号出现错误</li>
+</ul>
+</li>
+<li>解决问题的办法：年龄字段 (age)  <ul>
+<li>生成一个分组时，年龄字段不为 0  </li>
+<li>每隔一段时间， AGE 字段减 1  </li>
+<li>AGE 字段为 0 的分组将被抛弃  </li>
+</ul>
+</li>
+<li>扩散分组的数据结构  <ul>
+<li>Source：从哪个节点收到 LS 分组  </li>
+<li>Seq，Age：序号，年龄  </li>
+<li>Send flags：发送标记，必须向指定的哪些相邻站点转发 LS 分组  </li>
+<li>ACK flags：本站点必须向那斜相邻站点发送应答  </li>
+<li>DATA：来自 source 站点的 LS 分组  </li>
+<li>eg. 节点 B 的数据结构  </li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p><img src="/2022/08/23/computernetworknotes5/LSstructure.png"></p>
+<p><em>以上 4 步让每个路由器获得拓扑和边代价</em><br>5. 通过 Dijkstra 算法找出最短路径 (这一步才是路由算法)  </p>
+<ul>
+<li>每个节点独立算出来到其它节点 (路由器 = 网络) 的最短路径  </li>
+<li>迭代算法：第 k 步能够直到本节点到 k 个其它节点的最短路径  </li>
+</ul>
+<p>LS 的应用情况  </p>
+<ul>
+<li>OSPF 协议是一种 LS 协议，被用于 Internet 上  </li>
+<li>IS-IS (intermediate system - intermediate system)：被用于 Internet 主干中，Netware  </li>
+</ul>
+<p>算法复杂度：n 节点  </p>
+<ul>
+<li>每一次迭代：需要检查所有不在永久集合 N 中节点  </li>
+<li>n(n+1)/2 次比较：O(n<sup>2</sup>)  </li>
+<li>有效实现时：O(nlogn)  </li>
+</ul>
+<p>可能带来路径震荡：链路代价 = 链路承载的流量  </p>
+<p><img src="/2022/08/23/computernetworknotes5/Dijkstra.png"></p>
+<h3 id="距离矢量路由选择-distance-vector-routin"><a href="#距离矢量路由选择-distance-vector-routin" class="headerlink" title="距离矢量路由选择 (distance vector routin)"></a>距离矢量路由选择 (distance vector routin)</h3><p>基本思想：  </p>
+<ul>
+<li>各路由器维护一张路由表</li>
+<li>各路由器与相邻路由器交换路由表  </li>
+<li>根据获得的路由信息，更新路由表</li>
+</ul>
+<p><img src="/2022/08/23/computernetworknotes5/DV.png"></p>
+<p>代价及相邻节点减代价的获得  </p>
+<ul>
+<li>跳数 (hops)，延迟 (delay)，队列长度  </li>
+<li>相邻节点间代价的获得：实测  </li>
+</ul>
+<p>路由信息的更新  </p>
+<ul>
+<li>根据实测，得到本节点 A 到相邻站点的代价 (如延迟)  </li>
+<li>根据各相邻站点声称它们到目标站点 B 的代价  </li>
+<li>计算出本站点 A 经过各相邻站点到目标站点 B 的代价  </li>
+<li>找到一个最小的代价和相应的下一个节点 Z，到达节点 B 经过此节点 Z，并且代价为 A-Z-B 的代价  </li>
+<li>其它所有的目标节点都使用上述算法  </li>
+</ul>
+<p><img src="/2022/08/23/computernetworknotes5/DVrouting.png"></p>
+<p>距离矢量算法  </p>
+<ul>
+<li>D<sub>x</sub>(y) = 节点 x 到 y 代价最小值的估计  <ul>
+<li>x 节点维护距离矢量 D<sub>x</sub> = [D<sub>x</sub>(y): y ∈ N]</li>
+</ul>
+</li>
+<li>节点 x：<ul>
+<li>知道到所有邻居 v 的代价：c(x,v)  </li>
+<li>收到并维护一个它邻居的距离矢量集  </li>
+<li>对于每个邻居，x 维护 D<sub>v</sub> = [D<sub>v</sub>(y): y ∈ N]</li>
+</ul>
+</li>
+<li>核心思路：  <ul>
+<li>每个节点都将自己的距离矢量估计值传送给邻居，定时或者 DV 有变化时，让对方去算  </li>
+<li>当 x 从邻居收到 DV 时，自己运算，更新它自己的距离矢量<ul>
+<li>采用 B-F equation  </li>
+<li><img src="/2022/08/23/computernetworknotes5/BFequation.png">  </li>
+</ul>
+</li>
+<li>D<sub>x</sub>(y) 估计值最终收敛于实际的最小代价值 d<sub>x</sub>(y)  <ul>
+<li>分布式、迭代算法  </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>异步式、迭代：每次本地迭代被以下事件触发  </p>
+<ul>
+<li>本地链路代价变化  </li>
+<li>从邻居收到 DV 的更新消息  </li>
+</ul>
+<p>分布式：  </p>
+<ul>
+<li>每个节点只是在自己的 DV 改变之后向邻居通告  </li>
+<li>邻居在有必要时通知它们的邻居  </li>
+<li><img src="/2022/08/23/computernetworknotes5/DVhexin.png">  </li>
+</ul>
+<p>DV 的无穷计算问题  </p>
+<ul>
+<li>DV 的特点：好消息传得快，坏消息传得慢  </li>
+<li>好消息的传播以每一个交换周期前进一格路由器的速度进行  <ul>
+<li>好消息：某个路由器接入或有更短的路径  </li>
+<li><img src="/2022/08/23/computernetworknotes5/goodnews.png">  </li>
+</ul>
+</li>
+<li>坏消息传播速度非常慢 (无穷计算问题)  <ul>
+<li><img src="/2022/08/23/computernetworknotes5/badnews.png">  </li>
+</ul>
+</li>
+<li>水平分裂 (split horizon) 算法：一种对无穷计算问题的解决方法  <ul>
+<li><img src="/2022/08/23/computernetworknotes5/splithorizon.png">  </li>
+<li>在某些拓扑形式下会失败 (存在环路)  </li>
+</ul>
+</li>
+</ul>
+<h3 id="LS-和-DV-算法比较"><a href="#LS-和-DV-算法比较" class="headerlink" title="LS 和 DV 算法比较"></a>LS 和 DV 算法比较</h3><p>消息复杂度：DV 优  </p>
+<ul>
+<li>LS：有 n 个节点，E 条链路，发送报文 O(nE)个  <ul>
+<li>局部的路由信息，全局传播  </li>
+</ul>
+</li>
+<li>DV：只和邻居交换信息  <ul>
+<li>全局的路由信息，局部传播  </li>
+</ul>
+</li>
+</ul>
+<p>收敛时间：LS 优  </p>
+<ul>
+<li>LS：O(n<sup>2</sup>) <ul>
+<li>有可能震荡  </li>
+</ul>
+</li>
+<li>DV：收敛较慢  <ul>
+<li>可能存在路由环路  </li>
+<li>count-to-infinity 问题  </li>
+</ul>
+</li>
+</ul>
+<p>健壮性：LS 优  </p>
+<ul>
+<li>LS：<ul>
+<li>节点会通告不正确的链路代价  </li>
+<li>每个节点只计算自己的路由表  </li>
+<li>错误信息影响较小，局部，路由较健壮  </li>
+</ul>
+</li>
+<li>DV：  <ul>
+<li>DV 节点可能会通告对全网所有节点的不正确路径代价 (距离矢量)  </li>
+<li>每一个节点的路由表可能被其它节点使用 (错误可以扩散到全网)  </li>
+</ul>
+</li>
+</ul>
+<br>
+
+<h2 id="自治系统内部的路由选择-内部网关协议"><a href="#自治系统内部的路由选择-内部网关协议" class="headerlink" title="自治系统内部的路由选择 (内部网关协议)"></a>自治系统内部的路由选择 (内部网关协议)</h2><h3 id="RIP-Routing-Information-Protocol"><a href="#RIP-Routing-Information-Protocol" class="headerlink" title="RIP: Routing Information Protocol"></a>RIP: Routing Information Protocol</h3><p>基于 Distance Vector 算法  </p>
+<ul>
+<li>距离矢量：每条链路 cost = 1，# of hops (max = 15 hops) 跳数  </li>
+<li>DV 每隔 30 秒和邻居交换 DV，通告  <ul>
+<li>定期，而且在改变路由时发送通告报文  </li>
+<li>在对方的请求下可以发送通告报文  </li>
+</ul>
+</li>
+<li>每个通告包括：最多 25 个目标子网  <ul>
+<li>目标网络 + 跳数  </li>
+</ul>
+</li>
+</ul>
+<h4 id="链路失效和恢复"><a href="#链路失效和恢复" class="headerlink" title="链路失效和恢复"></a>链路失效和恢复</h4><p>如果 180 秒没有收到通告信息 -&gt; 邻居或者链路失效  </p>
+<ul>
+<li>发现经过这个邻居的路由已失效  </li>
+<li>新的通告报文会传递给邻居  </li>
+<li>邻居因此发出新的通告 (如果路由变化)  </li>
+<li>链路失效快速在整网中传播  </li>
+<li>使用毒性逆转 (poison reverse) 阻止 ping-pong 回路 (不可达的剧里：跳数无限 = 16 段)  </li>
+</ul>
+<h4 id="进程处理"><a href="#进程处理" class="headerlink" title="进程处理"></a>进程处理</h4><p>RIP 以应用进程的方式实现：route-d (daemon)<br>通告报文通过 UDP 报文传送，周期性重复<br>网络层的协议使用了传输层的服务，以应用层实体的方式实现  </p>
+<p><img src="/2022/08/23/computernetworknotes5/RIPprocess.png">  </p>
+<h3 id="OSPF-Open-Shortest-Path-First"><a href="#OSPF-Open-Shortest-Path-First" class="headerlink" title="OSPF: Open Shortest Path First"></a>OSPF: Open Shortest Path First</h3><p>open：标准可公开获得<br>使用 LS 算法：  </p>
+<ul>
+<li>LS 分组在网络中 (一个 AS 内部) 分发  </li>
+<li>全局网络拓扑、代价在每一个节点中都保持  </li>
+<li>路由计算采用 Dijkstra 算法  </li>
+</ul>
+<p>OSPF 通告信息中携带：每一个邻居路由器一个表项<br>通告信息会传遍 AS 全部 (通过泛洪)  </p>
+<ul>
+<li>在 IP 数据包上直接传送 OSPF 报文，而不是通过 UDP 和 TCP  </li>
+</ul>
+<p>IS-IS 路由协议：几乎和 OSPF 一样  </p>
+<h4 id="OSPF-“高级”-特性-在-RIP-中没有"><a href="#OSPF-“高级”-特性-在-RIP-中没有" class="headerlink" title="OSPF “高级” 特性 (在 RIP 中没有)"></a>OSPF “高级” 特性 (在 RIP 中没有)</h4><p>安全：所有的 OSPF 报文都是经过认证的 (防止恶意攻击)<br>允许有多个代价相同的路径存在 (RIP 协议中只有一个)<br>对每一个链路，对不同的 TOS 有多重代价矩阵  </p>
+<ul>
+<li>eg. 卫星链路代价对于尽力而为的服务代价设置比较低，对实时服务代价设置的比较高  </li>
+<li>支持按照不同代价计算最优路径，如按照时间和延迟分别计算最优路径  </li>
+</ul>
+<p>对单播和多播的集成支持：Multicast OSPF (MOSPF) 使用相同的拓扑数据库，就像在 OSPF 中一样  </p>
+<h4 id="层次性的-OSPF-路由"><a href="#层次性的-OSPF-路由" class="headerlink" title="层次性的 OSPF 路由"></a>层次性的 OSPF 路由</h4><p>在大型网络中支持层次性 OSPF  </p>
+<p><img src="/2022/08/23/computernetworknotes5/MOSPF.png">  </p>
+<p>2 个级别的层次性：本地，骨干  </p>
+<ul>
+<li>链路状态通告仅仅本地区与 Area 范围内进行  </li>
+<li>每一个节点拥有本地区域的拓扑信息：关于其它区域，知道去它的方向，通过区域边界路由器 (最短路径)  </li>
+</ul>
+<p>区域边界路由器：“汇总 (聚集)” 到自己区域内网络的距离，向其它区域边界路由器通告<br>骨干路由器：仅仅在骨干区域内，运行 OSPF 路由<br>边界路由器：连接其它的 AS’s  </p>
+<br>
+
+<h2 id="ISP-之间的路由选择：BGP"><a href="#ISP-之间的路由选择：BGP" class="headerlink" title="ISP 之间的路由选择：BGP"></a>ISP 之间的路由选择：BGP</h2><h3 id="一个平面的路由"><a href="#一个平面的路由" class="headerlink" title="一个平面的路由"></a>一个平面的路由</h3><p>平面路由  </p>
+<ul>
+<li>一个网络中的所有路由器的地位一样  </li>
+<li>通过 LS、DV 或其它路由算法，所有路由器都要知道其它所有路由器 (子网) 如何走  </li>
+<li>所有路由器在一个平面  </li>
+</ul>
+<p>平面路由的问题  </p>
+<ul>
+<li>规模巨大的网络中，路由信息的存储、传输和计算代价巨大  <ul>
+<li>DV：距离矢量很大，且不能够收敛  </li>
+<li>LS：几百万个节点的 LS 分组的泛洪传输，存储以及最短路径算法的计算  </li>
+</ul>
+</li>
+<li>管理问题  <ul>
+<li>不同的网络所有者希望按照自己的方式管理网络  </li>
+<li>希望对外隐藏自己网络的细节  </li>
+<li>希望和其它网络互联  </li>
+</ul>
+</li>
+</ul>
+<h3 id="层次路由"><a href="#层次路由" class="headerlink" title="层次路由"></a>层次路由</h3><p>层次路由：将互联网分成一个个 AS (路由器区域)  </p>
+<ul>
+<li>某个区域内的路由器集合，autonomous systems (AS)  </li>
+<li>一个 AS 用 AS Number (ASN) 唯一标示  </li>
+<li>一个 ISP 可能包括 1 个或多个 AS  </li>
+</ul>
+<p>路由变成了 2 个层次路由  </p>
+<ul>
+<li>AS 内部路由：在同一个 AS 内路由器运行相同的路由协议  <ul>
+<li>intra-AS routing protocol：内部网关协议  </li>
+<li>不同的 AS 可能运行不同的内部网关协议，如 RIP、OSPF、IGRP  </li>
+<li>能够解决规模和管理问题  </li>
+<li>网关路由器：AS 边缘路由器，可以连接到其它 AS  </li>
+</ul>
+</li>
+<li>AS 间运行 AS 间路由协议  <ul>
+<li>inter-AS routing protocol：外部网关协议  </li>
+<li>解决 AS 之间的路由问题，完成 AS 之间的互联互通  </li>
+</ul>
+</li>
+</ul>
+<p>层次路由优点  </p>
+<ul>
+<li>解决了规模问题  <ul>
+<li>内部网关协议解决：AS 内部数量有限的路由器互相到达的问题，AS 内部规模可控<ul>
+<li>如 AS 节点太多，可分割 AS，使得 AS 内部节点数量有限  </li>
+</ul>
+</li>
+<li>AS 之间的路由规模问题  <ul>
+<li>增加一个 AS，对于 AS 之间的路由从总体上来说只是增加了一个节点 = 子网 (每个 AS 可以用一个点来表示)  </li>
+<li>对于其他 AS 来说只是增加了一个表项，即新增的 AS 如何走的问题  </li>
+<li>扩展性墙：规模增大，但性能不会减得太多  </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>解决了管理问题  <ul>
+<li>各个 AS 可以运行不同的内部网关协议  </li>
+<li>可以使自己网络的细节不向外透露  </li>
+</ul>
+</li>
+</ul>
+<h3 id="互联网-AS-间路由：BGP"><a href="#互联网-AS-间路由：BGP" class="headerlink" title="互联网 AS 间路由：BGP"></a>互联网 AS 间路由：BGP</h3><p>BGP (Border Gateway Protocol)：自治区域间路由协议 “事实上的” 标准<br>BGP 提供给每个 AS：  </p>
+<ul>
+<li>eBGP：从相邻的 ASes 哪里获得子网可达信息  </li>
+<li>iBGP：将获得的子网可达信息传遍 AS 内部的所有路由器  </li>
+<li>根据子网可达信息和策略来决定到达子网的 “好” 路径  </li>
+</ul>
+<p>允许子网向互联网其它网络通告 “我在这里”<br>基于距离矢量算法 (路径矢量)：不仅是距离矢量，还包括到达哥哥目标网络的详细路径 (AS 序号的列标)，能够避免简单 DV 算法的路由环路问题  </p>
+<p><img src="/2022/08/23/computernetworknotes5/eBGPiBGP.png">  </p>
+<p>网关路由器同时运行 eBGP 和 iBGP 协议  </p>
+<h4 id="BGP-基础"><a href="#BGP-基础" class="headerlink" title="BGP 基础"></a>BGP 基础</h4><p>BGP 会话：2 个 BGP 路由器 (peers) 在一个半永久的 TCP 连接上交换 BGP 报文：  </p>
+<ul>
+<li>通告向不同目标子网前缀的 “路径” (BGP 是一个 “路径矢量” 协议)  </li>
+</ul>
+<p><img src="/2022/08/23/computernetworknotes5/BGPbasic.png">  </p>
+<h4 id="路径的属性-amp-BGP-路由"><a href="#路径的属性-amp-BGP-路由" class="headerlink" title="路径的属性 &amp; BGP 路由"></a>路径的属性 &amp; BGP 路由</h4><p>当通告一个子网前缀时，通告包括 BGP 属性  </p>
+<ul>
+<li>prefix + attributes = route  </li>
+</ul>
+<p>两个重要属性：  </p>
+<ul>
+<li>AS-PATH：前缀的通告所经过的 AS 列标：AS 67 AS 17  <ul>
+<li>检测环路：多路径选择  </li>
+<li>在向其它 AS 转发时，需要将自己的 AS 号加在路径上  </li>
+</ul>
+</li>
+<li>NEXT-HOP：从当前 AS 到下一跳 AS 有多个链路，在 NEXT-HOP 属性中，告诉对方通过哪个 I 转发  </li>
+<li>其它属性：路由偏好志保，如何被插入的属性  </li>
+</ul>
+<p>基于策略的路由：  </p>
+<ul>
+<li>当一个网关路由器接收到一个路由通告，使用输入策略来接收或过来 (accept/decline)  <ul>
+<li>eg. 不想经过某个 AS，转发某些前缀的分组  </li>
+<li>eg. 已经有了一条往某前缀的偏好路径  </li>
+</ul>
+</li>
+<li>策略决定了是否向它的邻居通告收到的这个路由信息  </li>
+</ul>
+<p>BGP 路径通告  </p>
+<p><img src="/2022/08/23/computernetworknotes5/BGPljtg.png">  </p>
+<p><img src="/2022/08/23/computernetworknotes5/BGPljtg2.png">  </p>
+<h4 id="BGP-报文"><a href="#BGP-报文" class="headerlink" title="BGP 报文"></a>BGP 报文</h4><p>使用 TCP 协议交换 BGP 报文<br>BGP 报文：  </p>
+<ul>
+<li>OPEN：打开 TCP 连接，认证发送方  </li>
+<li>UPDATE：通告新路径 (或撤销原路径)  </li>
+<li>KEEPALIVE：在没有更新时保持连接，也用于对 OPEN 请求确认  </li>
+<li>NOTIFICATION：报告以前消息的错误，也用来关闭连接  </li>
+</ul>
+<h4 id="BGP-路径选择"><a href="#BGP-路径选择" class="headerlink" title="BGP 路径选择"></a>BGP 路径选择</h4><p>路由器可能获得一个网络前缀的多个路径，路由器必须进行路径的选择，路由选择可基于：  </p>
+<ul>
+<li>本地偏好值属性：偏好策略决定  </li>
+<li>最短 AS-PATH：AS 的跳数  </li>
+<li>最近的 NEXT-HOP 路由器：热土豆路由  </li>
+<li>附加的判据：使用 BGP 标示  </li>
+</ul>
+<p>一个前缀对应着多种路径，采用消除规则直到留下一条路径  </p>
+<h3 id="为什么内-外部网关协议如此不同"><a href="#为什么内-外部网关协议如此不同" class="headerlink" title="为什么内/外部网关协议如此不同"></a>为什么内/外部网关协议如此不同</h3><p>策略：  </p>
+<ul>
+<li>Inter-AS：管理员需要控制通信路径，谁在使用它的网络进行数据传输  </li>
+<li>Intra-AS：一个管理者，无需策略；AS 内部的各子网的主机进肯能地利用资源进行快速路由  </li>
+</ul>
+<p>规模：  </p>
+<ul>
+<li>AS 间路由必须考虑规模问题，以便支持全网的数据转发  </li>
+<li>AS 内部路由规模不是大问题  <ul>
+<li>如果 AS 太大，可继续分为小的 AS，规模可控  </li>
+<li>或 AS 内部路由支持层次性，层次性路由节约表空间，降低更新数据流量  </li>
+</ul>
+</li>
+</ul>
+<p>性能：  </p>
+<ul>
+<li>Intra-AS：关注性能  </li>
+<li>Inter-AS：策略比性能更重要  </li>
+</ul>
+<br>
+
+<h2 id="SDN-控制平面"><a href="#SDN-控制平面" class="headerlink" title="SDN 控制平面"></a>SDN 控制平面</h2><h3 id="Software-Defined-Networking-SDN"><a href="#Software-Defined-Networking-SDN" class="headerlink" title="Software Defined Networking (SDN)"></a>Software Defined Networking (SDN)</h3><p>逻辑上集中的控制平面<br>一个不同的 (通常是远程的) 控制器与本地控制代理 (CAs) 交互  </p>
+<p><img src="/2022/08/23/computernetworknotes5/SDNway.png">  </p>
+<p>逻辑上集中的控制平面：网络管理更容易；基于流表的转发，允许 “可编程” 的路由器；控制平面的开放实现  </p>
+<h3 id="SDN-特点"><a href="#SDN-特点" class="headerlink" title="SDN 特点"></a>SDN 特点</h3><p>通用 “flow based”，基于流的匹配 + 行动<br>控制平面和数据平面分离<br>控制平面功能在数据交换设备之外实现<br>可编程控制应用，在控制器之上以网络应用形式实现各种网络功能  </p>
+<h3 id="SDN-架构"><a href="#SDN-架构" class="headerlink" title="SDN 架构"></a>SDN 架构</h3><h4 id="数据平面交换机"><a href="#数据平面交换机" class="headerlink" title="数据平面交换机"></a>数据平面交换机</h4><p>快速、简单、商业化交换设备，采用硬件实现通用转发功能<br>流表被控制器计算和安装<br>基于南向 API (如 OpenFlow)，SDN 控制器访问基于流的交换机：定义了哪些可以被控制，哪些不能<br>定义了和控制器的协议 (如 OpenFlow)  </p>
+<h4 id="SDN-控制器-网络-OS"><a href="#SDN-控制器-网络-OS" class="headerlink" title="SDN 控制器 (网络 OS)"></a>SDN 控制器 (网络 OS)</h4><p>维护网络状态信息<br>通过上面的北向 API 和网络控制应用交互<br>拖过下面的南向 API 和网络交换机交互<br>逻辑上集中，但在实现上通常由于性能、可扩展性、容错性以及鲁棒性采用分布式方法实现  </p>
+<h4 id="网络控制应用"><a href="#网络控制应用" class="headerlink" title="网络控制应用"></a>网络控制应用</h4><p>控制的大脑：采用下层提供的服务 (SDN 控制器提供的 API)，实现网络功能  </p>
+<ul>
+<li>路由器 交换机  </li>
+<li>接入控制 防火墙  </li>
+<li>负载均衡  </li>
+<li>其它功能  </li>
+</ul>
+<p>非绑定：可以被第三方提供，与控制器厂商通常上可以不同，与分组交换机厂商也可以不同  </p>
+<p><img src="/2022/08/23/computernetworknotes5/SDNcontroller.png">  </p>
+<h3 id="OpenFlow：控制器-交换机报文"><a href="#OpenFlow：控制器-交换机报文" class="headerlink" title="OpenFlow：控制器-交换机报文"></a>OpenFlow：控制器-交换机报文</h3><p>关键的控制器到交换机的报文：  </p>
+<ul>
+<li>特性：控制器查询交换机特性，交换机应答  </li>
+<li>配置：交换机查询/设置交换机的配置参数  </li>
+<li>修改状态：增加删除修改 OpenFlow 表中的流表  </li>
+<li>packet-out：控制器可以将分组通过特定的端口发出  </li>
+</ul>
+<p>关键的交换机到控制器的报文：  </p>
+<ul>
+<li>分组进入：将分组 (和他的控制) 传给控制器，见来自控制器的 packet-out 报文  </li>
+<li>流移除：在交换机上删除流表项  </li>
+<li>端口状态：报告控制器端口的变化  </li>
+</ul>
+<p>网络管理员不需要直接通过创建/发送流表来变成交换机，可采用控制器上的 app 自动运算和配置  </p>
+<h3 id="OpenDaylight-ODL-控制器"><a href="#OpenDaylight-ODL-控制器" class="headerlink" title="OpenDaylight (ODL) 控制器"></a>OpenDaylight (ODL) 控制器</h3><p>ODL lithium 控制器<br>网络应用可以在 SDN 控制内或外面<br>服务抽象层 SAL：和内部以及外部应用以及服务进行交互  </p>
+<p><img src="/2022/08/23/computernetworknotes5/ODL.png">  </p>
+<h3 id="ONOS-控制器"><a href="#ONOS-控制器" class="headerlink" title="ONOS 控制器"></a>ONOS 控制器</h3><p>控制应用和控制器分离 (应用 app 在控制器外部)<br>意图架构服务的高级规范：描述什么，而不是如何<br>相当多的重点聚焦在分布式核心上，以提高服务的可靠性、性能的可扩展性  </p>
+<p><img src="/2022/08/23/computernetworknotes5/ONOS.png"></p>
+<h3 id="SDN-的挑战"><a href="#SDN-的挑战" class="headerlink" title="SDN 的挑战"></a>SDN 的挑战</h3><p>强化控制平面：可靠、可信、性能可扩展性、安全的分布式系统  </p>
+<ul>
+<li>对于失效的鲁棒性：利用为控制平面可靠分布式系统的强大理论  </li>
+<li>可信任、安全：从开始就进行铸造  </li>
+</ul>
+<p>网络、协议满足特殊任务的需求  </p>
+<ul>
+<li>eg. 实时性、超高可靠性、超高安全性  </li>
+</ul>
+<p>互联网络范围内的扩展性  </p>
+<ul>
+<li>全网部署，而不是仅仅在一个 AS 内部部署</li>
 </ul>
 ]]></content>
       <categories>
