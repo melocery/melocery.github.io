@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"tech.musain.club","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="把老师的 PPT 变成 md 文件之计算机网络链路层和局域网">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Computer Network Notes 6：A Top Down Approach">
+<meta property="og:url" content="https://tech.musain.club/2022/09/06/computernetworknotes6/index.html">
+<meta property="og:site_name" content="Bugrocery">
+<meta property="og:description" content="把老师的 PPT 变成 md 文件之计算机网络链路层和局域网">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://tech.musain.club/2022/09/06/computernetworknotes6/shipeiqi.png">
+<meta property="og:image" content="https://tech.musain.club/2022/09/06/computernetworknotes6/EDC.png">
+<meta property="og:image" content="https://tech.musain.club/2022/09/06/computernetworknotes6/singlebit.png">
+<meta property="og:image" content="https://tech.musain.club/2022/09/06/computernetworknotes6/2dsinglebit.png">
+<meta property="og:image" content="https://tech.musain.club/2022/09/06/computernetworknotes6/CRC.png">
+<meta property="og:image" content="https://tech.musain.club/2022/09/06/computernetworknotes6/CRCexample.png">
+<meta property="article:published_time" content="2022-09-06T02:53:38.000Z">
+<meta property="article:modified_time" content="2022-09-08T03:19:36.815Z">
+<meta property="article:author" content="Udon">
+<meta property="article:tag" content="ComputerNetwork">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tech.musain.club/2022/09/06/computernetworknotes6/shipeiqi.png">
+
+
+<link rel="canonical" href="https://tech.musain.club/2022/09/06/computernetworknotes6/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://tech.musain.club/2022/09/06/computernetworknotes6/","path":"2022/09/06/computernetworknotes6/","title":"Computer Network Notes 6：A Top Down Approach"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Computer Network Notes 6：A Top Down Approach | Bugrocery</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Bugrocery</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+        <li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>links</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E8%AE%BA%E5%92%8C%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.</span> <span class="nav-text">引论和服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E8%8A%82%E7%82%B9%E7%9A%84%E8%BF%9E%E6%8E%A5%E6%96%B9%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">网络节点的连接方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%92%8C%E5%B1%80%E5%9F%9F%E7%BD%91"><span class="nav-number">1.2.</span> <span class="nav-text">数据链路层和局域网</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E8%B7%AF%E5%B1%82%E6%A6%82%E8%BF%B0"><span class="nav-number">1.3.</span> <span class="nav-text">链路层概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%AF%E8%AF%AD"><span class="nav-number">1.3.1.</span> <span class="nav-text">术语</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="nav-number">1.3.2.</span> <span class="nav-text">上下文</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E8%B7%AF%E5%B1%82%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.4.</span> <span class="nav-text">链路层服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E8%B7%AF%E5%B1%82%E5%AE%9E%E7%8E%B0%E4%BD%8D%E7%BD%AE"><span class="nav-number">1.5.</span> <span class="nav-text">链路层实现位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%82%E9%85%8D%E5%99%A8%E9%80%9A%E4%BF%A1"><span class="nav-number">1.6.</span> <span class="nav-text">适配器通信</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%AE%E9%94%99%E6%A3%80%E6%B5%8B%E5%92%8C%E7%BA%A0%E6%AD%A3"><span class="nav-number">2.</span> <span class="nav-text">差错检测和纠正</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E6%A3%80%E6%B5%8B"><span class="nav-number">2.1.</span> <span class="nav-text">错误检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A5%87%E5%81%B6%E6%A0%A1%E9%AA%8C"><span class="nav-number">2.2.</span> <span class="nav-text">奇偶校验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E9%AA%8C%E5%92%8C%EF%BC%9ACRC-%E5%BE%AA%E7%8E%AF%E5%86%97%E4%BD%99%E6%A0%A1%E9%AA%8C"><span class="nav-number">2.3.</span> <span class="nav-text">检验和：CRC (循环冗余校验)</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Udon"
+      src="/images/img.png">
+  <p class="site-author-name" itemprop="name">Udon</p>
+  <div class="site-description" itemprop="description">It's no use to be hardworking.</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/melocery" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;melocery" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:urbwatched@protonmail.com" title="E-Mail → mailto:urbwatched@protonmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tech.musain.club/2022/09/06/computernetworknotes6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/img.png">
+      <meta itemprop="name" content="Udon">
+      <meta itemprop="description" content="It's no use to be hardworking.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bugrocery">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Computer Network Notes 6：A Top Down Approach
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-09-06 10:53:38" itemprop="dateCreated datePublished" datetime="2022-09-06T10:53:38+08:00">2022-09-06</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2022-09-08 11:19:36" itemprop="dateModified" datetime="2022-09-08T11:19:36+08:00">2022-09-08</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/ComputerNetwork/" itemprop="url" rel="index"><span itemprop="name">ComputerNetwork</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>1.6k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>1 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <center> 把老师的 PPT 变成 md 文件之计算机网络链路层和局域网 </center>
+<span id="more"></span>
+
+<br>
+
+<h2 id="引论和服务"><a href="#引论和服务" class="headerlink" title="引论和服务"></a>引论和服务</h2><h3 id="网络节点的连接方式"><a href="#网络节点的连接方式" class="headerlink" title="网络节点的连接方式"></a>网络节点的连接方式</h3><p>点到点连接<br>多点连接：共享型介质；通过网络交换机  </p>
+<h3 id="数据链路层和局域网"><a href="#数据链路层和局域网" class="headerlink" title="数据链路层和局域网"></a>数据链路层和局域网</h3><p>WAN：网络形式采用点到点链路  </p>
+<ul>
+<li>贷款大、距离远 (延迟打)：贷款延迟积大  </li>
+<li>如果采用多点连接方式：竞争方式 (一旦冲突代价大)，令牌等协调方式 (在其中协调节点的发送代价大)  </li>
+</ul>
+<p>点到点的链路层服务实现非常简单，封装和解封装  </p>
+<p>LAN：一般采用多点连接方式  </p>
+<ul>
+<li>连接到节点非常方便  </li>
+<li>街道共享型介质上 (或网络交换机)，就可以连接所有其他节点  </li>
+</ul>
+<p>多点连接方式网络的链路层功能实现相当复杂  </p>
+<ul>
+<li>多点接入：协调各节点对共享型介质的访问和使用  </li>
+<li>竞争方式：冲突之后的协调  </li>
+<li>令牌方式：令牌产生、占有和释放等  </li>
+</ul>
+<h3 id="链路层概述"><a href="#链路层概述" class="headerlink" title="链路层概述"></a>链路层概述</h3><h4 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h4><p>主机和路由器是节点 (网桥和交换机也是)：nodes<br>沿着通信路径，连接相邻节点通信信道的是链路：links  </p>
+<ul>
+<li>有线链路</li>
+<li>无线链路  </li>
+<li>局域网，共享型链路  </li>
+</ul>
+<p>第二层协议数据单元帧 (frame)，封装数据报  </p>
+<p><strong>数据链路层</strong>负责从一个节点通过链路将 (帧重点) 数据报发送到<strong>物理相邻节点</strong>  </p>
+<h4 id="上下文"><a href="#上下文" class="headerlink" title="上下文"></a>上下文</h4><p>数据报 (分组) 在不同的链路上以不同的链路协议传送：  </p>
+<ul>
+<li>第一跳链路：以太网  </li>
+<li>中间链路：帧中继链路  </li>
+<li>最后一跳：802.11  </li>
+</ul>
+<p>不同的链路协议提供不同的服务，如在链路层上提供 (或没有) 可靠数据传送  </p>
+<h3 id="链路层服务"><a href="#链路层服务" class="headerlink" title="链路层服务"></a>链路层服务</h3><p>成帧，链路接入：  </p>
+<ul>
+<li>将数据报封装在帧中，加上帧头、帧尾部  </li>
+<li>如果采用的是共享型介质，信道接入获得信道访问权  </li>
+<li>在帧头部使用 “MAC” (物理) 地址来标示源和目的 (不同于 IP 地址)  </li>
+</ul>
+<p>在相邻两个节点完成可靠数据传输  </p>
+<ul>
+<li>在低出错率的链路上 (光纤和双绞线电缆) 很少使用  <ul>
+<li>出错率低，没有必要再每一个帧中做差错控制的工作，协议复杂  <ul>
+<li>发送端对每一帧进行差错控制编码，根据反馈做相应的动作  </li>
+<li>接收端进行差错控制解码，反馈给发送端 (ACK，NAK)  </li>
+</ul>
+</li>
+<li>在本层放弃可靠控制的工作，在网络层或传输层做可靠控制的工作，或根本不做可靠控制的工作  </li>
+</ul>
+</li>
+<li>在高差错链路上需要进行可靠的数据传送<ul>
+<li>高差错链路：无线链路  </li>
+<li>出错率高，如果在链路层不做差错控制工作，漏出去的错误比较高，到了上层如果需要可靠控制的数据传输代价会很大 (不做 local recovery 总体代价大)  </li>
+</ul>
+</li>
+</ul>
+<p>流量控制：使得相邻的发送和接收方节点的速度匹配  </p>
+<p>错误检测：  </p>
+<ul>
+<li>差错由信号衰减和噪声引起  </li>
+<li>接收方检测出的错误：通知发送端进行重传或丢弃帧  </li>
+</ul>
+<p>差错纠正：接收端检查和纠正 bit 错误，不通过重传来纠正错误  </p>
+<p>半双工和全双工  </p>
+<ul>
+<li>半双工：链路可以双向传输，但一次只有一个方向  </li>
+<li>全双工：两个方向可以同时  </li>
+</ul>
+<h3 id="链路层实现位置"><a href="#链路层实现位置" class="headerlink" title="链路层实现位置"></a>链路层实现位置</h3><p>在每一个主机上，也在每个路由器上，交换机的每个端口上  </p>
+<p>链路层功能在 “适配器” 上实现 (network interface card, NIC) 或在一个芯片组上  </p>
+<ul>
+<li>以太网卡，802.11 网卡；以太网芯片组  </li>
+<li>实现链路层和相应的物理层功能  </li>
+</ul>
+<p>接到主机的系统总线上  </p>
+<p>硬件、软件和固件的综合体</p>
+<h3 id="适配器通信"><a href="#适配器通信" class="headerlink" title="适配器通信"></a>适配器通信</h3><p>发送方  </p>
+<ul>
+<li>在帧中封装数据报  </li>
+<li>加上差错控制编码，实现 RDT 和流量控制功能等  </li>
+</ul>
+<p>接收方  </p>
+<ul>
+<li>检查有无出错，执行 RDT 和流量控制功等  </li>
+<li>解封装数据报，将其交给上层  </li>
+</ul>
+<p>适配器是半自治的，实现了链路和物理层功能  </p>
+<p><img src="/2022/09/06/computernetworknotes6/shipeiqi.png">  </p>
+<br>
+
+<h2 id="差错检测和纠正"><a href="#差错检测和纠正" class="headerlink" title="差错检测和纠正"></a>差错检测和纠正</h2><h3 id="错误检测"><a href="#错误检测" class="headerlink" title="错误检测"></a>错误检测</h3><p>EDC = 差错检测和纠正位 (冗余位)<br>D = 数据由差错检测保护，可以包含头部字段<br>错误检测不是 100% 可靠的：  </p>
+<ul>
+<li>协议会漏间一些错误 (很少)  </li>
+<li>更长的 EDC 字段可以得到更好的检测和纠正效果  </li>
+</ul>
+<p><img src="/2022/09/06/computernetworknotes6/EDC.png">  </p>
+<h3 id="奇偶校验"><a href="#奇偶校验" class="headerlink" title="奇偶校验"></a>奇偶校验</h3><p>单 bit 奇偶校验：检测单个 bit 级错误  </p>
+<p><img src="/2022/09/06/computernetworknotes6/singlebit.png">  </p>
+<p>2 维奇偶校验：检测和纠正单个 bit 错误  </p>
+<p><img src="/2022/09/06/computernetworknotes6/2dsinglebit.png">  </p>
+<h3 id="检验和：CRC-循环冗余校验"><a href="#检验和：CRC-循环冗余校验" class="headerlink" title="检验和：CRC (循环冗余校验)"></a>检验和：CRC (循环冗余校验)</h3><p>将数据比特 D 看作二进制的数据<br>生成多项式 G：双方协商 r+1 位模式 (r 次方)：生成和检验所使用的位模式<br>目标：选择 r 位 CRC 附加位 R，使得：  </p>
+<ul>
+<li>&lt;D, R&gt; 正好被 G 整除 (modulo 2)</li>
+<li>接收方直到 G，将 &lt;D, R&gt; 除以 G，如果非 0 余数，检查出错误  </li>
+<li>能检出所有少于 r+1 位的突发错误  </li>
+</ul>
+<p>实际应用：以太网、802.11 WiFi、ATM  </p>
+<p><img src="/2022/09/06/computernetworknotes6/CRC.png">  </p>
+<p>CRC 例子：  </p>
+<p><img src="/2022/09/06/computernetworknotes6/CRCexample.png"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ComputerNetwork/" rel="tag"># ComputerNetwork</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/08/23/computernetworknotes5/" rel="prev" title="Computer Network Notes 5：Network Layer (2)">
+                  <i class="fa fa-chevron-left"></i> Computer Network Notes 5：Network Layer (2)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/11/06/aps/" rel="next" title="APS 总是能过的">
+                  APS 总是能过的 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Udon</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>Symbols count total: </span>
+    <span title="Symbols count total">137k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>Reading time total &asymp;</span>
+    <span title="Reading time total">2:04</span>
+  </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
