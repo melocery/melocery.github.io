@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"tech.musain.club","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="给三个博客都加了评论区，记录一下分别做了什么">
+<meta property="og:type" content="article">
+<meta property="og:title" content="为博客添加评论区">
+<meta property="og:url" content="https://tech.musain.club/2023/02/08/comments/index.html">
+<meta property="og:site_name" content="Bugrocery">
+<meta property="og:description" content="给三个博客都加了评论区，记录一下分别做了什么">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-02-08T03:20:42.000Z">
+<meta property="article:modified_time" content="2023-02-08T04:31:55.463Z">
+<meta property="article:author" content="Udon">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="Blog">
+<meta property="article:tag" content="Hugo">
+<meta property="article:tag" content="Comments">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://tech.musain.club/2023/02/08/comments/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://tech.musain.club/2023/02/08/comments/","path":"2023/02/08/comments/","title":"为博客添加评论区"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>为博客添加评论区 | Bugrocery</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Bugrocery</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+        <li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>links</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Bugrocery-Giscus"><span class="nav-number">1.</span> <span class="nav-text">Bugrocery - Giscus</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%88%92-273-15-%E2%84%83-Waline"><span class="nav-number">2.</span> <span class="nav-text">− 273.15 ℃ - Waline</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sparkles-Club-Valine"><span class="nav-number">3.</span> <span class="nav-text">Sparkles Club - Valine</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Udon"
+      src="/images/img.png">
+  <p class="site-author-name" itemprop="name">Udon</p>
+  <div class="site-description" itemprop="description">It's no use to be hardworking.</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/melocery" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;melocery" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:urbwatched@protonmail.com" title="E-Mail → mailto:urbwatched@protonmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tech.musain.club/2023/02/08/comments/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/img.png">
+      <meta itemprop="name" content="Udon">
+      <meta itemprop="description" content="It's no use to be hardworking.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bugrocery">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          为博客添加评论区
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2023-02-08 11:20:42 / Modified: 12:31:55" itemprop="dateCreated datePublished" datetime="2023-02-08T11:20:42+08:00">2023-02-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Blog/" itemprop="url" rel="index"><span itemprop="name">Blog</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Blog/Building/" itemprop="url" rel="index"><span itemprop="name">Building</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>1.1k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>1 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <center> 给三个博客都加了评论区，记录一下分别做了什么 </center>
+<span id="more"></span>
+
+<h2 id="Bugrocery-Giscus"><a href="#Bugrocery-Giscus" class="headerlink" title="Bugrocery - Giscus"></a>Bugrocery - Giscus</h2><p>本博客的评论配置。  </p>
+<p>参考：<a target="_blank" rel="noopener" href="https://tech.konata.co/2022-02-20-add-comment-to-hexo/">给 Hexo 配置 Giscus 评论系统</a>  </p>
+<p>安装插件：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-next-giscus --save</span><br></pre></td></tr></table></figure>
+
+<p>在 <a target="_blank" rel="noopener" href="https://giscus.app/zh-CN">giscus</a> 生成相关参数：  </p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">giscus:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="comment"># Github repository name</span></span><br><span class="line">  <span class="attr">repo_id:</span> <span class="comment"># Github repository id</span></span><br><span class="line">  <span class="attr">category:</span> <span class="string">Announcements</span> <span class="comment"># Github discussion category</span></span><br><span class="line">  <span class="attr">category_id:</span> <span class="comment"># Github discussion category id</span></span><br><span class="line">  <span class="comment"># Available values: pathname | url | title | og:title</span></span><br><span class="line">  <span class="attr">mapping:</span> <span class="string">pathname</span></span><br><span class="line">  <span class="comment"># Available values: 0 | 1 </span></span><br><span class="line">  <span class="attr">reactions_enabled:</span> <span class="number">1</span></span><br><span class="line">   <span class="comment"># Available values: 0 | 1 </span></span><br><span class="line">  <span class="attr">emit_metadata:</span> <span class="number">1</span></span><br><span class="line">  <span class="comment"># Available values: light | dark | dark_high_contrast | transparent_dark | preferred-color-scheme</span></span><br><span class="line">  <span class="attr">theme:</span> <span class="string">preferred_color_scheme</span></span><br><span class="line">  <span class="comment"># Available values: en | zh-C</span></span><br><span class="line">  <span class="attr">lang:</span> <span class="string">en</span></span><br><span class="line">  <span class="comment"># Available value: anonymous</span></span><br><span class="line">  <span class="attr">crossorigin:</span> <span class="string">anonymous</span></span><br></pre></td></tr></table></figure>
+
+<p>将上述内容添加到 <code>next</code> 主题 <code>_config.yml</code> 的 <code>comments</code> 部分。<br>教程中说放在博客的 <code>_config.yml</code> 文件中即可，但一直不生效，改到主题的配置文件中才成功。  </p>
+<h2 id="−-273-15-℃-Waline"><a href="#−-273-15-℃-Waline" class="headerlink" title="− 273.15 ℃ - Waline"></a>− 273.15 ℃ - Waline</h2><p>生活博客的评论配置，该博客用 hugo + vercel 搭建，主题是 stack，该主题事先支持 Waline。  </p>
+<p>参考：<a target="_blank" rel="noopener" href="https://waline.js.org/guide/get-started/">Waline 快速上手</a>  </p>
+<p>根据教程中提到的步骤，先在 <a target="_blank" rel="noopener" href="https://console.leancloud.app/apps">LeanCloud 国际版</a>注册应用，再到 <a target="_blank" rel="noopener" href="https://vercel.com/new/clone?repository-url=https://github.com/walinejs/waline/tree/main/example">Vercel 部署</a>，最后修改主题配置文件中的 <code>waline</code> 部分，将 Vercel 给出的链接填入 <code>serverURL</code> 即可。  </p>
+<h2 id="Sparkles-Club-Valine"><a href="#Sparkles-Club-Valine" class="headerlink" title="Sparkles Club - Valine"></a>Sparkles Club - Valine</h2><p>存文博客的评论配置，该博客使用 hugo + vercel 搭建，主题是 LoveIt，该主题事先支持 Valine。 </p>
+<p>参考：<a target="_blank" rel="noopener" href="https://mantyke.icu/posts/2021/comment/">Hugo | 为 Blog 增加评论区</a>  </p>
+<p>根据教程中提到的步骤，先在 <a target="_blank" rel="noopener" href="https://console.leancloud.app/apps">LeanCloud 国际版</a>注册应用，再到配置文件 <code>config.toml</code> 中修改 Valine 的部分，填入 LeanCloud 应用的 <code>appID</code>、<code>appKey</code> 和 <code>serverURLs</code>。  </p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+              <a href="/tags/Blog/" rel="tag"># Blog</a>
+              <a href="/tags/Hugo/" rel="tag"># Hugo</a>
+              <a href="/tags/Comments/" rel="tag"># Comments</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/12/14/satan/" rel="prev" title="Satan：如何做一个嘟嘟中转站">
+                  <i class="fa fa-chevron-left"></i> Satan：如何做一个嘟嘟中转站
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments giscus-container">
+  </div>
+  
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Udon</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>Symbols count total: </span>
+    <span title="Symbols count total">142k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>Reading time total &asymp;</span>
+    <span title="Reading time total">2:09</span>
+  </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+<script class="next-config" data-name="giscus" type="application/json">{"enable":true,"repo":"melocery/melocery.github.io","repo_id":"MDEwOlJlcG9zaXRvcnk0MDY2NDI3NTM=","category":"Announcements","category_id":"DIC_kwDOGDzgQc4CQjbq","mapping":"pathname","reactions_enabled":1,"emit_metadata":1,"theme":"preferred_color_scheme","lang":"en","crossorigin":"anonymous"}</script>
+
+<script>
+document.addEventListener('page:loaded', () => {
+  if (!CONFIG.page.comments) return;
+
+  NexT.utils.loadComments('.giscus-container')
+    .then(() => NexT.utils.getScript('https://giscus.app/client.js', {
+      attributes: {
+        async                   : true,
+        crossOrigin             : 'anonymous',
+        'data-repo'             : CONFIG.giscus.repo,
+        'data-repo-id'          : CONFIG.giscus.repo_id,
+        'data-category'         : CONFIG.giscus.category,
+        'data-category-id'      : CONFIG.giscus.category_id,
+        'data-mapping'          : CONFIG.giscus.mapping,
+        'data-reactions-enabled': CONFIG.giscus.reactions_enabled,
+        'data-emit-metadata'    : CONFIG.giscus.emit_metadata,
+        'data-theme'            : CONFIG.giscus.theme,
+        'data-lang'             : CONFIG.giscus.lang,
+        'data-input-position'   : CONFIG.giscus.input_position,
+        'data-loading'          : CONFIG.giscus.loading
+      },
+      parentNode: document.querySelector('.giscus-container')
+    }));
+});
+</script>
+
+</body>
+</html>
