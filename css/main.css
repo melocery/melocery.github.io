@@ -2971,6 +2971,10 @@ mark.search-keyword {
     margin-bottom: 10px;
   }
 }
+.giscus {
+  max-width: unset;
+  box-sizing: border-box;
+}
 #links {
   margin-top: 5rem;
 }
