@@ -28,7 +28,7 @@
 <meta property="og:description" content="给三个博客都加了评论区，记录一下分别做了什么">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-02-08T03:20:42.000Z">
-<meta property="article:modified_time" content="2023-02-08T04:56:29.068Z">
+<meta property="article:modified_time" content="2023-02-08T05:29:34.717Z">
 <meta property="article:author" content="Udon">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="Blog">
@@ -150,7 +150,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Bugrocery-Giscus"><span class="nav-number">1.</span> <span class="nav-text">Bugrocery - Giscus</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%88%92-273-15-%E2%84%83-Waline"><span class="nav-number">2.</span> <span class="nav-text">− 273.15 ℃ - Waline</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sparkles-Club-Valine"><span class="nav-number">3.</span> <span class="nav-text">Sparkles Club - Valine</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Bugrocery-Giscus"><span class="nav-number">1.</span> <span class="nav-text">Bugrocery - Giscus</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%88%92-273-15-%E2%84%83-Waline"><span class="nav-number">2.</span> <span class="nav-text">− 273.15 ℃ - Waline</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sparkles-Club-Valine-amp-Disqus"><span class="nav-number">3.</span> <span class="nav-text">Sparkles Club - Valine &amp; Disqus</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -248,7 +248,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2023-02-08 11:20:42 / Modified: 12:56:29" itemprop="dateCreated datePublished" datetime="2023-02-08T11:20:42+08:00">2023-02-08</time>
+      <time title="Created: 2023-02-08 11:20:42 / Modified: 13:29:34" itemprop="dateCreated datePublished" datetime="2023-02-08T11:20:42+08:00">2023-02-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -271,14 +271,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>1.3k</span>
+      <span>1.7k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>1 mins.</span>
+      <span>2 mins.</span>
     </span>
 </div>
 
@@ -306,10 +306,14 @@
 <p>根据教程中提到的步骤，先在 <a target="_blank" rel="noopener" href="https://console.leancloud.app/apps">LeanCloud 国际版</a>注册应用，再到 <a target="_blank" rel="noopener" href="https://vercel.com/new/clone?repository-url=https://github.com/walinejs/waline/tree/main/example">Vercel 部署</a>，最后修改主题配置文件中的 <code>comments</code> 部分。  </p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">comments:</span></span><br><span class="line">        <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line">        <span class="attr">provider:</span> <span class="string">waline</span></span><br><span class="line"></span><br><span class="line">        <span class="attr">waline:</span></span><br><span class="line">            <span class="attr">serverURL:</span> <span class="comment">#vercel 提供的仓库链接</span></span><br><span class="line">            <span class="attr">lang:</span></span><br><span class="line">            <span class="attr">visitor:</span></span><br><span class="line">            <span class="attr">avatar:</span> <span class="string">&#x27;monsterid&#x27;</span></span><br><span class="line">            <span class="attr">emoji:</span></span><br><span class="line">                <span class="bullet">-</span> <span class="string">https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo</span></span><br><span class="line">            <span class="attr">requiredMeta:</span></span><br><span class="line">                <span class="bullet">-</span> <span class="string">name</span></span><br><span class="line">                <span class="bullet">-</span> <span class="string">email</span></span><br><span class="line">            <span class="attr">placeholder:</span></span><br><span class="line">            <span class="attr">locale:</span></span><br><span class="line">                <span class="attr">admin:</span> <span class="string">Admin</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="Sparkles-Club-Valine"><a href="#Sparkles-Club-Valine" class="headerlink" title="Sparkles Club - Valine"></a>Sparkles Club - Valine</h2><p>存文博客的评论配置，该博客使用 hugo + vercel 搭建，主题是 LoveIt，该主题事先支持 Valine。 </p>
+<h2 id="Sparkles-Club-Valine-amp-Disqus"><a href="#Sparkles-Club-Valine-amp-Disqus" class="headerlink" title="Sparkles Club - Valine &amp; Disqus"></a>Sparkles Club - Valine &amp; Disqus</h2><p>存文博客的评论配置，该博客使用 hugo + vercel 搭建，主题是 LoveIt，该主题事先支持 Valine。 </p>
 <p>参考：<a target="_blank" rel="noopener" href="https://mantyke.icu/posts/2021/comment/">Hugo | 为 Blog 增加评论区</a>  </p>
 <p>根据教程中提到的步骤，先在 <a target="_blank" rel="noopener" href="https://console.leancloud.app/apps">LeanCloud 国际版</a>注册应用，再到配置文件 <code>config.toml</code> 中修改 Valine 的部分，填入 LeanCloud 应用的 <code>appID</code> 和 <code>appKey</code>。其它参数修改可参考：<a target="_blank" rel="noopener" href="https://valine.js.org/configuration.html">valine 配置项</a>  </p>
-<p>但目前没有生效，不知道原因。反正也没人用，以后再说。  </p>
+<p>但目前没有生效，不知道原因。  </p>
+<p>看到多处提到 Valine 的安全性不高，因此改为另一个主题已经支持的评论系统，<a target="_blank" rel="noopener" href="https://disqus.com/">disqus</a>。注册账号，为网站创建评论。一步步进行之后，到配置文件中修改以下部分：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[params.page.comment]</span><br><span class="line">      enable = true</span><br><span class="line">      # Disqus comment config (https://disqus.com/)</span><br><span class="line">      # Disqus 评论系统设置 (https://disqus.com/)</span><br><span class="line">      [params.page.comment.disqus]</span><br><span class="line">        enable = true</span><br><span class="line">        # Disqus shortname to use Disqus in posts</span><br><span class="line">        # Disqus 的 shortname，用来在文章中启用 Disqus 评论系统</span><br><span class="line">        shortname = &quot;&quot; # 填入 Disqus 给出的 shortname</span><br></pre></td></tr></table></figure>
+
+<p>很顺利配置完成，但成功后才发现这个方法需要登录才能评论，但反正也没人用，改不改的以后再说。  </p>
 
     </div>
 
@@ -379,7 +383,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span>Reading time total &asymp;</span>
-    <span title="Reading time total">2:09</span>
+    <span title="Reading time total">2:10</span>
   </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>

@@ -418,6 +418,46 @@ main() # 运行上述函数
       </tags>
   </entry>
   <entry>
+    <title>为博客添加评论区</title>
+    <url>/2023/02/08/comments/</url>
+    <content><![CDATA[<center> 给三个博客都加了评论区，记录一下分别做了什么 </center>
+<span id="more"></span>
+
+<h2 id="Bugrocery-Giscus"><a href="#Bugrocery-Giscus" class="headerlink" title="Bugrocery - Giscus"></a>Bugrocery - Giscus</h2><p>本博客的评论配置。  </p>
+<p>参考：<a href="https://tech.konata.co/2022-02-20-add-comment-to-hexo/">给 Hexo 配置 Giscus 评论系统</a>  </p>
+<p>安装插件：  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ npm install hexo-next-giscus --save</span><br></pre></td></tr></table></figure>
+
+<p>在 <a href="https://giscus.app/zh-CN">giscus</a> 生成相关参数：  </p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">giscus:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="comment"># Github repository name</span></span><br><span class="line">  <span class="attr">repo_id:</span> <span class="comment"># Github repository id</span></span><br><span class="line">  <span class="attr">category:</span> <span class="string">Announcements</span> <span class="comment"># Github discussion category</span></span><br><span class="line">  <span class="attr">category_id:</span> <span class="comment"># Github discussion category id</span></span><br><span class="line">  <span class="comment"># Available values: pathname | url | title | og:title</span></span><br><span class="line">  <span class="attr">mapping:</span> <span class="string">pathname</span></span><br><span class="line">  <span class="comment"># Available values: 0 | 1 </span></span><br><span class="line">  <span class="attr">reactions_enabled:</span> <span class="number">1</span></span><br><span class="line">   <span class="comment"># Available values: 0 | 1 </span></span><br><span class="line">  <span class="attr">emit_metadata:</span> <span class="number">1</span></span><br><span class="line">  <span class="comment"># Available values: light | dark | dark_high_contrast | transparent_dark | preferred-color-scheme</span></span><br><span class="line">  <span class="attr">theme:</span> <span class="string">preferred_color_scheme</span></span><br><span class="line">  <span class="comment"># Available values: en | zh-C</span></span><br><span class="line">  <span class="attr">lang:</span> <span class="string">en</span></span><br><span class="line">  <span class="comment"># Available value: anonymous</span></span><br><span class="line">  <span class="attr">crossorigin:</span> <span class="string">anonymous</span></span><br></pre></td></tr></table></figure>
+
+<p>将上述内容添加到 <code>next</code> 主题 <code>_config.yml</code> 的 <code>comments</code> 部分。<br>教程中说放在博客的 <code>_config.yml</code> 文件中即可，但一直不生效，改到主题的配置文件中才成功。  </p>
+<h2 id="−-273-15-℃-Waline"><a href="#−-273-15-℃-Waline" class="headerlink" title="− 273.15 ℃ - Waline"></a>− 273.15 ℃ - Waline</h2><p>生活博客的评论配置，该博客用 hugo + vercel 搭建，主题是 stack，该主题事先支持 Waline。  </p>
+<p>参考：<a href="https://waline.js.org/guide/get-started/">Waline 快速上手</a>  </p>
+<p>根据教程中提到的步骤，先在 <a href="https://console.leancloud.app/apps">LeanCloud 国际版</a>注册应用，再到 <a href="https://vercel.com/new/clone?repository-url=https://github.com/walinejs/waline/tree/main/example">Vercel 部署</a>，最后修改主题配置文件中的 <code>comments</code> 部分。  </p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">comments:</span></span><br><span class="line">        <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line">        <span class="attr">provider:</span> <span class="string">waline</span></span><br><span class="line"></span><br><span class="line">        <span class="attr">waline:</span></span><br><span class="line">            <span class="attr">serverURL:</span> <span class="comment">#vercel 提供的仓库链接</span></span><br><span class="line">            <span class="attr">lang:</span></span><br><span class="line">            <span class="attr">visitor:</span></span><br><span class="line">            <span class="attr">avatar:</span> <span class="string">&#x27;monsterid&#x27;</span></span><br><span class="line">            <span class="attr">emoji:</span></span><br><span class="line">                <span class="bullet">-</span> <span class="string">https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo</span></span><br><span class="line">            <span class="attr">requiredMeta:</span></span><br><span class="line">                <span class="bullet">-</span> <span class="string">name</span></span><br><span class="line">                <span class="bullet">-</span> <span class="string">email</span></span><br><span class="line">            <span class="attr">placeholder:</span></span><br><span class="line">            <span class="attr">locale:</span></span><br><span class="line">                <span class="attr">admin:</span> <span class="string">Admin</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Sparkles-Club-Valine-amp-Disqus"><a href="#Sparkles-Club-Valine-amp-Disqus" class="headerlink" title="Sparkles Club - Valine &amp; Disqus"></a>Sparkles Club - Valine &amp; Disqus</h2><p>存文博客的评论配置，该博客使用 hugo + vercel 搭建，主题是 LoveIt，该主题事先支持 Valine。 </p>
+<p>参考：<a href="https://mantyke.icu/posts/2021/comment/">Hugo | 为 Blog 增加评论区</a>  </p>
+<p>根据教程中提到的步骤，先在 <a href="https://console.leancloud.app/apps">LeanCloud 国际版</a>注册应用，再到配置文件 <code>config.toml</code> 中修改 Valine 的部分，填入 LeanCloud 应用的 <code>appID</code> 和 <code>appKey</code>。其它参数修改可参考：<a href="https://valine.js.org/configuration.html">valine 配置项</a>  </p>
+<p>但目前没有生效，不知道原因。  </p>
+<p>看到多处提到 Valine 的安全性不高，因此改为另一个主题已经支持的评论系统，<a href="https://disqus.com/">disqus</a>。注册账号，为网站创建评论。一步步进行之后，到配置文件中修改以下部分：  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[params.page.comment]</span><br><span class="line">      enable = true</span><br><span class="line">      # Disqus comment config (https://disqus.com/)</span><br><span class="line">      # Disqus 评论系统设置 (https://disqus.com/)</span><br><span class="line">      [params.page.comment.disqus]</span><br><span class="line">        enable = true</span><br><span class="line">        # Disqus shortname to use Disqus in posts</span><br><span class="line">        # Disqus 的 shortname，用来在文章中启用 Disqus 评论系统</span><br><span class="line">        shortname = &quot;&quot; # 填入 Disqus 给出的 shortname</span><br></pre></td></tr></table></figure>
+
+<p>很顺利配置完成，但成功后才发现这个方法需要登录才能评论，但反正也没人用，改不改的以后再说。  </p>
+]]></content>
+      <categories>
+        <category>Blog</category>
+        <category>Building</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>Blog</tag>
+        <tag>Hugo</tag>
+        <tag>Comments</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CATsama：如何做一个定时发嘟的 Mastodon bot</title>
     <url>/2022/07/12/catsama/</url>
     <content><![CDATA[<center> 性感猫猫，每日上午八点半，在您的时间线上推送一个喵喵神签 </center>
@@ -449,42 +489,6 @@ main() # 运行上述函数
       <tags>
         <tag>Mastodon</tag>
         <tag>Python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>为博客添加评论区</title>
-    <url>/2023/02/08/comments/</url>
-    <content><![CDATA[<center> 给三个博客都加了评论区，记录一下分别做了什么 </center>
-<span id="more"></span>
-
-<h2 id="Bugrocery-Giscus"><a href="#Bugrocery-Giscus" class="headerlink" title="Bugrocery - Giscus"></a>Bugrocery - Giscus</h2><p>本博客的评论配置。  </p>
-<p>参考：<a href="https://tech.konata.co/2022-02-20-add-comment-to-hexo/">给 Hexo 配置 Giscus 评论系统</a>  </p>
-<p>安装插件：  </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ npm install hexo-next-giscus --save</span><br></pre></td></tr></table></figure>
-
-<p>在 <a href="https://giscus.app/zh-CN">giscus</a> 生成相关参数：  </p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">giscus:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="comment"># Github repository name</span></span><br><span class="line">  <span class="attr">repo_id:</span> <span class="comment"># Github repository id</span></span><br><span class="line">  <span class="attr">category:</span> <span class="string">Announcements</span> <span class="comment"># Github discussion category</span></span><br><span class="line">  <span class="attr">category_id:</span> <span class="comment"># Github discussion category id</span></span><br><span class="line">  <span class="comment"># Available values: pathname | url | title | og:title</span></span><br><span class="line">  <span class="attr">mapping:</span> <span class="string">pathname</span></span><br><span class="line">  <span class="comment"># Available values: 0 | 1 </span></span><br><span class="line">  <span class="attr">reactions_enabled:</span> <span class="number">1</span></span><br><span class="line">   <span class="comment"># Available values: 0 | 1 </span></span><br><span class="line">  <span class="attr">emit_metadata:</span> <span class="number">1</span></span><br><span class="line">  <span class="comment"># Available values: light | dark | dark_high_contrast | transparent_dark | preferred-color-scheme</span></span><br><span class="line">  <span class="attr">theme:</span> <span class="string">preferred_color_scheme</span></span><br><span class="line">  <span class="comment"># Available values: en | zh-C</span></span><br><span class="line">  <span class="attr">lang:</span> <span class="string">en</span></span><br><span class="line">  <span class="comment"># Available value: anonymous</span></span><br><span class="line">  <span class="attr">crossorigin:</span> <span class="string">anonymous</span></span><br></pre></td></tr></table></figure>
-
-<p>将上述内容添加到 <code>next</code> 主题 <code>_config.yml</code> 的 <code>comments</code> 部分。<br>教程中说放在博客的 <code>_config.yml</code> 文件中即可，但一直不生效，改到主题的配置文件中才成功。  </p>
-<h2 id="−-273-15-℃-Waline"><a href="#−-273-15-℃-Waline" class="headerlink" title="− 273.15 ℃ - Waline"></a>− 273.15 ℃ - Waline</h2><p>生活博客的评论配置，该博客用 hugo + vercel 搭建，主题是 stack，该主题事先支持 Waline。  </p>
-<p>参考：<a href="https://waline.js.org/guide/get-started/">Waline 快速上手</a>  </p>
-<p>根据教程中提到的步骤，先在 <a href="https://console.leancloud.app/apps">LeanCloud 国际版</a>注册应用，再到 <a href="https://vercel.com/new/clone?repository-url=https://github.com/walinejs/waline/tree/main/example">Vercel 部署</a>，最后修改主题配置文件中的 <code>comments</code> 部分。  </p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">comments:</span></span><br><span class="line">        <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line">        <span class="attr">provider:</span> <span class="string">waline</span></span><br><span class="line"></span><br><span class="line">        <span class="attr">waline:</span></span><br><span class="line">            <span class="attr">serverURL:</span> <span class="comment">#vercel 提供的仓库链接</span></span><br><span class="line">            <span class="attr">lang:</span></span><br><span class="line">            <span class="attr">visitor:</span></span><br><span class="line">            <span class="attr">avatar:</span> <span class="string">&#x27;monsterid&#x27;</span></span><br><span class="line">            <span class="attr">emoji:</span></span><br><span class="line">                <span class="bullet">-</span> <span class="string">https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo</span></span><br><span class="line">            <span class="attr">requiredMeta:</span></span><br><span class="line">                <span class="bullet">-</span> <span class="string">name</span></span><br><span class="line">                <span class="bullet">-</span> <span class="string">email</span></span><br><span class="line">            <span class="attr">placeholder:</span></span><br><span class="line">            <span class="attr">locale:</span></span><br><span class="line">                <span class="attr">admin:</span> <span class="string">Admin</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Sparkles-Club-Valine"><a href="#Sparkles-Club-Valine" class="headerlink" title="Sparkles Club - Valine"></a>Sparkles Club - Valine</h2><p>存文博客的评论配置，该博客使用 hugo + vercel 搭建，主题是 LoveIt，该主题事先支持 Valine。 </p>
-<p>参考：<a href="https://mantyke.icu/posts/2021/comment/">Hugo | 为 Blog 增加评论区</a>  </p>
-<p>根据教程中提到的步骤，先在 <a href="https://console.leancloud.app/apps">LeanCloud 国际版</a>注册应用，再到配置文件 <code>config.toml</code> 中修改 Valine 的部分，填入 LeanCloud 应用的 <code>appID</code> 和 <code>appKey</code>。其它参数修改可参考：<a href="https://valine.js.org/configuration.html">valine 配置项</a>  </p>
-<p>但目前没有生效，不知道原因。反正也没人用，以后再说。  </p>
-]]></content>
-      <categories>
-        <category>Blog</category>
-        <category>Building</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>Blog</tag>
-        <tag>Hugo</tag>
-        <tag>Comments</tag>
       </tags>
   </entry>
   <entry>
@@ -1152,7 +1156,7 @@ $ hexo deploy  # 部署到GitHub Pages
 <p>示例  </p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Satan</span><br><span class="line">许愿</span><br><span class="line">愿望：Beyond the barricade, there is a world we long to see.</span><br><span class="line">匿名：否</span><br><span class="line">可见度：unlisted</span><br></pre></td></tr></table></figure>
 
-<h2 id="创造一个撒旦老人需要什么准备"><a href="#创造一个撒旦老人需要什么准备" class="headerlink" title="创造一个撒旦老人需要什么准备"></a>创造一个撒旦老人需要什么准备</h2><h3 id="注册账号"><a href="#注册账号" class="headerlink" title="注册账号"></a>注册账号</h3><p>在缪尚新注册一个账号：@<a href="mailto:&#x53;&#97;&#x74;&#x61;&#x6e;&#64;&#x6d;&#117;&#x73;&#97;&#105;&#110;&#46;&#99;&#97;&#102;&#x65;">&#x53;&#97;&#x74;&#x61;&#x6e;&#64;&#x6d;&#117;&#x73;&#97;&#105;&#110;&#46;&#99;&#97;&#102;&#x65;</a>，修改基本资料，注意选中 “这是一个 bot 账号 / This is a bot account”。<br>在管理面板找到 <code>开发/Development-创建新应用/New Application</code>，创建新应用并给予读写权限，复制访问令牌。  </p>
+<h2 id="创造一个撒旦老人需要什么准备"><a href="#创造一个撒旦老人需要什么准备" class="headerlink" title="创造一个撒旦老人需要什么准备"></a>创造一个撒旦老人需要什么准备</h2><h3 id="注册账号"><a href="#注册账号" class="headerlink" title="注册账号"></a>注册账号</h3><p>在缪尚新注册一个账号：@<a href="mailto:&#83;&#97;&#116;&#97;&#x6e;&#x40;&#x6d;&#117;&#x73;&#97;&#x69;&#x6e;&#46;&#99;&#x61;&#x66;&#101;">&#83;&#97;&#116;&#97;&#x6e;&#x40;&#x6d;&#117;&#x73;&#97;&#x69;&#x6e;&#46;&#99;&#x61;&#x66;&#101;</a>，修改基本资料，注意选中 “这是一个 bot 账号 / This is a bot account”。<br>在管理面板找到 <code>开发/Development-创建新应用/New Application</code>，创建新应用并给予读写权限，复制访问令牌。  </p>
 <h3 id="安装-Mastodon-py"><a href="#安装-Mastodon-py" class="headerlink" title="安装 Mastodon.py"></a>安装 Mastodon.py</h3><p>安装 miniconda3：  </p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir miniconda</span><br><span class="line"><span class="built_in">cd</span> miniconda</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载 python 最新版本并用 bash 安装</span></span><br><span class="line">wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh</span><br><span class="line">sh Miniconda3-latest-Linux-x86_64.sh //用bash安装</span><br></pre></td></tr></table></figure>
 
