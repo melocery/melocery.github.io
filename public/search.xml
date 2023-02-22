@@ -418,6 +418,40 @@ main() # 运行上述函数
       </tags>
   </entry>
   <entry>
+    <title>CATsama：如何做一个定时发嘟的 Mastodon bot</title>
+    <url>/2022/07/12/catsama/</url>
+    <content><![CDATA[<center> 性感猫猫，每日上午八点半，在您的时间线上推送一个喵喵神签 </center>
+<span id="more"></span>
+
+<p>在缪尚后厅和大家聊天时，猫猫从键盘经过，留下一串神秘文字。大家一致认为这是猫猫给我们留下的忠告，因此决定在缪尚给猫猫神开个位置，就有了这个喵喵喵账号。让我们有请 CATsama！  </p>
+<h2 id="在-VPS-上安装-python"><a href="#在-VPS-上安装-python" class="headerlink" title="在 VPS 上安装 python"></a>在 VPS 上安装 python</h2><p>综合此方和塔塔的教程，决定安装 miniconda。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 在 /root 文件夹执行如下命令</span></span><br><span class="line">mkdir miniconda</span><br><span class="line"><span class="built_in">cd</span> miniconda</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载 python 最新版本并用 bash 安装</span></span><br><span class="line">wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh</span><br><span class="line">sh Miniconda3-latest-Linux-x86_64.sh //用bash安装</span><br></pre></td></tr></table></figure>
+
+<p>之后会有很长一段的文字，都是许可说明，一直按 <code>Enter</code> 即可，直到出现 <code>Do you accept the license terms? [yes|no]</code> 输入 <code>yes</code>，开启正式安装。安装路径直接使用默认 <code>/root/miniconda3</code>。<br>安装完成后会询问是否运行 <code>conda init</code> 来初始化，选择 <code>yes</code>。<br>检查是否安装成功，重启终端后输入 <code>conda --version</code>。  </p>
+<h2 id="安装-bot"><a href="#安装-bot" class="headerlink" title="安装 bot"></a>安装 bot</h2><h3 id="安装前准备"><a href="#安装前准备" class="headerlink" title="安装前准备"></a>安装前准备</h3><p>注册 Mastodon 账号，在管理面板找到开发-创建新应用，创建新应用并给予读写权限，复制访问令牌。<br>由于 Fedi 有许多 bot 账号，为避免 bot 账号之间陷入无限回复循环，建议勾选账号设置中的 “这是一个机器人账户”。</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>创建存放 bot 相关文件的文件夹，这里模仿塔塔，存在 <code>/root/miniconda</code> 下。  </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 代码来源于塔塔</span></span><br><span class="line"><span class="built_in">cd</span> miniconda</span><br><span class="line">conda create -n mastbot python=3.8 <span class="comment"># 创建一个叫mastbot的版本为3.8的python虚拟环境，如果已经创建了就不用了</span></span><br><span class="line">conda activate mastbot <span class="comment"># 激活mastbot环境，root账号前会出现（mastbot）</span></span><br><span class="line">pip3 install requests beautifulsoup4 Mastodon.py <span class="comment"># 安装mastodon.py</span></span><br><span class="line">pip3 install numpy <span class="comment"># 安装 numpy，catsama 需要</span></span><br><span class="line">mkdir catsama</span><br><span class="line"><span class="built_in">cd</span> catsama</span><br><span class="line">nano mybot_usercred.secret <span class="comment"># 写入刚才复制的访问令牌，保存退出</span></span><br><span class="line">nano catsama.py <span class="comment"># 发嘟脚本</span></span><br></pre></td></tr></table></figure>
+
+<p>发嘟 python 脚本框架如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">from</span> mastodon <span class="keyword">import</span> Mastodon</span><br><span class="line"></span><br><span class="line">mastodon = Mastodon(</span><br><span class="line">    access_token = <span class="string">&#x27;mybot_usercred.secret&#x27;</span>,</span><br><span class="line">    api_base_url = <span class="string">&#x27;实例地址&#x27;</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 要发送的内容放在当前文件夹下面的 `content.txt` 里，每行一句</span></span><br><span class="line">content = random.choice(<span class="built_in">open</span>(<span class="string">&quot;content.txt&quot;</span>).read().splitlines())  </span><br><span class="line"><span class="comment"># content 即为发送嘟文的内容，可根据 bot 的需要替换为不同内容</span></span><br><span class="line"></span><br><span class="line">mastodon.status_post(content)</span><br></pre></td></tr></table></figure>
+
+<p>上述工作完成后，<code>python bot.py</code> 运行脚本。如果顺利，bot 就会发出嘟嘟；如有报错，根据报错信息修改。  </p>
+<h2 id="定时发嘟"><a href="#定时发嘟" class="headerlink" title="定时发嘟"></a>定时发嘟</h2><p>想要实现定时发嘟肯定不能人工蹲点，而要实现自动化。使用 <code>crontab</code> 设置定时任务，定时自动运行 <code>python bot.py</code> 即可实现定时发嘟。  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">30 2 * * *  cd /root/miniconda/catsama &amp;&amp; /root/miniconda3/envs/mastbot/bin/python catsama.py &gt;&gt; /root/miniconda/catsama/log.txt 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
+<p>设置为每天服务器时间 2：30 发送一条喵签。如有报错信息，将输出到 log.txt，可根据报错修改。  </p>
+<h2 id="catsama-脚本存档"><a href="#catsama-脚本存档" class="headerlink" title="catsama 脚本存档"></a>catsama 脚本存档</h2><p>生成一个含有字母、数字、特殊符号和汉字的字符串，这串字符即为喵签内容。如果遇到低概率随机生成的串为空或最终输出的部分为空，则从 ABC 的朋友们名字中选择一个作为喵签内容。  </p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np, numpy.random</span><br><span class="line"><span class="keyword">from</span> mastodon <span class="keyword">import</span> Mastodon</span><br><span class="line"></span><br><span class="line"><span class="comment"># 随机生成num个中文字符并输出为list</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">GBK2312</span>(<span class="params">num</span>):</span></span><br><span class="line">    <span class="built_in">str</span> = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> num == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">str</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,num+<span class="number">1</span>):</span><br><span class="line">        head = random.randint(<span class="number">0xb0</span>, <span class="number">0xf7</span>)</span><br><span class="line">        body = random.randint(<span class="number">0xa1</span>, <span class="number">0xfe</span>)</span><br><span class="line">        val = <span class="string">f&#x27;<span class="subst">&#123;head:x&#125;</span><span class="subst">&#123;body:x&#125;</span>&#x27;</span></span><br><span class="line">        <span class="built_in">str</span> = <span class="built_in">str</span> + <span class="built_in">bytes</span>.fromhex(val).decode(<span class="string">&#x27;gb2312&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">list</span>(<span class="built_in">str</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 随机生成num个数字并输出为list</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">listNum</span>(<span class="params">num</span>):</span></span><br><span class="line">    nums = []</span><br><span class="line">    <span class="keyword">while</span> <span class="built_in">len</span>(nums) &lt; num:</span><br><span class="line">        i = random.randint(<span class="number">0</span>,<span class="number">9</span>)</span><br><span class="line">        nums.append(i)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">list</span>(<span class="built_in">str</span>(nums))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成猫签</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">predictfuture</span>():</span></span><br><span class="line">    <span class="comment"># 随机生成n个数字</span></span><br><span class="line">    numN = random.randint(<span class="number">0</span>,<span class="number">9</span>)</span><br><span class="line">    num = listNum(numN)</span><br><span class="line">    <span class="comment"># 随机生成n个字母</span></span><br><span class="line">    src_letters = string.ascii_letters</span><br><span class="line">    letN = random.randint(<span class="number">0</span>,<span class="number">26</span>)</span><br><span class="line">    letters = random.sample(src_letters,letN)</span><br><span class="line">    <span class="comment"># 随机生成n个特殊字符</span></span><br><span class="line">    spN = random.randint(<span class="number">0</span>,<span class="number">6</span>)</span><br><span class="line">    src_special = string.punctuation</span><br><span class="line">    special = random.sample(src_special,spN)</span><br><span class="line">    <span class="comment"># 随机生成n个汉字</span></span><br><span class="line">    chN = random.randint(<span class="number">0</span>,<span class="number">26</span>)</span><br><span class="line">    chinese = GBK2312(chN)</span><br><span class="line">    <span class="comment"># 合并所有随机生成的内容</span></span><br><span class="line">    ran_list = num + letters + special + chinese</span><br><span class="line">    <span class="comment"># 随机打乱生成的内容</span></span><br><span class="line">    random.shuffle(ran_list)</span><br><span class="line">    <span class="comment"># print(ran_list)</span></span><br><span class="line">    <span class="comment"># list转str</span></span><br><span class="line">    temp = <span class="string">&#x27;&#x27;</span>.join(ran_list)</span><br><span class="line">    numS = numN + letN + spN + chN</span><br><span class="line">    <span class="comment"># 填补可能出现的所有类型字符都为0或随机长度为0的情况</span></span><br><span class="line">    ABC_list = [<span class="string">&#x27;Enjolras&#x27;</span>, <span class="string">&#x27;Combeferre&#x27;</span>, <span class="string">&#x27;Jean prouvaire&#x27;</span>, <span class="string">&#x27;Feuilly&#x27;</span>, <span class="string">&#x27;Courfeyrac&#x27;</span>,<span class="string">&#x27; Bahorel&#x27;</span>, <span class="string">&#x27;Lesgle or Laigle&#x27;</span>, <span class="string">&#x27;Joly&#x27;</span>, <span class="string">&#x27;Grantaire&#x27;</span>]</span><br><span class="line">    friendABC = random.randint(<span class="number">0</span>, <span class="built_in">len</span>(ABC_list)-<span class="number">1</span>)</span><br><span class="line">    <span class="comment"># 输出猫猫语</span></span><br><span class="line">    <span class="keyword">if</span> numS == <span class="number">0</span>:</span><br><span class="line">        catsama = ABC_list[friendABC]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        catl = random.randint(<span class="number">0</span>,numS)</span><br><span class="line">        <span class="keyword">if</span> catl == <span class="number">0</span>:</span><br><span class="line">            catsama = ABC_list[friendABC]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            catsama = temp[<span class="number">0</span>:catl]</span><br><span class="line">    <span class="keyword">return</span> catsama</span><br><span class="line"></span><br><span class="line">mastodon = Mastodon(</span><br><span class="line">    access_token = <span class="string">&#x27;mybot_usercred.secret&#x27;</span>,</span><br><span class="line">    api_base_url = <span class="string">&#x27;https://musain.cafe&#x27;</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">content = predictfuture() + <span class="string">&#x27;, miao!&#x27;</span></span><br><span class="line"><span class="comment"># print(content)</span></span><br><span class="line"></span><br><span class="line">mastodon.status_post(content)</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Mastodon</category>
+        <category>Bot</category>
+      </categories>
+      <tags>
+        <tag>Mastodon</tag>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>为博客添加评论区</title>
     <url>/2023/02/08/comments/</url>
     <content><![CDATA[<center> 给三个博客都加了评论区，记录一下分别做了什么 </center>
@@ -455,40 +489,6 @@ main() # 运行上述函数
         <tag>Blog</tag>
         <tag>Hugo</tag>
         <tag>Comments</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CATsama：如何做一个定时发嘟的 Mastodon bot</title>
-    <url>/2022/07/12/catsama/</url>
-    <content><![CDATA[<center> 性感猫猫，每日上午八点半，在您的时间线上推送一个喵喵神签 </center>
-<span id="more"></span>
-
-<p>在缪尚后厅和大家聊天时，猫猫从键盘经过，留下一串神秘文字。大家一致认为这是猫猫给我们留下的忠告，因此决定在缪尚给猫猫神开个位置，就有了这个喵喵喵账号。让我们有请 CATsama！  </p>
-<h2 id="在-VPS-上安装-python"><a href="#在-VPS-上安装-python" class="headerlink" title="在 VPS 上安装 python"></a>在 VPS 上安装 python</h2><p>综合此方和塔塔的教程，决定安装 miniconda。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 在 /root 文件夹执行如下命令</span></span><br><span class="line">mkdir miniconda</span><br><span class="line"><span class="built_in">cd</span> miniconda</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载 python 最新版本并用 bash 安装</span></span><br><span class="line">wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh</span><br><span class="line">sh Miniconda3-latest-Linux-x86_64.sh //用bash安装</span><br></pre></td></tr></table></figure>
-
-<p>之后会有很长一段的文字，都是许可说明，一直按 <code>Enter</code> 即可，直到出现 <code>Do you accept the license terms? [yes|no]</code> 输入 <code>yes</code>，开启正式安装。安装路径直接使用默认 <code>/root/miniconda3</code>。<br>安装完成后会询问是否运行 <code>conda init</code> 来初始化，选择 <code>yes</code>。<br>检查是否安装成功，重启终端后输入 <code>conda --version</code>。  </p>
-<h2 id="安装-bot"><a href="#安装-bot" class="headerlink" title="安装 bot"></a>安装 bot</h2><h3 id="安装前准备"><a href="#安装前准备" class="headerlink" title="安装前准备"></a>安装前准备</h3><p>注册 Mastodon 账号，在管理面板找到开发-创建新应用，创建新应用并给予读写权限，复制访问令牌。<br>由于 Fedi 有许多 bot 账号，为避免 bot 账号之间陷入无限回复循环，建议勾选账号设置中的 “这是一个机器人账户”。</p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>创建存放 bot 相关文件的文件夹，这里模仿塔塔，存在 <code>/root/miniconda</code> 下。  </p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 代码来源于塔塔</span></span><br><span class="line"><span class="built_in">cd</span> miniconda</span><br><span class="line">conda create -n mastbot python=3.8 <span class="comment"># 创建一个叫mastbot的版本为3.8的python虚拟环境，如果已经创建了就不用了</span></span><br><span class="line">conda activate mastbot <span class="comment"># 激活mastbot环境，root账号前会出现（mastbot）</span></span><br><span class="line">pip3 install requests beautifulsoup4 Mastodon.py <span class="comment"># 安装mastodon.py</span></span><br><span class="line">pip3 install numpy <span class="comment"># 安装 numpy，catsama 需要</span></span><br><span class="line">mkdir catsama</span><br><span class="line"><span class="built_in">cd</span> catsama</span><br><span class="line">nano mybot_usercred.secret <span class="comment"># 写入刚才复制的访问令牌，保存退出</span></span><br><span class="line">nano catsama.py <span class="comment"># 发嘟脚本</span></span><br></pre></td></tr></table></figure>
-
-<p>发嘟 python 脚本框架如下：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">from</span> mastodon <span class="keyword">import</span> Mastodon</span><br><span class="line"></span><br><span class="line">mastodon = Mastodon(</span><br><span class="line">    access_token = <span class="string">&#x27;mybot_usercred.secret&#x27;</span>,</span><br><span class="line">    api_base_url = <span class="string">&#x27;实例地址&#x27;</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 要发送的内容放在当前文件夹下面的 `content.txt` 里，每行一句</span></span><br><span class="line">content = random.choice(<span class="built_in">open</span>(<span class="string">&quot;content.txt&quot;</span>).read().splitlines())  </span><br><span class="line"><span class="comment"># content 即为发送嘟文的内容，可根据 bot 的需要替换为不同内容</span></span><br><span class="line"></span><br><span class="line">mastodon.status_post(content)</span><br></pre></td></tr></table></figure>
-
-<p>上述工作完成后，<code>python bot.py</code> 运行脚本。如果顺利，bot 就会发出嘟嘟；如有报错，根据报错信息修改。  </p>
-<h2 id="定时发嘟"><a href="#定时发嘟" class="headerlink" title="定时发嘟"></a>定时发嘟</h2><p>想要实现定时发嘟肯定不能人工蹲点，而要实现自动化。使用 <code>crontab</code> 设置定时任务，定时自动运行 <code>python bot.py</code> 即可实现定时发嘟。  </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">30 2 * * *  cd /root/miniconda/catsama &amp;&amp; /root/miniconda3/envs/mastbot/bin/python catsama.py &gt;&gt; /root/miniconda/catsama/log.txt 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
-
-<p>设置为每天服务器时间 2：30 发送一条喵签。如有报错信息，将输出到 log.txt，可根据报错修改。  </p>
-<h2 id="catsama-脚本存档"><a href="#catsama-脚本存档" class="headerlink" title="catsama 脚本存档"></a>catsama 脚本存档</h2><p>生成一个含有字母、数字、特殊符号和汉字的字符串，这串字符即为喵签内容。如果遇到低概率随机生成的串为空或最终输出的部分为空，则从 ABC 的朋友们名字中选择一个作为喵签内容。  </p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np, numpy.random</span><br><span class="line"><span class="keyword">from</span> mastodon <span class="keyword">import</span> Mastodon</span><br><span class="line"></span><br><span class="line"><span class="comment"># 随机生成num个中文字符并输出为list</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">GBK2312</span>(<span class="params">num</span>):</span></span><br><span class="line">    <span class="built_in">str</span> = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> num == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">str</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,num+<span class="number">1</span>):</span><br><span class="line">        head = random.randint(<span class="number">0xb0</span>, <span class="number">0xf7</span>)</span><br><span class="line">        body = random.randint(<span class="number">0xa1</span>, <span class="number">0xfe</span>)</span><br><span class="line">        val = <span class="string">f&#x27;<span class="subst">&#123;head:x&#125;</span><span class="subst">&#123;body:x&#125;</span>&#x27;</span></span><br><span class="line">        <span class="built_in">str</span> = <span class="built_in">str</span> + <span class="built_in">bytes</span>.fromhex(val).decode(<span class="string">&#x27;gb2312&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">list</span>(<span class="built_in">str</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 随机生成num个数字并输出为list</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">listNum</span>(<span class="params">num</span>):</span></span><br><span class="line">    nums = []</span><br><span class="line">    <span class="keyword">while</span> <span class="built_in">len</span>(nums) &lt; num:</span><br><span class="line">        i = random.randint(<span class="number">0</span>,<span class="number">9</span>)</span><br><span class="line">        nums.append(i)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">list</span>(<span class="built_in">str</span>(nums))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成猫签</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">predictfuture</span>():</span></span><br><span class="line">    <span class="comment"># 随机生成n个数字</span></span><br><span class="line">    numN = random.randint(<span class="number">0</span>,<span class="number">9</span>)</span><br><span class="line">    num = listNum(numN)</span><br><span class="line">    <span class="comment"># 随机生成n个字母</span></span><br><span class="line">    src_letters = string.ascii_letters</span><br><span class="line">    letN = random.randint(<span class="number">0</span>,<span class="number">26</span>)</span><br><span class="line">    letters = random.sample(src_letters,letN)</span><br><span class="line">    <span class="comment"># 随机生成n个特殊字符</span></span><br><span class="line">    spN = random.randint(<span class="number">0</span>,<span class="number">6</span>)</span><br><span class="line">    src_special = string.punctuation</span><br><span class="line">    special = random.sample(src_special,spN)</span><br><span class="line">    <span class="comment"># 随机生成n个汉字</span></span><br><span class="line">    chN = random.randint(<span class="number">0</span>,<span class="number">26</span>)</span><br><span class="line">    chinese = GBK2312(chN)</span><br><span class="line">    <span class="comment"># 合并所有随机生成的内容</span></span><br><span class="line">    ran_list = num + letters + special + chinese</span><br><span class="line">    <span class="comment"># 随机打乱生成的内容</span></span><br><span class="line">    random.shuffle(ran_list)</span><br><span class="line">    <span class="comment"># print(ran_list)</span></span><br><span class="line">    <span class="comment"># list转str</span></span><br><span class="line">    temp = <span class="string">&#x27;&#x27;</span>.join(ran_list)</span><br><span class="line">    numS = numN + letN + spN + chN</span><br><span class="line">    <span class="comment"># 填补可能出现的所有类型字符都为0或随机长度为0的情况</span></span><br><span class="line">    ABC_list = [<span class="string">&#x27;Enjolras&#x27;</span>, <span class="string">&#x27;Combeferre&#x27;</span>, <span class="string">&#x27;Jean prouvaire&#x27;</span>, <span class="string">&#x27;Feuilly&#x27;</span>, <span class="string">&#x27;Courfeyrac&#x27;</span>,<span class="string">&#x27; Bahorel&#x27;</span>, <span class="string">&#x27;Lesgle or Laigle&#x27;</span>, <span class="string">&#x27;Joly&#x27;</span>, <span class="string">&#x27;Grantaire&#x27;</span>]</span><br><span class="line">    friendABC = random.randint(<span class="number">0</span>, <span class="built_in">len</span>(ABC_list)-<span class="number">1</span>)</span><br><span class="line">    <span class="comment"># 输出猫猫语</span></span><br><span class="line">    <span class="keyword">if</span> numS == <span class="number">0</span>:</span><br><span class="line">        catsama = ABC_list[friendABC]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        catl = random.randint(<span class="number">0</span>,numS)</span><br><span class="line">        <span class="keyword">if</span> catl == <span class="number">0</span>:</span><br><span class="line">            catsama = ABC_list[friendABC]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            catsama = temp[<span class="number">0</span>:catl]</span><br><span class="line">    <span class="keyword">return</span> catsama</span><br><span class="line"></span><br><span class="line">mastodon = Mastodon(</span><br><span class="line">    access_token = <span class="string">&#x27;mybot_usercred.secret&#x27;</span>,</span><br><span class="line">    api_base_url = <span class="string">&#x27;https://musain.cafe&#x27;</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">content = predictfuture() + <span class="string">&#x27;, miao!&#x27;</span></span><br><span class="line"><span class="comment"># print(content)</span></span><br><span class="line"></span><br><span class="line">mastodon.status_post(content)</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>Mastodon</category>
-        <category>Bot</category>
-      </categories>
-      <tags>
-        <tag>Mastodon</tag>
-        <tag>Python</tag>
       </tags>
   </entry>
   <entry>
@@ -609,7 +609,287 @@ main() # 运行上述函数
 <p><img src="/2022/09/06/computernetworknotes6/CRC.png">  </p>
 <p>CRC 例子：  </p>
 <p><img src="/2022/09/06/computernetworknotes6/CRCexample.png"></p>
-]]></content>
+<br>
+
+<h2 id="多点访协议"><a href="#多点访协议" class="headerlink" title="多点访协议"></a>多点访协议</h2><h3 id="多路访问链接和协议"><a href="#多路访问链接和协议" class="headerlink" title="多路访问链接和协议"></a>多路访问链接和协议</h3><p>两种类型的链路 (一个子网内部链路链接形式)</p>
+<ul>
+<li><p><strong>点对点</strong>  </p>
+<ul>
+<li>拨号访问的 PPP  </li>
+<li>以太网交换机和主机之间的点对点链路  </li>
+</ul>
+</li>
+<li><p><strong>广播</strong> (共享线路或媒体)  </p>
+<ul>
+<li>传统以太网  </li>
+<li>HFC 上行链路  </li>
+<li>802.11 无线局域网  </li>
+</ul>
+</li>
+</ul>
+<h3 id="多路访问协议"><a href="#多路访问协议" class="headerlink" title="多路访问协议"></a>多路访问协议</h3><p>单个共享的广播型链路<br>2 个或更多站点同时传送：冲突 (collision)，多个节点在同一个时刻发送，则会收到 2 个或多个信号叠加  </p>
+<h4 id="多路访问协议-介质访问控制协议：MAC"><a href="#多路访问协议-介质访问控制协议：MAC" class="headerlink" title="多路访问协议 (介质访问控制协议：MAC)"></a>多路访问协议 (介质访问控制协议：MAC)</h4><p>分布式算法：决定节点如何使用共享信道，即决定节点什么时候可以发送<br>关于共享控制的通信必须借助信道本身传输  </p>
+<ul>
+<li>没有带外的信道，各节点使用其协调信道使用  </li>
+<li>用于传输控制信息  </li>
+</ul>
+<h4 id="理想的多路访问协议"><a href="#理想的多路访问协议" class="headerlink" title="理想的多路访问协议"></a>理想的多路访问协议</h4><p>给定：R bps 的广播信道<br>必要条件： </p>
+<ol>
+<li>当一个节点要发送时，可以 R 速率发送 </li>
+<li>挡 M 个节点要发送，每个可以以 R/M 的平均速率发送  </li>
+<li>完全分布的：没有特殊节点协调发送，没有时钟和时隙的同步  </li>
+<li>简单  </li>
+</ol>
+<h4 id="MAC-媒体访问控制-协议分类"><a href="#MAC-媒体访问控制-协议分类" class="headerlink" title="MAC (媒体访问控制) 协议分类"></a>MAC (媒体访问控制) 协议分类</h4><p>信道划分：  </p>
+<ul>
+<li>把信道划分成小片 (时间、频率、编码)  </li>
+<li>分配片给每个节点专用  </li>
+</ul>
+<p>随机访问：  </p>
+<ul>
+<li>信道不划分，允许冲突  </li>
+<li>冲突后恢复  </li>
+</ul>
+<p>依次轮流：  </p>
+<ul>
+<li>节点依次轮流  </li>
+<li>有很多数据传输的节点可以获得较长的信道使用权  </li>
+</ul>
+<h3 id="信道划分-MAC-协议"><a href="#信道划分-MAC-协议" class="headerlink" title="信道划分 MAC 协议"></a>信道划分 MAC 协议</h3><h4 id="TDMA"><a href="#TDMA" class="headerlink" title="TDMA"></a>TDMA</h4><p>TDMA： timd division multiple access  </p>
+<ul>
+<li>轮流使用信道，信道的时间分为周期  </li>
+<li>每个站点使用每周期中固定的时隙 (长度 = 帧传输时间) 传输帧  </li>
+<li>如果站点无帧传输，时隙空闲 -&gt; 浪费  </li>
+<li>eg. 6 站 LAN，1、3、4 有数据报，时隙 2、5、6 空闲  </li>
+</ul>
+<p><img src="/2022/09/06/computernetworknotes6/TDMA.png">  </p>
+<h4 id="FDMA"><a href="#FDMA" class="headerlink" title="FDMA"></a>FDMA</h4><p>FDMA： frequency division multiple access  </p>
+<ul>
+<li>信道的有效频率范围被分成一个个小的频段  </li>
+<li>每个站点被分配一个固定的频段  </li>
+<li>分配给站点的频段如果没有被使用，则空闲  </li>
+</ul>
+<p><img src="/2022/09/06/computernetworknotes6/FDMA.png">  </p>
+<h4 id="码分多路访问-CDMA"><a href="#码分多路访问-CDMA" class="headerlink" title="码分多路访问 (CDMA)"></a>码分多路访问 (CDMA)</h4><p>CDMA：code division multiple access  </p>
+<ul>
+<li>所有站点在整个频段上同时进行传输，采用编码原理加以区分  </li>
+<li>完全无冲突  </li>
+<li>假定：信号同步很好，线性叠加  </li>
+</ul>
+<h3 id="随机存取协议"><a href="#随机存取协议" class="headerlink" title="随机存取协议"></a>随机存取协议</h3><p>当节点有帧要发送时  </p>
+<ul>
+<li>以信道带宽的全部 R bps 发送  </li>
+<li>没有节点间的预先协调  </li>
+</ul>
+<p>两个或更多节点同时传输，会发生冲突 (collision)<br>随机存取协议规定：  </p>
+<ul>
+<li>如何检测冲突  </li>
+<li>如何从冲突中恢复 (如，通过稍后的重传)  </li>
+</ul>
+<p>随机 MAC 协议  </p>
+<ul>
+<li>时隙 ALOHA  </li>
+<li>ALOHA  </li>
+<li>CSMA，CSMA/CD，CSMA/CA  </li>
+</ul>
+<h4 id="时隙-ALOHA"><a href="#时隙-ALOHA" class="headerlink" title="时隙 ALOHA"></a>时隙 ALOHA</h4><p>假设  </p>
+<ul>
+<li>所有帧是等长的  </li>
+<li>时间被划分成相等的时隙，每个时隙可发送一帧  </li>
+<li>节点支在时隙开始时发送帧  </li>
+<li>节点在时钟上是同步的  </li>
+<li>如果两个或多个节点在一个时隙传输，所有的站点都能检测到冲突  </li>
+</ul>
+<p>运行  </p>
+<ul>
+<li>当节点或去新的帧，在下一个时隙传输  </li>
+<li>传输时没有检测到冲突，成功：节点能够在下一时隙发送新帧  </li>
+<li>传输时检测到冲突，失败：节点在每一个随后的时隙以概率 p 重传帧直到成功  </li>
+</ul>
+<p>优点  </p>
+<ul>
+<li>节点可以以信道带宽全速连续传输  </li>
+<li>高度分布：仅需要节点之间在时隙上的同步  </li>
+<li>简单  </li>
+</ul>
+<p>缺点  </p>
+<ul>
+<li>存在冲突，浪费时隙  </li>
+<li>即使有帧要发送，仍然有可能存在空闲的时隙  </li>
+<li>节点检测冲突的时间 &lt; 帧传输的时间，必须传完  </li>
+<li>需要时钟上同步  </li>
+</ul>
+<p><img src="/2022/09/06/computernetworknotes6/shixiALOHA.png">  </p>
+<p>效率：当有很多节点，每个节点有很多帧要发送时，x % 的时隙是成功传输帧的时隙  </p>
+<p><img src="/2022/09/06/computernetworknotes6/ALOHAefficiency.png">  </p>
+<h4 id="纯-ALOHA-非时隙"><a href="#纯-ALOHA-非时隙" class="headerlink" title="纯 ALOHA (非时隙)"></a>纯 ALOHA (非时隙)</h4><p>无时隙 ALOHA：简单、无须节点间在时间上同步<br>当有帧需要传输：马上传输<br>冲突的概率增加：  </p>
+<p><img src="/2022/09/06/computernetworknotes6/ALOHA.png">  </p>
+<p><img src="/2022/09/06/computernetworknotes6/ALOHAef.png">  </p>
+<h3 id="CSMA-冲突"><a href="#CSMA-冲突" class="headerlink" title="CSMA 冲突"></a>CSMA 冲突</h3><p>冲突仍然可能发生：由传播延迟造成，节点可能侦听不到正在进行的传输<br>冲突：整个冲突帧的传输时间都被浪费了，是无效传输<br>传播延迟 (距离) 决定了冲突的概率<br>节点依据本地的信道使用情况来判断全部信道的使用情况  </p>
+<p><img src="/2022/09/06/computernetworknotes6/CSMAcollision.png"></p>
+<h4 id="CSMA-CD-冲突检测"><a href="#CSMA-CD-冲突检测" class="headerlink" title="CSMA/CD (冲突检测)"></a>CSMA/CD (冲突检测)</h4><p>CSMA/CD：  </p>
+<ul>
+<li>载波侦听 CSMA：和在 CSMA 中一样发送钱侦听信道  </li>
+<li>没有传完一个帧就可以在短时间内检测到冲突  </li>
+<li>冲突发送时则传输终止，减少对信道的浪费  </li>
+</ul>
+<p>冲突检测 CD 技术，有线局域网中容易实现：  </p>
+<ul>
+<li>检测信号强度，比较传输与接收到的信号是否相同  </li>
+<li>通过周期的过零点检测  </li>
+</ul>
+<p><img src="/2022/09/06/computernetworknotes6/CSMACD.png">  </p>
+<p><strong>以太网 CSMA/CD 算法</strong>  </p>
+<ol>
+<li>适配器获取数据报，创建帧  </li>
+<li>发送前：侦听信道 CS  </li>
+</ol>
+<ul>
+<li>闲：开始传送帧  </li>
+<li>忙：一直等到闲再发送  </li>
+</ul>
+<ol start="3">
+<li>发送过程中，冲突检测 CD  </li>
+</ol>
+<ul>
+<li>没有冲突：成功  </li>
+<li>检测到冲突：放弃，之后尝试重发  </li>
+</ul>
+<ol start="4">
+<li>发送方适配器检测到冲突，除放弃外，还发送一个 Jam 信号，所有听到冲突的适配器也是如此。  </li>
+</ol>
+<ul>
+<li>强化冲突：让所有站点都知道冲突  </li>
+</ul>
+<ol start="5">
+<li>如果放弃，适配器进入指数退避状态  </li>
+</ol>
+<ul>
+<li>在第 m 次失败后，适配器随机选择一个 {0, 1, 2,…, 2^(m-1)} 中 K，等待 K*512 位时，然后转到步骤 2</li>
+<li>exponential backoff：二进制指数退避算法  </li>
+</ul>
+<p><strong>指数退避</strong>  </p>
+<ul>
+<li>目标：适配器试图适应当前负载，在一个变化的碰撞窗口中随机选择时间点尝试重发  <ul>
+<li>高负载：重传窗口时间打，减少冲突，但等待时间长  </li>
+<li>低负载：使得个站点等待时间少，但冲突概率大  </li>
+</ul>
+</li>
+<li>例：  </li>
+</ul>
+<p><img src="/2022/09/06/computernetworknotes6/ExpBackoff.png">  </p>
+<p>CSMA/CD 效率  </p>
+<p><img src="/2022/09/06/computernetworknotes6/CSMACDeff.png"></p>
+<h4 id="无线局域网-CSMA-CA"><a href="#无线局域网-CSMA-CA" class="headerlink" title="无线局域网 CSMA/CA"></a>无线局域网 CSMA/CA</h4><p>WLAN 构成  </p>
+<ul>
+<li>基站：AP  </li>
+<li>无线链路  </li>
+<li>移动主机节点  </li>
+</ul>
+<p>冲突：2+ 站点 (AP 或者站点) 在同一个时刻发送<br>802.11：CSMA-发送前侦听信道；不会和其他节点正在进行的传输发生冲突<br>802.11：没有冲突检测  </p>
+<ul>
+<li>无法检测冲突：自身信号远远大于其它节点信号  </li>
+<li>即使能 CD：冲突 ！= 不成功  </li>
+<li>目标：avoid collisions (CSMA/CollisionAvoudance)  <ul>
+<li>无法 CD，一旦发送一股脑全部发送完毕，不 CD  </li>
+<li>为避免无 CD 带来的信道利用率低的问题，事前进行冲突避免  </li>
+</ul>
+</li>
+</ul>
+<p><strong>发送方</strong>：  </p>
+<ol>
+<li>如果站点侦测到信道空闲持续 DIFS 长，则传输整个帧 (no CD)  </li>
+<li>如果侦测到信道忙碌，则选择一个随机回退值，并在信道空闲时递减该值；如果信道忙碌，回退值不会变化。倒数到 0 时 (只生在信道闲时) 发送整个帧。如果没有收到 ACK，增加回退值，重复 2</li>
+</ol>
+<p><strong>802.11 接收方</strong>：  </p>
+<ul>
+<li>如果帧正确，则在 SIFS 后发送 ACK  </li>
+<li>无线链路特定，需要每帧确认；由于隐藏终端问题，在接收端可能形成干扰，接收方没有正确地接收到 (链路层可靠机制)  </li>
+</ul>
+<p>在 count down 时，真听到了信道空闲为什么不发送，而要等到 0 再发送：  </p>
+<ul>
+<li>2 个站点有数据帧需要发送，第三个节点正在发送  </li>
+<li>LAN CD：让 2 者听到第三个节点发完，立即发送  <ul>
+<li>冲突：放弃当前的发送，避免了信道浪费于无用冲突帧的发送  </li>
+<li>代价不昂贵  </li>
+</ul>
+</li>
+<li>WLAN CA<ul>
+<li>无法 CD，一旦发送就必须发完，如冲突信道浪费严重，代价高昂  </li>
+<li>思想：尽量实现避免冲突，而不是在发生冲突时放弃然后重发  </li>
+<li>听到发送的站点，分别选择随机值，回退到 0 发送：不同随机值，一个站点会胜利；失败站点会冻结计数器，当胜利节点发完再发  </li>
+</ul>
+</li>
+</ul>
+<p>无法完全避免冲突  </p>
+<p><img src="/2022/09/06/computernetworknotes6/CSMACA.png">  </p>
+<p><strong>冲突避免</strong><br>思想：允许发送方 “预约” 信道，而不是随机访问该信道；避免长数据帧的冲突 (可选)  </p>
+<ul>
+<li>发送方首先使用 CSMA 向 BS 发送一个雄安的 RTS 分组：RTS 可能会冲突，但由于比较短，浪费信道较少  </li>
+<li>BS 广播 clear-to-send CTS，作为 RTS 的响应  </li>
+<li>CTS 能够被所有涉及到的节点听到：发送方发送数据帧；其它节点抑制发送  </li>
+</ul>
+<p>采用雄安的预约分组可以完全避免数据帧的冲突  </p>
+<h4 id="线缆接入网络"><a href="#线缆接入网络" class="headerlink" title="线缆接入网络"></a>线缆接入网络</h4><p>多个 40 Mbps 下行 (广播) 信道，FDM  </p>
+<ul>
+<li>下行：通过 FDM 分成若干信道，互联网、数字电视等  </li>
+<li>互联网信道：只有 1 个 CMTS 在其上传输  </li>
+</ul>
+<p>多个 30 Mbps 上行的信道，FDM  </p>
+<ul>
+<li>多路访问：所有用户使用；结者 TDM 分成微时隙  </li>
+<li>部分时隙：分配；部分时隙；竞争  </li>
+</ul>
+<p><img src="/2022/09/06/computernetworknotes6/xianlanjieruwangluo.png">  </p>
+<p>DOCSIS: TMD 上行信道  </p>
+<ul>
+<li>采用 TDM 的方式将上行信道分成若干微时隙：MAP 指定  </li>
+<li>站点采用分配给它的微时隙上行微时隙：分配  </li>
+<li>在特殊的上行微时隙中，个站点请求上行微时隙：竞争  <ul>
+<li>个站点对于该时隙的使用时随机访问的  </li>
+<li>一旦碰撞 (请求不臣工，结果是再下行的 MAP 中没有为它分配，则二进制退避) 选择时隙上传输  </li>
+</ul>
+</li>
+</ul>
+<p><img src="/2022/09/06/computernetworknotes6/xianlanjieruwangluo2.png">  </p>
+<h3 id="轮流-Taking-Turns-MAC-协议"><a href="#轮流-Taking-Turns-MAC-协议" class="headerlink" title="轮流 (Taking Turns) MAC 协议"></a>轮流 (Taking Turns) MAC 协议</h3><h4 id="轮询"><a href="#轮询" class="headerlink" title="轮询"></a>轮询</h4><p>主节点邀请从节点依次传送<br>从节点一般比较 “dumb”<br>缺点：  </p>
+<ul>
+<li>轮询开销：轮询本身消耗信道带宽  </li>
+<li>等待时间：每个节点需等到主节点轮询后开始传输，即使只有一个节点，也许要等到轮询一周后才能够发送  </li>
+<li>单点故障：主节点失效时造成整个系统无法工作  </li>
+</ul>
+<h4 id="令牌传递"><a href="#令牌传递" class="headerlink" title="令牌传递"></a>令牌传递</h4><p>控制令牌 (token) 循环从一个节点到下一个节点传递<br>令牌报文：特殊的帧<br>缺点：  </p>
+<ul>
+<li>令牌开销：本身消耗带宽  </li>
+<li>延迟：只有等到抓住令牌，才可传输  </li>
+<li>单点故障 (token)：  <ul>
+<li>令牌丢失系统级故障，整个系统无法传输  </li>
+<li>复杂机制重新生成令牌 </li>
+</ul>
+</li>
+</ul>
+<h3 id="MAC-协议总结"><a href="#MAC-协议总结" class="headerlink" title="MAC 协议总结"></a>MAC 协议总结</h3><p>多点介入问题：对于一个共享型介质，各个节点如何协调对它的访问和使用？  </p>
+<ul>
+<li>信道划分：按时间、频率或编码  <ul>
+<li>TDMA, FDMA, CDMA</li>
+</ul>
+</li>
+<li>随机访问 (动态)  <ul>
+<li>ALOHA, S-ALOHA, CSMA, CSMA/CD  </li>
+<li>载波侦听：有线介质很容易，无线介质比较困难  </li>
+<li>CSMA/CD：802.3 Ethernet 网中使用  </li>
+<li>CSMA/CA：802.11 WLAN 中使用  </li>
+</ul>
+</li>
+<li>依次轮流协议  <ul>
+<li>集中 (有一个中心节点轮询)；分布 (通过令牌控制)  </li>
+<li>蓝牙、FDDI、令牌环  </li>
+</ul>
+</li>
+</ul>
+<br>
+
+<h2 id="LANs"><a href="#LANs" class="headerlink" title="LANs"></a>LANs</h2>]]></content>
       <categories>
         <category>Notes</category>
         <category>ComputerNetwork</category>
@@ -1156,7 +1436,7 @@ $ hexo deploy  # 部署到GitHub Pages
 <p>示例  </p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Satan</span><br><span class="line">许愿</span><br><span class="line">愿望：Beyond the barricade, there is a world we long to see.</span><br><span class="line">匿名：否</span><br><span class="line">可见度：unlisted</span><br></pre></td></tr></table></figure>
 
-<h2 id="创造一个撒旦老人需要什么准备"><a href="#创造一个撒旦老人需要什么准备" class="headerlink" title="创造一个撒旦老人需要什么准备"></a>创造一个撒旦老人需要什么准备</h2><h3 id="注册账号"><a href="#注册账号" class="headerlink" title="注册账号"></a>注册账号</h3><p>在缪尚新注册一个账号：@<a href="mailto:&#83;&#97;&#116;&#97;&#x6e;&#x40;&#x6d;&#117;&#x73;&#97;&#x69;&#x6e;&#46;&#99;&#x61;&#x66;&#101;">&#83;&#97;&#116;&#97;&#x6e;&#x40;&#x6d;&#117;&#x73;&#97;&#x69;&#x6e;&#46;&#99;&#x61;&#x66;&#101;</a>，修改基本资料，注意选中 “这是一个 bot 账号 / This is a bot account”。<br>在管理面板找到 <code>开发/Development-创建新应用/New Application</code>，创建新应用并给予读写权限，复制访问令牌。  </p>
+<h2 id="创造一个撒旦老人需要什么准备"><a href="#创造一个撒旦老人需要什么准备" class="headerlink" title="创造一个撒旦老人需要什么准备"></a>创造一个撒旦老人需要什么准备</h2><h3 id="注册账号"><a href="#注册账号" class="headerlink" title="注册账号"></a>注册账号</h3><p>在缪尚新注册一个账号：@<a href="mailto:&#x53;&#x61;&#116;&#x61;&#110;&#64;&#x6d;&#117;&#115;&#97;&#105;&#110;&#x2e;&#99;&#x61;&#x66;&#101;">&#x53;&#x61;&#116;&#x61;&#110;&#64;&#x6d;&#117;&#115;&#97;&#105;&#110;&#x2e;&#99;&#x61;&#x66;&#101;</a>，修改基本资料，注意选中 “这是一个 bot 账号 / This is a bot account”。<br>在管理面板找到 <code>开发/Development-创建新应用/New Application</code>，创建新应用并给予读写权限，复制访问令牌。  </p>
 <h3 id="安装-Mastodon-py"><a href="#安装-Mastodon-py" class="headerlink" title="安装 Mastodon.py"></a>安装 Mastodon.py</h3><p>安装 miniconda3：  </p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir miniconda</span><br><span class="line"><span class="built_in">cd</span> miniconda</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载 python 最新版本并用 bash 安装</span></span><br><span class="line">wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh</span><br><span class="line">sh Miniconda3-latest-Linux-x86_64.sh //用bash安装</span><br></pre></td></tr></table></figure>
 

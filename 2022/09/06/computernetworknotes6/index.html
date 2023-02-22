@@ -33,8 +33,21 @@
 <meta property="og:image" content="https://tech.musain.club/2022/09/06/computernetworknotes6/2dsinglebit.png">
 <meta property="og:image" content="https://tech.musain.club/2022/09/06/computernetworknotes6/CRC.png">
 <meta property="og:image" content="https://tech.musain.club/2022/09/06/computernetworknotes6/CRCexample.png">
+<meta property="og:image" content="https://tech.musain.club/2022/09/06/computernetworknotes6/TDMA.png">
+<meta property="og:image" content="https://tech.musain.club/2022/09/06/computernetworknotes6/FDMA.png">
+<meta property="og:image" content="https://tech.musain.club/2022/09/06/computernetworknotes6/shixiALOHA.png">
+<meta property="og:image" content="https://tech.musain.club/2022/09/06/computernetworknotes6/ALOHAefficiency.png">
+<meta property="og:image" content="https://tech.musain.club/2022/09/06/computernetworknotes6/ALOHA.png">
+<meta property="og:image" content="https://tech.musain.club/2022/09/06/computernetworknotes6/ALOHAef.png">
+<meta property="og:image" content="https://tech.musain.club/2022/09/06/computernetworknotes6/CSMAcollision.png">
+<meta property="og:image" content="https://tech.musain.club/2022/09/06/computernetworknotes6/CSMACD.png">
+<meta property="og:image" content="https://tech.musain.club/2022/09/06/computernetworknotes6/ExpBackoff.png">
+<meta property="og:image" content="https://tech.musain.club/2022/09/06/computernetworknotes6/CSMACDeff.png">
+<meta property="og:image" content="https://tech.musain.club/2022/09/06/computernetworknotes6/CSMACA.png">
+<meta property="og:image" content="https://tech.musain.club/2022/09/06/computernetworknotes6/xianlanjieruwangluo.png">
+<meta property="og:image" content="https://tech.musain.club/2022/09/06/computernetworknotes6/xianlanjieruwangluo2.png">
 <meta property="article:published_time" content="2022-09-06T02:53:38.000Z">
-<meta property="article:modified_time" content="2022-09-08T03:19:36.815Z">
+<meta property="article:modified_time" content="2023-02-08T11:48:49.380Z">
 <meta property="article:author" content="Udon">
 <meta property="article:tag" content="ComputerNetwork">
 <meta name="twitter:card" content="summary">
@@ -154,7 +167,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E8%AE%BA%E5%92%8C%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.</span> <span class="nav-text">引论和服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E8%8A%82%E7%82%B9%E7%9A%84%E8%BF%9E%E6%8E%A5%E6%96%B9%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">网络节点的连接方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%92%8C%E5%B1%80%E5%9F%9F%E7%BD%91"><span class="nav-number">1.2.</span> <span class="nav-text">数据链路层和局域网</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E8%B7%AF%E5%B1%82%E6%A6%82%E8%BF%B0"><span class="nav-number">1.3.</span> <span class="nav-text">链路层概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%AF%E8%AF%AD"><span class="nav-number">1.3.1.</span> <span class="nav-text">术语</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="nav-number">1.3.2.</span> <span class="nav-text">上下文</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E8%B7%AF%E5%B1%82%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.4.</span> <span class="nav-text">链路层服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E8%B7%AF%E5%B1%82%E5%AE%9E%E7%8E%B0%E4%BD%8D%E7%BD%AE"><span class="nav-number">1.5.</span> <span class="nav-text">链路层实现位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%82%E9%85%8D%E5%99%A8%E9%80%9A%E4%BF%A1"><span class="nav-number">1.6.</span> <span class="nav-text">适配器通信</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%AE%E9%94%99%E6%A3%80%E6%B5%8B%E5%92%8C%E7%BA%A0%E6%AD%A3"><span class="nav-number">2.</span> <span class="nav-text">差错检测和纠正</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E6%A3%80%E6%B5%8B"><span class="nav-number">2.1.</span> <span class="nav-text">错误检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A5%87%E5%81%B6%E6%A0%A1%E9%AA%8C"><span class="nav-number">2.2.</span> <span class="nav-text">奇偶校验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E9%AA%8C%E5%92%8C%EF%BC%9ACRC-%E5%BE%AA%E7%8E%AF%E5%86%97%E4%BD%99%E6%A0%A1%E9%AA%8C"><span class="nav-number">2.3.</span> <span class="nav-text">检验和：CRC (循环冗余校验)</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E8%AE%BA%E5%92%8C%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.</span> <span class="nav-text">引论和服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E8%8A%82%E7%82%B9%E7%9A%84%E8%BF%9E%E6%8E%A5%E6%96%B9%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">网络节点的连接方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E5%92%8C%E5%B1%80%E5%9F%9F%E7%BD%91"><span class="nav-number">1.2.</span> <span class="nav-text">数据链路层和局域网</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E8%B7%AF%E5%B1%82%E6%A6%82%E8%BF%B0"><span class="nav-number">1.3.</span> <span class="nav-text">链路层概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%AF%E8%AF%AD"><span class="nav-number">1.3.1.</span> <span class="nav-text">术语</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="nav-number">1.3.2.</span> <span class="nav-text">上下文</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E8%B7%AF%E5%B1%82%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.4.</span> <span class="nav-text">链路层服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E8%B7%AF%E5%B1%82%E5%AE%9E%E7%8E%B0%E4%BD%8D%E7%BD%AE"><span class="nav-number">1.5.</span> <span class="nav-text">链路层实现位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%82%E9%85%8D%E5%99%A8%E9%80%9A%E4%BF%A1"><span class="nav-number">1.6.</span> <span class="nav-text">适配器通信</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%AE%E9%94%99%E6%A3%80%E6%B5%8B%E5%92%8C%E7%BA%A0%E6%AD%A3"><span class="nav-number">2.</span> <span class="nav-text">差错检测和纠正</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E6%A3%80%E6%B5%8B"><span class="nav-number">2.1.</span> <span class="nav-text">错误检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A5%87%E5%81%B6%E6%A0%A1%E9%AA%8C"><span class="nav-number">2.2.</span> <span class="nav-text">奇偶校验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E9%AA%8C%E5%92%8C%EF%BC%9ACRC-%E5%BE%AA%E7%8E%AF%E5%86%97%E4%BD%99%E6%A0%A1%E9%AA%8C"><span class="nav-number">2.3.</span> <span class="nav-text">检验和：CRC (循环冗余校验)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E7%82%B9%E8%AE%BF%E5%8D%8F%E8%AE%AE"><span class="nav-number">3.</span> <span class="nav-text">多点访协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E8%B7%AF%E8%AE%BF%E9%97%AE%E9%93%BE%E6%8E%A5%E5%92%8C%E5%8D%8F%E8%AE%AE"><span class="nav-number">3.1.</span> <span class="nav-text">多路访问链接和协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E8%B7%AF%E8%AE%BF%E9%97%AE%E5%8D%8F%E8%AE%AE"><span class="nav-number">3.2.</span> <span class="nav-text">多路访问协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E8%B7%AF%E8%AE%BF%E9%97%AE%E5%8D%8F%E8%AE%AE-%E4%BB%8B%E8%B4%A8%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E5%8D%8F%E8%AE%AE%EF%BC%9AMAC"><span class="nav-number">3.2.1.</span> <span class="nav-text">多路访问协议 (介质访问控制协议：MAC)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%90%86%E6%83%B3%E7%9A%84%E5%A4%9A%E8%B7%AF%E8%AE%BF%E9%97%AE%E5%8D%8F%E8%AE%AE"><span class="nav-number">3.2.2.</span> <span class="nav-text">理想的多路访问协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MAC-%E5%AA%92%E4%BD%93%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6-%E5%8D%8F%E8%AE%AE%E5%88%86%E7%B1%BB"><span class="nav-number">3.2.3.</span> <span class="nav-text">MAC (媒体访问控制) 协议分类</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%A1%E9%81%93%E5%88%92%E5%88%86-MAC-%E5%8D%8F%E8%AE%AE"><span class="nav-number">3.3.</span> <span class="nav-text">信道划分 MAC 协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#TDMA"><span class="nav-number">3.3.1.</span> <span class="nav-text">TDMA</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#FDMA"><span class="nav-number">3.3.2.</span> <span class="nav-text">FDMA</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A0%81%E5%88%86%E5%A4%9A%E8%B7%AF%E8%AE%BF%E9%97%AE-CDMA"><span class="nav-number">3.3.3.</span> <span class="nav-text">码分多路访问 (CDMA)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E5%AD%98%E5%8F%96%E5%8D%8F%E8%AE%AE"><span class="nav-number">3.4.</span> <span class="nav-text">随机存取协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%B6%E9%9A%99-ALOHA"><span class="nav-number">3.4.1.</span> <span class="nav-text">时隙 ALOHA</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BA%AF-ALOHA-%E9%9D%9E%E6%97%B6%E9%9A%99"><span class="nav-number">3.4.2.</span> <span class="nav-text">纯 ALOHA (非时隙)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSMA-%E5%86%B2%E7%AA%81"><span class="nav-number">3.5.</span> <span class="nav-text">CSMA 冲突</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CSMA-CD-%E5%86%B2%E7%AA%81%E6%A3%80%E6%B5%8B"><span class="nav-number">3.5.1.</span> <span class="nav-text">CSMA&#x2F;CD (冲突检测)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%A0%E7%BA%BF%E5%B1%80%E5%9F%9F%E7%BD%91-CSMA-CA"><span class="nav-number">3.5.2.</span> <span class="nav-text">无线局域网 CSMA&#x2F;CA</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BA%BF%E7%BC%86%E6%8E%A5%E5%85%A5%E7%BD%91%E7%BB%9C"><span class="nav-number">3.5.3.</span> <span class="nav-text">线缆接入网络</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AE%E6%B5%81-Taking-Turns-MAC-%E5%8D%8F%E8%AE%AE"><span class="nav-number">3.6.</span> <span class="nav-text">轮流 (Taking Turns) MAC 协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BD%AE%E8%AF%A2"><span class="nav-number">3.6.1.</span> <span class="nav-text">轮询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A4%E7%89%8C%E4%BC%A0%E9%80%92"><span class="nav-number">3.6.2.</span> <span class="nav-text">令牌传递</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MAC-%E5%8D%8F%E8%AE%AE%E6%80%BB%E7%BB%93"><span class="nav-number">3.7.</span> <span class="nav-text">MAC 协议总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LANs"><span class="nav-number">4.</span> <span class="nav-text">LANs</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -258,7 +271,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2022-09-08 11:19:36" itemprop="dateModified" datetime="2022-09-08T11:19:36+08:00">2022-09-08</time>
+        <time title="Modified: 2023-02-08 19:48:49" itemprop="dateModified" datetime="2023-02-08T19:48:49+08:00">2023-02-08</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -281,14 +294,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>1.6k</span>
+      <span>5k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>1 mins.</span>
+      <span>5 mins.</span>
     </span>
 </div>
 
@@ -414,7 +427,287 @@
 <p><img src="/2022/09/06/computernetworknotes6/CRC.png">  </p>
 <p>CRC 例子：  </p>
 <p><img src="/2022/09/06/computernetworknotes6/CRCexample.png"></p>
+<br>
 
+<h2 id="多点访协议"><a href="#多点访协议" class="headerlink" title="多点访协议"></a>多点访协议</h2><h3 id="多路访问链接和协议"><a href="#多路访问链接和协议" class="headerlink" title="多路访问链接和协议"></a>多路访问链接和协议</h3><p>两种类型的链路 (一个子网内部链路链接形式)</p>
+<ul>
+<li><p><strong>点对点</strong>  </p>
+<ul>
+<li>拨号访问的 PPP  </li>
+<li>以太网交换机和主机之间的点对点链路  </li>
+</ul>
+</li>
+<li><p><strong>广播</strong> (共享线路或媒体)  </p>
+<ul>
+<li>传统以太网  </li>
+<li>HFC 上行链路  </li>
+<li>802.11 无线局域网  </li>
+</ul>
+</li>
+</ul>
+<h3 id="多路访问协议"><a href="#多路访问协议" class="headerlink" title="多路访问协议"></a>多路访问协议</h3><p>单个共享的广播型链路<br>2 个或更多站点同时传送：冲突 (collision)，多个节点在同一个时刻发送，则会收到 2 个或多个信号叠加  </p>
+<h4 id="多路访问协议-介质访问控制协议：MAC"><a href="#多路访问协议-介质访问控制协议：MAC" class="headerlink" title="多路访问协议 (介质访问控制协议：MAC)"></a>多路访问协议 (介质访问控制协议：MAC)</h4><p>分布式算法：决定节点如何使用共享信道，即决定节点什么时候可以发送<br>关于共享控制的通信必须借助信道本身传输  </p>
+<ul>
+<li>没有带外的信道，各节点使用其协调信道使用  </li>
+<li>用于传输控制信息  </li>
+</ul>
+<h4 id="理想的多路访问协议"><a href="#理想的多路访问协议" class="headerlink" title="理想的多路访问协议"></a>理想的多路访问协议</h4><p>给定：R bps 的广播信道<br>必要条件： </p>
+<ol>
+<li>当一个节点要发送时，可以 R 速率发送 </li>
+<li>挡 M 个节点要发送，每个可以以 R/M 的平均速率发送  </li>
+<li>完全分布的：没有特殊节点协调发送，没有时钟和时隙的同步  </li>
+<li>简单  </li>
+</ol>
+<h4 id="MAC-媒体访问控制-协议分类"><a href="#MAC-媒体访问控制-协议分类" class="headerlink" title="MAC (媒体访问控制) 协议分类"></a>MAC (媒体访问控制) 协议分类</h4><p>信道划分：  </p>
+<ul>
+<li>把信道划分成小片 (时间、频率、编码)  </li>
+<li>分配片给每个节点专用  </li>
+</ul>
+<p>随机访问：  </p>
+<ul>
+<li>信道不划分，允许冲突  </li>
+<li>冲突后恢复  </li>
+</ul>
+<p>依次轮流：  </p>
+<ul>
+<li>节点依次轮流  </li>
+<li>有很多数据传输的节点可以获得较长的信道使用权  </li>
+</ul>
+<h3 id="信道划分-MAC-协议"><a href="#信道划分-MAC-协议" class="headerlink" title="信道划分 MAC 协议"></a>信道划分 MAC 协议</h3><h4 id="TDMA"><a href="#TDMA" class="headerlink" title="TDMA"></a>TDMA</h4><p>TDMA： timd division multiple access  </p>
+<ul>
+<li>轮流使用信道，信道的时间分为周期  </li>
+<li>每个站点使用每周期中固定的时隙 (长度 = 帧传输时间) 传输帧  </li>
+<li>如果站点无帧传输，时隙空闲 -&gt; 浪费  </li>
+<li>eg. 6 站 LAN，1、3、4 有数据报，时隙 2、5、6 空闲  </li>
+</ul>
+<p><img src="/2022/09/06/computernetworknotes6/TDMA.png">  </p>
+<h4 id="FDMA"><a href="#FDMA" class="headerlink" title="FDMA"></a>FDMA</h4><p>FDMA： frequency division multiple access  </p>
+<ul>
+<li>信道的有效频率范围被分成一个个小的频段  </li>
+<li>每个站点被分配一个固定的频段  </li>
+<li>分配给站点的频段如果没有被使用，则空闲  </li>
+</ul>
+<p><img src="/2022/09/06/computernetworknotes6/FDMA.png">  </p>
+<h4 id="码分多路访问-CDMA"><a href="#码分多路访问-CDMA" class="headerlink" title="码分多路访问 (CDMA)"></a>码分多路访问 (CDMA)</h4><p>CDMA：code division multiple access  </p>
+<ul>
+<li>所有站点在整个频段上同时进行传输，采用编码原理加以区分  </li>
+<li>完全无冲突  </li>
+<li>假定：信号同步很好，线性叠加  </li>
+</ul>
+<h3 id="随机存取协议"><a href="#随机存取协议" class="headerlink" title="随机存取协议"></a>随机存取协议</h3><p>当节点有帧要发送时  </p>
+<ul>
+<li>以信道带宽的全部 R bps 发送  </li>
+<li>没有节点间的预先协调  </li>
+</ul>
+<p>两个或更多节点同时传输，会发生冲突 (collision)<br>随机存取协议规定：  </p>
+<ul>
+<li>如何检测冲突  </li>
+<li>如何从冲突中恢复 (如，通过稍后的重传)  </li>
+</ul>
+<p>随机 MAC 协议  </p>
+<ul>
+<li>时隙 ALOHA  </li>
+<li>ALOHA  </li>
+<li>CSMA，CSMA/CD，CSMA/CA  </li>
+</ul>
+<h4 id="时隙-ALOHA"><a href="#时隙-ALOHA" class="headerlink" title="时隙 ALOHA"></a>时隙 ALOHA</h4><p>假设  </p>
+<ul>
+<li>所有帧是等长的  </li>
+<li>时间被划分成相等的时隙，每个时隙可发送一帧  </li>
+<li>节点支在时隙开始时发送帧  </li>
+<li>节点在时钟上是同步的  </li>
+<li>如果两个或多个节点在一个时隙传输，所有的站点都能检测到冲突  </li>
+</ul>
+<p>运行  </p>
+<ul>
+<li>当节点或去新的帧，在下一个时隙传输  </li>
+<li>传输时没有检测到冲突，成功：节点能够在下一时隙发送新帧  </li>
+<li>传输时检测到冲突，失败：节点在每一个随后的时隙以概率 p 重传帧直到成功  </li>
+</ul>
+<p>优点  </p>
+<ul>
+<li>节点可以以信道带宽全速连续传输  </li>
+<li>高度分布：仅需要节点之间在时隙上的同步  </li>
+<li>简单  </li>
+</ul>
+<p>缺点  </p>
+<ul>
+<li>存在冲突，浪费时隙  </li>
+<li>即使有帧要发送，仍然有可能存在空闲的时隙  </li>
+<li>节点检测冲突的时间 &lt; 帧传输的时间，必须传完  </li>
+<li>需要时钟上同步  </li>
+</ul>
+<p><img src="/2022/09/06/computernetworknotes6/shixiALOHA.png">  </p>
+<p>效率：当有很多节点，每个节点有很多帧要发送时，x % 的时隙是成功传输帧的时隙  </p>
+<p><img src="/2022/09/06/computernetworknotes6/ALOHAefficiency.png">  </p>
+<h4 id="纯-ALOHA-非时隙"><a href="#纯-ALOHA-非时隙" class="headerlink" title="纯 ALOHA (非时隙)"></a>纯 ALOHA (非时隙)</h4><p>无时隙 ALOHA：简单、无须节点间在时间上同步<br>当有帧需要传输：马上传输<br>冲突的概率增加：  </p>
+<p><img src="/2022/09/06/computernetworknotes6/ALOHA.png">  </p>
+<p><img src="/2022/09/06/computernetworknotes6/ALOHAef.png">  </p>
+<h3 id="CSMA-冲突"><a href="#CSMA-冲突" class="headerlink" title="CSMA 冲突"></a>CSMA 冲突</h3><p>冲突仍然可能发生：由传播延迟造成，节点可能侦听不到正在进行的传输<br>冲突：整个冲突帧的传输时间都被浪费了，是无效传输<br>传播延迟 (距离) 决定了冲突的概率<br>节点依据本地的信道使用情况来判断全部信道的使用情况  </p>
+<p><img src="/2022/09/06/computernetworknotes6/CSMAcollision.png"></p>
+<h4 id="CSMA-CD-冲突检测"><a href="#CSMA-CD-冲突检测" class="headerlink" title="CSMA/CD (冲突检测)"></a>CSMA/CD (冲突检测)</h4><p>CSMA/CD：  </p>
+<ul>
+<li>载波侦听 CSMA：和在 CSMA 中一样发送钱侦听信道  </li>
+<li>没有传完一个帧就可以在短时间内检测到冲突  </li>
+<li>冲突发送时则传输终止，减少对信道的浪费  </li>
+</ul>
+<p>冲突检测 CD 技术，有线局域网中容易实现：  </p>
+<ul>
+<li>检测信号强度，比较传输与接收到的信号是否相同  </li>
+<li>通过周期的过零点检测  </li>
+</ul>
+<p><img src="/2022/09/06/computernetworknotes6/CSMACD.png">  </p>
+<p><strong>以太网 CSMA/CD 算法</strong>  </p>
+<ol>
+<li>适配器获取数据报，创建帧  </li>
+<li>发送前：侦听信道 CS  </li>
+</ol>
+<ul>
+<li>闲：开始传送帧  </li>
+<li>忙：一直等到闲再发送  </li>
+</ul>
+<ol start="3">
+<li>发送过程中，冲突检测 CD  </li>
+</ol>
+<ul>
+<li>没有冲突：成功  </li>
+<li>检测到冲突：放弃，之后尝试重发  </li>
+</ul>
+<ol start="4">
+<li>发送方适配器检测到冲突，除放弃外，还发送一个 Jam 信号，所有听到冲突的适配器也是如此。  </li>
+</ol>
+<ul>
+<li>强化冲突：让所有站点都知道冲突  </li>
+</ul>
+<ol start="5">
+<li>如果放弃，适配器进入指数退避状态  </li>
+</ol>
+<ul>
+<li>在第 m 次失败后，适配器随机选择一个 {0, 1, 2,…, 2^(m-1)} 中 K，等待 K*512 位时，然后转到步骤 2</li>
+<li>exponential backoff：二进制指数退避算法  </li>
+</ul>
+<p><strong>指数退避</strong>  </p>
+<ul>
+<li>目标：适配器试图适应当前负载，在一个变化的碰撞窗口中随机选择时间点尝试重发  <ul>
+<li>高负载：重传窗口时间打，减少冲突，但等待时间长  </li>
+<li>低负载：使得个站点等待时间少，但冲突概率大  </li>
+</ul>
+</li>
+<li>例：  </li>
+</ul>
+<p><img src="/2022/09/06/computernetworknotes6/ExpBackoff.png">  </p>
+<p>CSMA/CD 效率  </p>
+<p><img src="/2022/09/06/computernetworknotes6/CSMACDeff.png"></p>
+<h4 id="无线局域网-CSMA-CA"><a href="#无线局域网-CSMA-CA" class="headerlink" title="无线局域网 CSMA/CA"></a>无线局域网 CSMA/CA</h4><p>WLAN 构成  </p>
+<ul>
+<li>基站：AP  </li>
+<li>无线链路  </li>
+<li>移动主机节点  </li>
+</ul>
+<p>冲突：2+ 站点 (AP 或者站点) 在同一个时刻发送<br>802.11：CSMA-发送前侦听信道；不会和其他节点正在进行的传输发生冲突<br>802.11：没有冲突检测  </p>
+<ul>
+<li>无法检测冲突：自身信号远远大于其它节点信号  </li>
+<li>即使能 CD：冲突 ！= 不成功  </li>
+<li>目标：avoid collisions (CSMA/CollisionAvoudance)  <ul>
+<li>无法 CD，一旦发送一股脑全部发送完毕，不 CD  </li>
+<li>为避免无 CD 带来的信道利用率低的问题，事前进行冲突避免  </li>
+</ul>
+</li>
+</ul>
+<p><strong>发送方</strong>：  </p>
+<ol>
+<li>如果站点侦测到信道空闲持续 DIFS 长，则传输整个帧 (no CD)  </li>
+<li>如果侦测到信道忙碌，则选择一个随机回退值，并在信道空闲时递减该值；如果信道忙碌，回退值不会变化。倒数到 0 时 (只生在信道闲时) 发送整个帧。如果没有收到 ACK，增加回退值，重复 2</li>
+</ol>
+<p><strong>802.11 接收方</strong>：  </p>
+<ul>
+<li>如果帧正确，则在 SIFS 后发送 ACK  </li>
+<li>无线链路特定，需要每帧确认；由于隐藏终端问题，在接收端可能形成干扰，接收方没有正确地接收到 (链路层可靠机制)  </li>
+</ul>
+<p>在 count down 时，真听到了信道空闲为什么不发送，而要等到 0 再发送：  </p>
+<ul>
+<li>2 个站点有数据帧需要发送，第三个节点正在发送  </li>
+<li>LAN CD：让 2 者听到第三个节点发完，立即发送  <ul>
+<li>冲突：放弃当前的发送，避免了信道浪费于无用冲突帧的发送  </li>
+<li>代价不昂贵  </li>
+</ul>
+</li>
+<li>WLAN CA<ul>
+<li>无法 CD，一旦发送就必须发完，如冲突信道浪费严重，代价高昂  </li>
+<li>思想：尽量实现避免冲突，而不是在发生冲突时放弃然后重发  </li>
+<li>听到发送的站点，分别选择随机值，回退到 0 发送：不同随机值，一个站点会胜利；失败站点会冻结计数器，当胜利节点发完再发  </li>
+</ul>
+</li>
+</ul>
+<p>无法完全避免冲突  </p>
+<p><img src="/2022/09/06/computernetworknotes6/CSMACA.png">  </p>
+<p><strong>冲突避免</strong><br>思想：允许发送方 “预约” 信道，而不是随机访问该信道；避免长数据帧的冲突 (可选)  </p>
+<ul>
+<li>发送方首先使用 CSMA 向 BS 发送一个雄安的 RTS 分组：RTS 可能会冲突，但由于比较短，浪费信道较少  </li>
+<li>BS 广播 clear-to-send CTS，作为 RTS 的响应  </li>
+<li>CTS 能够被所有涉及到的节点听到：发送方发送数据帧；其它节点抑制发送  </li>
+</ul>
+<p>采用雄安的预约分组可以完全避免数据帧的冲突  </p>
+<h4 id="线缆接入网络"><a href="#线缆接入网络" class="headerlink" title="线缆接入网络"></a>线缆接入网络</h4><p>多个 40 Mbps 下行 (广播) 信道，FDM  </p>
+<ul>
+<li>下行：通过 FDM 分成若干信道，互联网、数字电视等  </li>
+<li>互联网信道：只有 1 个 CMTS 在其上传输  </li>
+</ul>
+<p>多个 30 Mbps 上行的信道，FDM  </p>
+<ul>
+<li>多路访问：所有用户使用；结者 TDM 分成微时隙  </li>
+<li>部分时隙：分配；部分时隙；竞争  </li>
+</ul>
+<p><img src="/2022/09/06/computernetworknotes6/xianlanjieruwangluo.png">  </p>
+<p>DOCSIS: TMD 上行信道  </p>
+<ul>
+<li>采用 TDM 的方式将上行信道分成若干微时隙：MAP 指定  </li>
+<li>站点采用分配给它的微时隙上行微时隙：分配  </li>
+<li>在特殊的上行微时隙中，个站点请求上行微时隙：竞争  <ul>
+<li>个站点对于该时隙的使用时随机访问的  </li>
+<li>一旦碰撞 (请求不臣工，结果是再下行的 MAP 中没有为它分配，则二进制退避) 选择时隙上传输  </li>
+</ul>
+</li>
+</ul>
+<p><img src="/2022/09/06/computernetworknotes6/xianlanjieruwangluo2.png">  </p>
+<h3 id="轮流-Taking-Turns-MAC-协议"><a href="#轮流-Taking-Turns-MAC-协议" class="headerlink" title="轮流 (Taking Turns) MAC 协议"></a>轮流 (Taking Turns) MAC 协议</h3><h4 id="轮询"><a href="#轮询" class="headerlink" title="轮询"></a>轮询</h4><p>主节点邀请从节点依次传送<br>从节点一般比较 “dumb”<br>缺点：  </p>
+<ul>
+<li>轮询开销：轮询本身消耗信道带宽  </li>
+<li>等待时间：每个节点需等到主节点轮询后开始传输，即使只有一个节点，也许要等到轮询一周后才能够发送  </li>
+<li>单点故障：主节点失效时造成整个系统无法工作  </li>
+</ul>
+<h4 id="令牌传递"><a href="#令牌传递" class="headerlink" title="令牌传递"></a>令牌传递</h4><p>控制令牌 (token) 循环从一个节点到下一个节点传递<br>令牌报文：特殊的帧<br>缺点：  </p>
+<ul>
+<li>令牌开销：本身消耗带宽  </li>
+<li>延迟：只有等到抓住令牌，才可传输  </li>
+<li>单点故障 (token)：  <ul>
+<li>令牌丢失系统级故障，整个系统无法传输  </li>
+<li>复杂机制重新生成令牌 </li>
+</ul>
+</li>
+</ul>
+<h3 id="MAC-协议总结"><a href="#MAC-协议总结" class="headerlink" title="MAC 协议总结"></a>MAC 协议总结</h3><p>多点介入问题：对于一个共享型介质，各个节点如何协调对它的访问和使用？  </p>
+<ul>
+<li>信道划分：按时间、频率或编码  <ul>
+<li>TDMA, FDMA, CDMA</li>
+</ul>
+</li>
+<li>随机访问 (动态)  <ul>
+<li>ALOHA, S-ALOHA, CSMA, CSMA/CD  </li>
+<li>载波侦听：有线介质很容易，无线介质比较困难  </li>
+<li>CSMA/CD：802.3 Ethernet 网中使用  </li>
+<li>CSMA/CA：802.11 WLAN 中使用  </li>
+</ul>
+</li>
+<li>依次轮流协议  <ul>
+<li>集中 (有一个中心节点轮询)；分布 (通过令牌控制)  </li>
+<li>蓝牙、FDDI、令牌环  </li>
+</ul>
+</li>
+</ul>
+<br>
+
+<h2 id="LANs"><a href="#LANs" class="headerlink" title="LANs"></a>LANs</h2>
     </div>
 
     
@@ -476,14 +769,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>Symbols count total: </span>
-    <span title="Symbols count total">142k</span>
+    <span title="Symbols count total">146k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>Reading time total &asymp;</span>
-    <span title="Reading time total">2:10</span>
+    <span title="Reading time total">2:13</span>
   </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
@@ -509,7 +802,7 @@
 
 
 
-<script class="next-config" data-name="giscus" type="application/json">{"enable":true,"repo":"melocery/melocery.github.io","repo_id":"MDEwOlJlcG9zaXRvcnk0MDY2NDI3NTM=","category":"Announcements","category_id":"DIC_kwDOGDzgQc4CQjbq","mapping":"pathname","reactions_enabled":1,"emit_metadata":1,"theme":"preferred_color_scheme","lang":"en","crossorigin":"anonymous"}</script>
+<script class="next-config" data-name="giscus" type="application/json">{"enable":true,"repo":"melocery/melocery.github.io","repo_id":"MDEwOlJlcG9zaXRvcnk0MDY2NDI3NTM=","category":"Announcements","category_id":"DIC_kwDOGDzgQc4CQjbq","mapping":"pathname","reactions_enabled":1,"emit_metadata":1,"data-input-position":"top","theme":"preferred_color_scheme","lang":"en","crossorigin":"anonymous"}</script>
 
 <script>
 document.addEventListener('page:loaded', () => {
