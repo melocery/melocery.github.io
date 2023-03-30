@@ -492,6 +492,27 @@ main() # 运行上述函数
       </tags>
   </entry>
   <entry>
+    <title>VPS：一款赛博乐高</title>
+    <url>/2022/08/13/cyberlego/</url>
+    <content><![CDATA[<center> 简单总结一下在 VPS 上折腾的一些小东西 </center>
+<span id="more"></span>
+
+<h2 id="Mastodon"><a href="#Mastodon" class="headerlink" title="Mastodon"></a>Mastodon</h2><p>买这个 VPS 就是为了长毛象，搭建过程非常缓慢，详细搭建过程见：<a href="https://tech.musain.club/2022/03/02/buildmastodon/">Mastodon 建站笔记</a>。搭建过程中遇到的很多问题，都在这篇中有提到。搭建一个长毛象实例并不难，后期装修维护才是挑战。各种各样零散的问题都会出现，甚至直到前几天才发现原来之前一直看错了 dockerhub 的报错信息。等有空需要给所有装修都总结成一篇装修笔记，以免以后忘记做过哪些东西。<br>目前站点除去朋友注册和 bot 账号约有四十多人，但由于很多人都只是建个魂器，所以总体开销并没有预期大，保持目前的配置扩建至 100 人应该没有问题。不过人少也有人少的好处，站点真的像一个咖啡馆，有经常来的熟客也有偶尔来喝一杯的生客。总得来说达到了我预想的结果，后续如果能有更多熟客就更好了。  </p>
+<h2 id="Plume"><a href="#Plume" class="headerlink" title="Plume"></a>Plume</h2><p>虽然已经有很多博客，但还是搭建了 plume。一开始的想法是来咖啡馆的人应该多多少少都会写同人，搭个 plume 比在咖啡馆直接发长文好，还能和咖啡馆直接互通，对创作者和读者之间的交流十分友好。但实际上大多数人都只是注册一下，然后放着不用。就连我自己也只是注册了一个账号，没有往这个账号搬运任何文。对我来说 plume 只是一个替代平台，除非 hugo + vercel 和 AO3 (甚至是 wordpress) 都不好用才会考虑用 plume。<br>搭建 plume 并不难，只在配置 ngnix 时出错重来过一次。也有很多教程，所以没有记录如何搭建。在这里存一个教程：<a href="https://blog.tantalum.life/posts/build-plume-in-docker/">Plume | 利用Docker-compose搭建Fedi开源博客平台</a></p>
+<h2 id="Matrix"><a href="#Matrix" class="headerlink" title="Matrix"></a>Matrix</h2><p>之前为了找一个不受审查还不被墙的即时聊天软件搜遍全网，直到自己有了一台 VPS，终于依靠搭建 matrix 从这种情况中脱离出来。虽然 matrix 由于发送每条消息都需要加密，所以发送图片还是很慢，但日常聊天可以忍这一点小毛病。这也是除了 mastodon 以外，我服务器上最活跃的应用。拼 lego 是自嗨游戏，搭好之后还是有人用更快乐。<br>不过 matrix 也不是没有被墙的风险，但和 mastodon 类似，一个服务器被墙还有无数个服务器可以选择。唯一的问题是很多搭建 matrix 的站长都不喜欢对外开放注册，我也是这样，而 matrix 大站已经被墙。这其实间接导致很多人无法真正开始使用 matrix，毕竟朋友都不能用的话，聊天软件也就失去意义。可能这就是为什么站内要账号的人不少，真正使用的人不多吧。<br>搭建 matrix 主要参考了两个教程：<a href="https://www.b612.me/code/223.html">使用docker搭建Synapse(Matrix)</a> 和 <a href="https://tech.konata.co/2022-04-10-matrix/">Matrix | 使用 docker 搭建 Synapse 记录</a>。我的搭建过程并没有记录下来，现在想想虽然都是别人写过的东西，也还是应该记录一份自己完成的过程。下次一定。  </p>
+<h2 id="Bot"><a href="#Bot" class="headerlink" title="Bot"></a>Bot</h2><p>这部分算是我的一时兴起，以及想知道如何做到这件事而进行的两个尝试。即使一开始就知道写的 bot 无人在意，但还是很用心地完成了这两个 bot。算是我买了这个 VPS 之后最意外的收获，发现自己竟还有探索欲，竟然能够纯粹为了满足自己而去做一件事。  </p>
+<h3 id="自动发嘟的喵喵喵"><a href="#自动发嘟的喵喵喵" class="headerlink" title="自动发嘟的喵喵喵"></a>自动发嘟的喵喵喵</h3><p>象上实现自动发嘟的 bot 有很多，在没有自己的站点和服务器时就很好奇这些 bot 如何运营。稍微看点教程就发现如果只是在自己电脑上运行的话，很可能需要一直开着电脑。如果想要完全自动化，最好还是有一个自己的服务器。所以在建好站点之后，有个很小的由头就火速写了喵喵喵。关于 bot 背后的原理其实并不完全清楚，但不知道 why 并不影响 how，所以还是很顺利完成了这个非常简单的 bot。<br>搭建过程：<a href="https://tech.musain.club/2022/07/12/catsama/">CATsama：如何做一个定时发嘟的 Mastodon bot</a><br>喵喵本喵：<a href="https://musain.cafe/@CATsama">喵喵喵</a>  </p>
+<h3 id="自动回复的汪汪汪"><a href="#自动回复的汪汪汪" class="headerlink" title="自动回复的汪汪汪"></a>自动回复的汪汪汪</h3><p>学会了自动发嘟就自然而然想学会自动回复，但整个过程比自动发嘟波折得多。幸好即使最初参考的教程非常详细，也在一开始就边做边记录，所以整个波折的过程也被写下来。虽然可能不具有什么真正的参考性，但自己回顾时会觉得很开心，抓耳挠腮想办法也很开心。最后这个 bot 只能说是可以运行，并没有真正实现我一开始想要的那种自动回复。但由于问题在站点设置，而不在代码，站点又是我根据教程一步步来的，完全不知道从何改起，目前来讲这个 bot 只能这样子了。<br>搭建过程：<a href="https://tech.musain.club/2022/07/20/dogchan/">DOGchan：如何做一个能够自动回复的 Mastodon bot</a><br>汪汪本汪：<a href="https://musain.cafe/@DOGchan">汪汪汪</a>  </p>
+<h2 id="说点感想"><a href="#说点感想" class="headerlink" title="说点感想"></a>说点感想</h2><p>写完才发现其实在 VPS 上搞的东西也不算多，但每一个都是自己想去做就做了的。就像在 bot 部分说的，这个 VPS 带给我的最大惊喜是竟然还有这么多东西我想去探索、想知道如何实现。这个列表在未来还会继续变多，说不定什么时候看到感兴趣的东西就又在服务器上折腾点什么。但目前来讲更重要的是维护已有东西的稳定，在此基础之上搞搞装修。<br>忘记是哪里看到的，说 VPS 就是一款赛博乐高，的确如此。  </p>
+]]></content>
+      <categories>
+        <category>VPS</category>
+      </categories>
+      <tags>
+        <tag>VPS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Computer Network Notes 6：A Top Down Approach</title>
     <url>/2022/09/06/computernetworknotes6/</url>
     <content><![CDATA[<center> 把老师的 PPT 变成 md 文件之计算机网络链路层和局域网 </center>
@@ -899,27 +920,6 @@ main() # 运行上述函数
       </tags>
   </entry>
   <entry>
-    <title>VPS：一款赛博乐高</title>
-    <url>/2022/08/13/cyberlego/</url>
-    <content><![CDATA[<center> 简单总结一下在 VPS 上折腾的一些小东西 </center>
-<span id="more"></span>
-
-<h2 id="Mastodon"><a href="#Mastodon" class="headerlink" title="Mastodon"></a>Mastodon</h2><p>买这个 VPS 就是为了长毛象，搭建过程非常缓慢，详细搭建过程见：<a href="https://tech.musain.club/2022/03/02/buildmastodon/">Mastodon 建站笔记</a>。搭建过程中遇到的很多问题，都在这篇中有提到。搭建一个长毛象实例并不难，后期装修维护才是挑战。各种各样零散的问题都会出现，甚至直到前几天才发现原来之前一直看错了 dockerhub 的报错信息。等有空需要给所有装修都总结成一篇装修笔记，以免以后忘记做过哪些东西。<br>目前站点除去朋友注册和 bot 账号约有四十多人，但由于很多人都只是建个魂器，所以总体开销并没有预期大，保持目前的配置扩建至 100 人应该没有问题。不过人少也有人少的好处，站点真的像一个咖啡馆，有经常来的熟客也有偶尔来喝一杯的生客。总得来说达到了我预想的结果，后续如果能有更多熟客就更好了。  </p>
-<h2 id="Plume"><a href="#Plume" class="headerlink" title="Plume"></a>Plume</h2><p>虽然已经有很多博客，但还是搭建了 plume。一开始的想法是来咖啡馆的人应该多多少少都会写同人，搭个 plume 比在咖啡馆直接发长文好，还能和咖啡馆直接互通，对创作者和读者之间的交流十分友好。但实际上大多数人都只是注册一下，然后放着不用。就连我自己也只是注册了一个账号，没有往这个账号搬运任何文。对我来说 plume 只是一个替代平台，除非 hugo + vercel 和 AO3 (甚至是 wordpress) 都不好用才会考虑用 plume。<br>搭建 plume 并不难，只在配置 ngnix 时出错重来过一次。也有很多教程，所以没有记录如何搭建。在这里存一个教程：<a href="https://blog.tantalum.life/posts/build-plume-in-docker/">Plume | 利用Docker-compose搭建Fedi开源博客平台</a></p>
-<h2 id="Matrix"><a href="#Matrix" class="headerlink" title="Matrix"></a>Matrix</h2><p>之前为了找一个不受审查还不被墙的即时聊天软件搜遍全网，直到自己有了一台 VPS，终于依靠搭建 matrix 从这种情况中脱离出来。虽然 matrix 由于发送每条消息都需要加密，所以发送图片还是很慢，但日常聊天可以忍这一点小毛病。这也是除了 mastodon 以外，我服务器上最活跃的应用。拼 lego 是自嗨游戏，搭好之后还是有人用更快乐。<br>不过 matrix 也不是没有被墙的风险，但和 mastodon 类似，一个服务器被墙还有无数个服务器可以选择。唯一的问题是很多搭建 matrix 的站长都不喜欢对外开放注册，我也是这样，而 matrix 大站已经被墙。这其实间接导致很多人无法真正开始使用 matrix，毕竟朋友都不能用的话，聊天软件也就失去意义。可能这就是为什么站内要账号的人不少，真正使用的人不多吧。<br>搭建 matrix 主要参考了两个教程：<a href="https://www.b612.me/code/223.html">使用docker搭建Synapse(Matrix)</a> 和 <a href="https://tech.konata.co/2022-04-10-matrix/">Matrix | 使用 docker 搭建 Synapse 记录</a>。我的搭建过程并没有记录下来，现在想想虽然都是别人写过的东西，也还是应该记录一份自己完成的过程。下次一定。  </p>
-<h2 id="Bot"><a href="#Bot" class="headerlink" title="Bot"></a>Bot</h2><p>这部分算是我的一时兴起，以及想知道如何做到这件事而进行的两个尝试。即使一开始就知道写的 bot 无人在意，但还是很用心地完成了这两个 bot。算是我买了这个 VPS 之后最意外的收获，发现自己竟还有探索欲，竟然能够纯粹为了满足自己而去做一件事。  </p>
-<h3 id="自动发嘟的喵喵喵"><a href="#自动发嘟的喵喵喵" class="headerlink" title="自动发嘟的喵喵喵"></a>自动发嘟的喵喵喵</h3><p>象上实现自动发嘟的 bot 有很多，在没有自己的站点和服务器时就很好奇这些 bot 如何运营。稍微看点教程就发现如果只是在自己电脑上运行的话，很可能需要一直开着电脑。如果想要完全自动化，最好还是有一个自己的服务器。所以在建好站点之后，有个很小的由头就火速写了喵喵喵。关于 bot 背后的原理其实并不完全清楚，但不知道 why 并不影响 how，所以还是很顺利完成了这个非常简单的 bot。<br>搭建过程：<a href="https://tech.musain.club/2022/07/12/catsama/">CATsama：如何做一个定时发嘟的 Mastodon bot</a><br>喵喵本喵：<a href="https://musain.cafe/@CATsama">喵喵喵</a>  </p>
-<h3 id="自动回复的汪汪汪"><a href="#自动回复的汪汪汪" class="headerlink" title="自动回复的汪汪汪"></a>自动回复的汪汪汪</h3><p>学会了自动发嘟就自然而然想学会自动回复，但整个过程比自动发嘟波折得多。幸好即使最初参考的教程非常详细，也在一开始就边做边记录，所以整个波折的过程也被写下来。虽然可能不具有什么真正的参考性，但自己回顾时会觉得很开心，抓耳挠腮想办法也很开心。最后这个 bot 只能说是可以运行，并没有真正实现我一开始想要的那种自动回复。但由于问题在站点设置，而不在代码，站点又是我根据教程一步步来的，完全不知道从何改起，目前来讲这个 bot 只能这样子了。<br>搭建过程：<a href="https://tech.musain.club/2022/07/20/dogchan/">DOGchan：如何做一个能够自动回复的 Mastodon bot</a><br>汪汪本汪：<a href="https://musain.cafe/@DOGchan">汪汪汪</a>  </p>
-<h2 id="说点感想"><a href="#说点感想" class="headerlink" title="说点感想"></a>说点感想</h2><p>写完才发现其实在 VPS 上搞的东西也不算多，但每一个都是自己想去做就做了的。就像在 bot 部分说的，这个 VPS 带给我的最大惊喜是竟然还有这么多东西我想去探索、想知道如何实现。这个列表在未来还会继续变多，说不定什么时候看到感兴趣的东西就又在服务器上折腾点什么。但目前来讲更重要的是维护已有东西的稳定，在此基础之上搞搞装修。<br>忘记是哪里看到的，说 VPS 就是一款赛博乐高，的确如此。  </p>
-]]></content>
-      <categories>
-        <category>VPS</category>
-      </categories>
-      <tags>
-        <tag>VPS</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Computational Deconvolution for More Precise Biological Data</title>
     <url>/2021/12/08/deconmixeddata/</url>
     <content><![CDATA[<center> 文献阅读：解卷积可从混合的生物学数据中解得各细胞类型比例，或估计各细胞类型的表达谱，为研究提供更准确的样本数据 </center>
@@ -995,6 +995,34 @@ main() # 运行上述函数
       <tags>
         <tag>DeconvoluteMixedBioData</tag>
         <tag>Bioinformatics</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>留学总不能走着去还住桥洞吧？</title>
+    <url>/2023/03/24/flightNaccommodation/</url>
+    <content><![CDATA[<center> 不要犹豫，犹豫就会败北。一切趁早，越早越能容错。 </center>
+<span id="more"></span>
+
+<p>买机票和租房都是留学生活中最基础也最重要的部分，但其实没有什么通用的经验可讲，写下这一篇主要是为了记录，顺便混一篇博客。  </p>
+<h2 id="机票"><a href="#机票" class="headerlink" title="机票"></a>机票</h2><h3 id="查价与购票"><a href="#查价与购票" class="headerlink" title="查价与购票"></a>查价与购票</h3><p>网上关于买机票什么时候便宜已经说得够多了，基本上是越早越好，提前两到三个月就可以开始看机票。推荐使用各大航空公司的 app 查看机票，第三方软件有你越看越涨价的嫌疑。  </p>
+<p>第一步，随便使用一个第三方软件，比如飞猪、携程、航旅纵横等等。这里不适让你真的去看机票的价格，而是看一看你要去的目的地有那些航司有航班。随便查看一天票比较多的，锁定几个航空公司，下载航空公司的官方 app。<br>第二步，在航空公司的 app 、小程序或官网上查看是否有 “留学生机票” 这一活动。比如南航有 “留学生特惠 GO” 活动，可以多一件免费行李额度。虽然价格上没有明显优势，但同样价格能多一件免费行李额度简直就是赚呐！一般情况下，提供护照和能证明年龄的注册证明、录取通知或居住证即可，有一些可能还需要留学签证。<br>第三步，挑航班和大致出发时间。锁定几个比较喜欢的航班，一般就是看一下出发和到达的时间是否合适，转机时长以及转机要求。观察一个星期的机票浮动，差不多就可以买票了。最低价的日期不会变动太大，但会因为犹豫而没有票。  </p>
+<p>其它也没什么好说的，总之就是有钱你随时可以买票，没钱就多搜刮航司的优惠信息。  </p>
+<h3 id="我的购票过程"><a href="#我的购票过程" class="headerlink" title="我的购票过程"></a>我的购票过程</h3><p>我的购票时间相对比较晚，再加上学签还没有到手，一直不太敢买票，所以直到今天才买了票。学签依旧没有消息，但最心动的机票已经没有了。  </p>
+<p>一开始买票前先问了一些出国的朋友关于行李的问题，其中一个朋友直接给我推荐了南航的留学生票，多一件免费行李额度。所以购票过程直接从前述的第二步开始，注册南航账号并申请留学生认证。目前南航的留学生认证只需要提供护照信息页和能够证明年龄的 offer 或注册证明。周五提交，当天下午就受到人工审核通过的短信，第二周的周二在 app 的 “我 - 更多权益” 一栏可以看到多出一个 “购票权益 留学生专享”。通过这里的链接购票，即可享受多一件免费行李额度。<br>但我的购票并不顺利。注册时也没有让我输入姓名的拼音，系统自动给我识别了一个拼音。很不巧，本人名字里有一个多音字，极少有系统或人会觉得是另一个读音，但南航就是认为是另一个读音。更改拼音除了一直不停打那个根本没有能工智人，只有什么都听不懂的人工智能的客服热线，就只能在 app 里层层点击 <code>在线客服 - 会员服务 - 会员信息管理 - 修改会员姓名</code> 得到一个修改链接。上传相关的身份证件，即可修改姓名、英文名和证件号等。<br>终于改好了英文名，购票时选择乘机人又出问题。乘机人信息没有同步修改，英文名依然是错误的拼音。而且明明应该可以在乘机人信息那里自行修改，但就是无法输入信息。删除已有乘机人重新建立乘机人，但购票时只有一个系统自动生成的信息，没有自己添加的部分；试图网页端购票，但网页端无法显示留学生权益；还有刷新个人信息和退出重新登录等都试了，依然没有显示正确的信息。最后只好等待信息同步，第二天再次退出重进才得到正确的乘机人。<br>这就可以买票了吗？天真！当我以为一切都好起来时，点击购票就显示服务器无响应或者连接超时，无论 app 还是微信小程序或者换个手机都是如此，完全不想卖给我这张票呢！最后兜兜转转又回到第三方购票软件，选择留学生票，比在南航 app 多花 90 块买到机票。刚买好票切回南航 app，显示我已经有未出行行程，这会儿服务器倒是顺畅，同步订单很快！总之，虽然多花了九十块，至少买到了想要的票。  </p>
+<p>从上面的过程可以看出来，<del>南航的 app 很难用</del> 购票过程还是会出现很多意想不到的小问题。早发现早治疗，不要事到临头因为一些小问题而一次又一次错过低价机票。我就错过了两次低价机票，很难过，很焦虑，很伤心要多花钱！  </p>
+<h2 id="租房"><a href="#租房" class="headerlink" title="租房"></a>租房</h2><p>租房更难说有什么经验，不同城市情况差别较大，这里仅作记录和分享。  </p>
+<h3 id="短租"><a href="#短租" class="headerlink" title="短租"></a>短租</h3><p>短租一般是 zwischen，即别人租好的房因为各种原因不住了，转租给下一个人。大多数是假期回国，把房子转租出去回一回血。也有因为学校变动、工作等原因，要去其它城市导致房屋闲置。不过原因并不重要，重要的是这对刚到德国的人非常友好 —— 可以先定下一个住处，然后在当地慢慢找长租。zwischen 在德国非常常见，也可以签合同 (UNTERMIETVERTRAG ÜBER EINE MÖBLIERTE EINLIEGERWOHNUNG Ziwischen)。尽量签合同、线下或视频看房。押金租金这些细节都可以和租给你房子的人谈。可以先付定金，到达当地后，退定金并分别付押金和第一个月的房租，所有金钱交易尽量用欧元。<br>短租信息一般会发在当地留学生群、微博 (eg. 德国房姐) 和豆瓣小组，或许还有小红书。注意甄别信息真假，谨防上当受骗。  </p>
+<h3 id="长租"><a href="#长租" class="headerlink" title="长租"></a>长租</h3><p>长租房可以到了柏林再找，目前我也没找到，等找到再来说怎么找吧。<br>有一个柏林公寓租房网站 (<a href="https://request.home-in-berlin.de/offering">HOME IN BERLIN</a>)，选择学生身份可以找学生公寓房源。学生租房需要提供相关信息，如 zu、注册证明。每个月 1 号和 16 号德国时间下午三点会放出房源，需要蹲点抢。我第一次蹲到了，但因为要多付一个月房租没有下手，后来再也没有见过房源。  </p>
+<h3 id="我的租房过程"><a href="#我的租房过程" class="headerlink" title="我的租房过程"></a>我的租房过程</h3><p>先在 3.1 用 HOME IN BERLIN 那个网站感受了一下怎么刷房源、刷到后要填什么信息。这个时间放出来的房源都是 3.16 起租，由于 4.17 才开学，不想多租一个月加暂时不着急租房，就放弃了刷到的房源。当时刷到的房源是学生公寓，单人间，18 m<sup>2</sup>，共享浴室、洗衣房和厨房，540 欧/月。<br>后来在 3.16 自信满满打开网站，房源放出前十分钟，网站已经非常卡，后面果然什么都没有刷出来。<br>大约 3.17 开始，朋友在当地的群里帮我看短租信息。很幸运，在 3.18 就看到一个短租房源，可以从 4.1 租到 9.30。Apartment，30 m<sup>2</sup>，有卫浴有厨房，拎包入住。朋友也帮我线下看房，稍微计算了一下从房子到 fu 的时间。这个房各个地方都很满意，唯一的缺点是距离 fu 要一个小时车程。但这也不算房子的缺点，应该怪 fu 实在是过于郊区。当时告诉对方自己有些犹豫，如果有别人想租可以先考虑别人。放弃之后就非常后悔，感觉可能也遇不上这么好的房子了。<br>在 3.22，朋友又转发给我一个房源信息，在柏林市中心，合租中的一间，可以租两个月。但由于当时整个人状态极差，再加上对方的微信显示为男性，完全不想和对方联系，直接摆烂仿佛没看见消息，甚至已经在想柏林到底能不能真的住桥洞。第二天朋友问我对方有没有回消息。我：我没问。朋友：？<br>事情在 3.23 出现转机，那套非常心动的 apartment 由于原本订房的人可能会有打扰邻居的行为，决定把房给我。最近几天都在签合同和转钱这些事，搞定也算是有房的人了。  </p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>没什么特别要说的，把 summary 重复一遍 ——  </p>
+<center>不要犹豫，犹豫就会败北！</center>  
+<center>一切趁早，越早越能容错！</center>]]></content>
+      <categories>
+        <category>runrunrun</category>
+      </categories>
+      <tags>
+        <tag>Accommodation</tag>
+        <tag>AirTickts</tag>
       </tags>
   </entry>
   <entry>
@@ -1358,7 +1386,7 @@ data[key] = $.html();
 <p>示例  </p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Satan</span><br><span class="line">许愿</span><br><span class="line">愿望：Beyond the barricade, there is a world we long to see.</span><br><span class="line">匿名：否</span><br><span class="line">可见度：unlisted</span><br></pre></td></tr></table></figure>
 
-<h2 id="创造一个撒旦老人需要什么准备"><a href="#创造一个撒旦老人需要什么准备" class="headerlink" title="创造一个撒旦老人需要什么准备"></a>创造一个撒旦老人需要什么准备</h2><h3 id="注册账号"><a href="#注册账号" class="headerlink" title="注册账号"></a>注册账号</h3><p>在缪尚新注册一个账号：@<a href="mailto:&#x53;&#97;&#x74;&#x61;&#x6e;&#64;&#x6d;&#x75;&#115;&#x61;&#x69;&#110;&#x2e;&#99;&#97;&#102;&#101;">&#x53;&#97;&#x74;&#x61;&#x6e;&#64;&#x6d;&#x75;&#115;&#x61;&#x69;&#110;&#x2e;&#99;&#97;&#102;&#101;</a>，修改基本资料，注意选中 “这是一个 bot 账号 / This is a bot account”。<br>在管理面板找到 <code>开发/Development-创建新应用/New Application</code>，创建新应用并给予读写权限，复制访问令牌。  </p>
+<h2 id="创造一个撒旦老人需要什么准备"><a href="#创造一个撒旦老人需要什么准备" class="headerlink" title="创造一个撒旦老人需要什么准备"></a>创造一个撒旦老人需要什么准备</h2><h3 id="注册账号"><a href="#注册账号" class="headerlink" title="注册账号"></a>注册账号</h3><p>在缪尚新注册一个账号：@<a href="mailto:&#83;&#x61;&#116;&#x61;&#110;&#x40;&#109;&#117;&#115;&#97;&#105;&#x6e;&#46;&#x63;&#x61;&#102;&#x65;">&#83;&#x61;&#116;&#x61;&#110;&#x40;&#109;&#117;&#115;&#97;&#105;&#x6e;&#46;&#x63;&#x61;&#102;&#x65;</a>，修改基本资料，注意选中 “这是一个 bot 账号 / This is a bot account”。<br>在管理面板找到 <code>开发/Development-创建新应用/New Application</code>，创建新应用并给予读写权限，复制访问令牌。  </p>
 <h3 id="安装-Mastodon-py"><a href="#安装-Mastodon-py" class="headerlink" title="安装 Mastodon.py"></a>安装 Mastodon.py</h3><p>安装 miniconda3：  </p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir miniconda</span><br><span class="line"><span class="built_in">cd</span> miniconda</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载 python 最新版本并用 bash 安装</span></span><br><span class="line">wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh</span><br><span class="line">sh Miniconda3-latest-Linux-x86_64.sh //用bash安装</span><br></pre></td></tr></table></figure>
 
@@ -1389,6 +1417,38 @@ data[key] = $.html();
       <tags>
         <tag>Mastodon</tag>
         <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>当你有两台电脑都需要用 ssh-key 登录到服务器</title>
+    <url>/2023/03/30/sshkey2vps/</url>
+    <content><![CDATA[<center> 为服务器添加一台通过 ssh-key 登录的电脑 </center>
+<span id="more"></span>
+
+<h2 id="生成-ssh-key"><a href="#生成-ssh-key" class="headerlink" title="生成 ssh-key"></a>生成 ssh-key</h2><p>首先查看电脑当前用户的目录下是否存在.ssh目录，以及目录中是否存在<code>id_rsa</code>和<code>id_rsa.pub</code>两个文件。如果存在，公钥即为<code>id_rsa.pub</code>中的内容。如果不存在，则输入命令：  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C “your email or other message”</span><br></pre></td></tr></table></figure>
+
+<p>一路回车，直到生成一个矩形的图案为止，生成的这串字符就是后面需要的公钥。  </p>
+<h2 id="配置-ssh-key"><a href="#配置-ssh-key" class="headerlink" title="配置 ssh-key"></a>配置 ssh-key</h2><p>利用能够登录到服务器的电脑连接到服务器，在 <code>~/.ssh/</code> 文件夹下新建文件：  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nano ~/.ssh/authorized_keys2</span><br></pre></td></tr></table></figure>
+
+<p>将刚才生成的公钥粘贴进去。<br>修改 sshd 的相关配置，给新公钥授权。打开配置文件：  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nano /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+
+<p>找到 <code>AuthorizedKeysFile</code> 行，取消行首的 <code>#</code> 注释。  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Expect .ssh/authorized_keys2 to be disregarded by default in future.</span><br><span class="line">AuthorizedKeysFile      .ssh/authorized_keys .ssh/authorized_keys2</span><br></pre></td></tr></table></figure>
+
+<p>重启 sshd：  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">systemctl restart sshd</span><br></pre></td></tr></table></figure>
+
+<h2 id="新电脑登录"><a href="#新电脑登录" class="headerlink" title="新电脑登录"></a>新电脑登录</h2><p>使用 MobaXterm 登录，勾选 <code>Use private key</code> 并指定私钥文件。<br>具体步骤为： <code>Session -&gt; SSH -&gt; Use private key and specify a private key for passwordless login</code>。<br>设置完成后即可顺利登录。  </p>
+]]></content>
+      <categories>
+        <category>VPS</category>
+      </categories>
+      <tags>
+        <tag>VPS</tag>
+        <tag>ssh-key</tag>
       </tags>
   </entry>
   <entry>
@@ -2230,495 +2290,6 @@ $ hexo deploy  # 部署到GitHub Pages
       </tags>
   </entry>
   <entry>
-    <title>Computer Network Notes 4：Network Layer (1)</title>
-    <url>/2022/06/07/computernetworknotes4/</url>
-    <content><![CDATA[<center> 把老师的 PPT 变成 md 文件之计算机网络第四章网络层：数据平面 </center>
-<span id="more"></span>
-
-<br>
-
-<h2 id="导论"><a href="#导论" class="headerlink" title="导论"></a>导论</h2><h3 id="网络层服务"><a href="#网络层服务" class="headerlink" title="网络层服务"></a>网络层服务</h3><p>在发送主机和接收主机对之间传送段 (segment)<br>在发送端将段封装到数据报中<br>在接收端，将段上交给传输层实体<br>网络层协议存在于每一个主机和路由器<br>路由器检查每一个经过它的 IP 数据报的头部  </p>
-<h3 id="网络层的关键功能"><a href="#网络层的关键功能" class="headerlink" title="网络层的关键功能"></a>网络层的关键功能</h3><p><strong>转发</strong>：将分组从路由器的输入接口转发到合适的输出接口<br><strong>路由</strong>：使用路由算法来决定分组从发送主机到目标接收主机的路径  </p>
-<ul>
-<li>路由选择算法  </li>
-<li>路由选择协议  </li>
-</ul>
-<h3 id="数据平面与控制平面"><a href="#数据平面与控制平面" class="headerlink" title="数据平面与控制平面"></a>数据平面与控制平面</h3><p><strong>数据平面</strong>  </p>
-<ul>
-<li>本地，每个路由器功能  </li>
-<li>决定从路由器输入端口到达的分组如何转发到输出端口  </li>
-<li>转发功能  <ul>
-<li>传统方式：基于目标地址 + 转发表  </li>
-<li>SDN 方式：集于多个字段 + 流表  </li>
-</ul>
-</li>
-</ul>
-<p><strong>控制平面</strong>  </p>
-<ul>
-<li>网络范围内的逻辑  </li>
-<li>决定数据报如何在路由器之间路由，决定数据报从源道目标主机之间的端到端路径  </li>
-<li>2 个控制平面方法  <ul>
-<li>传统的路由算法：在路由器中被实现  </li>
-<li>software-defined networking (SND)：在远程的服务器中实现  </li>
-</ul>
-</li>
-</ul>
-<h4 id="传统方式"><a href="#传统方式" class="headerlink" title="传统方式"></a>传统方式</h4><p>每-路由器(Per-router)控制平面<br>在每一个路由器中的单独路由器算法元件，在控制平面进行交互  </p>
-<p><img src="/2022/06/07/computernetworknotes4/traditionalway.png">  </p>
-<p>控制平面、数据平面紧紧耦合<br>路由和转发的相互作用  </p>
-<p><img src="/2022/06/07/computernetworknotes4/traditional.png">  </p>
-<h4 id="SDN-方式"><a href="#SDN-方式" class="headerlink" title="SDN 方式"></a>SDN 方式</h4><p>逻辑集中的控制平面<br>一个不同的(通常是远程的)控制器与本地控制代理(CAs)交互  </p>
-<p><img src="/2022/06/07/computernetworknotes4/SDNway.png">  </p>
-<h3 id="网络服务模型"><a href="#网络服务模型" class="headerlink" title="网络服务模型"></a>网络服务模型</h3><p>对于单个数据报的服务  </p>
-<ul>
-<li>可靠传送  </li>
-<li>延迟保证，如：少于 40 ms 的延迟  </li>
-</ul>
-<p>对于数据报流的服务  </p>
-<ul>
-<li>保存数据报传送  </li>
-<li>保证流的最小带宽  </li>
-<li>分组之间的延迟差  </li>
-</ul>
-<p><img src="/2022/06/07/computernetworknotes4/servicemodel.png"></p>
-<h3 id="连接建立"><a href="#连接建立" class="headerlink" title="连接建立"></a>连接建立</h3><p>在某些网络架构中是第三个重要的功能  </p>
-<ul>
-<li>ATM, frame relay, X.25  </li>
-</ul>
-<p>在分组传输之前，在两个主机之间，再通过一些路由器所构成的路径上建立一个网络层连接  </p>
-<ul>
-<li>涉及到路由器  </li>
-</ul>
-<p>网络层和传输层连接服务区别  </p>
-<ul>
-<li><strong>网络层</strong>：在 2 个主机之间，涉及到路径上的一些路由器  </li>
-<li><strong>传输层</strong>：在 2 个进程之间，很可能只体现在端系统上 (TCP 连接)  </li>
-</ul>
-<br>
-
-<h2 id="路由器组成"><a href="#路由器组成" class="headerlink" title="路由器组成"></a>路由器组成</h2><h3 id="路由器结构概况"><a href="#路由器结构概况" class="headerlink" title="路由器结构概况"></a>路由器结构概况</h3><p>高层面(非常简化的)通用路由器体系架构：  </p>
-<ul>
-<li>路由：运行<strong>路由</strong>选择算法/协议(RIP, OSPF, BGP)-生成路由表  </li>
-<li>转发：从输入到输出链路交换数据报-根据路由表进行分组的<strong>转发</strong>  </li>
-</ul>
-<p><img src="/2022/06/07/computernetworknotes4/luyouqi.png">  </p>
-<h3 id="输入端口功能"><a href="#输入端口功能" class="headerlink" title="输入端口功能"></a>输入端口功能</h3><p><strong>物理层</strong>：Bit 级的接收<br><strong>数据链路层</strong>：链路层协议动作、解封装<br><strong>分布式交换</strong>：  </p>
-<ul>
-<li>根据数据报头部信息，如目的地址，在输入端口内存中的转发表中查找合适的输出端口 (匹配 + 行动)  </li>
-<li>基于目的的转发：仅仅依赖于 IP 数据包的目标 IP 地址 (传统方法)  </li>
-<li>通用转发：基于头部字段的任意集合进行转发  </li>
-</ul>
-<p><img src="/2022/06/07/computernetworknotes4/inputfunction.png">  </p>
-<h3 id="输入端口缓存"><a href="#输入端口缓存" class="headerlink" title="输入端口缓存"></a>输入端口缓存</h3><p>当交换机构的速率小于输入端口的汇聚速率时，在输入端口可能要排队：排队延迟以及由于输入缓存溢出造成丢失<br>Head-of-the-line (HOL) blocking：排在队头的数据报阻止了队列中其它数据报向前移动  </p>
-<p><img src="/2022/06/07/computernetworknotes4/inputhuancun.png"></p>
-<h3 id="交换结构"><a href="#交换结构" class="headerlink" title="交换结构"></a>交换结构</h3><p>将分组从输入缓冲区传输到合适的输出端口<br>交换速率：分组可以按照该速率从输入传输到输出  </p>
-<ul>
-<li>运行速度经常是输入/输出链路速率的若干倍  </li>
-<li>N个输入端口：交换机构的交换速率是输入线路速度的 N 倍比较理想，才不会成为瓶颈  </li>
-</ul>
-<p>3 种典型的交换机构：<br><img src="/2022/06/07/computernetworknotes4/switch3.png">  </p>
-<h4 id="通过内存交换"><a href="#通过内存交换" class="headerlink" title="通过内存交换"></a>通过内存交换</h4><p>第一代路由器：  </p>
-<ul>
-<li>在 CPU 直接控制下的交换，采用传统的计算机  </li>
-<li>分组倍拷贝到系统内存，CPU 从分组的头部提取出目标地址，查找转发表，找到对应的输出端口，拷贝到输出端口  </li>
-<li>转发速率被内存的带宽限制 (数据报通过 BUS 两遍)  </li>
-<li>一次只能转发一个分组  </li>
-</ul>
-<p><img src="/2022/06/07/computernetworknotes4/memory.png">  </p>
-<h3 id="通过总线交换"><a href="#通过总线交换" class="headerlink" title="通过总线交换"></a>通过总线交换</h3><p>数据报通过共享总线，从输入端口转发到输出端口<br>总线竞争：交换速度受限于总线带宽<br>1 次处理一个分组<br>1 Gbps bus, Cisco 1900；32 Gbps bus, Cisco 5600；对于接入或企业级路由器，速度足够，但不适合区域或骨干网络  </p>
-<p><img src="/2022/06/07/computernetworknotes4/bus.png">  </p>
-<h3 id="通过互联网络-crossbar-等-的交换"><a href="#通过互联网络-crossbar-等-的交换" class="headerlink" title="通过互联网络 (crossbar 等) 的交换"></a>通过互联网络 (crossbar 等) 的交换</h3><p>同时并发转发多个分组，克服总线带宽限制<br>Banyan (榕树) 网络，crossbar (纵横) 和其它的互联网络被开发，将多个处理器连接成多处理器<br>当分组从端口 A 到达，转给端口 Y：控制器短接相应的两个总线<br>高级设计：将数据报分片为固定长度的信元，通过交换网络交换<br>Cisco 12000：以 60 Gbps 的交换速率通过互联网络  </p>
-<p><img src="/2022/06/07/computernetworknotes4/crossbar.png"></p>
-<h3 id="输出端口"><a href="#输出端口" class="headerlink" title="输出端口"></a>输出端口</h3><p>当数据报从交换机构的到达速度比传输速度快，就需要输出端口缓存  </p>
-<ul>
-<li>数据报 (分组) 可能会被丢弃，由于拥塞，缓冲区没有空间  </li>
-</ul>
-<p>由<strong>调度规则</strong>选择排队的数据报进行传输  </p>
-<ul>
-<li>优先权调度-谁会获得最优性能，网络中立？  </li>
-</ul>
-<p><img src="/2022/06/07/computernetworknotes4/output.png">  </p>
-<h3 id="输出端口排队"><a href="#输出端口排队" class="headerlink" title="输出端口排队"></a>输出端口排队</h3><p>假设交换速率 Rswitch 是 Rline 的 N 倍 (N：输入端口的数量)<br>当多个输入端口同时向输出端口发送时，缓冲该分组 (当通过交换网络到达的速率超过输出速率则缓存)<br>排队带来延迟，由于输出端口缓存溢出则丢弃数据报  </p>
-<p><img src="/2022/06/07/computernetworknotes4/outputqueue.png">  </p>
-<h3 id="调度机制"><a href="#调度机制" class="headerlink" title="调度机制"></a>调度机制</h3><p><strong>调度</strong>：选择下一个要通过链路传输的分组<br>FIFO (first in first out) scheduling：按照分组到来次序发送  </p>
-<ul>
-<li>丢弃策略：如果分组到达一个满的队列，哪个分组将会被抛弃  <ul>
-<li>tail drop：丢弃刚到达的分组  </li>
-<li>priority：根据优先权丢失/移除分组  </li>
-<li>random：随机丢弃/移除  </li>
-</ul>
-</li>
-</ul>
-<h4 id="优先权"><a href="#优先权" class="headerlink" title="优先权"></a>优先权</h4><p>优先权调度：发送最高优先权的分组<br>多类，不同类别有不同的优先权  </p>
-<ul>
-<li>类别可能依赖于标记或其它的头部字段，eg. IP source/dest, port numbers, ds, etc.  </li>
-<li>先传最高优先级的队列中的分组，除非没有  </li>
-<li>高(低)优先权种的分组传输次序：FIFO  </li>
-</ul>
-<h4 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h4><p>Round Robin(RR) scheduling：  </p>
-<ul>
-<li>多类  </li>
-<li>循环扫描不同类型的队列，发送完一类的一个分组，再发送下一个类的一个分组，循环所有类</li>
-</ul>
-<p>Weighted Fair Queuing (WFQ)：  </p>
-<ul>
-<li>一般化的 Round Robin  </li>
-<li>在一段时间内，每个队列得到的任务时间是：W<sub>i</sub>/(XIGMA(W<sub>i</sub>)) * t，和权重成正比  </li>
-<li>每个类在一个循环中获得不同权重的服务量</li>
-</ul>
-<br>
-
-<h2 id="IP-Internet-Protocol"><a href="#IP-Internet-Protocol" class="headerlink" title="IP Internet Protocol"></a>IP Internet Protocol</h2><h3 id="互联网的网络层"><a href="#互联网的网络层" class="headerlink" title="互联网的网络层"></a>互联网的网络层</h3><p>主机，路由器种的网络层功能：</p>
-<p><img src="/2022/06/07/computernetworknotes4/InternetNet.png">  </p>
-<h3 id="IP-数据报格式"><a href="#IP-数据报格式" class="headerlink" title="IP 数据报格式"></a>IP 数据报格式</h3><p>IPv4 数据报格式：  </p>
-<p><img src="/2022/06/07/computernetworknotes4/IPform.png">  </p>
-<h3 id="IP-分片和重组-Fragmentation-amp-Reassembly"><a href="#IP-分片和重组-Fragmentation-amp-Reassembly" class="headerlink" title="IP 分片和重组 (Fragmentation &amp; Reassembly)"></a>IP 分片和重组 (Fragmentation &amp; Reassembly)</h3><p>网络链路有 MTU (最大传输单元) - 链路层帧所携带的最大数据长度  </p>
-<ul>
-<li>不同的链路类型  </li>
-<li>不同的 MTU  </li>
-</ul>
-<p>大的 IP 数据报在网络上被分片 (fragmented)  </p>
-<ul>
-<li>一个数据报被分割成若干个小数据报  <ul>
-<li>相同的 ID  </li>
-<li>不同的偏移量  </li>
-<li>最后一个分片标记为 0  </li>
-</ul>
-</li>
-<li>“重组” 只在最终的目标主机进行  </li>
-<li>IP 头部的信息被用于标识、排序相关分片  </li>
-</ul>
-<p><img src="/2022/06/07/computernetworknotes4/FRexample.png">  </p>
-<h3 id="IP-编址"><a href="#IP-编址" class="headerlink" title="IP 编址"></a>IP 编址</h3><p>IP 地址：32 位标示，对主机或路由器的接口编址<br>接口：主机/路由器和物理链路的连接处  </p>
-<ul>
-<li>路由器通常拥有多个接口  </li>
-<li>主机也有可能有多个接口  </li>
-<li>IP 地址和每一个接口关联  </li>
-</ul>
-<p>一个 IP 地址和一个接口相关联<br>这些接口如何连接：  </p>
-<ul>
-<li>有线以太网网口链接到以太网络交换机连接  </li>
-<li>无线 WiFi 接口被 WiFi 基站连接  </li>
-</ul>
-<h3 id="子网-Subsets"><a href="#子网-Subsets" class="headerlink" title="子网 (Subsets)"></a>子网 (Subsets)</h3><p>IP 地址：</p>
-<ul>
-<li>子网部分 (高位 bits)  </li>
-<li>主机部分 (低位 bits)  </li>
-</ul>
-<p><strong>子网</strong>：  </p>
-<ul>
-<li>一个子网内的节点 (主机或者路由器)，它们的 <strong>IP 地址的高位部分相同</strong>，这些节点构成的网络的一部分叫做子网  </li>
-<li><strong>无需路由器介入</strong>，子网内个主机可以在物理上相互直接到达  </li>
-</ul>
-<p><strong>方法</strong>：  </p>
-<ul>
-<li>要判断一个子网，将每一个接口从主机或者路由器上分开，构成了一个个网络的孤岛  </li>
-<li>每一个孤岛 (网络) 都可以被称之为 subset  </li>
-</ul>
-<p>子网掩码：11111111 11111111 11111111 00000000<br>subset mask：/24  </p>
-<h3 id="IP-地址分类"><a href="#IP-地址分类" class="headerlink" title="IP 地址分类"></a>IP 地址分类</h3><p>单播地址：<br>Class A: 126 networks, 16 million hosts<br>Class B: 16382 networks, 64 K hosts<br>Class C: 2 million networks, 254 host<br>组播地址：<br>Class D: multicast<br>预留：<br>Class E: reserved for future  </p>
-<p><img src="/2022/06/07/computernetworknotes4/IPclass.png">  </p>
-<h3 id="特殊-IP-地址"><a href="#特殊-IP-地址" class="headerlink" title="特殊 IP 地址"></a>特殊 IP 地址</h3><p><strong>一些约定：</strong>  </p>
-<ul>
-<li>子网部分：全为 0 — 本网络  </li>
-<li>主机部分：全为 0 — 本主机  </li>
-<li>主机部分：全为 1 — 广播地址，这个网络的所有主机  </li>
-<li>127.x.x.x: 回路地址/测试地址  </li>
-</ul>
-<p><img src="/2022/06/07/computernetworknotes4/spIP.png">  </p>
-<p><strong>内网 (专用) IP 地址</strong>  </p>
-<ul>
-<li>专用地址：地址空间的一部分供专用地址使用  </li>
-<li>永远不会被当作共用地址来分配，不会与公用地址重复<ul>
-<li>只在局部网络中有意义，区分不同的设备  </li>
-</ul>
-</li>
-<li>路由器不对目标地址是专用地址的分组进行转发  </li>
-<li>专用地址范围：<ul>
-<li>Class A 10.0.0.0 - 10.255.255.255 MASK 255.0.0.0  </li>
-<li>Class B 172.16.0.0 - 172.31.255.255 MASK 255.255.0.0  </li>
-<li>Class C 192.168.0.0 - 192.168.255.255 MASK 255.255.255.0  </li>
-</ul>
-</li>
-</ul>
-<h3 id="IP-编址：CIDR"><a href="#IP-编址：CIDR" class="headerlink" title="IP 编址：CIDR"></a>IP 编址：CIDR</h3><p><strong>CIDR</strong>：Classless InterDomain Routing (无类域间路由)  </p>
-<ul>
-<li>子网部分可以在任意的位置  </li>
-<li>地址格式：a.b.c.d/x，其中 x 是地址中子网号的长度  </li>
-</ul>
-<p><img src="/2022/06/07/computernetworknotes4/CIDR.png">  </p>
-<h3 id="转发表和转发算法"><a href="#转发表和转发算法" class="headerlink" title="转发表和转发算法"></a>转发表和转发算法</h3><p>目标子网号 | 掩码 | 下一跳 | 端口  </p>
-<p><img src="/2022/06/07/computernetworknotes4/IPtransfer.png">  </p>
-<ul>
-<li>获得 IP 数据报的目标地址  </li>
-<li>对于转发表中的每一个表项  <ul>
-<li>如 (IP Des addr) &amp; (mask) == destination，则按照表项对应的接口转发该数据报  </li>
-<li>如果没有找到，则使用默认表项转发数据报  </li>
-</ul>
-</li>
-</ul>
-<h3 id="如何获得一个-IP-地址"><a href="#如何获得一个-IP-地址" class="headerlink" title="如何获得一个 IP 地址"></a>如何获得一个 IP 地址</h3><h4 id="主机如何获得"><a href="#主机如何获得" class="headerlink" title="主机如何获得"></a>主机如何获得</h4><p>系统管理员将地址配置在一个文件中  </p>
-<ul>
-<li>Wintel: control-panel -&gt; network -&gt; configuration -&gt; tcp/ip -&gt; properties  </li>
-<li>UNIX: /etc/rc.config<br>DHCP (Dynamic Host Configuration Protocol)：从服务器中动态获得一个 IP 地址  </li>
-<li>plug-and-play  </li>
-</ul>
-<h4 id="DHCP"><a href="#DHCP" class="headerlink" title="DHCP"></a>DHCP</h4><p>目标：允许主机在加入网络的时候，动态地从服务器哪里获得 IP 地址：  </p>
-<ul>
-<li>可以更新对主机在用 IP 地址的租用期 - 租期快到了  </li>
-<li>重新启动时，允许重新使用以前用过的 IP 地址  </li>
-<li>支持移动用户加入到该网络 (短期在网)  </li>
-</ul>
-<p>工作概况：  </p>
-<ul>
-<li>主机广播 “DHCP discover” 报文 [可选]  </li>
-<li>DHCP 服务器用 “DHCP offer” 提供报文相应 [可选]  </li>
-<li>主机请求 IP 地址：发送 “DHCP request” 报文  </li>
-<li>DHCP 服务器发送地址：“DHCP ack” 报文  </li>
-</ul>
-<p>DHCP client-server scenario:  </p>
-<p><img src="/2022/06/07/computernetworknotes4/DHCPclientserver.png"></p>
-<h4 id="获得一个网络的子网部分"><a href="#获得一个网络的子网部分" class="headerlink" title="获得一个网络的子网部分"></a>获得一个网络的子网部分</h4><p>从 ISP 获得地址块中分配一个小地址块  </p>
-<p>一个 ISP 如何获得一个地址块？<br>ICANN: Internet Corporation for Assigned Names and Numbers  </p>
-<ul>
-<li>分配地址  </li>
-<li>管理 DNS  </li>
-<li>分配域名，解决冲突  </li>
-</ul>
-<h3 id="层次编址"><a href="#层次编址" class="headerlink" title="层次编址"></a>层次编址</h3><p><strong>路由聚集</strong> (route aggregation):<br>层次编址允许路由信息的有效广播<br>支持有空洞的、大概的聚集  </p>
-<p><img src="/2022/06/07/computernetworknotes4/RA.png">  </p>
-<p><strong>特殊路由信息</strong> (more specific routes)：<br>ISPs-R-Us 拥有一个对组织 1 更加精确的路由<br>匹配时，多个匹配采用最长匹配 (最精确)  </p>
-<p><img src="/2022/06/07/computernetworknotes4/msr.png"></p>
-<h3 id="NAT-Network-Address-Translation"><a href="#NAT-Network-Address-Translation" class="headerlink" title="NAT: Network Address Translation"></a>NAT: Network Address Translation</h3><p>网络间地址转换：出去时将所有内网地址转换为同一个机构 IP 地址，转回来时再由机构 IP 地址转回主机</p>
-<p><img src="/2022/06/07/computernetworknotes4/NAT.png">  </p>
-<p>动机：本地网络只有一个有效 IP 地址  </p>
-<ul>
-<li>不需要从 ISP 分配一块地址，可用一个 IP 地址用于所有的 (局域网) 设备 —— 省钱  </li>
-<li>在局域网改变设备地址的情况下无须通知外界  </li>
-<li>可以改变 ISP (地址变化) 而不需要改变内部的设备地址  </li>
-<li>局域网内部的设备没有明确的地址，对外是不可见的 —— 安全  </li>
-</ul>
-<p>实现：NAT 路由器必须  </p>
-<ul>
-<li>外出数据包：替换源地址和端口号为 NAT IP 地址和新的端口号，目标 IP 和端口号不变  <ul>
-<li>远端的 C/S 将会用 NAP IP 地址，新端口号作为目标地址  </li>
-</ul>
-</li>
-<li>记住每个转换替换对 (在 NAT 转换表中)  <ul>
-<li>源 IP，端口 vs NAP IP，新端口</li>
-</ul>
-</li>
-<li>进入数据包：替换目标 IP 地址和端口号，采用存储在 NAT 表中的mapping 表项，用 (源 IP，端口)  </li>
-</ul>
-<p><img src="/2022/06/07/computernetworknotes4/NATprocess.png">  </p>
-<p>16-bit 端口字段：6 万多个同时连接，要给局域网  </p>
-<p>NAT 争议：  </p>
-<ul>
-<li>路由器之应该对第 3 层做信息处理，而这里对端口号 (4 层) 做了处理  </li>
-<li>违反了 end-to-end 原则  <ul>
-<li>端到端原则：复杂性放到网络边缘，无需借助中转和变换，就可以直接传送到目标主机  </li>
-<li>NAT 可能要被一些应用设计者考虑，eg. P2P applications  </li>
-<li>外网的机器无法主动连接到内网的机器上  </li>
-</ul>
-</li>
-<li>地址短缺问题可以被 IPv6 解决  </li>
-<li>NAT 穿越：如果客户端要连接 NAT 后面的服务器，如何操作  </li>
-</ul>
-<p><img src="/2022/06/07/computernetworknotes4/NATchuanyue1.png">  </p>
-<p><img src="/2022/06/07/computernetworknotes4/NATchuanyue2.png">  </p>
-<p><img src="/2022/06/07/computernetworknotes4/NATchuanyue3.png">  </p>
-<h3 id="IPv6"><a href="#IPv6" class="headerlink" title="IPv6"></a>IPv6</h3><p>动机：  </p>
-<ul>
-<li>初始动机：32-bit 地址空间将会很快用完  </li>
-<li>头部格式改变帮助加速处理和转发  <ul>
-<li>TTL-1  </li>
-<li>头部 checksum  </li>
-<li>分片  </li>
-</ul>
-</li>
-<li>头部格式改变帮助 QoS</li>
-</ul>
-<p>IPv6 数据报格式：  </p>
-<ul>
-<li>固定的 40 字节头部  </li>
-<li>数据报传输过程中不允许分片 (源主机分片)  </li>
-</ul>
-<p>IPv6 头部 (Cont)  </p>
-<ul>
-<li>Priority：标示流中数据报的优先级  </li>
-<li>Flow Label：表示数据包在一个 “flow” (“flow” 的概念没有被严格定义)  </li>
-<li>Next header：标示上层协议  </li>
-<li>Checksum：被移除，降低在每一段中的处理速度  </li>
-<li>Options：允许，但是在头部之外，被 “Next Header” 字段标示  </li>
-<li>ICMPv6：ICMP 的最新版本  <ul>
-<li>附加了报文类型，eg. Packet too big  </li>
-<li>多播组管理功能  </li>
-</ul>
-</li>
-</ul>
-<p><img src="/2022/06/07/computernetworknotes4/IPv6Cont.png">  </p>
-<h3 id="IPv4-到-IPv6-的平移"><a href="#IPv4-到-IPv6-的平移" class="headerlink" title="IPv4 到 IPv6 的平移"></a>IPv4 到 IPv6 的平移</h3><p>不是所有的路由器都能够同时升级  </p>
-<ul>
-<li>没有一个标记日 “flag days”  </li>
-<li>在 IPv4 和 IPv6 路由器混合时，网络如何运转？  </li>
-</ul>
-<p><strong>隧道</strong>：在 IPv4 路由器之间传输的 IPv4 数据报中写代 IPv6 数据报</p>
-<br>
-
-<h2 id="通用转发和-SDN"><a href="#通用转发和-SDN" class="headerlink" title="通用转发和 SDN"></a>通用转发和 SDN</h2><h3 id="网络层功能为例的数据平面和控制平面"><a href="#网络层功能为例的数据平面和控制平面" class="headerlink" title="网络层功能为例的数据平面和控制平面"></a>网络层功能为例的数据平面和控制平面</h3><p><strong>网络层功能</strong>：  </p>
-<ul>
-<li>转发：对于从某个端口到来的分组转发到合适的输出端口  </li>
-<li>路由：决定分组从源端到目标端的路径 (路由算法)  </li>
-</ul>
-<p><strong>每个路由器 (Per Route) 的控制平面</strong>：每个路由器上都有实现路由算法原件 (它们之间需要相互交互) - 形成传统 IP 实现方式的控制平面  </p>
-<ul>
-<li>每台设备上既实现控制功能，又实现数据平面  </li>
-<li>控制功能分布式实现  </li>
-<li>路由表 - 粘连  </li>
-</ul>
-<p>缺陷：数量众多、功能各异的中间盒  </p>
-<ul>
-<li>路由器的网络层功能：  <ul>
-<li>IP 转发：对于到来的分组按照路由表决定如何转发；数据平面  </li>
-<li>路由：决定路径，计算路由表；处在控制平面  </li>
-</ul>
-</li>
-<li>还有其他种类繁多网络设备 (中间盒)：  <ul>
-<li>交换机；防火墙；NAT；IDS；负载均衡设备  </li>
-<li>未来：不断增加的需求和相应的网络设备  </li>
-<li>需要不同设备实现不同的网络功能  <ul>
-<li>每台设备继承了控制平面和数据平面的功能  </li>
-<li>控制平面分布式地实现了各种控制平面功能  </li>
-<li>升级和部署网络设备非常困难  </li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="网络设备控制平面的实现方式特点"><a href="#网络设备控制平面的实现方式特点" class="headerlink" title="网络设备控制平面的实现方式特点"></a>网络设备控制平面的实现方式特点</h3><p>互联网网络设备：传统方式都是通过分布式，每台设备的方法来实现数据平面和控制平面功能  </p>
-<ul>
-<li>垂直集成：每台路由器或其它网络设备，包括：  <ul>
-<li>硬件、在私有的操作系统  </li>
-<li>互联网标准协议 (IP, RIP, IS-IS, OSPF, BGP) 的私有实现  </li>
-<li>从上到下都有一个厂商提供 (代价大、被设备上 “绑架”)  </li>
-</ul>
-</li>
-<li>每个设备都实现了数据平面和控制平面的事情  <ul>
-<li>控制平面的功能是分布式实现的  </li>
-</ul>
-</li>
-<li>设备基本上只能 (分布式升级困难) 按照固定方式工作，控制逻辑固化。不同的网络功能需要不哦那个的 “middle boxes”：防火墙、负载均衡设备、NAT boxes  </li>
-</ul>
-<p>(数据 + 控制平面) 集成 -&gt; (控制逻辑) 粉不 -&gt; 固化  </p>
-<ul>
-<li>代价大；升级困难；管理困难  </li>
-</ul>
-<p>问题：  </p>
-<ul>
-<li>垂直集成 &gt; 昂贵、不便于创新的生态  </li>
-<li>分布式、货设备功能 == 网络设备种类繁多  <ul>
-<li>无法改变路由等工作逻辑，无法实现流量工程等高级特性  </li>
-<li>配置错误影响全网运行；升级和维护会涉及到全网设备；管理困难  </li>
-<li>要增加新的网络功能，需要设计、实现以及不舒心的特定设备，设备种类繁多  </li>
-</ul>
-</li>
-</ul>
-<p>解决：重新思考网络控制平面的处理方式  </p>
-<ul>
-<li>集中：远程的控制器集中实现控制逻辑  </li>
-<li>远程：数据平面和控制平面的分离  </li>
-</ul>
-<h3 id="SDN：逻辑上集中的控制平面"><a href="#SDN：逻辑上集中的控制平面" class="headerlink" title="SDN：逻辑上集中的控制平面"></a>SDN：逻辑上集中的控制平面</h3><p>一个不同的 (通常是远程) 控制器和 CA 交互，控制器决定分组转发的逻辑 (可编程)，CA 所在设备执行逻辑  </p>
-<p><img src="/2022/06/07/computernetworknotes4/SDN.png">  </p>
-<p>特点：  </p>
-<ul>
-<li>通用 “flow-based” 基于流的匹配 + 行动，eg. OpenFlow  </li>
-<li>控制平面和数据平面分离  </li>
-<li>控制平面功能在数据交换设备之外实现  </li>
-<li>可编程控制应用：在控制器之上以网络应用形式实现各种网络功能  </li>
-</ul>
-<h3 id="SDN-的主要思路"><a href="#SDN-的主要思路" class="headerlink" title="SDN 的主要思路"></a>SDN 的主要思路</h3><p>网络设备数据平面和控制平面分离<br>数据平面 - 分组交换机  </p>
-<ul>
-<li>将路由器、交换机和目前大多数网络设备的功能进一步抽象成：按照流表 (由控制平面设置的控制逻辑) 进行 PDU (帧、分组) 的动作 (包括转发、丢弃、拷贝、翻红、阻塞)  </li>
-<li>统一化设备功能：SDN 交换机 (分组交换机)，执行控制逻辑  </li>
-</ul>
-<p>控制平面 - 控制器 + 网络应用  </p>
-<ul>
-<li>分离、集中  </li>
-<li>计算和下发控制逻辑：流表  </li>
-</ul>
-<h3 id="SDN-控制平面和数据平面分离的优势"><a href="#SDN-控制平面和数据平面分离的优势" class="headerlink" title="SDN 控制平面和数据平面分离的优势"></a>SDN 控制平面和数据平面分离的优势</h3><p>水平集成控制平面的开放实现 (而非私有实现)，创造出更好的产业生态，促进发展  </p>
-<ul>
-<li>分组交换机、控制器和各种控制逻辑网络应用 app 可由不同厂商生产，专业化，引入竞争形成良好生态  </li>
-</ul>
-<p>集中式实现控制逻辑，网络管理容易  </p>
-<ul>
-<li>集中式控制器了解网络状况，编程简单  </li>
-<li>避免路由器的误配置  </li>
-</ul>
-<p>基于流表的<strong>匹配 + 行动</strong>的工作方式允许可编程的分组交换机  </p>
-<ul>
-<li>实现流量工程等高级特性  </li>
-<li>在此框架下实现各种新型 (未来) 的网络设备  </li>
-</ul>
-<h3 id="SDN-架构"><a href="#SDN-架构" class="headerlink" title="SDN 架构"></a>SDN 架构</h3><p>SDN 控制器 (网络OS)  </p>
-<ul>
-<li>维护网络状态信息  </li>
-<li>通过上面的北向 API 和网络控制应用交互  </li>
-<li>通过下面的南向 API 和网络交换机交互  </li>
-<li>逻辑上集中，但是在是线上通常由于性能、可扩展性、容错性以及鲁棒性采用分布式方法  </li>
-</ul>
-<p>网络控制应用  </p>
-<ul>
-<li>控制的大脑：采用下层提供的服务 (SDN 控制器提供的 API)，实现网络功能  <ul>
-<li>路由器 交换机</li>
-<li>接入控制 防火墙  </li>
-<li>负载均衡  </li>
-<li>其它功能</li>
-</ul>
-</li>
-<li>非绑定：可以被第三方提供，与控制器厂商可以通常上不同，与分组交换机厂商也可以不同  </li>
-</ul>
-<h3 id="通用转发和-SDN-1"><a href="#通用转发和-SDN-1" class="headerlink" title="通用转发和 SDN"></a>通用转发和 SDN</h3><p>每个路由器包含一个流表 (被逻辑上集中的控制器计算和分发)  </p>
-<h3 id="OpenFlow-数据平面抽象"><a href="#OpenFlow-数据平面抽象" class="headerlink" title="OpenFlow 数据平面抽象"></a>OpenFlow 数据平面抽象</h3><p>流：由分组 (帧) 头部字段所定义<br>通用转发：简单的分组处理规则  </p>
-<ul>
-<li>模式：将分组头部字段和流表进行匹配  </li>
-<li>行动：对于匹配上的分组，可以是丢弃、转发、修改、将匹配的分组发送给控制器  </li>
-<li>优先权 Priority：计歌模式匹配了，优先采用哪个，消除歧义  </li>
-<li>计数器 Counters： #bytes 以及 #packets  </li>
-</ul>
-<p>路由器中的流表定义了路由器的匹配 + 行动规则 (流表由控制器计算并下发)  </p>
-<h3 id="OpenFlow-抽象"><a href="#OpenFlow-抽象" class="headerlink" title="OpenFlow 抽象"></a>OpenFlow 抽象</h3><p>match + action：统一化各种网络设备提供的功能<br>目前几乎所有网络设备都可以在这个匹配 + 行动模式框架进行描述，具体化为各种网络设备包括未来的网络设备  </p>
-<p>路由器  </p>
-<ul>
-<li>match：最长前缀匹配  </li>
-<li>action：通过一条链路转发  </li>
-</ul>
-<p>交换机：  </p>
-<ul>
-<li>match：目标 MAC 地址  </li>
-<li>action：转发或泛洪  </li>
-</ul>
-<p>防火墙  </p>
-<ul>
-<li>match：IP 地址和 TCP/UDP 端口号  </li>
-<li>action：允许或者禁止</li>
-</ul>
-<p>NAT  </p>
-<ul>
-<li>match：IP 地址和端口号  </li>
-<li>action：重写地址和端口号  </li>
-</ul>
-]]></content>
-      <categories>
-        <category>Notes</category>
-        <category>ComputerNetwork</category>
-      </categories>
-      <tags>
-        <tag>ComputerNetwork</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Computer Network Notes 3：Transport Layer</title>
     <url>/2022/04/19/computernetworknotes3/</url>
     <content><![CDATA[<center> 把老师的 PPT 变成 md 文件之计算机网络第三章传输层 </center>
@@ -3450,6 +3021,495 @@ $ hexo deploy  # 部署到GitHub Pages
       </tags>
   </entry>
   <entry>
+    <title>Computer Network Notes 4：Network Layer (1)</title>
+    <url>/2022/06/07/computernetworknotes4/</url>
+    <content><![CDATA[<center> 把老师的 PPT 变成 md 文件之计算机网络第四章网络层：数据平面 </center>
+<span id="more"></span>
+
+<br>
+
+<h2 id="导论"><a href="#导论" class="headerlink" title="导论"></a>导论</h2><h3 id="网络层服务"><a href="#网络层服务" class="headerlink" title="网络层服务"></a>网络层服务</h3><p>在发送主机和接收主机对之间传送段 (segment)<br>在发送端将段封装到数据报中<br>在接收端，将段上交给传输层实体<br>网络层协议存在于每一个主机和路由器<br>路由器检查每一个经过它的 IP 数据报的头部  </p>
+<h3 id="网络层的关键功能"><a href="#网络层的关键功能" class="headerlink" title="网络层的关键功能"></a>网络层的关键功能</h3><p><strong>转发</strong>：将分组从路由器的输入接口转发到合适的输出接口<br><strong>路由</strong>：使用路由算法来决定分组从发送主机到目标接收主机的路径  </p>
+<ul>
+<li>路由选择算法  </li>
+<li>路由选择协议  </li>
+</ul>
+<h3 id="数据平面与控制平面"><a href="#数据平面与控制平面" class="headerlink" title="数据平面与控制平面"></a>数据平面与控制平面</h3><p><strong>数据平面</strong>  </p>
+<ul>
+<li>本地，每个路由器功能  </li>
+<li>决定从路由器输入端口到达的分组如何转发到输出端口  </li>
+<li>转发功能  <ul>
+<li>传统方式：基于目标地址 + 转发表  </li>
+<li>SDN 方式：集于多个字段 + 流表  </li>
+</ul>
+</li>
+</ul>
+<p><strong>控制平面</strong>  </p>
+<ul>
+<li>网络范围内的逻辑  </li>
+<li>决定数据报如何在路由器之间路由，决定数据报从源道目标主机之间的端到端路径  </li>
+<li>2 个控制平面方法  <ul>
+<li>传统的路由算法：在路由器中被实现  </li>
+<li>software-defined networking (SND)：在远程的服务器中实现  </li>
+</ul>
+</li>
+</ul>
+<h4 id="传统方式"><a href="#传统方式" class="headerlink" title="传统方式"></a>传统方式</h4><p>每-路由器(Per-router)控制平面<br>在每一个路由器中的单独路由器算法元件，在控制平面进行交互  </p>
+<p><img src="/2022/06/07/computernetworknotes4/traditionalway.png">  </p>
+<p>控制平面、数据平面紧紧耦合<br>路由和转发的相互作用  </p>
+<p><img src="/2022/06/07/computernetworknotes4/traditional.png">  </p>
+<h4 id="SDN-方式"><a href="#SDN-方式" class="headerlink" title="SDN 方式"></a>SDN 方式</h4><p>逻辑集中的控制平面<br>一个不同的(通常是远程的)控制器与本地控制代理(CAs)交互  </p>
+<p><img src="/2022/06/07/computernetworknotes4/SDNway.png">  </p>
+<h3 id="网络服务模型"><a href="#网络服务模型" class="headerlink" title="网络服务模型"></a>网络服务模型</h3><p>对于单个数据报的服务  </p>
+<ul>
+<li>可靠传送  </li>
+<li>延迟保证，如：少于 40 ms 的延迟  </li>
+</ul>
+<p>对于数据报流的服务  </p>
+<ul>
+<li>保存数据报传送  </li>
+<li>保证流的最小带宽  </li>
+<li>分组之间的延迟差  </li>
+</ul>
+<p><img src="/2022/06/07/computernetworknotes4/servicemodel.png"></p>
+<h3 id="连接建立"><a href="#连接建立" class="headerlink" title="连接建立"></a>连接建立</h3><p>在某些网络架构中是第三个重要的功能  </p>
+<ul>
+<li>ATM, frame relay, X.25  </li>
+</ul>
+<p>在分组传输之前，在两个主机之间，再通过一些路由器所构成的路径上建立一个网络层连接  </p>
+<ul>
+<li>涉及到路由器  </li>
+</ul>
+<p>网络层和传输层连接服务区别  </p>
+<ul>
+<li><strong>网络层</strong>：在 2 个主机之间，涉及到路径上的一些路由器  </li>
+<li><strong>传输层</strong>：在 2 个进程之间，很可能只体现在端系统上 (TCP 连接)  </li>
+</ul>
+<br>
+
+<h2 id="路由器组成"><a href="#路由器组成" class="headerlink" title="路由器组成"></a>路由器组成</h2><h3 id="路由器结构概况"><a href="#路由器结构概况" class="headerlink" title="路由器结构概况"></a>路由器结构概况</h3><p>高层面(非常简化的)通用路由器体系架构：  </p>
+<ul>
+<li>路由：运行<strong>路由</strong>选择算法/协议(RIP, OSPF, BGP)-生成路由表  </li>
+<li>转发：从输入到输出链路交换数据报-根据路由表进行分组的<strong>转发</strong>  </li>
+</ul>
+<p><img src="/2022/06/07/computernetworknotes4/luyouqi.png">  </p>
+<h3 id="输入端口功能"><a href="#输入端口功能" class="headerlink" title="输入端口功能"></a>输入端口功能</h3><p><strong>物理层</strong>：Bit 级的接收<br><strong>数据链路层</strong>：链路层协议动作、解封装<br><strong>分布式交换</strong>：  </p>
+<ul>
+<li>根据数据报头部信息，如目的地址，在输入端口内存中的转发表中查找合适的输出端口 (匹配 + 行动)  </li>
+<li>基于目的的转发：仅仅依赖于 IP 数据包的目标 IP 地址 (传统方法)  </li>
+<li>通用转发：基于头部字段的任意集合进行转发  </li>
+</ul>
+<p><img src="/2022/06/07/computernetworknotes4/inputfunction.png">  </p>
+<h3 id="输入端口缓存"><a href="#输入端口缓存" class="headerlink" title="输入端口缓存"></a>输入端口缓存</h3><p>当交换机构的速率小于输入端口的汇聚速率时，在输入端口可能要排队：排队延迟以及由于输入缓存溢出造成丢失<br>Head-of-the-line (HOL) blocking：排在队头的数据报阻止了队列中其它数据报向前移动  </p>
+<p><img src="/2022/06/07/computernetworknotes4/inputhuancun.png"></p>
+<h3 id="交换结构"><a href="#交换结构" class="headerlink" title="交换结构"></a>交换结构</h3><p>将分组从输入缓冲区传输到合适的输出端口<br>交换速率：分组可以按照该速率从输入传输到输出  </p>
+<ul>
+<li>运行速度经常是输入/输出链路速率的若干倍  </li>
+<li>N个输入端口：交换机构的交换速率是输入线路速度的 N 倍比较理想，才不会成为瓶颈  </li>
+</ul>
+<p>3 种典型的交换机构：<br><img src="/2022/06/07/computernetworknotes4/switch3.png">  </p>
+<h4 id="通过内存交换"><a href="#通过内存交换" class="headerlink" title="通过内存交换"></a>通过内存交换</h4><p>第一代路由器：  </p>
+<ul>
+<li>在 CPU 直接控制下的交换，采用传统的计算机  </li>
+<li>分组倍拷贝到系统内存，CPU 从分组的头部提取出目标地址，查找转发表，找到对应的输出端口，拷贝到输出端口  </li>
+<li>转发速率被内存的带宽限制 (数据报通过 BUS 两遍)  </li>
+<li>一次只能转发一个分组  </li>
+</ul>
+<p><img src="/2022/06/07/computernetworknotes4/memory.png">  </p>
+<h3 id="通过总线交换"><a href="#通过总线交换" class="headerlink" title="通过总线交换"></a>通过总线交换</h3><p>数据报通过共享总线，从输入端口转发到输出端口<br>总线竞争：交换速度受限于总线带宽<br>1 次处理一个分组<br>1 Gbps bus, Cisco 1900；32 Gbps bus, Cisco 5600；对于接入或企业级路由器，速度足够，但不适合区域或骨干网络  </p>
+<p><img src="/2022/06/07/computernetworknotes4/bus.png">  </p>
+<h3 id="通过互联网络-crossbar-等-的交换"><a href="#通过互联网络-crossbar-等-的交换" class="headerlink" title="通过互联网络 (crossbar 等) 的交换"></a>通过互联网络 (crossbar 等) 的交换</h3><p>同时并发转发多个分组，克服总线带宽限制<br>Banyan (榕树) 网络，crossbar (纵横) 和其它的互联网络被开发，将多个处理器连接成多处理器<br>当分组从端口 A 到达，转给端口 Y：控制器短接相应的两个总线<br>高级设计：将数据报分片为固定长度的信元，通过交换网络交换<br>Cisco 12000：以 60 Gbps 的交换速率通过互联网络  </p>
+<p><img src="/2022/06/07/computernetworknotes4/crossbar.png"></p>
+<h3 id="输出端口"><a href="#输出端口" class="headerlink" title="输出端口"></a>输出端口</h3><p>当数据报从交换机构的到达速度比传输速度快，就需要输出端口缓存  </p>
+<ul>
+<li>数据报 (分组) 可能会被丢弃，由于拥塞，缓冲区没有空间  </li>
+</ul>
+<p>由<strong>调度规则</strong>选择排队的数据报进行传输  </p>
+<ul>
+<li>优先权调度-谁会获得最优性能，网络中立？  </li>
+</ul>
+<p><img src="/2022/06/07/computernetworknotes4/output.png">  </p>
+<h3 id="输出端口排队"><a href="#输出端口排队" class="headerlink" title="输出端口排队"></a>输出端口排队</h3><p>假设交换速率 Rswitch 是 Rline 的 N 倍 (N：输入端口的数量)<br>当多个输入端口同时向输出端口发送时，缓冲该分组 (当通过交换网络到达的速率超过输出速率则缓存)<br>排队带来延迟，由于输出端口缓存溢出则丢弃数据报  </p>
+<p><img src="/2022/06/07/computernetworknotes4/outputqueue.png">  </p>
+<h3 id="调度机制"><a href="#调度机制" class="headerlink" title="调度机制"></a>调度机制</h3><p><strong>调度</strong>：选择下一个要通过链路传输的分组<br>FIFO (first in first out) scheduling：按照分组到来次序发送  </p>
+<ul>
+<li>丢弃策略：如果分组到达一个满的队列，哪个分组将会被抛弃  <ul>
+<li>tail drop：丢弃刚到达的分组  </li>
+<li>priority：根据优先权丢失/移除分组  </li>
+<li>random：随机丢弃/移除  </li>
+</ul>
+</li>
+</ul>
+<h4 id="优先权"><a href="#优先权" class="headerlink" title="优先权"></a>优先权</h4><p>优先权调度：发送最高优先权的分组<br>多类，不同类别有不同的优先权  </p>
+<ul>
+<li>类别可能依赖于标记或其它的头部字段，eg. IP source/dest, port numbers, ds, etc.  </li>
+<li>先传最高优先级的队列中的分组，除非没有  </li>
+<li>高(低)优先权种的分组传输次序：FIFO  </li>
+</ul>
+<h4 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h4><p>Round Robin(RR) scheduling：  </p>
+<ul>
+<li>多类  </li>
+<li>循环扫描不同类型的队列，发送完一类的一个分组，再发送下一个类的一个分组，循环所有类</li>
+</ul>
+<p>Weighted Fair Queuing (WFQ)：  </p>
+<ul>
+<li>一般化的 Round Robin  </li>
+<li>在一段时间内，每个队列得到的任务时间是：W<sub>i</sub>/(XIGMA(W<sub>i</sub>)) * t，和权重成正比  </li>
+<li>每个类在一个循环中获得不同权重的服务量</li>
+</ul>
+<br>
+
+<h2 id="IP-Internet-Protocol"><a href="#IP-Internet-Protocol" class="headerlink" title="IP Internet Protocol"></a>IP Internet Protocol</h2><h3 id="互联网的网络层"><a href="#互联网的网络层" class="headerlink" title="互联网的网络层"></a>互联网的网络层</h3><p>主机，路由器种的网络层功能：</p>
+<p><img src="/2022/06/07/computernetworknotes4/InternetNet.png">  </p>
+<h3 id="IP-数据报格式"><a href="#IP-数据报格式" class="headerlink" title="IP 数据报格式"></a>IP 数据报格式</h3><p>IPv4 数据报格式：  </p>
+<p><img src="/2022/06/07/computernetworknotes4/IPform.png">  </p>
+<h3 id="IP-分片和重组-Fragmentation-amp-Reassembly"><a href="#IP-分片和重组-Fragmentation-amp-Reassembly" class="headerlink" title="IP 分片和重组 (Fragmentation &amp; Reassembly)"></a>IP 分片和重组 (Fragmentation &amp; Reassembly)</h3><p>网络链路有 MTU (最大传输单元) - 链路层帧所携带的最大数据长度  </p>
+<ul>
+<li>不同的链路类型  </li>
+<li>不同的 MTU  </li>
+</ul>
+<p>大的 IP 数据报在网络上被分片 (fragmented)  </p>
+<ul>
+<li>一个数据报被分割成若干个小数据报  <ul>
+<li>相同的 ID  </li>
+<li>不同的偏移量  </li>
+<li>最后一个分片标记为 0  </li>
+</ul>
+</li>
+<li>“重组” 只在最终的目标主机进行  </li>
+<li>IP 头部的信息被用于标识、排序相关分片  </li>
+</ul>
+<p><img src="/2022/06/07/computernetworknotes4/FRexample.png">  </p>
+<h3 id="IP-编址"><a href="#IP-编址" class="headerlink" title="IP 编址"></a>IP 编址</h3><p>IP 地址：32 位标示，对主机或路由器的接口编址<br>接口：主机/路由器和物理链路的连接处  </p>
+<ul>
+<li>路由器通常拥有多个接口  </li>
+<li>主机也有可能有多个接口  </li>
+<li>IP 地址和每一个接口关联  </li>
+</ul>
+<p>一个 IP 地址和一个接口相关联<br>这些接口如何连接：  </p>
+<ul>
+<li>有线以太网网口链接到以太网络交换机连接  </li>
+<li>无线 WiFi 接口被 WiFi 基站连接  </li>
+</ul>
+<h3 id="子网-Subsets"><a href="#子网-Subsets" class="headerlink" title="子网 (Subsets)"></a>子网 (Subsets)</h3><p>IP 地址：</p>
+<ul>
+<li>子网部分 (高位 bits)  </li>
+<li>主机部分 (低位 bits)  </li>
+</ul>
+<p><strong>子网</strong>：  </p>
+<ul>
+<li>一个子网内的节点 (主机或者路由器)，它们的 <strong>IP 地址的高位部分相同</strong>，这些节点构成的网络的一部分叫做子网  </li>
+<li><strong>无需路由器介入</strong>，子网内个主机可以在物理上相互直接到达  </li>
+</ul>
+<p><strong>方法</strong>：  </p>
+<ul>
+<li>要判断一个子网，将每一个接口从主机或者路由器上分开，构成了一个个网络的孤岛  </li>
+<li>每一个孤岛 (网络) 都可以被称之为 subset  </li>
+</ul>
+<p>子网掩码：11111111 11111111 11111111 00000000<br>subset mask：/24  </p>
+<h3 id="IP-地址分类"><a href="#IP-地址分类" class="headerlink" title="IP 地址分类"></a>IP 地址分类</h3><p>单播地址：<br>Class A: 126 networks, 16 million hosts<br>Class B: 16382 networks, 64 K hosts<br>Class C: 2 million networks, 254 host<br>组播地址：<br>Class D: multicast<br>预留：<br>Class E: reserved for future  </p>
+<p><img src="/2022/06/07/computernetworknotes4/IPclass.png">  </p>
+<h3 id="特殊-IP-地址"><a href="#特殊-IP-地址" class="headerlink" title="特殊 IP 地址"></a>特殊 IP 地址</h3><p><strong>一些约定：</strong>  </p>
+<ul>
+<li>子网部分：全为 0 — 本网络  </li>
+<li>主机部分：全为 0 — 本主机  </li>
+<li>主机部分：全为 1 — 广播地址，这个网络的所有主机  </li>
+<li>127.x.x.x: 回路地址/测试地址  </li>
+</ul>
+<p><img src="/2022/06/07/computernetworknotes4/spIP.png">  </p>
+<p><strong>内网 (专用) IP 地址</strong>  </p>
+<ul>
+<li>专用地址：地址空间的一部分供专用地址使用  </li>
+<li>永远不会被当作共用地址来分配，不会与公用地址重复<ul>
+<li>只在局部网络中有意义，区分不同的设备  </li>
+</ul>
+</li>
+<li>路由器不对目标地址是专用地址的分组进行转发  </li>
+<li>专用地址范围：<ul>
+<li>Class A 10.0.0.0 - 10.255.255.255 MASK 255.0.0.0  </li>
+<li>Class B 172.16.0.0 - 172.31.255.255 MASK 255.255.0.0  </li>
+<li>Class C 192.168.0.0 - 192.168.255.255 MASK 255.255.255.0  </li>
+</ul>
+</li>
+</ul>
+<h3 id="IP-编址：CIDR"><a href="#IP-编址：CIDR" class="headerlink" title="IP 编址：CIDR"></a>IP 编址：CIDR</h3><p><strong>CIDR</strong>：Classless InterDomain Routing (无类域间路由)  </p>
+<ul>
+<li>子网部分可以在任意的位置  </li>
+<li>地址格式：a.b.c.d/x，其中 x 是地址中子网号的长度  </li>
+</ul>
+<p><img src="/2022/06/07/computernetworknotes4/CIDR.png">  </p>
+<h3 id="转发表和转发算法"><a href="#转发表和转发算法" class="headerlink" title="转发表和转发算法"></a>转发表和转发算法</h3><p>目标子网号 | 掩码 | 下一跳 | 端口  </p>
+<p><img src="/2022/06/07/computernetworknotes4/IPtransfer.png">  </p>
+<ul>
+<li>获得 IP 数据报的目标地址  </li>
+<li>对于转发表中的每一个表项  <ul>
+<li>如 (IP Des addr) &amp; (mask) == destination，则按照表项对应的接口转发该数据报  </li>
+<li>如果没有找到，则使用默认表项转发数据报  </li>
+</ul>
+</li>
+</ul>
+<h3 id="如何获得一个-IP-地址"><a href="#如何获得一个-IP-地址" class="headerlink" title="如何获得一个 IP 地址"></a>如何获得一个 IP 地址</h3><h4 id="主机如何获得"><a href="#主机如何获得" class="headerlink" title="主机如何获得"></a>主机如何获得</h4><p>系统管理员将地址配置在一个文件中  </p>
+<ul>
+<li>Wintel: control-panel -&gt; network -&gt; configuration -&gt; tcp/ip -&gt; properties  </li>
+<li>UNIX: /etc/rc.config<br>DHCP (Dynamic Host Configuration Protocol)：从服务器中动态获得一个 IP 地址  </li>
+<li>plug-and-play  </li>
+</ul>
+<h4 id="DHCP"><a href="#DHCP" class="headerlink" title="DHCP"></a>DHCP</h4><p>目标：允许主机在加入网络的时候，动态地从服务器哪里获得 IP 地址：  </p>
+<ul>
+<li>可以更新对主机在用 IP 地址的租用期 - 租期快到了  </li>
+<li>重新启动时，允许重新使用以前用过的 IP 地址  </li>
+<li>支持移动用户加入到该网络 (短期在网)  </li>
+</ul>
+<p>工作概况：  </p>
+<ul>
+<li>主机广播 “DHCP discover” 报文 [可选]  </li>
+<li>DHCP 服务器用 “DHCP offer” 提供报文相应 [可选]  </li>
+<li>主机请求 IP 地址：发送 “DHCP request” 报文  </li>
+<li>DHCP 服务器发送地址：“DHCP ack” 报文  </li>
+</ul>
+<p>DHCP client-server scenario:  </p>
+<p><img src="/2022/06/07/computernetworknotes4/DHCPclientserver.png"></p>
+<h4 id="获得一个网络的子网部分"><a href="#获得一个网络的子网部分" class="headerlink" title="获得一个网络的子网部分"></a>获得一个网络的子网部分</h4><p>从 ISP 获得地址块中分配一个小地址块  </p>
+<p>一个 ISP 如何获得一个地址块？<br>ICANN: Internet Corporation for Assigned Names and Numbers  </p>
+<ul>
+<li>分配地址  </li>
+<li>管理 DNS  </li>
+<li>分配域名，解决冲突  </li>
+</ul>
+<h3 id="层次编址"><a href="#层次编址" class="headerlink" title="层次编址"></a>层次编址</h3><p><strong>路由聚集</strong> (route aggregation):<br>层次编址允许路由信息的有效广播<br>支持有空洞的、大概的聚集  </p>
+<p><img src="/2022/06/07/computernetworknotes4/RA.png">  </p>
+<p><strong>特殊路由信息</strong> (more specific routes)：<br>ISPs-R-Us 拥有一个对组织 1 更加精确的路由<br>匹配时，多个匹配采用最长匹配 (最精确)  </p>
+<p><img src="/2022/06/07/computernetworknotes4/msr.png"></p>
+<h3 id="NAT-Network-Address-Translation"><a href="#NAT-Network-Address-Translation" class="headerlink" title="NAT: Network Address Translation"></a>NAT: Network Address Translation</h3><p>网络间地址转换：出去时将所有内网地址转换为同一个机构 IP 地址，转回来时再由机构 IP 地址转回主机</p>
+<p><img src="/2022/06/07/computernetworknotes4/NAT.png">  </p>
+<p>动机：本地网络只有一个有效 IP 地址  </p>
+<ul>
+<li>不需要从 ISP 分配一块地址，可用一个 IP 地址用于所有的 (局域网) 设备 —— 省钱  </li>
+<li>在局域网改变设备地址的情况下无须通知外界  </li>
+<li>可以改变 ISP (地址变化) 而不需要改变内部的设备地址  </li>
+<li>局域网内部的设备没有明确的地址，对外是不可见的 —— 安全  </li>
+</ul>
+<p>实现：NAT 路由器必须  </p>
+<ul>
+<li>外出数据包：替换源地址和端口号为 NAT IP 地址和新的端口号，目标 IP 和端口号不变  <ul>
+<li>远端的 C/S 将会用 NAP IP 地址，新端口号作为目标地址  </li>
+</ul>
+</li>
+<li>记住每个转换替换对 (在 NAT 转换表中)  <ul>
+<li>源 IP，端口 vs NAP IP，新端口</li>
+</ul>
+</li>
+<li>进入数据包：替换目标 IP 地址和端口号，采用存储在 NAT 表中的mapping 表项，用 (源 IP，端口)  </li>
+</ul>
+<p><img src="/2022/06/07/computernetworknotes4/NATprocess.png">  </p>
+<p>16-bit 端口字段：6 万多个同时连接，要给局域网  </p>
+<p>NAT 争议：  </p>
+<ul>
+<li>路由器之应该对第 3 层做信息处理，而这里对端口号 (4 层) 做了处理  </li>
+<li>违反了 end-to-end 原则  <ul>
+<li>端到端原则：复杂性放到网络边缘，无需借助中转和变换，就可以直接传送到目标主机  </li>
+<li>NAT 可能要被一些应用设计者考虑，eg. P2P applications  </li>
+<li>外网的机器无法主动连接到内网的机器上  </li>
+</ul>
+</li>
+<li>地址短缺问题可以被 IPv6 解决  </li>
+<li>NAT 穿越：如果客户端要连接 NAT 后面的服务器，如何操作  </li>
+</ul>
+<p><img src="/2022/06/07/computernetworknotes4/NATchuanyue1.png">  </p>
+<p><img src="/2022/06/07/computernetworknotes4/NATchuanyue2.png">  </p>
+<p><img src="/2022/06/07/computernetworknotes4/NATchuanyue3.png">  </p>
+<h3 id="IPv6"><a href="#IPv6" class="headerlink" title="IPv6"></a>IPv6</h3><p>动机：  </p>
+<ul>
+<li>初始动机：32-bit 地址空间将会很快用完  </li>
+<li>头部格式改变帮助加速处理和转发  <ul>
+<li>TTL-1  </li>
+<li>头部 checksum  </li>
+<li>分片  </li>
+</ul>
+</li>
+<li>头部格式改变帮助 QoS</li>
+</ul>
+<p>IPv6 数据报格式：  </p>
+<ul>
+<li>固定的 40 字节头部  </li>
+<li>数据报传输过程中不允许分片 (源主机分片)  </li>
+</ul>
+<p>IPv6 头部 (Cont)  </p>
+<ul>
+<li>Priority：标示流中数据报的优先级  </li>
+<li>Flow Label：表示数据包在一个 “flow” (“flow” 的概念没有被严格定义)  </li>
+<li>Next header：标示上层协议  </li>
+<li>Checksum：被移除，降低在每一段中的处理速度  </li>
+<li>Options：允许，但是在头部之外，被 “Next Header” 字段标示  </li>
+<li>ICMPv6：ICMP 的最新版本  <ul>
+<li>附加了报文类型，eg. Packet too big  </li>
+<li>多播组管理功能  </li>
+</ul>
+</li>
+</ul>
+<p><img src="/2022/06/07/computernetworknotes4/IPv6Cont.png">  </p>
+<h3 id="IPv4-到-IPv6-的平移"><a href="#IPv4-到-IPv6-的平移" class="headerlink" title="IPv4 到 IPv6 的平移"></a>IPv4 到 IPv6 的平移</h3><p>不是所有的路由器都能够同时升级  </p>
+<ul>
+<li>没有一个标记日 “flag days”  </li>
+<li>在 IPv4 和 IPv6 路由器混合时，网络如何运转？  </li>
+</ul>
+<p><strong>隧道</strong>：在 IPv4 路由器之间传输的 IPv4 数据报中写代 IPv6 数据报</p>
+<br>
+
+<h2 id="通用转发和-SDN"><a href="#通用转发和-SDN" class="headerlink" title="通用转发和 SDN"></a>通用转发和 SDN</h2><h3 id="网络层功能为例的数据平面和控制平面"><a href="#网络层功能为例的数据平面和控制平面" class="headerlink" title="网络层功能为例的数据平面和控制平面"></a>网络层功能为例的数据平面和控制平面</h3><p><strong>网络层功能</strong>：  </p>
+<ul>
+<li>转发：对于从某个端口到来的分组转发到合适的输出端口  </li>
+<li>路由：决定分组从源端到目标端的路径 (路由算法)  </li>
+</ul>
+<p><strong>每个路由器 (Per Route) 的控制平面</strong>：每个路由器上都有实现路由算法原件 (它们之间需要相互交互) - 形成传统 IP 实现方式的控制平面  </p>
+<ul>
+<li>每台设备上既实现控制功能，又实现数据平面  </li>
+<li>控制功能分布式实现  </li>
+<li>路由表 - 粘连  </li>
+</ul>
+<p>缺陷：数量众多、功能各异的中间盒  </p>
+<ul>
+<li>路由器的网络层功能：  <ul>
+<li>IP 转发：对于到来的分组按照路由表决定如何转发；数据平面  </li>
+<li>路由：决定路径，计算路由表；处在控制平面  </li>
+</ul>
+</li>
+<li>还有其他种类繁多网络设备 (中间盒)：  <ul>
+<li>交换机；防火墙；NAT；IDS；负载均衡设备  </li>
+<li>未来：不断增加的需求和相应的网络设备  </li>
+<li>需要不同设备实现不同的网络功能  <ul>
+<li>每台设备继承了控制平面和数据平面的功能  </li>
+<li>控制平面分布式地实现了各种控制平面功能  </li>
+<li>升级和部署网络设备非常困难  </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="网络设备控制平面的实现方式特点"><a href="#网络设备控制平面的实现方式特点" class="headerlink" title="网络设备控制平面的实现方式特点"></a>网络设备控制平面的实现方式特点</h3><p>互联网网络设备：传统方式都是通过分布式，每台设备的方法来实现数据平面和控制平面功能  </p>
+<ul>
+<li>垂直集成：每台路由器或其它网络设备，包括：  <ul>
+<li>硬件、在私有的操作系统  </li>
+<li>互联网标准协议 (IP, RIP, IS-IS, OSPF, BGP) 的私有实现  </li>
+<li>从上到下都有一个厂商提供 (代价大、被设备上 “绑架”)  </li>
+</ul>
+</li>
+<li>每个设备都实现了数据平面和控制平面的事情  <ul>
+<li>控制平面的功能是分布式实现的  </li>
+</ul>
+</li>
+<li>设备基本上只能 (分布式升级困难) 按照固定方式工作，控制逻辑固化。不同的网络功能需要不哦那个的 “middle boxes”：防火墙、负载均衡设备、NAT boxes  </li>
+</ul>
+<p>(数据 + 控制平面) 集成 -&gt; (控制逻辑) 粉不 -&gt; 固化  </p>
+<ul>
+<li>代价大；升级困难；管理困难  </li>
+</ul>
+<p>问题：  </p>
+<ul>
+<li>垂直集成 &gt; 昂贵、不便于创新的生态  </li>
+<li>分布式、货设备功能 == 网络设备种类繁多  <ul>
+<li>无法改变路由等工作逻辑，无法实现流量工程等高级特性  </li>
+<li>配置错误影响全网运行；升级和维护会涉及到全网设备；管理困难  </li>
+<li>要增加新的网络功能，需要设计、实现以及不舒心的特定设备，设备种类繁多  </li>
+</ul>
+</li>
+</ul>
+<p>解决：重新思考网络控制平面的处理方式  </p>
+<ul>
+<li>集中：远程的控制器集中实现控制逻辑  </li>
+<li>远程：数据平面和控制平面的分离  </li>
+</ul>
+<h3 id="SDN：逻辑上集中的控制平面"><a href="#SDN：逻辑上集中的控制平面" class="headerlink" title="SDN：逻辑上集中的控制平面"></a>SDN：逻辑上集中的控制平面</h3><p>一个不同的 (通常是远程) 控制器和 CA 交互，控制器决定分组转发的逻辑 (可编程)，CA 所在设备执行逻辑  </p>
+<p><img src="/2022/06/07/computernetworknotes4/SDN.png">  </p>
+<p>特点：  </p>
+<ul>
+<li>通用 “flow-based” 基于流的匹配 + 行动，eg. OpenFlow  </li>
+<li>控制平面和数据平面分离  </li>
+<li>控制平面功能在数据交换设备之外实现  </li>
+<li>可编程控制应用：在控制器之上以网络应用形式实现各种网络功能  </li>
+</ul>
+<h3 id="SDN-的主要思路"><a href="#SDN-的主要思路" class="headerlink" title="SDN 的主要思路"></a>SDN 的主要思路</h3><p>网络设备数据平面和控制平面分离<br>数据平面 - 分组交换机  </p>
+<ul>
+<li>将路由器、交换机和目前大多数网络设备的功能进一步抽象成：按照流表 (由控制平面设置的控制逻辑) 进行 PDU (帧、分组) 的动作 (包括转发、丢弃、拷贝、翻红、阻塞)  </li>
+<li>统一化设备功能：SDN 交换机 (分组交换机)，执行控制逻辑  </li>
+</ul>
+<p>控制平面 - 控制器 + 网络应用  </p>
+<ul>
+<li>分离、集中  </li>
+<li>计算和下发控制逻辑：流表  </li>
+</ul>
+<h3 id="SDN-控制平面和数据平面分离的优势"><a href="#SDN-控制平面和数据平面分离的优势" class="headerlink" title="SDN 控制平面和数据平面分离的优势"></a>SDN 控制平面和数据平面分离的优势</h3><p>水平集成控制平面的开放实现 (而非私有实现)，创造出更好的产业生态，促进发展  </p>
+<ul>
+<li>分组交换机、控制器和各种控制逻辑网络应用 app 可由不同厂商生产，专业化，引入竞争形成良好生态  </li>
+</ul>
+<p>集中式实现控制逻辑，网络管理容易  </p>
+<ul>
+<li>集中式控制器了解网络状况，编程简单  </li>
+<li>避免路由器的误配置  </li>
+</ul>
+<p>基于流表的<strong>匹配 + 行动</strong>的工作方式允许可编程的分组交换机  </p>
+<ul>
+<li>实现流量工程等高级特性  </li>
+<li>在此框架下实现各种新型 (未来) 的网络设备  </li>
+</ul>
+<h3 id="SDN-架构"><a href="#SDN-架构" class="headerlink" title="SDN 架构"></a>SDN 架构</h3><p>SDN 控制器 (网络OS)  </p>
+<ul>
+<li>维护网络状态信息  </li>
+<li>通过上面的北向 API 和网络控制应用交互  </li>
+<li>通过下面的南向 API 和网络交换机交互  </li>
+<li>逻辑上集中，但是在是线上通常由于性能、可扩展性、容错性以及鲁棒性采用分布式方法  </li>
+</ul>
+<p>网络控制应用  </p>
+<ul>
+<li>控制的大脑：采用下层提供的服务 (SDN 控制器提供的 API)，实现网络功能  <ul>
+<li>路由器 交换机</li>
+<li>接入控制 防火墙  </li>
+<li>负载均衡  </li>
+<li>其它功能</li>
+</ul>
+</li>
+<li>非绑定：可以被第三方提供，与控制器厂商可以通常上不同，与分组交换机厂商也可以不同  </li>
+</ul>
+<h3 id="通用转发和-SDN-1"><a href="#通用转发和-SDN-1" class="headerlink" title="通用转发和 SDN"></a>通用转发和 SDN</h3><p>每个路由器包含一个流表 (被逻辑上集中的控制器计算和分发)  </p>
+<h3 id="OpenFlow-数据平面抽象"><a href="#OpenFlow-数据平面抽象" class="headerlink" title="OpenFlow 数据平面抽象"></a>OpenFlow 数据平面抽象</h3><p>流：由分组 (帧) 头部字段所定义<br>通用转发：简单的分组处理规则  </p>
+<ul>
+<li>模式：将分组头部字段和流表进行匹配  </li>
+<li>行动：对于匹配上的分组，可以是丢弃、转发、修改、将匹配的分组发送给控制器  </li>
+<li>优先权 Priority：计歌模式匹配了，优先采用哪个，消除歧义  </li>
+<li>计数器 Counters： #bytes 以及 #packets  </li>
+</ul>
+<p>路由器中的流表定义了路由器的匹配 + 行动规则 (流表由控制器计算并下发)  </p>
+<h3 id="OpenFlow-抽象"><a href="#OpenFlow-抽象" class="headerlink" title="OpenFlow 抽象"></a>OpenFlow 抽象</h3><p>match + action：统一化各种网络设备提供的功能<br>目前几乎所有网络设备都可以在这个匹配 + 行动模式框架进行描述，具体化为各种网络设备包括未来的网络设备  </p>
+<p>路由器  </p>
+<ul>
+<li>match：最长前缀匹配  </li>
+<li>action：通过一条链路转发  </li>
+</ul>
+<p>交换机：  </p>
+<ul>
+<li>match：目标 MAC 地址  </li>
+<li>action：转发或泛洪  </li>
+</ul>
+<p>防火墙  </p>
+<ul>
+<li>match：IP 地址和 TCP/UDP 端口号  </li>
+<li>action：允许或者禁止</li>
+</ul>
+<p>NAT  </p>
+<ul>
+<li>match：IP 地址和端口号  </li>
+<li>action：重写地址和端口号  </li>
+</ul>
+]]></content>
+      <categories>
+        <category>Notes</category>
+        <category>ComputerNetwork</category>
+      </categories>
+      <tags>
+        <tag>ComputerNetwork</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Computer Network Notes 5：Network Layer (2)</title>
     <url>/2022/08/23/computernetworknotes5/</url>
     <content><![CDATA[<center> 把老师的 PPT 变成 md 文件之计算机网络第四章网络层：控制平面 </center>
@@ -4166,7 +4226,7 @@ $ hexo deploy  # 部署到GitHub Pages
 
 <p>就像标题说的那样，过程坎坷崩溃，但总算递签了。看过很多人的经验，依然准备不好自己的材料，所以还是把这次递签经历写一写，顺便水一篇博客。如果你想看看我参考过的攻略：<a href="https://zhuanlan.zhihu.com/p/213775517?utm_id=0#">超详细德国留学上海递签攻略</a>。<br>现在回想整个过程，最有用的经验大概是能早办就早办、尽量不要拖和染了头也可以拍递签照片、递签。<del>撒，下面的废话可以不看了！</del>  </p>
 <p>由于之前参加过上海审核部的 APS 面审，只能在审核部递签。上海审核部也给出了很详细的递签流程和材料参考：<a href="https://www.aps.org.cn/zh/shanghai-visum">上海审核部递签</a> 和材料相关提示：<a href="https://www.aps.org.cn/wp-content/uploads/WichtigeHinweise_Visumantrag_SH_chn.pdf">上海留学签证特别提示</a>。<br>撒，开始分享经验吧！  </p>
-<h2 id="预约递签时间"><a href="#预约递签时间" class="headerlink" title="预约递签时间"></a>预约递签时间</h2><p>上海审核部递签需要至少提前一周预约，经过 APS 的属于一般国内申请人（C程序），每周可约的时间只有周一、周二和周四。我预约的时候要求发送姓名、审核号、希望递签日期，并附件发送德方高校录取通知书和经济来源证明，目前官网的要求又更新为姓名、审核号、希望递签日期，并附件发送经济来源证明。<br>预约时注意到底需要提供什么信息，收件人注意把地址中的 [at] 改为@，即 <a href="mailto:&#x73;&#104;&#x61;&#45;&#x76;&#105;&#x73;&#117;&#x6d;&#116;&#101;&#114;&#x6d;&#105;&#110;&#x40;&#x61;&#x70;&#115;&#46;&#x6f;&#114;&#103;&#46;&#99;&#110;">&#x73;&#104;&#x61;&#45;&#x76;&#105;&#x73;&#117;&#x6d;&#116;&#101;&#114;&#x6d;&#105;&#110;&#x40;&#x61;&#x70;&#115;&#46;&#x6f;&#114;&#103;&#46;&#99;&#110;</a>。  </p>
+<h2 id="预约递签时间"><a href="#预约递签时间" class="headerlink" title="预约递签时间"></a>预约递签时间</h2><p>上海审核部递签需要至少提前一周预约，经过 APS 的属于一般国内申请人（C程序），每周可约的时间只有周一、周二和周四。我预约的时候要求发送姓名、审核号、希望递签日期，并附件发送德方高校录取通知书和经济来源证明，目前官网的要求又更新为姓名、审核号、希望递签日期，并附件发送经济来源证明。<br>预约时注意到底需要提供什么信息，收件人注意把地址中的 [at] 改为@，即 <a href="mailto:&#x73;&#x68;&#97;&#x2d;&#118;&#x69;&#115;&#117;&#109;&#x74;&#101;&#x72;&#x6d;&#x69;&#110;&#64;&#x61;&#112;&#115;&#x2e;&#x6f;&#114;&#x67;&#x2e;&#x63;&#110;">&#x73;&#x68;&#97;&#x2d;&#118;&#x69;&#115;&#117;&#109;&#x74;&#101;&#x72;&#x6d;&#x69;&#110;&#64;&#x61;&#112;&#115;&#x2e;&#x6f;&#114;&#x67;&#x2e;&#x63;&#110;</a>。  </p>
 <p>由于审核部递签办公室只在上午上班，周一下午发邮件约时间，周二上午收到回复，问是否仍在校。在校生根据学校所在地划分辖区，非在校生需另外提交常住证明一类的东西。我的情况稍微有些复杂，已经向学校递交了退学材料，但学校完全没动静。回邮件说正在办退学，问是否需要证明常住地。然后，又超过办公时间了！上午十一点说下班就下班，绝对不多办公一秒！我也想要这样的工作。下午打电话问学校退学证明什么时候给，得到的回复很模糊，只有 “应该很快”。决定打个时间差，趁着学校各系统没有同步，直接办个在读证明。周三上午收到邮件问通过在读证明递签还是退学证明，回复用在读。没多久就收到预约成功的邮件和递签相关提示信息，顺利约到下一周周二递签。<br>建议能用在读证明还是用在读证明来申请签证，不能的话记得发送常住地证明。我没有用这个所以不知道需要什么证明，可以直接发邮件问。  </p>
 <h2 id="材料"><a href="#材料" class="headerlink" title="材料"></a>材料</h2><p>所有材料一定要按照<a href="https://www.aps.org.cn/wp-content/uploads/WichtigeHinweise_Visumantrag_SH_chn.pdf">上海留学签证特别提示</a>中的顺序整理。所有材料整理好之后会是三沓，一沓原件，包括护照、照片和 VIDEX 表最后一页；两沓递签材料，包括签证申请表、复印件、翻译件等材料。  </p>
 <h3 id="原件部分"><a href="#原件部分" class="headerlink" title="原件部分"></a>原件部分</h3><p>这部分材料除了护照、VIDEX 二维码和申请人联系方式附加声明都会当场返还。  </p>
