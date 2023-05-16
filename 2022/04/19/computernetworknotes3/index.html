@@ -19,82 +19,82 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"tech.musain.club","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"tech.sommercamp.xyz","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 <meta name="description" content="把老师的 PPT 变成 md 文件之计算机网络第三章传输层">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Computer Network Notes 3：Transport Layer">
-<meta property="og:url" content="https://tech.musain.club/2022/04/19/computernetworknotes3/index.html">
+<meta property="og:url" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/index.html">
 <meta property="og:site_name" content="Bugrocery">
 <meta property="og:description" content="把老师的 PPT 变成 md 文件之计算机网络第三章传输层">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/TCPfuyong.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/UDPfuyong.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/TCPUDPbaowen.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/UDPfuyongeg.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/mianxianglianjiedejiefuyong.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/UDPform.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/jinweihuijuan.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/RDT.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/zhuangtai.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/RDT1.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/RDT2.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/RDT21send.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/RDT21receive.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/rdt21ackerror.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/rdt21ackright.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/NAKfree.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/RDT22.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/RDT22xu.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/RDT22SR.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/RDT3send.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/RDT3delayedACK.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/RDT3xingneng.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/RDT3xingneng2.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/RDT3liushuixian.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/xiangduihuadong.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/sendingwindow.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/receivingwindow.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/WWI.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/GBNFSM.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/GBNFSMr.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/runningGBN.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/SRsummary.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/RunningSR.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/GBNvsSR.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/TCPform.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/TCPnumber.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/sampleRTT.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/TCPsendersimple.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/TCPsendersimplecode.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/TCPresend.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/TCPACKsuggestion.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/TCPstreamcontrol.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/rcvbuffer.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/rcvwindow.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/hellofailure.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/3hello.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/3hello2.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/3helloFSM.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/jam1.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/jam2.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/jam3.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/yongseganzhi.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/sulvkongzhi.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/TCPsendercongcon.png">
-<meta property="og:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/inout.png">
-<meta property="article:published_time" content="2022-04-19T12:57:45.000Z">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/TCPfuyong.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/UDPfuyong.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/TCPUDPbaowen.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/UDPfuyongeg.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/mianxianglianjiedejiefuyong.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/UDPform.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/jinweihuijuan.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/RDT.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/zhuangtai.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/RDT1.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/RDT2.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/RDT21send.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/RDT21receive.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/rdt21ackerror.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/rdt21ackright.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/NAKfree.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/RDT22.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/RDT22xu.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/RDT22SR.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/RDT3send.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/RDT3delayedACK.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/RDT3xingneng.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/RDT3xingneng2.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/RDT3liushuixian.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/xiangduihuadong.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/sendingwindow.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/receivingwindow.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/WWI.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/GBNFSM.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/GBNFSMr.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/runningGBN.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/SRsummary.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/RunningSR.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/GBNvsSR.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/TCPform.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/TCPnumber.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/sampleRTT.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/TCPsendersimple.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/TCPsendersimplecode.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/TCPresend.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/TCPACKsuggestion.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/TCPstreamcontrol.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/rcvbuffer.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/rcvwindow.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/hellofailure.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/3hello.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/3hello2.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/3helloFSM.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/jam1.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/jam2.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/jam3.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/yongseganzhi.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/sulvkongzhi.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/TCPsendercongcon.png">
+<meta property="og:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/inout.png">
+<meta property="article:published_time" content="2022-04-19T18:57:45.000Z">
 <meta property="article:modified_time" content="2022-06-01T11:00:30.208Z">
 <meta property="article:author" content="tomo">
 <meta property="article:tag" content="ComputerNetwork">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://tech.musain.club/2022/04/19/computernetworknotes3/TCPfuyong.png">
+<meta name="twitter:image" content="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/TCPfuyong.png">
 
 
-<link rel="canonical" href="https://tech.musain.club/2022/04/19/computernetworknotes3/">
+<link rel="canonical" href="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://tech.musain.club/2022/04/19/computernetworknotes3/","path":"2022/04/19/computernetworknotes3/","title":"Computer Network Notes 3：Transport Layer"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/","path":"2022/04/19/computernetworknotes3/","title":"Computer Network Notes 3：Transport Layer"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>Computer Network Notes 3：Transport Layer | Bugrocery</title>
@@ -276,7 +276,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://tech.musain.club/2022/04/19/computernetworknotes3/">
+    <link itemprop="mainEntityOfPage" href="https://tech.sommercamp.xyz/2022/04/19/computernetworknotes3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/img.png">
@@ -300,14 +300,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2022-04-19 20:57:45" itemprop="dateCreated datePublished" datetime="2022-04-19T20:57:45+08:00">2022-04-19</time>
+      <time title="Created: 2022-04-19 20:57:45" itemprop="dateCreated datePublished" datetime="2022-04-19T20:57:45+02:00">2022-04-19</time>
     </span>
       <span class="post-meta-item">
         <span class="post-meta-item-icon">
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2022-06-01 19:00:30" itemprop="dateModified" datetime="2022-06-01T19:00:30+08:00">2022-06-01</time>
+        <time title="Modified: 2022-06-01 13:00:30" itemprop="dateModified" datetime="2022-06-01T13:00:30+02:00">2022-06-01</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
