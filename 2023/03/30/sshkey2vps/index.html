@@ -28,7 +28,7 @@
 <meta property="og:description" content="为服务器添加一台通过 ssh-key 登录的电脑">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-03-30T10:26:22.000Z">
-<meta property="article:modified_time" content="2023-03-30T04:42:42.534Z">
+<meta property="article:modified_time" content="2024-06-07T11:09:39.060Z">
 <meta property="article:author" content="Udon">
 <meta property="article:tag" content="VPS">
 <meta property="article:tag" content="sshkey">
@@ -163,18 +163,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -244,10 +244,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2023-03-30 12:26:22 / Modified: 06:42:42" itemprop="dateCreated datePublished" datetime="2023-03-30T12:26:22+02:00">2023-03-30</time>
+      <time title="Created: 2023-03-30 12:26:22" itemprop="dateCreated datePublished" datetime="2023-03-30T12:26:22+02:00">2023-03-30</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2024-06-07 13:09:39" itemprop="dateModified" datetime="2024-06-07T13:09:39+02:00">2024-06-07</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -285,6 +291,8 @@
     <div class="post-body" itemprop="articleBody">
         <center> 为服务器添加一台通过 ssh-key 登录的电脑 </center>
 <span id="more"></span>
+
+<br>
 
 <h2 id="生成-ssh-key"><a href="#生成-ssh-key" class="headerlink" title="生成 ssh-key"></a>生成 ssh-key</h2><p>首先查看电脑当前用户的目录下是否存在.ssh目录，以及目录中是否存在<code>id_rsa</code>和<code>id_rsa.pub</code>两个文件。如果存在，公钥即为<code>id_rsa.pub</code>中的内容。如果不存在，则输入命令：  </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C “your email or other message”</span><br></pre></td></tr></table></figure>
@@ -366,14 +374,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>Symbols count total: </span>
-    <span title="Symbols count total">156k</span>
+    <span title="Symbols count total">158k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>Reading time total &asymp;</span>
-    <span title="Reading time total">2:22</span>
+    <span title="Reading time total">2:24</span>
   </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>

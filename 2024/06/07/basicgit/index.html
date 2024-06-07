@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"tech.sommercamp.xyz","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="明明已经无数次从本地或服务器把代码备份到 GitHub，但还是记不住到底怎么做">
+<meta property="og:type" content="article">
+<meta property="og:title" content="到底多少次才能学会使用 git">
+<meta property="og:url" content="https://tech.sommercamp.xyz/2024/06/07/basicgit/index.html">
+<meta property="og:site_name" content="Bugrocery">
+<meta property="og:description" content="明明已经无数次从本地或服务器把代码备份到 GitHub，但还是记不住到底怎么做">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-06-07T10:26:32.000Z">
+<meta property="article:modified_time" content="2024-06-07T12:11:58.119Z">
+<meta property="article:author" content="Udon">
+<meta property="article:tag" content="git">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://tech.sommercamp.xyz/2024/06/07/basicgit/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://tech.sommercamp.xyz/2024/06/07/basicgit/","path":"2024/06/07/basicgit/","title":"到底多少次才能学会使用 git"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>到底多少次才能学会使用 git | Bugrocery</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Bugrocery</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+        <li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>links</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA-repository"><span class="nav-number">1.</span> <span class="nav-text">新建 repository</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5-git"><span class="nav-number">2.</span> <span class="nav-text">检查 git</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-git"><span class="nav-number">3.</span> <span class="nav-text">配置 git</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">4.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="nav-number">5.</span> <span class="nav-text">添加远程仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%96%87%E4%BB%B6%E5%B9%B6%E6%8F%90%E4%BA%A4"><span class="nav-number">6.</span> <span class="nav-text">添加文件并提交</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A8%E9%80%81%E5%88%B0%E8%BF%9C%E7%A8%8B%E5%BA%93"><span class="nav-number">7.</span> <span class="nav-text">推送到远程库</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Udon"
+      src="/images/img.png">
+  <p class="site-author-name" itemprop="name">Udon</p>
+  <div class="site-description" itemprop="description">It's no use to be hardworking.</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/melocery" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;melocery" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:urbwatched@protonmail.com" title="E-Mail → mailto:urbwatched@protonmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tech.sommercamp.xyz/2024/06/07/basicgit/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/img.png">
+      <meta itemprop="name" content="Udon">
+      <meta itemprop="description" content="It's no use to be hardworking.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bugrocery">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          到底多少次才能学会使用 git
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-06-07 12:26:32 / Modified: 14:11:58" itemprop="dateCreated datePublished" datetime="2024-06-07T12:26:32+02:00">2024-06-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Tools/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>1.6k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>1 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <center> 明明已经无数次从本地或服务器把代码备份到 GitHub，但还是记不住到底怎么做 </center>
+<span id="more"></span>
+
+<br>  
+
+<h2 id="新建-repository"><a href="#新建-repository" class="headerlink" title="新建 repository"></a>新建 repository</h2><p>在 GitHub 上为想要上传的内容新建一个空 repository，连 <code>README.md</code> 都不要。没有什么特别的原因，只是我解决不了冲突，怎么改都不对，不如直接建个空库。  </p>
+<h2 id="检查-git"><a href="#检查-git" class="headerlink" title="检查 git"></a>检查 git</h2><p>检查是否安装 <code>git</code>：  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git version</span><br></pre></td></tr></table></figure>
+
+<p>输出应为 git 版本。如果提醒命令不存在，需要安装 git。<br>Mac 和 Linux 系统的电脑已经预装了git。Windows 系统的电脑可以从官网(<a target="_blank" rel="noopener" href="https://git-scm.com/downloads">https://git-scm.com/downloads</a> )下载相应的版本，安装过程中选择默认选项即可。  </p>
+<h2 id="配置-git"><a href="#配置-git" class="headerlink" title="配置 git"></a>配置 git</h2><p>配置 Git 用户名和邮箱：  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;Your Name&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;your.email@example.com&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><p>打开代码所在的目录，并初始化一个新的Git仓库：  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /path/to/your/code</span><br><span class="line">git init</span><br></pre></td></tr></table></figure>
+
+<p>在使用 Git 管理代码时，<code>git init</code> 命令用于在一个目录中初始化一个新的 Git 仓库。这个命令通常在你开始一个新的项目时使用，它会在当前目录创建一个 <code>.git</code> 文件夹，用来存储 Git 仓库的配置信息、对象数据库等。但是，并不是在所有情况下都必须执行 <code>git init</code>。<br>不需要执行 <code>git init</code>:  </p>
+<ul>
+<li>克隆现有仓库 (<code>git clone &lt;remote-url&gt;</code>)  </li>
+<li>加入已有的仓库  </li>
+<li>继承现有的 Git 仓库  </li>
+</ul>
+<h2 id="添加远程仓库"><a href="#添加远程仓库" class="headerlink" title="添加远程仓库"></a>添加远程仓库</h2><p>检查当前 git 是否有远程库：  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
+
+<p>如果已存在 origin，可以执行 <code>git remote remove origin</code> 后，再添加远程库。  </p>
+<p>将第一步新建的 GitHub 库添加为远程库。假设 GitHub 库 URL 是 <code>https://github.com/yourusername/your-repo.git</code>：  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin https://github.com/yourusername/your-repo.git</span><br></pre></td></tr></table></figure>
+
+<p>GitHub 已经不再支持使用密码进行身份验证，而是建议使用个人访问令牌 (Personal Access Token, PAT) 或 SSH 密钥进行身份验证。如果利用 PAT 进行身份验证，则需要执行：  </p>
+<ol>
+<li>登录到 GitHub 账户。  </li>
+<li>点击右上角的头像，选择 “Settings”。  </li>
+<li>在左侧菜单中选择 “Developer settings”。  </li>
+<li>选择 “Personal access tokens” -&gt; “Tokens (classic)” -&gt; “Generate new token”。  </li>
+<li>为令牌命名并选择所需的权限，通常选择 “repo” 就足够了。  </li>
+<li>生成令牌并保存它，因为这是你唯一能看到它的机会。  </li>
+</ol>
+<p>然后在终端输入以下命令：  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote set-url origin https://&lt;your_token&gt;@github.com/yourusername/your-repo.git</span><br></pre></td></tr></table></figure>
+
+<p>将 <code>&lt;your_token&gt;</code> 替换为生成的 PAT。  </p>
+<p>或在一开始添加仓库时，就使用包含 token 的链接：  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin https://&lt;your_token&gt;@github.com/your_username/repository_name.git</span><br></pre></td></tr></table></figure>
+
+<h2 id="添加文件并提交"><a href="#添加文件并提交" class="headerlink" title="添加文件并提交"></a>添加文件并提交</h2><p>添加所有文件并提交：  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加当前目录下所有文件，也可添加指定文件</span></span><br><span class="line">git add .</span><br><span class="line"></span><br><span class="line"><span class="comment"># commit</span></span><br><span class="line">git commit -m <span class="string">&quot;commit message&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="推送到远程库"><a href="#推送到远程库" class="headerlink" title="推送到远程库"></a>推送到远程库</h2><p>将代码推送到 GitHub 仓库：  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 拉取远程仓库中的内容，否则 push 时也会因为未同步远程仓库内容而失败</span></span><br><span class="line"><span class="comment"># 如果远程仓库为空，则不需要这一步</span></span><br><span class="line">git pull origin main --allow-unrelated-histories</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 commit 推送到远程仓库</span></span><br><span class="line">git push origin main</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/git/" rel="tag"># git</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/02/14/certbot/" rel="prev" title="你这个SSL证书怎么总是过期啊">
+                  <i class="fa fa-chevron-left"></i> 你这个SSL证书怎么总是过期啊
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments giscus-container">
+  </div>
+  
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Udon</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>Symbols count total: </span>
+    <span title="Symbols count total">158k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>Reading time total &asymp;</span>
+    <span title="Reading time total">2:24</span>
+  </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+<script class="next-config" data-name="giscus" type="application/json">{"enable":true,"repo":"melocery/melocery.github.io","repo_id":"MDEwOlJlcG9zaXRvcnk0MDY2NDI3NTM=","category":"Announcements","category_id":"DIC_kwDOGDzgQc4CQjbq","mapping":"pathname","reactions_enabled":1,"emit_metadata":1,"data-input-position":"top","theme":"preferred_color_scheme","lang":"en","crossorigin":"anonymous"}</script>
+
+<script>
+document.addEventListener('page:loaded', () => {
+  if (!CONFIG.page.comments) return;
+
+  NexT.utils.loadComments('.giscus-container')
+    .then(() => NexT.utils.getScript('https://giscus.app/client.js', {
+      attributes: {
+        async                   : true,
+        crossOrigin             : 'anonymous',
+        'data-repo'             : CONFIG.giscus.repo,
+        'data-repo-id'          : CONFIG.giscus.repo_id,
+        'data-category'         : CONFIG.giscus.category,
+        'data-category-id'      : CONFIG.giscus.category_id,
+        'data-mapping'          : CONFIG.giscus.mapping,
+        'data-reactions-enabled': CONFIG.giscus.reactions_enabled,
+        'data-emit-metadata'    : CONFIG.giscus.emit_metadata,
+        'data-theme'            : CONFIG.giscus.theme,
+        'data-lang'             : CONFIG.giscus.lang,
+        'data-input-position'   : CONFIG.giscus.input_position,
+        'data-loading'          : CONFIG.giscus.loading
+      },
+      parentNode: document.querySelector('.giscus-container')
+    }));
+});
+</script>
+
+</body>
+</html>
