@@ -28,7 +28,7 @@
 <meta property="og:description" content="早就该搞定的 miniconda + vscode 直到开始写论文了才真的认认真真配置好">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-04-22T11:52:16.000Z">
-<meta property="article:modified_time" content="2025-07-03T08:26:06.598Z">
+<meta property="article:modified_time" content="2025-07-18T08:42:53.218Z">
 <meta property="article:author" content="Udon">
 <meta property="article:tag" content="vscode">
 <meta property="article:tag" content="miniconda">
@@ -148,7 +148,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-miniconda"><span class="nav-number">1.</span> <span class="nav-text">安装 miniconda</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-conda"><span class="nav-number">2.</span> <span class="nav-text">使用 conda</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E5%AE%83"><span class="nav-number">3.</span> <span class="nav-text">其它</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-miniconda"><span class="nav-number">1.</span> <span class="nav-text">安装 miniconda</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-conda"><span class="nav-number">2.</span> <span class="nav-text">使用 conda</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA"><span class="nav-number">2.1.</span> <span class="nav-text">创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4"><span class="nav-number">2.2.</span> <span class="nav-text">删除</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E5%AE%83"><span class="nav-number">3.</span> <span class="nav-text">其它</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -252,7 +252,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2025-07-03 10:26:06" itemprop="dateModified" datetime="2025-07-03T10:26:06+02:00">2025-07-03</time>
+        <time title="Modified: 2025-07-18 10:42:53" itemprop="dateModified" datetime="2025-07-18T10:42:53+02:00">2025-07-18</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -275,7 +275,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>2.3k</span>
+      <span>2.6k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
@@ -314,7 +314,7 @@
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// example</span></span><br><span class="line"><span class="string">&quot;terminal.integrated.env.windows&quot;</span>: &#123;</span><br><span class="line">  <span class="attr">&quot;PATH&quot;</span>: <span class="string">&quot;D:\\miniconda;D:\\miniconda\\Scripts;$&#123;env:PATH&#125;&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>这条配置是告诉 vscode：每次打开 Terminal 时，自动把 Conda 路径加进去。这样就可以直接打开 vscode，不需要再用 Anaconda Prompt。  </p>
-<h2 id="使用-conda"><a href="#使用-conda" class="headerlink" title="使用 conda"></a>使用 conda</h2><p>配置终端环境，在第一次 activate 前需要先 init 一次。运行：  </p>
+<h2 id="使用-conda"><a href="#使用-conda" class="headerlink" title="使用 conda"></a>使用 conda</h2><h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><p>配置终端环境，在第一次 activate 前需要先 init 一次。运行：  </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># initiate conda</span></span><br><span class="line">conda init</span><br></pre></td></tr></table></figure>
 
 <p>遇到了一个报错 <code>无法加载文件 C:\Users\username\Documents\WindowsPowerShell\profile.ps1，因为在此系统上禁止运行脚本</code>。解决方法是以管理员身份打开 PowerShell，输入：  </p>
@@ -338,8 +338,23 @@
 <li>Debug/测试一些非 notebook 的东西  </li>
 </ul>
 <p>所以大部分时候只是打开 VSCode 写 <code>.ipynb</code>，根本不用管 activate 不 activate，已经自动切好啦。  </p>
+<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><p>要删除 ipykernel 和对应的 Conda 环境：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda remove --name env_name --all</span><br></pre></td></tr></table></figure>
+
+<p>这会彻底删除整个环境及其中安装的所有包，包括 ipykernel。<br>有时候，即使环境被删了，kernel 仍显示在 VSCode 或 Jupyter Notebook 里，可以查看并删除：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 查看所有kernel</span><br><span class="line">jupyter kernelspec list</span><br><span class="line"></span><br><span class="line"># 删除指定 kernel</span><br><span class="line">jupyter kernelspec uninstall kernel_name</span><br></pre></td></tr></table></figure>
+
+<p>如果只是想从某个环境里移除 ipykernel 而保留环境，可执行：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda remove ipykernel</span><br></pre></td></tr></table></figure>
+
+<p>但通常不需要这样做，直接删环境就足够。  </p>
 <h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h2><p>一个小问题，conda 安装 <code>igraph</code> 时需要指定是 python 版本，使用如下命令安装：  </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install -c conda-forge python-igraph</span><br></pre></td></tr></table></figure>
+
+<p>以开发者模式安装某个包，切到包的根目录，然后运行：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -e .</span><br></pre></td></tr></table></figure>
+
+
     </div>
 
     
@@ -402,7 +417,7 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>Symbols count total: </span>
-    <span title="Symbols count total">162k</span>
+    <span title="Symbols count total">163k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
