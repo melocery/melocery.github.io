@@ -27,7 +27,7 @@
 <meta property="og:description" content="基础的 git 已经完全掌握 (真的吗？)，现在来学习一下用 branch 管理代码吧！">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-05-18T11:50:40.000Z">
-<meta property="article:modified_time" content="2025-07-18T09:38:02.857Z">
+<meta property="article:modified_time" content="2025-08-01T12:28:33.980Z">
 <meta property="article:author" content="Udon">
 <meta property="article:tag" content="git">
 <meta name="twitter:card" content="summary">
@@ -146,7 +146,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E4%BD%93%E6%80%9D%E8%B7%AF"><span class="nav-number">1.</span> <span class="nav-text">总体思路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#main-%E5%88%86%E6%94%AF"><span class="nav-number">1.1.</span> <span class="nav-text">main 分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#development-%E5%88%86%E6%94%AF"><span class="nav-number">1.2.</span> <span class="nav-text">development 分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#daily-dev-%E5%88%86%E6%94%AF"><span class="nav-number">1.3.</span> <span class="nav-text">daily-dev 分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Tag%EF%BC%88%E6%A0%87%E7%AD%BE%EF%BC%89%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">1.4.</span> <span class="nav-text">Tag（标签）的作用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E5%92%8C%E5%88%9D%E6%AC%A1-push"><span class="nav-number">2.</span> <span class="nav-text">初始化和初次 push</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E6%94%AF"><span class="nav-number">3.</span> <span class="nav-text">分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E4%BA%BA-vs-%E5%A4%9A%E4%BA%BA"><span class="nav-number">4.</span> <span class="nav-text">单人 vs 多人</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E4%BD%93%E6%80%9D%E8%B7%AF"><span class="nav-number">1.</span> <span class="nav-text">总体思路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#main-%E5%88%86%E6%94%AF"><span class="nav-number">1.1.</span> <span class="nav-text">main 分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#development-%E5%88%86%E6%94%AF"><span class="nav-number">1.2.</span> <span class="nav-text">development 分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#daily-dev-%E5%88%86%E6%94%AF"><span class="nav-number">1.3.</span> <span class="nav-text">daily-dev 分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Tag%EF%BC%88%E6%A0%87%E7%AD%BE%EF%BC%89%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">1.4.</span> <span class="nav-text">Tag（标签）的作用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E5%92%8C%E5%88%9D%E6%AC%A1-push"><span class="nav-number">2.</span> <span class="nav-text">初始化和初次 push</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E6%94%AF"><span class="nav-number">3.</span> <span class="nav-text">分支</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E6%9F%90%E4%B8%AA%E5%88%86%E6%94%AF%E5%88%9B%E5%BB%BA%E6%96%B0%E5%88%86%E6%94%AF"><span class="nav-number">3.1.</span> <span class="nav-text">基于某个分支创建新分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%A9%BA%E7%99%BD%E5%88%86%E6%94%AF"><span class="nav-number">3.2.</span> <span class="nav-text">创建空白分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%88%86%E6%94%AF"><span class="nav-number">3.3.</span> <span class="nav-text">删除分支</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E4%BA%BA-vs-%E5%A4%9A%E4%BA%BA"><span class="nav-number">4.</span> <span class="nav-text">单人 vs 多人</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -161,7 +161,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">32</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -250,7 +250,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2025-07-18 11:38:02" itemprop="dateModified" datetime="2025-07-18T11:38:02+02:00">2025-07-18</time>
+        <time title="Modified: 2025-08-01 14:28:33" itemprop="dateModified" datetime="2025-08-01T14:28:33+02:00">2025-08-01</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -273,7 +273,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>2k</span>
+      <span>2.5k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
@@ -315,7 +315,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git tag stable-0.0.1</span><br><span class="line">git push origin stable-0.0.1</span><br></pre></td></tr></table></figure>
 
 <p>标记这一份代码是一份能跑通的稳定代码。  </p>
-<h3 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h3><p>创建新的开发分支：  </p>
+<h3 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h3><h4 id="基于某个分支创建新分支"><a href="#基于某个分支创建新分支" class="headerlink" title="基于某个分支创建新分支"></a>基于某个分支创建新分支</h4><p>创建新的开发分支：  </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b development</span><br></pre></td></tr></table></figure>
 
 <p>这个新的分支会默认基于<strong>当前分支</strong>，如果需要基于某个分支，可以先切过去，比如基于 main 的话：  </p>
@@ -335,6 +335,20 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout development</span><br><span class="line">git merge daily-dev</span><br></pre></td></tr></table></figure>
 
 <p>然后 <code>git push</code> 推送更新后的 development。  </p>
+<h4 id="创建空白分支"><a href="#创建空白分支" class="headerlink" title="创建空白分支"></a>创建空白分支</h4><p>有时候会需要一个相对干净的分支，因此需要创建 “空白” 的分支。<br>首先确认要添加到这个新空白分支的内容是否已经在当前的分支存在，但处于 <code>unstaged</code> 或 <code>untracked</code> 的状态。如果有，首先要备份这些文件。可以先挪到其它文件夹，之后再移回来。<br>如果有一些需要在当前分支 <code>commit</code> 的文件或更新，先执行对当前分支的操作。<br>完成上述检查之后，创建一个不含任何已有 <code>commit</code> 历史的分支，所以要用：  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git switch --orphan new-branch-name</span><br></pre></td></tr></table></figure>
+
+<p>然后把之前想要存在这个分支的所有文件搬回来，正常执行 <code>git add</code> 添加文件和后续的 <code>git commit</code>、<code>git push</code> 等操作。  </p>
+<h4 id="删除分支"><a href="#删除分支" class="headerlink" title="删除分支"></a>删除分支</h4><p>以删除 <code>del-branch</code> 为例。<br>如果仍然在需要删除的分支上，先切换到其它分支。如果不在这个分支上，比如在 <code>main</code> 或 <code>develop</code>，可以直接删：  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d del-branch</span><br></pre></td></tr></table></figure>
+
+<p>强制删除：  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -D del-branch</span><br></pre></td></tr></table></figure>
+
+<p>即使没有合并过也会强制删除，谨慎使用。<br>然后删除远程分支：  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin --delete old-feature</span><br></pre></td></tr></table></figure>
+
+
 <h3 id="单人-vs-多人"><a href="#单人-vs-多人" class="headerlink" title="单人 vs 多人"></a>单人 vs 多人</h3><p>如果是单人开发，目前的步骤已经够用。日常用 <code>daily-dev</code>，某些部分稳定之后可以适时合并到 <code>development</code>，代码全部稳定之后就合并到 <code>main</code>。不需要频繁重建分支，只要保持分支更新同步。即：  </p>
 <ul>
 <li>日常开发全部在 daily-dev 分支进行  </li>
@@ -371,6 +385,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2025/08/01/servermigration/" rel="next" title="Mastodon 站点迁移">
+                  Mastodon 站点迁移 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>
