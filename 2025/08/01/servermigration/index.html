@@ -27,7 +27,7 @@
 <meta property="og:description" content="换个新服务器，记录一下迁移过程。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-08-01T11:07:24.000Z">
-<meta property="article:modified_time" content="2025-08-01T11:11:48.604Z">
+<meta property="article:modified_time" content="2025-09-25T13:18:15.036Z">
 <meta property="article:author" content="Udon">
 <meta property="article:tag" content="Mastodon">
 <meta name="twitter:card" content="summary">
@@ -133,7 +133,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -146,6 +146,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.</span> <span class="nav-text">配置系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-ssh-key"><span class="nav-number">1.1.</span> <span class="nav-text">配置 ssh-key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">1.2.</span> <span class="nav-text">安装常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E9%98%B2%E7%81%AB%E5%A2%99"><span class="nav-number">1.3.</span> <span class="nav-text">配置防火墙</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-docker-%E5%92%8C-docker-compose"><span class="nav-number">2.</span> <span class="nav-text">安装 docker 和 docker-compose</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%89%E5%8F%96-Mastodon-%E9%95%9C%E5%83%8F"><span class="nav-number">3.</span> <span class="nav-text">拉取 Mastodon 镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-Mastodon"><span class="nav-number">4.</span> <span class="nav-text">配置 Mastodon</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8C-Redis-%E6%96%87%E4%BB%B6"><span class="nav-number">5.</span> <span class="nav-text">数据库和 Redis 文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AA%92%E4%BD%93%E6%96%87%E4%BB%B6"><span class="nav-number">6.</span> <span class="nav-text">媒体文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nginx-%E9%85%8D%E7%BD%AE"><span class="nav-number">7.</span> <span class="nav-text">nginx 配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E5%90%AF%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2"><span class="nav-number">8.</span> <span class="nav-text">开启全文搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-number">9.</span> <span class="nav-text">小结</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -241,10 +242,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2025-08-01 13:07:24 / Modified: 13:11:48" itemprop="dateCreated datePublished" datetime="2025-08-01T13:07:24+02:00">2025-08-01</time>
+      <time title="Created: 2025-08-01 13:07:24" itemprop="dateCreated datePublished" datetime="2025-08-01T13:07:24+02:00">2025-08-01</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2025-09-25 15:18:15" itemprop="dateModified" datetime="2025-09-25T15:18:15+02:00">2025-09-25</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -266,14 +273,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>16</span>
+      <span>4.2k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>1 mins.</span>
+      <span>4 mins.</span>
     </span>
 </div>
 
@@ -286,6 +293,104 @@
     <div class="post-body" itemprop="articleBody">
         <center> 换个新服务器，记录一下迁移过程。 </center>
 <span id="more"></span>
+
+<h2 id="配置系统"><a href="#配置系统" class="headerlink" title="配置系统"></a>配置系统</h2><h3 id="配置-ssh-key"><a href="#配置-ssh-key" class="headerlink" title="配置 ssh-key"></a>配置 ssh-key</h3><p>登入新服务器后进行如下操作：  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p ~/.ssh</span><br><span class="line">nano ~/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+
+<p>将生成的ssh-rsa公钥粘贴入其中，随后通过ssh-key密钥方式登录。<br>修改配置：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nano /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+
+<p>找到 PasswordAuthentication 一行，将其前面的 <code>#</code> 删掉 (取消注释)，在后面将 <strong>yes</strong> 改成 <strong>no</strong>。<br>然后  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart sshd</span><br></pre></td></tr></table></figure>
+
+<p>然后开一个新终端测试公钥登录，确认能进再关闭旧会话。  </p>
+<h3 id="安装常用命令"><a href="#安装常用命令" class="headerlink" title="安装常用命令"></a>安装常用命令</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install wget rsync python3 git curl vim ufw -y</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置防火墙"><a href="#配置防火墙" class="headerlink" title="配置防火墙"></a>配置防火墙</h3><p>首先：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw allow OpenSSH</span><br><span class="line">sudo ufw enable</span><br></pre></td></tr></table></figure>
+
+<p>打开防火墙，随后打开 <strong>80</strong> 和 <strong>443</strong> 端口：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw allow http</span><br><span class="line">sudo ufw allow https</span><br></pre></td></tr></table></figure>
+
+<p>然后可以通过 <code>sudo ufw status</code> 检查防火墙状态，会看到 80 和 443 端口的显示。</p>
+<h2 id="安装-docker-和-docker-compose"><a href="#安装-docker-和-docker-compose" class="headerlink" title="安装 docker 和 docker-compose"></a>安装 <code>docker</code> 和 <code>docker-compose</code></h2><p>参考<a target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository">官网教程</a>。<br>Set up Docker’s apt repository:  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># Add Docker&#x27;s official GPG key:</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install ca-certificates curl</span><br><span class="line">sudo install -m 0755 -d /etc/apt/keyrings</span><br><span class="line">sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc</span><br><span class="line">sudo chmod a+r /etc/apt/keyrings/docker.asc</span><br><span class="line"></span><br><span class="line"># Add the repository to Apt sources:</span><br><span class="line">echo \</span><br><span class="line">  &quot;deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \</span><br><span class="line">  $(. /etc/os-release &amp;&amp; echo &quot;$&#123;UBUNTU_CODENAME:-$VERSION_CODENAME&#125;&quot;) stable&quot; | \</span><br><span class="line">  sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null</span><br><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
+
+<p>Install the Docker packages：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</span><br></pre></td></tr></table></figure>
+
+<p>check:  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker --version</span><br><span class="line">docker compose version</span><br></pre></td></tr></table></figure>
+
+<p>The Docker service starts automatically after installation. To verify that Docker is running, use:  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl status docker</span><br></pre></td></tr></table></figure>
+
+<p>Some systems may have this behavior disabled and will require a manual start:  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start docker</span><br></pre></td></tr></table></figure>
+
+<p>Verify that the installation is successful by running the hello-world image:  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run hello-world</span><br></pre></td></tr></table></figure>
+
+<h2 id="拉取-Mastodon-镜像"><a href="#拉取-Mastodon-镜像" class="headerlink" title="拉取 Mastodon 镜像"></a>拉取 Mastodon 镜像</h2><p>拉取镜像:  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /home/mastodon/mastodon</span><br><span class="line">cd /home/mastodon/mastodon</span><br><span class="line">docker pull melocery/mastodon:latest # 此处拉取我自己的镜像，非官方版本，修改过字数上限、主题等</span><br></pre></td></tr></table></figure>
+
+<p>下载适配的配置文件，本站仍为 <code>v3.5.19</code>，下载对应版本：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://raw.githubusercontent.com/mastodon/mastodon/v3.5.19/docker-compose.yml</span><br></pre></td></tr></table></figure>
+
+<p>打开配置文件：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nano docker-compose.yml</span><br></pre></td></tr></table></figure>
+
+<p>把 web、streaming、sidekiq 的 <code>image</code> 改为刚才下载的镜像。  </p>
+<h2 id="配置-Mastodon"><a href="#配置-Mastodon" class="headerlink" title="配置 Mastodon"></a>配置 Mastodon</h2><p>直接复制旧服务器上的配置文件：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -avz -e &quot;ssh -i ~/.ssh/id_rsa_migration&quot; root@旧服务器IP:/home/mastodon/mastodon/.env.production ./.env.production</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="数据库和-Redis-文件"><a href="#数据库和-Redis-文件" class="headerlink" title="数据库和 Redis 文件"></a>数据库和 Redis 文件</h2><p>先在新服务器上生成 ssh key，在 <code>/home/mastodon/mastodon/</code> 下执行：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t ed25519 -C &quot;mastodon-migration&quot; -f ~/.ssh/id_rsa_migration</span><br></pre></td></tr></table></figure>
+
+<p>passphrase 回车留空即可。打开旧服务器上的 <code>authorized_keys</code>：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nano ~/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+
+<p>在文件末尾粘贴新服务器的公钥。<br>停止旧服务器上的 Mastodon 服务：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose down</span><br></pre></td></tr></table></figure>
+
+<p>在新服务器测试能否顺利从旧服务器复制文件，在新服务器运行：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rsync -avzn -e &quot;ssh -i ~/.ssh/id_rsa_migration&quot; root@旧服务器IP:/home/mastodon/mastodon/postgres14 /home/mastodon/mastodon</span><br><span class="line">rsync -avzn -e &quot;ssh -i ~/.ssh/id_rsa_migration&quot; root@旧服务器IP:/home/mastodon/mastodon/redis /home/mastodon/mastodon</span><br></pre></td></tr></table></figure>
+
+<p>这是 dry-run (<code>-n</code>)，只显示会复制哪些文件，不真正传输。确认 dry-run 没问题后，运行：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rsync -avz -e &quot;ssh -i ~/.ssh/id_rsa_migration&quot; root@旧服务器IP:/home/mastodon/mastodon/postgres14 /home/mastodon/mastodon</span><br><span class="line">rsync -avz -e &quot;ssh -i ~/.ssh/id_rsa_migration&quot; root@旧服务器IP:/home/mastodon/mastodon/redis /home/mastodon/mastodon</span><br></pre></td></tr></table></figure>
+
+<p>文件会传到 <code>/home/mastodon/mastodon/postgres14</code> 和 <code>/home/mastodon/mastodon/redis</code>。传输完成后，给文件夹赋权：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chown -R 70:70 ./postgres14</span><br><span class="line">chown -R 70:70 ./redis</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="媒体文件"><a href="#媒体文件" class="headerlink" title="媒体文件"></a>媒体文件</h2><p>在旧服务器 Mastodon 用户下执行清理命令，移除远程媒体文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker-compose run --rm -e RAILS_ENV=production web bin/tootctl media remove</span><br><span class="line">docker-compose run --rm -e RAILS_ENV=production web bin/tootctl media remove-orphans</span><br></pre></td></tr></table></figure>
+
+<p>赋权：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown 991:991 -R ./public</span><br></pre></td></tr></table></figure>
+
+<h2 id="nginx-配置"><a href="#nginx-配置" class="headerlink" title="nginx 配置"></a>nginx 配置</h2><p>在域名网站把域名的 DNS 设置指向的 IP 地址改为新服务器地址。然后安装 nginx：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install nginx -y</span><br></pre></td></tr></table></figure>
+
+<p>从旧服务器直接把之前站点的配置复制过来：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rsync -avz -e &quot;ssh -i ~/.ssh/id_rsa_migration&quot; root@旧服务器IP:/etc/nginx/sites-available/your.domain /home/mastodon</span><br><span class="line">sudo mv /home/mastodon/your.domain /etc/nginx/sites-available/</span><br><span class="line">ln -s /etc/nginx/sites-available/your.domain /etc/nginx/sites-enabled/</span><br></pre></td></tr></table></figure>
+
+<p>之后先编辑  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/nginx/sites-available/your.domain</span><br></pre></td></tr></table></figure>
+
+<p>在所有包含 ssl 的行前加注释，之后运行 <code>sudo nginx -t</code>，没有报错之后，使用 <code>systemctl reload nginx</code> 重启 nginx。<br>配置 SSL 证书：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">apt install snapd</span><br><span class="line">sudo snap install core; sudo snap refresh core</span><br><span class="line">sudo snap install --classic certbot</span><br><span class="line">sudo ln -s /snap/bin/certbot /usr/bin/certbot</span><br><span class="line">sudo certbot certonly --nginx -d your.domain</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>重启 nginx，打开配置文件，将所有刚才加上的注释取消。检查 Certificate 和 Key 的路径是否和刚才生成的路径一致，如不一致，修改为刚才 certbot 给出的路径。使用 <code>nginx -t</code> 检查没有错误，重启 nginx。<br>通过 <code>certbot renew --dry-run</code> 检查证书是否能自动更新。  </p>
+<h2 id="开启全文搜索"><a href="#开启全文搜索" class="headerlink" title="开启全文搜索"></a>开启全文搜索</h2><p>参考：<a target="_blank" rel="noopener" href="https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/10/19/Mastodon-on-Docker.html#%E5%BC%80%E5%90%AF%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2">如何利用Docker搭建Mastodon实例（一）：基础搭建篇 - 开启全文搜索</a>  </p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>刚迁移完外站网友头像为空，但会慢慢显示。这是由于没有把旧服务器的 cache 复制过来，所以外站的媒体存储全部都要依靠服务器一点一点和外站服务器交互再拉过来，图片类的信息都很慢。<br>主要参考：  </p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://pullopen.github.io/%E7%AB%99%E7%82%B9%E7%BB%B4%E6%8A%A4/2020/10/21/migrate-Mastodon-to-Docker.html">将Mastodon站点从非Docker迁移至Docker：兼谈其他平台迁移</a>  </li>
+<li><a target="_blank" rel="noopener" href="https://pullopen.github.io/%E5%9F%BA%E7%A1%80%E6%90%AD%E5%BB%BA/2020/10/19/Mastodon-on-Docker.html">如何利用Docker搭建Mastodon实例（一）：基础搭建篇</a>  </li>
+<li>ChatGPT  </li>
+</ul>
+
     </div>
 
     
@@ -344,14 +449,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>Symbols count total: </span>
-    <span title="Symbols count total">163k</span>
+    <span title="Symbols count total">167k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>Reading time total &asymp;</span>
-    <span title="Reading time total">2:28</span>
+    <span title="Reading time total">2:32</span>
   </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
